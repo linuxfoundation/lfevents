@@ -40,6 +40,8 @@ web/private/scripts/quicksilver
 
 .lando.yml
 behat-local.yml
+wraith/configs/capture.yaml
+wraith/shots
 
 # :::::::::::::::::::::: cut ::::::::::::::::::::::
 
