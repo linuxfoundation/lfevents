@@ -38,7 +38,8 @@ web/private/scripts/quicksilver
 # Add directories containing build assets below.
 # Keep all additions above the "cut" line.
 
-
+.lando.yml
+behat-local.yml
 
 # :::::::::::::::::::::: cut ::::::::::::::::::::::
 
