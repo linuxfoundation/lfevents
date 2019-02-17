@@ -148,6 +148,20 @@ jobs:
                 command: ./.circleci/behat-test-cleanup.sh
                 when: always
 
+    wraith_test:
+        docker:
+            - image: bbcnews/wraith
+
+        steps:
+            - checkout
+
+            - run:
+                name: run Wraith tests
+                command: ./.circleci/wraith-test.sh   
+
+            - store_artifacts:
+                path: ./wraith/shots     
+
 workflows:
   version: 2
   build_and_test:
@@ -165,3 +179,6 @@ workflows:
             requires:
                 - build
                 - build_and_deploy
+      - wraith_test:
+            requires:
+                - behat_test                
