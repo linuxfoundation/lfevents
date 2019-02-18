@@ -1,5 +1,133 @@
-# lfevents  
-
 [![CircleCI](https://circleci.com/gh/LF-Engineering/lfevents.svg?style=shield&circle-token=97ff5f114ec48d9c1595975ac16ee11d7f87014a)](https://circleci.com/gh/LF-Engineering/lfevents)
 [![Dashboard lfevents](https://img.shields.io/badge/dashboard-lfeventsci-yellow.svg)](https://dashboard.pantheon.io/sites/f74d847c-e689-4631-a91b-24b7f897139b#dev/code)
 [![Dev Site lfevents](https://img.shields.io/badge/site-lfeventsci-blue.svg)](http://dev-lfeventsci.pantheonsite.io/)
+
+# LFEvents Developer Instructions
+
+LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
+
+All these tests are run by CircleCI on each commit to the master branch and on each commit to a branch that already has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
+
+## Local Instance
+
+Follow [these steps](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando) for using Lando to create a local instance of the repo:
+
+*   use [this repo](https://github.com/LF-Engineering/lfevents) for the clone operation.  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
+*   Use these values for the lando init command:
+
+```
+? From where should we get your app's codebase? current working directory
+? What recipe do you want to use? pantheon
+? Select a Pantheon account [your email]
+? Which site? Lfeventsci
+```
+
+
+`lando pull --code=none` can be run at any time to pull down a fresh copy of db and files from a Pantheon instance.
+
+`lando composer update` can be used to grab the latest versions of the vendor packages.
+
+
+## Wordhat Tests
+
+The CircleCI job runs [Wordhat](https://wordhat.info/) tests after each commit.  They interact with the site through a chrome headless browser.  The tests are stored in tests/behat/. Here's a [quick intro](https://wordhat.info/getting-started/behat-intro.html) on how to write tests.
+
+Create a behat-local.yml like this:
+
+
+```
+cp tests/behat/behat-pantheon.yml behat-local.yml
+```
+
+
+Edit behat-local.yml to have the bottom half of the file like this. You'll need to fill in your own admin password and update the `base_url` and `site_url` params:
+
+
+```
+ extensions:
+   Behat\MinkExtension:
+     base_url: https://lfeventsci.lndo.site
+     browser_name: chrome
+     sessions:
+       default:
+         chrome:
+           api_url: "http://localhost:9222"
+           validate_certificate: false
+
+   PaulGibbs\WordpressBehatExtension:
+     users:
+       -
+         roles:
+           - administrator
+         username: admin
+         password: xxx
+     default_driver: wpcli
+     site_url: https://lfeventsci.lndo.site/wp
+     path: web/wp
+
+
+   DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+```
+
+
+You need to have chrome running in headless mode in order for the tests to run.  I accomplished that on macos like this:
+
+
+```
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+chrome --headless --remote-debugging-port=9222 https://www.chromestatus.com&
+```
+
+
+Then to run the tests:
+
+
+```
+vendor/bin/behat --config=behat-local.yml
+```
+
+
+
+## Wraith Tests
+
+[Wraith](https://github.com/BBC-News/wraith) performs visual regression tests by comparing two versions of the site.  It is a great way to spot unintended render issues across the site.  
+
+Install wraith system-wide using [the instructions here](http://bbc-news.github.io/wraith/index.html).
+
+Then setup your own config file:
+
+
+```
+cd wraith
+cp configs/capture-local.yaml.template configs/capture.yaml
+```
+
+
+Edit configs/capture.yaml to update the new domain to point to your local instance.
+
+Run wraith: `wraith capture configs/capture.yaml`
+
+View the diff gallery: `open shots/gallery.html`
+
+
+## Code Sniffs
+
+The CircleCI process has a job to sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
+
+phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the repo and are installed in the vendor directory by composer.  phpcs can be run on the command line like this:
+
+
+```
+./vendor/bin/phpcs --standard=WordPress ./web/wp-content
+```
+
+
+It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).  
+
+Since the lfeventsci repo includes phpcs via composer, it will use that version of the binary even though you may have phpcs installed system-wide.  So in the root of the repo you'll need to run the following so that it can find the WordPress standards from within your code editor:
+
+
+```
+./vendor/bin/phpcs --config-set installed_paths ~/Sites/lfeventsci/vendor/wp-coding-standards/wpcs
+```
+
