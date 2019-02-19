@@ -131,3 +131,18 @@ Since the lfeventsci repo includes phpcs via composer, it will use that version 
 ./vendor/bin/phpcs --config-set installed_paths ~/Sites/lfeventsci/vendor/wp-coding-standards/wpcs
 ```
 
+## Upgrading WordPress core, themes and plugins
+
+Dependencies of this project are managed by [Composer](https://getcomposer.org/). All dependencies of the project are set in [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) and are pulled in at deploy time according to what is set in [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock).  
+
+composer.lock is generated from composer.json only when explicitly calling the `composer update` function. Any additional themes or plugins can be added first to composer.json and then `composer update package` is run to update composer.lock and pull in the new files.  Dependencies are pegged to a version according to the composer [versioning rules](https://getcomposer.org/doc/articles/versions.md).
+
+It's good practice to keep WordPress and all plugins set at their latest releases to inherit any security patches and upgraded functionality.  Upgrading to a new version, however, sometimes has unintended consequences so it's critical to run all tests before deploying live.  
+
+To upgrade the version of a dependency, follow these steps:
+1. Edit [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) to set the new version rule
+2. Run `composer update package` to update [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock) for just that package or run `composer update` to upgrade all packages to the latest versions which satisfy the constraints set in composer.json
+3. Test the site locally
+4. Check in to github and allow the tests to run
+5. Test the dev instance to make sure all looks good
+6. Deploy live
