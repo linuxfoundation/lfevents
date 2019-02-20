@@ -16,7 +16,7 @@ Feature: Change blogname and blogdescription
     And I press "Clear Cache"
     And I should see "Site cache flushed." in the ".updated" element
     And I am on the homepage
-    Then I should see "Awesome WordHat Test Site" in the ".site-title > a" element
+    Then I should see "123" in the ".site-title > a" element
 
   Scenario: Saving blogdescription
     Given I go to the "Settings > General" menu
@@ -27,4 +27,4 @@ Feature: Change blogname and blogdescription
     And I press "Clear Cache"
     And I should see "Site cache flushed." in the ".updated" element
     And I am on the homepage
-    Then I should see "GitHub + Composer + CircleCi + Pantheon = Win!" in the ".site-description" element
+    Then I should see "another" in the ".site-description" element
