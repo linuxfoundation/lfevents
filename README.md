@@ -6,7 +6,7 @@
 
 LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
 
-All these tests are run by CircleCI on each commit to the master branch and on each commit to a branch that already has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
+All these tests are run by CircleCI on each commit to the master branch, whenver a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
 
 ## Local Instance
 
