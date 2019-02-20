@@ -12,6 +12,9 @@ Feature: Change blogname and blogdescription
     When I fill in "blogname" with "Awesome WordHat Test Site"
     And I press "submit"
     And I should see "Settings saved."
+    And I go to "/wp/wp-admin/options-general.php?page=pantheon-cache"
+    And I press "Clear Cache"
+    And I should see "Site cache flushed." in the ".updated" element
     And I am on the homepage
     Then I should see "Awesome WordHat Test Site" in the ".site-title > a" element
 
@@ -20,5 +23,8 @@ Feature: Change blogname and blogdescription
     When I fill in "blogdescription" with "GitHub + Composer + CircleCi + Pantheon = Win!"
     And I press "submit"
     And I should see "Settings saved."
+    And I go to "/wp/wp-admin/options-general.php?page=pantheon-cache"
+    And I press "Clear Cache"
+    And I should see "Site cache flushed." in the ".updated" element
     And I am on the homepage
     Then I should see "GitHub + Composer + CircleCi + Pantheon = Win!" in the ".site-description" element
