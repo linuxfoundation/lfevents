@@ -15,7 +15,6 @@ Feature: Change blogname and blogdescription
     And I go to "/wp/wp-admin/options-general.php?page=pantheon-cache"
     And I press "Clear Cache"
     And I should see "Site cache flushed." in the ".updated" element
-    And the cache is cleared
     And I am on the homepage
     Then I should see "Awesome WordHat Test Site" in the ".site-title > a" element
 
