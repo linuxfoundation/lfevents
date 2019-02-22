@@ -141,7 +141,7 @@ It's good practice to keep WordPress and all plugins set at their latest release
 
 To upgrade the version of a dependency, follow these steps:
 1. Edit [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) to set the new version rule
-2. Run `composer update package` to update [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock) for just that package or run `composer update` to upgrade all packages to the latest versions which satisfy the constraints set in composer.json
+2. Run `lando composer update [package]` to update [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock) for just that package or run `lando composer update` to upgrade all packages to the latest versions which satisfy the constraints set in composer.json
 3. Test the site locally
 4. Check in to github and allow the tests to run
 5. Test the dev instance to make sure all looks good
