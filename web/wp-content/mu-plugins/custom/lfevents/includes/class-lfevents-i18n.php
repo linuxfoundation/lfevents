@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage LFEvents/includes
  * @author     Your Name <email@example.com>
  */
-class LFEvents_i18n {
+class LFEvents_I18n {
 
 
 	/**
