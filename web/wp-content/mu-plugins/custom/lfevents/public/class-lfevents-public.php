@@ -44,13 +44,13 @@ class LFEvents_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $lfevents       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $lfevents       The name of the plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $lfevents, $version ) {
 
 		$this->lfevents = $lfevents;
-		$this->version = $version;
+		$this->version  = $version;
 
 	}
 
