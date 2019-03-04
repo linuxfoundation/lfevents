@@ -156,6 +156,7 @@ class LFEvents {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'new_cpt_events' );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_event_categories' );
 	}
 
 	/**

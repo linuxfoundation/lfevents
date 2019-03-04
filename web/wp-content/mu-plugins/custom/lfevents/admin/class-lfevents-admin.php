@@ -118,4 +118,21 @@ class LFEvents_Admin {
 		register_post_type( 'lfevent', $opts );
 	}
 
+	/**
+	 * Registers the LFEvent categories
+	 */
+	public function register_event_categories() {
+		$labels = [
+			'name'          => _x( 'Event Categories', 'taxonomy general name' ),
+			'singular_name' => _x( 'Event Category', 'taxonomy singular name' ),
+		];
+		$args   = [
+			'labels'       => $labels,
+			'show_in_rest' => true,
+			'hierarchical' => true,
+		];
+		register_taxonomy( 'lfevent-category', [ 'lfevent' ], $args );
+
+	}
+
 }
