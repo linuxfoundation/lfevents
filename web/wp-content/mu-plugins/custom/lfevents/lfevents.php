@@ -1,23 +1,20 @@
 <?php
 /**
- * The plugin bootstrap file
+ * Core functionality for running the LFEvents site.
  *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
+ * This plugin contains the core functionality that runs the LFEvents site.  It is a must-have plugin so will always be loaded despite which theme is selected.
  *
- * @link              http://example.com
+ * @link              https://events.linuxfoundation.org/
  * @since             1.0.0
  * @package           LFEvents
  *
  * @wordpress-plugin
- * Plugin Name:       LFEvents Plugin
- * Plugin URI:        http://example.com/lfevents-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       LFEvents
+ * Plugin URI:        https://github.com/LF-Engineering/lfevents
+ * Description:       Core functionality for running the LFEvents site.
  * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Author:            Chris Abraham
+ * Author URI:        https://www.linuxfoundation.org
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       lfevents
@@ -30,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
+ * Current plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */

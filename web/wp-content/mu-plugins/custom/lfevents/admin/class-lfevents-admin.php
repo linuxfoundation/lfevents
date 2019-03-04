@@ -99,4 +99,23 @@ class LFEvents_Admin {
 
 	}
 
+	/**
+	 * Registers the LFEvent custom post
+	 */
+	public function new_cpt_events() {
+		$opts = array(
+			'labels'       => array(
+				'name'          => __( 'Events' ),
+				'singular_name' => __( 'Event' ),
+			),
+			'public'       => true,
+			'has_archive'  => true,
+			'show_in_rest' => true,
+			'rewrite'      => array( 'slug' => 'events' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+		);
+
+		register_post_type( 'lfevent', $opts );
+	}
+
 }
