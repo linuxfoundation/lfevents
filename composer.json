@@ -23,7 +23,8 @@
     "vlucas/phpdotenv": "^3.1.0",
     "wpackagist-plugin/pantheon-advanced-page-cache": "^0.3.0",
     "wpackagist-plugin/wp-native-php-sessions": "^0.6.9",
-    "wpackagist-theme/twentynineteen": "^1.2"
+    "wpackagist-theme/twentynineteen": "^1.2",
+    "wpackagist-plugin/wp-mail-smtp":"^1.4.1"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2.1",
