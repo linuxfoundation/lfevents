@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ac45a4831b06f0b42a29e756e69bea7",
+    "content-hash": "0f5fefedcc7f808a7b6e80fcbb2100bf",
     "packages": [
         {
             "name": "composer/installers",
@@ -507,6 +507,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/duracelltomi-google-tag-manager/"
+        },
+        {
+            "name": "wpackagist-plugin/lh-hsts",
+            "version": "1.24",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/lh-hsts/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/lh-hsts.zip?timestamp=1536934210",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/lh-hsts/"
         },
         {
             "name": "wpackagist-plugin/pantheon-advanced-page-cache",
