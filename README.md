@@ -8,25 +8,25 @@ LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI 
 
 All these tests are run by CircleCI on each commit to the master branch, whenver a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
 
-## Local Instance
+## Install Local Instance
 
 Follow [these steps](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando) for using Lando to create a local instance of the repo:
 
-*   use [this repo](https://github.com/LF-Engineering/lfevents) for the clone operation.  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
-*   Use these values for the lando init command:
-
+* [Install](https://docs.devwithlando.io/installation/system-requirements.html) lando. On a Mac, the command is `brew cask install lando`
+* `git clone git@github.com:LF-Engineering/lfevents.git
+* Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
+* Get a machine token from your user [dashboard](https://dashboard.pantheon.io/users/#account/tokens/) on Pantheon.
+* `lando init` and use these values:
 ```
-? From where should we get your app's codebase? current working directory
-? What recipe do you want to use? pantheon
-? Select a Pantheon account [your email]
-? Which site? Lfeventsci
+From where should we get your app's codebase? `current working directory`
+What recipe do you want to use? `pantheon`
+Enter a Pantheon machine token `[enter token you got above]`
+Which site? `lfeventsci`
 ```
-
 
 `lando pull --code=none` can be run at any time to pull down a fresh copy of db and files from a Pantheon instance.
 
 `lando composer update` can be used to grab the latest versions of the vendor packages.
-
 
 ## Wordhat Tests
 
