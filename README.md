@@ -15,46 +15,41 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 * Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer); On a Mac using brew, the command is `brew cask install lando`
 
-* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon)
-
-* Make sure your Pantheon account has your [SSH key](https://pantheon.io/docs/ssh-keys/)
-
-* Create/authenticate a Pantheon [machine token](https://pantheon.io/docs/machine-tokens/)
+* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon); follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication)
 
 * You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password to performing Git operations over HTTPS
 
-### Lando Setup <small>(see [Working locally with Lando](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))</small>
+### Lando Setup (see [Working locally with Lando](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
 
-* Clone this repository with HTTPS (not SSH):
+1. Clone this repository with HTTPS (not SSH):
   ```
   git clone https://github.com/LF-Engineering/lfevents.git
   ```
-  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
+  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/).
 
-* Run `lando init` and follow the prompts:
+2. Run `lando init` and follow the prompts:
   * `From where should we get your app's codebase?` > `current working directory`
   * `What recipe do you want to use?` > `pantheon`
   * `Enter a Pantheon machine token` > `[enter token you got above]`
   * `Which site?` > `lfeventsci`
 
-* Run `lando start` and note the local site URL
+3. Run `lando start` and note the local site URL
 
-* Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies _(this repo does not contain all of WordPress or 3rd-party themes and plugins, which are dependencies managed by [Composer](https://getcomposer.org/))_
+4. Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies
 
-
-* Run `lando pull --code=none` and follow the prompts to download the media files and database from Pantheon:
+5. Run `lando pull --code=none` and follow the prompts to download the media files and database from Pantheon:
   * `Pull database from?` >  `dev`
   * `Pull files from?` >  `dev`
 
-* Visit the local site URL saved from above
+6. Visit the local site URL saved from above
 
 ### Notes
 
-* Use `lando composer update` to get the latest dependencies
+* Use `lando composer update` at any point in the future to update dependencies to the latest versions
 
 * Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from Pantheon
 
-* You can stop Lando with `lando stop` and start it again with `lando start`. The steps above do not need to be completed on subsequent starts.
+* You can stop Lando with `lando stop` and start it again with `lando start`. 
 
 -----
 
