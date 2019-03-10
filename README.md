@@ -13,24 +13,25 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 ### Requirements
 
-* Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer); On a Mac using brew, the command is `brew cask install lando`
+* Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer). On a Mac using brew, the command is `brew cask install lando`.
 
-* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon); follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication)
+* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon).  Follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication).
 
-* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password to performing Git operations over HTTPS.  It will be used in step 2 below.
+* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password for performing Git operations over HTTPS.  It will be used in step 2 below.
 
-### Lando Setup (see [Working locally with Lando](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
+### Lando Setup
+(these steps were derived from [instructions provided by Pantheon](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
 
 1. Clone this repository with HTTPS (not SSH):
   ```
   git clone https://github.com/LF-Engineering/lfevents.git
   ```
-  * Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/).
+  * Note that the repo does not contain all of WordPress, 3rd-party themes and plugins. They will be pulled in via [composer](https://getcomposer.org/) in step 4.
 
 2. Run `lando init` and follow the prompts:
   * `From where should we get your app's codebase?` > `current working directory`
   * `What recipe do you want to use?` > `pantheon`
-  * `Enter a Pantheon machine token` > `[enter token you got above]`
+  * `Enter a Pantheon machine token` > `[enter the GitHub token you got above]`
   * `Which site?` > `lfeventsci`
 
 3. Run `lando start` and note the local site URL
@@ -47,7 +48,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 * You can stop Lando with `lando stop` and start it again with `lando start`
 
-* Composer, Terminus and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json run `lando composer update` rather than `composer update`.
+* Composer, Terminus and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json, run `lando composer update` rather than `composer update`.
 
 * Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from Pantheon
 
