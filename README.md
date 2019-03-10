@@ -9,12 +9,11 @@ LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI 
 All these tests are run by CircleCI on each commit to the master branch, whenver a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
 
 -----
-
-## Local Instance
+## Install Local Instance
 
 ### Requirements
 
-* Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer)
+* Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer); On a Mac using brew, the command is `brew cask install lando`
 
 * Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon)
 
@@ -30,6 +29,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
   ```
   git clone https://github.com/LF-Engineering/lfevents.git
   ```
+  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
 
 * Run `lando init` and follow the prompts:
   * `From where should we get your app's codebase?` > `current working directory`
