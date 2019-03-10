@@ -22,19 +22,16 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 ### Lando Setup
 (these steps were derived from [instructions provided by Pantheon](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
 
-1. Clone this repository with HTTPS (not SSH):
-  ```
-  git clone https://github.com/LF-Engineering/lfevents.git
-  ```
+1. Clone this repository with HTTPS (not SSH): `git clone https://github.com/LF-Engineering/lfevents.git`
   * Note that the repo does not contain all of WordPress, 3rd-party themes and plugins. They will be pulled in via [composer](https://getcomposer.org/) in step 4.
 
-2. Run `lando init` and follow the prompts:
+2. Run `lando init` and use the following values when prompted:
   * `From where should we get your app's codebase?` > `current working directory`
   * `What recipe do you want to use?` > `pantheon`
   * `Enter a Pantheon machine token` > `[enter the GitHub token you got above]`
   * `Which site?` > `lfeventsci`
 
-3. Run `lando start` and note the local site URL
+3. Run `lando start` and note the local site URL provided at the end of the process
 
 4. Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies
 
