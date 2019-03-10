@@ -17,7 +17,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 * Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon); follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication)
 
-* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password to performing Git operations over HTTPS
+* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password to performing Git operations over HTTPS.  It will be used in step 2 below.
 
 ### Lando Setup (see [Working locally with Lando](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
 
@@ -25,7 +25,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
   ```
   git clone https://github.com/LF-Engineering/lfevents.git
   ```
-  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/).
+  * Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/).
 
 2. Run `lando init` and follow the prompts:
   * `From where should we get your app's codebase?` > `current working directory`
@@ -45,11 +45,11 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 ### Notes
 
-* Use `lando composer update` at any point in the future to update dependencies to the latest versions
+* You can stop Lando with `lando stop` and start it again with `lando start`
+
+* Composer, Terminus and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json run `lando composer update` rather than `composer update`.
 
 * Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from Pantheon
-
-* You can stop Lando with `lando stop` and start it again with `lando start`. 
 
 -----
 
