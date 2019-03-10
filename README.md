@@ -8,25 +8,55 @@ LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI 
 
 All these tests are run by CircleCI on each commit to the master branch, whenver a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
 
+-----
 ## Install Local Instance
 
-Follow [these steps](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando) for using Lando to create a local instance of the repo:
+### Requirements
 
-* [Install](https://docs.devwithlando.io/installation/system-requirements.html) lando. On a Mac using brew, the command is `brew cask install lando`
-* Clone this repo: `git clone git@github.com:LF-Engineering/lfevents.git`
-* Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
-* Get a machine token from your user [dashboard](https://dashboard.pantheon.io/users/#account/tokens/) on Pantheon.
-* `lando init` and use these values:
-```
-From where should we get your app's codebase? `current working directory`
-What recipe do you want to use? `pantheon`
-Enter a Pantheon machine token `[enter token you got above]`
-Which site? `lfeventsci`
-```
+* Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer); On a Mac using brew, the command is `brew cask install lando`
 
-`lando pull --code=none` can be run at any time to pull down a fresh copy of db and files from a Pantheon instance.
+* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon)
 
-`lando composer update` can be used to grab the latest versions of the vendor packages.
+* Make sure your Pantheon account has your [SSH key](https://pantheon.io/docs/ssh-keys/)
+
+* Create/authenticate a Pantheon [machine token](https://pantheon.io/docs/machine-tokens/)
+
+* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password to performing Git operations over HTTPS
+
+### Lando Setup <small>(see [Working locally with Lando](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))</small>
+
+* Clone this repository with HTTPS (not SSH):
+  ```
+  git clone https://github.com/LF-Engineering/lfevents.git
+  ```
+  Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
+
+* Run `lando init` and follow the prompts:
+  * `From where should we get your app's codebase?` > `current working directory`
+  * `What recipe do you want to use?` > `pantheon`
+  * `Enter a Pantheon machine token` > `[enter token you got above]`
+  * `Which site?` > `lfeventsci`
+
+* Run `lando start` and note the local site URL
+
+* Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies _(this repo does not contain all of WordPress or 3rd-party themes and plugins, which are dependencies managed by [Composer](https://getcomposer.org/))_
+
+
+* Run `lando pull --code=none` and follow the prompts to download the media files and database from Pantheon:
+  * `Pull database from?` >  `dev`
+  * `Pull files from?` >  `dev`
+
+* Visit the local site URL saved from above
+
+### Notes
+
+* Use `lando composer update` to get the latest dependencies
+
+* Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from Pantheon
+
+* You can stop Lando with `lando stop` and start it again with `lando start`. The steps above do not need to be completed on subsequent starts.
+
+-----
 
 ## Wordhat Tests
 
@@ -86,7 +116,7 @@ Then to run the tests:
 vendor/bin/behat --config=behat-local.yml
 ```
 
-
+-----
 
 ## Wraith Tests
 
@@ -109,6 +139,7 @@ Run wraith: `wraith capture configs/capture.yaml`
 
 View the diff gallery: `open shots/gallery.html`
 
+-----
 
 ## Code Sniffs
 
@@ -116,20 +147,19 @@ The CircleCI process has a job to sniff the code to make sure it complies with W
 
 phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the repo and are installed in the vendor directory by composer.  phpcs can be run on the command line like this:
 
-
 ```
 ./vendor/bin/phpcs --standard=WordPress ./web/wp-content
 ```
-
 
 It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).  
 
 Since the lfeventsci repo includes phpcs via composer, it will use that version of the binary even though you may have phpcs installed system-wide.  So in the root of the repo you'll need to run the following so that it can find the WordPress standards from within your code editor:
 
-
 ```
 ./vendor/bin/phpcs --config-set installed_paths ~/Sites/lfeventsci/vendor/wp-coding-standards/wpcs
 ```
+
+-----
 
 ## Upgrading WordPress core, themes and plugins
 
@@ -140,9 +170,15 @@ composer.lock is generated from composer.json only when explicitly calling the `
 It's good practice to keep WordPress and all plugins set at their latest releases to inherit any security patches and upgraded functionality.  Upgrading to a new version, however, sometimes has unintended consequences so it's critical to run all tests before deploying live.  
 
 To upgrade the version of a dependency, follow these steps:
+
 1. Edit [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) to set the new version rule
+
 2. Run `lando composer update [package]` to update [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock) for just that package or run `lando composer update` to upgrade all packages to the latest versions which satisfy the constraints set in composer.json
+
 3. Test the site locally
+
 4. Check in to github and allow the tests to run
+
 5. Test the dev instance to make sure all looks good
+
 6. Deploy live
