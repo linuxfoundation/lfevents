@@ -12,8 +12,8 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 Follow [these steps](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando) for using Lando to create a local instance of the repo:
 
-* [Install](https://docs.devwithlando.io/installation/system-requirements.html) lando. On a Mac, the command is `brew cask install lando`
-* `git clone git@github.com:LF-Engineering/lfevents.git
+* [Install](https://docs.devwithlando.io/installation/system-requirements.html) lando. On a Mac using brew, the command is `brew cask install lando`
+* Clone this repo: `git clone git@github.com:LF-Engineering/lfevents.git`
 * Note that the repo does not contain all of WordPress, 3rd-party themes and plugins; those are included into live instances via [composer](https://getcomposer.org/)
 * Get a machine token from your user [dashboard](https://dashboard.pantheon.io/users/#account/tokens/) on Pantheon.
 * `lando init` and use these values:
