@@ -15,6 +15,21 @@ Feature: Change blogname and blogdescription
     And I press "Clear Cache"
     And I should see "Site cache flushed." in the ".updated" element
 
+  Scenario: Clear the site cache
+    When I go to "/wp/wp-admin/options-general.php?page=pantheon-cache"
+    Then I should see "Clear Site Cache"
+    And I should not see "Site cache flushed."
+
+    When I press "Clear Cache"
+    Then print current URL
+    And I should be on "/wp/wp-admin/options-general.php?page=pantheon-cache&cache-cleared=true"
+    And I should see "Site cache flushed." in the ".updated" element
+
+  Scenario: Verify the Pantheon MU plugin is present
+    When I go to "/wp/wp-admin/plugins.php?plugin_status=mustuse"
+    Then I should see "/wp-content/mu-plugins directory are executed automatically." in the ".tablenav" element
+    And I should see "Pantheon" in the "#the-list" element
+ 
   Scenario: Verifying blogname and blogdescription
     Given I am on the homepage
     Then I should be on the homepage
