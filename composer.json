@@ -26,7 +26,8 @@
     "wpackagist-theme/twentynineteen": "^1.2",
     "wpackagist-plugin/wp-mail-smtp":"^1.4.1",
     "wpackagist-plugin/duracelltomi-google-tag-manager":"^1.9.2",
-    "wpackagist-plugin/lh-hsts":"^1.24"
+    "wpackagist-plugin/lh-hsts":"^1.24",
+    "wpackagist-plugin/post-meta-controls":"^1.0.0"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2.1",
