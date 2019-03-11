@@ -111,7 +111,9 @@ class LFEvents_Admin {
 			'public'       => true,
 			'has_archive'  => true,
 			'show_in_rest' => true,
-			'heirarchical' => true,
+			'hierarchical' => true,
+			'menu_position'=> 2,
+			'menu_icon'    => 'dashicons-admin-site',
 			'rewrite'      => array( 'slug' => 'events' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
 		);
