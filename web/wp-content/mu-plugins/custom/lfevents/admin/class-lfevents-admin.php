@@ -111,8 +111,9 @@ class LFEvents_Admin {
 			'public'       => true,
 			'has_archive'  => true,
 			'show_in_rest' => true,
+			'heirarchical' => true,
 			'rewrite'      => array( 'slug' => 'events' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
 		);
 
 		register_post_type( 'lfevent', $opts );
@@ -200,7 +201,6 @@ class LFEvents_Admin {
 									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
 									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
 									// where this setting is nested will be used.
-									'data_key_prefix' => 'pmc_',
 									'label'           => __( 'Event dates', 'my_plugin' ),
 									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top'   => true, // Display CSS border-top in the editor control.
