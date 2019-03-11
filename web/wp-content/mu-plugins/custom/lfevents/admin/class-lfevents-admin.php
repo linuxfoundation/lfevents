@@ -158,38 +158,18 @@ class LFEvents_Admin {
 						array(
 							'label'    => __( 'General Settings' ),
 							'settings' => array(
-								// Buttons setting.
 								array(
-									'type'          => 'buttons',
-									'data_type'     => 'meta',
-									'data_key'      => 'buttons_key',
-									'label'         => __( 'Setting label', 'my_plugin' ),
-									'help'          => __( 'Setting description', 'my_plugin' ),
-									'default_value' => 'bbb',
-									'options'       => array(
-										array(
-											'title'         => __( 'Option title aaa', 'my_plugin' ),
-											'value'         => 'aaa',
-											'icon_dashicon' => 'carrot',
-										),
-										array(
-											'title'         => __( 'Option title bbb', 'my_plugin' ),
-											'value'         => 'bbb',
-											'icon_dashicon' => 'sos',
-										),
+									'type'            => 'text', // Required.
+									'id'              => 'location',
+									'data_type'       => 'meta', // Available: 'meta', 'none'.
+									'data_key'        => 'location', // Required if 'data_type' is 'meta'.
+									'label'           => __( 'Event location' ),
+									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+									// Setting text specific options:
+									'default_value'   => '',
+									'placeholder'     => __( 'City, Country' ),
 									),
-								),
-								// Checkbox setting.
-								array(
-									'type'          => 'checkbox',
-									'data_type'     => 'meta',
-									'data_key'      => 'checkbox_key',
-									'label'         => __( 'Setting label', 'my_plugin' ),
-									'help'          => __( 'Setting description', 'my_plugin' ),
-									'default_value' => false,
-									'use_toggle'    => true,
-									'input_label'   => __( 'Input label', 'my_plugin' ),
-								),
 								array(
 									'type'            => 'date_range', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
