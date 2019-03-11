@@ -16,6 +16,8 @@ Feature: Change blogname and blogdescription
     And I should see "Site cache flushed." in the ".updated" element
 
   Scenario: Clear the site cache
+    Given I am logged in as an administrator
+    Given I am on the dashboard
     When I go to "/wp/wp-admin/options-general.php?page=pantheon-cache"
     Then I should see "Clear Site Cache"
     And I should not see "Site cache flushed."
@@ -26,6 +28,8 @@ Feature: Change blogname and blogdescription
     And I should see "Site cache flushed." in the ".updated" element
 
   Scenario: Verify the Pantheon MU plugin is present
+    Given I am logged in as an administrator
+    Given I am on the dashboard
     When I go to "/wp/wp-admin/plugins.php?plugin_status=mustuse"
     Then I should see "/wp-content/mu-plugins directory are executed automatically." in the ".tablenav" element
     And I should see "Pantheon" in the "#the-list" element
