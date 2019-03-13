@@ -29,7 +29,8 @@
     "wpackagist-plugin/lh-hsts":"^1.24",
     "wpackagist-plugin/post-meta-controls":"^1.0.0",
     "wpackagist-plugin/redirection":"^4.0.1",
-    "wpackagist-plugin/wordpress-seo":"10.0"
+    "wpackagist-plugin/wordpress-seo":"10.0",
+    "wpackagist-plugin/safe-svg":"1.9.3"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2.1",
