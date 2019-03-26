@@ -196,7 +196,7 @@ jobs:
                 command: ./.circleci/wraith-test2.sh   
 
             - store_artifacts:
-                path: ./wraith/shots2     
+                path: ./wraith/shots     
 
 workflows:
   version: 2
