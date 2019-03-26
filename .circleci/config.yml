@@ -118,6 +118,28 @@ jobs:
                 name: deploy to Pantheon
                 command: ./.circleci/deploy-to-pantheon.sh
 
+    build_and_deploy2:
+        <<: *defaults
+        steps:
+            - checkout
+
+            - restore_cache:
+                keys:
+                    - composer-cache
+                    - terminus-install
+
+            - run:
+                name: dependencies
+                command: ./.circleci/set-up-globals.sh
+
+            - run:
+                name: build assets
+                command: composer -n build-assets
+
+            - run:
+                name: deploy to Pantheon
+                command: ./.circleci/deploy-to-pantheon2.sh
+
     behat_test:
         <<: *defaults
         steps:
@@ -162,6 +184,20 @@ jobs:
             - store_artifacts:
                 path: ./wraith/shots     
 
+    wraith_test2:
+        docker:
+            - image: bbcnews/wraith
+
+        steps:
+            - checkout
+
+            - run:
+                name: run Wraith tests
+                command: ./.circleci/wraith-test2.sh   
+
+            - store_artifacts:
+                path: ./wraith/shots2     
+
 workflows:
   version: 2
   build_and_test:
@@ -170,6 +206,7 @@ workflows:
       - build
       # Build and deploy
       - build_and_deploy
+      - build_and_deploy2
       # Code sniff and unit text first
       - code_sniff_unit_test:
             requires:
@@ -182,3 +219,6 @@ workflows:
       - wraith_test:
             requires:
                 - behat_test                
+      - wraith_test2:
+            requires:
+                - build_and_deploy2                
