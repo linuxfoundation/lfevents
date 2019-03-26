@@ -40,6 +40,15 @@ class LFEvents_Admin {
 	private $version;
 
 	/**
+	 * Array of lfevent custom post types that are in use
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $post_types    Array of lfevent custom post types that are in use
+	 */
+	private $post_types;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -50,7 +59,11 @@ class LFEvents_Admin {
 
 		$this->lfevents = $lfevents;
 		$this->version  = $version;
+		$this->post_types = [ 'lfevent' ];
 
+		for ( $x = 2019; $x <= date( 'Y' ); $x++ ) {
+			$this->post_types[] = 'lfevent' . $x;
+		}
 	}
 
 	/**
@@ -100,9 +113,10 @@ class LFEvents_Admin {
 	}
 
 	/**
-	 * Registers the LFEvent custom post
+	 * Registers the LFEvent custom post types
 	 */
 	public function new_cpt_events() {
+
 		$opts = array(
 			'labels'        => array(
 				'name'          => __( 'Events' ),
@@ -114,11 +128,21 @@ class LFEvents_Admin {
 			'hierarchical'  => true,
 			'menu_position' => 2,
 			'menu_icon'     => 'dashicons-admin-site',
-			'rewrite'       => array( 'slug' => 'events' ),
+			'rewrite'       => false,
 			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
 		);
 
 		register_post_type( 'lfevent', $opts );
+
+		for ( $x = 2019; $x <= date( 'Y' ); $x++ ) {
+			$opts['labels'] = array(
+				'name'          => __( 'Events (' . $x . ')' ),
+				'singular_name' => __( 'Event (' . $x . ')' ),
+			);
+			$opts['rewrite'] = array( 'slug' => $x );
+
+			register_post_type( 'lfevent' . $x, $opts );
+		}
 	}
 
 	/**
@@ -134,7 +158,8 @@ class LFEvents_Admin {
 			'show_in_rest' => true,
 			'hierarchical' => true,
 		];
-		register_taxonomy( 'lfevent-category', [ 'lfevent' ], $args );
+
+		register_taxonomy( 'lfevent-category', $this->post_types, $args );
 
 	}
 
@@ -149,7 +174,7 @@ class LFEvents_Admin {
 			'id'              => 'lfevent-sidebar',
 			'id_prefix'       => 'lfes_',
 			'label'           => __( 'Event Settings' ),
-			'post_type'       => array( 'lfevent' ),
+			'post_type'       => $this->post_types,
 			'data_key_prefix' => 'lfes_',
 			'icon_dashicon'   => 'admin-site',
 			'tabs'            => array(
