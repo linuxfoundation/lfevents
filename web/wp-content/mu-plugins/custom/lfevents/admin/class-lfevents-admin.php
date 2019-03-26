@@ -57,11 +57,12 @@ class LFEvents_Admin {
 	 */
 	public function __construct( $lfevents, $version ) {
 
-		$this->lfevents = $lfevents;
-		$this->version  = $version;
+		$this->lfevents   = $lfevents;
+		$this->version    = $version;
 		$this->post_types = [ 'lfevent' ];
+		$current_year     = date( 'Y' );
 
-		for ( $x = 2019; $x <= date( 'Y' ); $x++ ) {
+		for ( $x = 2019; $x <= $current_year; $x++ ) {
 			$this->post_types[] = 'lfevent' . $x;
 		}
 	}
@@ -134,10 +135,11 @@ class LFEvents_Admin {
 
 		register_post_type( 'lfevent', $opts );
 
-		for ( $x = 2019; $x <= date( 'Y' ); $x++ ) {
-			$opts['labels'] = array(
-				'name'          => __( 'Events (' . $x . ')' ),
-				'singular_name' => __( 'Event (' . $x . ')' ),
+		$current_year = date( 'Y' );
+		for ( $x = 2019; $x <= $current_year; $x++ ) {
+			$opts['labels']  = array(
+				'name'          => 'Events (' . $x . ')',
+				'singular_name' => 'Event (' . $x . ')',
 			);
 			$opts['rewrite'] = array( 'slug' => $x );
 
