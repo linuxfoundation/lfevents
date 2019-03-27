@@ -119,19 +119,17 @@ class LFEvents_Admin {
 	public function new_cpt_events() {
 
 		$opts = array(
-			'labels'        => array(
+			'labels'       => array(
 				'name'          => __( 'Events' ),
 				'singular_name' => __( 'Event' ),
 			),
-			'public'        => true,
-			'has_archive'   => true,
-			'show_in_rest'  => true,
-			'hierarchical'  => true,
-			'menu_icon'     => 'dashicons-admin-site',
-			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
+			'public'       => true,
+			'has_archive'  => true,
+			'show_in_rest' => true,
+			'hierarchical' => true,
+			'menu_icon'    => 'dashicons-admin-site',
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
 		);
-
-		//register_post_type( 'lfevent', $opts );
 
 		$current_year = date( 'Y' );
 		for ( $x = 2019; $x <= $current_year; $x++ ) {
