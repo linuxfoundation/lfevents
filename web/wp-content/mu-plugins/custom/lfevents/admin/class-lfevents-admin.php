@@ -59,7 +59,7 @@ class LFEvents_Admin {
 
 		$this->lfevents   = $lfevents;
 		$this->version    = $version;
-		$this->post_types = [ 'lfevent' ];
+		$this->post_types = [ 'page' ];
 		$current_year     = date( 'Y' );
 
 		for ( $x = 2019; $x <= $current_year; $x++ ) {
@@ -127,13 +127,11 @@ class LFEvents_Admin {
 			'has_archive'   => true,
 			'show_in_rest'  => true,
 			'hierarchical'  => true,
-			'menu_position' => 2,
 			'menu_icon'     => 'dashicons-admin-site',
-			'rewrite'       => false,
 			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
 		);
 
-		register_post_type( 'lfevent', $opts );
+		//register_post_type( 'lfevent', $opts );
 
 		$current_year = date( 'Y' );
 		for ( $x = 2019; $x <= $current_year; $x++ ) {
@@ -141,7 +139,7 @@ class LFEvents_Admin {
 				'name'          => 'Events (' . $x . ')',
 				'singular_name' => 'Event (' . $x . ')',
 			);
-			$opts['rewrite'] = array( 'slug' => $x );
+			$opts['rewrite'] = array( 'slug' => 'archive/' . $x );
 
 			register_post_type( 'lfevent' . $x, $opts );
 		}
