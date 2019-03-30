@@ -138,7 +138,7 @@ jobs:
 
             - run:
                 name: deploy to Pantheon
-                command: ./.circleci/deploy-to-pantheon2.sh
+                command: ./.circleci/deploy-to-pantheon.sh $TERMINUS_SITE2
 
     behat_test_lfeventsci:
         <<: *defaults
@@ -179,7 +179,7 @@ jobs:
 
             - run:
                 name: run Wraith tests
-                command: ./.circleci/wraith-test.sh   
+                command: ./.circleci/wraith-test.sh $TERMINUS_SITE 
 
             - store_artifacts:
                 path: ./wraith/shots     
@@ -193,7 +193,7 @@ jobs:
 
             - run:
                 name: run Wraith tests
-                command: ./.circleci/wraith-test2.sh   
+                command: ./.circleci/wraith-test.sh $TERMINUS_SITE2
 
             - store_artifacts:
                 path: ./wraith/shots     

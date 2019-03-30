@@ -1,8 +1,6 @@
 #!/bin/bash
 
 TERMINUS_S=$1
-echo "!!! $1"
-echo "!!! $TERMINUS_S"
 set -ex
 
 TERMINUS_DOES_MULTIDEV_EXIST()

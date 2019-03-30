@@ -1,5 +1,6 @@
 #!/bin/bash
 
+TERMINUS_S=$1
 echo 'export PATH=$PATH:$HOME/bin:$HOME/terminus/bin' >> $BASH_ENV
 echo 'export BRANCH=$(echo $CIRCLE_BRANCH | grep -v '"'"'^\(master\|[0-9]\+.x\)$'"'"')' >> $BASH_ENV
 echo 'export PR_ENV=${BRANCH:+pr-$BRANCH}' >> $BASH_ENV
@@ -30,14 +31,14 @@ then
 fi
 
 # Bail if required environment varaibles are missing
-if [ -z "$TERMINUS_SITE" ] || [ -z "$TERMINUS_ENV" ]
+if [ -z "$TERMINUS_S" ] || [ -z "$TERMINUS_ENV" ]
 then
   echo 'No test site specified. Set TERMINUS_SITE and TERMINUS_ENV.'
   exit 1
 fi
 
 echo "::::::::::::::::::::::::::::::::::::::::::::::::"
-echo "Wraith test site: $TERMINUS_SITE.$TERMINUS_ENV"
+echo "Wraith test site: $TERMINUS_S.$TERMINUS_ENV"
 echo "::::::::::::::::::::::::::::::::::::::::::::::::"
 echo
 
@@ -50,8 +51,8 @@ cp configs/capture.yaml.template configs/capture.yaml
 cat >>configs/capture.yaml <<EOL
 # (required) The domains to take screenshots of.
 domains:
-  current:  "http://live-lfeventsci.pantheonsite.io"
-  new:      "https://$TERMINUS_ENV-$TERMINUS_SITE.pantheonsite.io"  
+  current:  "http://live-$TERMINUS_S.pantheonsite.io"
+  new:      "https://$TERMINUS_ENV-$TERMINUS_S.pantheonsite.io"  
 EOL
 wraith capture capture
 
