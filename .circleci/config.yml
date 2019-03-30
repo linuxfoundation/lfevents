@@ -96,7 +96,7 @@ jobs:
                 name: run unit tests
                 command: composer -n unit-test
 
-    build_and_deploy:
+    build_and_deploy_lfeventsci:
         <<: *defaults
         steps:
             - checkout
@@ -118,7 +118,7 @@ jobs:
                 name: deploy to Pantheon
                 command: ./.circleci/deploy-to-pantheon.sh
 
-    build_and_deploy2:
+    build_and_deploy_lfasiallcci:
         <<: *defaults
         steps:
             - checkout
@@ -140,7 +140,7 @@ jobs:
                 name: deploy to Pantheon
                 command: ./.circleci/deploy-to-pantheon2.sh
 
-    behat_test:
+    behat_test_lfeventsci:
         <<: *defaults
         steps:
             - checkout
@@ -170,7 +170,7 @@ jobs:
                 command: ./.circleci/behat-test-cleanup.sh
                 when: always
 
-    wraith_test:
+    wraith_test_lfeventsci:
         docker:
             - image: bbcnews/wraith
 
@@ -184,7 +184,7 @@ jobs:
             - store_artifacts:
                 path: ./wraith/shots     
 
-    wraith_test2:
+    wraith_test_lfasiallcci:
         docker:
             - image: bbcnews/wraith
 
@@ -205,20 +205,20 @@ workflows:
       # Install dev dependencies
       - build
       # Build and deploy
-      - build_and_deploy
-      - build_and_deploy2
+      - build_and_deploy_lfeventsci
+      - build_and_deploy_lfasiallcci
       # Code sniff and unit text first
       - code_sniff_unit_test:
             requires:
                 - build
       # Run Behat tests after deploy so they can be done on Pantheon
-      - behat_test:
+      - behat_test_lfeventsci:
             requires:
                 - build
-                - build_and_deploy
-      - wraith_test:
+                - build_and_deploy_lfeventsci
+      - wraith_test_lfeventsci:
             requires:
-                - behat_test                
-      - wraith_test2:
+                - behat_test_lfeventsci               
+      - wraith_test_lfasiallcci:
             requires:
-                - build_and_deploy2                
+                - build_and_deploy_lfasiallcci                
