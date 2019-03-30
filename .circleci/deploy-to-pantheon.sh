@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TERMINUS_S = $1
+TERMINUS_S=$1
 echo "!!! $1"
 echo "!!! $TERMINUS_S"
 set -ex
