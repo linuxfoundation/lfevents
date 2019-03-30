@@ -116,7 +116,7 @@ jobs:
 
             - run:
                 name: deploy to Pantheon
-                command: ./.circleci/deploy-to-pantheon.sh TERMINUS_SITE
+                command: ./.circleci/deploy-to-pantheon.sh $TERMINUS_SITE
 
     build_and_deploy_lfasiallcci:
         <<: *defaults
