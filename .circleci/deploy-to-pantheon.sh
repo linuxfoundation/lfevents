@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TERMINUS_S = $1;
+echo "!!! $TERMINUS_S"
 set -ex
 
 TERMINUS_DOES_MULTIDEV_EXIST()
@@ -11,7 +13,7 @@ TERMINUS_DOES_MULTIDEV_EXIST()
     fi
 
     # Stash list of Pantheon multidev environments
-    PANTHEON_MULTIDEV_LIST="$(terminus multidev:list -n ${TERMINUS_SITE} --format=list --field=Name)"
+    PANTHEON_MULTIDEV_LIST="$(terminus multidev:list -n ${TERMINUS_S} --format=list --field=Name)"
 
     while read -r multiDev; do
         if [[ "${multiDev}" == "$1" ]]
@@ -33,16 +35,16 @@ fi
 
 if ! TERMINUS_DOES_MULTIDEV_EXIST ${TERMINUS_ENV}
 then
-    terminus env:wake -n "$TERMINUS_SITE.dev"
-    terminus build:env:create -n "$TERMINUS_SITE.dev" "$TERMINUS_ENV" --clone-content --yes --notify="$NOTIFY"
+    terminus env:wake -n "$TERMINUS_S.dev"
+    terminus build:env:create -n "$TERMINUS_S.dev" "$TERMINUS_ENV" --clone-content --yes --notify="$NOTIFY"
 else
-    terminus build:env:push -n "$TERMINUS_SITE.$TERMINUS_ENV" --yes
+    terminus build:env:push -n "$TERMINUS_S.$TERMINUS_ENV" --yes
 fi
 
 set +ex
 echo 'terminus secrets:set'
-terminus secrets:set -n "$TERMINUS_SITE.$TERMINUS_ENV" token "$GITHUB_TOKEN" --file='github-secrets.json' --clear --skip-if-empty
+terminus secrets:set -n "$TERMINUS_S.$TERMINUS_ENV" token "$GITHUB_TOKEN" --file='github-secrets.json' --clear --skip-if-empty
 set -ex
 
 # Cleanup old multidevs
-terminus build:env:delete:pr -n "$TERMINUS_SITE" --yes
+terminus build:env:delete:pr -n "$TERMINUS_S" --yes
