@@ -1024,10 +1024,50 @@ a:focus {
 ## Menus
 --------------------------------------------------------------*/
 /** === Main menu === */
+.main-menu-toggler {
+  position: absolute !important;
+  top: -9999px !important;
+  right: -9999px !important;
+}
+
+.main-menu-toggler-label {
+  font-size: 22px;
+  float: left;
+  padding: 0.5rem;
+  color: #fff;
+}
+
+@media only screen and (min-width: 1168px) {
+  .main-menu-toggler-label {
+    display: none;
+  }
+}
+
+.menu-main-nav-container {
+  display: none;
+  clear: both;
+}
+
+[type="checkbox"]:checked ~ .menu-main-nav-container {
+  display: block;
+}
+
+@media only screen and (min-width: 1168px) {
+  .menu-main-nav-container {
+    display: block !important;
+  }
+}
+
 .main-navigation {
   display: block;
-  margin-top: 0.25rem;
-  /* Un-style buttons */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #0073aa;
+  z-index: 999;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+  font-size: 0;
   /*
 	 * Sub-menu styles
 	 *
@@ -1037,156 +1077,124 @@ a:focus {
   /**
 	 * Fade-in animation for top-level submenus
 	 */
-  /**
-	 * Off-canvas touch device styles
-	 */
+}
+
+body.admin-bar .main-navigation {
+  /* WP core breakpoint */
+}
+
+@media only screen and (min-width: 782px) {
+  body.admin-bar .main-navigation {
+    top: 32px;
+  }
 }
 
 body.page .main-navigation {
   display: block;
 }
 
-.main-navigation > div {
-  display: inline;
+.main-navigation .main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
 }
 
-.main-navigation button {
-  display: inline-block;
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu {
+    flex-wrap: nowrap;
+  }
+}
+
+.main-navigation .main-menu > li {
+  font-size: 22px;
+  display: inline;
+  position: relative;
+  flex-basis: 100%;
+}
+
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu > li {
+    flex-grow: 1;
+    flex-basis: auto;
+  }
+}
+
+.main-navigation .main-menu > li > a {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-weight: 700;
+  background-color: #0073aa;
+  color: #fff;
+  padding: 0.75rem;
+  transition: background-color 0.25s ease-out;
+}
+
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu > li > a {
+    height: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+.main-navigation .main-menu > li > a:hover {
+  background-color: #005177;
+}
+
+.main-navigation .main-menu > li.menu-item-has-children > a {
+  position: relative;
+  padding-left: 2rem;
+}
+
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu > li.menu-item-has-children > a {
+    padding-left: 2.25rem;
+  }
+}
+
+.main-navigation .main-menu > li.menu-item-has-children > button {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.75rem;
+  pointer-events: none;
   border: none;
   padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
+  line-height: 2;
   text-decoration: none;
   background: transparent;
-  color: inherit;
-  cursor: pointer;
-  transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-.main-navigation button:hover, .main-navigation button:focus {
-  background: transparent;
-}
-
-.main-navigation button:focus {
-  outline: 1px solid transparent;
-  outline-offset: -4px;
-}
-
-.main-navigation button:active {
-  transform: scale(0.99);
-}
-
-.main-navigation .main-menu {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-}
-
-.main-navigation .main-menu > li {
-  color: #0073aa;
-  display: inline;
-  position: relative;
-}
-
-.main-navigation .main-menu > li > a {
-  font-weight: 700;
-  color: #0073aa;
-  margin-left: 0.5rem;
-}
-
-.main-navigation .main-menu > li > a + svg {
-  margin-left: 0.5rem;
-}
-
-.main-navigation .main-menu > li > a:hover,
-.main-navigation .main-menu > li > a:hover + svg {
-  color: #005177;
-}
-
-.main-navigation .main-menu > li.menu-item-has-children {
-  display: inline-block;
-  position: inherit;
-}
-
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu > li.menu-item-has-children {
-    position: relative;
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu > li.menu-item-has-children > button {
+    left: 1rem;
   }
-}
-
-.main-navigation .main-menu > li.menu-item-has-children > a {
-  margin-left: 0.125rem;
-}
-
-.main-navigation .main-menu > li.menu-item-has-children > a:after,
-.main-navigation .main-menu > li.menu-item-has-children .menu-item-has-children > a:after {
-  content: "";
-  display: none;
-}
-
-.main-navigation .main-menu > li.menu-item-has-children .submenu-expand {
-  display: inline-block;
-  margin-left: 0.25rem;
-  /* Priority+ Menu */
-}
-
-.main-navigation .main-menu > li.menu-item-has-children .submenu-expand.main-menu-more-toggle {
-  position: relative;
-  height: 24px;
-  line-height: 1.2;
-  width: 24px;
-  padding: 0;
-  margin-right: 0.5rem;
-}
-
-.main-navigation .main-menu > li.menu-item-has-children .submenu-expand.main-menu-more-toggle svg {
-  height: 24px;
-  width: 24px;
-  top: -0.125rem;
-  vertical-align: text-bottom;
-}
-
-.wp-customizer-unloading .main-navigation .main-menu > li.menu-item-has-children .submenu-expand, .main-navigation .main-menu > li.menu-item-has-children .submenu-expand.is-empty {
-  display: none;
-}
-
-.main-navigation .main-menu > li.menu-item-has-children .submenu-expand svg {
-  position: relative;
-  top: 0.2rem;
-}
-
-.main-navigation .main-menu > li:last-child > a,
-.main-navigation .main-menu > li:last-child.menu-item-has-children .submenu-expand {
-  margin-left: 0;
 }
 
 .main-navigation .sub-menu {
   background-color: #0073aa;
-  color: #fff;
   list-style: none;
+  display: none;
   padding-right: 0;
-  position: absolute;
-  opacity: 0;
-  right: -9999px;
-  z-index: 99999;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1168px) {
   .main-navigation .sub-menu {
     width: auto;
     min-width: -moz-max-content;
     min-width: -webkit-max-content;
     min-width: max-content;
+    border: 4px solid rgba(0, 0, 0, 0.2);
+    background-clip: content-box;
+    border-top: 0;
   }
 }
 
 .main-navigation .sub-menu > li {
   display: block;
-  float: none;
   position: relative;
 }
 
@@ -1210,7 +1218,7 @@ body.page .main-navigation {
   margin-left: 0;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1168px) {
   .main-navigation .sub-menu > li.menu-item-has-children .menu-item-has-children > a:after {
     content: "\203a";
   }
@@ -1219,11 +1227,21 @@ body.page .main-navigation {
 .main-navigation .sub-menu > li > a,
 .main-navigation .sub-menu > li > .menu-item-link-return {
   color: #fff;
+  font-size: 0.71111em;
+  font-weight: normal;
   display: block;
   line-height: 1.2;
+  text-align: center;
   text-shadow: none;
   padding: calc( .5 * 1rem) 1rem calc( .5 * 1rem) calc( 24px + 1rem);
   white-space: nowrap;
+}
+
+@media only screen and (min-width: 1168px) {
+  .main-navigation .sub-menu > li > a,
+  .main-navigation .sub-menu > li > .menu-item-link-return {
+    font-size: 0.88889em;
+  }
 }
 
 .main-navigation .sub-menu > li > a:hover, .main-navigation .sub-menu > li > a:focus,
@@ -1255,13 +1273,7 @@ body.page .main-navigation {
   font-weight: normal;
 }
 
-.main-navigation .sub-menu > li.mobile-parent-nav-menu-item svg {
-  position: relative;
-  top: 0.2rem;
-  margin-left: calc( .25 * 1rem);
-}
-
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu {
+.main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu {
   display: block;
   right: 0;
   margin-top: 0;
@@ -1272,7 +1284,7 @@ body.page .main-navigation {
   /* Nested sub-menu dashes */
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu {
+.main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu {
   display: block;
   right: 0;
   margin-top: 0;
@@ -1283,8 +1295,8 @@ body.page .main-navigation {
   /* Nested sub-menu dashes */
 }
 
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu {
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu {
     display: block;
     margin-top: 0;
     opacity: 1;
@@ -1299,7 +1311,7 @@ body.page .main-navigation {
     min-width: max-content;
     transform: none;
   }
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu {
+  .main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu {
     display: block;
     margin-top: 0;
     opacity: 1;
@@ -1316,28 +1328,28 @@ body.page .main-navigation {
   }
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu.hidden-links {
+.main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu.hidden-links {
   right: 0;
   width: 100%;
   display: table;
   position: absolute;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu.hidden-links {
+.main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu.hidden-links {
   right: 0;
   width: 100%;
   display: table;
   position: absolute;
 }
 
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu.hidden-links {
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu.hidden-links {
     left: 0;
     right: auto;
     display: block;
     width: max-content;
   }
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu.hidden-links {
+  .main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu.hidden-links {
     left: 0;
     right: auto;
     display: block;
@@ -1345,15 +1357,7 @@ body.page .main-navigation {
   }
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu .submenu-expand {
-  display: none;
-}
-
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .submenu-expand {
-  display: none;
-}
-
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu .sub-menu {
+.main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu .sub-menu {
   display: block;
   margin-top: inherit;
   position: relative;
@@ -1363,7 +1367,7 @@ body.page .main-navigation {
   /* Non-mobile position */
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .sub-menu {
+.main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu .sub-menu {
   display: block;
   margin-top: inherit;
   position: relative;
@@ -1373,63 +1377,57 @@ body.page .main-navigation {
   /* Non-mobile position */
 }
 
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu .sub-menu {
-    float: none;
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu .sub-menu {
     max-width: 100%;
   }
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .sub-menu {
-    float: none;
+  .main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu .sub-menu {
     max-width: 100%;
   }
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu .sub-menu {
+.main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu .sub-menu {
   counter-reset: submenu;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .sub-menu {
+.main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu .sub-menu {
   counter-reset: submenu;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas)[focus-within] > .sub-menu .sub-menu > li > a::before {
+.main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu .sub-menu > li > a::before {
   font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .sub-menu > li > a::before {
+.main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu .sub-menu > li > a::before {
   font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu,
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu,
-.main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu {
+.main-navigation .main-menu .menu-item-has-children:hover > .sub-menu,
+.main-navigation .main-menu .menu-item-has-children:focus > .sub-menu,
+.main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu {
   display: block;
-  right: 0;
-  margin-top: 0;
-  opacity: 1;
   width: auto;
   min-width: 100%;
   /* Non-mobile position */
   /* Nested sub-menu dashes */
 }
 
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu,
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu,
-  .main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu {
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu .menu-item-has-children:hover > .sub-menu,
+  .main-navigation .main-menu .menu-item-has-children:focus > .sub-menu,
+  .main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu {
     display: block;
-    float: none;
     margin-top: 0;
     opacity: 1;
     position: absolute;
-    right: 0;
-    left: auto;
+    right: auto;
+    left: 0;
     top: auto;
     bottom: auto;
     height: auto;
@@ -1440,19 +1438,19 @@ body.page .main-navigation {
   }
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu.hidden-links,
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu.hidden-links,
-.main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu.hidden-links {
+.main-navigation .main-menu .menu-item-has-children:hover > .sub-menu.hidden-links,
+.main-navigation .main-menu .menu-item-has-children:focus > .sub-menu.hidden-links,
+.main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu.hidden-links {
   right: 0;
   width: 100%;
   display: table;
   position: absolute;
 }
 
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu.hidden-links,
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu.hidden-links,
-  .main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu.hidden-links {
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu .menu-item-has-children:hover > .sub-menu.hidden-links,
+  .main-navigation .main-menu .menu-item-has-children:focus > .sub-menu.hidden-links,
+  .main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu.hidden-links {
     left: 0;
     right: auto;
     display: table;
@@ -1460,15 +1458,15 @@ body.page .main-navigation {
   }
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu .submenu-expand,
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu .submenu-expand,
-.main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu .submenu-expand {
+.main-navigation .main-menu .menu-item-has-children:hover > .sub-menu .submenu-expand,
+.main-navigation .main-menu .menu-item-has-children:focus > .sub-menu .submenu-expand,
+.main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu .submenu-expand {
   display: none;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu .sub-menu,
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu .sub-menu,
-.main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu .sub-menu {
+.main-navigation .main-menu .menu-item-has-children:hover > .sub-menu .sub-menu,
+.main-navigation .main-menu .menu-item-has-children:focus > .sub-menu .sub-menu,
+.main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu .sub-menu {
   display: block;
   margin-top: inherit;
   position: relative;
@@ -1478,113 +1476,34 @@ body.page .main-navigation {
   /* Non-mobile position */
 }
 
-@media only screen and (min-width: 768px) {
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu .sub-menu,
-  .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu .sub-menu,
-  .main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu .sub-menu {
-    float: none;
+@media only screen and (min-width: 1168px) {
+  .main-navigation .main-menu .menu-item-has-children:hover > .sub-menu .sub-menu,
+  .main-navigation .main-menu .menu-item-has-children:focus > .sub-menu .sub-menu,
+  .main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu .sub-menu {
     max-width: 100%;
   }
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu .sub-menu,
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu .sub-menu,
-.main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu .sub-menu {
+.main-navigation .main-menu .menu-item-has-children:hover > .sub-menu .sub-menu,
+.main-navigation .main-menu .menu-item-has-children:focus > .sub-menu .sub-menu,
+.main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu .sub-menu {
   counter-reset: submenu;
 }
 
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu .sub-menu > li > a::before,
-.main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu .sub-menu > li > a::before,
-.main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu .sub-menu > li > a::before {
+.main-navigation .main-menu .menu-item-has-children:hover > .sub-menu .sub-menu > li > a::before,
+.main-navigation .main-menu .menu-item-has-children:focus > .sub-menu .sub-menu > li > a::before,
+.main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu .sub-menu > li > a::before {
   font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
 }
 
-.main-navigation .main-menu > .menu-item-has-children:not(.off-canvas):hover > .sub-menu {
-  animation: fade_in 0.1s forwards;
-}
-
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu .submenu-expand .svg-icon {
-  transform: rotate(-270deg);
-}
-
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu .sub-menu {
-  opacity: 0;
-  position: absolute;
-  z-index: 0;
-  transform: translateX(100%);
-}
-
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu li:hover,
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu li:focus,
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu li > a:hover,
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu li > a:focus {
-  background-color: transparent;
-}
-
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu > li > a,
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu > li > .menu-item-link-return {
-  white-space: inherit;
-}
-
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu.expanded-true {
-  display: table;
-  margin-top: 0;
-  opacity: 1;
-  padding-right: 0;
-  /* Mobile position */
-  right: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  position: fixed;
-  z-index: 100000;
-  /* Make sure appears above mobile admin bar */
-  width: 100vw;
-  height: 100vh;
-  max-width: 100vw;
-  transform: translateX(-100%);
-  animation: slide_in_right 0.3s forwards;
-  /* Prevent menu from being blocked by admin bar */
-}
-
-.main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu.expanded-true > .mobile-parent-nav-menu-item {
-  display: block;
-}
-
-.admin-bar .main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu.expanded-true {
-  top: 46px;
-  height: calc( 100vh - 46px);
-  /* WP core breakpoint */
-}
-
-.admin-bar .main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu.expanded-true .sub-menu.expanded-true {
-  top: 0;
-}
-
-@media only screen and (min-width: 782px) {
-  .admin-bar .main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu.expanded-true {
-    top: 32px;
-    height: calc( 100vh - 32px);
-  }
-  .admin-bar .main-navigation .main-menu .menu-item-has-children.off-canvas .sub-menu.expanded-true .sub-menu.expanded-true {
-    top: 0;
-  }
-}
-
-.main-navigation .main-menu-more:nth-child(n+3) {
-  display: none;
+.main-navigation .main-menu > .menu-item-has-children:hover > .sub-menu {
+  animation: fade_in 0.25s forwards;
 }
 
 /* Menu animation */
-@keyframes slide_in_right {
-  100% {
-    transform: translateX(0%);
-  }
-}
-
 @keyframes fade_in {
   from {
     opacity: 0;
@@ -2002,7 +1921,7 @@ body.page .main-navigation {
 @media only screen and (min-width: 768px) {
   .site-header {
     margin: 0;
-    padding: 3rem 0;
+    padding: 6rem 0 3rem 0;
   }
   .site-header.featured-image {
     min-height: 100vh;
