@@ -100,6 +100,11 @@
 
 			&.menu-item-has-children {
 
+				&:hover,
+				&:focus {
+					z-index: 2;
+				}
+
 				> a {
 					position: relative;
 					padding-right: 2rem;
@@ -128,6 +133,21 @@
 				}
 			}
 
+			&.current-menu-ancestor,
+			&.current-menu-item {
+
+				> a {
+					background-color: mix($color__link-hover, $color__link);
+
+					&:hover {
+						background-color: $color__link-hover;
+					}
+
+					@include media(desktop) {
+						box-shadow: 0 4px 0 0 transparentize($color__link, 0.8);
+					}
+				}
+			}
 		}
 	}
 
@@ -142,7 +162,7 @@
 			min-width: -moz-max-content;
 			min-width: -webkit-max-content;
 			min-width: max-content;
-			border: 4px solid rgba(0,0,0,0.2);
+			border: 4px solid rgba(0,0,0,0.1);
 			background-clip: content-box;
 			border-top: 0;
 		}
@@ -150,6 +170,12 @@
 		> li {
 			display: block;
 			position: relative;
+
+			&.current-menu-item {
+				> a {
+					background-color: mix($color__link-hover, $color__link);
+				}
+			}
 
 			> a,
 			> .menu-item-link-return {
@@ -165,6 +191,7 @@
 
 				@include media(desktop) {
 					font-size: $font__size-sm;
+					text-align: left;
 				}
 
 				&:hover,
@@ -217,7 +244,7 @@
 			margin-top: 0;
 			opacity: 1;
 			position: absolute;
-			left: 0;
+			left: -4px;
 			right: auto;
 			top: auto;
 			bottom: auto;
@@ -282,7 +309,7 @@
 			margin-top: 0;
 			opacity: 1;
 			position: absolute;
-			left: 0;
+			left: -4px;
 			right: auto;
 			top: auto;
 			bottom: auto;
