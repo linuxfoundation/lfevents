@@ -1066,7 +1066,7 @@ a:focus {
   left: 0;
   background-color: #0073aa;
   z-index: 999;
-  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1), 0 -50px 0 50px #0073aa;
   font-size: 0;
   /*
 	 * Sub-menu styles
@@ -1128,14 +1128,14 @@ body.page .main-navigation {
   font-weight: 700;
   background-color: #0073aa;
   color: #fff;
-  padding: 0.75rem;
+  padding: 1em;
   transition: background-color 0.25s ease-out;
 }
 
 @media only screen and (min-width: 1168px) {
   .main-navigation .main-menu > li > a {
     height: 100%;
-    padding: 0.75rem 1.5rem;
+    padding: 1.25em 1.5em;
   }
 }
 
@@ -1156,7 +1156,7 @@ body.page .main-navigation {
 
 .main-navigation .main-menu > li.menu-item-has-children > button {
   position: absolute;
-  top: 0.7rem;
+  top: 1.25em;
   right: 0.75rem;
   pointer-events: none;
   border: none;
@@ -1196,32 +1196,6 @@ body.page .main-navigation {
 .main-navigation .sub-menu > li {
   display: block;
   position: relative;
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children .submenu-expand {
-  display: inline-block;
-  position: absolute;
-  width: calc( 24px + 1rem);
-  right: 0;
-  top: calc( .125 * 1rem);
-  bottom: 0;
-  color: white;
-  line-height: 1;
-  padding: calc( .5 * 1rem);
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children .submenu-expand svg {
-  top: 0;
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children .submenu-expand {
-  margin-right: 0;
-}
-
-@media only screen and (min-width: 1168px) {
-  .main-navigation .sub-menu > li.menu-item-has-children .menu-item-has-children > a:after {
-    content: "\203a";
-  }
 }
 
 .main-navigation .sub-menu > li > a,
@@ -1426,8 +1400,8 @@ body.page .main-navigation {
     margin-top: 0;
     opacity: 1;
     position: absolute;
-    left: auto;
-    right: 0;
+    left: 0;
+    right: auto;
     top: auto;
     bottom: auto;
     height: auto;

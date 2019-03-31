@@ -34,7 +34,6 @@
 }
 
 .main-navigation {
-
 	display: block;
 	position: fixed;
 	top: 0;
@@ -42,7 +41,7 @@
 	left: 0;
 	background-color: $color__link;
 	z-index: 999;
-	box-shadow: 0 4px 0 0 rgba(0,0,0,0.1);
+	box-shadow: 0 4px 0 0 rgba(0,0,0,0.1), 0 -50px 0 50px $color__link;
 	font-size: 0;
 
 	// Move the nav down a bit when the admin bar is present
@@ -58,7 +57,6 @@
 	}
 
 	.main-menu {
-
 		display: flex;
 		flex-wrap: wrap;
 		margin: 0;
@@ -69,7 +67,6 @@
 		}
 
 		> li {
-
 			font-size: $font__size_base;
 			display: inline;
 			position: relative;
@@ -81,7 +78,6 @@
 			}
 
 			> a {
-
 				display: flex;
 				align-items: center;
 				text-align: center;
@@ -89,12 +85,12 @@
 				font-weight: 700;
 				background-color: $color__link;
 				color: #fff;
-				padding: 0.75rem;
+				padding: 1em;
 				transition: background-color 0.25s ease-out;
 
 				@include media(desktop) {
 					height: 100%;
-					padding: 0.75rem 1.5rem;
+					padding: 1.25em 1.5em;
 				}
 
 				&:hover {
@@ -115,10 +111,9 @@
 
 				> button {
 					position: absolute;
-					top: 0.7rem;
+					top: 1.25em;
 					right: 0.75rem;
 					pointer-events: none;
-
 					border: none;
 					padding: 0;
 					line-height: 2;
@@ -153,46 +148,11 @@
 		}
 
 		> li {
-
 			display: block;
 			position: relative;
 
-			&.menu-item-has-children {
-
-				.submenu-expand {
-					display: inline-block;
-					position: absolute;
-					width: calc( 24px + #{$size__spacing-unit} );
-					right: 0;
-					top: calc( .125 * #{$size__spacing-unit} );
-					bottom: 0;
-					color: white;
-					line-height: 1;
-					padding: calc( .5 * #{$size__spacing-unit} );
-
-					svg {
-						top: 0;
-					}
-				}
-
-				.submenu-expand {
-					margin-right: 0;
-				}
-
-				@include media(desktop) {
-
-					.menu-item-has-children > a {
-
-						&:after {
-							content: "\203a";
-						}
-					}
-				}
-			}
-
 			> a,
 			> .menu-item-link-return {
-
 				color: $color__background-body;
 				font-size: $font__size-xs;
 				font-weight: normal;
@@ -244,14 +204,12 @@
 	 * selectors don’t get ignored if a browser doesn’t recognize it
 	 */
 	.main-menu .menu-item-has-children:focus-within > .sub-menu {
-
 		display: block;
 		left: 0;
 		margin-top: 0;
 		opacity: 1;
 		width: auto;
 		min-width: 100%;
-
 
 		/* Non-mobile position */
 		@include media(desktop) {
@@ -284,10 +242,6 @@
 			}
 		}
 
-		// .submenu-expand {
-		// 	display: none;
-		// }
-
 		.sub-menu {
 			display: block;
 			margin-top: inherit;
@@ -318,11 +272,9 @@
 	.main-menu .menu-item-has-children:hover > .sub-menu,
 	.main-menu .menu-item-has-children:focus > .sub-menu,
 	.main-menu .menu-item-has-children.is-focused > .sub-menu {
-
 		display: block;
 		width: auto;
 		min-width: 100%;
-
 
 		/* Non-mobile position */
 		@include media(desktop) {
@@ -330,8 +282,8 @@
 			margin-top: 0;
 			opacity: 1;
 			position: absolute;
-			left: auto;
-			right: 0;
+			left: 0;
+			right: auto;
 			top: auto;
 			bottom: auto;
 			height: auto;

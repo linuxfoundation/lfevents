@@ -413,7 +413,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #111;
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 1em;
   line-height: 1.8;
@@ -427,7 +427,7 @@ select,
 optgroup,
 textarea {
   color: #111;
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   line-height: 1.8;
   text-rendering: optimizeLegibility;
@@ -488,7 +488,7 @@ h6 {
 }
 
 .page-title {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .site-branding,
@@ -1066,7 +1066,7 @@ a:focus {
   right: 0;
   background-color: #0073aa;
   z-index: 999;
-  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1), 0 -50px 10px 10px #0073aa;
   font-size: 0;
   /*
 	 * Sub-menu styles
@@ -1128,14 +1128,14 @@ body.page .main-navigation {
   font-weight: 700;
   background-color: #0073aa;
   color: #fff;
-  padding: 0.75rem;
+  padding: 1em;
   transition: background-color 0.25s ease-out;
 }
 
 @media only screen and (min-width: 1168px) {
   .main-navigation .main-menu > li > a {
     height: 100%;
-    padding: 0.75rem 1.5rem;
+    padding: 1.25em 1.5em;
   }
 }
 
@@ -1156,7 +1156,7 @@ body.page .main-navigation {
 
 .main-navigation .main-menu > li.menu-item-has-children > button {
   position: absolute;
-  top: 0.7rem;
+  top: 1.25em;
   left: 0.75rem;
   pointer-events: none;
   border: none;
@@ -1196,32 +1196,6 @@ body.page .main-navigation {
 .main-navigation .sub-menu > li {
   display: block;
   position: relative;
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children .submenu-expand {
-  display: inline-block;
-  position: absolute;
-  width: calc( 24px + 1rem);
-  left: 0;
-  top: calc( .125 * 1rem);
-  bottom: 0;
-  color: white;
-  line-height: 1;
-  padding: calc( .5 * 1rem);
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children .submenu-expand svg {
-  top: 0;
-}
-
-.main-navigation .sub-menu > li.menu-item-has-children .submenu-expand {
-  margin-left: 0;
-}
-
-@media only screen and (min-width: 1168px) {
-  .main-navigation .sub-menu > li.menu-item-has-children .menu-item-has-children > a:after {
-    content: "\203a";
-  }
 }
 
 .main-navigation .sub-menu > li > a,
@@ -1395,14 +1369,14 @@ body.page .main-navigation {
 }
 
 .main-navigation .main-menu .menu-item-has-children[focus-within] > .sub-menu .sub-menu > li > a::before {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
 }
 
 .main-navigation .main-menu .menu-item-has-children:focus-within > .sub-menu .sub-menu > li > a::before {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
@@ -1426,8 +1400,8 @@ body.page .main-navigation {
     margin-top: 0;
     opacity: 1;
     position: absolute;
-    right: auto;
-    left: 0;
+    right: 0;
+    left: auto;
     top: auto;
     bottom: auto;
     height: auto;
@@ -1493,7 +1467,7 @@ body.page .main-navigation {
 .main-navigation .main-menu .menu-item-has-children:hover > .sub-menu .sub-menu > li > a::before,
 .main-navigation .main-menu .menu-item-has-children:focus > .sub-menu .sub-menu > li > a::before,
 .main-navigation .main-menu .menu-item-has-children.is-focused > .sub-menu .sub-menu > li > a::before {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
@@ -3316,7 +3290,7 @@ body.page .main-navigation {
 .widget_recent_comments ul ul > li > a::before,
 .widget_recent_entries ul ul > li > a::before,
 .widget_rss ul ul > li > a::before {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
@@ -3676,7 +3650,7 @@ body.page .main-navigation {
 }
 
 .entry .entry-content .wp-block-categories ul > li > a::before {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal;
   content: "– " counters(submenu, "– ", none);
   counter-increment: submenu;
@@ -3707,7 +3681,7 @@ body.page .main-navigation {
 }
 
 .entry .entry-content .wp-block-verse {
-  font-family: "NonBreakingSpaceOverride", "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 18px;
   line-height: 1.8;
 }
