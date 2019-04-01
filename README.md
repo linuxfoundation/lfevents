@@ -9,6 +9,7 @@ LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI 
 All these tests are run by CircleCI on each commit to the master branch, whenver a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
 
 -----
+
 ## Install Local Instance
 
 ### Requirements
@@ -18,6 +19,8 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 * Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon).  Follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication).
 
 * You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password for performing Git operations over HTTPS.  It will be used in step 2 below.
+
+* [Node](https://nodejs.org/)/[NPM](https://www.npmjs.com/) (for theme development)
 
 ### Lando Setup
 (these steps were derived from [instructions provided by Pantheon](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
@@ -48,6 +51,20 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 * Composer, Terminus and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json, run `lando composer update` rather than `composer update`.
 
 * Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from Pantheon
+
+-----
+
+## Theme Development
+
+LFEvents uses a fork of the Twenty Nineteen theme which relies on Sass, allowing us to more easily share code between multiple stylesheets (`style.css`, `style-editor.css`, etc.). To compile Sass files (`.scss`) use the built-in `npm` scripts.
+
+**DO NOT edit `.css` files directly**
+
+* Go to the theme directory: `cd web/wp-content/themes/twentynineteen`
+
+* Install the Node.js dependencies: `npm install` (git ignores the `node_modules/` directory)
+
+* Build CSS files after making a change to a `.scss` file by running `npm run build`, or watch the theme directory for Sass changes by running `npm run watch`
 
 -----
 
