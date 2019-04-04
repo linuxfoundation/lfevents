@@ -129,6 +129,7 @@ class LFEvents_Admin {
 			'show_in_rest' => true,
 			'hierarchical' => true,
 			'menu_icon'    => 'dashicons-info',
+			'rewrite'      => array( 'slug' => 'about' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'page-attributes' ),
 		);
 
