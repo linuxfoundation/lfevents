@@ -114,33 +114,69 @@ class LFEvents_Admin {
 	}
 
 	/**
-	 * Registers the LFEvent custom post types
+	 * Registers the custom post types
 	 */
-	public function new_cpt_events() {
+	public function new_cpts() {
 
 		$opts = array(
 			'labels'       => array(
-				'name'          => __( 'Events' ),
-				'singular_name' => __( 'Event' ),
+				'name'          => __( 'About Pages' ),
+				'singular_name' => __( 'About Page' ),
 			),
 			'public'       => true,
 			'has_archive'  => true,
 			'show_in_rest' => true,
 			'hierarchical' => true,
-			'menu_icon'    => 'dashicons-admin-site',
+			'menu_icon'    => 'dashicons-info',
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'page-attributes' ),
+		);
+
+		register_post_type( 'lfevents_about_page', $opts );
+
+		$opts = array(
+			'public'       => true,
+			'has_archive'  => true,
+			'show_in_rest' => true,
+			'hierarchical' => true,
+			'menu_icon'    => 'dashicons-admin-page',
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
 		);
 
 		$current_year = date( 'Y' );
 		for ( $x = 2019; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
-				'name'          => 'Events (' . $x . ')',
-				'singular_name' => 'Event (' . $x . ')',
+				'name'          => 'Past Events (' . $x . ')',
+				'singular_name' => 'Past Event (' . $x . ')',
 			);
 			$opts['rewrite'] = array( 'slug' => 'archive/' . $x );
 
 			register_post_type( 'lfevent' . $x, $opts );
 		}
+
+	}
+
+	/**
+	 * Changes the "Pages" labels to "Events"
+	 */
+	public function change_page_label() {
+		global $wp_post_types;
+		$labels = &$wp_post_types['page']->labels;
+		$labels->name = 'Events';
+		$labels->singular_name = 'Event';
+		$labels->add_new_item = 'Add Event';
+		$labels->edit_item = 'Edit Event';
+		$labels->new_item = 'New Event';
+		$labels->view_item = 'View Event';
+		$labels->all_items = "All Events";
+		$labels->view_items = 'View Events';
+		$labels->search_items = 'Search Events';
+		$labels->not_found = 'No Events found';
+		$labels->not_found_in_trash = 'No Events found in Trash';
+		$labels->archives = "Event Archives";
+		$labels->attributes = "Event Attributes";
+		$labels->menu_name = "Events";
+		$labels->name_admin_bar = "Event";
+
 	}
 
 	/**
