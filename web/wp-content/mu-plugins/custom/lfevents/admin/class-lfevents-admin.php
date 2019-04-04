@@ -148,7 +148,7 @@ class LFEvents_Admin {
 		for ( $x = 2019; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
 				'name'          => $x . ' Events',
-				'singular_name' => $x . 'Event',
+				'singular_name' => $x . ' Event',
 				'all_items'     => 'All ' . $x . ' Events',
 			);
 			$opts['rewrite'] = array( 'slug' => 'archive/' . $x );
