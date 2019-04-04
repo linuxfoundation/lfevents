@@ -287,4 +287,88 @@ class LFEvents_Admin {
 
 	}
 
+	/**
+	 * Adds filters to the Events listing in wp-admin
+	 */
+	public function event_filters() {
+		global $wpdb;
+
+		// only do this for Events.
+		$post_type_listing = isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
+		if ( $post_type_listing !== 'page' && substr( $post_type_listing, 0, 7 ) !== 'lfevent' || $post_type_listing === 'lfevents_about_page') {
+			return;
+		}
+
+		$myposts = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM $wpdb->posts
+				WHERE post_type like %s
+				AND post_parent = 0 
+				AND post_status <> 'trash'
+				AND post_title <> 'Auto Draft'
+				ORDER BY $wpdb->posts.post_title ASC",
+				$wpdb->esc_like( $post_type_listing ) . '%'
+			)
+		);
+
+		echo '<select name="admin-single-event" class="event-quick-link">
+		<option selected="selected" value="">' . __( 'Select Event' ) . '</option>';
+		foreach ( $myposts as $ep ) {
+			$e = get_post( $ep );
+			if ( $e->ID == $_GET['admin-single-event'] ) {
+				echo '<option value="' . $e->ID . '" selected="selected">' . $e->post_title . '</option>';
+			} else {
+				echo '<option value="' . $e->ID . '">' . $e->post_title . '</option>';
+			}
+		}
+		echo '</select>';
+	}
+
+	/**
+	 * Does the actual filtering of Events in the Admin listing
+	 *
+	 * @param object $query Existing query.
+	 */
+	public function event_list_filter( $query ) {
+		global $wpdb;
+
+		$post_id = isset( $_GET['admin-single-event'] ) ? (int) $_GET['admin-single-event'] : '';
+		if ( ! $post_id ) {
+			return;
+		}
+
+		$posts_ids   = array( $post_id );
+		$event_posts = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM $wpdb->posts
+				WHERE post_parent = '%d'
+				AND post_status <> 'trash'",
+				$post_id
+			)
+		);
+
+		foreach ( $event_posts as $p ) {
+			$e = (int) $p->ID;
+			$posts_ids[] = $e;
+
+			$gc_posts = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM $wpdb->posts
+					WHERE post_parent = '%d'
+					AND post_status <> 'trash'",
+					$e
+				)
+			);
+
+			if ( $gc_posts ) {
+				foreach ( $gc_posts as $gc ) {
+					$posts_ids[] = $gc->ID;
+				}
+			}
+		}
+
+		$query->set( 'post__in', $posts_ids );
+		$query->set( 'order', 'ASC' );
+		$query->set( 'orderby', 'parent' );
+	}
 }

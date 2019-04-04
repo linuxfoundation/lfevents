@@ -159,7 +159,8 @@ class LFEvents {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_event_categories' );
 		$this->loader->add_filter( 'pmc_create_sidebar', $plugin_admin, 'create_sidebar' );
 		$this->loader->add_action( 'init', $plugin_admin, 'change_page_label' );
-
+		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'event_filters' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'event_list_filter' );
 
 	}
 
