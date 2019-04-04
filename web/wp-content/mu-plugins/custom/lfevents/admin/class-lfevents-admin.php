@@ -122,6 +122,7 @@ class LFEvents_Admin {
 			'labels'       => array(
 				'name'          => __( 'About Pages' ),
 				'singular_name' => __( 'About Page' ),
+				'all_items'     => __( 'All About Pages' ),
 			),
 			'public'       => true,
 			'has_archive'  => true,
@@ -145,8 +146,9 @@ class LFEvents_Admin {
 		$current_year = date( 'Y' );
 		for ( $x = 2019; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
-				'name'          => 'Past Events (' . $x . ')',
-				'singular_name' => 'Past Event (' . $x . ')',
+				'name'          => $x . ' Events',
+				'singular_name' => $x . 'Event',
+				'all_items'     => 'All ' . $x . ' Events',
 			);
 			$opts['rewrite'] = array( 'slug' => 'archive/' . $x );
 
