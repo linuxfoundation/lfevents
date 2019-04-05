@@ -163,22 +163,22 @@ class LFEvents_Admin {
 	 */
 	public function change_page_label() {
 		global $wp_post_types;
-		$labels = &$wp_post_types['page']->labels;
-		$labels->name = 'Events';
-		$labels->singular_name = 'Event';
-		$labels->add_new_item = 'Add Event';
-		$labels->edit_item = 'Edit Event';
-		$labels->new_item = 'New Event';
-		$labels->view_item = 'View Event';
-		$labels->all_items = "All Events";
-		$labels->view_items = 'View Events';
-		$labels->search_items = 'Search Events';
-		$labels->not_found = 'No Events found';
+		$labels                     = &$wp_post_types['page']->labels;
+		$labels->name               = 'Events';
+		$labels->singular_name      = 'Event';
+		$labels->add_new_item       = 'Add Event';
+		$labels->edit_item          = 'Edit Event';
+		$labels->new_item           = 'New Event';
+		$labels->view_item          = 'View Event';
+		$labels->all_items          = 'All Events';
+		$labels->view_items         = 'View Events';
+		$labels->search_items       = 'Search Events';
+		$labels->not_found          = 'No Events found';
 		$labels->not_found_in_trash = 'No Events found in Trash';
-		$labels->archives = "Event Archives";
-		$labels->attributes = "Event Attributes";
-		$labels->menu_name = "Events";
-		$labels->name_admin_bar = "Event";
+		$labels->archives           = 'Event Archives';
+		$labels->attributes         = 'Event Attributes';
+		$labels->menu_name          = 'Events';
+		$labels->name_admin_bar     = 'Event';
 
 	}
 
@@ -294,10 +294,12 @@ class LFEvents_Admin {
 		global $wpdb;
 
 		// only do this for Events.
-		$post_type_listing = isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
-		if ( $post_type_listing !== 'page' && substr( $post_type_listing, 0, 7 ) !== 'lfevent' || $post_type_listing === 'lfevents_about_page') {
+		$post_type_listing = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
+		if ( 'page' !== $post_type_listing && substr( $post_type_listing, 0, 7 ) !== 'lfevent' || 'lfevents_about_page' === $post_type_listing ) {
 			return;
 		}
+
+		$post_id = isset( $_GET['admin-single-event'] ) ? (int) $_GET['admin-single-event'] : '';
 
 		$myposts = $wpdb->get_results(
 			$wpdb->prepare(
@@ -312,13 +314,13 @@ class LFEvents_Admin {
 		);
 
 		echo '<select name="admin-single-event" class="event-quick-link">
-		<option selected="selected" value="">' . __( 'Select Event' ) . '</option>';
+		<option selected="selected" value="">Select Event</option>';
 		foreach ( $myposts as $ep ) {
 			$e = get_post( $ep );
-			if ( $e->ID == $_GET['admin-single-event'] ) {
-				echo '<option value="' . $e->ID . '" selected="selected">' . $e->post_title . '</option>';
+			if ( $e->ID === $post_id ) {
+				echo '<option value="' . esc_html( $e->ID ) . '" selected="selected">' . esc_html( $e->post_title ) . '</option>';
 			} else {
-				echo '<option value="' . $e->ID . '">' . $e->post_title . '</option>';
+				echo '<option value="' . esc_html( $e->ID ) . '">' . esc_html( $e->post_title ) . '</option>';
 			}
 		}
 		echo '</select>';
@@ -341,20 +343,20 @@ class LFEvents_Admin {
 		$event_posts = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM $wpdb->posts
-				WHERE post_parent = '%d'
+				WHERE post_parent = %d
 				AND post_status <> 'trash'",
 				$post_id
 			)
 		);
 
 		foreach ( $event_posts as $p ) {
-			$e = (int) $p->ID;
+			$e           = (int) $p->ID;
 			$posts_ids[] = $e;
 
 			$gc_posts = $wpdb->get_results(
 				$wpdb->prepare(
 					"SELECT * FROM $wpdb->posts
-					WHERE post_parent = '%d'
+					WHERE post_parent = %d
 					AND post_status <> 'trash'",
 					$e
 				)
