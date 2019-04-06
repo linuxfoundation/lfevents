@@ -92,6 +92,7 @@
     ],
     "code-sniff": [
       "./vendor/bin/phpcs --config-set installed_paths ~/example_wordpress_composer/vendor/wp-coding-standards/wpcs",
+      "./vendor/bin/phpcs --config-set ignore_warnings_on_exit 1",
       "./vendor/bin/phpcs --standard=WordPress ./web/wp-content"
     ],
     "unit-test": [
