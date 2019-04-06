@@ -133,7 +133,7 @@ class LFEvents_Admin {
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'page-attributes' ),
 		);
 
-		register_post_type( 'lfevents_about_page', $opts );
+		register_post_type( 'lfe_about_page', $opts );
 
 		$opts = array(
 			'public'       => true,
@@ -295,7 +295,7 @@ class LFEvents_Admin {
 
 		// only do this for Events.
 		$post_type_listing = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
-		if ( 'page' !== $post_type_listing && substr( $post_type_listing, 0, 7 ) !== 'lfevent' || 'lfevents_about_page' === $post_type_listing ) {
+		if ( 'page' !== $post_type_listing && substr( $post_type_listing, 0, 7 ) !== 'lfevent' ) {
 			return;
 		}
 
