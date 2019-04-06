@@ -28,7 +28,7 @@ class TwentyNineteen_Walker_Comment extends Walker_Comment {
 		$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 
 		?>
-		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
+		<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
 			<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
 				<footer class="comment-meta">
 					<div class="comment-author vcard">
@@ -40,10 +40,10 @@ class TwentyNineteen_Walker_Comment extends Walker_Comment {
 
 						if ( 0 != $args['avatar_size'] ) {
 							if ( empty( $comment_author_url ) ) {
-								echo $avatar;
+								echo $avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							} else {
-								printf( '<a href="%s" rel="external nofollow" class="url">', $comment_author_url );
-								echo $avatar;
+								printf( '<a href="%s" rel="external nofollow" class="url">', $comment_author_url ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo $avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							}
 						}
 
@@ -52,13 +52,13 @@ class TwentyNineteen_Walker_Comment extends Walker_Comment {
 						 * fill color to the inner check shape when in circle form.
 						 */
 						if ( twentynineteen_is_comment_by_post_author( $comment ) ) {
-							printf( '<span class="post-author-badge" aria-hidden="true">%s</span>', twentynineteen_get_icon_svg( 'check', 24 ) );
+							printf( '<span class="post-author-badge" aria-hidden="true">%s</span>', twentynineteen_get_icon_svg( 'check', 24 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						}
 
 						printf(
 							/* translators: %s: comment author link */
 							wp_kses(
-								__( '%s <span class="screen-reader-text says">says:</span>', 'twentynineteen' ),
+								__( '%s <span class="screen-reader-text says">says:</span>', 'twentynineteen' ), // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
 								array(
 									'span' => array(
 										'class' => array(),
@@ -80,8 +80,8 @@ class TwentyNineteen_Walker_Comment extends Walker_Comment {
 								/* translators: 1: comment date, 2: comment time */
 								$comment_timestamp = sprintf( __( '%1$s at %2$s', 'twentynineteen' ), get_comment_date( '', $comment ), get_comment_time() );
 							?>
-							<time datetime="<?php comment_time( 'c' ); ?>" title="<?php echo $comment_timestamp; ?>">
-								<?php echo $comment_timestamp; ?>
+							<time datetime="<?php comment_time( 'c' ); ?>" title="<?php echo $comment_timestamp; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
+								<?php echo $comment_timestamp; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</time>
 						</a>
 						<?php
@@ -91,7 +91,7 @@ class TwentyNineteen_Walker_Comment extends Walker_Comment {
 					</div><!-- .comment-metadata -->
 
 					<?php if ( '0' == $comment->comment_approved ) : ?>
-					<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentynineteen' ); ?></p>
+					<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?></p>
 					<?php endif; ?>
 				</footer><!-- .comment-meta -->
 

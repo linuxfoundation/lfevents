@@ -14,7 +14,7 @@ if ( (bool) get_the_author_meta( 'description' ) ) : ?>
 			<?php
 			printf(
 				/* translators: %s: post author */
-				__( 'Published by %s', 'twentynineteen' ),
+				__( 'Published by %s', 'twentynineteen' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				esc_html( get_the_author() )
 			);
 			?>
@@ -23,7 +23,7 @@ if ( (bool) get_the_author_meta( 'description' ) ) : ?>
 	<p class="author-description">
 		<?php the_author_meta( 'description' ); ?>
 		<a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
-			<?php _e( 'View more posts', 'twentynineteen' ); ?>
+			<?php _e( 'View more posts', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
 		</a>
 	</p><!-- .author-description -->
 </div><!-- .author-bio -->

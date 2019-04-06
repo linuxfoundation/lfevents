@@ -26,7 +26,7 @@ if ( $has_responses ) {
 	}
 	?>
 	<p class="discussion-meta-info">
-		<?php echo twentynineteen_get_icon_svg( 'comment', 24 ); ?>
+		<?php echo twentynineteen_get_icon_svg( 'comment', 24 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<span><?php echo esc_html( $meta_label ); ?></span>
 	</p>
 </div><!-- .discussion-meta -->

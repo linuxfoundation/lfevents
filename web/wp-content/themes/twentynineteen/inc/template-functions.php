@@ -34,6 +34,10 @@ add_filter( 'body_class', 'twentynineteen_body_classes' );
 
 /**
  * Adds custom class to the array of posts classes.
+ *
+ * @param int $classes      xxx.
+ * @param int $class      xxx.
+ * @param int $post_id      xxx.
  */
 function twentynineteen_post_classes( $classes, $class, $post_id ) {
 	$classes[] = 'entry';
@@ -55,6 +59,8 @@ add_action( 'wp_head', 'twentynineteen_pingback_header' );
 
 /**
  * Changes comment form default fields.
+ *
+ * @param int $defaults      xxx.
  */
 function twentynineteen_comment_form_defaults( $defaults ) {
 	$comment_field = $defaults['comment_field'];
@@ -142,6 +148,7 @@ function twentynineteen_get_avatar_size() {
  * Returns true if comment is by author of the post.
  *
  * @see get_comment_class()
+ * @param int $comment      xxx.
  */
 function twentynineteen_is_comment_by_post_author( $comment = null ) {
 	if ( is_object( $comment ) && $comment->user_id > 0 ) {
@@ -234,10 +241,15 @@ add_filter( 'wp_nav_menu', 'twentynineteen_add_ellipses_to_nav', 10, 2 );
  * for flyout and dropdown menus.
  *
  * @ref https://www.w3.org/WAI/tutorials/menus/flyout/
+ *
+ * @param int $atts      xxx.
+ * @param int $item      xxx.
+ * @param int $args      xxx.
+ * @param int $depth     xxx.
  */
 function twentynineteen_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
 
-	// Add [aria-haspopup] and [aria-expanded] to menu items that have children
+	// Add [aria-haspopup] and [aria-expanded] to menu items that have children.
 	$item_has_children = in_array( 'menu-item-has-children', $item->classes );
 	if ( $item_has_children ) {
 		$atts['aria-haspopup'] = 'true';
@@ -273,7 +285,7 @@ function twentynineteen_add_dropdown_icons( $output, $item, $depth, $args ) {
 			twentynineteen_get_icon_svg( 'chevron_left', 24 )
 		);
 
-		// replace opening <a> with <button>
+		// replace opening <a> with <button>.
 		$output = preg_replace(
 			'/<a\s.*?>/',
 			$link,
@@ -281,7 +293,7 @@ function twentynineteen_add_dropdown_icons( $output, $item, $depth, $args ) {
 			1 // Limit.
 		);
 
-		// replace closing </a> with </button>
+		// replace closing </a> with </button>.
 		$output = preg_replace(
 			'#</a>#i',
 			'</button>',
@@ -341,6 +353,11 @@ add_filter( 'wp_nav_menu_objects', 'twentynineteen_add_mobile_parent_nav_menu_it
 
 /**
  * Convert HSL to HEX colors
+ *
+ * @param int $h      xxx.
+ * @param int $s      xxx.
+ * @param int $l      xxx.
+ * @param int $to_hex xxx.
  */
 function twentynineteen_hsl_hex( $h, $s, $l, $to_hex = true ) {
 

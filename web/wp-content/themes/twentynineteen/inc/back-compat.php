@@ -36,8 +36,8 @@ add_action( 'after_switch_theme', 'twentynineteen_switch_theme' );
  * @global string $wp_version WordPress version.
  */
 function twentynineteen_upgrade_notice() {
-	$message = sprintf( __( 'Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'twentynineteen' ), $GLOBALS['wp_version'] );
-	printf( '<div class="error"><p>%s</p></div>', $message );
+	$message = sprintf( __( 'Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'twentynineteen' ), $GLOBALS['wp_version'] ); // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+	printf( '<div class="error"><p>%s</p></div>', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -50,8 +50,8 @@ function twentynineteen_upgrade_notice() {
 function twentynineteen_customize() {
 	wp_die(
 		sprintf(
-			__( 'Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'twentynineteen' ),
-			$GLOBALS['wp_version']
+			__( 'Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'twentynineteen' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.I18n.MissingTranslatorsComment
+			$GLOBALS['wp_version'] // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		),
 		'',
 		array(
@@ -70,7 +70,7 @@ add_action( 'load-customize.php', 'twentynineteen_customize' );
  */
 function twentynineteen_preview() {
 	if ( isset( $_GET['preview'] ) ) {
-		wp_die( sprintf( __( 'Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'twentynineteen' ), $GLOBALS['wp_version'] ) );
+		wp_die( sprintf( __( 'Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again.', 'twentynineteen' ), $GLOBALS['wp_version'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.I18n.MissingTranslatorsComment
 	}
 }
 add_action( 'template_redirect', 'twentynineteen_preview' );

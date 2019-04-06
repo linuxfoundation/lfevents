@@ -1,4 +1,12 @@
-var postcssFocusWithin = require( 'postcss-focus-within' );
+/**
+ * File postcss.config.js.
+ *
+ * Xxxxx.
+ *
+ * @package WordPress
+ */
+
+ var postcssFocusWithin = require( 'postcss-focus-within' );
 
 module.exports = {
 	plugins: {

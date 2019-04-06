@@ -27,9 +27,9 @@ if ( ! function_exists( 'twentynineteen_posted_on' ) ) :
 
 		printf(
 			'<span class="posted-on">%1$s<a href="%2$s" rel="bookmark">%3$s</a></span>',
-			twentynineteen_get_icon_svg( 'watch', 16 ),
+			twentynineteen_get_icon_svg( 'watch', 16 ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			esc_url( get_permalink() ),
-			$time_string
+			$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		);
 	}
 endif;
@@ -42,8 +42,8 @@ if ( ! function_exists( 'twentynineteen_posted_by' ) ) :
 		printf(
 			/* translators: 1: SVG icon. 2: post author, only visible to screen readers. 3: author link. */
 			'<span class="byline">%1$s<span class="screen-reader-text">%2$s</span><span class="author vcard"><a class="url fn n" href="%3$s">%4$s</a></span></span>',
-			twentynineteen_get_icon_svg( 'person', 16 ),
-			__( 'Posted by', 'twentynineteen' ),
+			twentynineteen_get_icon_svg( 'person', 16 ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			__( 'Posted by', 'twentynineteen' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 			esc_html( get_the_author() )
 		);
@@ -57,7 +57,7 @@ if ( ! function_exists( 'twentynineteen_comment_count' ) ) :
 	function twentynineteen_comment_count() {
 		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
-			echo twentynineteen_get_icon_svg( 'comment', 16 );
+			echo twentynineteen_get_icon_svg( 'comment', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			/* translators: %s: Name of current post. Only visible to screen readers. */
 			comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'twentynineteen' ), get_the_title() ) );
@@ -76,10 +76,10 @@ if ( ! function_exists( 'twentynineteen_entry_footer' ) ) :
 		// Hide author, post date, category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
-			// Posted by
+			// Posted by.
 			twentynineteen_posted_by();
 
-			// Posted on
+			// Posted on.
 			twentynineteen_posted_on();
 
 			/* translators: used between list items, there is a space after the comma. */
@@ -169,6 +169,8 @@ endif;
 if ( ! function_exists( 'twentynineteen_comment_avatar' ) ) :
 	/**
 	 * Returns the HTML markup to generate a user avatar.
+	 *
+	 * @param int $id_or_email      xxx.
 	 */
 	function twentynineteen_get_user_avatar_markup( $id_or_email = null ) {
 
@@ -183,6 +185,8 @@ endif;
 if ( ! function_exists( 'twentynineteen_discussion_avatars_list' ) ) :
 	/**
 	 * Displays a list of avatars involved in a discussion for a given post.
+	 *
+	 * @param int $comment_authors      xxx.
 	 */
 	function twentynineteen_discussion_avatars_list( $comment_authors ) {
 		if ( empty( $comment_authors ) ) {
@@ -192,7 +196,7 @@ if ( ! function_exists( 'twentynineteen_discussion_avatars_list' ) ) :
 		foreach ( $comment_authors as $id_or_email ) {
 			printf(
 				"<li>%s</li>\n",
-				twentynineteen_get_user_avatar_markup( $id_or_email )
+				twentynineteen_get_user_avatar_markup( $id_or_email ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);
 		}
 		echo '</ol><!-- .discussion-avatar-list -->', "\n";
@@ -202,6 +206,8 @@ endif;
 if ( ! function_exists( 'twentynineteen_comment_form' ) ) :
 	/**
 	 * Documentation for function.
+	 *
+	 * @param int $order      xxx.
 	 */
 	function twentynineteen_comment_form( $order ) {
 		if ( true === $order || strtolower( $order ) === strtolower( get_option( 'comment_order', 'asc' ) ) ) {

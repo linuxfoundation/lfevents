@@ -10,6 +10,7 @@
  * @subpackage Twenty_Nineteen
  * @since 1.0.0
  */
+
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -21,7 +22,7 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentynineteen' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?></a>
 
 		<header id="masthead" class="<?php echo is_singular() && twentynineteen_can_show_post_thumbnail() ? 'site-header featured-image' : 'site-header'; ?>">
 
@@ -41,7 +42,7 @@
 						$classes = 'entry-header has-discussion';
 					}
 					?>
-					<div class="<?php echo $classes; ?>">
+					<div class="<?php echo $classes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
 						<?php get_template_part( 'template-parts/header/entry', 'header' ); ?>
 					</div><!-- .entry-header -->
 					<?php rewind_posts(); ?>

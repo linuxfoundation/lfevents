@@ -30,26 +30,26 @@ $discussion = twentynineteen_get_discussion_data();
 		<?php
 		if ( comments_open() ) {
 			if ( have_comments() ) {
-				_e( 'Join the Conversation', 'twentynineteen' );
+				_e( 'Join the Conversation', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
 			} else {
-				_e( 'Leave a comment', 'twentynineteen' );
+				_e( 'Leave a comment', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
 			}
 		} else {
 			if ( '1' == $discussion->responses ) {
 				/* translators: %s: post title */
-				printf( _x( 'One reply on &ldquo;%s&rdquo;', 'comments title', 'twentynineteen' ), get_the_title() );
+				printf( _x( 'One reply on &ldquo;%s&rdquo;', 'comments title', 'twentynineteen' ), get_the_title() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			} else {
 				printf(
 					/* translators: 1: number of comments, 2: post title */
-					_nx(
+					_nx( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						'%1$s reply on &ldquo;%2$s&rdquo;',
 						'%1$s replies on &ldquo;%2$s&rdquo;',
 						$discussion->responses,
 						'comments title',
 						'twentynineteen'
 					),
-					number_format_i18n( $discussion->responses ),
-					get_the_title()
+					number_format_i18n( $discussion->responses ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					get_the_title() // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
 		}
@@ -85,7 +85,7 @@ $discussion = twentynineteen_get_discussion_data();
 		</ol><!-- .comment-list -->
 		<?php
 
-		// Show comment navigation
+		// Show comment navigation.
 		if ( have_comments() ) :
 			$prev_icon     = twentynineteen_get_icon_svg( 'chevron_left', 22 );
 			$next_icon     = twentynineteen_get_icon_svg( 'chevron_right', 22 );
@@ -102,9 +102,9 @@ $discussion = twentynineteen_get_discussion_data();
 		if ( comments_open() && 'asc' === strtolower( get_option( 'comment_order', 'asc' ) ) ) :
 			?>
 			<div class="comment-form-flex">
-				<span class="screen-reader-text"><?php _e( 'Leave a comment', 'twentynineteen' ); ?></span>
+				<span class="screen-reader-text"><?php _e( 'Leave a comment', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?></span>
 				<?php twentynineteen_comment_form( 'asc' ); ?>
-				<h2 class="comments-title" aria-hidden="true"><?php _e( 'Leave a comment', 'twentynineteen' ); ?></h2>
+				<h2 class="comments-title" aria-hidden="true"><?php _e( 'Leave a comment', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?></h2>
 			</div>
 			<?php
 		endif;
@@ -113,7 +113,7 @@ $discussion = twentynineteen_get_discussion_data();
 		if ( ! comments_open() ) :
 			?>
 			<p class="no-comments">
-				<?php _e( 'Comments are closed.', 'twentynineteen' ); ?>
+				<?php _e( 'Comments are closed.', 'twentynineteen' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
 			</p>
 			<?php
 		endif;
@@ -123,6 +123,6 @@ $discussion = twentynineteen_get_discussion_data();
 		// Show comment form.
 		twentynineteen_comment_form( true );
 
-	endif; // if have_comments();
+	endif; // if have_comments();.
 	?>
 </div><!-- #comments -->

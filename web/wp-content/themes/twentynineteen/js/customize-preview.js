@@ -4,6 +4,8 @@
  * Theme Customizer enhancements for a better user experience.
  *
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
+ *
+ * @package WordPress
  */
 
 (function( $ ) {
@@ -21,10 +23,10 @@
 					color;
 
 					if ( 'custom' === to ) {
-						  // If a custom primary color is selected, use the currently set primary_color_hue
+						  // If a custom primary color is selected, use the currently set primary_color_hue.
 						  color = wp.customize.get().primary_color_hue;
 					} else {
-						  // If the "default" option is selected, get the default primary_color_hue
+						  // If the "default" option is selected, get the default primary_color_hue.
 						  color = 199;
 					}
 

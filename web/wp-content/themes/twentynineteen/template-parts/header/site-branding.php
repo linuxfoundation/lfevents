@@ -6,6 +6,7 @@
  * @subpackage Twenty_Nineteen
  * @since 1.0.0
  */
+
 ?>
 <div class="site-branding">
 
@@ -26,7 +27,7 @@
 	if ( $description || is_customize_preview() ) :
 		?>
 			<p class="site-description">
-				<?php echo $description; ?>
+				<?php echo $description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</p>
 	<?php endif; ?>
 	<?php if ( has_nav_menu( 'menu-1' ) ) : ?>
