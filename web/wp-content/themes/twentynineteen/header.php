@@ -42,7 +42,7 @@
 						$classes = 'entry-header has-discussion';
 					}
 					?>
-					<div class="<?php echo $classes; ?>">
+					<div class="<?php echo $classes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
 						<?php get_template_part( 'template-parts/header/entry', 'header' ); ?>
 					</div><!-- .entry-header -->
 					<?php rewind_posts(); ?>
