@@ -23,15 +23,37 @@ function lfe_get_post_types() {
 }
 
 /**
- * Gets related LFEvents.
- *
- * @param int $post_id ID of Event to get related Events.
- * @return array
+ * Gets related LFEvents for current post.  Only returns Events for the current year.
  */
-function lfe_get_related_events( $post_id ) {
-	$related_events = [];
+function lfe_get_related_events() {
+	global $post;
+	$terms = wp_get_post_terms( $post->ID, 'lfevent-category', array( 'fields' => 'ids' ) );
 
-	return $related_events;
+	$args = array(
+		'post_type' => 'page',
+		'post_parent' => 0,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'lfevent-category',
+				'field'    => 'term_id',
+				'terms'    => $terms,
+			),
+		),
+	);
+
+	$the_query = new WP_Query( $args );
+
+	if ( $the_query->have_posts() ) {
+		echo '<ul>';
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			echo '<li>' . esc_html( get_the_title() ) . '</li>';
+		}
+		echo '</ul>';
+		/* Restore original Post Data */
+		wp_reset_postdata();
+	}
+
 }
 
 /**
