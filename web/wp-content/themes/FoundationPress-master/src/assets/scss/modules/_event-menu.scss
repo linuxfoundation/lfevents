@@ -1,0 +1,60 @@
+.menu-toggler {
+  &, &:hover, &:focus {
+    background-color: transparent;
+    margin: 0;
+    outline: 0;
+  }
+}
+
+.event-header {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(10,59,97,100);
+  box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2);
+
+  .hamburger-icon {
+    @include hamburger($white, $white, 20px, 16px, 2px, 3);
+  }
+}
+
+.event-menu {
+
+  .button-group {
+    margin: 0;
+
+    button,
+    .button {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.dropdown::after {
+        top: 0.1em;
+      }
+    }
+  }
+
+  .dropdown-pane {
+    border: 0;
+    background-color: #14679e;
+    padding: 0;
+    box-shadow: 0 0.25rem 0 0.25rem rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(0,0,0,0.2);
+
+    a {
+      color: #fff;
+      padding: 1rem 1.5rem !important;
+
+      &:hover {
+        background-color: rgba(0,0,0,0.2);
+      }
+    }
+  }
+}

@@ -1,7 +1,9 @@
 .footer-container {
-  @include xy-grid-container;
-  border-top: 1px solid $medium-gray;
-  margin-top: rem-calc(60);
+  // @include xy-grid-container;
+  padding-top: rem-calc(60);
+  background-color: $charcoal;
+  color: $white;
+  box-shadow: inset 0 10px 0 0 rgba(0,0,0,0.1)
 }
 
 .footer-grid {

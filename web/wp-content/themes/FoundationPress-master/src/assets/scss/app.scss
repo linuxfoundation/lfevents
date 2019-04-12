@@ -60,13 +60,13 @@
 
 // Global
 @import "global/accessibility";
-@import "global/colors";
 @import "global/wp-admin";
 @import "global/wp-overrides";
 @import "global/gutenberg";
 
 // Modules
 @import "modules/navigation";
+@import "modules/event-menu";
 @import "modules/content";
 @import "modules/footer";
 @import "modules/editor-style";

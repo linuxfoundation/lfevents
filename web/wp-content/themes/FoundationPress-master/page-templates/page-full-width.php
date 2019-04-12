@@ -4,6 +4,8 @@ Template Name: Full Width
 */
 get_header(); ?>
 
+<?php /* TODO: Nix this template. We don't need it. */ ?>
+
 <?php get_template_part( 'template-parts/featured-image' ); ?>
 <div class="main-container">
 	<div class="main-grid">
