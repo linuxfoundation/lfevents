@@ -25,7 +25,8 @@ add_image_size( 'fp-xlarge', 1920 );
 // Register the new image sizes for use in the add media modal in wp-admin
 function foundationpress_custom_sizes( $sizes ) {
 	return array_merge(
-		$sizes, array(
+		$sizes,
+		array(
 			'fp-small'  => __( 'FP Small' ),
 			'fp-medium' => __( 'FP Medium' ),
 			'fp-large'  => __( 'FP Large' ),

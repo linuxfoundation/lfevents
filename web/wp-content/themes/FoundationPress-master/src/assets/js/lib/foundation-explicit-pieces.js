@@ -33,71 +33,69 @@ import { Tooltip } from 'foundation-sites/js/foundation.tooltip';
 import { ResponsiveAccordionTabs } from 'foundation-sites/js/foundation.responsiveAccordionTabs';
 
 
-Foundation.addToJquery($);
+Foundation.addToJquery( $ );
 
 // Add Foundation Utils to Foundation global namespace for backwards
 // compatibility.
-
-Foundation.rtl = rtl;
-Foundation.GetYoDigits = GetYoDigits;
+Foundation.rtl           = rtl;
+Foundation.GetYoDigits   = GetYoDigits;
 Foundation.transitionend = transitionend;
 
-Foundation.Box = Box;
+Foundation.Box            = Box;
 Foundation.onImagesLoaded = onImagesLoaded;
-Foundation.Keyboard = Keyboard;
-Foundation.MediaQuery = MediaQuery;
-Foundation.Motion = Motion;
-Foundation.Move = Move;
-Foundation.Nest = Nest;
-Foundation.Timer = Timer;
+Foundation.Keyboard       = Keyboard;
+Foundation.MediaQuery     = MediaQuery;
+Foundation.Motion         = Motion;
+Foundation.Move           = Move;
+Foundation.Nest           = Nest;
+Foundation.Timer          = Timer;
 
 // Touch and Triggers previously were almost purely sede effect driven,
 // so no // need to add it to Foundation, just init them.
+Touch.init( $ );
 
-Touch.init($);
+Triggers.init( $, Foundation );
 
-Triggers.init($, Foundation);
+Foundation.plugin( Abide, 'Abide' );
 
-Foundation.plugin(Abide, 'Abide');
+Foundation.plugin( Accordion, 'Accordion' );
 
-Foundation.plugin(Accordion, 'Accordion');
+Foundation.plugin( AccordionMenu, 'AccordionMenu' );
 
-Foundation.plugin(AccordionMenu, 'AccordionMenu');
+Foundation.plugin( Drilldown, 'Drilldown' );
 
-Foundation.plugin(Drilldown, 'Drilldown');
+Foundation.plugin( Dropdown, 'Dropdown' );
 
-Foundation.plugin(Dropdown, 'Dropdown');
+Foundation.plugin( DropdownMenu, 'DropdownMenu' );
 
-Foundation.plugin(DropdownMenu, 'DropdownMenu');
+Foundation.plugin( Equalizer, 'Equalizer' );
 
-Foundation.plugin(Equalizer, 'Equalizer');
+Foundation.plugin( Interchange, 'Interchange' );
 
-Foundation.plugin(Interchange, 'Interchange');
+Foundation.plugin( Magellan, 'Magellan' );
 
-Foundation.plugin(Magellan, 'Magellan');
+Foundation.plugin( OffCanvas, 'OffCanvas' );
 
-Foundation.plugin(OffCanvas, 'OffCanvas');
+Foundation.plugin( Orbit, 'Orbit' );
 
-Foundation.plugin(Orbit, 'Orbit');
+Foundation.plugin( ResponsiveMenu, 'ResponsiveMenu' );
 
-Foundation.plugin(ResponsiveMenu, 'ResponsiveMenu');
+Foundation.plugin( ResponsiveToggle, 'ResponsiveToggle' );
 
-Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
+Foundation.plugin( Reveal, 'Reveal' );
 
-Foundation.plugin(Reveal, 'Reveal');
+Foundation.plugin( Slider, 'Slider' );
 
-Foundation.plugin(Slider, 'Slider');
+Foundation.plugin( SmoothScroll, 'SmoothScroll' );
 
-Foundation.plugin(SmoothScroll, 'SmoothScroll');
+Foundation.plugin( Sticky, 'Sticky' );
 
-Foundation.plugin(Sticky, 'Sticky');
+Foundation.plugin( Tabs, 'Tabs' );
 
-Foundation.plugin(Tabs, 'Tabs');
+Foundation.plugin( Toggler, 'Toggler' );
 
-Foundation.plugin(Toggler, 'Toggler');
+Foundation.plugin( Tooltip, 'Tooltip' );
 
-Foundation.plugin(Tooltip, 'Tooltip');
-
-Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
+Foundation.plugin( ResponsiveAccordionTabs, 'ResponsiveAccordionTabs' );
 
 module.exports = Foundation;

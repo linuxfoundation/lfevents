@@ -21,7 +21,10 @@ get_header(); ?>
 </header>
 
 <?php do_action( 'foundationpress_before_content' ); ?>
-<?php while ( have_posts() ) : the_post(); ?>
+<?php
+while ( have_posts() ) :
+	the_post();
+	?>
 <section class="intro" role="main">
 	<div class="fp-intro">
 
@@ -95,4 +98,5 @@ get_header(); ?>
 
 </section>
 
-<?php get_footer();
+<?php
+get_footer();

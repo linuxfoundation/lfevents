@@ -10,7 +10,7 @@
  */
 
 if ( have_comments() ) :
-?>
+	?>
 	<section id="comments">
 		<?php
 
@@ -38,9 +38,9 @@ if ( have_comments() ) :
 		?>
 		<?php
 			foundationpress_the_comments_pagination();
-	 	?>
+		?>
 	</section>
-<?php
+	<?php
 endif;
 ?>
 
@@ -53,7 +53,8 @@ endif;
 
 	defined( 'ABSPATH' ) || die( __( 'Please do not load this page directly. Thanks!', 'foundationpress' ) );
 
-	if ( post_password_required() ) { ?>
+if ( post_password_required() ) {
+	?>
 	<section id="comments">
 		<div class="notice">
 			<p class="bottom"><?php _e( 'This post is password protected. Enter the password to view comments.', 'foundationpress' ); ?></p>
@@ -66,15 +67,15 @@ endif;
 
 <?php
 if ( comments_open() ) :
-?>
+	?>
 <section id="respond">
 	<?php
 		comment_form(
 			array(
-				'class_submit' => 'button'
+				'class_submit' => 'button',
 			)
 		);
 	?>
 </section>
-<?php
+	<?php
 	endif; // If you delete this the sky will fall on your head.

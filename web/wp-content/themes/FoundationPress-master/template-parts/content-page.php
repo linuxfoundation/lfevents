@@ -2,7 +2,6 @@
 /**
  * The default template for displaying page content
  *
- *
  * @package FoundationPress
  * @since FoundationPress 1.0.0
  */
@@ -25,7 +24,10 @@
 					'after'  => '</p></nav>',
 				)
 			);
-		?>
-		<?php $tag = get_the_tags(); if ( $tag ) { ?><p><?php the_tags(); ?></p><?php } ?>
+			?>
+		<?php
+		$tag = get_the_tags(); if ( $tag ) {
+			?>
+			<p><?php the_tags(); ?></p><?php } ?>
 	</footer>
 </article>

@@ -22,7 +22,8 @@
 		<?php get_template_part( 'template-parts/mobile-off-canvas' ); ?>
 	<?php endif; ?>
 
-	<?php /* TODO: We don't want a specific menu on every page/post
+	<?php /*
+	TODO: We don't want a specific menu on every page/post
 	<header class="site-header" role="banner">
 		<div class="site-title-bar title-bar" <?php foundationpress_title_bar_responsive_toggle(); ?>>
 			<div class="title-bar-left">

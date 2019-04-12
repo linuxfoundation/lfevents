@@ -86,5 +86,5 @@ if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
 		}
 	}
 
-	$foundationpress_protocol_relative_theme_assets = new Foundationpress_Protocol_Relative_Theme_Assets;
+	$foundationpress_protocol_relative_theme_assets = new Foundationpress_Protocol_Relative_Theme_Assets();
 endif;

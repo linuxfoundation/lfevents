@@ -11,7 +11,8 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 
 		// Create custom panels
 		$wp_customize->add_panel(
-			'mobile_menu_settings', array(
+			'mobile_menu_settings',
+			array(
 				'priority'       => 1000,
 				'theme_supports' => '',
 				'title'          => __( 'Mobile Menu Settings', 'foundationpress' ),
@@ -21,7 +22,8 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 
 		// Create custom field for mobile navigation layout
 		$wp_customize->add_section(
-			'mobile_menu_layout', array(
+			'mobile_menu_layout',
+			array(
 				'title'    => __( 'Mobile navigation layout', 'foundationpress' ),
 				'panel'    => 'mobile_menu_settings',
 				'priority' => 1000,
