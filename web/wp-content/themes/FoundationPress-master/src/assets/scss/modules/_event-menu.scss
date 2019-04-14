@@ -7,53 +7,107 @@
 }
 
 .event-header {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
+  @include clearfix;
   position: relative;
   z-index: 2;
   background-color: rgba(10,59,97,100);
   box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2);
 
-  .hamburger-icon {
-    @include hamburger($white, $white, 20px, 16px, 2px, 3);
+  .pre-nav {
+    display: flex;
+    align-content: stretch;
+
+    @include breakpoint(large) {
+      display: none;
+    }
+
+    a {
+      @include button();
+      @include button-style(transparent, transparent, $white);
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 0 1rem 0 0;
+      flex-grow: 1;
+    }
+
+    .menu-toggler {
+      flex-grow: 0;
+    }
+
+    .hamburger-icon {
+      @include hamburger($white, $white, 20px, 16px, 2px, 3);
+    }
   }
 }
 
 .event-menu {
+  clear: both;
 
-  .button-group {
-    margin: 0;
-
-    button,
-    .button {
-      font-weight: bold;
-      font-size: 1rem;
-      margin-bottom: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &.dropdown::after {
-        top: 0.1em;
-      }
-    }
+  ul {
+    list-style: none;
+    margin: 0 !important;
   }
 
-  .dropdown-pane {
-    border: 0;
-    background-color: #14679e;
-    padding: 0;
-    box-shadow: 0 0.25rem 0 0.25rem rgba(0,0,0,0.2);
-    border-top: 1px solid rgba(0,0,0,0.2);
+  .event-menu-list {
+    @include button-group('.page_item', 0);
+    @include button-group-expand('.page_item', 0);
 
-    a {
-      color: #fff;
-      padding: 1rem 1.5rem !important;
+    @include breakpoint(medium down) {
+      @include button-group-stack('.page_item');
+    }
 
-      &:hover {
-        background-color: rgba(0,0,0,0.2);
+    > li {
+
+      &:first-child { // HACK: We should add a class w/ a WP walker for this selector
+        @include breakpoint(medium down) {
+          display: none;
+        }
+      }
+
+      a {
+        @include button();
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include breakpoint(large) {
+          min-height: 100%;
+        }
+      }
+    }
+
+    .page_item_has_children {
+      position: relative;
+
+      > a {
+        @include breakpoint(large) {
+          @include button-dropdown(0.4em, rgba(255,255,255,0.8), 1rem);
+        }
+
+        &::after {
+          top: 0.1em;
+        }
+      }
+
+      @include breakpoint(large) {
+        .children {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          min-width: 100%;
+          box-shadow: 0 0.25rem 0 0.25rem rgba(0,0,0,0.2);
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.4s;
+        }
+
+        &:hover > .children {
+          visibility: visible;
+          opacity: 1;
+        }
       }
     }
   }
