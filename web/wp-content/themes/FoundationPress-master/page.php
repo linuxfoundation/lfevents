@@ -16,41 +16,35 @@ get_header(); ?>
 
 <div data-sticky-container>
 	<header class="event-header sticky" data-sticky data-options="marginTop:0;" >
-		<button class="menu-toggler button float-right hide-for-large" data-toggle="event-menu">
-			<span class="hamburger-icon"></span>
-		</button>
+
+		<div class="pre-nav">
+			<?php
+				if ($post->post_parent) {
+					$ancestors = get_post_ancestors($post->ID);
+					$parent = $ancestors[count($ancestors) - 1];
+				} else {
+					$parent = $post->ID;
+				}
+				echo '<a href="' . post_permalink($parent) . '">' . get_the_title($parent) . '</a>';
+			?>
+
+			<button class="menu-toggler button alignright" data-toggle="event-menu">
+				<span class="hamburger-icon"></span>
+			</button>
+		</div>
 
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
-			<div class="button-group expanded stacked-for-medium">
-				<a href="#" class="button" style="min-width:16rem;">
-					<img style="max-height:3rem;" src="https://events.linuxfoundation.org/wp-content/uploads/2018/12/OSSNA_Logo_800x161-01.png" />
-				</a>
-				<a class="button dropdown" href="#" data-toggle="example-dropdown-1">Attend</a>
-				<div class="dropdown-pane" id="example-dropdown-1" data-dropdown data-hover="true" data-hover-pane="true">
-					<ul class="menu vertical">
-						<li><a href="#">Diversity and Inclusion</a></li>
-						<li><a href="#">Child Care</a></li>
-						<li><a href="#">Diversity Scholarships</a></li>
-						<li><a href="#">Convince Your Boss</a></li>
-						<li><a href="#">Code of Conduct</a></li>
-					</ul>
-				</div>
-				<a class="button" href="#">Sponsors</a>
-				<a class="button" href="#">Venue + Travel</a>
-				<a class="button dropdown" href="#" data-toggle="dropdown-2">Program</a>
-				<div class="dropdown-pane" id="dropdown-2" data-dropdown data-hover="true" data-hover-pane="true">
-					<ul class="menu vertical">
-						<li><a href="#">Schedule</a></li>
-						<li><a href="#">Pre-Conference</a></li>
-						<li><a href="#">Co-Located Events</a></li>
-						<li><a href="#">Program Co-Chairs</a></li>
-						<li><a href="#">Training and Exams</a></li>
-					</ul>
-				</div>
-				<a class="button" href="#">Register</a>
-				<a class="button" href="#">Other LF Events</a>
-			</div>
+			<ul class="event-menu-list">
+				<?php
+				wp_list_pages("title_li=&include=" . $parent);
+				$children = wp_list_pages("title_li=&child_of=" . $parent . "&echo=0&sort_column=menu_order");
+				if ($children) { ?>
+						<?php echo $children; ?>
+				<?php } ?>
+				<li class="page_item"><a href="#">Other LF Events</a></li>
+			</ul>
 		</nav>
+
 	</header>
 </div>
 
