@@ -30,9 +30,9 @@ function lfe_get_related_events() {
 	$terms = wp_get_post_terms( $post->ID, 'lfevent-category', array( 'fields' => 'ids' ) );
 
 	$args = array(
-		'post_type' => 'page',
+		'post_type'   => 'page',
 		'post_parent' => 0,
-		'tax_query' => array(
+		'tax_query'   => array(
 			array(
 				'taxonomy' => 'lfevent-category',
 				'field'    => 'term_id',

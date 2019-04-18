@@ -19,13 +19,13 @@ get_header(); ?>
 
 		<div class="pre-nav">
 			<?php
-				if ($post->post_parent) {
-					$ancestors = get_post_ancestors($post->ID);
-					$parent = $ancestors[count($ancestors) - 1];
-				} else {
-					$parent = $post->ID;
-				}
-				echo '<a href="' . post_permalink($parent) . '">' . get_the_title($parent) . '</a>';
+			if ( $post->post_parent ) {
+				$ancestors = get_post_ancestors( $post->ID );
+				$parent    = $ancestors[ count( $ancestors ) - 1 ];
+			} else {
+				$parent = $post->ID;
+			}
+				echo '<a href="' . post_permalink( $parent ) . '">' . get_the_title( $parent ) . '</a>';
 			?>
 
 			<button class="menu-toggler button alignright" data-toggle="event-menu">
@@ -36,9 +36,10 @@ get_header(); ?>
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
 				<?php
-				wp_list_pages("title_li=&include=" . $parent);
-				$children = wp_list_pages("title_li=&child_of=" . $parent . "&echo=0&sort_column=menu_order");
-				if ($children) { ?>
+				wp_list_pages( 'title_li=&include=' . $parent );
+				$children = wp_list_pages( 'title_li=&child_of=' . $parent . '&echo=0&sort_column=menu_order' );
+				if ( $children ) {
+					?>
 						<?php echo $children; ?>
 				<?php } ?>
 				<li class="page_item"><a href="#">Other LF Events</a></li>
