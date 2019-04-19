@@ -9,4 +9,3 @@ config.yml
 packaged/
 wpcs/
 vendor/
-dist
