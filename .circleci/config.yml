@@ -112,7 +112,7 @@ jobs:
                 command: 'cd $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/; npm install; npm run build'
 
             - persist_to_workspace:
-                root: $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master
+                root: web/wp-content/themes/FoundationPress-master
                 paths:
                     - dist
 
