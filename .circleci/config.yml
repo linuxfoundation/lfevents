@@ -111,10 +111,10 @@ jobs:
                 name: compile css/js
                 command: 'cd $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/; npm install; npm run build'
 
-            - save_cache:
-                key: dist
+            - persist_to_workspace:
+                root: .
                 paths:
-                    - $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/dist
+                    - example_wordpress_composer/web/wp-content/themes/FoundationPress-master/dist
 
 
     build_and_deploy_lfeventsci:
@@ -126,7 +126,13 @@ jobs:
                 keys:
                     - composer-cache
                     - terminus-install
-                    - dist
+
+            - attach_workspace:
+                at: /tmp                    
+
+            - run:
+                name: copy dist
+                command: cp -r /tmp/dist $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/
 
             - run:
                 name: dependencies
