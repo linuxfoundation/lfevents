@@ -96,18 +96,26 @@ jobs:
                 name: run unit tests
                 command: composer -n unit-test
 
-    build_and_deploy_lfeventsci:
+    build_css_js:
         <<: *defaults
+        docker:
+            - image: circleci/node:4.8.2
         steps:
             - checkout
 
             - run:
                 name: update-npm
-                command: 'sudo apt-get nodejs npm'
+                command: 'sudo npm install -g npm@latest'
 
-            - run:
+           - run:
                 name: Check current version of node
-                command: node -v
+                command: npm -v
+
+
+    build_and_deploy_lfeventsci:
+        <<: *defaults
+        steps:
+            - checkout
 
             - restore_cache:
                 keys:
@@ -212,9 +220,14 @@ workflows:
     jobs:
       # Install dev dependencies
       - build
+      - build_css_js
       # Build and deploy
       - build_and_deploy_lfeventsci
+            requires:
+                - build_css_js
       - build_and_deploy_lfasiallcci
+            requires:
+                - build_css_js
       # Code sniff and unit text first
       - code_sniff_unit_test:
             requires:
