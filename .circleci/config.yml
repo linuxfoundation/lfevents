@@ -107,7 +107,7 @@ jobs:
                 name: update-npm
                 command: 'sudo npm install -g npm@latest'
 
-           - run:
+            - run:
                 name: Check current version of node
                 command: npm -v
 
