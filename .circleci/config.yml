@@ -99,13 +99,9 @@ jobs:
     build_css_js:
         <<: *defaults
         docker:
-            - image: circleci/node:4.8.2
+            - image: circleci/node:9.9-stretch
         steps:
             - checkout
-
-            - run:
-                name: update-npm
-                command: 'sudo npm install -g npm@latest'
 
             - run:
                 name: Check current version of node
