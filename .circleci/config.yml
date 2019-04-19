@@ -101,15 +101,6 @@ jobs:
         steps:
             - checkout
 
-            - restore_cache:
-                keys:
-                    - composer-cache
-                    - terminus-install
-
-            - run:
-                name: dependencies
-                command: ./.circleci/set-up-globals.sh
-
             - run:
                 name: "Update Node.js and npm"
                 command: |
@@ -119,6 +110,16 @@ jobs:
             - run:
                 name: Check current version of node
                 command: node -v
+
+            - restore_cache:
+                keys:
+                    - composer-cache
+                    - terminus-install
+
+            - run:
+                name: dependencies
+                command: ./.circleci/set-up-globals.sh
+
 
             - run:
             name: build assets
