@@ -107,6 +107,15 @@ jobs:
                 name: Check current version of node
                 command: npm -v
 
+            - run:
+                name: compile css/js
+                command: 'cd example_wordpress_composer/web/wp-content/themes/FoundationPress-master/; npm install; npm run build'
+
+            - save_cache:
+                key: dist
+                paths:
+                    - $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/dist
+
 
     build_and_deploy_lfeventsci:
         <<: *defaults
@@ -117,6 +126,7 @@ jobs:
                 keys:
                     - composer-cache
                     - terminus-install
+                    - dist
 
             - run:
                 name: dependencies
