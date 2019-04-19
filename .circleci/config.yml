@@ -156,6 +156,13 @@ jobs:
                     - composer-cache
                     - terminus-install
 
+            - attach_workspace:
+                at: /tmp                    
+
+            - run:
+                name: copy dist
+                command: cp -r /tmp/dist $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/
+
             - run:
                 name: dependencies
                 command: ./.circleci/set-up-globals.sh
