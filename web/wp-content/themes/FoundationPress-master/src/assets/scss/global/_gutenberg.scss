@@ -5,13 +5,13 @@ Frontend styles for gutenberg blocks
 /** === Base Color Palatte === */
 @each $color, $code in $foundation-palette {
 
-  .has-#{$color}-background-color {
-      background-color: $code;
-  }
+	.has-#{$color}-background-color {
+		background-color: $code;
+	}
 
-  .has-#{$color}-color {
-      color: $code;
-  }
+	.has-#{$color}-color {
+		color: $code;
+	}
 }
 
 /** === Button === */
@@ -20,16 +20,16 @@ Frontend styles for gutenberg blocks
 	// add general foundation button styling
 	.wp-block-button__link {
 		@extend .button;
-    @each $color, $code in $foundation-palette {
+		@each $color, $code in $foundation-palette {
 
-      &.has-#{$color}-background-color {
-          background-color: $code;
-      }
+			&.has-#{$color}-background-color {
+					background-color: $code;
+			}
 
-      &.has-#{$color}-color {
-          color: $code;
-      }
-    }
+			&.has-#{$color}-color {
+					color: $code;
+			}
+		}
 	}
 
 	// add special styling for squared buttons
@@ -47,14 +47,39 @@ Frontend styles for gutenberg blocks
 	&.is-style-outline:hover,
 	&.is-style-outline:focus,
 	&.is-style-outline:active {
-    // background: transparent;
-    .wp-block-button__link{
-      // background: transparent;
-    }
+		// background: transparent;
+		.wp-block-button__link{
+			// background: transparent;
+		}
 	}
 }
 
 /** === File === */
 .wp-block-file .wp-block-file__button{
-  @include button();
+	@include button();
+}
+
+/** === Align Wide/Full === */
+.entry-content > *,
+.entry-summary > *,
+.entry-header > *,
+.entry-footer > * {
+	margin-left: auto;
+	margin-right: auto;
+	// max-width: 100%;
+	max-width: calc(#{map-deep-get($breakpoints, medium)} - #{map-deep-get($grid-column-gutter, small)} - #{map-deep-get($grid-column-gutter, small)});
+
+	&.alignwide {
+		clear: both;
+
+		@include breakpoint(medium) {
+			width: 100%;
+			max-width: map-deep-get($breakpoints, large);
+		}
+	}
+
+	&.alignfull {
+		clear: both;
+		max-width: 100%;
+	}
 }

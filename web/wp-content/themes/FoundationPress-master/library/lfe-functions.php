@@ -69,7 +69,7 @@ function lfe_get_archive( $event_slug ) {
 			"SELECT * FROM $wpdb->posts
 			WHERE (post_type like %s
 			OR post_type = 'page')
-			AND post_parent = 0 
+			AND post_parent = 0
 			AND post_status = 'Publish'
 			AND post_name = %s
 			ORDER BY post_type ASC",
@@ -80,3 +80,16 @@ function lfe_get_archive( $event_slug ) {
 
 	return $myposts;
 }
+
+
+/**
+ * Theme support
+ */
+function lfe_setup_theme_supported_features() {
+
+	// Add support for Block Styles.
+	add_theme_support( 'align-wide' );
+
+}
+
+add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
