@@ -114,7 +114,7 @@ jobs:
             - persist_to_workspace:
                 root: .
                 paths:
-                    - example_wordpress_composer/web/wp-content/themes/FoundationPress-master/dist
+                    - web/wp-content/themes/FoundationPress-master/dist
 
 
     build_and_deploy_lfeventsci:
