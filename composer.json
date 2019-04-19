@@ -78,8 +78,7 @@
   "scripts": {
     "build-assets": [
       "@prepare-for-pantheon",
-      "composer install --no-dev --no-ansi --no-interaction --optimize-autoloader --no-progress",
-      "sudo apt-get install node.js npm"
+      "composer install --no-dev --no-ansi --no-interaction --optimize-autoloader --no-progress"
     ],
     "prepare-for-pantheon": "WordPressProject\\composer\\ScriptHandler::prepareForPantheon",
     "cleanup": [
