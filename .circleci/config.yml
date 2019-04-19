@@ -120,10 +120,9 @@ jobs:
                 name: dependencies
                 command: ./.circleci/set-up-globals.sh
 
-
             - run:
-            name: build assets
-            command: composer -n build-assets
+                name: build assets
+                command: composer -n build-assets
 
             - run:
                 name: deploy to Pantheon
