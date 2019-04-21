@@ -5,10 +5,10 @@ set -ex
 
 TERMINUS_DOES_MULTIDEV_EXIST()
 {
-    # Return 1 if on master since dev always exists
+    # Return 0 (true in shell scripts) if on master since dev always exists
     if [[ ${CIRCLE_BRANCH} == "master" ]]
     then
-        return 1;
+        return 0;
     fi
 
     # Stash list of Pantheon multidev environments
