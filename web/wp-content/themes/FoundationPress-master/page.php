@@ -39,10 +39,11 @@ get_header(); ?>
 				wp_list_pages( 'title_li=&include=' . $parent );
 				$children = wp_list_pages( 'title_li=&child_of=' . $parent . '&echo=0&sort_column=menu_order' );
 				if ( $children ) {
-					?>
-						<?php echo $children; //phpcs:ignore ?>
-				<?php } ?>
-				<li class="page_item"><a href="#">Other LF Events</a></li>
+					echo $children; //phpcs:ignore
+				}
+				?>
+
+				<?php lfe_get_related_events(); ?>
 			</ul>
 		</nav>
 

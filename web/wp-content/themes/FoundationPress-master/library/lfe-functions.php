@@ -44,14 +44,21 @@ function lfe_get_related_events() {
 	$the_query = new WP_Query( $args );
 
 	if ( $the_query->have_posts() ) {
-		echo '<ul>';
+		echo '<li class="page_item page_item_has_children">';
+		echo '<a href="' . esc_url( home_url( '/' ) ) . '">Other Events</a>';
+		echo '<ul class="children">';
+
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			echo '<li>' . esc_html( get_the_title() ) . '</li>';
+			echo '<li><a href="' . get_the_permalink() . '">' . esc_html( get_the_title() ) . '</a></li>';
 		}
+
 		echo '</ul>';
-		/* Restore original Post Data */
-		wp_reset_postdata();
+		echo '</li>';
+
+		wp_reset_postdata(); // Restore original Post Data
+	} else {
+		echo '<li class="page_item"><a href="' . esc_url( home_url( '/' ) ) . '">Other Events</a></li>';
 	}
 
 }
