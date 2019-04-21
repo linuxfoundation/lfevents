@@ -257,8 +257,10 @@ workflows:
     #             - build
     #             - build_and_deploy_lfeventsci
       - wraith_test_lfeventsci:
-            # requires:
+            requires:
+                - build_and_deploy_lfeventsci
                 # - behat_test_lfeventsci               
       - wraith_test_lfasiallcci:
-            # requires:
+            requires:
+                - build_and_deploy_lfasiallcci
                 # - build_and_deploy_lfasiallcci                
