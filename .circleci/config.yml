@@ -252,6 +252,7 @@ workflows:
             requires:
                 - build
       # Run Behat tests after deploy so they can be done on Pantheon
+    # commenting out behat tests until we need them
     #   - behat_test_lfeventsci:
     #         requires:
     #             - build
