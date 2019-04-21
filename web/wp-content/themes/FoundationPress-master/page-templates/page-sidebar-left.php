@@ -1,7 +1,10 @@
 <?php
-/*
-Template Name: Left Sidebar
-*/
+/**
+ * Template Name: Left Sidebar.
+ *
+ * @package FoundationPress
+ */
+
 get_header(); ?>
 
 <?php /* TODO: Nix this template. We don't need it. */ ?>

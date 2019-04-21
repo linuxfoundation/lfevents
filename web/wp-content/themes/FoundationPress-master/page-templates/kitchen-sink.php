@@ -1,7 +1,10 @@
 <?php
-/*
-Template Name: Kitchen Sink
-*/
+/**
+ * Template Name: Kitchen Sink.
+ *
+ * @package FoundationPress
+ */
+
 get_header(); ?>
 
 

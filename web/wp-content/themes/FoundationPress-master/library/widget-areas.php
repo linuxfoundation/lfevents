@@ -7,6 +7,10 @@
  */
 
 if ( ! function_exists( 'foundationpress_sidebar_widgets' ) ) :
+
+	/**
+	 * Comment.
+	 */
 	function foundationpress_sidebar_widgets() {
 		register_sidebar(
 			array(

@@ -21,6 +21,7 @@ register_nav_menus(
  * @link http://codex.wordpress.org/Function_Reference/wp_nav_menu
  */
 if ( ! function_exists( 'foundationpress_top_bar_r' ) ) {
+	/** Comment */
 	function foundationpress_top_bar_r() {
 		wp_nav_menu(
 			array(
@@ -41,10 +42,11 @@ if ( ! function_exists( 'foundationpress_top_bar_r' ) ) {
  * Mobile navigation - topbar (default) or offcanvas
  */
 if ( ! function_exists( 'foundationpress_mobile_nav' ) ) {
+	/** Comment */
 	function foundationpress_mobile_nav() {
 		wp_nav_menu(
 			array(
-				'container'      => false,                         // Remove nav container
+				'container'      => false,                         // Remove nav container.
 				'menu'           => __( 'mobile-nav', 'foundationpress' ),
 				'menu_class'     => 'vertical menu',
 				'theme_location' => 'mobile-nav',
@@ -65,6 +67,11 @@ if ( ! function_exists( 'foundationpress_mobile_nav' ) ) {
  * 4) Save Menu. Your menu item will now appear as a button in your top-menu
 */
 if ( ! function_exists( 'foundationpress_add_menuclass' ) ) {
+	/**
+	 * Comment.
+	 *
+	 * @param string $ulclass Comment.
+	 */
 	function foundationpress_add_menuclass( $ulclass ) {
 		$find    = array( '/<a rel="button"/', '/<a title=".*?" rel="button"/' );
 		$replace = array( '<a rel="button" class="button"', '<a rel="button" class="button"' );

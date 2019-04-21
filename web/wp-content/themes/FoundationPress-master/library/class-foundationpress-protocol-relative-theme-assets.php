@@ -7,6 +7,7 @@
  */
 
 if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
+	/** Comment. */
 	class Foundationpress_Protocol_Relative_Theme_Assets {
 		/**
 		 * Plugin URI: https://github.com/ryanjbonnell/Protocol-Relative-Theme-Assets
@@ -34,6 +35,8 @@ if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
 		 * @access  private
 		 * @return  string
 		 * @since   1.0
+		 *
+		 * @param string $url Comment.
 		 */
 		private function make_protocol_relative_url( $url ) {
 			return preg_replace( '(https?://)', '//', $url );
@@ -45,6 +48,9 @@ if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
 		 * @access  public
 		 * @return  string
 		 * @since   1.0
+		 *
+		 * @param string $src Comment.
+		 * @param string $handle Comment.
 		 */
 		public function style_loader_src( $src, $handle ) {
 			return $this->make_protocol_relative_url( $src );
@@ -56,6 +62,9 @@ if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
 		 * @access  public
 		 * @return  string
 		 * @since   1.0
+		 *
+		 * @param string $src Comment.
+		 * @param string $handle Comment.
 		 */
 		public function script_loader_src( $src, $handle ) {
 			return $this->make_protocol_relative_url( $src );
@@ -68,6 +77,10 @@ if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
 		 * @return  string
 		 * @since   1.0
 		 * @link    http://codex.wordpress.org/Function_Reference/get_template_directory_uri
+		 *
+		 * @param string $template_dir_uri Comment.
+		 * @param string $template Comment.
+		 * @param string $theme_root_uri Comment.
 		 */
 		public function template_directory_uri( $template_dir_uri, $template, $theme_root_uri ) {
 			return $this->make_protocol_relative_url( $template_dir_uri );
@@ -80,6 +93,10 @@ if ( ! class_exists( 'Foundationpress_Protocol_Relative_Theme_Assets' ) ) :
 		 * @return  string
 		 * @since   1.0
 		 * @link    http://codex.wordpress.org/Function_Reference/get_stylesheet_directory_uri
+		 *
+		 * @param string $stylesheet_dir_uri Comment.
+		 * @param string $stylesheet Comment.
+		 * @param string $theme_root_uri Comment.
 		 */
 		public function stylesheet_directory_uri( $stylesheet_dir_uri, $stylesheet, $theme_root_uri ) {
 			return $this->make_protocol_relative_url( $stylesheet_dir_uri );

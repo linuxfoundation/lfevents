@@ -8,13 +8,16 @@
 
 // Pagination.
 if ( ! function_exists( 'foundationpress_pagination' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_pagination() {
 		global $wp_query;
 
-		$big = 999999999; // This needs to be an unlikely integer
+		$big = 999999999; // This needs to be an unlikely integer.
 
 		// For more options and info view the docs for paginate_links()
-		// http://codex.wordpress.org/Function_Reference/paginate_links
+		// http://codex.wordpress.org/Function_Reference/paginate_links.
 		$paginate_links = paginate_links(
 			array(
 				'base'      => str_replace( $big, '%#%', html_entity_decode( get_pagenum_link( $big ) ) ),
@@ -37,13 +40,18 @@ if ( ! function_exists( 'foundationpress_pagination' ) ) :
 
 		// Display the pagination if more than one page is found.
 		if ( $paginate_links ) {
-			echo $paginate_links;
+			echo $paginate_links; //phpcs:ignore
 		}
 	}
 endif;
 
 // Custom Comments Pagination.
 if ( ! function_exists( 'foundationpress_get_the_comments_pagination' ) ) :
+	/**
+	 * Comment.
+	 *
+	 * @param array $args Comment.
+	 */
 	function foundationpress_get_the_comments_pagination( $args = array() ) {
 		$navigation   = '';
 		$args         = wp_parse_args(
@@ -100,8 +108,13 @@ endif;
 
 // Custom Comments Pagination.
 if ( ! function_exists( 'foundationpress_the_comments_pagination' ) ) :
+	/**
+	 * Comment.
+	 *
+	 * @param array $args Comment.
+	 */
 	function foundationpress_the_comments_pagination( $args = array() ) {
-		echo foundationpress_get_the_comments_pagination( $args );
+		echo foundationpress_get_the_comments_pagination( $args ); //phpcs:ignore
 	}
 endif;
 
@@ -111,20 +124,23 @@ endif;
  */
 
 if ( ! function_exists( 'foundationpress_menu_fallback' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_menu_fallback() {
 		echo '<div class="alert-box secondary">';
 		/* translators: %1$s: link to menus, %2$s: link to customize. */
 		printf(
-			__( 'Please assign a menu to the primary menu location under %1$s or %2$s the design.', 'foundationpress' ),
+			__( 'Please assign a menu to the primary menu location under %1$s or %2$s the design.', 'foundationpress' ), //phpcs:ignore
 			/* translators: %s: menu url */
 			sprintf(
-				__( '<a href="%s">Menus</a>', 'foundationpress' ),
-				get_admin_url( get_current_blog_id(), 'nav-menus.php' )
+				__( '<a href="%s">Menus</a>', 'foundationpress' ), //phpcs:ignore
+				get_admin_url( get_current_blog_id(), 'nav-menus.php' ) //phpcs:ignore
 			),
 			/* translators: %s: customize url */
 			sprintf(
-				__( '<a href="%s">Customize</a>', 'foundationpress' ),
-				get_admin_url( get_current_blog_id(), 'customize.php' )
+				__( '<a href="%s">Customize</a>', 'foundationpress' ), //phpcs:ignore
+				get_admin_url( get_current_blog_id(), 'customize.php' ) //phpcs:ignore
 			)
 		);
 		echo '</div>';
@@ -133,8 +149,14 @@ endif;
 
 // Add Foundation 'is-active' class for the current menu item.
 if ( ! function_exists( 'foundationpress_active_nav_class' ) ) :
+	/**
+	 * Comment
+	 *
+	 * @param array  $classes Comment.
+	 * @param object $item Comment.
+	 */
 	function foundationpress_active_nav_class( $classes, $item ) {
-		if ( $item->current == 1 || $item->current_item_ancestor == true ) {
+		if ( $item->current == 1 || $item->current_item_ancestor == true ) { //phpcs:ignore
 			$classes[] = 'is-active';
 		}
 		return $classes;
@@ -147,6 +169,11 @@ endif;
  * From required+ Foundation http://themes.required.ch.
  */
 if ( ! function_exists( 'foundationpress_active_list_pages_class' ) ) :
+	/**
+	 * Comment
+	 *
+	 * @param string $input Comment.
+	 */
 	function foundationpress_active_list_pages_class( $input ) {
 
 		$pattern = '/current_page_item/';
@@ -166,6 +193,9 @@ endif;
  */
 
 if ( ! function_exists( 'foundationpress_mobile_menu_id' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_mobile_menu_id() {
 		if ( get_theme_mod( 'wpt_mobile_menu_layout' ) === 'offcanvas' ) {
 			echo 'off-canvas-menu';
@@ -180,6 +210,9 @@ endif;
  */
 
 if ( ! function_exists( 'foundationpress_title_bar_responsive_toggle' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_title_bar_responsive_toggle() {
 		if ( ! get_theme_mod( 'wpt_mobile_menu_layout' ) || get_theme_mod( 'wpt_mobile_menu_layout' ) === 'topbar' ) {
 			echo 'data-responsive-toggle="mobile-menu"';
@@ -191,6 +224,11 @@ endif;
  * Custom markup for WordPress gallery
  */
 if ( ! function_exists( 'foundationpress_gallery' ) ) :
+	/**
+	 * Comment.
+	 *
+	 * @param array $attr Comment.
+	 */
 	function foundationpress_gallery( $attr ) {
 
 		$post            = get_post();
@@ -207,11 +245,11 @@ if ( ! function_exists( 'foundationpress_gallery' ) ) :
 
 		// Allow plugins/themes to override the default gallery template.
 		$output = apply_filters( 'post_gallery', '', $attr, $instance );
-		if ( $output != '' ) {
+		if ( $output != '' ) { //phpcs:ignore
 			return $output;
 		}
 
-		// Let's make sure it looks like a valid orderby statement
+		// Let's make sure it looks like a valid orderby statement.
 		if ( isset( $attr['orderby'] ) ) {
 			$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
 			if ( ! $attr['orderby'] ) {
@@ -227,9 +265,9 @@ if ( ! function_exists( 'foundationpress_gallery' ) ) :
 				'itemtag'        => 'figure',
 				'icontag'        => 'div',
 				'captiontag'     => 'figcaption',
-				'columns-small'  => 2, // set default columns for small screen
-				'columns-medium' => 4, // set default columns for medium screen
-				'columns'        => 3, // set default columns for large screen (3 = wordpress default)
+				'columns-small'  => 2, // set default columns for small screen.
+				'columns-medium' => 4, // set default columns for medium screen.
+				'columns'        => 3, // set default columns for large screen (3 = wordpress default).
 				'size'           => 'thumbnail',
 				'include'        => '',
 				'exclude'        => '',
@@ -320,7 +358,7 @@ if ( ! function_exists( 'foundationpress_gallery' ) ) :
 		foreach ( $attachments as $id => $attachment ) {
 
 			// Check if destination is file, nothing or attachment page.
-			if ( isset( $attr['link'] ) && $attr['link'] == 'file' ) {
+			if ( isset( $attr['link'] ) && $attr['link'] == 'file' ) { //phpcs:ignore
 				$link = wp_get_attachment_link(
 					$id,
 					$size_class,
@@ -336,7 +374,7 @@ if ( ! function_exists( 'foundationpress_gallery' ) ) :
 				// Edit this line to implement your html params in <a> tag with use a custom lightbox plugin.
 				$link = str_replace( '<a href', '<a class="thumbnail fp-gallery-lightbox" data-gall="fp-gallery-' . $post->ID . '" data-title="' . wptexturize( $attachment->post_excerpt ) . '" title="' . wptexturize( $attachment->post_excerpt ) . '" href', $link );
 
-			} elseif ( isset( $attr['link'] ) && $attr['link'] == 'none' ) {
+			} elseif ( isset( $attr['link'] ) && $attr['link'] == 'none' ) { //phpcs:ignore
 				$link = wp_get_attachment_image(
 					$id,
 					$size_class,
@@ -372,8 +410,9 @@ if ( ! function_exists( 'foundationpress_gallery' ) ) :
 		            $link
 		        </{$icon_tag}>";
 
-			// Uncomment if you wish to display captions inline on gallery.
 			/*
+			// Uncomment if you wish to display captions inline on gallery.
+
 			if ( $caption_tag && trim($attachment->post_excerpt) ) {
 				$output .= "
 					<{$caption_tag} class='wp-caption-text gallery-caption'>

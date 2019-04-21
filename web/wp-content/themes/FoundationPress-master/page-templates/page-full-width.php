@@ -1,7 +1,10 @@
 <?php
-/*
-Template Name: Full Width
-*/
+/**
+ * Template Name: Full Width.
+ *
+ * @package FoundationPress
+ */
+
 get_header(); ?>
 
 <?php /* TODO: Nix this template. We don't need it. */ ?>

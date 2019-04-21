@@ -7,6 +7,7 @@
  * @package FoundationPress
  * @since FoundationPress 1.0.0
  */
+
 ?>
 
 <footer class="footer-container">

@@ -7,6 +7,11 @@
  */
 
 if ( ! function_exists( 'foundationpress_sticky_posts' ) ) :
+	/**
+	 * Comment.
+	 *
+	 * @param array $classes Comment.
+	 */
 	function foundationpress_sticky_posts( $classes ) {
 		if ( in_array( 'sticky', $classes, true ) ) {
 			$classes   = array_diff( $classes, array( 'sticky' ) );

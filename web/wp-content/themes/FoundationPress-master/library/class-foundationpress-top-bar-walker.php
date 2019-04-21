@@ -11,8 +11,19 @@
  */
 
 if ( ! class_exists( 'Foundationpress_Top_Bar_Walker' ) ) :
+	/**
+	 * Class definition.
+	 */
 	class Foundationpress_Top_Bar_Walker extends Walker_Nav_Menu {
-		function start_lvl( &$output, $depth = 0, $args = array() ) {
+
+		/**
+		 * Comment.
+		 *
+		 * @param string $output Comment.
+		 * @param int    $depth Comment.
+		 * @param array  $args Comment.
+		 */
+		function start_lvl( &$output, $depth = 0, $args = array() ) { //phpcs:ignore
 			$indent  = str_repeat( "\t", $depth );
 			$output .= "\n$indent<ul class=\"dropdown menu vertical\" data-toggle>\n";
 		}

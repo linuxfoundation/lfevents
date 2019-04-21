@@ -7,9 +7,14 @@
  */
 
 if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
+	/**
+	 * Comment.
+	 *
+	 * @param object $wp_customize Comment.
+	 */
 	function wpt_register_theme_customizer( $wp_customize ) {
 
-		// Create custom panels
+		// Create custom panels.
 		$wp_customize->add_panel(
 			'mobile_menu_settings',
 			array(
@@ -20,7 +25,7 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 			)
 		);
 
-		// Create custom field for mobile navigation layout
+		// Create custom field for mobile navigation layout.
 		$wp_customize->add_section(
 			'mobile_menu_layout',
 			array(
@@ -30,7 +35,7 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 			)
 		);
 
-		// Set default navigation layout
+		// Set default navigation layout.
 		$wp_customize->add_setting(
 			'wpt_mobile_menu_layout',
 			array(
@@ -38,7 +43,7 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 			)
 		);
 
-		// Add options for navigation layout
+		// Add options for navigation layout.
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
@@ -59,8 +64,13 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 
 	add_action( 'customize_register', 'wpt_register_theme_customizer' );
 
-	// Add class to body to help w/ CSS
+	// Add class to body to help w/ CSS.
 	add_filter( 'body_class', 'mobile_nav_class' );
+	/**
+	 * Comment.
+	 *
+	 * @param array $classes Comment.
+	 */
 	function mobile_nav_class( $classes ) {
 		if ( ! get_theme_mod( 'wpt_mobile_menu_layout' ) || get_theme_mod( 'wpt_mobile_menu_layout' ) === 'topbar' ) :
 			$classes[] = 'topbar';

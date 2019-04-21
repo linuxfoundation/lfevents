@@ -1,9 +1,17 @@
 <?php
+/**
+ * Comment.
+ *
+ * @package Comment.
+ */
 
 if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_gutenberg_support() {
 
-		// Add foundation color palette to the editor
+		// Add foundation color palette to the editor.
 		add_theme_support(
 			'editor-color-palette',
 			array(

@@ -35,7 +35,7 @@
 			);
 			?>
 		<?php
-		$tag = get_the_tags(); if ( $tag ) {
+		$tag = get_the_tags(); if ( $tag ) { //phpcs:ignore
 			?>
 			<p><?php the_tags(); ?></p><?php } ?>
 	</footer>

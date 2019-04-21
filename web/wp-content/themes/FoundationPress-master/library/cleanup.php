@@ -7,6 +7,10 @@
  */
 
 if ( ! function_exists( 'foundationpress_start_cleanup' ) ) :
+
+	/**
+	 * Comment.
+	 */
 	function foundationpress_start_cleanup() {
 
 		// Launching operation cleanup.
@@ -30,6 +34,10 @@ endif;
  */
 
 if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
+
+	/**
+	 * Comment.
+	 */
 	function foundationpress_cleanup_head() {
 
 		// EditURI link.
@@ -75,6 +83,9 @@ endif;
 
 // Remove WP version from RSS.
 if ( ! function_exists( 'foundationpress_remove_rss_version' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_remove_rss_version() {
 		return '';
 	}
@@ -82,6 +93,9 @@ endif;
 
 // Remove injected CSS for recent comments widget.
 if ( ! function_exists( 'foundationpress_remove_wp_widget_recent_comments_style' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_remove_wp_widget_recent_comments_style() {
 		if ( has_filter( 'wp_head', 'wp_widget_recent_comments_style' ) ) {
 			remove_filter( 'wp_head', 'wp_widget_recent_comments_style' );
@@ -91,6 +105,9 @@ endif;
 
 // Remove injected CSS from recent comments widget.
 if ( ! function_exists( 'foundationpress_remove_recent_comments_style' ) ) :
+	/**
+	 * Comment.
+	 */
 	function foundationpress_remove_recent_comments_style() {
 		global $wp_widget_factory;
 		if ( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
