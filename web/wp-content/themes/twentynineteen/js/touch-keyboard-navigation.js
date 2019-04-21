@@ -237,9 +237,9 @@
 					// Check if child of .submenu-expand is touched.
 				} else if ( null != getCurrentParent( event.target, '.submenu-expand' ) &&
 								getCurrentParent( event.target, '.submenu-expand' ).matches( '.submenu-expand' ) ) {
-				openSubMenu( getCurrentParent( event.target, '.submenu-expand' ) );
+					openSubMenu( getCurrentParent( event.target, '.submenu-expand' ) );
 
-			// Check if .menu-item-link-return is touched.
+					// Check if .menu-item-link-return is touched.
 				} else if ( event.target.matches( '.menu-item-link-return' ) ) {
 					closeSubMenu( event.target );
 

@@ -118,11 +118,11 @@ $discussion = twentynineteen_get_discussion_data();
 			<?php
 		endif;
 
-	else :
+		else :
 
-		// Show comment form.
-		twentynineteen_comment_form( true );
+			// Show comment form.
+			twentynineteen_comment_form( true );
 
 	endif; // if have_comments();.
-	?>
+		?>
 </div><!-- #comments -->
