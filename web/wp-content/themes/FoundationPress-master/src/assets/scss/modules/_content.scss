@@ -5,10 +5,10 @@
 
 .main-grid {
   @include xy-grid();
-  padding-top: 1rem;
+  // padding-top: 1rem;
 
   @include breakpoint(medium) {
-    padding-top: 3rem;
+    // padding-top: 3rem;
   }
 
   &.sidebar-left {
