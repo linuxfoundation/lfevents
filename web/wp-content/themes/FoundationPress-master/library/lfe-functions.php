@@ -27,11 +27,15 @@ function lfe_get_post_types() {
  */
 function lfe_get_related_events() {
 	global $post;
-	$terms = wp_get_post_terms( $post->ID, 'lfevent-category', array( 'fields' => 'ids' ) );
+	$post_id_in = $post->ID;
+	$terms = wp_get_post_terms( $post_id_in, 'lfevent-category', array( 'fields' => 'ids' ) );
 
 	$args = array(
 		'post_type'   => 'page',
 		'post_parent' => 0,
+		'no_found_rows' => true,  // used to improve performance.
+		'update_post_meta_cache' => false, // used to improve performance.
+		'update_post_term_cache' => false, // used to improve performance.
 		'tax_query'   => array(
 			array(
 				'taxonomy' => 'lfevent-category',
@@ -50,7 +54,9 @@ function lfe_get_related_events() {
 
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			echo '<li><a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></li>';
+			if ( $post->ID !== $post_id_in ) { // don't list the current post.
+				echo '<li><a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></li>';
+			}
 		}
 
 		echo '</ul>';
@@ -78,9 +84,11 @@ function lfe_get_archive() {
 			AND post_parent = 0
 			AND post_status = 'Publish'
 			AND post_name = %s
+			AND id <> %d
 			ORDER BY post_type ASC",
 			'lfevent%',
-			$post->post_title
+			$post->post_title,
+			$post->ID
 		)
 	);
 
