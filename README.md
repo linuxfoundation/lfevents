@@ -160,6 +160,10 @@ phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.co
 ```
 ./vendor/bin/phpcs --standard=WordPress ./web/wp-content
 ```
+For convenience on local instances, use this command to ignore particular files and ignore warnings:
+```
+./vendor/bin/phpcs -n -s --ignore=*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*pantheon* -d memory_limit=1024M --standard=WordPress ./web/wp-content
+```
 
 It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).  
 
