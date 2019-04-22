@@ -50,13 +50,13 @@ function lfe_get_related_events() {
 
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			echo '<li><a href="' . get_the_permalink() . '">' . esc_html( get_the_title() ) . '</a></li>';
+			echo '<li><a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></li>';
 		}
 
 		echo '</ul>';
 		echo '</li>';
 
-		wp_reset_postdata(); // Restore original Post Data
+		wp_reset_postdata(); // Restore original Post Data.
 	} else {
 		echo '<li class="page_item"><a href="' . esc_url( home_url( '/' ) ) . '">Other Events</a></li>';
 	}
