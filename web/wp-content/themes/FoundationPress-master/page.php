@@ -42,7 +42,7 @@ get_header(); ?>
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
-
+				lfe_get_archive();
 				lfe_get_related_events();
 				?>
 			</ul>

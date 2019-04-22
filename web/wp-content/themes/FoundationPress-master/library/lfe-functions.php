@@ -66,11 +66,10 @@ function lfe_get_related_events() {
 /**
  * Gets all archives of a particular LFEvent.
  *
- * @param text $event_slug Slug of Event to get archive.
  * @return array
  */
-function lfe_get_archive( $event_slug ) {
-	global $wpdb;
+function lfe_get_archive() {
+	global $wpdb, $post;
 	$myposts = $wpdb->get_results(
 		$wpdb->prepare(
 			"SELECT * FROM $wpdb->posts
@@ -81,9 +80,22 @@ function lfe_get_archive( $event_slug ) {
 			AND post_name = %s
 			ORDER BY post_type ASC",
 			'lfevent%',
-			$event_slug
+			$post->post_title
 		)
 	);
+
+	if ( $myposts ) {
+		echo '<li class="page_item page_item_has_children">';
+		echo '<a href="' . esc_url( home_url( '/' ) ) . '">Archive</a>';
+		echo '<ul class="children">';
+
+		foreach ( $myposts as $p ) {
+			echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">' . esc_html( get_post_type( $p->ID ) . ' - ' . get_the_title() ) . '</a></li>';
+		}
+
+		echo '</ul>';
+		echo '</li>';
+	}
 
 	return $myposts;
 }
