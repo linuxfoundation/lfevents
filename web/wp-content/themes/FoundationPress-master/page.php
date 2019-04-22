@@ -25,7 +25,7 @@ get_header(); ?>
 			} else {
 				$parent = $post->ID;
 			}
-				echo '<a href="' . post_permalink( $parent ) . '">' . get_the_title( $parent ) . '</a>'; //phpcs:ignore
+			echo '<a href="' . post_permalink( $parent ) . '">' . get_the_title( $parent ) . '</a>'; //phpcs:ignore
 			?>
 
 			<button class="menu-toggler button alignright" data-toggle="event-menu">
@@ -37,12 +37,14 @@ get_header(); ?>
 			<ul class="event-menu-list">
 				<?php
 				wp_list_pages( 'title_li=&include=' . $parent );
+
 				$children = wp_list_pages( 'title_li=&child_of=' . $parent . '&echo=0&sort_column=menu_order' );
 				if ( $children ) {
-					?>
-						<?php echo $children; //phpcs:ignore ?>
-				<?php } ?>
-				<li class="page_item"><a href="#">Other LF Events</a></li>
+					echo $children; //phpcs:ignore
+				}
+
+				lfe_get_related_events();
+				?>
 			</ul>
 		</nav>
 

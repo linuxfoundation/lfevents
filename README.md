@@ -56,15 +56,15 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 ## Theme Development
 
-LFEvents uses a fork of the Twenty Nineteen theme which relies on Sass, allowing us to more easily share code between multiple stylesheets (`style.css`, `style-editor.css`, etc.). To compile Sass files (`.scss`) use the built-in `npm` scripts.
+LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme, which **requires [Node.js](http://nodejs.org)**.
 
-**DO NOT edit `.css` files directly**
-
-* Go to the theme directory: `cd web/wp-content/themes/twentynineteen`
+* Go to the theme directory: `cd web/wp-content/themes/FoundationPress-master`
 
 * Install the Node.js dependencies: `npm install` (git ignores the `node_modules/` directory)
 
-* Build CSS files after making a change to a `.scss` file by running `npm run build`, or watch the theme directory for Sass changes by running `npm run watch`
+* To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`
+
+* Run `npm start` to watch changes theme changes and compile CSS and JS to `dist/` (git ignores this directory). When deployed, `dist/` files are compiled and minified with `npm run build` through CircleCI.
 
 -----
 
