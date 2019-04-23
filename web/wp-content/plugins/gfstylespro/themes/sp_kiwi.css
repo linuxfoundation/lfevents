@@ -1,0 +1,259 @@
+/*
+Theme Name: Kiwi
+Theme Slug: sp_kiwi
+Theme URI: http://gravitystylespro.com/themes/
+Author: Warp Lord
+Author URI: http://gravitystylespro.com/author/
+Version: 2.0
+Description: A theme for Divi users or users who wish to use block style form fields.
+Font: 1em/Open Sans/#808080/Google
+Font Label: 1em/Open Sans/#808080
+Field Margin: 1.5em
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Open%20Sans);
+
+.sp_kiwi button,
+.sp_kiwi input,
+.sp_kiwi select,
+.sp_kiwi textarea,
+.sp_kiwi .ginput_total,
+.sp_kiwi .ginput_product_price,
+.sp_kiwi .ginput_shipping_price,
+.sp_kiwi input[type=checkbox]:not(old) + label,
+.sp_kiwi input[type=radio   ]:not(old) + label {
+    font-family: "Open Sans";
+    color: #3a3a3a;
+}
+.sp_kiwi *::-webkit-input-placeholder {
+    font-family: "Open Sans";
+    color: rgba(79, 79, 79, 0.4);
+}
+.sp_kiwi *:-moz-placeholder {		/* FF 4-18 */
+    font-family: "Open Sans";
+    color: rgba(79, 79, 79, 0.4);
+}
+.sp_kiwi *::-moz-placeholder {		/* FF 19+ */
+    font-family: "Open Sans";
+    color: rgba(79, 79, 79, 0.4);
+}
+.sp_kiwi *:-ms-input-placeholder { 	/* IE 10+ */
+    font-family: "Open Sans";
+    color: rgba(79, 79, 79, 0.4);
+}
+.sp_kiwi placeholder {
+    font-family: "Open Sans";
+    color: rgba(79, 79, 79, 0.4);
+}
+.sp_kiwi,
+.sp_kiwi .gfield_label,
+.sp_kiwi .ginput_complex label,
+.sp_kiwi .gfield_description,
+.sp_kiwi .ginput_counter {
+    color: #858585;
+    font-family: "Open Sans";
+}
+.sp_kiwi .ginput_complex label,
+.sp_kiwi .ginput_counter {
+        -moz-opacity: 0.75;
+        -khtml-opacity: 0.75;
+        filter: alpha(opacity=75);
+    opacity: 0.75;
+}
+.sp_kiwi input,
+.sp_kiwi select,
+.sp_kiwi textarea,
+.sp_kiwi input[type="text"],
+.sp_kiwi input[type="email"],
+.sp_kiwi input[type="url"],
+.sp_kiwi input[type="password"],
+.sp_kiwi input[type="search"] {
+    padding: 1em;
+    border: none;
+    background-color: #f0f0f0;
+}
+.sp_kiwi .chosen-choices {
+    padding: 1em;
+}
+.sp_kiwi .gfsp_icon {
+    padding: 0.97em;
+}
+.sp_kiwi input[type="date"]:focus,
+.sp_kiwi input[type="time"]:focus,
+.sp_kiwi input[type="datetime-local"]:focus,
+.sp_kiwi input[type="week"]:focus,
+.sp_kiwi input[type="month"]:focus,
+.sp_kiwi input[type="text"]:focus,
+.sp_kiwi input[type="email"]:focus,
+.sp_kiwi input[type="url"]:focus,
+.sp_kiwi input[type="password"]:focus,
+.sp_kiwi input[type="search"]:focus,
+.sp_kiwi input[type="tel"]:focus,
+.sp_kiwi input[type="number"]:focus,
+.sp_kiwi textarea:focus {
+    background: #f0f0f0;
+}
+.gf_stylespro.sp_kiwi .button {
+    color: #2ea3f2;
+    border: 2px solid #2ea3f2;
+    -ms-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    padding: .7em 1.2em;
+    border-radius: 3px;
+    background: none;
+    font-size: 1em;
+}
+.sp_kiwi .button:active,
+.sp_kiwi input[type=button]:active,
+.sp_kiwi input[type=submit]:active {
+    border-color: #2ea3f2;
+}
+
+.sp_kiwi .button:hover,
+.sp_kiwi input[type=button]:hover,
+.sp_kiwi input[type=submit]:hover {
+    background: #f0f0f0;
+    border-color: #f0f0f0;
+}
+
+/* RADIO AND CHECKBOXES */
+.sp_kiwi input[type=checkbox]:not(old) + label,
+.sp_kiwi input[type=radio   ]:not(old) + label {
+    line-height: 1.8;
+    padding: 0 1em 0 0;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    -ms-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    margin-left: 0;
+    text-indent: 0;
+    text-transform: none;
+}
+.sp_kiwi input[type=checkbox]:not(old) + label:before,
+.sp_kiwi input[type=radio   ]:not(old) + label:before{
+    overflow: visible;
+    background: #f0f0f0;
+    padding: 0.62em;
+    width: auto;
+    height: auto;
+    vertical-align: initial;
+    -moz-opacity: 0.50;
+    -khtml-opacity: 0.50;
+    filter: alpha(opacity=50);
+    opacity: .5;
+    -ms-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    color: inherit;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    margin-right: 0.5em;
+    border: 1px solid;
+    border-radius: 2px;
+}
+.sp_kiwi input[type=checkbox]:not(old):checked + label,
+.sp_kiwi input[type=radio   ]:not(old):checked + label{
+	opacity: 1;
+}
+.sp_kiwi input[type=checkbox]:not(old):checked + label:before,
+.sp_kiwi input[type=radio   ]:not(old):checked + label:before{
+    color: #2ea3f2;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #f0f0f0;
+    -moz-opacity: 0.1;
+    -khtml-opacity: 0.1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    border-color: #f0f0f0;
+}
+.sp_kiwi input[type=checkbox]:not(old) + label:before{
+    content: '\2713';
+}
+.sp_kiwi input[type=radio]:not(old) + label:before{
+    content: '\2717';
+}
+.sp_kiwi .gsurvey-rating input[type=radio]:not(old) + label:before{
+    border: none;
+}
+.sp_kiwi .gfsp_o_list .ginput_container input:not(:checked) + label{
+    background-color: #f0f0f0;
+}
+.sp_kiwi .gf_list_2col:not(.gfield_price) .o_label,
+.sp_kiwi .gf_list_3col:not(.gfield_price) .o_label,
+.sp_kiwi .gf_list_4col:not(.gfield_price) .o_label,
+.sp_kiwi .gf_list_5col:not(.gfield_price) .o_label {
+    /* Default is better */
+    /* width: calc(100% - 2.8em); */
+}
+.sp_kiwi .gfield_description {
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0%;
+}
+.sp_kiwi .validation_message {
+    font-weight: bold;
+}
+.sp_kiwi .gfield_error .gfield_label {
+    color: #f15555;
+}
+.sp_kiwi .gfield_error input,
+.sp_kiwi .gfield_error select,
+.sp_kiwi .gfield_error textarea,
+.sp_kiwi .gfield_error input[type="text"],
+.sp_kiwi .gfield_error input[type="email"],
+.sp_kiwi .gfield_error input[type="url"],
+.sp_kiwi .gfield_error input[type="password"],
+.sp_kiwi .gfield_error input[type="search"],
+.sp_kiwi .gfield_error textarea {
+    background-color: #fff7f7;
+}
+.sp_kiwi .gf_progressbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background: #f0f0f0;
+}
+.gf_stylespro .percentbar_blue {
+    background-color: #2ea3f2;
+}
+.sp_kiwi .gf_icn_theme .gfsp_icon {
+    border: 1px solid transparent;
+}
+.sp_kiwi .chosen-container-multi .chosen-choices li.search-choice {
+    background: rgba(150, 150, 150, 0.2);
+    border-radius: 0;
+    border-color: #fbfbfb;
+    box-shadow: none;
+    border: 1px solid #f1f1f1;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+.sp_kiwi .gfsp_o_frame .ginput_container label{
+    border-radius: 2px;
+    border-color: #f0f0f0;
+}
+.sp_kiwi .gfsp_o_frame .ginput_container input:not(:checked) + label{
+    background-color: #f0f0f0;
+}
+.sp_kiwi .gform_save_link{
+    color: #2ea3f2
+}
+.sp_kiwi .small {
+    width: 4em;
+}
+.sp_kiwi .gfield_date_day input[type=text],
+.sp_kiwi .gfield_date_month input[type=text] {
+    width: 3.5em;
+}
+.sp_kiwi .gfield_date_year input[type=text] {
+    width: 5em;
+}

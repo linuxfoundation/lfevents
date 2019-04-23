@@ -1,0 +1,211 @@
+/*
+Theme Name: Pixel Chisel
+Theme Slug: sp_chisel
+Theme URI: http://gravitystylespro.com/themes/
+Author: Warp Lord
+Author URI: http://gravitystylespro.com/author/
+Description: Classic chiseled fields that haven't gone out of fashion in UI since they first appeared.
+Version: 2.0
+Font: 16px/Abel/#808080/Google
+Font Label: 14px/Abel/#5F5F5F
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Abel);
+
+.sp_chisel_wrapper {
+    background: #f6f6f6; 
+}
+.sp_chisel button,
+.sp_chisel input,
+.sp_chisel select,
+.sp_chisel textarea,
+.sp_chisel .ginput_total,
+.sp_chisel .ginput_product_price,
+.sp_chisel .ginput_shipping_price,
+.sp_chisel input[type=checkbox]:not(old) + label,
+.sp_chisel input[type=radio   ]:not(old) + label {
+    font-family: "Abel";
+    color: #808080;
+}
+.sp_chisel *::-webkit-input-placeholder {
+    font-family: "Abel";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_chisel *:-moz-placeholder {		/* FF 4-18 */
+    font-family: "Abel";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_chisel *::-moz-placeholder {		/* FF 19+ */
+    font-family: "Abel";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_chisel *:-ms-input-placeholder { 	/* IE 10+ */
+    font-family: "Abel";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_chisel placeholder{
+    font-family: "Abel";
+    color: rgba(191, 191, 191, 0.40);    
+}
+.sp_chisel,
+.sp_chisel .gfield_label,
+.sp_chisel .ginput_complex label,
+.sp_chisel .gfield_description,
+.sp_chisel .ginput_counter {
+    color: #858585;
+    font-family: "Abel";
+}
+.sp_chisel .gfield_label {
+  font-size: 14px;
+}
+.sp_chisel input,
+.sp_chisel select,
+.sp_chisel textarea,
+.sp_chisel input[type="text"],
+.sp_chisel input[type="email"],
+.sp_chisel input[type="url"],
+.sp_chisel input[type="password"],
+.sp_chisel input[type="search"],
+.sp_chisel textarea {
+    border: 1px solid #eeeeee;
+    border-color: #eeeeee;
+    border-bottom-color: #fcfcfc;
+    -moz-box-shadow: 0 0.2em 0.3em -0.15em inset;
+    -webkit-box-shadow: 0 0.2em 0.3em -0.15em inset;
+    box-shadow: 0 0.2em 0.3em -0.15em inset;
+    background-color: #eeeeee;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.sp_chisel input:focus,
+.sp_chisel input:hover,
+.sp_chisel textarea:focus,
+.sp_chisel textarea:hover,
+.sp_chisel select:focus,
+.sp_chisel select:hover {box-shadow: 0 0.4em 0.8em -0.5em inset;color: #7b7b7b;}
+.sp_chisel .button {
+    color: grey;
+    border: 1px solid #f8f8f8;
+        -moz-box-shadow: 0.15em 0.15em 0.5em -0.15em;
+        -webkit-box-shadow: 0.15em 0.15em 0.5em -0.15em;
+    box-shadow: 0.15em 0.15em 0.5em -0.15em;
+    border-bottom-color: #c9c9c9;
+    border-right-color: #c9c9c9;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.sp_chisel .button:active {
+    background: #e2e2e2;
+    color: #797979;
+}
+.sp_chisel .button:hover {
+    background: #eeeeee;
+        -moz-box-shadow: 0 0.55em 0.8em -0.3em;
+        -webkit-box-shadow: 0 0.55em 0.8em -0.3em;
+    box-shadow: 0 0.55em 0.8em -0.3em;
+}
+
+/* RADIO AND CHECKBOXES */
+.sp_chisel input[type=checkbox]:not(old) + label:before,
+.sp_chisel input[type=radio   ]:not(old) + label:before{
+    text-shadow: 0px 0px 0.0714em white,0px 0px 0.0714em #6D6D6D;
+        -moz-transition: .5s all;
+        -webkit-transition: .5s all;
+    transition: .5s all;
+        -moz-box-shadow: 0 0.4em 0.8em -0.5em inset;
+        -webkit-box-shadow: 0 0.4em 0.8em -0.5em inset;
+    box-shadow: 0 0.4em 0.8em -0.5em inset;
+}
+.sp_chisel input[type=checkbox]:not(old):checked + label:before,
+.sp_chisel input[type=radio   ]:not(old):checked + label:before{
+  background-image:-moz-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image:-ms-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image:-o-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image: -webkit-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image: linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  color: black;
+  text-shadow: 1px 1px 0.0714em white,-1px 0px 0.0714em #6D6D6D;
+  box-shadow: 0px 3px 1px 1px #F9F9F9, -1px -1px 1px 1px #D0D0D0, 1px 1px 1px #A0A0A0;
+  overflow: visible;
+  font-size: 1em;
+    -moz-box-shadow: 0px 1px 1px 1px #F9F9F9, -1px -1px 1px #D0D0D0;
+    -webkit-box-shadow: 0px 1px 1px 1px #F9F9F9, -1px -1px 1px #D0D0D0;
+  box-shadow: 0px 1px 1px 1px #F9F9F9, -1px -1px 1px #D0D0D0;
+}
+.sp_chisel input[type=checkbox]:not(old):checked + label,
+.sp_chisel input[type=radio   ]:not(old):checked + label{
+	text-shadow: 2px 2px 1px #F1F1F1;
+}
+.sp_chisel .gfield_description {
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0%;
+}
+.sp_chisel .validation_message {
+    font-weight: bold;
+}
+.sp_chisel .gfield_error .gfield_label {
+    color: #f15555;
+}
+.sp_chisel .gfield_error input,
+.sp_chisel .gfield_error select,
+.sp_chisel .gfield_error textarea,
+.sp_chisel .gfield_error input[type="text"],
+.sp_chisel .gfield_error input[type="email"],
+.sp_chisel .gfield_error input[type="url"],
+.sp_chisel .gfield_error input[type="password"],
+.sp_chisel .gfield_error input[type="search"],
+.sp_chisel .gfield_error textarea {
+    background-color: #f8e5e5;
+}
+.sp_chisel .gf_progressbar_percentage {
+    color: #dbdbdb;
+    border: 2px solid #cfcfcf;
+    border-top-color: #eeeeee;
+    border-left-color: #aaaaaa;
+    height: 29px;
+        -moz-border-radius: 0 5px 5px 0;
+        -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    line-height: 1.8;
+        -moz-box-shadow: 2px 0 6px #b2b2b2;
+        -webkit-box-shadow: 2px 0 6px #b2b2b2;
+    box-shadow: 2px 0 6px #b2b2b2;
+    padding-right: 0.3em;
+    border-right-color: #a8a8a8;
+}
+.sp_chisel .gf_progressbar {
+        -moz-box-shadow: 0px 0px 2px #D4D1E8, -10px 15px 25px -15px rgba(215, 215, 215, 0.69) inset;
+        -webkit-box-shadow: 0px 0px 2px #D4D1E8, -10px 15px 25px -15px rgba(215, 215, 215, 0.69) inset;
+    box-shadow: 0px 0px 2px #D4D1E8, -10px 15px 25px -15px rgba(215, 215, 215, 0.69) inset;
+    color: grey;
+    border: 1px solid #f0f0f0;
+    border-bottom-color: #f8f8f8;
+    border-right-color: #c9c9c9;
+    background: #ececec;
+        -moz-box-shadow: 0 0.2em 0.3em -0.15em inset;
+        -webkit-box-shadow: 0 0.2em 0.3em -0.15em inset;
+    box-shadow: 0 0.2em 0.3em -0.15em inset;
+}
+.sp_chisel .gf_icn_theme .gfsp_icon {
+    border: 1px solid;
+    border-right: 0;
+    border-bottom-color: white;
+    box-shadow: 0 0.4em 0.8em -0.5em inset;
+    border: 1px solid #eeeeee;
+    border-color: #eeeeee;
+    border-left: 0;
+    border-bottom-color: #fcfcfc;
+    -moz-box-shadow: 0 0.2em 0.3em -0.15em inset;
+    -webkit-box-shadow: 0 0.2em 0.3em -0.15em inset;
+    box-shadow: 0 0.2em 0.3em -0.15em inset;
+    background-color: #eeeeee;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-left: 0px;
+}
+.sp_chisel .gf_icn_border .gfsp_icon,
+.sp_chisel .gf_icn_bs .gfsp_icon {
+	border-bottom-color: white;
+	-moz-box-shadow: 0 0.2em 0.3em -0.15em inset;
+	-webkit-box-shadow: 0 0.2em 0.3em -0.15em inset;
+	box-shadow: 0 0.2em 0.3em -0.15em inset;
+	border-top-color: #eaeaea;
+}

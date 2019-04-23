@@ -1,0 +1,261 @@
+/*
+Theme Name: Paper Shaper
+Theme Slug: sp_paper
+Theme URI: http://gravitystylespro.com/themes/
+Author: Warp Lord
+Author URI: http://gravitystylespro.com/author/
+Version: 2.0
+Description: A theme for when you need something out of the ordinary form design, best for old-timey styles or friendly forms.
+Font: 19px/Indie Flower/#230707/Google
+Font Label: 1em/Ubuntu Mono/#925C4A/Google
+*/
+@import url(https://fonts.googleapis.com/css?family=Indie%20Flower);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu%20Mono);
+
+.sp_paper .gfield {
+    margin-bottom: 2em;
+}
+.sp_paper button,
+.sp_paper input,
+.sp_paper select,
+.sp_paper textarea,
+.sp_paper .ginput_total,
+.sp_paper .ginput_product_price,
+.sp_paper .ginput_shipping_price,
+.sp_paper input[type=checkbox]:not(old) + label,
+.sp_paper input[type=radio   ]:not(old) + label {
+    font-family: "Indie Flower";
+    color: #230707;
+}
+.sp_paper *::-webkit-input-placeholder {
+    font-family: "Indie Flower";
+    color: rgba(35, 7, 7, 0.40);
+}
+.sp_paper *:-moz-placeholder {		/* FF 4-18 */
+    font-family: "Indie Flower";
+    color: rgba(35, 7, 7, 0.40);
+}
+.sp_paper *::-moz-placeholder {		/* FF 19+ */
+    font-family: "Indie Flower";
+    color: rgba(35, 7, 7, 0.40);
+}
+.sp_paper *:-ms-input-placeholder { 	/* IE 10+ */
+    font-family: "Indie Flower";
+    color: rgba(35, 7, 7, 0.40);
+}
+.sp_paper placeholder{
+    font-family: "Indie Flower";
+    color: rgba(35, 7, 7, 0.40);    
+}
+.sp_paper,
+.sp_paper .gfield_label,
+.sp_paper .ginput_complex label,
+.sp_paper .gfield_description,
+.sp_paper .ginput_counter {
+    color: #925C4A;
+    font-family: "Ubuntu Mono";
+    letter-spacing: 0.05em;
+}
+.sp_paper .gform_title {
+    border-bottom: 5px solid;
+    text-align: center;
+    padding-bottom: 1em;
+}
+.sp_paper .gform_description {
+    background: rgba(0, 0, 0, 0.03) none repeat scroll 0% 0%;
+    padding: 1em;
+}
+.sp_paper input,
+.sp_paper select,
+.sp_paper textarea,
+.sp_paper input[type="text"],
+.sp_paper input[type="email"],
+.sp_paper input[type="url"],
+.sp_paper input[type="password"],
+.sp_paper input[type="search"] {
+    border: 0;
+    border-bottom: 1px solid #929292;
+    padding: 0.5em 0.5em 0em 0.5em;
+}
+.gf_stylespro.sp_paper input,
+.gf_stylespro.sp_paper select,
+.gf_stylespro.sp_paper textarea,
+.gf_stylespro.sp_paper input[type="text"],
+.gf_stylespro.sp_paper input[type="email"],
+.gf_stylespro.sp_paper input[type="url"],
+.gf_stylespro.sp_paper input[type="password"],
+.gf_stylespro.sp_paper input[type="search"] {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.sp_paper .gfsp_icon {
+    padding: 0.5em 0.5em 0em 0.5em;
+}
+.sp_paper textarea {
+    border-left: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    background: rgba(50, 55, 60, 0.01);
+}
+.sp_paper input:focus,
+.sp_paper input:hover,
+.sp_paper textarea:focus,
+.sp_paper textarea:hover,
+.sp_paper select:focus,
+.sp_paper select:hover,
+.sp_paper input[type="date"]:focus,
+.sp_paper input[type="time"]:focus,
+.sp_paper input[type="datetime-local"]:focus,
+.sp_paper input[type="week"]:focus,
+.sp_paper input[type="month"]:focus,
+.sp_paper input[type="text"]:focus,
+.sp_paper input[type="email"]:focus,
+.sp_paper input[type="url"]:focus,
+.sp_paper input[type="password"]:focus,
+.sp_paper input[type="search"]:focus,
+.sp_paper input[type="tel"]:focus,
+.sp_paper input[type="number"]:focus,
+.sp_paper textarea:focus {
+    border-bottom-color: #000000;
+    color: #000000;
+}
+.sp_paper .button {
+    color: grey;
+    border: 1px solid silver;
+}
+.sp_paper input[type=checkbox]:not(old) + label:before,
+.sp_paper input[type=radio   ]:not(old) + label:before{
+    text-shadow: none;
+    transition: .5s all;
+    font-size: 1.5em;
+    background: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    line-height: 1.6;
+    margin-top: -.6em;
+}
+.sp_paper input[type=checkbox]:not(old):checked + label:before,
+.sp_paper input[type=radio   ]:not(old):checked + label:before{
+    background: none;
+    color: inherit;
+    overflow: visible;
+    font-size: 1.5em;
+    box-shadow: none;
+}
+.sp_paper input[type=checkbox]:not(old):checked + label:before{
+    content: '\2713';
+}
+.sp_paper input[type=radio]:not(old):checked + label:before{
+    content: '\2717';
+}
+.sp_paper input[type=checkbox]:not(old):checked + label,
+.sp_paper input[type=radio   ]:not(old):checked + label{
+    font-weight: bold;
+}
+.sp_paper .gfield_description {
+    background: rgba(0, 0, 0, 0.03) none repeat scroll 0% 0%;
+    font-style: normal;
+}
+.sp_paper .ginput_complex label {
+    font-size: 0.75em;
+}
+.sp_paper .gfield_error input,
+.sp_paper .gfield_error select,
+.sp_paper .gfield_error textarea,
+.sp_paper .gfield_error input[type="text"],
+.sp_paper .gfield_error input[type="email"],
+.sp_paper .gfield_error input[type="url"],
+.sp_paper .gfield_error input[type="password"],
+.sp_paper .gfield_error input[type="search"],
+.sp_paper .gfield_error textarea {
+    border-color: #f15555;
+}
+.sp_paper .gfield_error .gfield_label {
+    color: #f15555;
+    font-weight: bold;
+}
+.sp_paper .gfield_description.validation_message {
+    color: white;
+    background: #f15555;
+}    
+.sp_paper .gf_step_number:after {
+    content: '\\';
+    opacity: 0.7;
+    font-size: 22px;
+    padding-left: 0.2em;
+}
+.sp_paper .gform_page {
+    background: url(sp_paper-turn.png);
+    overflow: visible;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+.sp_paper .gform_page {
+    padding-bottom: 1em;
+}
+.sp_paper .gform_page_footer {
+    text-align: center;
+    border-top: none;
+    padding-bottom: 2em;
+    padding-top: .5em;
+}
+.sp_paper .gf_progressbar_title,
+.sp_paper .gsection_title {
+    font-size: 1.7em;
+}
+.gf_stylespro.sp_paper .gfield.gsection {
+    border-bottom: none;
+    margin-bottom: 2em;
+    border-top: 2px dashed;
+    padding-top: 2em;
+    margin-top: 3em;
+}
+.sp_paper .gf_progressbar{
+    background: rgba(255, 255, 255, 0.5);
+}
+.sp_paper_wrapper,
+.sp_paper_wrapper {
+    background: url(sp_paper-bg.jpg);
+}
+.gf_stylespro_wrapper.sp_paper_wrapper,
+.gf_stylespro.sp_paper_wrapper {
+    padding-bottom: 0;
+}
+.sp_paper .gfsp_o_shade input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_o_shade input[type=radio   ]:not(old) + label:before {
+    content: '\2714';
+    height: auto;
+}
+.sp_paper .gfsp_ios input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_ios input[type=radio   ]:not(old) + label:before,
+.sp_paper .gfsp_flip input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_flip input[type=radio   ]:not(old) + label:before,
+.sp_paper .gfsp_dot input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_dot input[type=radio   ]:not(old) + label:before{
+    margin-top: 0;
+    font-size: 1em;
+}
+.sp_paper .gfsp_draw input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_draw input[type=radio   ]:not(old) + label:before,
+.sp_paper .gfsp_draw input[type=checkbox]:not(old) + label:after,
+.sp_paper .gfsp_draw input[type=radio   ]:not(old) + label:after{
+    font-size: 1.7em;
+    margin-top: -.1em;
+    border: none;
+}
+.sp_paper .gfsp_draw input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_draw input[type=radio   ]:not(old) + label:before{
+    color: black;
+}
+.sp_paper .gfsp_toggle input[type=checkbox]:not(old) + label:before,
+.sp_paper .gfsp_toggle input[type=radio   ]:not(old) + label:before{
+    font-size: 1em;
+}
+.sp_paper .gf_icn_border .has_gfsp_icn > *,
+.sp_paper .gf_icn_bs .has_gfsp_icn > * {
+    vertical-align: bottom;
+}
+.sp_paper .gf_icn_bs .gfsp_icon {
+    border-color: #ccc;
+}
