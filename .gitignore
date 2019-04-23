@@ -111,10 +111,3 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
-
-!web/wp-content/plugins/gfstylespro
-!web/wp-content/plugins/gravityforms
-!web/wp-content/plugins/gp-nested-forms
-!web/wp-content/plugins/gravityformssalesforce
-!web/wp-content/plugins/gravityplus-dynamic-population-salesforce
-!web/wp-content/plugins/gravityplus-dynamic-population
