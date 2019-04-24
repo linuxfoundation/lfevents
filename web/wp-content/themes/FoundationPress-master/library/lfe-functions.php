@@ -25,13 +25,14 @@ function lfe_get_post_types() {
 /**
  * Gets related LFEvents for current post.  Only returns Events for the current year.
  *
- * @return array Returns array of IDs of posts that are related.
+ * @param int $parent_id ID of top parent post of the Event.
+ *
+ * @return array
  */
-function lfe_get_related_events() {
-	global $post;
+function lfe_get_related_events( $parent_id ) {
 	$related_events = [];
 
-	$terms = wp_get_post_terms( $post->ID, 'lfevent-category', array( 'fields' => 'ids' ) );
+	$terms = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
 
 	$args = array(
 		'post_type'   => 'page',
@@ -39,7 +40,7 @@ function lfe_get_related_events() {
 		'no_found_rows' => true,  // used to improve performance.
 		'update_post_meta_cache' => false, // used to improve performance.
 		'update_post_term_cache' => false, // used to improve performance.
-		'post__not_in' => array( $post->ID ), // ignores current post.
+		'post__not_in' => array( $parent_id ), // ignores current post.
 		'tax_query'   => array(
 			array(
 				'taxonomy' => 'lfevent-category',
@@ -66,10 +67,14 @@ function lfe_get_related_events() {
 /**
  * Gets all archives of a particular LFEvent.
  *
+ * @param int $parent_id ID of top parent post of the Event.
+ *
  * @return array
  */
-function lfe_get_archive() {
-	global $wpdb, $post;
+function lfe_get_archive( $parent_id ) {
+	global $wpdb;
+	$parent_post = get_post( $parent_id );
+
 	$myposts = $wpdb->get_results(
 		$wpdb->prepare(
 			"SELECT * FROM $wpdb->posts
@@ -81,8 +86,8 @@ function lfe_get_archive() {
 			AND id <> %d
 			ORDER BY post_type ASC",
 			'lfevent%',
-			$post->post_name,
-			$post->ID
+			$parent_post->post_name,
+			$parent_id
 		)
 	);
 
@@ -91,10 +96,12 @@ function lfe_get_archive() {
 
 /**
  * Generates the "Other Events" menu item.
+ *
+ * @param int $parent_id ID of top parent post of the Event.
  */
-function lfe_get_other_events() {
-	$related_events = lfe_get_related_events();
-	$archive_events = lfe_get_archive();
+function lfe_get_other_events( $parent_id ) {
+	$related_events = lfe_get_related_events( $parent_id );
+	$archive_events = lfe_get_archive( $parent_id );
 
 	if ( $related_events || $archive_events ) {
 		echo '<li class="page_item page_item_has_children">';

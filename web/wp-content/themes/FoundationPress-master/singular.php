@@ -21,11 +21,11 @@ get_header(); ?>
 			<?php
 			if ( $post->post_parent ) {
 				$ancestors = get_post_ancestors( $post->ID );
-				$parent    = $ancestors[ count( $ancestors ) - 1 ];
+				$parent_id    = $ancestors[ count( $ancestors ) - 1 ];
 			} else {
-				$parent = $post->ID;
+				$parent_id = $post->ID;
 			}
-			echo '<a href="' . post_permalink( $parent ) . '">' . get_the_title( $parent ) . '</a>'; //phpcs:ignore
+			echo '<a href="' . post_permalink( $parent_id ) . '">' . get_the_title( $parent_id ) . '</a>'; //phpcs:ignore
 			?>
 
 			<button class="menu-toggler button alignright" data-toggle="event-menu">
@@ -36,13 +36,13 @@ get_header(); ?>
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
 				<?php
-				wp_list_pages( 'title_li=&include=' . $parent );
+				wp_list_pages( 'title_li=&include=' . $parent_id );
 
-				$children = wp_list_pages( 'title_li=&child_of=' . $parent . '&echo=0&sort_column=menu_order' );
+				$children = wp_list_pages( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order' );
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
-				lfe_get_other_events();
+				lfe_get_other_events( $parent_id );
 				?>
 			</ul>
 		</nav>
