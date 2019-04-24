@@ -103,29 +103,20 @@ function lfe_get_other_events( $parent_id ) {
 	$related_events = lfe_get_related_events( $parent_id );
 	$archive_events = lfe_get_archive( $parent_id );
 
-	if ( $related_events || $archive_events ) {
-		echo '<li class="page_item page_item_has_children">';
-	} else {
-		echo '<li class="page_item">';
+	echo '<li class="page_item page_item_has_children">';
+	echo '<a>Other Events</a>';
+	echo '<ul class="children">';
+	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Events</a></li>';
+
+	foreach ( $related_events as $p ) {
+		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">Related: ' . esc_html( get_post_type( $p['ID'] ) . ' - ' . get_the_title( $p['ID'] ) ) . '</a></li>';
 	}
 
-	echo '<a href="' . esc_url( home_url( '/' ) ) . '">Other Events</a>';
-
-	if ( $related_events || $archive_events ) {
-		echo '<ul class="children">';
-
-		foreach ( $related_events as $p ) {
-			echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">Related: ' . esc_html( get_post_type( $p['ID'] ) . ' - ' . get_the_title( $p['ID'] ) ) . '</a></li>';
-		}
-
-		foreach ( $archive_events as $p ) {
-			echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">Archive: ' . esc_html( get_post_type( $p->ID ) . ' - ' . get_the_title( $p->ID ) ) . '</a></li>';
-		}
-
-		echo '</ul>';
+	foreach ( $archive_events as $p ) {
+		echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">Archive: ' . esc_html( get_post_type( $p->ID ) . ' - ' . get_the_title( $p->ID ) ) . '</a></li>';
 	}
 
-	echo '</li>';
+	echo '</ul></li>';
 }
 
 
@@ -140,3 +131,29 @@ function lfe_setup_theme_supported_features() {
 }
 
 add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
+
+
+/**
+ * We need this function to remove links on parent menu items.
+ *
+ * @param string $args Args for the wp_list_pages funciton.
+ */
+function lfe_remove_parent_links( $args ) {
+	$pages = wp_list_pages( $args );
+	$pages = explode( '</li>', $pages );
+	$count = 0;
+	foreach ( $pages as $page ) {
+		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
+			$page = explode( '<ul class=\'children\'>', $page );
+			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1', $page[0] );
+			if ( count( $page ) == 3 ) {
+				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1', $page[1] );
+			}
+			$page = implode( '<ul class=\'children\'>', $page );
+		}
+		$pages[ $count ] = $page;
+		$count++;
+	}
+	$pages = implode( '</li>', $pages );
+	echo $pages; //phpcs:ignore
+}

@@ -36,9 +36,9 @@ get_header(); ?>
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
 				<?php
-				wp_list_pages( 'title_li=&include=' . $parent_id );
+				wp_list_pages( 'title_li=&include=' . $parent_id . '&post_type=' . $post->post_type );
 
-				$children = wp_list_pages( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order' );
+				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type );
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
