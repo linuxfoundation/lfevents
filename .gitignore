@@ -111,3 +111,6 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+!web/wp-content/plugins/gravityforms
+!web/wp-content/plugins/gravityformssalesforce
