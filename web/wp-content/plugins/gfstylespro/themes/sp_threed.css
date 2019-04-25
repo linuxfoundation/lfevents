@@ -1,0 +1,241 @@
+/*
+Theme Name: ThreeD Graffiti
+Theme Slug: sp_threed
+Theme URI: http://gravitystylespro.com/themes/
+Author: Warp Lord
+Author URI: http://gravitystylespro.com/author/
+Description: This oddball theme gives a new twist to text fields from classic games and the DOS era 3D illusions.
+Version: 2.0
+Font: 1em/Righteous/#d55288/Google
+Font Label: 1em/Play/#1ACDC5/Google
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Play);
+
+.sp_threed .button,
+.sp_threed input,
+.sp_threed select,
+.sp_threed textarea,
+.sp_threed .ginput_total,
+.sp_threed .ginput_product_price,
+.sp_threed .ginput_shipping_price,
+.sp_threed input[type=checkbox]:not(old) + label,
+.sp_threed input[type=radio   ]:not(old) + label {
+    font-family: "Righteous";
+    color: #1ACDC5;
+}
+.sp_threed *::-webkit-input-placeholder {
+    font-family: "Righteous";
+    color: rgba(26, 205, 197, 0.40);
+}
+.sp_threed *:-moz-placeholder {		/* FF 4-18 */
+    font-family: "Righteous";
+    color: rgba(26, 205, 197, 0.40);
+}
+.sp_threed *::-moz-placeholder {		/* FF 19+ */
+    font-family: "Righteous";
+    color: rgba(26, 205, 197, 0.40);
+}
+.sp_threed *:-ms-input-placeholder { 	/* IE 10+ */
+    font-family: "Righteous";
+    color: rgba(26, 205, 197, 0.40);
+}
+.sp_threed placeholder{
+    font-family: "Righteous";
+    color: rgba(26, 205, 197, 0.40);
+}
+.sp_threed .gfield_label {
+  color: #d55288;
+  text-shadow: 1px 1px #ececec, 2px 2px #ececec,3px 3px #ececec, 4px 4px #ececec, 5px 5px #ececec;
+}
+.sp_threed .ginput_complex label{
+  font-size: 0.8em;
+  margin-left: 10px;
+  top: 10px;
+  color: #d55288;
+  font-style: italic;
+  line-height: 1.5;
+}
+.sp_threed input,
+.sp_threed select,
+.sp_threed textarea,
+.sp_threed input[type="text"],
+.sp_threed input[type="email"],
+.sp_threed input[type="url"],
+.sp_threed input[type="password"],
+.sp_threed input[type="search"],
+.sp_threed textarea {
+    border: 1px solid #d3d3d3;
+    border-color: #d9d9d9;
+    box-shadow: 2px 1px,2px 2px,3px 3px,4px 4px,5px 5px,6px 6px;
+    text-shadow: 1px 1px #f0f0f0, 2px 2px #f0f0f0,3px 3px #f0f0f0, 4px 4px #f0f0f0, 5px 5px #f0f0f0;
+        -ms-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.sp_threed input:focus,
+.sp_threed textarea:focus,
+.sp_threed select:focus {
+    text-shadow: none;
+}
+.sp_threed .button {
+    color: grey;
+    border: 1px solid #f8f8f8;
+        -moz-box-shadow: 0.15em 0.15em 0.5em -0.15em;
+        -webkit-box-shadow: 0.15em 0.15em 0.5em -0.15em;
+    box-shadow: 0.15em 0.15em 0.5em -0.15em;
+    border-bottom-color: #c9c9c9;
+    border-right-color: #c9c9c9;
+        -ms-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+    transition: all 0.3s;
+    box-shadow: 1px 1px,2px 2px,3px 3px,4px 4px,1px 1px,1px 1px;
+    vertical-align: text-bottom;
+}
+.sp_threed .button:hover {
+    background: #eeeeee;
+    -moz-box-shadow: 1px 1px grey,2px 2px grey, 3px 3px grey, 4px 4px grey, 5px 5px grey, 6px 6px grey, 7px 7px grey, 8px 8px grey;
+    -webkit-box-shadow: 1px 1px grey,2px 2px grey, 3px 3px grey, 4px 4px grey, 5px 5px grey, 6px 6px grey, 7px 7px grey, 8px 8px grey;
+    box-shadow: 1px 1px grey,2px 2px grey, 3px 3px grey, 4px 4px grey, 5px 5px grey, 6px 6px grey, 7px 7px grey, 8px 8px grey;
+    margin: -5px 5px 5px -5px;
+    color: #3c3c3c;
+}
+.sp_threed .button + .button:hover {
+    margin: -5px 10px 5px 1.2em;
+}
+.sp_threed .button:active,
+.sp_threed .button:focus {
+    background: #e2e2e2;
+    color: #797979;
+    -moz-box-shadow: 1px 1px grey,2px 2px grey;
+    -webkit-box-shadow: 1px 1px grey,2px 2px grey;
+    box-shadow: 1px 1px grey,2px 2px grey;
+    margin: 0px 0px -1px 0px;
+}
+.sp_threed .button + .button:active,
+.sp_threed .button + .button:focus {
+    margin: -5px 10px 0px 1.5em;
+}
+
+/* RADIO AND CHECKBOXES */
+.sp_threed input[type=checkbox]:not(old) + label,
+.sp_threed input[type=radio   ]:not(old) + label{
+        -ms-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.sp_threed input[type=checkbox]:not(old) + label:before,
+.sp_threed input[type=radio   ]:not(old) + label:before{
+        -ms-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+    transition: all 0.5s;
+        -moz-box-shadow: 0 0.4em 0.8em -0.5em inset;
+        -webkit-box-shadow: 0 0.4em 0.8em -0.5em inset;
+    box-shadow: 0 0.4em 0.8em -0.5em inset;
+    border-radius: 10px;
+}
+.sp_threed input[type=checkbox]:not(old):checked + label:before,
+.sp_threed input[type=radio   ]:not(old):checked + label:before{
+  background-image:-moz-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image:-ms-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image:-o-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image: -webkit-linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background-image: linear-gradient(rgb(239,239,239),rgb(226,226,226));
+  background: none;
+  color: #6D6D6D;
+  overflow: visible;
+  font-size: 1em;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+  box-shadow: none;
+  text-shadow: 1px 1px #f0f0f0,2px 2px #f0f0f0,3px 3px #f0f0f0, 4px 4px #f0f0f0, 5px 5px #f0f0f0;
+}
+.sp_threed input:checked + label .o_label i,
+.sp_threed input[type=checkbox]:not(old):checked + label,
+.sp_threed input[type=radio   ]:not(old):checked + label{
+	text-shadow: 1px 1px #f0f0f0,2px 2px #f0f0f0,3px 3px #f0f0f0, 4px 4px #f0f0f0, 5px 5px #f0f0f0;
+	transition: .5s all;
+}
+.sp_threed .gfsp_o_list input[type=checkbox]:not(old):checked + label,
+.sp_threed .gfsp_o_list input[type=radio   ]:not(old):checked + label,
+.sp_threed .gfsp_o_frame input[type=checkbox]:not(old):checked + label,
+.sp_threed .gfsp_o_frame input[type=radio   ]:not(old):checked + label{
+	text-shadow: 1px 1px #b4b4b4,2px 2px #9c9c9c,3px 3px #848484, 4px 4px #6c6c6c, 5px 5px #595959;
+	box-shadow: 1px 1px #f0f0f0, 2px 2px #f0f0f0, 3px 3px #f0f0f0, 4px 4px #f0f0f0, 5px 5px #f0f0f0;
+}
+.sp_threed .gfsp_flip input[type=checkbox]:not(old) + label:before,
+.sp_threed .gfsp_flip input[type=radio   ]:not(old) + label:before,
+.sp_threed .gfsp_o_list input:checked + label:after{
+  text-shadow: none;
+}
+.sp_threed .gfsp_o_frame input[type=checkbox]:not(old) + label,
+.sp_threed .gfsp_o_frame input[type=radio   ]:not(old) + label {
+  padding-bottom: .2em
+}
+
+.sp_threed .gfield_description {
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0%;
+}
+.sp_threed .validation_message {
+    font-weight: bold;
+}
+.sp_threed .gfield_error .gfield_label {
+    color: #f15555;
+}
+.sp_threed .gfield_error input,
+.sp_threed .gfield_error select,
+.sp_threed .gfield_error textarea,
+.sp_threed .gfield_error input[type="text"],
+.sp_threed .gfield_error input[type="email"],
+.sp_threed .gfield_error input[type="url"],
+.sp_threed .gfield_error input[type="password"],
+.sp_threed .gfield_error input[type="search"],
+.sp_threed .gfield_error textarea {
+    background-color: #ffe7e7;
+}
+.sp_threed .gf_progressbar_percentage {
+    color: #dbdbdb;
+    height: 28px;
+        -moz-box-shadow: 0px 1px black,0px 2px black,0px 3px black,0px 4px black,0px 5px black,0px 6px black,1px 1px #4e4e4e, 2px 2px #4e4e4e, 3px 3px #4e4e4e, 4px 4px #4e4e4e, 5px 5px #4e4e4e, 6px 6px #4e4e4e;
+        -webkit-box-shadow: 0px 1px black,0px 2px black,0px 3px black,0px 4px black,0px 5px black,0px 6px black,1px 1px #4e4e4e, 2px 2px #4e4e4e, 3px 3px #4e4e4e, 4px 4px #4e4e4e, 5px 5px #4e4e4e, 6px 6px #4e4e4e;
+    box-shadow: 0px 1px black,0px 2px black,0px 3px black,0px 4px black,0px 5px black,0px 6px black,1px 1px #4e4e4e, 2px 2px #4e4e4e, 3px 3px #4e4e4e, 4px 4px #4e4e4e, 5px 5px #4e4e4e, 6px 6px #4e4e4e;
+    padding-right: 0.3em;
+    margin-top: -3px;
+}
+.sp_threed .gf_progressbar {
+        -moz-box-shadow: 2px 1px,2px 2px,3px 3px,4px 4px,5px 5px,6px 6px;
+        -webkit-box-shadow: 2px 1px,2px 2px,3px 3px,4px 4px,5px 5px,6px 6px;
+    box-shadow: 2px 1px,2px 2px,3px 3px,4px 4px,5px 5px,6px 6px;
+    color: grey;
+    border: 1px solid #f0f0f0;
+    border-bottom-color: #f8f8f8;
+    border-right-color: #c9c9c9;
+    background: #ececec;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+    border-radius: 0;
+    overflow: visible;
+}
+.sp_threed .gsection_title,
+.gf_progressbar_title {
+    text-shadow: 0px 0px #ececec, 1px 1px #ececec, 2px 2px #ececec, 3px 3px #ececec, 4px 4px #ececec, 5px 5px #ececec, 6px 6px #ececec;
+}
+.sp_threed .gsection_title {
+    padding-bottom: 0.5em;
+    border-bottom: 5px solid;
+    -moz-box-shadow: 0px 1px 0px 0px #e9e9e9, 0px 3px 0px -1px #e9e9e9, 2px 6px 0px -2px #e9e9e9, 1px 5px 0px -2px #e9e9e9;
+    -webkit-box-shadow: 0px 1px 0px 0px #e9e9e9, 0px 3px 0px -1px #e9e9e9, 2px 6px 0px -2px #e9e9e9, 1px 5px 0px -2px #e9e9e9;
+    box-shadow: 0px 1px 0px 0px #e9e9e9, 0px 3px 0px -1px #e9e9e9, 2px 6px 0px -2px #e9e9e9, 1px 5px 0px -2px #e9e9e9;
+}
+.sp_threed .ui-datepicker-trigger {
+    margin-left: 0.5em;
+}

@@ -1,0 +1,304 @@
+/*
+Theme Name: Ethereal Material
+Theme Slug: sp_material
+Theme URI: http://gravitystylespro.com/themes/
+Author: Warp Lord
+Author URI: http://gravitystylespro.com/author/
+Version: 2.0
+Description: Material theme takes its visual style from the guidebook of Material design by Google.
+Font: 16px/Roboto/#808080/Google
+Font Label: 14px/Roboto/#9A2DB1
+Field Margin: 4em
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+.sp_material .gfield {
+    margin-bottom: 4em;
+}
+
+.sp_material .gf_inline {
+    margin-right: 7%;
+}
+
+.sp_material button,
+.sp_material input,
+.sp_material select,
+.sp_material textarea,
+.sp_material .ginput_total,
+.sp_material .ginput_product_price,
+.sp_material .ginput_shipping_price,
+.sp_material input[type=checkbox]:not(old) + label,
+.sp_material input[type=radio   ]:not(old) + label {
+    font-family: "Roboto";
+    color: #3a3a3a;
+}
+.sp_material *::-webkit-input-placeholder {
+    font-family: "Roboto";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_material *:-moz-placeholder {		/* FF 4-18 */
+    font-family: "Roboto";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_material *::-moz-placeholder {		/* FF 19+ */
+    font-family: "Roboto";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_material *:-ms-input-placeholder { 	/* IE 10+ */
+    font-family: "Roboto";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_material placeholder {
+    font-family: "Roboto";
+    color: rgba(191, 191, 191, 0.40);
+}
+.sp_material,
+.sp_material .gfield_label,
+.sp_material .ginput_complex label,
+.sp_material .gfield_description,
+.sp_material .ginput_counter {
+    color: #858585;
+    font-family: "Roboto";
+}
+.sp_material .gfield_label,
+.sp_material .ginput_complex label {
+    font-size: 0.9em;
+}
+.sp_material .ginput_complex label,
+.sp_material .ginput_counter {
+        -moz-opacity: 0.75;
+        -khtml-opacity: 0.75;
+        filter: alpha(opacity=75);
+    opacity: 0.75;
+}
+.sp_material input,
+.sp_material select,
+.sp_material textarea,
+.sp_material input[type="text"],
+.sp_material input[type="email"],
+.sp_material input[type="url"],
+.sp_material input[type="password"],
+.sp_material input[type="search"] {
+    padding: 0.7em 0.05em;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 2px solid;
+    border-color: #919191;
+}
+.gf_stylespro.sp_material input,
+.gf_stylespro.sp_material select,
+.gf_stylespro.sp_material textarea,
+.gf_stylespro.sp_material input[type="text"],
+.gf_stylespro.sp_material input[type="email"],
+.gf_stylespro.sp_material input[type="url"],
+.gf_stylespro.sp_material input[type="password"],
+.gf_stylespro.sp_material input[type="search"] {
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+.sp_material .button,
+.sp_material input[type=button],
+.sp_material input[type=submit] {
+    color: grey;
+    border: 1px solid #f8f8f8;
+    border-bottom-color: #c9c9c9;
+    border-right-color: #c9c9c9;
+    -ms-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    padding: 1em 1.5em;
+}
+.sp_material .button:active,
+.sp_material input[type=button]:active,
+.sp_material input[type=submit]:active {
+    background: #e2e2e2;
+    color: #797979;
+}
+.sp_material .button:hover,
+.sp_material input[type=button]:hover,
+.sp_material input[type=submit]:hover {
+    background: #ffffff;
+    color: #797979;
+    box-shadow: 0px 4px 15px -5px;
+}
+
+/* RADIO AND CHECKBOXES */
+.sp_material input[type=checkbox]:not(old) + label,
+.sp_material input[type=radio   ]:not(old) + label {
+    line-height: 1.8;
+    padding: 0 1em 0 0;
+    -moz-opacity: 0.7;
+    -khtml-opacity: 0.7;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    -ms-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    margin-left: 0;
+    text-indent: 0;
+    text-transform: none;
+}
+.sp_material input[type=checkbox]:not(old) + label:before,
+.sp_material input[type=radio   ]:not(old) + label:before{
+    overflow: visible;
+    padding: 0.5em;
+    width: auto;
+    height: auto;
+    vertical-align: inherit;
+    -moz-opacity: 0.15;
+    -khtml-opacity: 0.15;
+    filter: alpha(opacity=15);
+    opacity: 0.7;
+    -ms-transition: all 0.5s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    color: black;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    margin-right: 0.5em;
+    box-shadow: 0 0 0 0 #4a92ff, 0 0 0 0 #4a92ff inset;
+}
+.sp_material input[type=checkbox]:not(old):checked + label,
+.sp_material input[type=radio   ]:not(old):checked + label{
+    opacity: 1;
+}
+
+.sp_material input[type=checkbox]:not(old):checked + label:before,
+.sp_material input[type=radio   ]:not(old):checked + label:before{
+        color: white;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -moz-opacity: 0.1;
+        -khtml-opacity: 0.1;
+        filter: alpha(opacity=100);
+        opacity: 1;
+        box-shadow: 0 0 10px -2px #4a92ff,0 0 0 15px #4a92ff inset;
+}
+.sp_material .gfsp_o_round li:not(.gfsp_choice_icn):not(.gfsp_choice_img) :checked + label:before{
+    color: inherit;
+    text-shadow: none;
+}
+.sp_material input[type=checkbox]:not(old) + label:before{
+    content: '\2713';
+}
+.sp_material input[type=radio]:not(old) + label:before{
+    content: '\2717';
+}
+.sp_material .gf_list_2col:not(.gfield_price) .o_label,
+.sp_material .gf_list_3col:not(.gfield_price) .o_label,
+.sp_material .gf_list_4col:not(.gfield_price) .o_label,
+.sp_material .gf_list_5col:not(.gfield_price) .o_label{
+    width: calc(100% - 2.5em)
+}
+.sp_material .gfield_description {
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0%;
+}
+.sp_material .validation_message {
+    font-weight: bold;
+}
+.sp_material .gfield_error .gfield_label {
+    color: #f15555;
+}
+.sp_material .gfield_error input,
+.sp_material .gfield_error select,
+.sp_material .gfield_error textarea,
+.sp_material .gfield_error input[type="text"],
+.sp_material .gfield_error input[type="email"],
+.sp_material .gfield_error input[type="url"],
+.sp_material .gfield_error input[type="password"],
+.sp_material .gfield_error input[type="search"] {
+    border-color: #f79586;
+}
+.sp_material .gf_progressbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.sp_material .gfsp_icon{
+    border-bottom-width: 2px;
+    border-bottom-color: #919191;
+    padding: 0.7em 0.05em;
+    vertical-align: middle;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.sp_material .gf_icn_bs .gfsp_icon{
+    border-color: #c5c5c5;
+}
+.sp_material .gfsp_icon + input,
+.sp_material .gfsp_icon + select {
+    padding-left: .2em;
+}
+/* For advanced Field Options */
+.sp_material .gf_icn_border .gfsp_icon,
+.sp_material .gf_icn_bs .gfsp_icon {
+    /* border-top-width: 1px; */
+}
+.gf_stylespro .gf_icn_border:not(.gf_icon_after) .gfsp_icon,
+.gf_stylespro .gf_icn_bs:not(.gf_icon_after) .gfsp_icon {
+    /* border-right-width: 0; */
+    /* border-left-width: 1px; */
+}
+.gf_stylespro .gf_icn_border.gf_icon_after .gfsp_icon,
+.gf_stylespro .gf_icn_bs.gf_icon_after .gfsp_icon {
+    /* border-left-width: 0; */
+    /* border-right-width: 1px; */
+}
+
+/* Floating labels */
+.floatable_label.ginput_container.has_gfsp_icn label.gfield_label {
+    margin-left: 2.3em;
+}
+.gf_icon_after .floatable_label.ginput_container.has_gfsp_icn label.gfield_label {
+    margin-left: 0;
+}
+.floatable_label.ginput_container:not(.float_label) label.gfield_label {
+    font-size: 1em;
+}
+.floatable_label.ginput_container label.gfield_label {
+    position: absolute;
+    transition: .15s ease-out;
+    top: 1.5em;
+}
+.floatable_label.ginput_container {
+    position: relative;
+    margin-top: 1.75em;
+}
+.float_label.ginput_container label.gfield_label {
+    top: -1.5em;
+}
+.floatable_label.ginput_container.has_gfsp_icn.float_label label.gfield_label  {
+    margin-left: 0;
+}
+/* Placeholders */
+.gf_stylespro .floatable_label:not(.float_label) *::-webkit-input-placeholder {
+    opacity: 0;
+}
+.gf_stylespro .floatable_label:not(.float_label) *:-moz-placeholder {		/* FF 4-18 */
+    opacity:  0;
+}
+.gf_stylespro .floatable_label:not(.float_label) *::-moz-placeholder {		/* FF 19+ */
+    opacity:  0;
+}
+.gf_stylespro .floatable_label:not(.float_label) *:-ms-input-placeholder { /* IE 10+ */
+    opacity:  0;
+}
+.gf_stylespro .floatable_label:not(.float_label) placeholder,
+.gf_stylespro .floatable_label:not(.float_label) .gf_placeholder {
+    opacity:  0;
+}
