@@ -111,3 +111,9 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+# Allowing Gravity Forms plugins #
+!web/wp-content/plugins/gravityforms
+!web/wp-content/plugins/gravityformssalesforce
+!web/wp-content/plugins/gravityplus-dynamic-population-salesforce
+!web/wp-content/plugins/gravityplus-dynamic-population
