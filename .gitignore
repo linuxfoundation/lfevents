@@ -117,3 +117,6 @@ Thumbs.db
 !web/wp-content/plugins/gravityformssalesforce
 !web/wp-content/plugins/gravityplus-dynamic-population-salesforce
 !web/wp-content/plugins/gravityplus-dynamic-population
+
+# Allowing Advanced Post Types Order plugin #
+!web/wp-content/plugins/advanced-post-types-order

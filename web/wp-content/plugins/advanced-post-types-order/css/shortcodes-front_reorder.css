@@ -1,0 +1,107 @@
+#apto .widefat {    border-spacing: 0;    clear: both;    margin: 0;    width: 100%;}
+#apto table.widefat {    border: 1px solid #e5e5e5;    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);    box-shadow: 0 1px 1px rgba(0,0,0,0.04);    margin-bottom: 0px}
+#apto .widefat tfoot th {    border-bottom: none;    border-top: 1px solid #e1e1e1;}
+#apto .widefat thead th {    border-bottom: 1px solid #e1e1e1;}
+#apto .widefat td, #apto .widefat th {    color: #555;}
+#apto .widefat .check-column {    padding: 6px 10px 6px 10px;    vertical-align: top;    width: 1%;}
+#apto .widefat thead th.check-column {    padding-top: 10px;}
+#apto .alternate {    background-color: #F9F9F9;}
+#apto .fixed .column-categories {width: 15%}
+#apto .column-categories {display: table-cell !important}
+#apto h2.nav-tab-wrapper{padding-left: 10px; border-bottom: 1px solid #CCCCCC;    padding-bottom: 0; margin-bottom: 0px}
+#apto .nav-tab {font-size: 12px; font-weight: bold; padding: 2px 10px 3px; margin-right: 0; line-height: 24px;border: 1px solid #ccc;    border-bottom: none;    background: #e4e4e4;    color: #555;    font-size: 12px;    line-height: 16px;    display: inline-block;    padding: 4px 14px 6px;    text-decoration: none;    margin: -4px 4px -1px 0;}
+#apto .nav-tab:hover {    background-color: #fff;    color: #464646;} 
+#apto .nav-tab-active, #apto .nav-tab-active:hover {    background: none repeat scroll 0 0 #F1F1F1;    border-bottom: 1px solid #F1F1F1;    color: #000000;}
+#ajax-response .updated { background-color: #BBDCEC; border-color: #92BBCE; color: #000000;}
+#apto #ajax-response .updated {background-color: #BBDCEC; border-left: 4px solid #92BBCE; margin: 5px 0 15px; color: #000000; padding: 1px 12px;}
+#apto #ajax-response p {margin: 0.5em 0;    padding: 2px;}
+#apto .apto_metabox.postbox {    background: #FFFFFF;    border: 1px solid #E1E1E1;    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);    position: relative;    border-radius: 0;   margin-bottom: 10px}
+#apto .postbox .inside {    margin: 0;    padding: 0;}
+#apto table.apto_input {    border: 0 none;    background: #fff;}
+#apto table.apto_input tbody tr td {    padding: 10px 12px;    border-top: 1px solid #f5f5f5;    border-bottom: 0 none;}
+#apto table.apto_input tbody tr:first-child td,
+#apto table.apto_input tbody tr:first-child td.label {    border-top: 0 none;}
+#apto table.apto_input tbody tr td.label {    width: 20%;    vertical-align: top;    background: #F9F9F9;    border-top: 1px solid #f0f0f0;    border-right: 1px solid #E1E1E1;}
+#apto table.apto_input tbody tr td.label label{    display: block;    font-size: 12px;    font-weight: bold;    padding: 0;    margin: 0;    color: #333;    }
+#apto table.apto_input tbody tr td.label p{    display: block;    font-size: 12px;    padding: 6px 0 !important;    margin: 0 !important;    font-style: normal;    line-height: 16px;    color: #666;}
+#apto table.apto_input tbody tr.submit td {background-color: #F9F9F9; text-align: right}
+#apto table.apto_input tbody tr.submit td.label {border-right: 1px solid #F9F9F9}
+#apto table.apto_input input[type=text]{    width: 99.95%;    outline: none;}
+#apto table.apto_input input[type=text]:focus {    border-color:#98B6CB;}
+#apto #sort_description {padding: 0px 10px}
+#apto .ajax_loading {display: none}
+#apto table.apto_input input[type=text]:focus,table.apto_input textarea:focus,table.apto_input select:focus {    border-color:#98B6CB;}
+#apto  #rules-meta table.apto_input .meta_value[data-type="array"] input {width: 50%; display: inline-block; margin: 0px}
+
+#apto #hint_arrow {font-family: Comic Sans MS,sans-serif; font-size: 12px; color:#696969; padding-left: 30px; padding-bottom: 10px}
+#apto #hint_arrow p {margin: 0px; padding-top: 25px}
+#apto #hint_arrow #arrow {display: block; width: 50px; height: 85px; float: left; background: url(../images/sprite.png) 0 0 no-repeat; background-position: -0px -115px;}
+
+#order-post-type img {vertical-align: middle}
+#order-post-type .sortable-list { list-style-type: none; margin: 10px 0 0; padding: 0; width: 100%; position: relative;}
+#order-post-type .sortable-list >li {position: relative}
+#order-post-type .sortable-list.animate li {transition:All 0.5s ease;-webkit-transition:All 0.5s ease;-moz-transition:All 0.5s ease;-o-transition:All 0.5s ease;}
+#order-post-type ul {list-style: none; margin-left:20px; list-style: none; }
+#order-post-type li .item { border: 1px solid #E6E6E6;height: auto;line-height: 27px;overflow: hidden;padding-left: 10px;position: relative; text-shadow: 0 1px 0 #FFFFFF;width: auto;word-wrap: break-word;cursor: move;background: url("../images/gray-grad.png") repeat-x scroll left top #DFDFDF;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; transition:All 0.5s ease;-webkit-transition:All 0.5s ease;-moz-transition:All 0.5s ease;-o-transition:All 0.5s ease;}
+#order-post-type li .item.is-sticky {margin-left: 35px}
+#order-post-type li .item .post_type_thumbnail {float: left; display: none; padding: 0px 5px 0px 0; margin-left: -10px;}
+#order-post-type li .item span.i_description { display: block;line-height: 20px; padding: 5px 0; white-space: nowrap; font-weight: bold; overflow: hidden; font-size: 12px;}
+#order-post-type li .item span.option {display: inline-block; vertical-align: middle;cursor: pointer; width: 16px; height: 20px; background-image:url("../images/sprite.png");background-repeat:no-repeat;}
+#order-post-type li .item span.edit { background-position: -65px -7px}
+#order-post-type li .item span.sticky { background-position: -65px -42px}
+#order-post-type li .item span.move_top { background-position: -9px -7px}
+#order-post-type li .item span.move_bottom { background-position: -35px -7px}
+#order-post-type li .options {float: right; padding: 0px 5px 0 10px}
+#order-post-type li .a_sticky {left: 0;    position: absolute;    top: 0;}
+#order-post-type li .a_sticky input{ font-size: 10px;    min-height: 30px;    padding: 3px;    text-align: center;    width: 30px;}
+#order-post-type .ui-sortable-placeholder{border-color:#bbb;background-color:#FCFCFC; height:30px; background-image: none; -moz-border-radius: 6px 6px 6px 6px; border: 3px dashed #E6E6E6; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; box-sizing: border-box;}
+#order-post-type .ui-sortable-helper{filter:alpha(opacity=75); /* for internet explorer */opacity: 0.75; /* CSS3 standard */-moz-opacity:0.75; /* for older gecko browsers */-khtml-opacity: 0.75; /* for older webkit browsers */}
+#order-post-type .no-nesting .ui-sortable-placeholder {background-color: transparent; border: none}
+#order-post-type .postbox {margin-bottom: 0px; border-top: none;}
+#order-post-type #nav-menu-header {background: url("../images/gray-grad.png") repeat-x scroll left top #DFDFDF; -moz-border-radius-topleft: 6px; -moz-border-radius-topright: 6px;border-width: 1px 1px 0;border-color: #CCCCCC;border-style: solid; margin-bottom: 0;}
+#order-post-type #nav-menu-header .major-publishing-actions {clear: both;padding: 5px 10px;}
+#order-post-type #nav-menu-header .actions {padding: 0px; margin: 0px; position: relative}
+#order-post-type .actions .toggle_thumbnails {margin-right: 30px; float: left}
+#order-post-type #nav-menu-header .ajax_loading {display: none; position: absolute; top: -30px; right: 0px}
+#order-post-type #nav-menu-header .ajax_loading img {vertical-align: middle;}
+#order-post-type #nav-menu-header .ajax_loading .progress {display: inline-block; vertical-align: middle;}
+#order-post-type #nav-menu-header .save-order {float: left}
+#order-post-type #nav-menu-footer {background: url("../images/gray-grad.png") repeat-x scroll left top #DFDFDF; -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px;border-width: 0 1px 1px 1px;border-color: #CCCCCC;border-style: solid;}
+#order-post-type #nav-menu-footer .major-publishing-actions {clear: both;padding: 5px 10px;} 
+#order-post-type #nav-menu-footer .submit {padding: 0px; margin: 0px}
+#order-post-type #post-body {background: none repeat scroll 0 0 #FFFFFF;border-width: 0 1px 0 1px;padding: 10px;border-color: #CCCCCC;border-style: solid;}
+#order-post-type .fl {float: left !important}
+#order-post-type #post-search-input {padding: 4px 8px; margin-right: 10px}
+#order-post-type .actions .button-primary {margin-top: 1px}
+
+#sort_list_type {display: inline-block; float: right}
+#sort_list_type .icon {width: 20px; height: 20px; display: inline-block; background-image:url("../images/sprite.png");background-repeat:no-repeat; text-indent: -9999px;}
+#sort_list_type .icon.list{background-position: -185px -3px}
+#sort_list_type .icon.grid{background-position: -216px -3px}
+
+#order-post-type .sortable-list.view-grid li {width: 195px; min-height: 195px; display: inline-block; vertical-align: top; margin: 0px 10px 10px 0px}
+#order-post-type .sortable-list.view-grid li .post_type_thumbnail {display: block !important; margin: 0px; padding: 0px; float: none; line-height: 1px;}
+#order-post-type .sortable-list.view-grid li .post_type_thumbnail img {width: 100%; height: auto}
+#order-post-type .sortable-list.view-grid li .item {padding-left: 0px; background: none}
+#order-post-type .sortable-list.view-grid li .a_sticky {z-index: 10; top: 0px}
+#order-post-type .sortable-list.view-grid li .options .move_top,#order-post-type .sortable-list.view-grid li .options .move_bottom {display: none}
+#order-post-type .sortable-list.view-grid .item.is-sticky {margin-left: 0px}
+#order-post-type .sortable-list.view-grid .item span.i_description {overflow: visible; padding: 2px 3px; font-weight: normal; white-space: inherit}
+#order-post-type .sortable-list.view-grid .ui-sortable-helper {min-height: 195px}
+
+#order-post-type li.multi-select .item{background-image: none; background-color: #f9f9f9;}
+
+#apto_form_order {padding-bottom: 20px}
+#apto_form_order_reset {display: none;}
+
+#order-post-type #sort_options {font-size: 12px; display: inline-block;}
+#order-post-type #sort_options a {text-decoration: none; vertical-align: middle;}
+#order-post-type #sort_options span {font-size: 8px; vertical-align: middle}
+
+#order-post-type .sortable-list li {margin-bottom: 6px}
+
+#apto .button-primary, #apto .button, #apto .button-secondary {  background: #2EA2CC;  border-color: #0074A2;  color: white;       -moz-box-sizing: border-box;    border-radius: 3px;    border-style: solid;    border-width: 1px;    cursor: pointer;    display: inline-block;    font-size: 13px;    height: 28px;    line-height: 26px;    margin: 0;    padding: 0 10px 1px;    text-decoration: none;    white-space: nowrap;    text-decoration: none !important ; text-transform: none;}
+#apto .button-primary:hover, #apto .button-primary:focus, #apto .button:hover, #apto .button:focus {    background: #1E8CBE;    border-color: #bd831f;    color: white;    }
+#apto .button-primary:active, #apto .button:active {    background: #1E8CBE;;    border-color: #bd831f;    color: white;    }
+#apto .button-primary:disabled {    color: #d1cdc7 !important;    background: #db9825 !important;    border-color: #bd831f !important;    text-shadow: none !important; }
+#apto .clear {clear: both} 
