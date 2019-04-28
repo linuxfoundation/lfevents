@@ -2,6 +2,10 @@
 [![Dashboard lfevents](https://img.shields.io/badge/dashboard-lfeventsci-yellow.svg)](https://dashboard.pantheon.io/sites/f74d847c-e689-4631-a91b-24b7f897139b#dev/code)
 [![Dev Site lfevents](https://img.shields.io/badge/site-lfeventsci-blue.svg)](http://dev-lfeventsci.pantheonsite.io/)
 
+# Test Site
+
+Work is occurring at https://dev-lfeventsci.pantheonsite.io/kubecon-cloudnativecon-europe/.
+
 # LFEvents Developer Instructions
 
 LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
