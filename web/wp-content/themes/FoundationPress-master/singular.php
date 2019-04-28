@@ -15,7 +15,8 @@ get_header(); ?>
 <?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
 
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-options="marginTop:0;" >
+	<header class="event-header sticky" data-sticky data-options="marginTop:0;" style="background-color:#168f44;">
+		<!-- TODO: The line above uses an inline style for the menu color. This should be dynamic, coming from the event options -->
 
 		<div class="pre-nav">
 			<?php

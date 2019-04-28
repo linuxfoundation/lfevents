@@ -42,6 +42,9 @@
 
 .event-menu {
   clear: both;
+  background-color: inherit;
+
+  ul, li { background-color: inherit; }
 
   ul {
     list-style: none;
@@ -66,6 +69,7 @@
 
       a {
         @include button();
+        @include button-style(transparent, rgba(0,0,0,0.2), $white);
         font-weight: bold;
         font-size: 1rem;
         margin-bottom: 0;
@@ -82,17 +86,25 @@
     .page_item_has_children {
       position: relative;
 
-      > a {
-        @include breakpoint(large) {
-          @include button-dropdown(0.4em, rgba(255,255,255,0.8), 1rem);
-        }
-
-        &::after {
-          top: 0.1em;
-        }
-      }
-
       @include breakpoint(large) {
+        > a {
+          @include button-dropdown(0.4em, rgba(255,255,255,0.7), 1rem);
+          cursor: default;
+
+          &::after {
+            top: 0.1em;
+            transition: transform 0.2s ease-in-out;
+          }
+        }
+
+        &:hover > a {
+          background-color: rgba(0,0,0,0.2);
+        }
+
+        &:hover > a::after {
+          transform: scaleY(-1);
+        }
+
         .children {
           position: absolute;
           top: 100%;
@@ -102,6 +114,11 @@
           visibility: hidden;
           opacity: 0;
           transition: opacity 0.4s;
+
+          a {
+            font-size: rem-calc(14);
+            border-top-color: rgba(255,255,255,0.1);
+          }
         }
 
         &:hover > .children {
