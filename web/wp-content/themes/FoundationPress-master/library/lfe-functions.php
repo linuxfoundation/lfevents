@@ -157,3 +157,39 @@ function lfe_remove_parent_links( $args ) {
 	$pages = implode( '</li>', $pages );
 	echo $pages; //phpcs:ignore
 }
+
+/**
+ * Outputs the Sponsors page for an Event if a Sponsors page exists.
+ *
+ * @param int $parent_id ID of top parent post of the Event.
+ */
+function lfe_get_sponsors( $parent_id ) {
+	$post_types = lfe_get_post_types();
+
+	$args = array(
+		'post_type' => $post_types,
+		'post_parent' => $parent_id,
+		'name' => 'sponsors',
+		'no_found_rows' => true,  // used to improve performance.
+		'update_post_meta_cache' => false, // used to improve performance.
+		'update_post_term_cache' => false, // used to improve performance.
+	);
+
+	$the_query = new WP_Query( $args );
+
+	if ( $the_query->have_posts() ) {
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<div class="entry-content">
+					<?php the_content(); ?>
+					<?php edit_post_link( __( '(Edit Sponsors)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
+				</div>
+			</article>
+			<?php
+		}
+	}
+	wp_reset_postdata(); // Restore original Post Data.
+
+}

@@ -58,7 +58,8 @@ get_header(); ?>
 				the_post();
 				?>
 				<?php get_template_part( 'template-parts/content', 'page' ); ?>
-				<?php comments_template(); ?>
+				<?php lfe_get_sponsors( $parent_id ); ?>
+				<?php /* comments_template(); */ ?>
 			<?php endwhile; ?>
 		</main>
 		<?php /* get_sidebar(); */ ?>
