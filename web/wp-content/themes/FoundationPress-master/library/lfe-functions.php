@@ -103,7 +103,7 @@ function lfe_get_other_events( $parent_id ) {
 	$related_events = lfe_get_related_events( $parent_id );
 	$archive_events = lfe_get_archive( $parent_id );
 
-	echo '<li class="page_item page_item_has_children">';
+	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
 	echo '<ul class="children">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Events</a></li>';

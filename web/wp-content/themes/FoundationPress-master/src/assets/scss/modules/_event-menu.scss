@@ -71,7 +71,8 @@
 
     > li {
 
-      &:first-child { // HACK: We should add a class w/ a WP walker for this selector
+      &:first-child, // HACK: We should add a class w/ a WP walker for this selector
+      &.other-events {
         @include breakpoint(medium down) {
           display: none;
         }
@@ -87,6 +88,10 @@
         justify-content: center;
         align-items: center;
 
+        @include breakpoint(medium down) {
+          font-size: rem-calc(14);
+        }
+
         @include breakpoint(large) {
           min-height: 100%;
         }
@@ -99,6 +104,12 @@
 
     .page_item_has_children {
       position: relative;
+
+      @include breakpoint(medium down) {
+        > a:not([href]) {
+          display: none;
+        }
+      }
 
       @include breakpoint(large) {
         > a {
