@@ -22,7 +22,7 @@ get_header(); ?>
 			<?php
 			if ( $post->post_parent ) {
 				$ancestors = get_post_ancestors( $post->ID );
-				$parent_id    = $ancestors[ count( $ancestors ) - 1 ];
+				$parent_id = $ancestors[ count( $ancestors ) - 1 ];
 			} else {
 				$parent_id = $post->ID;
 			}
@@ -34,7 +34,7 @@ get_header(); ?>
 				$event_link_content = get_the_title( $parent_id );
 			}
 
-			echo '<a class="event-home-link" href="' . post_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
+			echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 			?>
 
 			<button class="menu-toggler button alignright" data-toggle="event-menu">
@@ -44,7 +44,7 @@ get_header(); ?>
 
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
-				<li class="page_item event-home-link"><a href="<?php post_permalink( $parent_id ) ?>"><?php echo $event_link_content; ?></a></li>
+				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; ?></a></li>
 				<?php
 				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type );
 				if ( $children ) {
