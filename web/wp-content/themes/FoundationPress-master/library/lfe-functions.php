@@ -109,11 +109,11 @@ function lfe_get_other_events( $parent_id ) {
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Events</a></li>';
 
 	foreach ( $related_events as $p ) {
-		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">Related: ' . esc_html( get_post_type( $p['ID'] ) . ' - ' . get_the_title( $p['ID'] ) ) . '</a></li>';
+		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '"><small class="menu-item-pre-text">Related:</small> ' . esc_html( get_post_type( $p['ID'] ) . ' - ' . get_the_title( $p['ID'] ) ) . '</a></li>';
 	}
 
 	foreach ( $archive_events as $p ) {
-		echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">Archive: ' . esc_html( get_post_type( $p->ID ) . ' - ' . get_the_title( $p->ID ) ) . '</a></li>';
+		echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '"><small class="menu-item-pre-text">Archive:</small> ' . esc_html( get_post_type( $p->ID ) . ' - ' . get_the_title( $p->ID ) ) . '</a></li>';
 	}
 
 	echo '</ul></li>';
