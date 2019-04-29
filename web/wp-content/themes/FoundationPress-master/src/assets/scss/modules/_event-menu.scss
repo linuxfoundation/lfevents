@@ -48,8 +48,11 @@
 .event-menu {
   clear: both;
   background-color: inherit;
-  max-height: 80vh;
-  overflow: auto;
+
+  @include breakpoint(medium down) {
+    max-height: 80vh;
+    overflow: auto;
+  }
 
   ul, li { background-color: inherit; }
 
