@@ -10,30 +10,31 @@
  * @since FoundationPress 1.0.0
  */
 
-get_header(); ?>
+get_header();
+
+if ( $post->post_parent ) {
+	$ancestors = get_post_ancestors( $post->ID );
+	$parent_id = $ancestors[ count( $ancestors ) - 1 ];
+} else {
+	$parent_id = $post->ID;
+}
+
+$featured_image = get_the_post_thumbnail( $parent_id );
+if ( $featured_image ) {
+	$event_link_content = $featured_image;
+} else {
+	$event_link_content = get_the_title( $parent_id );
+}
+
+?>
 
 <?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
 
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-options="marginTop:0;" style="background-color:#168f44;">
-		<!-- TODO: The line above uses an inline style for the menu color. This should be dynamic, coming from the event options -->
+	<header class="event-header sticky" data-sticky data-options="marginTop:0;" style="background-color:<?php echo esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) ); ?>">
 
 		<div class="pre-nav">
 			<?php
-			if ( $post->post_parent ) {
-				$ancestors = get_post_ancestors( $post->ID );
-				$parent_id = $ancestors[ count( $ancestors ) - 1 ];
-			} else {
-				$parent_id = $post->ID;
-			}
-
-			$featured_image = get_the_post_thumbnail( $parent_id );
-			if ( $featured_image ) {
-				$event_link_content = $featured_image;
-			} else {
-				$event_link_content = get_the_title( $parent_id );
-			}
-
 			echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 			?>
 

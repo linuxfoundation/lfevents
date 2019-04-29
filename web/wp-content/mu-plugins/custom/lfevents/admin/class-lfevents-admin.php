@@ -261,15 +261,19 @@ class LFEvents_Admin {
 							'settings' => array(
 								array(
 									'type'          => 'color',
-									'id'            => 'color_id',
+									'id'            => 'menu_color',
 									'data_type'     => 'meta',
-									'data_key'      => 'accent_color', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Accent color' ),
-									'help'          => __( 'Choose a color for all accents for the Event' ),
+									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu color' ),
+									'help'          => __( 'Choose a color for the topnav menu' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
-									'default_value' => '', // A string with a HEX, rgb or rgba color format.
+									'default_value' => '#ff0000', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'         => array(
+										'red'   => '#ff0000',
+										'green' => '#00ff00',
+									),
 								),
 							),
 						),
