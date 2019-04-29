@@ -44,7 +44,7 @@ get_header(); ?>
 
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
-				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; ?></a></li>
+				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
 				<?php
 				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type );
 				if ( $children ) {
