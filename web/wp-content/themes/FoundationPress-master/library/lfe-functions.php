@@ -145,9 +145,9 @@ function lfe_remove_parent_links( $args ) {
 	foreach ( $pages as $page ) {
 		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
 			$page = explode( '<ul class=\'children\'>', $page );
-			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1', $page[0] );
+			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
 			if ( count( $page ) == 3 ) {
-				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1', $page[1] );
+				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
 			$page = implode( '<ul class=\'children\'>', $page );
 		}
