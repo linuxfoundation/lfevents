@@ -18,6 +18,10 @@
   background-color: rgba(10,59,97,100);
   box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2);
 
+  .admin-bar &.is-stuck {
+    top: 32px !important;
+  }
+
   .pre-nav {
     display: flex;
     align-content: stretch;
