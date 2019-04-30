@@ -8,7 +8,8 @@
 
 .event-home-link img {
   display: block;
-  max-height: 5rem;
+  width: auto;
+  max-height: 3rem;
 }
 
 .event-header {
@@ -17,6 +18,10 @@
   z-index: 2;
   background-color: rgba(10,59,97,100);
   box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2);
+
+  .admin-bar &.is-stuck {
+    top: 32px !important;
+  }
 
   .pre-nav {
     display: flex;
@@ -50,7 +55,7 @@
   background-color: inherit;
 
   @include breakpoint(medium down) {
-    max-height: 80vh;
+    max-height: calc(100vh - 4.7rem);
     overflow: auto;
   }
 
@@ -99,14 +104,14 @@
     }
 
     .event-home-link {
-      flex-grow: 1.75;
+      flex-grow: 1.25;
     }
 
     .page_item_has_children {
       position: relative;
 
       @include breakpoint(medium down) {
-        > a:not([href]) {
+        > a[href="#"] {
           display: none;
         }
       }
