@@ -55,7 +55,7 @@
   background-color: inherit;
 
   @include breakpoint(medium down) {
-    max-height: 80vh;
+    max-height: calc(100vh - 4.7rem);
     overflow: auto;
   }
 
