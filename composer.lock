@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "240dc854ce2abfe485cb7166d7492280",
+    "content-hash": "4de14a8e5bf7ac2170987e1f08d43f45",
     "packages": [
         {
             "name": "composer/installers",
@@ -489,26 +489,6 @@
             "time": "2019-03-06T09:39:45+00:00"
         },
         {
-            "name": "wpackagist-plugin/atomic-blocks",
-            "version": "1.7.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/atomic-blocks/",
-                "reference": "tags/1.7.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/atomic-blocks.1.7.0.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/atomic-blocks/"
-        },
-        {
             "name": "wpackagist-plugin/autodescription",
             "version": "3.2.4",
             "source": {
@@ -707,26 +687,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/stackable-ultimate-gutenberg-blocks/"
-        },
-        {
-            "name": "wpackagist-plugin/ultimate-addons-for-gutenberg",
-            "version": "1.13.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/ultimate-addons-for-gutenberg/",
-                "reference": "tags/1.13.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/ultimate-addons-for-gutenberg.1.13.1.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/ultimate-addons-for-gutenberg/"
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
