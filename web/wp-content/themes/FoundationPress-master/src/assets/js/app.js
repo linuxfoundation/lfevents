@@ -15,6 +15,8 @@
 import './lib/foundation-explicit-pieces';
 $( document ).foundation();
 
-$('.page_item_has_children a[href="#"]').click(function(e) {
-  e.preventDefault();
-});
+$( '.page_item_has_children a[href="#"]' ).click(
+	function(e) {
+		e.preventDefault();
+	}
+);
