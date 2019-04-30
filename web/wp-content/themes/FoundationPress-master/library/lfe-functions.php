@@ -109,11 +109,11 @@ function lfe_get_other_events( $parent_id ) {
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Events</a></li>';
 
 	foreach ( $related_events as $p ) {
-		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '"><small class="menu-item-pre-text">Related:</small> ' . esc_html( get_post_type( $p['ID'] ) . ' - ' . get_the_title( $p['ID'] ) ) . '</a></li>';
+		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '"><small class="menu-item-pre-text">Related:</small> ' . esc_html( get_the_title( $p['ID'] ) ) . '</a></li>';
 	}
 
 	foreach ( $archive_events as $p ) {
-		echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '"><small class="menu-item-pre-text">Archive:</small> ' . esc_html( get_post_type( $p->ID ) . ' - ' . get_the_title( $p->ID ) ) . '</a></li>';
+		echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '"><small class="menu-item-pre-text">Archive:</small> ' . esc_html( get_the_title( $p->ID ) ) . '</a></li>';
 	}
 
 	echo '</ul></li>';
@@ -145,9 +145,9 @@ function lfe_remove_parent_links( $args ) {
 	foreach ( $pages as $page ) {
 		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
 			$page = explode( '<ul class=\'children\'>', $page );
-			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1', $page[0] );
+			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
 			if ( count( $page ) == 3 ) {
-				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1', $page[1] );
+				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
 			$page = implode( '<ul class=\'children\'>', $page );
 		}

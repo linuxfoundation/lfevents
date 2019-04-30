@@ -10,31 +10,32 @@
  * @since FoundationPress 1.0.0
  */
 
-get_header(); ?>
+get_header();
+
+if ( $post->post_parent ) {
+	$ancestors = get_post_ancestors( $post->ID );
+	$parent_id = $ancestors[ count( $ancestors ) - 1 ];
+} else {
+	$parent_id = $post->ID;
+}
+
+$featured_image = get_the_post_thumbnail( $parent_id );
+if ( $featured_image ) {
+	$event_link_content = $featured_image;
+} else {
+	$event_link_content = get_the_title( $parent_id );
+}
+
+?>
 
 <?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
 
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-options="marginTop:0;" style="background-color:#168f44;">
-		<!-- TODO: The line above uses an inline style for the menu color. This should be dynamic, coming from the event options -->
+	<header class="event-header sticky" data-sticky data-options="marginTop:0;" style="background-color:<?php echo esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) ); ?>">
 
 		<div class="pre-nav">
 			<?php
-			if ( $post->post_parent ) {
-				$ancestors = get_post_ancestors( $post->ID );
-				$parent_id    = $ancestors[ count( $ancestors ) - 1 ];
-			} else {
-				$parent_id = $post->ID;
-			}
-
-			$featured_image = get_the_post_thumbnail( $parent_id );
-			if ( $featured_image ) {
-				$event_link_content = $featured_image;
-			} else {
-				$event_link_content = get_the_title( $parent_id );
-			}
-
-			echo '<a class="event-home-link" href="' . post_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
+			echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 			?>
 
 			<button class="menu-toggler button alignright" data-toggle="event-menu">
@@ -44,7 +45,7 @@ get_header(); ?>
 
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
-				<li class="page_item event-home-link"><a href="<?php post_permalink( $parent_id ) ?>"><?php echo $event_link_content; ?></a></li>
+				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
 				<?php
 				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type );
 				if ( $children ) {
