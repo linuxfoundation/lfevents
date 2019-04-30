@@ -85,3 +85,29 @@ Frontend styles for gutenberg blocks
 		margin-left: -0.625rem;
 	}
 }
+
+/** === Gallery overrides === */
+body .main-container .main-grid .wp-block-gallery {
+	@include flex-align(center, null);
+
+	&.large { @include xy-grid-layout(1, '.blocks-gallery-item'); }
+	&.medium { @include xy-grid-layout(2, '.blocks-gallery-item'); }
+	&.small { @include xy-grid-layout(2, '.blocks-gallery-item'); }
+
+	@include breakpoint(medium) {
+		&.large { @include xy-grid-layout(2, '.blocks-gallery-item'); }
+	}
+
+	@include breakpoint(large) {
+		&.large { @include xy-grid-layout(3, '.blocks-gallery-item'); }
+		&.medium { @include xy-grid-layout(4, '.blocks-gallery-item'); }
+		&.small { @include xy-grid-layout(5, '.blocks-gallery-item'); }
+		// &.columns-6 { @include xy-grid-layout(4, '.blocks-gallery-item'); }
+	}
+
+  .blocks-gallery-item {
+    @include xy-gutters(3rem, padding, top left bottom right);
+		margin: 0 !important;
+    flex: 0 1 auto;
+  }
+}
