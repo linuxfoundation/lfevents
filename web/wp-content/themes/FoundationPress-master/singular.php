@@ -19,7 +19,7 @@ if ( $post->post_parent ) {
 	$parent_id = $post->ID;
 }
 
-$featured_image = get_the_post_thumbnail( $parent_id );
+$featured_image = get_the_post_thumbnail( $parent_id, 'full' );
 if ( $featured_image ) {
 	$event_link_content = $featured_image;
 } else {

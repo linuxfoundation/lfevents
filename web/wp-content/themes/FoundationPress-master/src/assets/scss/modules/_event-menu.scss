@@ -8,7 +8,8 @@
 
 .event-home-link img {
   display: block;
-  max-height: 5rem;
+  width: auto;
+  max-height: 3rem;
 }
 
 .event-header {
@@ -103,7 +104,7 @@
     }
 
     .event-home-link {
-      flex-grow: 1.75;
+      flex-grow: 1.25;
     }
 
     .page_item_has_children {
