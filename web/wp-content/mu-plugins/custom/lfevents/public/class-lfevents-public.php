@@ -101,6 +101,7 @@ class LFEvents_Public {
 
 	/**
 	 * Sets up redirects for "sponsor" images who have a url in their Description field.
+	 * Also redirects menu elements to their first child if one exists.
 	 */
 	public function lfe_redirects() {
 		global $post;
@@ -110,6 +111,25 @@ class LFEvents_Public {
 			if ( filter_var( $url, FILTER_VALIDATE_URL ) ) {
 				wp_redirect( $url );
 				exit;
+			}
+		}
+
+		if ( in_array( $post->post_type, lfe_get_post_types() ) && $post->post_parent ) {
+			$args = array(
+				'post_parent' => $post->ID,
+				'post_type'   => $post->post_type,
+				'numberposts' => 1,
+				'post_status' => 'Published',
+				'orderby'    => 'menu_order',
+				'sort_order' => 'asc',
+			);
+			$child = get_children( $args );
+			if ( $child ) {
+				foreach ( $child as $c ) {
+					$url = get_permalink( $c->ID );
+					wp_redirect( $url );
+					exit;
+				}
 			}
 		}
 	}

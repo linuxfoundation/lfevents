@@ -8,21 +8,6 @@
  */
 
 /**
- * Gets all post types currently used for LFEvents.
- *
- * @return array
- */
-function lfe_get_post_types() {
-	$post_types   = [ 'page' ];
-	$current_year = date( 'Y' );
-
-	for ( $x = 2019; $x <= $current_year; $x++ ) {
-		$post_types[] = 'lfevent' . $x;
-	}
-	return $post_types;
-}
-
-/**
  * Gets related LFEvents for current post.  Only returns Events for the current year.
  *
  * @param int $parent_id ID of top parent post of the Event.

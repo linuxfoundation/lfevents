@@ -59,12 +59,7 @@ class LFEvents_Admin {
 
 		$this->lfevents   = $lfevents;
 		$this->version    = $version;
-		$this->post_types = [ 'page' ];
-		$current_year     = date( 'Y' );
-
-		for ( $x = 2019; $x <= $current_year; $x++ ) {
-			$this->post_types[] = 'lfevent' . $x;
-		}
+		$this->post_types = lfe_get_post_types();
 	}
 
 	/**
