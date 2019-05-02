@@ -120,12 +120,12 @@ class LFEvents_Public {
 				'post_type'   => $post->post_type,
 				'numberposts' => 1,
 				'post_status' => 'Published',
-				'orderby'    => 'menu_order',
-				'sort_order' => 'asc',
+				'orderby'     => 'menu_order',
+				'order'       => 'ASC',
 			);
-			$child = get_children( $args );
-			if ( $child ) {
-				foreach ( $child as $c ) {
+			$children = get_posts( $args );
+			if ( $children ) {
+				foreach ( $children as $c ) {
 					$url = get_permalink( $c->ID );
 					wp_redirect( $url );
 					exit;
