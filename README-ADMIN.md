@@ -1,6 +1,6 @@
-# LFEvents User Instructions
+# LFEvents Admin Instructions
 
-These instructions are for the administrators of the Linux Foundation Events site.  They explain the ways to configure the site that aren't immediately obvious or part of WordPress standard behavior.
+These instructions are for the administrators of the Linux Foundation Events site.  They explain the ways to setup Events and configure the site's contents.
 
 ## General Event Configuration
 
