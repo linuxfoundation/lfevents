@@ -11,6 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { PlainText } = wp.editor;
 
 /**
  * Register: aa Gutenberg Block.
@@ -25,16 +26,22 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/block-china-video-block', {
+registerBlockType( 'lfe/block-china-video-block', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'china-video-block - CGB Block' ), // Block title.
-	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+	title: __( 'China Video Block' ), // Block title.
+	icon: 'welcome-view-site', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'china-video-block — CGB Block' ),
-		__( 'CGB Example' ),
-		__( 'create-guten-block' ),
+		__( 'china video block' ),
 	],
+	attributes: {
+        chinavid: {
+			type: 'string'
+		},
+		worldvid: {
+            type: 'string'
+        }
+    },
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -45,23 +52,27 @@ registerBlockType( 'cgb/block-china-video-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		// Creates a <p class='wp-block-cgb-block-china-video-block'></p>.
+		const { setAttributes, attributes: { chinavid, worldvid }} = props;
+
 		return (
 			<div className={ props.className }>
-				<p>— Hello from the backend.</p>
-				<p>
-					CGB BLOCK: <code>china-video-block</code> is a new Gutenberg block
+				<p>Insert one video to be shown to users in China, another video to be shown to everyone else.</p>
+				<p>Chinese video:
+					<PlainText
+						value={ chinavid }
+						onChange={( value ) => setAttributes({ chinavid: value })}
+						placeholder="https://v.qq.com/iframe/player.html?vid=f0718z01vwl&tiny=0&auto=0"
+					/>
 				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
+				<p>World video:
+					<PlainText
+						value={ worldvid }
+						onChange={( value ) => setAttributes({ worldvid: value })}
+						placeholder="https://www.youtube.com/embed/1JAXMGqzMxs"
+					/>
 				</p>
 			</div>
-		);
+	);
 	},
 
 	/**
@@ -73,20 +84,14 @@ registerBlockType( 'cgb/block-china-video-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function( props ) {
+		const { setAttributes, attributes: { chinavid, worldvid }} = props;
+
 		return (
 			<div>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>china-video-block</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+				<script type="text/javascript">
+					var worldvid = "{worldvid}"; 
+					var chinavid = "{chinavid}"; 
+				</script>
 			</div>
 		);
 	},

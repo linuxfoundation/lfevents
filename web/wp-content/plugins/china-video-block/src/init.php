@@ -36,6 +36,17 @@ function china_video_block_cgb_block_assets() { // phpcs:ignore
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
 	);
 
+	// Register video swap script for front-end.
+	if ( ! is_admin() ) {
+		wp_enqueue_script(
+			'china_video_block-cgb-block-front-js', // Handle.
+			plugins_url( '/src/block/front.js', dirname( __FILE__ ) ),
+			array( 'jquery' ), // Dependencies.
+			null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
+			true // Enqueue the script in the footer.
+		);
+	}
+
 	// Register block editor script for backend.
 	wp_register_script(
 		'china_video_block-cgb-block-js', // Handle.
