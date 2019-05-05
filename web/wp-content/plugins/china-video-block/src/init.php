@@ -66,7 +66,7 @@ function china_video_block_lfe_block_assets() { // phpcs:ignore
 	register_block_type(
 		'cgb/block-china-video-block', array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'china_video_block-cgb-style-css',
+			// 'style'         => 'china_video_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
 			'editor_script' => 'china_video_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.

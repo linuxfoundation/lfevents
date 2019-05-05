@@ -92,7 +92,7 @@ registerBlockType( 'lfe/block-china-video-block', {
 					var worldvid = '{worldvid}'; 
 					var chinavid = '{chinavid}'; 
 				</script>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/NSBjz4RPi9k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				<script type="text/javascript" src="/wp-content/plugins/china-video-block/src/block/front.js"></script>
 			</div>
 		);
