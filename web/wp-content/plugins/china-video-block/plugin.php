@@ -2,7 +2,7 @@
 /**
  * Plugin Name: China Video Block
  * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/create-guten-block/
- * Description: Embeds one video for users in China, another for everyone else.
+ * Description: Gutenberg block that embeds one video for users in China, another for everyone else.  Useful to accomodate video sites that are blocked in China.
  * Author: cjyabraham
  * Version: 1.0.0
  * License: GPL2+
