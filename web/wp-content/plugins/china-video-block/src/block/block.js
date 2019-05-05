@@ -56,15 +56,15 @@ registerBlockType( 'lfe/block-china-video-block', {
 
 		return (
 			<div className={ props.className }>
-				<p>Insert one video to be shown to users in China, another video to be shown to everyone else.</p>
-				<p>Chinese video:
+				<p>This block will shown the Chinese video to users in China and the World video to everyone else.</p>
+				<p>Chinese video (iframe "src" attribute):
 					<PlainText
 						value={ chinavid }
 						onChange={( value ) => setAttributes({ chinavid: value })}
 						placeholder="https://v.qq.com/iframe/player.html?vid=f0718z01vwl&tiny=0&auto=0"
 					/>
 				</p>
-				<p>World video:
+				<p>World video (iframe "src" attribute):
 					<PlainText
 						value={ worldvid }
 						onChange={( value ) => setAttributes({ worldvid: value })}
@@ -89,9 +89,11 @@ registerBlockType( 'lfe/block-china-video-block', {
 		return (
 			<div>
 				<script type="text/javascript">
-					var worldvid = "{worldvid}"; 
-					var chinavid = "{chinavid}"; 
+					var worldvid = '{worldvid}'; 
+					var chinavid = '{chinavid}'; 
 				</script>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/NSBjz4RPi9k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<script type="text/javascript" src="/wp-content/plugins/china-video-block/src/block/front.js"></script>
 			</div>
 		);
 	},
