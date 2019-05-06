@@ -20,7 +20,7 @@ function cvb_settings_init() {
 	);
 
 	add_settings_field(
-		'cvb_ipinfo_token', 
+		'cvb_ipinfo_token',
 		__( 'IPInfo.io token', 'cvb' ),
 		'cvb_ipinfo_token_cb',
 		'cvb',

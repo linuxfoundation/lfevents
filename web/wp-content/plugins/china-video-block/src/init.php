@@ -45,11 +45,15 @@ function china_video_block_cvb_block_assets() { // phpcs:ignore
 		true // Enqueue the script in the footer.
 	);
 	$options = get_option( 'cvb_options' );
-	wp_localize_script('china_video_block-cgb-block-js', 'cvbPHPVars', array(
-		'frontScriptURL' => plugins_url( '/src/block/front.js', dirname( __FILE__ ) ),
-		'cvbIPInfoToken' => $options['cvb_ipinfo_token'],
-		'settingsURL' => get_site_url() . '/wp-admin/options-general.php?page=cvb',
-	));
+	wp_localize_script(
+		'china_video_block-cgb-block-js',
+		'cvbPHPVars',
+		array(
+			'frontScriptURL' => plugins_url( '/src/block/front.js', dirname( __FILE__ ) ),
+			'cvbIPInfoToken' => $options['cvb_ipinfo_token'],
+			'settingsURL' => get_site_url() . '/wp-admin/options-general.php?page=cvb',
+		)
+	);
 
 	// Register block editor styles for backend.
 	wp_register_style(
@@ -70,7 +74,8 @@ function china_video_block_cvb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-china-video-block', array(
+		'cgb/block-china-video-block',
+		array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			// 'style'         => 'china_video_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
