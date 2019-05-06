@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-function china_video_block_lfe_block_assets() { // phpcs:ignore
+function china_video_block_cvb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
 		'china_video_block-cgb-style-css', // Handle.
@@ -44,6 +44,11 @@ function china_video_block_lfe_block_assets() { // phpcs:ignore
 		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
 	);
+	$options = get_option( 'cvb_options' );
+	wp_localize_script('china_video_block-cgb-block-js', 'cvbPHPVars', array(
+		'frontScriptURL' => plugins_url( '/src/block/front.js', dirname( __FILE__ ) ),
+		'cvbIPInfoToken' => $options['cvb_ipinfo_token'],
+	));
 
 	// Register block editor styles for backend.
 	wp_register_style(
@@ -76,4 +81,4 @@ function china_video_block_lfe_block_assets() { // phpcs:ignore
 }
 
 // Hook: Block assets.
-add_action( 'init', 'china_video_block_lfe_block_assets' );
+add_action( 'init', 'china_video_block_cvb_block_assets' );

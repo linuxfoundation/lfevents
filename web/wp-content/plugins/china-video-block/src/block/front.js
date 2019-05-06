@@ -1,7 +1,5 @@
 $(document).ready(function () {
-	var youku = $('.wp-block-lfe-block-china-video-block iframe'),
-		china = chinavid,
-		world = worldvid,
+	var youku = $('.wp-block-cvb-block-chinavid-video-block iframe'),
 		path = "path=/;"
 	d = new Date();
 	d.setTime(d.getTime() + (7 * 24 * 60 * 60 * 1000)),
@@ -15,27 +13,26 @@ $(document).ready(function () {
 	}
 
 	if (getCookie("is_china") === "") {
+		var ipinfourl = "https://ipinfo.io?token=" + cvbIPInfoToken
+		console.log(ipinfourl)
 		$.ajax({
-			url: "https://ipinfo.io?token=d590ecd654d57b",
+			url: ipinfourl,
 			dataType: "jsonp",
 			success: function (response) {
 				if (response.country == 'CN') {
-					youku.attr('src', china)
+					youku.attr('src', chinavid)
 					document.cookie = "is_china=true;" + path + expires;
 				} else {
-					youku.attr('src', world)
 					document.cookie = "is_china=false;" + path + expires;
 				}
 			},
 			error: function () {
-				youku.attr('src', china)
+				youku.attr('src', chinavid)
 				document.cookie = "is_china=true;" + path + expires;
 			},
 			timeout: 3000
 		});
 	} else if (getCookie("is_china") === "true") {
-		youku.attr('src', china)
-	} else {
-		youku.attr('src', world)
-	}	
+		youku.attr('src', chinavid)
+	} 
 });

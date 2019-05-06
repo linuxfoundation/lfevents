@@ -26,7 +26,7 @@ const { PlainText } = wp.editor;
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'lfe/block-china-video-block', {
+registerBlockType( 'cvb/block-china-video-block', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'China Video Block' ), // Block title.
 	icon: 'welcome-view-site', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
@@ -85,15 +85,15 @@ registerBlockType( 'lfe/block-china-video-block', {
 	 */
 	save: function( props ) {
 		const { setAttributes, attributes: { chinavid, worldvid }} = props;
-
+		var jsurl = cvbPHPVars.frontScriptURL;
 		return (
 			<div>
 				<script type="text/javascript">
-					var worldvid = '{worldvid}'; 
 					var chinavid = '{chinavid}'; 
+					var cvbIPInfoToken = '{cvbPHPVars.cvbIPInfoToken}';
 				</script>
-				<iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				<script type="text/javascript" src="/wp-content/plugins/china-video-block/src/block/front.js"></script>
+				<iframe width="560" height="315" src={worldvid} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<script type="text/javascript" src={jsurl}></script>
 			</div>
 		);
 	},

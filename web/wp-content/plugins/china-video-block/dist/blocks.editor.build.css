@@ -10,7 +10,7 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.wp-block-lfe-block-china-video-block {
+.wp-block-cvb-block-china-video-block {
   background: #bada55;
   border: 0.2rem solid #292929;
   color: #292929;
