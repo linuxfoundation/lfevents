@@ -56,7 +56,7 @@ registerBlockType( 'cvb/block-china-video-block', {
 
 		return (
 			<div className={ props.className }>
-				<p>This block will shown the Chinese video to users in China and the World video to everyone else.</p>
+				<p>This block will show the Chinese video to users in China and the World video to everyone else. You must have a valid IPInfo.io token in <a href={cvbPHPVars.settingsURL}>the settings</a> for this to work.</p>
 				<p>Chinese video (iframe "src" attribute):
 					<PlainText
 						value={ chinavid }

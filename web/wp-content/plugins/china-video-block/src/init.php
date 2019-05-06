@@ -48,6 +48,7 @@ function china_video_block_cvb_block_assets() { // phpcs:ignore
 	wp_localize_script('china_video_block-cgb-block-js', 'cvbPHPVars', array(
 		'frontScriptURL' => plugins_url( '/src/block/front.js', dirname( __FILE__ ) ),
 		'cvbIPInfoToken' => $options['cvb_ipinfo_token'],
+		'settingsURL' => get_site_url() . '/wp-admin/options-general.php?page=cvb',
 	));
 
 	// Register block editor styles for backend.
