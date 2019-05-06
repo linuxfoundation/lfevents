@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 	if (getCookie("is_china") === "") {
 		var ipinfourl = "https://ipinfo.io?token=" + cvbIPInfoToken
-		console.log(ipinfourl)
+
 		$.ajax({
 			url: ipinfourl,
 			dataType: "jsonp",
