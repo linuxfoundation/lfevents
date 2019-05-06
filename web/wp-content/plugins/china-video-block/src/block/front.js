@@ -1,3 +1,9 @@
+/**
+ * Does the IP test in the user's browser to choose the right vid to serve.
+ *
+ * @package CGB
+ */
+
 $( document ).ready(
 	function () {
 		var youku = $( '.wp-block-cvb-block-chinavid-video-block iframe' ),
