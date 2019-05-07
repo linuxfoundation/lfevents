@@ -1,0 +1,3 @@
+[submodule "web/wp-content/plugins/china-video-block"]
+	path = web/wp-content/plugins/china-video-block
+	url = https://github.com/cncf/china-video-block
