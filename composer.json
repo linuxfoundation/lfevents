@@ -76,9 +76,7 @@
   "scripts": {
     "build-assets": [
       "@prepare-for-pantheon",
-      "composer install --no-dev --no-ansi --no-interaction --optimize-autoloader --no-progress",
-      "git submodule init",
-      "git submodule update"
+      "composer install --no-dev --no-ansi --no-interaction --optimize-autoloader --no-progress"
     ],
     "prepare-for-pantheon": "WordPressProject\\composer\\ScriptHandler::prepareForPantheon",
     "cleanup": [
