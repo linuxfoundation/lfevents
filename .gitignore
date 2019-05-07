@@ -120,7 +120,3 @@ Thumbs.db
 
 # Allowing Advanced Post Types Order plugin #
 !web/wp-content/plugins/advanced-post-types-order
-
-# Allowing Custom Gutenberg Blocks #
-!web/wp-content/plugins/china-video-block
-
