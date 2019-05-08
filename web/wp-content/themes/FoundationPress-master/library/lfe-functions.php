@@ -94,7 +94,7 @@ function lfe_get_other_events( $parent_id ) {
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Events</a></li>';
 
 	if ( $related_events ) {
-		echo '<li><a>Related Events</a></li>';
+		echo '<li class="other-events-header"><span>Related Events</span></li>';
 	}
 
 	foreach ( $related_events as $p ) {
@@ -102,7 +102,7 @@ function lfe_get_other_events( $parent_id ) {
 	}
 
 	if ( $archive_events ) {
-		echo '<li><a>Previous Years</a></li>';
+		echo '<li class="other-events-header"><span>Previous Years</span></li>';
 	}
 
 	foreach ( $archive_events as $p ) {
