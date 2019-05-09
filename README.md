@@ -60,7 +60,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme, which **requires [Node.js](http://nodejs.org)**.
 
-* Go to the theme directory: `cd web/wp-content/themes/FoundationPress-master`
+* Go to the theme directory: `cd web/wp-content/themes/lfevents`
 
 * Install the Node.js dependencies: `npm install` (git ignores the `node_modules/` directory)
 
