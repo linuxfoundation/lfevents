@@ -161,7 +161,7 @@ jobs:
 
             - run:
                 name: copy dist
-                command: cp -r /tmp/dist $HOME/example_wordpress_composer/web/wp-content/themes/FoundationPress-master/
+                command: cp -r /tmp/dist $HOME/example_wordpress_composer/web/wp-content/themes/lfevents/
 
             - run:
                 name: dependencies
