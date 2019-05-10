@@ -186,3 +186,29 @@ function lfe_get_sponsors( $parent_id ) {
 	wp_reset_postdata(); // Restore original Post Data.
 
 }
+
+/**
+ * Enqueues scripts for lfe stuff.
+ */
+function lfe_scripts() {
+
+	// https://instant.page/.
+	wp_enqueue_script( 'instantpage', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'instantpage-1.2.2.js' ), array(), '1.2.2', true );
+}
+
+add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
+
+/**
+ * Adds the module tag to the instant.page script.
+ *
+ * @param string $tag the tag.
+ * @param string $handle the handle.
+ */
+function instantpage_script_loader_tag( $tag, $handle ) {
+	if ( 'instantpage' === $handle ) {
+		$tag = str_replace( 'text/javascript', 'module', $tag );
+	}
+	return $tag;
+}
+
+add_filter( 'script_loader_tag', 'instantpage_script_loader_tag', 10, 2 );
