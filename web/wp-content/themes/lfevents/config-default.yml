@@ -8,9 +8,9 @@ COMPATIBILITY:
   - "last 2 versions"
   - "ie >= 9"
   - "ios >= 7"
-  
+
 # Set to true if you want static asset revisioning, helpful for cache busting
-REVISIONING: false  
+REVISIONING: false
 
 # Gulp will reference these paths when it copies files
 PATHS:
@@ -27,6 +27,7 @@ PATHS:
   # Paths to JavaScript entry points for webpack to bundle modules
   entries:
     - "src/assets/js/app.js"
+    - "src/assets/js/instantpage-1.2.2.js"
   # Paths for the package task to include/exclude in .zip archive
   package:
     - "**/*"
@@ -46,4 +47,4 @@ PATHS:
   phpcs:
     - "**/*.php"
     - "!wpcs"
-    - "!wpcs/**"  
+    - "!wpcs/**"
