@@ -106,7 +106,12 @@ function lfe_get_other_events( $parent_id ) {
 	}
 
 	foreach ( $archive_events as $p ) {
-		echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">' . esc_html( substr( get_post_type( $p->ID ), 7 ) ) . '</a></li>';
+		$year = substr( get_post_type( $p->ID ), 7 );
+		if ( $year ) {
+			echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">' . esc_html( $year ) . '</a></li>';
+		} else {
+			echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">Current year</a></li>';
+		}
 	}
 
 	echo '</ul></li>';
