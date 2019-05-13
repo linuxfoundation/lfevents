@@ -76,6 +76,24 @@
 
     > li {
 
+      @include breakpoint(large) {
+        &.current_page_item > a,
+        &.current_page_ancestor > a {
+          position: relative;
+          background-color: rgba(0,0,0,0.2);
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: calc(100% + 1px);
+            right: -1px;
+            left: -1px;
+            background-color: inherit;
+            height: 0.5rem;
+          }
+        }
+      }
+
       &:first-child, // HACK: We should add a class w/ a WP walker for this selector
       &.other-events {
         @include breakpoint(medium down) {
@@ -170,6 +188,10 @@
             display: block;
             font-size: rem-calc(14);
             border-top-color: rgba(255,255,255,0.1);
+          }
+
+          .current_page_item > a {
+            background-color: rgba(0,0,0,0.2);
           }
         }
 
