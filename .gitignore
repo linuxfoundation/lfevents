@@ -118,5 +118,6 @@ Thumbs.db
 !web/wp-content/plugins/gravityplus-dynamic-population-salesforce
 !web/wp-content/plugins/gravityplus-dynamic-population
 
-# Allowing Advanced Post Types Order plugin #
+# Allowing other premium plugins #
 !web/wp-content/plugins/advanced-post-types-order
+!web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
