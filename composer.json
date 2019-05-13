@@ -31,8 +31,6 @@
     "wpackagist-plugin/autodescription":"^3.2.3",
     "wpackagist-plugin/post-type-switcher":"^3.1.0",
     "wpackagist-plugin/photonic":"^2.23",
-    "wpackagist-plugin/stackable-ultimate-gutenberg-blocks":"^1.15.1",
-    "wpackagist-plugin/otter-blocks":"^1.1.5",
     "wpackagist-plugin/china-video-block":"^0.1.0"
 
   },
