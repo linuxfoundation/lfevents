@@ -1,6 +1,8 @@
 .main-container {
   // @include xy-grid-container;
   background-color: $white;
+  position: relative;
+  z-index: 1;
 }
 
 .main-grid {
