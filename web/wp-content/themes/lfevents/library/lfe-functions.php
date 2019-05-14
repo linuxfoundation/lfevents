@@ -162,6 +162,11 @@ function lfe_remove_parent_links( $args ) {
  * @param int $parent_id ID of top parent post of the Event.
  */
 function lfe_get_sponsors( $parent_id ) {
+	global $post;
+	if ( 'sponsors' === $post->post_name ) {
+		return;
+	}
+
 	$post_types = lfe_get_post_types();
 
 	$args = array(
