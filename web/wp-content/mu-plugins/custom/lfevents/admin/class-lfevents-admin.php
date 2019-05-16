@@ -151,6 +151,23 @@ class LFEvents_Admin {
 			register_post_type( 'lfevent' . $x, $opts );
 		}
 
+		$opts = array(
+			'labels'       => array(
+				'name'          => __( 'Speakers' ),
+				'singular_name' => __( 'Speaker' ),
+				'all_items'     => __( 'All Speakers' ),
+			),
+			'show_in_rest' => true,
+			'exclude_from_search'       => true,
+			'publicly_queryable' => false,
+			'show_in_nav_menus' => true,
+			'show_ui' => true,
+			'menu_icon'    => 'dashicons-groups',
+			'rewrite'      => array( 'slug' => 'speakers' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+		);
+
+		register_post_type( 'lfe_speaker', $opts );
 	}
 
 	/**
@@ -196,7 +213,7 @@ class LFEvents_Admin {
 	}
 
 	/**
-	 * Registers the LFEvent sidebar
+	 * Registers the extra sidebar for post types
 	 *
 	 * @param array $sidebars    Existing sidebars in Gutenberg.
 	 */
@@ -208,7 +225,7 @@ class LFEvents_Admin {
 			'label'           => __( 'Event Settings' ),
 			'post_type'       => $this->post_types,
 			'data_key_prefix' => 'lfes_',
-			'icon_dashicon'   => 'admin-site',
+			'icon_dashicon'   => 'list-view',
 			'tabs'            => array(
 				array(
 					'label'  => __( 'Tab label' ),
@@ -280,6 +297,65 @@ class LFEvents_Admin {
 		// Push the $sidebar we just assigned to the variable
 		// to the array of $sidebars that comes in the function argument.
 		$sidebars[] = $sidebar;
+
+		$sidebar = array(
+			'id'              => 'lfe-speaker-sidebar',
+			'id_prefix'       => 'lfes_',
+			'label'           => __( 'Speaker Details' ),
+			'post_type'       => array( 'lfe_speaker' ),
+			'data_key_prefix' => 'lfes_',
+			'icon_dashicon'   => 'admin-users',
+			'tabs'            => array(
+				array(
+					'label'  => __( 'Tab label' ),
+					'panels' => array(
+						array(
+							'label'    => __( 'Speaker Details' ),
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'title',
+									'data_type'     => 'meta',
+									'data_key'      => 'title', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Title, Company' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'Title, Company' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'linkedin',
+									'data_type'     => 'meta',
+									'data_key'      => 'linkedin', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'LinkedIn URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.linkedin.com/in/username/' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'twitter',
+									'data_type'     => 'meta',
+									'data_key'      => 'twitter', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Twitter URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://twitter.com/cjyabraham' ),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		// Push the $sidebar we just assigned to the variable
+		// to the array of $sidebars that comes in the function argument.
+		$sidebars[] = $sidebar;
+
 
 		// Return the $sidebars array with our sidebar now included.
 		return $sidebars;
