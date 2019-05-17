@@ -121,3 +121,8 @@ Thumbs.db
 # Allowing other premium plugins #
 !web/wp-content/plugins/advanced-post-types-order
 !web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
+
+# Allowing Speakers block plugin
+!web/wp-content/plugins/speakers-block
+web/wp-content/plugins/speakers-block/node_modules
+
