@@ -1,11 +1,10 @@
 <?php
 /**
- * Plugin Name: speakers-block — CGB Gutenberg Block Plugin
- * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: speakers-block — is a Gutenberg plugin created via create-guten-block.
- * Author: mrahmadawais, maedahbatool
- * Author URI: https://AhmadAwais.com/
- * Version: 1.0.0
+ * Plugin Name: Speakers block
+ * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/speakers-block
+ * Description: Gutenberg block which allows for insertion of a Speakers showcase in a page/post. It requires an existing Speakers CPT already setup <a href="https://github.com/LF-Engineering/lfevents/blob/master/web/wp-content/mu-plugins/custom/lfevents/admin/class-lfevents-admin.php#L154">here</a>
+ * Author: cjyabraham
+ * Version: 0.1.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *

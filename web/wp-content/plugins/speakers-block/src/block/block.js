@@ -11,6 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { PlainText } = wp.editor;
 
 /**
  * Register: aa Gutenberg Block.
@@ -27,14 +28,17 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  */
 registerBlockType( 'cgb/block-speakers-block', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'speakers-block - CGB Block' ), // Block title.
-	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+	title: __( 'Speakers' ), // Block title.
+	icon: 'groups', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'speakers-block — CGB Block' ),
-		__( 'CGB Example' ),
-		__( 'create-guten-block' ),
+		__( 'Speakers' ),
 	],
+	attributes: {
+        speakers: {
+			type: 'string'
+		}
+    },
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -45,20 +49,16 @@ registerBlockType( 'cgb/block-speakers-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		// Creates a <p class='wp-block-cgb-block-speakers-block'></p>.
+		const { setAttributes, attributes: { speakers }} = props;
 		return (
 			<div className={ props.className }>
-				<p>— Hello from the backend.</p>
-				<p>
-					CGB BLOCK: <code>speakers-block</code> is a new Gutenberg block
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
+				<p>This block will show Speakers that are speaking at an Event.</p>
+				<p>Speakers IDs to feature:
+					<PlainText
+						value={ speakers }
+						onChange={( value ) => setAttributes({ speakers: value })}
+						placeholder="177, 176, 175, 174"
+					/>
 				</p>
 			</div>
 		);
@@ -73,20 +73,10 @@ registerBlockType( 'cgb/block-speakers-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function( props ) {
+		const { setAttributes, attributes: { speakers }} = props;
 		return (
 			<div>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>speakers-block</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+				<p> Here we output all the speakers with these ids { speakers }</p>
 			</div>
 		);
 	},
