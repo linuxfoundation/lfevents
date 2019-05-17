@@ -343,7 +343,7 @@ class LFEvents_Admin {
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '',
-									'placeholder'   => __( 'https://twitter.com/cjyabraham' ),
+									'placeholder'   => __( 'https://twitter.com/username' ),
 								),
 							),
 						),
