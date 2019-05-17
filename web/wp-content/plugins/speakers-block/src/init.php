@@ -71,9 +71,43 @@ function speakers_block_cgb_block_assets() { // phpcs:ignore
 			'editor_script' => 'speakers_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
 			'editor_style'  => 'speakers_block-cgb-block-editor-css',
+			'render_callback' => 'speakers_block_callback',
 		)
 	);
 }
 
 // Hook: Block assets.
 add_action( 'init', 'speakers_block_cgb_block_assets' );
+
+/**
+ * Callback for speakers block.
+ *
+ * @param array  $attributes Atts.
+ * @param string $content Content.
+ */
+function speakers_block_callback( $attributes, $content ) {
+	$speakers_to_show = explode( ',', $attributes['speakers'] );
+	$the_query = new WP_Query(
+		array(
+			'no_found_rows' => true,
+			'update_post_term_cache' => false,
+			'post_type' => 'lfe_speaker',
+			'post__in' => $speakers_to_show,
+		)
+	);
+
+	if ( $the_query->have_posts() ) {
+		$out = '<ul>';
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			$out .= '<li>' . get_the_title() . '</li>';
+		}
+		$out .= '</ul>';
+		/* Restore original Post Data */
+		wp_reset_postdata();
+	} else {
+		$out = '';
+	}
+
+	return $out;
+}

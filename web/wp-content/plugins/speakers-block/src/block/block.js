@@ -50,7 +50,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 	 */
 	edit: function( props ) {
 		const { setAttributes, attributes: { speakers }} = props;
-		return (
+		return (	
 			<div className={ props.className }>
 				<p>This block will show Speakers that are speaking at an Event.</p>
 				<p>Speakers IDs to feature:
@@ -74,10 +74,6 @@ registerBlockType( 'cgb/block-speakers-block', {
 	 */
 	save: function( props ) {
 		const { setAttributes, attributes: { speakers }} = props;
-		return (
-			<div>
-				<p> Here we output all the speakers with these ids { speakers }</p>
-			</div>
-		);
+		return null;
 	},
 } );
