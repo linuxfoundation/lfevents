@@ -100,24 +100,40 @@
           display: none;
         }
 
-        .other-events-header {
-          color: rgba(255,255,255,0.7);
-          padding: 0.75rem 0 0;
-          text-align: center;
+        .other-events-header a {
+          // color: rgba(255,255,255,0.7);
+          // padding: 0.75rem 0 0;
+          // text-align: center;
+          // font-size: rem-calc(11);
+          // border-top: 1px solid rgba(0,0,0,0.2);
+          // background-color: rgba(0,0,0,0.1);
+          // text-transform: uppercase;
+          // cursor: default;
+          // position: relative;
+          //
+          // span {
+          //   display: inline-block;
+          //   background-color: rgba(255,255,255,0.08);
+          //   padding: 0.5em 1em 0.25em;
+          //   border-top-right-radius: 0.75em;
+          //   border-top-left-radius: 0.75em;
+          //   width: calc(100% - 1.5rem);
+          // }
           font-size: rem-calc(11);
-          border-top: 1px solid rgba(0,0,0,0.2);
-          background-color: rgba(0,0,0,0.2);
+          color: rgba(255,255,255,0.8);
           text-transform: uppercase;
+          font-weight: normal;
+          letter-spacing: 0.15em;
+          white-space: nowrap;
           cursor: default;
-          position: relative;
-
-          span {
-            display: inline-block;
-            background-color: rgba(255,255,255,0.08);
-            padding: 0.5em 1em 0.25em;
-            border-top-right-radius: 0.75em;
-            border-top-left-radius: 0.75em;
-            width: calc(100% - 1.5rem);
+          &::before,
+          &::after {
+            content: '—';
+            margin: 0 0.5em;
+            color: rgba(255,255,255,0.5);
+          }
+          &:hover {
+            background-color: transparent;
           }
         }
       }
@@ -151,7 +167,20 @@
 
       @include breakpoint(medium down) {
         > a[href="#"] {
-          display: none;
+          color: rgba(255,255,255,0.8);
+          text-transform: uppercase;
+          font-weight: normal;
+          letter-spacing: 0.15em;
+          cursor: default;
+          &::before,
+          &::after {
+            content: '—';
+            margin: 0 0.5em;
+            color: rgba(255,255,255,0.5);
+          }
+          &:hover {
+            background-color: transparent;
+          }
         }
       }
 

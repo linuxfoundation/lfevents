@@ -91,10 +91,10 @@ function lfe_get_other_events( $parent_id ) {
 	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
 	echo '<ul class="children">';
-	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Events</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Linux Foundation Events</a></li>';
 
 	if ( $related_events ) {
-		echo '<li class="other-events-header"><span>Related Events</span></li>';
+		echo '<li class="other-events-header"><a>Related Events</a></li>';
 	}
 
 	foreach ( $related_events as $p ) {
@@ -102,7 +102,7 @@ function lfe_get_other_events( $parent_id ) {
 	}
 
 	if ( $archive_events ) {
-		echo '<li class="other-events-header"><span>Previous Years</span></li>';
+		echo '<li class="other-events-header"><a>Previous Years</a></li>';
 	}
 
 	foreach ( $archive_events as $p ) {
