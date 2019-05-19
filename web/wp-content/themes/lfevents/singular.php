@@ -31,7 +31,7 @@ if ( $featured_image ) {
 <?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
 
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-options="marginTop:0;" style="background-color:<?php echo esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) ); ?>">
+	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="background-color:<?php echo esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) ); ?>">
 
 		<div class="pre-nav">
 			<?php
