@@ -30,8 +30,18 @@ if ( $featured_image ) {
 
 <?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
 
+<?php
+// menu background color
+$menu_color = esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) );
+$menu_color_2 = esc_html( get_post_meta( $parent_id, 'lfes_menu_color_2', true ) );
+$background_style = 'background-color: ' . $menu_color . ';';
+if ($menu_color_2) {
+	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+}
+?>
+
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="background-color:<?php echo esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) ); ?>">
+	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo $background_style ?>">
 
 		<div class="pre-nav">
 			<?php
@@ -47,11 +57,11 @@ if ( $featured_image ) {
 			<ul class="event-menu-list">
 				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
 				<?php
-				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type );
+				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type, $background_style );
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
-				lfe_get_other_events( $parent_id );
+				lfe_get_other_events( $parent_id, $background_style );
 				?>
 			</ul>
 		</nav>

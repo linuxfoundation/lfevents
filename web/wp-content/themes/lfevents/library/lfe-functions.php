@@ -84,13 +84,13 @@ function lfe_get_archive( $parent_id ) {
  *
  * @param int $parent_id ID of top parent post of the Event.
  */
-function lfe_get_other_events( $parent_id ) {
+function lfe_get_other_events( $parent_id,$background_style ) {
 	$related_events = lfe_get_related_events( $parent_id );
 	$archive_events = lfe_get_archive( $parent_id );
 
 	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
-	echo '<ul class="children">';
+	echo '<ul class="children" style="' . $background_style . '">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Linux Foundation Events</a></li>';
 
 	if ( $related_events ) {
@@ -136,8 +136,8 @@ add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
  *
  * @param string $args Args for the wp_list_pages funciton.
  */
-function lfe_remove_parent_links( $args ) {
-	$pages = wp_list_pages( $args );
+function lfe_remove_parent_links( $query, $background_style ) {
+	$pages = wp_list_pages( $query );
 	$pages = explode( '</li>', $pages );
 	$count = 0;
 	foreach ( $pages as $page ) {
@@ -147,7 +147,7 @@ function lfe_remove_parent_links( $args ) {
 			if ( count( $page ) == 3 ) {
 				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
-			$page = implode( '<ul class=\'children\'>', $page );
+			$page = implode( '<ul class=\'children\' style=\'' . $background_style . '\'>', $page );
 		}
 		$pages[ $count ] = $page;
 		$count++;
