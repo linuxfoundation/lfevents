@@ -82,7 +82,7 @@ function lfe_get_archive( $parent_id ) {
 /**
  * Generates the "Other Events" menu item.
  *
- * @param int $parent_id ID of top parent post of the Event.
+ * @param int    $parent_id ID of top parent post of the Event.
  * @param string $background_style sets the solid or gradient background color.
  */
 function lfe_get_other_events( $parent_id, $background_style ) {
