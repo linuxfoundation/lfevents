@@ -24,7 +24,6 @@
     "wpackagist-plugin/pantheon-advanced-page-cache": "^0.3.0",
     "wpackagist-plugin/wp-native-php-sessions": "^0.6.9",
     "wpackagist-plugin/wp-mail-smtp":"^1.4.1",
-    "wpackagist-plugin/duracelltomi-google-tag-manager":"^1.9.2",
     "wpackagist-plugin/lh-hsts":"^1.24",
     "wpackagist-plugin/post-meta-controls":"^1.0.0",
     "wpackagist-plugin/safe-svg":"^1.9.3",
