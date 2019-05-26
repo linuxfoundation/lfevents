@@ -31,17 +31,17 @@ if ( $featured_image ) {
 <?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
 
 <?php
-// menu background color
+// menu background color.
 $menu_color = esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) );
 $menu_color_2 = esc_html( get_post_meta( $parent_id, 'lfes_menu_color_2', true ) );
 $background_style = 'background-color: ' . $menu_color . ';';
-if ($menu_color_2) {
+if ( $menu_color_2 ) {
 	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 }
 ?>
 
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo $background_style ?>">
+	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html($background_style); ?>">
 
 		<div class="pre-nav">
 			<?php

@@ -83,14 +83,15 @@ function lfe_get_archive( $parent_id ) {
  * Generates the "Other Events" menu item.
  *
  * @param int $parent_id ID of top parent post of the Event.
+ * @param string $background_style sets the solid or gradient background color.
  */
-function lfe_get_other_events( $parent_id,$background_style ) {
+function lfe_get_other_events( $parent_id, $background_style ) {
 	$related_events = lfe_get_related_events( $parent_id );
 	$archive_events = lfe_get_archive( $parent_id );
 
 	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
-	echo '<ul class="children" style="' . $background_style . '">';
+	echo '<ul class="children" style="' . esc_html($background_style) . '">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Linux Foundation Events</a></li>';
 
 	if ( $related_events ) {
@@ -134,7 +135,8 @@ add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
 /**
  * We need this function to remove links on parent menu items.
  *
- * @param string $args Args for the wp_list_pages funciton.
+ * @param string $query Args for the wp_list_pages funciton.
+ * @param string $background_style sets the solid or gradient background color.
  */
 function lfe_remove_parent_links( $query, $background_style ) {
 	$pages = wp_list_pages( $query );
@@ -147,7 +149,7 @@ function lfe_remove_parent_links( $query, $background_style ) {
 			if ( count( $page ) == 3 ) {
 				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
-			$page = implode( '<ul class=\'children\' style=\'' . $background_style . '\'>', $page );
+			$page = implode( '<ul class=\'children\' style=\'' . esc_html($background_style) . '\'>', $page );
 		}
 		$pages[ $count ] = $page;
 		$count++;
