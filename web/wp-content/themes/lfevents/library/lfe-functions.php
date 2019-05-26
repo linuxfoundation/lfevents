@@ -91,7 +91,7 @@ function lfe_get_other_events( $parent_id, $background_style ) {
 
 	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
-	echo '<ul class="children" style="' . esc_html($background_style) . '">';
+	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">All Linux Foundation Events</a></li>';
 
 	if ( $related_events ) {
@@ -149,7 +149,7 @@ function lfe_remove_parent_links( $query, $background_style ) {
 			if ( count( $page ) == 3 ) {
 				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
-			$page = implode( '<ul class=\'children\' style=\'' . esc_html($background_style) . '\'>', $page );
+			$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
 		}
 		$pages[ $count ] = $page;
 		$count++;
