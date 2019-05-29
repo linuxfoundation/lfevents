@@ -219,6 +219,50 @@ class LFEvents_Admin {
 	 */
 	public function create_sidebar( $sidebars ) {
 		// First we define the sidebar with it's tabs, panels and settings.
+		$palette = array(
+			'dark-red'   => '#641E16',
+			'dark-violet' => '#4A235A',
+			'dark-indigo' => '#154360',
+			'dark-blue' => '#1B4F72',
+			'dark-aqua' => '#0E6251',
+			'dark-teal' => '#0B5345',
+
+			'medium-red'   => '#7B241C',
+			'medium-violet' => '#5B2C6F',
+			'medium-indigo' => '#1A5276',
+			'medium-blue' => '#21618C',
+			'medium-aqua' => '#117864',
+			'medium-teal' => '#0E6655',
+
+			'light-red'   => '#922B21',
+			'light-violet' => '#6C3483',
+			'light-indigo' => '#1F618D',
+			'light-blue' => '#2874A6',
+			'light-aqua' => '#148F77',
+			'light-teal' => '#117A65',
+
+			'dark-chartreuse' => '#186A3B',
+			'dark-yellow' => '#7D6608',
+			'dark-gold' => '#7E5109',
+			'dark-orange' => '#784212',
+			'dark-umber' => '#6E2C00',
+			'dark-fuschia' => '#880E4F',
+
+			'medium-chartreuse' => '#1D8348',
+			'medium-yellow' => '#9A7D0A',
+			'medium-gold' => '#9C640C',
+			'medium-orange' => '#935116',
+			'medium-umber' => '#873600',
+			'medium-fuschia' => '#AD1457',
+
+			'light-chartreuse' => '#239B56',
+			'light-yellow' => '#B7950B',
+			'light-gold' => '#B9770E',
+			'light-orange' => '#AF601A',
+			'light-umber' => '#A04000',
+			'light-fuschia' => '#C2185B',
+		);
+
 		$sidebar = array(
 			'id'              => 'lfevent-sidebar',
 			'id_prefix'       => 'lfes_',
@@ -277,15 +321,25 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Menu color' ),
-									'help'          => __( 'Choose a color for the topnav menu' ),
+									// 'help'          => __( 'Choose a color for the topnav menu' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
-									'default_value' => '#ff0000', // A string with a HEX, rgb or rgba color format.
+									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'         => array(
-										'red'   => '#ff0000',
-										'green' => '#00ff00',
-									),
+									'palette'       => $palette,
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'menu_color_2',
+									'data_type'     => 'meta',
+									'data_key'      => 'menu_color_2', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu color 2' ),
+									'help'          => __( 'Choose a second menu color to create a gradient' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
 								),
 							),
 						),
@@ -380,7 +434,7 @@ class LFEvents_Admin {
 			$wpdb->prepare(
 				"SELECT * FROM $wpdb->posts
 				WHERE post_type like %s
-				AND post_parent = 0 
+				AND post_parent = 0
 				AND post_status <> 'trash'
 				AND post_title <> 'Auto Draft'
 				ORDER BY $wpdb->posts.post_title ASC",
