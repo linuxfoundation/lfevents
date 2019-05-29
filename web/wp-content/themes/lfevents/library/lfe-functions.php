@@ -92,7 +92,7 @@ function lfe_get_other_events( $parent_id, $background_style ) {
 	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
-	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_blue.png' ) . '"></a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_blue.png' ) . '"></a></li>'; //phpcs:ignore
 
 	if ( $related_events ) {
 		echo '<li class="other-events-header"><a>Related Events</a></li>';
