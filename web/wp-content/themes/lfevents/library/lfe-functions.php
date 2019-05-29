@@ -99,7 +99,13 @@ function lfe_get_other_events( $parent_id, $background_style ) {
 	}
 
 	foreach ( $related_events as $p ) {
-		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">' . esc_html( get_the_title( $p['ID'] ) ) . '</a></li>';
+		$featured_image = get_the_post_thumbnail( $p['ID'], 'full' );
+		if ( $featured_image ) {
+			$event_link_content = $featured_image;
+		} else {
+			$event_link_content = esc_html( get_the_title( $parent_id ) );
+		}
+		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
 	}
 
 	if ( $archive_events ) {
