@@ -32,16 +32,18 @@ if ( $featured_image ) {
 
 <?php
 // menu background color.
-$menu_color = esc_html( get_post_meta( $parent_id, 'lfes_menu_color', true ) );
-$menu_color_2 = esc_html( get_post_meta( $parent_id, 'lfes_menu_color_2', true ) );
+$menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
+$menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+$menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
 $background_style = 'background-color: ' . $menu_color . ';';
 if ( $menu_color_2 ) {
 	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 }
+$text_style = 'color: ' . $menu_text_color . ';';
 ?>
 
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html( $background_style ); ?>">
+	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html( $background_style . $text_style ); ?>">
 
 		<div class="pre-nav">
 			<?php

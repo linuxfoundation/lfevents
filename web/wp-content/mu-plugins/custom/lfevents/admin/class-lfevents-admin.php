@@ -341,6 +341,19 @@ class LFEvents_Admin {
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'palette'       => $palette,
 								),
+								array(
+									'type'          => 'color',
+									'id'            => 'menu_text_color',
+									'data_type'     => 'meta',
+									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu text color' ),
+									'help'          => __( 'Choose a color for the menu text' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '#fefefe', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
+								),
 							),
 						),
 					),
