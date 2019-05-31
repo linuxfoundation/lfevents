@@ -100,62 +100,55 @@
       &.other-events {
         @include breakpoint(medium down) {
           border-top: 4px solid rgba(255,255,255,0.2);
-          margin-top: 0.75em;
-          padding-top: 0.75em;
+          margin-top: 2em;
+        }
 
-          > a {
-            color: rgba(255,255,255,0.5) !important;
-            padding-bottom: 0;
-            cursor: default;
+        > a {
+          @include breakpoint(medium down) {
+            display: none;
+          }
+        }
 
-            &:hover {
-              background-color: transparent;
-            }
+        img {
+          width: 13rem;
+          margin: 0.5em;
+        }
+
+        .children li:first-child img {
+          width: 16rem;
+
+          @include breakpoint(large) {
+            min-width: 16rem;
           }
         }
 
         .other-events-header a {
-          @include breakpoint(medium down) {
+          color: rgba(255,255,255,0.5);
+          font-weight: normal;
+          letter-spacing: 0.15em;
+          padding-top: 1.5em;
+          cursor: default;
+          text-transform: uppercase;
+          white-space: nowrap;
+          border-top: 4px solid rgba(255,255,255,0.2);
+
+          &:hover {
+            background-color: transparent;
+          }
+
+          &::before,
+          &::after {
+            content: '—';
+            margin: 0 0.5em;
             color: rgba(255,255,255,0.5);
-            padding-bottom: 0;
-            padding-left: 1em;
-            cursor: default;
-            text-transform: uppercase;
-
-            &::before {
-              content: '';
-              margin: 0;
-            }
-
-            &:hover {
-              background-color: transparent;
-            }
           }
 
           @include breakpoint(large) {
             font-size: rem-calc(11);
-            color: rgba(255,255,255,0.8);
-            border-top: 4px solid rgba(255,255,255,0.2);
             border-right: 0;
             border-left: 0;
             padding-top: 1.5em;
             padding-bottom: 1em;
-            text-transform: uppercase;
-            font-weight: normal;
-            letter-spacing: 0.15em;
-            white-space: nowrap;
-            cursor: default;
-
-            &::before,
-            &::after {
-              content: '—';
-              margin: 0 0.5em;
-              color: rgba(255,255,255,0.5);
-            }
-
-            &:hover {
-              background-color: transparent;
-            }
           }
         }
       }
@@ -177,7 +170,6 @@
 
       > a {
         @include breakpoint(medium down) {
-          // border-top: 4px solid rgba(255,255,255,0.2);
           text-transform: uppercase;
           justify-content: left;
         }
@@ -192,7 +184,7 @@
       position: relative;
 
       @include breakpoint(medium down) {
-        a {
+        &:not(.other-events) a {
           justify-content: left;
         }
 
@@ -206,7 +198,7 @@
           }
         }
 
-        .children a {
+        &:not(.other-events) .children a {
           padding-left: 1.5em;
 
           &::before {
