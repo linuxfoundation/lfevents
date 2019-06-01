@@ -320,7 +320,7 @@ class LFEvents_Admin {
 									'id'            => 'menu_color',
 									'data_type'     => 'meta',
 									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu color' ),
+									'label'         => __( 'Menu Background Color' ),
 									// 'help'          => __( 'Choose a color for the topnav menu' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
@@ -333,8 +333,8 @@ class LFEvents_Admin {
 									'id'            => 'menu_color_2',
 									'data_type'     => 'meta',
 									'data_key'      => 'menu_color_2', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu color 2' ),
-									'help'          => __( 'Choose a second menu color to create a gradient' ),
+									'label'         => __( 'Menu Gradient Color' ),
+									// 'help'          => __( 'Choose a second menu color to create a gradient' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
@@ -346,13 +346,16 @@ class LFEvents_Admin {
 									'id'            => 'menu_text_color',
 									'data_type'     => 'meta',
 									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu text color' ),
-									'help'          => __( 'Choose a color for the menu text' ),
+									'label'         => __( 'Menu Text Color' ),
+									// 'help'          => __( 'Choose a color for the menu text' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
-									'default_value' => '#fefefe', // A string with a HEX, rgb or rgba color format.
+									'default_value' => '#ffffff', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'       => $palette,
+									'palette'       => $palette = array(
+										'white' => '#ffffff',
+										'black' => '#000000',
+									),
 								),
 							),
 						),
