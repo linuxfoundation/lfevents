@@ -53,11 +53,11 @@ registerBlockType( 'cgb/block-speakers-block', {
 		return (	
 			<div className={ props.className }>
 				<p>This block will show Speakers that are speaking at an Event.</p>
-				<p>Speakers IDs to feature:
+				<p>Speakers' to feature:
 					<PlainText
 						value={ speakers }
 						onChange={( value ) => setAttributes({ speakers: value })}
-						placeholder="177, 176, 175, 174"
+						placeholder="Dan Kohn, Andy Cochran"
 					/>
 				</p>
 			</div>

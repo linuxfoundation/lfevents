@@ -87,27 +87,34 @@ add_action( 'init', 'speakers_block_cgb_block_assets' );
  */
 function speakers_block_callback( $attributes, $content ) {
 	$speakers_to_show = explode( ',', $attributes['speakers'] );
-	$the_query = new WP_Query(
-		array(
-			'no_found_rows' => true,
-			'update_post_term_cache' => false,
-			'post_type' => 'lfe_speaker',
-			'post__in' => $speakers_to_show,
-		)
-	);
-
-	if ( $the_query->have_posts() ) {
-		$out = '<ul>';
-		while ( $the_query->have_posts() ) {
-			$the_query->the_post();
-			$out .= '<li>' . get_the_title() . '</li>';
-		}
-		$out .= '</ul>';
-		/* Restore original Post Data */
-		wp_reset_postdata();
-	} else {
-		$out = '';
+	if ( ! $speakers_to_show ) {
+		return '';
 	}
+
+	$out = '<ul>';
+
+	foreach ( $speakers_to_show as $speaker ) {
+		$the_query = new WP_Query(
+			array(
+				'no_found_rows' => true,
+				'update_post_term_cache' => false,
+				'update_post_meta_cache' => false,
+				'post_type' => 'lfe_speaker',
+				'name' => str_replace( ' ', '-', strtolower( trim( $speaker ) ) ),
+			)
+		);
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$out .= '<li>' . get_the_title() . '</li>';
+			}
+		}
+	}
+
+	$out .= '</ul>';
+
+	/* Restore original Post Data */
+	wp_reset_postdata();
 
 	return $out;
 }
