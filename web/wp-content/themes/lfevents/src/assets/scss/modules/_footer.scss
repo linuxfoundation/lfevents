@@ -19,20 +19,28 @@
 
     li {
       display: inline-block;
-      margin-right: 1.5rem;
+      margin: 0 1.5rem 1.5rem 0;
 
-      a {
-        opacity: 0.5;
+      @include breakpoint(large) {
+        margin: 0 0.75rem 1.5rem 0.75rem;
+      }
 
-        &:hover {
-          opacity: 1;
-        }
+      @include breakpoint(xlarge) {
+        margin: 0 1.5rem 3rem 1.5rem;
       }
 
       svg {
         display: block;
-        fill: #fff;
+        fill: $light-gray;
         height: rem-calc(40);
+
+        @include breakpoint(xlarge) {
+          height: rem-calc(50);
+        }
+
+        &:hover {
+          fill: #fff;
+        }
       }
     }
   }
