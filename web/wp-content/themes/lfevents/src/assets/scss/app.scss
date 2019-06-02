@@ -65,11 +65,13 @@
 @import "global/gutenberg";
 
 // Modules
+@import "modules/box-model";
 @import "modules/navigation";
 @import "modules/event-menu";
 @import "modules/content";
 @import "modules/footer";
 @import "modules/editor-style";
+@import "modules/speakers";
 
 // Components
 @import "components/buttons";
