@@ -230,3 +230,11 @@ function instantpage_script_loader_tag( $tag, $handle ) {
 }
 
 add_filter( 'script_loader_tag', 'instantpage_script_loader_tag', 10, 2 );
+
+/**
+ * Removes the annoying Ultimate Blocks menu in the admin
+ */
+function custom_menu_page_removing() {
+	remove_menu_page( 'ultimate-blocks-settings' );
+}
+add_action( 'admin_menu', 'custom_menu_page_removing' );
