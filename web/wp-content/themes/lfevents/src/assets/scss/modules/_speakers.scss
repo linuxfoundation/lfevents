@@ -109,7 +109,7 @@
         margin: 0.75rem 0 0;
 
         li {
-          display: inline;
+          display: inline-block;
           margin-right: 0.5rem;
 
           a {
@@ -126,6 +126,10 @@
 
             @include breakpoint(large) {
               height: rem-calc(24);
+            }
+
+            @include breakpoint(xxlarge) {
+              height: rem-calc(18);
             }
           }
         }
