@@ -59,7 +59,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 						onChange={( value ) => setAttributes({ speakers: value })}
 						placeholder="Dan Kohn, Andy Cochran"
 					/>
-					<em>Names entered must match the slug of a Speaker</em>
+					<em>Names entered must match the slug of a Speaker.</em>
 				</p>
 			</div>
 		);
