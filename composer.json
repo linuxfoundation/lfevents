@@ -31,7 +31,8 @@
     "wpackagist-plugin/post-type-switcher":"^3.1.0",
     "wpackagist-plugin/photonic":"^2.23",
     "wpackagist-plugin/china-video-block":"^0.1.0",
-    "wpackagist-plugin/ultimate-blocks":"1.1.9"
+    "wpackagist-plugin/ultimate-blocks":"1.1.9",
+    "wpackagist-plugin/wp-nested-pages":"3.0.11"
 
   },
   "require-dev": {
