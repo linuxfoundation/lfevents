@@ -1,6 +1,6 @@
-=== Deep Duplicate Page ===
+=== Clone Page Tree ===
 Contributors: cjyabraham
-Tags: duplicate, clone, page, tree
+Tags: clone, clone, page, tree
 Requires at least: 4
 Tested up to: 5.2.1
 Stable tag: trunk

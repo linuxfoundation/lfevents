@@ -124,5 +124,5 @@ Thumbs.db
 # Allowing custom plugins
 !web/wp-content/plugins/speakers-block
 web/wp-content/plugins/speakers-block/node_modules
-!web/wp-content/plugins/deep-duplicate-page
+!web/wp-content/plugins/clone-page-tree
 

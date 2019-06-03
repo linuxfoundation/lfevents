@@ -1,12 +1,12 @@
 <?php
 /**
- * Adds Deep Duplicate action to the page row actions.
+ * Adds "Clone Page Tree" action to the page row actions.
  *
- * @package   Deep_Duplicate_Page
+ * @package   Clone_Page_Tree
  *
- * Plugin Name:       Deep Duplicate Page
- * Plugin URI:        https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/deep-duplicate-page
- * Description:       Adds "Deep Duplicate" action to the page row actions.  A deep duplicate of a page duplicates the page and all children creating a new copy of the full page tree.
+ * Plugin Name:       Clone Page Tree
+ * Plugin URI:        https://github.com/cncf/clone-page-tree
+ * Description:       Adds a "Clone Page Tree" action to the page row actions.  Cloning a page tree clones the page and all children creating a new copy of the full hierarchy.
  * Version:           0.1.0
  * Author:            cjyabraham
  * License:           GPL-2.0+
@@ -19,22 +19,22 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Function creates page deep duplicate
+ * Clones page tree
  */
-function ddp_deep_duplicate_page() {
-	if ( ! ( isset( $_GET['post'] ) || isset( $_POST['post'] ) || ( isset( $_REQUEST['action'] ) && 'ddp_deep_duplicate_page' == $_REQUEST['action'] ) ) ) {
-		wp_die( 'No page to duplicate has been supplied!' );
+function cpt_clone_page_tree() {
+	if ( ! ( isset( $_GET['post'] ) || isset( $_POST['post'] ) || ( isset( $_REQUEST['action'] ) && 'cpt_clone_page_tree' == $_REQUEST['action'] ) ) ) {
+		wp_die( 'No page to clone has been supplied!' );
 	}
 
 	// Nonce verification.
-	if ( ! isset( $_GET['deep_duplicate_nonce'] ) || ! wp_verify_nonce( $_GET['deep_duplicate_nonce'], basename( __FILE__ ) ) ) { //phpcs:ignore
+	if ( ! isset( $_GET['clone_page_tree_nonce'] ) || ! wp_verify_nonce( $_GET['clone_page_tree_nonce'], basename( __FILE__ ) ) ) { //phpcs:ignore
 		return;
 	}
 
 	// get the original post id.
 	$post_id = ( isset( $_GET['post'] ) ? absint( $_GET['post'] ) : absint( $_POST['post'] ) );
 
-	$new_post_id = deep_duplicate( $post_id, 0 );
+	$new_post_id = cpt_deep_clone( $post_id, 0 );
 
 	if ( $new_post_id ) {
 		// finally, redirect to the edit post screen for the new draft.
@@ -44,31 +44,31 @@ function ddp_deep_duplicate_page() {
 		wp_die( 'Page creation failed, could not find original page: ' . esc_html( $post_id ) );
 	}
 }
-add_action( 'admin_action_ddp_deep_duplicate_page', 'ddp_deep_duplicate_page' );
+add_action( 'admin_action_cpt_clone_page_tree', 'cpt_clone_page_tree' );
 
 /**
- * Add the duplicate link to action list for page_row_actions
+ * Add the clone link to action list for page_row_actions
  *
  * @param array  $actions Array of actions.
  * @param object $post Post object.
  */
-function ddp_duplicate_page_link( $actions, $post ) {
+function cpt_clone_page_link( $actions, $post ) {
 	if ( current_user_can( 'edit_posts' ) ) {
-		$actions['deep_duplicate'] = '<a href="' . wp_nonce_url( 'admin.php?action=ddp_deep_duplicate_page&post=' . $post->ID, basename( __FILE__ ), 'deep_duplicate_nonce' ) . '" title="Deep Duplicate this item" rel="permalink">Deep Duplicate</a>';
+		$actions['cpt_clone_page_tree'] = '<a href="' . wp_nonce_url( 'admin.php?action=cpt_clone_page_tree&post=' . $post->ID, basename( __FILE__ ), 'clone_page_tree_nonce' ) . '" title="Clone this page tree" rel="permalink">Clone Page Tree</a>';
 	}
 	return $actions;
 }
 
-add_filter( 'page_row_actions', 'ddp_duplicate_page_link', 10, 2 );
+add_filter( 'page_row_actions', 'cpt_clone_page_link', 10, 2 );
 
 /**
- * The recursive function that traverses the children of a page and duplicates each of them
+ * The recursive function that traverses the children of a page and clones each of them
  * Returns the new post id that was created.
  *
  * @param int $post_id the post id.
- * @param int $new_parent_id the new parent id for the duplicated post.
+ * @param int $new_parent_id the new parent id for the cloned post.
  */
-function deep_duplicate( $post_id, $new_parent_id ) {
+function cpt_deep_clone( $post_id, $new_parent_id ) {
 	global $wpdb;
 
 	$post_in = get_post( $post_id );
@@ -112,7 +112,7 @@ function deep_duplicate( $post_id, $new_parent_id ) {
 		wp_set_object_terms( $new_post_id, $post_terms, $taxonomy_in, false );
 	}
 
-	// duplicate all post meta just in two SQL queries.
+	// clone all post meta just in two SQL queries.
 	$post_meta_infos = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=%d", $post_id ) );
 	if ( count( $post_meta_infos ) != 0 ) {
 		$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
@@ -138,7 +138,7 @@ function deep_duplicate( $post_id, $new_parent_id ) {
 
 	if ( $children ) {
 		foreach ( $children as $child ) {
-			deep_duplicate( $child->ID, $new_post_id );
+			cpt_deep_clone( $child->ID, $new_post_id );
 		}
 	}
 
