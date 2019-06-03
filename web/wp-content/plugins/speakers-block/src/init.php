@@ -29,12 +29,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function speakers_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
-	wp_register_style(
-		'speakers_block-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-editor' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
-	);
+	// wp_register_style(
+	// 	'speakers_block-cgb-style-css', // Handle.
+	// 	plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
+	// 	array( 'wp-editor' ), // Dependency to include the CSS after it.
+	// 	null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+	// );
 
 	// Register block editor script for backend.
 	wp_register_script(
@@ -66,7 +66,7 @@ function speakers_block_cgb_block_assets() { // phpcs:ignore
 	register_block_type(
 		'cgb/block-speakers-block', array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'speakers_block-cgb-style-css',
+//			'style'         => 'speakers_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
 			'editor_script' => 'speakers_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
