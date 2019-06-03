@@ -52,14 +52,13 @@ registerBlockType( 'cgb/block-speakers-block', {
 		const { setAttributes, attributes: { speakers }} = props;
 		return (	
 			<div className={ props.className }>
-				<p>This block will show Speakers that are speaking at an Event.</p>
-				<p>Speakers' to feature:
+				<p>Featured Speakers:
 					<PlainText
 						value={ speakers }
 						onChange={( value ) => setAttributes({ speakers: value })}
 						placeholder="Dan Kohn, Andy Cochran"
 					/>
-					<em>Names entered must match the slug of a Speaker.</em>
+					<em>Enter a comma-separated list of slugs (must match Speaker slugs).</em>
 				</p>
 			</div>
 		);
