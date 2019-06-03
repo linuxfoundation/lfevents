@@ -121,7 +121,8 @@ Thumbs.db
 # Allowing other premium plugins #
 !web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
 
-# Allowing Speakers block plugin
+# Allowing custom plugins
 !web/wp-content/plugins/speakers-block
 web/wp-content/plugins/speakers-block/node_modules
+!web/wp-content/plugins/deep-duplicate-page
 
