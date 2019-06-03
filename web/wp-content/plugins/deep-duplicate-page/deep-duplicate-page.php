@@ -6,7 +6,7 @@
  *
  * Plugin Name:       Deep Duplicate Page
  * Plugin URI:        https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/deep-duplicate-page
- * Description:       Adds Deep Duplicate action to the page row actions.  A deep duplicate of a page duplicates the page and all children creating a new copy of the full page tree.
+ * Description:       Adds "Deep Duplicate" action to the page row actions.  A deep duplicate of a page duplicates the page and all children creating a new copy of the full page tree.
  * Version:           0.1.0
  * Author:            cjyabraham
  * License:           GPL-2.0+
