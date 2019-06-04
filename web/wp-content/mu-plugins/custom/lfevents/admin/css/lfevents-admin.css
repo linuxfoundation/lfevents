@@ -14,8 +14,18 @@
 	color: #555;
     background-color: #f7f7f7;
 	border: 1px solid #e1e1e1;
+	-webkit-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
 	transition: all 200ms ease;
     vertical-align: top;
+}
+
+.nestedpages ol ul.np-assigned-pt-actions li:first-child:hover {
+	background-color: #0074a2;
+    -webkit-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    border-color: #0074a2;
 }
 
 .nestedpages ol ul.np-assigned-pt-actions {
@@ -25,5 +35,8 @@
 
 .nestedpages ol ul.np-assigned-pt-actions li:first-child a {
 	padding: 0 1px;
-    color: #555;
+}
+
+.nestedpages ol ul.np-assigned-pt-actions li:first-child a:hover {
+	color: #fff;
 }
