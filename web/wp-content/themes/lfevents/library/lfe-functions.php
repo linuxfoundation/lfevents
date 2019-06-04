@@ -103,7 +103,7 @@ function lfe_get_other_events( $parent_id, $background_style ) {
 		if ( $featured_image ) {
 			$event_link_content = $featured_image;
 		} else {
-			$event_link_content = esc_html( get_the_title( $parent_id ) );
+			$event_link_content = esc_html( get_the_title( $p['ID'] ) );
 		}
 		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
 	}
@@ -222,19 +222,19 @@ add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
  * @param string $tag the tag.
  * @param string $handle the handle.
  */
-function instantpage_script_loader_tag( $tag, $handle ) {
+function lfe_instantpage_script_loader_tag( $tag, $handle ) {
 	if ( 'instantpage' === $handle ) {
 		$tag = str_replace( 'text/javascript', 'module', $tag );
 	}
 	return $tag;
 }
 
-add_filter( 'script_loader_tag', 'instantpage_script_loader_tag', 10, 2 );
+add_filter( 'script_loader_tag', 'lfe_instantpage_script_loader_tag', 10, 2 );
 
 /**
  * Removes the annoying Ultimate Blocks menu in the admin
  */
-function custom_menu_page_removing() {
+function lfe_custom_menu_page_removing() {
 	remove_menu_page( 'ultimate-blocks-settings' );
 }
-add_action( 'admin_menu', 'custom_menu_page_removing' );
+add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
