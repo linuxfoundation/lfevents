@@ -54,7 +54,7 @@ add_action( 'admin_action_cpt_clone_page_tree', 'cpt_clone_page_tree' );
  */
 function cpt_clone_page_link( $actions, $post ) {
 	if ( current_user_can( 'edit_posts' ) ) {
-		$actions['cpt_clone_page_tree'] = '<a href="' . wp_nonce_url( 'admin.php?action=cpt_clone_page_tree&post=' . $post->ID, basename( __FILE__ ), 'clone_page_tree_nonce' ) . '" title="Clone this page tree" rel="permalink">Clone Page Tree</a>';
+		$actions['cpt_clone_page_tree'] = '<a href="' . wp_nonce_url( 'admin.php?action=cpt_clone_page_tree&post=' . $post->ID, basename( __FILE__ ), 'clone_page_tree_nonce' ) . '" title="Clone this page and all its child pages" rel="permalink">Clone Page Tree</a>';
 	}
 	return $actions;
 }
