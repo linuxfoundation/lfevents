@@ -2,3 +2,28 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+/*
+ * Some styles to make the "Clone Page Tree" link look good on Nested Pages
+ */
+.nestedpages ol ul.np-assigned-pt-actions li:first-child {
+	margin: 0 0 0 -5px;
+    padding: 0 .5em;
+    height: 30px;
+	line-height: 30px;
+	color: #555;
+    background-color: #f7f7f7;
+	border: 1px solid #e1e1e1;
+	transition: all 200ms ease;
+    vertical-align: top;
+}
+
+.nestedpages ol ul.np-assigned-pt-actions {
+	margin-left: 200px;
+	margin-top: 3px;
+}
+
+.nestedpages ol ul.np-assigned-pt-actions li:first-child a {
+	padding: 0 1px;
+    color: #555;
+}
