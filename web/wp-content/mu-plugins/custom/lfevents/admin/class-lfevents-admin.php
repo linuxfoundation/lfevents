@@ -474,45 +474,49 @@ class LFEvents_Admin {
 	 * @param object $query Existing query.
 	 */
 	public function event_list_filter( $query ) {
-		global $wpdb;
-
 		$post_id = isset( $_GET['admin-single-event'] ) ? (int) $_GET['admin-single-event'] : '';
 		if ( ! $post_id ) {
 			return;
 		}
 
-		$posts_ids   = array( $post_id );
-		$event_posts = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM $wpdb->posts
-				WHERE post_parent = %d
-				AND post_status <> 'trash'",
-				$post_id
-			)
-		);
-
-		foreach ( $event_posts as $p ) {
-			$e           = (int) $p->ID;
-			$posts_ids[] = $e;
-
-			$gc_posts = $wpdb->get_results(
-				$wpdb->prepare(
-					"SELECT * FROM $wpdb->posts
-					WHERE post_parent = %d
-					AND post_status <> 'trash'",
-					$e
-				)
-			);
-
-			if ( $gc_posts ) {
-				foreach ( $gc_posts as $gc ) {
-					$posts_ids[] = $gc->ID;
-				}
-			}
-		}
+		$posts_ids = array( $post_id );
+		$posts_ids = array_merge( $posts_ids, get_kids( $post_id ) );
 
 		$query->set( 'post__in', $posts_ids );
 		$query->set( 'order', 'ASC' );
 		$query->set( 'orderby', 'parent' );
 	}
+}
+
+
+/**
+ * Returns an array of all descendents of $post_id.
+ * Recursive function.
+ *
+ * @param int $post_id parent post.
+ */
+function get_kids( $post_id ) {
+	global $wpdb;
+
+	$kid_ids = array();
+
+	$kid_posts = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT * FROM $wpdb->posts
+			WHERE post_parent = %d
+			AND post_status <> 'trash'",
+			$post_id
+		)
+	);
+
+	if ( ! $kid_posts ) {
+		return array();
+	}
+
+	foreach ( $kid_posts as $kid ) {
+		$kid_ids[] = $kid->ID;
+		$kid_ids = array_merge( $kid_ids, get_kids( $kid->ID ) );
+	}
+
+	return $kid_ids;
 }
