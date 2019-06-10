@@ -238,3 +238,27 @@ function lfe_custom_menu_page_removing() {
 	remove_menu_page( 'ultimate-blocks-settings' );
 }
 add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
+
+/**
+ * Inserts Google Analytics code on live sites.
+ */
+function lfe_insert_google_analytics() {
+	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'old-events.linuxfoundation.org', 'old-events.lfasiallc.com', 'events.linuxfoundation.cn', 'old-events.linuxfoundation.cn'";
+	$current_domain = parse_url( home_url(), PHP_URL_HOST );
+	$analytics_code = <<<EOD
+<!-- Google Analytics -->
+		<script>
+		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+		ga('create', 'UA-831873-5', 'auto', {allowLinker: true});
+		ga('require', 'linker');
+		ga('linker:autoLink', [$domains] );
+		ga('send', 'pageview');
+		</script>
+EOD;
+	$analytics_code .= "<script async src='https://www.google-analytics.com/analytics.js'></script>\n\t\t<!-- End Google Analytics -->\n"; //phpcs:ignore
+
+	if ( strpos( $domains, $current_domain ) ) {
+		// this is a live site so output the analytics code.
+		echo $analytics_code; //phpcs:ignore
+	}
+}
