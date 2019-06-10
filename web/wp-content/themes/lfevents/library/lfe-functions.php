@@ -212,6 +212,14 @@ function lfe_scripts() {
 
 	// https://instant.page/.
 	wp_enqueue_script( 'instantpage', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'instantpage-1.2.2.js' ), array(), '1.2.2', true );
+
+	$chinese_domains = "'www.lfasiallc.com', 'old-events.lfasiallc.com', 'events.linuxfoundation.cn', 'old-events.linuxfoundation.cn'";
+	$current_domain = parse_url( home_url(), PHP_URL_HOST );
+	if ( strpos( $chinese_domains, $current_domain ) ) {
+		// scripts for Chinese-audience sites.
+		wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'china.js' ), array(), '1.2.2', true );
+	}
+
 }
 
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
