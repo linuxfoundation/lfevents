@@ -44,7 +44,12 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
   * `Pull database from?` >  `dev`
   * `Pull files from?` >  `dev`
 
-6. Visit the local site URL saved from above
+6. You will need to compile the theme css/js before the site will render correctly:
+  1. Go to the theme directory: `cd web/wp-content/themes/lfevents`
+  2. Install the Node.js dependencies: `npm install`
+  3. Compile the files: `npm run build`
+
+7. Visit the local site URL saved from above.  To find it again run `lando info`.
 
 ### Notes
 
@@ -61,7 +66,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme, which **requires [Node.js](http://nodejs.org)**.
 
 * Go to the theme directory: `cd web/wp-content/themes/lfevents`
-
+ 
 * Install the Node.js dependencies: `npm install` (git ignores the `node_modules/` directory)
 
 * To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`
