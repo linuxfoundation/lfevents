@@ -18,9 +18,9 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 * Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer). On a Mac using brew, the command is `brew cask install lando`.
 
-* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon).  Follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication).
+* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon).  Follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication).  Save the machine token for use in step 2 below.
 
-* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password for performing Git operations over HTTPS.  It will be used in step 2 below.
+* You need a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password for performing Git operations over HTTPS.
 
 * [Node](https://nodejs.org/)/[NPM](https://www.npmjs.com/) (for theme development)
 
