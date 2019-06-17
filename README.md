@@ -63,15 +63,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 ## Theme Development
 
-LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme, which **requires [Node.js](http://nodejs.org)**.
-
-* Go to the theme directory: `cd web/wp-content/themes/lfevents`
- 
-* Install the Node.js dependencies: `npm install` (git ignores the `node_modules/` directory)
-
-* To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`
-
-* Run `npm start` to watch changes theme changes and compile CSS and JS to `dist/` (git ignores this directory). When deployed, `dist/` files are compiled and minified with `npm run build` through CircleCI.
+LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified with `npm run build` through CircleCI.
 
 -----
 
