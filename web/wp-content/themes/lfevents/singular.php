@@ -86,7 +86,7 @@ $text_style = 'color: ' . $menu_text_color . ';';
 			<!-- hardcoded speakers list -->
 			<div class="entry-content">
 				<section class="speakers-section wp-block-ugb-container alignfull"
-					style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color ) ?> 0%, <?php echo esc_html( $menu_color_2 ) ?> 100%); <?php echo esc_html( $text_style ); ?>">
+					style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color ); ?> 0%, <?php echo esc_html( $menu_color_2 ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 					<h3 class="speakers-section-title">Featured Speakers</h3>
 					<ul class="speaker-list grid-x">
 						<?php
@@ -98,18 +98,18 @@ $text_style = 'color: ' . $menu_text_color . ';';
 								$rotation = '135deg';
 							}
 							?>
-								<li id="speaker-<?php echo $value ?>"
+								<li id="speaker-<?php echo $value; ?>"
 										class="speaker cell small-6 medium-4 xxlarge-3"
-										style="background: linear-gradient(<?php echo $rotation ?>, <?php echo $menu_color ?> 0%, <?php echo $menu_color_2 ?> 100%);"
+										style="background: linear-gradient(<?php echo $rotation; ?>, <?php echo $menu_color; ?> 0%, <?php echo $menu_color_2; ?> 100%);"
 										data-toggler=".open"
 									>
 									<div class="grid-x">
 										<div class="cell large-5">
-											<div class="headshot" style="background-image:url(https://i.pravatar.cc/600?img=<?php echo $value ?>);" data-toggle="speaker-<?php echo $value ?>"></div>
+											<div class="headshot" style="background-image:url(https://i.pravatar.cc/600?img=<?php echo $value; ?>);" data-toggle="speaker-<?php echo $value; ?>"></div>
 										</div>
 										<div class="text cell large-7">
-											<a class="name" data-toggle="speaker-<?php echo $value ?>">Firstname Lastname</a>
-											<a class="title" data-toggle="speaker-<?php echo $value ?>">Impressive Title</a>
+											<a class="name" data-toggle="speaker-<?php echo $value; ?>">Firstname Lastname</a>
+											<a class="title" data-toggle="speaker-<?php echo $value; ?>">Impressive Title</a>
 											<div class="bio">
 												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, vero magni nostrum aliquam rem odio, neque sequi iusto repudiandae quidem quam blanditiis distinctio magnam doloribus sapiente ad, ipsa velit! Harum?</p>
 											</div>

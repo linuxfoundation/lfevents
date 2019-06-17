@@ -423,7 +423,6 @@ class LFEvents_Admin {
 		// to the array of $sidebars that comes in the function argument.
 		$sidebars[] = $sidebar;
 
-
 		// Return the $sidebars array with our sidebar now included.
 		return $sidebars;
 
