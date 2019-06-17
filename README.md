@@ -45,9 +45,9 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
   * `Pull files from?` >  `dev`
 
 6. You will need to compile the theme css/js before the site will render correctly:
-  1. Go to the theme directory: `cd web/wp-content/themes/lfevents`
-  2. Install the Node.js dependencies: `npm install`
-  3. Compile the files: `npm run build`
+   1. Go to the theme directory: `cd web/wp-content/themes/lfevents`
+   2. Install the Node.js dependencies: `npm install`
+   3. Compile the files: `npm run build`
 
 7. Visit the local site URL saved from above.  To find it again run `lando info`.
 
