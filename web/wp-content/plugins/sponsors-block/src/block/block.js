@@ -5,8 +5,6 @@
  * Simple block, renders and saves the same content without any interactivity.
  */
 
-import './style.scss';
-import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -78,11 +76,10 @@ registerBlockType( 'cgb/sponsors-block', {
                 //Loops throug the images
                 images.map( (image) => {
                     return (
-                    <div className="gallery-item-container">
+						<li class="blocks-gallery-item"><figure>
                             <img className='gallery-item' src={image.url} key={ images.id } />
                             <div className='remove-item' onClick={() => removeImage(image)}><span class="dashicons dashicons-trash"></span></div>
-                            <div className='caption-text'>{image.caption[0]}</div>
-                    </div>
+						</figure></li>
                     )
                 })
 
@@ -92,9 +89,9 @@ registerBlockType( 'cgb/sponsors-block', {
         //JSX to return
         return (
             <div>
-                <div className="gallery-grid">
+                <ul class="wp-block-gallery columns-3 is-cropped">
                     {displayImages(images)}
-                </div>
+                </ul>
                 <br/>
                 <MediaUpload
                         onSelect={(media) => {setAttributes({images: [...images, ...media]});}}
@@ -129,14 +126,16 @@ registerBlockType( 'cgb/sponsors-block', {
             return (
                 images.map( (image,index) => {
                     return (
-                            <img
-                                className='gallery-item'
-                                key={images.id}
+                            <li class="blocks-gallery-item columns-3 is-cropped"><figure>
+							<a href={image.url}>
+							<img
                                 src={image.url}
-                                data-slide-no={index}
-                                data-caption={image.caption[0]}
                                 alt={image.alt}
+								data-id={image.id}
+								data-link={image.url}
+								className={image.id}
                                 />
+							</a></figure></li>
                     )
                 })
             )
@@ -144,9 +143,9 @@ registerBlockType( 'cgb/sponsors-block', {
 
         //JSX to return
         return (
-            <div>
-            <div className="gallery-grid" data-total-slides={images.length}>{ displayImages(images) }</div>
-            </div>
+			<div>
+			<ul class="wp-block-gallery columns-3 is-cropped">{ displayImages(images) }</ul>
+			</div>
         );
 
     },
