@@ -128,7 +128,7 @@ registerBlockType( 'cgb/sponsors-block', {
                 images.map( (image,index) => {
                     return (
                             <li class="blocks-gallery-item columns-3 is-cropped"><figure>
-							<a href={image.url}>
+							<a href={image.description}>
 							<img
                                 src={image.url}
                                 alt={image.alt}
