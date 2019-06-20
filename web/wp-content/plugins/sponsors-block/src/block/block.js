@@ -73,7 +73,7 @@ registerBlockType( 'cgb/sponsors-block', {
         //Displays the images
         const displayImages = (images) => {
             return (
-                //Loops throug the images
+				//Loops through the images
                 images.map( (image) => {
                     return (
 						<li class="blocks-gallery-item"><figure>
@@ -94,10 +94,11 @@ registerBlockType( 'cgb/sponsors-block', {
                 </ul>
                 <br/>
                 <MediaUpload
-                        onSelect={(media) => {setAttributes({images: [...images, ...media]});}}
+                        onSelect={(media) => {setAttributes({images: [...images, ...media].sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )}) }}
                         type="image"
                         multiple={true}
-                        value={images}
+						value={images}
+
                         render={({open}) => (
                             <Button className="select-images-button is-button is-default is-large" onClick={open}>
                                 Add images
