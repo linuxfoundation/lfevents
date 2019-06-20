@@ -8,8 +8,8 @@
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { MediaUpload } = wp.editor; //Import MediaUpload from wp.editor
-const { Button } = wp.components; //Import Button from wp.components
+const { MediaUpload, InspectorControls } = wp.editor; //Import MediaUpload from wp.editor
+const { Button, SelectControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
 
 
 /**
@@ -36,7 +36,11 @@ registerBlockType( 'cgb/sponsors-block', {
     attributes: { //Attributes
         images : { //Images array
             type: 'array',
-        }
+		},
+		sponsorClass : {
+			type: 'string',
+			default: 'large',
+		}
 },
 
     /**
@@ -47,10 +51,10 @@ registerBlockType( 'cgb/sponsors-block', {
      *
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
-    edit({ attributes, className, setAttributes }) {
+    edit({ attributes, className, setAttributes, focus }) {
 
         //Destructuring the images array attribute
-        const {images = []} = attributes;
+        const {images = [], sponsorClass} = attributes;
 
 
         // This removes an image from the gallery
@@ -86,8 +90,30 @@ registerBlockType( 'cgb/sponsors-block', {
             )
         }
 
+		function onSponsorClassChange(changes) {
+			setAttributes({
+				sponsorClass: changes
+			})
+		}
+
         //JSX to return
-        return (
+        return [
+			<InspectorControls>
+				<PanelBody><PanelRow>
+				<div>
+					<SelectControl
+						label='Select a style for the sponsor images:'
+						value={sponsorClass}
+						onChange={onSponsorClassChange}
+						options={ [
+							{ label: 'Large', value: 'large' },
+							{ label: 'Medium', value: 'medium' },
+							{ label: 'Small', value: 'small' },
+						] }
+						/>
+				</div>
+				</PanelRow></PanelBody>
+			</InspectorControls>,
             <div>
                 <ul class="wp-block-gallery columns-3 is-cropped">
                     {displayImages(images)}
@@ -107,7 +133,7 @@ registerBlockType( 'cgb/sponsors-block', {
                     />
             </div>
 
-        );
+		];
     },
 
     /**
@@ -120,21 +146,21 @@ registerBlockType( 'cgb/sponsors-block', {
      */
     save({attributes}) {
         //Destructuring the images array attribute
-        const { images = [] } = attributes;
+        const {images = [], sponsorClass} = attributes;
 
         // Displays the images
         const displayImages = (images) => {
             return (
                 images.map( (image,index) => {
                     return (
-                            <li class="blocks-gallery-item columns-3 is-cropped"><figure>
+                            <li class="blocks-gallery-item"><figure>
 							<a href={image.description}>
 							<img
                                 src={image.url}
                                 alt={image.alt}
 								data-id={image.id}
 								data-link={image.url}
-								className={image.id}
+								className={'wp-image-' + image.id}
                                 />
 							</a></figure></li>
                     )
@@ -144,9 +170,7 @@ registerBlockType( 'cgb/sponsors-block', {
 
         //JSX to return
         return (
-			<div>
-			<ul class="wp-block-gallery columns-3 is-cropped">{ displayImages(images) }</ul>
-			</div>
+			<ul className={'wp-block-gallery alignwide columns-3 is-cropped ' + sponsorClass}>{ displayImages(images) }</ul>
         );
 
     },
