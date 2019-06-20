@@ -100,19 +100,10 @@ class LFEvents_Public {
 	}
 
 	/**
-	 * Sets up redirects for "sponsor" images who have a url in their Description field.
-	 * Also redirects menu elements to their first child if one exists.
+	 * Sets up redirects.
 	 */
 	public function lfe_redirects() {
 		global $post;
-
-		if ( is_attachment() && substr( $post->post_title, -7 ) === 'sponsor' ) {
-			$url = $post->post_content;
-			if ( filter_var( $url, FILTER_VALIDATE_URL ) ) {
-				wp_redirect( $url );
-				exit;
-			}
-		}
 
 		if ( in_array( $post->post_type, lfe_get_post_types() ) && $post->post_parent ) {
 			$args = array(
