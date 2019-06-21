@@ -20,6 +20,8 @@ get_header(); ?>
 				?>
 				<?php get_template_part( 'template-parts/content', 'page' ); ?>
 			<?php endwhile; ?>
+
+			<?php lfe_get_upcoming_events(); ?>
 		</main>
 	</div>
 </div>

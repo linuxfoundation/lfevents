@@ -290,9 +290,9 @@ class LFEvents_Admin {
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
-									'id'            => 'date_range_id',
+									'id'            => 'date_range',
 									'data_type'     => 'meta',
-									'data_key'      => 'date_range_key', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'date_range', // Required if 'data_type' is 'meta' or 'localstorage'.
 									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
 									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
 									// where this setting is nested will be used.
@@ -314,9 +314,9 @@ class LFEvents_Admin {
 							'settings' => array(
 								array(
 									'type'          => 'checkbox', // Required.
-									'id'            => 'cfp_id',
+									'id'            => 'cfp_active',
 									'data_type'     => 'meta',
-									'data_key'      => 'cfp_key', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'cfp_active', // Required if 'data_type' is 'meta'.
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => true,
@@ -328,9 +328,9 @@ class LFEvents_Admin {
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
-									'id'            => 'cfp_date_range_id',
+									'id'            => 'cfp_date_range',
 									'data_type'     => 'meta',
-									'data_key'      => 'cfp_date_range_key', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'cfp_date_range', // Required if 'data_type' is 'meta' or 'localstorage'.
 									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
 									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
 									// where this setting is nested will be used.

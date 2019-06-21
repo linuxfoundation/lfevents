@@ -270,3 +270,40 @@ EOD;
 		echo $analytics_code; //phpcs:ignore
 	}
 }
+
+/**
+ * Inserts calendar of upcoming events with CFP dates etc.
+ */
+function lfe_get_upcoming_events() {
+	global $post;
+	$args = array(
+		'post_type' => 'page',
+		'post_parent' => 0,
+		'no_found_rows' => true,  // used to improve performance.
+		'update_post_term_cache' => false, // used to improve performance.
+		'posts_per_page' => 500,
+		'post_status' => 'publish',
+		'meta_key'   => 'lfes_date_range',
+		'orderby'    => 'meta_value_datetime',
+		'order'      => 'DESC',
+	);
+
+	$the_query = new WP_Query( $args );
+
+	if ( $the_query->have_posts() ) {
+		while ( $the_query->have_posts() ) {
+			echo $post->ID;
+			$the_query->the_post();
+			?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<div class="entry-content">
+					<?php the_title(); ?>
+					<?php var_dump( get_post_meta($post->ID, 'lfes_date_range' ) ); ?>
+				</div>
+			</article>
+			<?php
+		}
+	}
+	wp_reset_postdata(); // Restore original Post Data.
+
+}
