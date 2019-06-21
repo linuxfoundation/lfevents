@@ -283,22 +283,33 @@ function lfe_get_upcoming_events() {
 		'update_post_term_cache' => false, // used to improve performance.
 		'posts_per_page' => 500,
 		'post_status' => 'publish',
-		'meta_key'   => 'lfes_date_range',
-		'orderby'    => 'meta_value_datetime',
-		'order'      => 'DESC',
+		'meta_key'   => 'lfes_date_start',
+		'orderby'    => 'meta_value',
+		'order'      => 'ASC',
 	);
 
 	$the_query = new WP_Query( $args );
 
 	if ( $the_query->have_posts() ) {
 		while ( $the_query->have_posts() ) {
-			echo $post->ID;
 			$the_query->the_post();
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<div class="entry-content">
-					<?php the_title(); ?>
-					<?php var_dump( get_post_meta($post->ID, 'lfes_date_range' ) ); ?>
+					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					<br />
+					<?php
+					$date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
+					$date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+					$cfp_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_cfp_date_start', true ) );
+					$cfp_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_cfp_date_end', true ) );
+					echo $date_start->format( 'm/j/Y' ) . ' - ' . $date_end->format( 'm/j/Y' );
+					echo ' | ' . get_post_meta( $post->ID, 'lfes_location', true );
+					echo '<br />CFP Status: '; 
+
+
+
+					?>
 				</div>
 			</article>
 			<?php
