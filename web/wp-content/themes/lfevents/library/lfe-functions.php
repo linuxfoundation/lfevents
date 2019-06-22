@@ -95,7 +95,7 @@ function lfe_get_other_events( $parent_id, $background_style ) {
 	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_blue.png' ) . '"></a></li>'; //phpcs:ignore
 
 	if ( $related_events ) {
-		echo '<li class="other-events-header"><a>Related Events</a></li>';
+		echo '<li class="other-events-header"><a>View Related Events</a></li>';
 	}
 
 	foreach ( $related_events as $p ) {
@@ -109,7 +109,7 @@ function lfe_get_other_events( $parent_id, $background_style ) {
 	}
 
 	if ( $archive_events ) {
-		echo '<li class="other-events-header"><a>Previous Years</a></li>';
+		echo '<li class="other-events-header"><a>View Previous Years</a></li>';
 	}
 
 	foreach ( $archive_events as $p ) {
