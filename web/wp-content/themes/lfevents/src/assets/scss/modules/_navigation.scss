@@ -1,93 +1,54 @@
-// Navigation breakpoints
-.mobile-menu,
-.site-title-bar {
-  @include hide-for(medium);
+.hamburger-icon {
+  @include hamburger($white, $white, 20px, 16px, 2px, 3);
 }
 
-.desktop-menu,
-.site-navigation .top-bar-left {
-  @include show-for(medium);
-}
+// About Page nav
+.main-header {
+  @include clearfix;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(10,59,97,100);
+  box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2);
+  color: #ffffff;
+  padding: 1rem;
 
-// Site title
-.site-desktop-title a {
-  font-weight: bold;
-}
-
-// Mobile menu
-.mobile-menu {
-  display: none; // prevents repaint caused by JS hiding menu onload
-}
-
-.off-canvas {
-  > ul.menu {
-    height: 100vh;
-    padding: 1rem;
-
-    a {
-      color: $white;
-      font-weight: 600;
-      font-size: rem-calc(15);
-    }
+  @include breakpoint(large) {
+    padding: 1rem 1.5rem;
   }
 
-  .menu .active > a { background-color: #ccc; }
+  .admin-bar &.is-stuck {
+    top: 32px !important;
+  }
 
-}
-
-.title-bar-title {
   a {
-    font-size: 1rem;
-    color: #B9B9B9;
-  }
-}
-
-.mobile-menu,
-.mobile-off-canvas-menu {
-
-  .menu .is-active > a {
-    background-color: lighten($dark-nav-color, 5%);
-  }
-}
-
-// Tablet and desktop menu
-
-.top-bar {
-
-  .top-bar-title a {
-    font-size: 1rem;
-    color: #B9B9B9;
-    padding-left: 1rem;
-    line-height: 1.8;
+    color: #ffffff !important;
   }
 
-  .menu a {
-    color: #e6e6e6;
-    padding-top: 0;
-    padding-bottom: 0;
-    font-weight: bold;
-    font-size: 0.8rem;
-    line-height: 1;
+  .home-link {
+    display: inline-block;
+    padding: 0.5rem;
 
-    &:hover:not(.button) {
-      background-color: #42525D;
+    img {
+      height: rem-calc(20);
+      max-width: 70vw;
     }
   }
 
-  .menu .active > a { background-color: #ccc; }
+  .main-menu {
 
-  .menu>li:not(.menu-text)>a { padding: 1rem; }
-  .menu li:not(:last-child) { border-right: 1px solid #4e4e4e; }
+    @include breakpoint(large) {
+      // display: inline-block;
+      float: right;
+    }
 
-  .dropdown.menu .submenu { border: 0; }
-  .dropdown.menu .has-submenu.is-down-arrow a { padding-right: 1rem; }
-  .dropdown.menu .has-submenu.is-down-arrow > a::after { border: 0; }
-  .dropdown.menu:first-child > li.is-dropdown-submenu-parent > a::after { display: none; }
-}
+    ul {
+      @include menu-base();
+      @include menu-direction(vertical);
 
-.site-navigation {
-  @include breakpoint(small only) {
-    padding: 0; // prevents container visibility on small screens
+      @include breakpoint(large) {
+        @include menu-direction(horizontal);
+      }
+    }
   }
 }
 

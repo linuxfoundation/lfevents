@@ -50,10 +50,6 @@
     .menu-toggler {
       flex-grow: 0;
     }
-
-    .hamburger-icon {
-      @include hamburger($white, $white, 20px, 16px, 2px, 3);
-    }
   }
 }
 
