@@ -23,17 +23,14 @@ get_header(); ?>
 	</header>
 </div>
 
-<div class="main-container">
-	<div class="main-grid">
-		<header>
-			<h1 class="entry-title"><?php the_title(); ?></h1>
-		</header>
+<div class="main-container about-page">
+	<div class="main-grid grid-container">
 		<main class="main-content-full-width">
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
-				<?php get_template_part( 'template-parts/content', 'page' ); ?>
+				<?php get_template_part( 'template-parts/content' ); ?>
 			<?php endwhile; ?>
 
 			<?php lfe_get_upcoming_events(); ?>

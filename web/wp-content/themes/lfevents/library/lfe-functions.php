@@ -290,6 +290,8 @@ function lfe_get_upcoming_events() {
 
 	$the_query = new WP_Query( $args );
 
+	echo '<div class="grid-x grid-margin-x">';
+
 	if ( $the_query->have_posts() ) {
 		$year = 0;
 		$month = 0;
@@ -305,25 +307,24 @@ function lfe_get_upcoming_events() {
 
 			if ( ( 0 == $year ) || ( $year < (int) $dt_date_start->format( 'Y' ) ) ) {
 				$year = (int) $dt_date_start->format( 'Y' );
-				echo '<h2>' . esc_html( $year ) . '</h2>';
+				echo '<div class="cell"><hr><h2 class="h4"><strong>' . esc_html( $year ) . '</strong></h2></div>';
 				$month = (int) $dt_date_start->format( 'm' );
-				echo '<h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+				echo '<div class="cell"><h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3></div>';
 			} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
 				$month = (int) $dt_date_start->format( 'm' );
-				echo '<h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+				echo '<div class="cell"><h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3></div>';
 			}
 			?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<div class="entry-content">
-					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-					<br />
+			<article id="post-<?php the_ID(); ?>" class="cell medium-6 large-4">
+				<div class="callout">
+					<h4 class="h5"><strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong></h4>
 					<?php
 					echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
 					echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
-					echo '<br />CFP Status: ';
+					echo '<br />Status: ';
 
 					if ( '0' === $cfp_active ) {
-						echo 'No CFP';
+						echo 'No Call for Proposals';
 					} elseif ( ! ( $cfp_date_start ) ) {
 						echo 'Details Coming Soon';
 					} elseif ( strtotime( $cfp_date_end ) < time() ) {
@@ -340,4 +341,5 @@ function lfe_get_upcoming_events() {
 		}
 	}
 	wp_reset_postdata(); // Restore original Post Data.
+	echo '</div>';
 }

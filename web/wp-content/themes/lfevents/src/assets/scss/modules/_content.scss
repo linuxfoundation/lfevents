@@ -1,8 +1,18 @@
 .main-container {
-  // @include xy-grid-container;
   background-color: $white;
   position: relative;
   z-index: 1;
+
+  &.about-page {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+
+    .entry-title {
+      border-bottom: $hr-border;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .main-grid {
