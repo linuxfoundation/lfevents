@@ -291,35 +291,46 @@ function lfe_get_upcoming_events() {
 	$the_query = new WP_Query( $args );
 
 	if ( $the_query->have_posts() ) {
+		$year = 0;
+		$month = 0;
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
+			$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
+			$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+			$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
+			$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
+			$dt_cfp_date_start = new DateTime( $cfp_date_start );
+			$dt_cfp_date_end = new DateTime( $cfp_date_end );
+			$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
+
+			if ( ( 0 == $year ) || ( $year < (int) $dt_date_start->format( 'Y' ) ) ) {
+				$year = (int) $dt_date_start->format( 'Y' );
+				echo '<h2>' . esc_html( $year ) . '</h2>';
+				$month = (int) $dt_date_start->format( 'm' );
+				echo '<h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+			} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
+				$month = (int) $dt_date_start->format( 'm' );
+				echo '<h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+			}
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<div class="entry-content">
 					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 					<br />
 					<?php
-					$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
-					$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-					$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
-					$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
-					$dt_cfp_date_start = new DateTime( $cfp_date_start );
-					$dt_cfp_date_end = new DateTime( $cfp_date_end );
-					$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
-
 					echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
 					echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
 					echo '<br />CFP Status: ';
 
 					if ( '0' === $cfp_active ) {
 						echo 'No CFP';
-					} else if ( ! ( $cfp_date_start ) ) {
+					} elseif ( ! ( $cfp_date_start ) ) {
 						echo 'Details Coming Soon';
-					} else if ( strtotime( $cfp_date_end ) < time() ) {
+					} elseif ( strtotime( $cfp_date_end ) < time() ) {
 						echo 'Closed';
-					} else if ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
+					} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
 						echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) );
-					} else if ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
+					} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
 						echo 'Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) );
 					}
 					?>
