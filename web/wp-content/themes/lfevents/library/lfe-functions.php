@@ -299,16 +299,29 @@ function lfe_get_upcoming_events() {
 					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 					<br />
 					<?php
-					$date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
-					$date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-					$cfp_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_cfp_date_start', true ) );
-					$cfp_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_cfp_date_end', true ) );
-					echo $date_start->format( 'm/j/Y' ) . ' - ' . $date_end->format( 'm/j/Y' );
-					echo ' | ' . get_post_meta( $post->ID, 'lfes_location', true );
-					echo '<br />CFP Status: '; 
+					$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
+					$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+					$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
+					$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
+					$dt_cfp_date_start = new DateTime( $cfp_date_start );
+					$dt_cfp_date_end = new DateTime( $cfp_date_end );
+					$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
 
+					echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
+					echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
+					echo '<br />CFP Status: ';
 
-
+					if ( '0' === $cfp_active ) {
+						echo 'No CFP';
+					} else if ( ! ( $cfp_date_start ) ) {
+						echo 'Details Coming Soon';
+					} else if ( strtotime( $cfp_date_end ) < time() ) {
+						echo 'Closed';
+					} else if ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
+						echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) );
+					} else if ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
+						echo 'Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) );
+					}
 					?>
 				</div>
 			</article>
@@ -316,5 +329,4 @@ function lfe_get_upcoming_events() {
 		}
 	}
 	wp_reset_postdata(); // Restore original Post Data.
-
 }
