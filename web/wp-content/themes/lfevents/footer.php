@@ -12,7 +12,7 @@
 
 <footer class="site-footer">
 
-	<p class="copyright">Copyright © 2019 The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="Trademark Usage" target="_blank">Trademark Usage</a> page. Linux is a registered trademark of Linus Torvalds.</p>
+	<p class="copyright">Copyright © 2019 The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page. Linux is a registered trademark of Linus Torvalds.</p>
 
 	<ul class="linux-foundaiton-links">
 		<li><a href="https://www.linuxfoundation.org/terms/">Terms of Use</a></li>
