@@ -290,7 +290,7 @@ function lfe_get_upcoming_events() {
 
 	$the_query = new WP_Query( $args );
 
-	echo '<div class="grid-x grid-margin-x">';
+	echo '<div class="grid-x grid-margin-x large-margin-top">';
 
 	if ( $the_query->have_posts() ) {
 		$year = 0;
@@ -307,34 +307,38 @@ function lfe_get_upcoming_events() {
 
 			if ( ( 0 == $year ) || ( $year < (int) $dt_date_start->format( 'Y' ) ) ) {
 				$year = (int) $dt_date_start->format( 'Y' );
-				echo '<div class="cell"><hr><h2 class="h4"><strong>' . esc_html( $year ) . '</strong></h2></div>';
+				echo '<div class="cell"><h2 class="h4 header-bg-white-smoke medium-padding-left small-padding-top small-padding-bottom"><strong>' . esc_html( $year ) . '</strong></h2></div>';
 				$month = (int) $dt_date_start->format( 'm' );
-				echo '<div class="cell"><h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3></div>';
+				echo '<div class="cell"><h3 class="h4">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3></div>';
 			} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
 				$month = (int) $dt_date_start->format( 'm' );
-				echo '<div class="cell"><h3>' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3></div>';
+				echo '<div class="cell"><h3 class="h4">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3></div>';
 			}
 			?>
 			<article id="post-<?php the_ID(); ?>" class="cell medium-6 large-4">
 				<div class="callout">
-					<h4 class="h5"><strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong></h4>
-					<?php
-					echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
-					echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
-					echo '<br />Status: ';
+					<h4 class="h5 no-margin"><strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong></h4>
+					<p>
+						<?php
+						echo '<small>';
+						echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
+						echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
+						echo '</small>';
+						echo '<br />Status: ';
 
-					if ( '0' === $cfp_active ) {
-						echo 'No Call for Proposals';
-					} elseif ( ! ( $cfp_date_start ) ) {
-						echo 'Details Coming Soon';
-					} elseif ( strtotime( $cfp_date_end ) < time() ) {
-						echo 'Closed';
-					} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
-						echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) );
-					} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
-						echo 'Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) );
-					}
-					?>
+						if ( '0' === $cfp_active ) {
+							echo 'No Call for Proposals';
+						} elseif ( ! ( $cfp_date_start ) ) {
+							echo 'Details Coming Soon';
+						} elseif ( strtotime( $cfp_date_end ) < time() ) {
+							echo 'Closed';
+						} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
+							echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) );
+						} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
+							echo 'Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) );
+						}
+						?>
+					</p>
 				</div>
 			</article>
 			<?php
