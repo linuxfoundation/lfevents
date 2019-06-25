@@ -516,7 +516,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/china-video-block.zip?timestamp=1557370552"
+                "url": "https://downloads.wordpress.org/plugin/china-video-block.zip?timestamp=1561262989"
             },
             "require": {
                 "composer/installers": "~1.0"
