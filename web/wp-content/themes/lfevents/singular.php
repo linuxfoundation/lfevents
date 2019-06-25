@@ -34,6 +34,7 @@ if ( $featured_image ) {
 // menu background color.
 $menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
 $menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+$menu_color_3 = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
 $menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
 $background_style = 'background-color: ' . $menu_color . ';';
 if ( $menu_color_2 ) {
@@ -59,11 +60,16 @@ $text_style = 'color: ' . $menu_text_color . ';';
 			<ul class="event-menu-list">
 				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
 				<?php
-				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type, $background_style );
+				if ( $menu_color_3 ) {
+					$background_style_solid = 'background: ' . $menu_color_3 . ';';
+				} else {
+					$background_style_solid = $background_style;
+				}
+				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type, $background_style_solid );
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
-				lfe_get_other_events( $parent_id, $background_style );
+				lfe_get_other_events( $parent_id, $background_style_solid );
 				?>
 			</ul>
 		</nav>
