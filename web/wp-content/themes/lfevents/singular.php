@@ -40,7 +40,7 @@ $background_style = 'background-color: ' . $menu_color . ';';
 if ( $menu_color_2 ) {
 	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 }
-$text_style = 'color: ' . $menu_text_color . ';';
+$text_style = 'color: #' . $menu_text_color . ';';
 ?>
 
 <div data-sticky-container>

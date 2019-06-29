@@ -434,7 +434,7 @@ class LFEvents_Admin {
 									'palette'       => $palette,
 								),
 								array(
-									'type'          => 'color',
+									'type'          => 'radio',
 									'id'            => 'menu_text_color',
 									'data_type'     => 'meta',
 									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
@@ -442,11 +442,11 @@ class LFEvents_Admin {
 									// 'help'          => __( 'Choose a color for the menu text' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
-									'default_value' => '#ffffff', // A string with a HEX, rgb or rgba color format.
+									'default_value' => 'ffffff', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'       => $palette = array(
-										'white' => '#ffffff',
-										'black' => '#000000',
+									'options'         => array( // Required.
+										'ffffff' => __( 'White', 'my_plugin' ),
+										'000000' => __( 'Black', 'my_plugin' ),
 									),
 								),
 							),
