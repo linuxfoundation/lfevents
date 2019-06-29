@@ -14,7 +14,7 @@ get_header(); ?>
 			<span class="hamburger-icon"></span>
 		</button>
 
-		<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_blue.png' ); ?>"></a>
+		<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_blue.png' ); //phpcs:ignore ?>"></a>
 
 		<nav id="main-menu" class="main-menu show-for-large" data-toggler="show-for-large" role="navigation">
 			<?php foundationpress_about_pages_nav(); ?>
@@ -27,14 +27,20 @@ get_header(); ?>
 		<main class="main-content-full-width">
 
 			<?php
-			$query = new WP_Query( array( 'post_type' => 'lfe_about_page', 'name' => 'homepage' ) );
+			$query = new WP_Query(
+				array(
+					'post_type' => 'lfe_about_page',
+					'name' => 'homepage',
+				)
+			);
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
 					$query->the_post();
-					echo get_the_content();
+					the_content();
 				}
 				wp_reset_postdata();
-			} ?>
+			}
+			?>
 
 			<hr>
 
