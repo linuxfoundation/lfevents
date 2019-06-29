@@ -307,7 +307,11 @@ function lfe_get_upcoming_events() {
 					<p>
 						<?php
 						echo '<small>';
-						echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
+						if ( $dt_date_start != $dt_date_end ) {
+							echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
+						} else {
+							echo esc_html( $dt_date_start->format( 'm/j/Y' ) );
+						}
 						echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
 						echo '</small>';
 						echo '<br />Status: ';
