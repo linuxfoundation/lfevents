@@ -329,6 +329,36 @@ class LFEvents_Admin {
 									// To see the available locales check https://momentjs.com/.
 									'locale'        => 'en',
 								),
+								array(
+									'type'            => 'image', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'              => 'white_logo',
+									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'        => 'white_logo', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'           => __( 'White logo', 'my_plugin' ),
+									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+								),
+								array(
+									'type'            => 'image', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'              => 'black_logo',
+									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'        => 'black_logo', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'           => __( 'Black logo', 'my_plugin' ),
+									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+								),
 							),
 						),
 						array(
@@ -445,8 +475,8 @@ class LFEvents_Admin {
 									'default_value' => 'ffffff', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'options'         => array( // Required.
-										'ffffff' => __( 'White', 'my_plugin' ),
-										'000000' => __( 'Black', 'my_plugin' ),
+										'white' => __( 'White', 'my_plugin' ),
+										'black' => __( 'Black', 'my_plugin' ),
 									),
 								),
 							),

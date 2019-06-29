@@ -19,18 +19,6 @@ if ( $post->post_parent ) {
 	$parent_id = $post->ID;
 }
 
-$featured_image = get_the_post_thumbnail( $parent_id, 'full' );
-if ( $featured_image ) {
-	$event_link_content = $featured_image;
-} else {
-	$event_link_content = get_the_title( $parent_id );
-}
-
-?>
-
-<?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
-
-<?php
 // menu background color.
 $menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
 $menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
@@ -40,7 +28,15 @@ $background_style = 'background-color: ' . $menu_color . ';';
 if ( $menu_color_2 ) {
 	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 }
-$text_style = 'color: #' . $menu_text_color . ';';
+$text_style = 'color: ' . $menu_text_color . ';';
+
+$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
+if ( $logo ) {
+	$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
+} else {
+	$event_link_content = get_the_title( $parent_id );
+}
+
 ?>
 
 <div data-sticky-container>
