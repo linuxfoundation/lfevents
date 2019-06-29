@@ -61,17 +61,21 @@
     padding-right: 2rem;
     padding-left: 2rem;
     transform-origin: 0 0;
-    transition: transform 0.5s ease-in-out 0.1s,
-                box-shadow 0.5s ease-in-out 0.1s,
-                background-color 0.25s ease-in-out 0s,
-                border-bottom-right-radius 0.5s ease-in-out 0.1s;
+    transition: transform 0.2s ease-in-out 0s,
+                box-shadow 0.2s ease-in-out 0s,
+                background-color 0.1s ease-in-out 0s,
+                border-bottom-right-radius 0.2s ease-in-out 0s;
 
     .event-header.is-stuck & {
       background-color: transparent !important;
-      transition: transform 0.5s ease-in-out 0.1s,
-                  box-shadow 0.5s ease-in-out 0.1s,
-                  background-color 0.1s ease-in-out 0.7s,
-                  border-bottom-right-radius 0.5s ease-in-out 0.1s;
+      transition: transform 0.3s ease-in-out 0.3s,
+                  box-shadow 0.3s ease-in-out 0.3s,
+                  background-color 0.1s ease-in-out 0.8s,
+                  border-bottom-right-radius 0.3s ease-in-out 0.6s;
+
+      img {
+        transition: transform 0.3s ease-in-out 0.3s;
+      }
     }
 
     .event-header:not(.is-stuck) & {
@@ -86,7 +90,7 @@
   }
 
   img {
-    transition: transform 0.5s ease-in-out 0.1s;
+    transition: transform 0.2s ease-in-out 0s;
   }
 }
 
