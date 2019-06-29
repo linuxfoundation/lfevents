@@ -84,42 +84,28 @@ function lfe_get_archive( $parent_id ) {
  *
  * @param int    $parent_id ID of top parent post of the Event.
  * @param string $background_style sets the solid or gradient background color.
+ * @param string $menu_text_color color of the txt on the topnav.
  */
-function lfe_get_other_events( $parent_id, $background_style ) {
+function lfe_get_other_events( $parent_id, $background_style, $menu_text_color ) {
 	$related_events = lfe_get_related_events( $parent_id );
-	$archive_events = lfe_get_archive( $parent_id );
 
 	echo '<li class="page_item page_item_has_children other-events">';
 	echo '<a>Other Events</a>';
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
-	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_blue.png' ) . '"></a></li>'; //phpcs:ignore
-
-	if ( $related_events ) {
-		echo '<li class="other-events-header"><a>View Related Events</a></li>';
-	}
+	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfe_' . $menu_text_color . '.png' ) . '">LF Events Homepage</a></li>'; //phpcs:ignore
 
 	foreach ( $related_events as $p ) {
-		$featured_image = get_the_post_thumbnail( $p['ID'], 'full' );
-		if ( $featured_image ) {
-			$event_link_content = $featured_image;
+		$logo = get_post_meta( $p['ID'], 'lfes_' . $menu_text_color . '_logo', true );
+		if ( $logo ) {
+			$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $p['ID'] ) . '">';
 		} else {
-			$event_link_content = esc_html( get_the_title( $p['ID'] ) );
+			$event_link_content = get_the_title( $p['ID'] );
 		}
+
 		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
 	}
 
-	if ( $archive_events ) {
-		echo '<li class="other-events-header"><a>View Previous Years</a></li>';
-	}
-
-	foreach ( $archive_events as $p ) {
-		$year = substr( get_post_type( $p->ID ), 7 );
-		if ( $year ) {
-			echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">' . esc_html( $year ) . '</a></li>';
-		} else {
-			echo '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">Current year</a></li>';
-		}
-	}
+	echo '<li><a href="' . esc_url( home_url( '/about/events-calendar/' ) ) . '">Past Events</a></li>'; //phpcs:ignore
 
 	echo '</ul></li>';
 }

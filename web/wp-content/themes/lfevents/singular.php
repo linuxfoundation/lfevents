@@ -65,7 +65,7 @@ if ( $logo ) {
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
-				lfe_get_other_events( $parent_id, $background_style_solid );
+				lfe_get_other_events( $parent_id, $background_style_solid, $menu_text_color );
 				?>
 			</ul>
 		</nav>
