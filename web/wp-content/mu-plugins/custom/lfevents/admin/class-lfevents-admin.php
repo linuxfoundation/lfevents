@@ -537,6 +537,17 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => __( 'https://twitter.com/username' ),
 								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'website',
+									'data_type'     => 'meta',
+									'data_key'      => 'website', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Website URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://cncf.io' ),
+								),
 							),
 						),
 					),
