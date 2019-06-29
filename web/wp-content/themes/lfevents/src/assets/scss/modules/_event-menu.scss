@@ -53,6 +53,44 @@
   }
 }
 
+#popout-header-link {
+  flex-grow: 1.5;
+
+  a {
+    position: relative;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    transform-origin: 0 0;
+    transition: transform 0.5s ease-in-out 0.1s,
+                box-shadow 0.5s ease-in-out 0.1s,
+                background-color 0.25s ease-in-out 0s,
+                border-bottom-right-radius 0.5s ease-in-out 0.1s;
+
+    .event-header.is-stuck & {
+      background-color: transparent !important;
+      transition: transform 0.5s ease-in-out 0.1s,
+                  box-shadow 0.5s ease-in-out 0.1s,
+                  background-color 0.1s ease-in-out 0.7s,
+                  border-bottom-right-radius 0.5s ease-in-out 0.1s;
+    }
+
+    .event-header:not(.is-stuck) & {
+      border-bottom-right-radius: 1rem;
+      box-shadow: -0.125rem 0.25rem 0 0.25rem rgba(0,0,0,0.2);
+      transform: scaleY(1.4);
+
+      img {
+        transform: scaleX(1.26) scaleY(0.9);
+      }
+    }
+  }
+
+  img {
+    transition: transform 0.5s ease-in-out 0.1s;
+  }
+}
+
+
 .event-menu {
   clear: both;
   background-color: inherit;
@@ -158,7 +196,7 @@
         @include button();
         @include button-style(transparent, rgba(0,0,0,0.2), $white);
         font-weight: bold;
-        font-size: 1rem;
+        font-size: rem-calc(12);
         margin-bottom: 0;
         display: flex;
         justify-content: center;
@@ -166,6 +204,10 @@
 
         @include breakpoint(large) {
           min-height: 100%;
+        }
+
+        @include breakpoint(xlarge) {
+          font-size: rem-calc(14);
         }
       }
 
@@ -175,10 +217,6 @@
           justify-content: left;
         }
       }
-    }
-
-    .event-home-link {
-      flex-grow: 1.25;
     }
 
     .page_item_has_children {
@@ -207,6 +245,12 @@
             color: rgba(255,255,255,0.6);
             margin-right: 0.75em;
           }
+        }
+      }
+
+      @include breakpoint(medium down) {
+        .children {
+          background: transparent !important;
         }
       }
 
@@ -243,8 +287,12 @@
 
           a {
             display: block;
-            font-size: rem-calc(14);
+            font-size: rem-calc(12);
             border-top-color: rgba(255,255,255,0.1);
+
+            @include breakpoint(large) {
+              font-size: rem-calc(14);
+            }
           }
 
           .current_page_item > a {

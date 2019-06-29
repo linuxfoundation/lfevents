@@ -54,7 +54,7 @@ if ( $logo ) {
 
 		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
 			<ul class="event-menu-list">
-				<li class="page_item event-home-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
+				<li class="page_item event-home-link" id="popout-header-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>" style="background-color:<?php echo $menu_color; ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
 				<?php
 				if ( $menu_color_3 ) {
 					$background_style_solid = 'background: ' . $menu_color_3 . ';';
