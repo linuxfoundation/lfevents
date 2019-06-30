@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Upcoming Events
+ * Template Name: Events Calendar
  * Template Post Type: lfe_about_page
  *
  * @package FoundationPress
@@ -33,7 +33,7 @@ get_header(); ?>
 				<?php get_template_part( 'template-parts/content' ); ?>
 			<?php endwhile; ?>
 
-			<?php lfe_get_upcoming_events(); ?>
+			<?php lfe_get_events(); ?>
 		</main>
 	</div>
 </div>

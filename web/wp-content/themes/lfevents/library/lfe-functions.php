@@ -258,9 +258,9 @@ EOD;
 }
 
 /**
- * Inserts calendar of upcoming events with CFP dates etc.
+ * Inserts calendar of events with CFP dates etc.
  */
-function lfe_get_upcoming_events() {
+function lfe_get_events() {
 	global $post;
 	$args = array(
 		'post_type' => 'page',
@@ -312,9 +312,13 @@ function lfe_get_upcoming_events() {
 						} else {
 							echo esc_html( $dt_date_start->format( 'm/j/Y' ) );
 						}
-						echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_location', true ) );
+						$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+						if ( $country ) {
+							$country = $country[0]->name;
+							echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country );
+						}
 						echo '</small>';
-						echo '<br />Status: ';
+						echo '<br />CFP Status: ';
 
 						if ( '0' === $cfp_active ) {
 							echo 'No Call for Proposals';
