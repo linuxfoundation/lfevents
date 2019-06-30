@@ -93,9 +93,8 @@ function speakers_block_callback( $attributes, $content ) {
 		return '';
 	}
 
-	$bg_color_1 = $attributes['color1']; // color should be set in wp-admin.
-	$bg_color_2 = $attributes['color2']; // color should be set in wp-admin.
-	$white_text = true; // boolean should be set in wp-admin.
+	$bg_color_1 = $attributes['color1'];
+	$bg_color_2 = $attributes['color2'];
 	if ( 'white' == $attributes['text_color'] ) {
 		$text_color = 'rgb(255,255,255)';
 		$gradient_color = 'rgba(255,255,255,0.15)';
