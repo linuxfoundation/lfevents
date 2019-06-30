@@ -9,7 +9,7 @@
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { MediaUpload, InspectorControls } = wp.editor; //Import MediaUpload from wp.editor
-const { Button, SelectControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
+const { Button, TextControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
 
 
 /**
@@ -37,10 +37,14 @@ registerBlockType( 'cgb/sponsors-block', {
         images : { //Images array
             type: 'array',
 		},
-		sponsorClass : {
+		columns : {
 			type: 'string',
-			default: 'large',
-		}
+			default: '3',
+        },
+		size : {
+			type: 'string',
+			default: '50',
+        },        
 },
 
     /**
@@ -54,7 +58,7 @@ registerBlockType( 'cgb/sponsors-block', {
     edit({ attributes, className, setAttributes, focus }) {
 
         //Destructuring the images array attribute
-        const {images = [], sponsorClass} = attributes;
+        const {images = [], columns, size} = attributes;
 
 
         // This removes an image from the gallery
@@ -90,9 +94,15 @@ registerBlockType( 'cgb/sponsors-block', {
             )
         }
 
-		function onSponsorClassChange(changes) {
+		function onColumnsChange(changes) {
 			setAttributes({
-				sponsorClass: changes
+				columns: changes
+			})
+		}
+
+        function onSizeChange(changes) {
+			setAttributes({
+				size: changes
 			})
 		}
 
@@ -101,16 +111,19 @@ registerBlockType( 'cgb/sponsors-block', {
 			<InspectorControls>
 				<PanelBody><PanelRow>
 				<div>
-					<SelectControl
-						label='Select a style for the sponsor images:'
-						value={sponsorClass}
-						onChange={onSponsorClassChange}
-						options={ [
-							{ label: 'Large', value: 'large' },
-							{ label: 'Medium', value: 'medium' },
-							{ label: 'Small', value: 'small' },
-						] }
-						/>
+                <TextControl
+                    label='Columns'
+                    value={ columns }
+                    onChange={ onColumnsChange }
+                />
+				</div>
+				</PanelRow><PanelRow>
+				<div>
+                <TextControl
+                    label='Size (px)'
+                    value={ size }
+                    onChange={ onSizeChange }
+                />
 				</div>
 				</PanelRow></PanelBody>
 			</InspectorControls>,
@@ -146,7 +159,7 @@ registerBlockType( 'cgb/sponsors-block', {
      */
     save({attributes}) {
         //Destructuring the images array attribute
-        const {images = [], sponsorClass} = attributes;
+        const {images = [], columns, size} = attributes;
 
         // Displays the images
         const displayImages = (images) => {
@@ -170,7 +183,7 @@ registerBlockType( 'cgb/sponsors-block', {
 
         //JSX to return
         return (
-			<ul className={'wp-block-gallery alignwide columns-3 is-cropped ' + sponsorClass}>{ displayImages(images) }</ul>
+			<ul className={'wp-block-gallery alignwide columns-' + columns + ' is-cropped '}>{ displayImages(images) }</ul>
         );
 
     },
