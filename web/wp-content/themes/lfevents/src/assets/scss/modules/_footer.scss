@@ -57,8 +57,18 @@
   color: #ffffff;
   text-align: center;
 
-  a {
+  a, button {
     color: inherit !important;
+    cursor: pointer;
+  }
+
+  .dropdown-pane {
+    width: auto;
+    border: 0px;
+    padding: 0.5rem;
+    background-color: white;
+    box-shadow: 0 0 0 0.5rem rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
   }
 
   .event-social-links-header {
