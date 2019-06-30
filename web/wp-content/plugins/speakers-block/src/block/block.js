@@ -11,7 +11,9 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { PlainText } = wp.editor;
+const { PlainText, InspectorControls, ColorPalette } = wp.editor;
+const { RadioControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
+
 
 /**
  * Register: aa Gutenberg Block.
@@ -37,7 +39,16 @@ registerBlockType( 'cgb/block-speakers-block', {
 	attributes: {
         speakers: {
 			type: 'string'
-		}
+		},
+		color1: {
+			type: 'string',
+		},
+		color2: {
+			type: 'string',
+		},
+		text_color: {
+			type: 'string',
+		},
     },
 
 	/**
@@ -49,8 +60,58 @@ registerBlockType( 'cgb/block-speakers-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		const { setAttributes, attributes: { speakers }} = props;
-		return (	
+		const { setAttributes, attributes: { speakers, color1, color2, text_color }} = props;
+		
+		function onColor1Change(changes) {
+			setAttributes({
+				color1: changes
+			})
+		}
+
+		function onColor2Change(changes) {
+			setAttributes({
+				color2: changes
+			})
+		}
+
+		function onTextColorChange(changes) {
+			setAttributes({
+				text_color: changes
+			})
+		}
+
+		return [	
+			<InspectorControls>
+				<PanelBody><PanelRow>
+				<div>
+					<strong>Color 1 for the background gradient:</strong>
+					<ColorPalette
+						value={color1}
+						onChange={onColor1Change}
+					/>
+				</div>
+				</PanelRow><PanelRow>
+				<div>
+					<strong>Color 2 for the background gradient:</strong>
+					<ColorPalette
+						value={color2}
+						onChange={onColor2Change}
+					/>
+				</div>
+				</PanelRow><PanelRow>
+				<div>
+					<RadioControl
+						label='Text color:'
+						selected={text_color}
+						onChange={onTextColorChange}
+						options={ [
+							{ label: 'White', value: 'white' },
+							{ label: 'Black', value: 'black' },
+						] }
+						/>
+				</div>
+				</PanelRow></PanelBody>
+			</InspectorControls>,
 			<div className={ props.className }>
 				<p><strong>Featured Speakers:</strong>
 					<PlainText
@@ -61,7 +122,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 					<em>Enter a comma-separated list of Speaker names or slugs.</em>
 				</p>
 			</div>
-		);
+		];
 	},
 
 	/**
