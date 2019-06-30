@@ -481,6 +481,81 @@ class LFEvents_Admin {
 								),
 							),
 						),
+						array(
+							'label'    => __( 'Social' ),
+							'settings' => array(
+								array(
+									'type'            => 'image', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'              => 'wechat',
+									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'        => 'wechat', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'           => __( 'WeChat QR code', 'my_plugin' ),
+									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'linkedin',
+									'data_type'     => 'meta',
+									'data_key'      => 'linkedin', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'LinkedIn url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.linkedin.com/company/cloud-native-computing-foundation' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'qq',
+									'data_type'     => 'meta',
+									'data_key'      => 'qq', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'QQ url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'http://v.qq.com/vplus/dbc4895dfc0a6ec609ad9e42a10507e0/videos' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'youtube',
+									'data_type'     => 'meta',
+									'data_key'      => 'youtube', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'YouTube url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.youtube.com/channel/UCvqbFHwN-nwalWPjPUKpvTA' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'facebook',
+									'data_type'     => 'meta',
+									'data_key'      => 'facebook', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Facebook url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.facebook.com/CloudNativeComputingFoundation/' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'twitter',
+									'data_type'     => 'meta',
+									'data_key'      => 'twitter', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Twitter url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://twitter.com/CloudNativeFdn' ),
+								),
+							),
+						),
 					),
 				),
 			),
