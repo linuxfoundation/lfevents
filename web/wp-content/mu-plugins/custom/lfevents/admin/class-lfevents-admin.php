@@ -207,6 +207,17 @@ class LFEvents_Admin {
 
 		register_taxonomy( 'lfevent-category', $this->post_types, $args );
 
+		$labels = [
+			'name'          => _x( 'Event Countries', 'taxonomy general name' ),
+			'singular_name' => _x( 'Event Country', 'taxonomy singular name' ),
+		];
+		$args   = [
+			'labels'       => $labels,
+			'show_in_rest' => true,
+			'hierarchical' => true,
+		];
+
+		register_taxonomy( 'lfevent-country', $this->post_types, $args );
 	}
 
 	/**
@@ -276,14 +287,14 @@ class LFEvents_Admin {
 							'settings' => array(
 								array(
 									'type'          => 'text', // Required.
-									'id'            => 'location',
+									'id'            => 'city',
 									'data_type'     => 'meta',
-									'data_key'      => 'location', // Required if 'data_type' is 'meta'.
-									'label'         => __( 'Event location' ),
+									'data_key'      => 'city', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Event city' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
-									'placeholder'   => __( 'City, Country' ),
+									'placeholder'   => __( 'Paris' ),
 								),
 								array(
 									'type'          => 'date_single', // Required.
