@@ -9,7 +9,7 @@
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { MediaUpload, InspectorControls } = wp.editor; //Import MediaUpload from wp.editor
-const { Button, TextControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
+const { Button, TextControl, SelectControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
 
 
 /**
@@ -43,7 +43,7 @@ registerBlockType( 'cgb/sponsors-block', {
         },
 		size : {
 			type: 'string',
-			default: '50',
+			default: 'large',
         },        
 },
 
@@ -112,17 +112,22 @@ registerBlockType( 'cgb/sponsors-block', {
 				<PanelBody><PanelRow>
 				<div>
                 <TextControl
-                    label='Columns'
+                    label='Columns:'
                     value={ columns }
                     onChange={ onColumnsChange }
                 />
 				</div>
 				</PanelRow><PanelRow>
 				<div>
-                <TextControl
-                    label='Size (px)'
-                    value={ size }
-                    onChange={ onSizeChange }
+                <SelectControl
+						label='Size of the logos:'
+						value={size}
+						onChange={onSizeChange}
+						options={ [
+							{ label: 'Large', value: 'large' },
+							{ label: 'Medium', value: 'medium' },
+							{ label: 'Small', value: 'small' },
+						] }
                 />
 				</div>
 				</PanelRow></PanelBody>
