@@ -297,7 +297,7 @@ class LFEvents_Admin {
 									'placeholder'   => __( 'Paris' ),
 								),
 								array(
-									'type'          => 'date_single', // Required.
+									'type'          => 'text', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
@@ -312,14 +312,10 @@ class LFEvents_Admin {
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'format'        => 'YYYY/MM/DD',
-									// A string with the locale value.
-									// For example 'en' for english, or 'ja' for japanese.
-									// To see the available locales check https://momentjs.com/.
-									'locale'        => 'en',
+									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'date_single', // Required.
+									'type'          => 'text', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
@@ -334,11 +330,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'format'        => 'YYYY/MM/DD',
-									// A string with the locale value.
-									// For example 'en' for english, or 'ja' for japanese.
-									// To see the available locales check https://momentjs.com/.
-									'locale'        => 'en',
+									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
 									'type'            => 'image', // Required.
@@ -387,7 +379,7 @@ class LFEvents_Admin {
 									'input_label'     => __( 'CFP for Event', 'my_plugin' ), // Required.
 								),
 								array(
-									'type'          => 'date_single', // Required.
+									'type'          => 'text', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
@@ -402,14 +394,10 @@ class LFEvents_Admin {
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'format'        => 'YYYY/MM/DD',
-									// A string with the locale value.
-									// For example 'en' for english, or 'ja' for japanese.
-									// To see the available locales check https://momentjs.com/.
-									'locale'        => 'en',
+									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'date_single', // Required.
+									'type'          => 'text', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
@@ -424,11 +412,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'format'        => 'YYYY/MM/DD',
-									// A string with the locale value.
-									// For example 'en' for english, or 'ja' for japanese.
-									// To see the available locales check https://momentjs.com/.
-									'locale'        => 'en',
+									'placeholder'        => 'YYYY/MM/DD',
 								),
 							),
 						),
