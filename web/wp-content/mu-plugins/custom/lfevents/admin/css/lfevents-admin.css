@@ -40,3 +40,7 @@
 .nestedpages ol ul.np-assigned-pt-actions li:first-child a:hover {
 	color: #fff;
 }
+
+#lfes_white_logo img.pmc-image {
+	background-color: #999;
+}
