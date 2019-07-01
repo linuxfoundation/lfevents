@@ -263,7 +263,7 @@ EOD;
 function lfe_get_events() {
 	global $post;
 	$args = array(
-		'post_type' => 'page',
+		'post_type' => lfe_get_post_types(),
 		'post_parent' => 0,
 		'no_found_rows' => true,  // used to improve performance.
 		'update_post_term_cache' => false, // used to improve performance.
