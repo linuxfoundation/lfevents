@@ -47,7 +47,15 @@ if ( $query->have_posts() ) {
 		?>
 		<article id="post-<?php the_ID(); ?>" class="cell medium-6 large-4">
 			<div class="callout">
-				<h4 class="h5 no-margin"><strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong></h4>
+				<h4 class="h5 no-margin"><strong>
+				<?php
+				if ( 'publish' == $post->post_status ) {
+					echo '<a href="' . get_the_permalink() . '">' . get_the_title() . '</a>'; //phpcs:ignore
+				} else {
+					the_title();
+				}
+				?>
+				</strong></h4>
 				<p>
 					<?php
 					echo '<small>';
