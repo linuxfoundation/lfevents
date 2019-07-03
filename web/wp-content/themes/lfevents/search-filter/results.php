@@ -20,6 +20,8 @@
  */
 
 global $post;
+
+echo '<a id="switch-archive-view" href="#">Show Past Events</a>';
 echo '<div class="grid-x grid-margin-x large-margin-top">';
 
 if ( $query->have_posts() ) {
@@ -94,3 +96,22 @@ if ( $query->have_posts() ) {
 }
 echo '</div>';
 ?>
+
+<script>
+// this script controls the appearence and behavior of the link to navigate between all and just upcoming events.
+$( document ).ready( function() {
+	var currentUrl = $( location ).attr( 'href' ) 
+	if ( -1 == currentUrl.indexOf( 'events-calendar-archive' ) ) {
+		//we are on the event-calendar page.
+		console.log( 'on event-cal page');
+		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar-archive' );
+		$( 'a#switch-archive-view' ).attr( "href", newUrl );
+	} else {
+		//we are on the event-calendar-archive page.
+		console.log( 'on event-cal-archive page');
+		newUrl = currentUrl.replace( 'events-calendar-archive', 'events-calendar' );
+		$( 'a#switch-archive-view' ).attr( "href", newUrl );
+		$( 'a#switch-archive-view' ).html( 'Hide Past Events' );
+	}
+});
+</script>
