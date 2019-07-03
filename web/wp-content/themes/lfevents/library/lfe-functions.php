@@ -17,7 +17,13 @@
 function lfe_get_related_events( $parent_id ) {
 	$related_events = [];
 
-	$terms = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
+	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
+
+	if ( 0 != $term[0]->parent ) {
+		$term = $term[0]->parent;
+	} else {
+		$term = $term[0]->term_id;
+	}
 
 	$args = array(
 		'post_type'   => 'page',
@@ -30,7 +36,7 @@ function lfe_get_related_events( $parent_id ) {
 			array(
 				'taxonomy' => 'lfevent-category',
 				'field'    => 'term_id',
-				'terms'    => $terms,
+				'terms'    => $term,
 			),
 		),
 	);
