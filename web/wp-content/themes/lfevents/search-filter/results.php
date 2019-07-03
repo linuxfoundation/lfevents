@@ -103,12 +103,10 @@ $( document ).ready( function() {
 	var currentUrl = $( location ).attr( 'href' ) 
 	if ( -1 == currentUrl.indexOf( 'events-calendar-archive' ) ) {
 		//we are on the event-calendar page.
-		console.log( 'on event-cal page');
 		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar-archive' );
 		$( 'a#switch-archive-view' ).attr( "href", newUrl );
 	} else {
 		//we are on the event-calendar-archive page.
-		console.log( 'on event-cal-archive page');
 		newUrl = currentUrl.replace( 'events-calendar-archive', 'events-calendar' );
 		$( 'a#switch-archive-view' ).attr( "href", newUrl );
 		$( 'a#switch-archive-view' ).html( 'Hide Past Events' );
