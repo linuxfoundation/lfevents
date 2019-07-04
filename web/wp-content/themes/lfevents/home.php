@@ -98,7 +98,7 @@ get_header(); ?>
 				wp_reset_postdata();
 			}
 			?>
-			<a href="<?php echo esc_url( home_url( '/about/events-calendar' ) ); ?>">Full Calls for Proposals Calendar</a>
+			<a href="<?php echo esc_url( home_url( '/about/events-calendar' ) ); ?>">Full Events Calendar</a>
 
 			<h2>Latest News</h2>
 			<?php
