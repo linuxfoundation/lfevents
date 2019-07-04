@@ -21,7 +21,7 @@
 
 global $post;
 
-echo '<a id="switch-archive-view" href="#">Show Past Events</a>';
+echo '<a id="switch-archive-view" href="#"></a>';
 echo '<div class="grid-x grid-margin-x large-margin-top">';
 
 if ( $query->have_posts() ) {
@@ -105,6 +105,7 @@ $( document ).ready( function() {
 		//we are on the event-calendar page.
 		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar-archive' );
 		$( 'a#switch-archive-view' ).attr( "href", newUrl );
+		$( 'a#switch-archive-view' ).html( 'Show Past Events' );
 	} else {
 		//we are on the event-calendar-archive page.
 		newUrl = currentUrl.replace( 'events-calendar-archive', 'events-calendar' );
