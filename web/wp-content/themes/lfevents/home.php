@@ -107,7 +107,7 @@ get_header(); ?>
 				array(
 					'post_type' => 'post',
 					'no_found_rows' => true,
-					'numberposts' => 5,
+					'posts_per_page' => 3,
 				)
 			);
 			if ( $query->have_posts() ) {
