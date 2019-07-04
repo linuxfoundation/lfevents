@@ -44,3 +44,7 @@
 #lfes_white_logo img.pmc-image {
 	background-color: #999;
 }
+
+div.pmc-sidebar input::placeholder {
+	color: #999;
+}
