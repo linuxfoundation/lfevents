@@ -113,9 +113,9 @@ get_header(); ?>
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
 					$query->the_post();
-					echo '<p><a href="' . get_permalink() . '">' . get_the_title() .'</a></p>';
+					echo '<p><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></p>';
 					echo '<p>' . get_the_date() . '</p>';
-					echo '<p>' . get_the_excerpt() . '</p>';
+					echo '<p>' . esc_html( get_the_excerpt() ) . '</p>';
 				}
 			}
 			wp_reset_postdata();
