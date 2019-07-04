@@ -12,27 +12,18 @@
 
 get_header(); ?>
 
-<?php /* get_template_part( 'template-parts/featured-image' ); */ ?>
-
 <div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-options="marginTop:0;" >
+	<header class="main-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;">
 
-		<div class="pre-nav">
-			<?php
-			if ( $post->post_parent ) {
-				$ancestors = get_post_ancestors( $post->ID );
-				$parent    = $ancestors[ count( $ancestors ) - 1 ];
-			} else {
-				$parent = $post->ID;
-			}
-			echo '<a href="' . post_permalink( $parent ) . '">' . get_the_title( $parent ) . '</a>'; //phpcs:ignore
-			?>
+		<button class="menu-toggler button alignright hide-for-large" data-toggle="main-menu">
+			<span class="hamburger-icon"></span>
+		</button>
 
-			<button class="menu-toggler button alignright" data-toggle="event-menu">
-				<span class="hamburger-icon"></span>
-			</button>
-		</div>
+		<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lfevents-horizontal-white-blue.svg' ); //phpcs:ignore ?>"></a>
 
+		<nav id="main-menu" class="main-menu show-for-large" data-toggler="show-for-large" role="navigation">
+			<?php foundationpress_about_pages_nav(); ?>
+		</nav>
 	</header>
 </div>
 
