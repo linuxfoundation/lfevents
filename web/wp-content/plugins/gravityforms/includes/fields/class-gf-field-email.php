@@ -96,7 +96,6 @@ class GF_Field_Email extends GF_Field {
 
 		$required_attribute    = $this->isRequired ? 'aria-required="true"' : '';
 		$invalid_attribute     = $this->failed_validation ? 'aria-invalid="true"' : 'aria-invalid="false"';
-		$aria_describedby      = $this->get_aria_describedby();
 
 		$enter_email_field_input = GFFormsModel::get_input( $this, $this->id . '' );
 		$confirm_field_input     = GFFormsModel::get_input( $this, $this->id . '.2' );
@@ -188,7 +187,7 @@ class GF_Field_Email extends GF_Field {
 				$class    = esc_attr( $class );
 
 				return "<div class='ginput_container ginput_container_email'>
-                            <input name='input_{$id}' id='{$field_id}' type='{$html_input_type}' value='$value' class='{$class}' {$tabindex} {$disabled_text} {$single_placeholder_attribute} {$required_attribute} {$invalid_attribute} {$aria_describedby}/>
+                            <input name='input_{$id}' id='{$field_id}' type='{$html_input_type}' value='$value' class='{$class}' {$tabindex} {$disabled_text} {$single_placeholder_attribute} {$required_attribute} {$invalid_attribute}/>
                         </div>";
 			}
 		}

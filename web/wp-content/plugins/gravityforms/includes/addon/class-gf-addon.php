@@ -4269,7 +4269,9 @@ abstract class GFAddOn {
 	public function form_settings_init() {
 		$view    = rgget( 'view' );
 		$subview = rgget( 'subview' );
-		add_filter( 'gform_form_settings_menu', array( $this, 'add_form_settings_menu' ), 10, 2 );
+		if ( $this->current_user_can_any( $this->_capabilities_form_settings ) ) {
+			add_action( 'gform_form_settings_menu', array( $this, 'add_form_settings_menu' ), 10, 2 );
+		}
 
 		if ( rgget( 'page' ) == 'gf_edit_forms' && $view == 'settings' && $subview == $this->_slug && $this->current_user_can_any( $this->_capabilities_form_settings ) ) {
 			require_once( GFCommon::get_base_path() . '/tooltips.php' );
@@ -4680,8 +4682,8 @@ abstract class GFAddOn {
 	 * Not intended to be overridden or called directly by add-ons.
 	 */
 	public function app_tab_page() {
-		$page        = sanitize_text_field( rgget( 'page' ) );
-		$current_tab = sanitize_text_field( rgget( 'view' ) );
+		$page        = rgget( 'page' );
+		$current_tab = rgget( 'view' );
 
 		if ( $page == $this->_slug . '_settings' ) {
 
@@ -4779,7 +4781,7 @@ abstract class GFAddOn {
 	 */
 	public function add_form_settings_menu( $tabs, $form_id ) {
 
-		$tabs[] = array( 'name' => $this->_slug, 'label' => $this->get_short_title(), 'query' => array( 'fid' => null ), 'capabilities' => $this->_capabilities_form_settings );
+		$tabs[] = array( 'name' => $this->_slug, 'label' => $this->get_short_title(), 'query' => array( 'fid' => null ) );
 
 		return $tabs;
 	}
@@ -5090,7 +5092,7 @@ abstract class GFAddOn {
 		</ul>
 
 		<div id="gform_tab_container" class="gform_tab_container">
-		<div class="gform_tab_content" id="tab_<?php echo esc_attr( $current_tab ) ?>">
+		<div class="gform_tab_content" id="tab_<?php echo $current_tab ?>">
 
 	<?php
 	}

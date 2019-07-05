@@ -253,8 +253,7 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 		$field_label = $this->get_field_label( $force_frontend_label, $value );
 
-		$validation_message_id = 'validation_message_' . $form['id'] . '_' . $this->id;
-		$validation_message = ( $this->failed_validation && ! empty( $this->validation_message ) ) ? sprintf( "<div id='%s' class='gfield_description validation_message' aria-live='polite'>%s</div>", $validation_message_id, $this->validation_message ) : '';
+		$validation_message = ( $this->failed_validation && ! empty( $this->validation_message ) ) ? sprintf( "<div class='gfield_description validation_message'>%s</div>", $this->validation_message ) : '';
 
 		$is_form_editor  = $this->is_form_editor();
 		$is_entry_detail = $this->is_entry_detail();

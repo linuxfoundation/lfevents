@@ -4,7 +4,7 @@
  * Plugin Name: Gravity Forms + Salesforce: API
  * Plugin URI: https://gravityplus.pro/gravity-forms-salesforce
  * Description: Integrate Gravity Forms with Salesforce
- * Version: 1.5.0
+ * Version: 1.6.0.dev4
  * Author: gravity+
  * Author URI: https://gravityplus.pro
  * Text Domain: gravityformssalesforce
@@ -27,13 +27,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * @package   GFP_Salesforce
- * @version   1.5.0
+ * @version   1.6.0
  * @author    gravity+ <support@gravityplus.pro>
  * @license   GPL-2.0+
  * @link      https://gravityplus.pro
  * @copyright 2017-2019 gravity+
  *
- * last updated: February 10, 2019
+ * last updated: May 13, 2019
  */
 
 // If this file is called directly, abort.
@@ -43,7 +43,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-define( 'GFP_SALESFORCE_CURRENT_VERSION', '1.5.0' );
+define( 'GFP_SALESFORCE_CURRENT_VERSION', '1.6.0.dev4' );
 
 define( 'GFP_SALESFORCE_FILE', __FILE__ );
 

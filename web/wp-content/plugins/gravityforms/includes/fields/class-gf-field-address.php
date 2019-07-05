@@ -1176,7 +1176,7 @@ class GF_Field_Address extends GF_Field {
 			__( 'British Columbia', 'gravityforms' ),
 			__( 'Manitoba', 'gravityforms' ),
 			__( 'New Brunswick', 'gravityforms' ),
-			__( 'Newfoundland and Labrador', 'gravityforms' ),
+			__( 'Newfoundland & Labrador', 'gravityforms' ),
 			__( 'Northwest Territories', 'gravityforms' ),
 			__( 'Nova Scotia', 'gravityforms' ),
 			__( 'Nunavut', 'gravityforms' ),

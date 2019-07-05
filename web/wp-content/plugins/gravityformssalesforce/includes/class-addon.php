@@ -254,6 +254,11 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 			)
 		);
 
+		add_filter( 'gform_custom_merge_tags', array( $this, 'gform_custom_merge_tags' ), 10, 4 );
+
+		add_filter( 'gform_replace_merge_tags', array( $this, 'gform_replace_merge_tags' ), 10, 7 );
+
+
 		add_action( 'gform_after_submission', array( $this, 'gform_after_submission' ), 11, 2 );
 
 		add_filter( 'gform_entry_detail_meta_boxes', array( $this, 'gform_entry_detail_meta_boxes' ), 10, 3 );
@@ -261,9 +266,9 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	}
 
 	/**
-	 * @see GFAddOn::init_admin()
+	 * @see    GFAddOn::init_admin()
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 *
 	 * @author Naomi C. Bush for gravity+ <support@gravityplus.pro>
 	 */
@@ -271,7 +276,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 		parent::init_admin();
 
-		add_filter( 'gform_custom_merge_tags', array( $this, 'gform_custom_merge_tags' ), 11, 1);
+		add_filter( 'gform_custom_merge_tags', array( $this, 'gform_custom_merge_tags_pdf' ), 11, 1 );
 	}
 
 	/**
@@ -977,6 +982,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 			'name'       => 'sobject_id',
 			'tooltip'    => __( 'Select the field that holds the ID of the Salesforce object you want to update when someone submits this form', 'gravityformssalesforce' ),
 			'required'   => true,
+			'args' => array( 'append_choices' => $this->get_field_map_choices_other_feeds( rgget('id' ) ) ),
 			'dependency' => array( 'field' => 'action', 'values' => array( 'update' ) )
 
 		);
@@ -1018,21 +1024,21 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 		);
 
 		$feed_field_other_fields = array(
-			'label'       => __( 'Other Fields', 'gravityformssalesforce' ),
-			'type'        => 'generic_map',
-			'name'        => 'other_fields',
-			'tooltip'     => __( 'Select your Salesforce field name, then select the form field with the value for that field', 'gravityformssalesforce' ),
-			'field_map'   => $fields_to_map[ 'other' ],
+			'label'             => __( 'Other Fields', 'gravityformssalesforce' ),
+			'type'              => 'generic_map',
+			'name'              => 'other_fields',
+			'tooltip'           => __( 'Select your Salesforce field name, then select the form field with the value for that field', 'gravityformssalesforce' ),
+			'field_map'         => $fields_to_map[ 'other' ],
 			'enable_custom_key' => false,
-			'key_field'   => array(
-				'title'        => esc_html__( 'Salesforce Field', 'gravityformssalesforce' ),
+			'key_field'         => array(
+				'title' => esc_html__( 'Salesforce Field', 'gravityformssalesforce' ),
 			),
-			'value_field' => array(
+			'value_field'       => array(
 				'choices'      => 'form_fields',
 				'custom_value' => true,
 			),
-			'merge_tags'  => true,
-			'save_callback' => array( $this, 'save_feed_other_fields' )
+			'merge_tags'        => true,
+			'save_callback'     => array( $this, 'save_feed_other_fields' )
 		);
 
 		$feed_field_conditional_logic = array(
@@ -1363,29 +1369,38 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	 */
 	public function get_field_map_choices_other_feeds( $form_id ) {
 
-		global $gravityformssalesforce;
-
-		$addon_object = $gravityformssalesforce->get_addon_object();
-
-
 		$other_feeds_choices = array();
 
-		$feeds = $addon_object->get_feeds_by_slug( GFP_SALESFORCE_SLUG, $form_id );
+		$feeds = $this->get_active_feeds( $form_id );
 
 		foreach ( $feeds as $feed ) {
 
-			if ( $addon_object->get_current_feed_id() !== $feed[ 'id' ] ) {
+			if ( $feed[ 'id' ] == $this->get_current_feed_id() ) {
 
-				$feed_name = rgars( $feed, 'meta/feedName' );
-
-				$shortened_feed_name = substr( trim( $feed_name ), 0, 20 );
-
-				$other_feeds_choices[] = array(
-					'value' => "feed_{$feed['id']}",
-					'label' => sprintf( __( ' %s Feed ', 'gravityformssalesforce' ), $shortened_feed_name ) . '(' . __( 'Created ID', 'gravityformssalesforce' ) . ')'
-				);
-
+				continue;
 			}
+
+			if ( 'create' !== rgars( $feed, 'meta/action' ) ) {
+
+				continue;
+			}
+
+			$sobject = rgars( $feed, 'meta/sobject' );
+
+			if ( 'Attachment' == $sobject ) {
+
+				continue;
+			}
+
+			$feed_name = rgars( $feed, 'meta/feedName' );
+
+			$shortened_feed_name = substr( trim( $feed_name ), 0, 20 );
+
+			$other_feeds_choices[] = array(
+				'value' => "feed_{$feed['id']}",
+				'label' => sprintf( __( ' %s Feed ', 'gravityformssalesforce' ), $shortened_feed_name ) . '(' . __( 'Created ID', 'gravityformssalesforce' ) . ')'
+			);
+
 		}
 
 		return $other_feeds_choices;
@@ -1513,9 +1528,9 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	 *
 	 * Also update former dynamic_field_map feed settings to new format, for backwards compatibility
 	 *
-	 * @see GFAddOn::settings_generic_map
+	 * @see    GFAddOn::settings_generic_map
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 *
 	 * @author Naomi C. Bush for gravity+ <support@gravityplus.pro>
 	 *
@@ -1528,25 +1543,25 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 		$feed = $this->get_current_feed();
 
-		if ( ! empty( $feed['meta']['other_fields'] ) ) {
+		if ( ! empty( $feed[ 'meta' ][ 'other_fields' ] ) ) {
 
 			$added_custom_value = false;
 
-			foreach( $feed['meta']['other_fields'] as $array_position => $other_field_data ) {
+			foreach ( $feed[ 'meta' ][ 'other_fields' ] as $array_position => $other_field_data ) {
 
 				if ( ! array_key_exists( 'custom_value', $other_field_data ) ) {
 
-					$feed['meta']['other_fields'][ $array_position ]['custom_value'] = '';
+					$feed[ 'meta' ][ 'other_fields' ][ $array_position ][ 'custom_value' ] = '';
 
 					$added_custom_value = true;
 				}
 			}
 
-			if ( $added_custom_value ){
+			if ( $added_custom_value ) {
 
-				$this->update_feed_meta( $feed['id'], $feed['meta'] );
+				$this->update_feed_meta( $feed[ 'id' ], $feed[ 'meta' ] );
 
-				$this->set_settings( $feed['meta'] );
+				$this->set_settings( $feed[ 'meta' ] );
 
 			}
 
@@ -1590,25 +1605,25 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	 *
 	 * @return mixed
 	 */
-	public function gform_custom_merge_tags( $custom_tags ) {
+	public function gform_custom_merge_tags_pdf( $custom_tags ) {
 
 		if ( ! $this->is_detail_page() ) {
 
 			return $custom_tags;
 		}
 
-		foreach( $custom_tags as $index => $tag_info ) {
+		foreach ( $custom_tags as $index => $tag_info ) {
 
-			if ( false !== strpos( $tag_info['tag'], ':pdf:') ) {
+			if ( false !== strpos( $tag_info[ 'tag' ], ':pdf:' ) ) {
 
-				unset( $custom_tags[$index] );
+				unset( $custom_tags[ $index ] );
 
 			}
 
 		}
 
 
-		return $custom_tags;
+		return array_values( $custom_tags );
 	}
 
 	/**
@@ -1663,7 +1678,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	/**
 	 * Convert any single merge tag fields to mapped field instead of merge tag
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 *
 	 * @author Naomi C. Bush for gravity+ <support@gravityplus.pro>
 	 *
@@ -1674,25 +1689,25 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	 */
 	public function save_feed_other_fields( $field, $field_setting ) {
 
-		foreach( $field_setting as &$mapping ) {
+		foreach ( $field_setting as &$mapping ) {
 
-			if ( ( 'gf_custom' == $mapping['value'] ) && ( 1 == substr_count( $mapping['custom_value'], '{' ) ) ) {
+			if ( ( 'gf_custom' == $mapping[ 'value' ] ) && ( 1 == substr_count( $mapping[ 'custom_value' ], '{' ) ) ) {
 
-				preg_match_all( '/{[^{]*?:(\d+(\.\d+)?)(:(.*?))?}/mi', $mapping['custom_value'], $matches, PREG_SET_ORDER );
+				preg_match_all( '/{[^{]*?:(\d+(\.\d+)?)(:(.*?))?}/mi', $mapping[ 'custom_value' ], $matches, PREG_SET_ORDER );
 
 				if ( is_array( $matches ) ) {
 
 					foreach ( $matches as $match ) {
 
-						$input_id = $match[1];
+						$input_id = $match[ 1 ];
 
 						$field = RGFormsModel::get_field( $this->get_current_form(), $input_id );
 
 						if ( $field ) {
 
-							$mapping['value'] = $input_id;
+							$mapping[ 'value' ] = $input_id;
 
-							$mapping['custom_value'] = '';
+							$mapping[ 'custom_value' ] = '';
 
 						}
 
@@ -2157,7 +2172,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 		}
 
 
-		return $this->format_field_value_for_sf( $form, $field_id, $field_value, $addl['type'] );
+		return $this->format_field_value_for_sf( $form, $field_id, $field_value, $addl[ 'type' ] );
 
 	}
 
@@ -2233,6 +2248,16 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 			return $field_value;
 
+		}
+
+		if ( ( 'time' == $sf_field_type ) && ( 'time' == $field->type ) ){
+
+			$time = new DateTime( $field_value );
+
+			$field_value = $time->format( 'H:i:s.v' );
+
+
+			return $field_value;
 		}
 
 
@@ -2472,11 +2497,11 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	/**
 	 * Modify parent to send SF field type to get_field_value
 	 *
-	 * @see parent
+	 * @see   parent
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param array $feed
+	 * @param array  $feed
 	 * @param string $field_name
 	 * @param array  $form
 	 * @param array  $entry
@@ -2493,15 +2518,15 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 			foreach ( $generic_fields as $generic_field ) {
 
-				$field_key = $generic_field['key'];
+				$field_key = $generic_field[ 'key' ];
 
-				if ( 'gf_custom' === $generic_field['value'] ) {
+				if ( 'gf_custom' === $generic_field[ 'value' ] ) {
 
-					$field_value = empty( $form ) ? $generic_field['custom_value'] : $this->replace_variables( $generic_field['custom_value'], $form, $entry, false, false, false, 'text' );
+					$field_value = empty( $form ) ? $generic_field[ 'custom_value' ] : $this->replace_variables( $generic_field[ 'custom_value' ], $form, $entry, false, false, false, 'text' );
 
 				} else {
 
-					$field_value = empty( $form ) ? $generic_field['value'] : $this->get_field_value( $form, $entry, $generic_field['value'], array( 'type' => $generic_field[ 'type' ] ) );
+					$field_value = empty( $form ) ? $generic_field[ 'value' ] : $this->get_field_value( $form, $entry, $generic_field[ 'value' ], array( 'type' => $generic_field[ 'type' ] ) );
 
 				}
 
@@ -2593,7 +2618,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 	 * A modified version of GFCommon::replace_variables that allows us to only process the tags we want
 	 * and handle any additional formatting
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 *
 	 * @author Naomi C. Bush for gravity+ <support@gravityplus.pro>
 	 *
@@ -2614,7 +2639,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 		$data = apply_filters( 'gform_merge_tag_data', $data, $text, $form, $lead );
 
-		$lead = $data['entry'];
+		$lead = $data[ 'entry' ];
 
 		$text = $format == 'html' && $nl2br ? nl2br( $text ) : $text;
 		$text = apply_filters( 'gform_pre_replace_merge_tags', $text, $form, $lead, $url_encode, $esc_html, $nl2br, $format );
@@ -2651,7 +2676,7 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 			foreach ( $matches as $match ) {
 
-				$input_id = $match[1];
+				$input_id = $match[ 1 ];
 
 				$text = GFCommon::replace_field_variable( $text, $form, $lead, $url_encode, $esc_html, $nl2br, $format, $input_id, $match );
 
@@ -2667,8 +2692,8 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 		$entry_url = get_bloginfo( 'wpurl' ) . '/wp-admin/admin.php?page=gf_entries&view=entry&id=' . rgar( $form, 'id' ) . '&lid=' . rgar( $lead, 'id' );
 
-		$entry_url      = esc_url( apply_filters( 'gform_entry_detail_url', $entry_url, $form, $lead ) );
-		$text           = str_replace( '{entry_url}', $url_encode ? urlencode( $entry_url ) : $entry_url, $text );
+		$entry_url = esc_url( apply_filters( 'gform_entry_detail_url', $entry_url, $form, $lead ) );
+		$text      = str_replace( '{entry_url}', $url_encode ? urlencode( $entry_url ) : $entry_url, $text );
 
 		$text = str_replace( '{post_id}', $url_encode ? urlencode( rgar( $lead, 'post_id' ) ) : rgar( $lead, 'post_id' ), $text );
 
@@ -2775,6 +2800,119 @@ class GFP_Salesforce_Addon extends GFFeedAddOn {
 
 		$this->update_processed_feeds_meta( $entry, $delayed_feeds, 'delayed_feeds' );
 
+	}
+
+	/**
+	 * Add merge tags for Salesforce record IDs
+	 *
+	 * @since  1.6.0
+	 *
+	 * @author Naomi C. Bush for gravity+ <support@gravityplus.pro>
+	 *
+	 * @param $merge_tags
+	 * @param $form_id
+	 * @param $fields
+	 * @param $element_id
+	 *
+	 * @return array
+	 */
+	public function gform_custom_merge_tags( $merge_tags, $form_id, $fields, $element_id ) {
+
+		if ( ! GFP_Salesforce_Addon::get_instance()->has_feed( $form_id ) ) {
+
+			return $merge_tags;
+
+		}
+
+		if ( 'form_editor' == GFForms::get_page() ) {
+
+			return $merge_tags;
+
+		}
+
+		if ( $this->_slug == rgget( 'subview' ) ) {
+
+			return $merge_tags;
+		}
+
+		$current_feed_id = $this->get_current_feed_id();
+
+		foreach ( $this->get_active_feeds( $form_id ) as $feed ) {
+
+			if ( $feed[ 'id' ] == $current_feed_id ) {
+
+				continue;
+			}
+
+			if ( 'create' !== rgars( $feed, 'meta/action' ) ) {
+
+				continue;
+			}
+
+			$sobject = rgars( $feed, 'meta/sobject' );
+
+			if ( 'Attachment' == $sobject ) {
+
+				continue;
+			}
+
+			$merge_tags[] = array( 'tag'   => "{salesforce:{$sobject}_{$feed['id']}}",
+			                       'label' => sprintf( __( 'Salesforce Record ID: %s', 'gravityformssalesforce' ), $sobject )
+			);
+
+		}
+
+
+		return $merge_tags;
+	}
+
+	/**
+	 * Replace merge tags
+	 *
+	 * @since  1.6.0
+	 *
+	 * @author Naomi C. Bush for gravity+ <support@gravityplus.pro>
+	 *
+	 * @param $text
+	 * @param $form
+	 * @param $entry
+	 * @param $url_encode
+	 * @param $esc_html
+	 * @param $nl2br
+	 * @param $format
+	 *
+	 * @return mixed
+	 */
+	public function gform_replace_merge_tags( $text, $form, $entry, $url_encode, $esc_html, $nl2br, $format ) {
+
+		if ( empty( $entry ) || empty( $form ) ) {
+
+			return $text;
+
+		}
+
+		preg_match_all( "/\{salesforce:(.*?)\}/", $text, $matches, PREG_SET_ORDER );
+
+		if ( empty( $matches ) ) {
+
+			return $text;
+		}
+
+		$salesforce_meta = gform_get_meta( $entry[ 'id' ], 'gravityformssalesforce_sobject' );
+
+		foreach ( $matches as $match ) {
+
+			$full_tag = $match[ 0 ];
+
+			$meta_key = $match[ 1 ];
+
+			$record_id = rgar( $salesforce_meta, $meta_key );
+
+			$text = str_replace( $full_tag, $record_id, $text );
+		}
+
+
+		return $text;
 	}
 
 	/**

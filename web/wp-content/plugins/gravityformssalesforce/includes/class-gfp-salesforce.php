@@ -66,6 +66,13 @@ class GFP_Salesforce {
 
 		GFAddOn::register( 'GFP_Salesforce_Addon' );
 
+		/**
+		 * Used to make sure all Salesforce Add-Ons are loaded after the main plugin
+		 *
+		 * @since 1.6.0
+		 */
+		do_action( 'gform_salesforce_loaded' );
+
 	}
 
 	/**
