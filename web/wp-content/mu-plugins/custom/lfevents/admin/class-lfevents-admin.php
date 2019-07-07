@@ -253,7 +253,6 @@ class LFEvents_Admin {
 			'light-yellow' => '#b0b000',
 			'light-gold' => '#c29b00',
 			'light-orange' => '#c2770e',
-			'light-umber' => '#A04000',
 			'light-umber' => '#b8510d',
 			'light-red'   => '#922B21',
 		);
