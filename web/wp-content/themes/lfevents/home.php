@@ -24,27 +24,32 @@ get_header(); ?>
 
 <div class="main-container xlarge-padding-bottom">
 
-	<div class="home-hero">
-		<div class="bg-animation"></div>
-		<div class="grid-container">
-			<?php
-			// Top homepage content.
-			$query = new WP_Query(
-				array(
-					'post_type' => 'lfe_about_page',
-					'name' => 'homepage',
-				)
-			);
-			if ( $query->have_posts() ) {
-				while ( $query->have_posts() ) {
-					$query->the_post();
-					the_content();
-				}
-				wp_reset_postdata();
-			}
+	<?php
+	// Top homepage content.
+	$query = new WP_Query(
+		array(
+			'post_type' => 'lfe_about_page',
+			'name' => 'homepage',
+		)
+	);
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
 			?>
-		</div>
-	</div>
+			<div class="home-hero">
+				<div class="bg-image" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>);"></div>
+				<div class="bg-animation"></div>
+				<div class="grid-container">
+					<?php
+					the_content();
+					?>
+				</div>
+			</div>
+			<?php
+		}
+		wp_reset_postdata();
+	}
+	?>
 
 	<div class="grid-container xlarge-padding-bottom">
 		<div class="grid-x grid-margin-x">

@@ -13,9 +13,21 @@
     z-index: 1;
   }
 
+  .bg-image {
+    background-size: cover;
+    mix-blend-mode: soft-light;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    opacity: 0.4;
+  }
+
   .grid-container {
     position: relative;
-    z-index: 3;
+    z-index: 4;
     color: $white;
   }
 
@@ -37,8 +49,8 @@
   }
 
   &::before {
-    background-color: rgba(90,180,100,0.6);
-    background: linear-gradient(90deg, rgba(20,90,30,0.6) 0%, rgba(140,200,160,0.6) 100%);
+    background-color: rgba(90,180,100,0.7);
+    background: linear-gradient(90deg, rgba(20,90,30,0.7) 0%, rgba(140,200,160,0.7) 100%);
     clip-path: polygon(
       0 0,
       100% 0,
@@ -50,8 +62,8 @@
   }
 
   .bg-animation::before {
-    background-color: rgba(160,80,100,0.6);
-    background: linear-gradient(90deg, rgba(170,90,110,0.6) 0%, rgba(90,10,30,0.6) 100%);
+    background-color: rgba(160,80,100,0.7);
+    background: linear-gradient(90deg, rgba(170,90,110,0.7) 0%, rgba(90,10,30,0.7) 100%);
     clip-path: polygon(
       0 0,
       100% 0,
@@ -62,8 +74,8 @@
   }
 
   .bg-animation::after {
-    background-color: rgba(90,100,180,0.6);
-    background: linear-gradient(90deg, rgba(20,30,100,0.6) 0%, rgba(120,130,190,0.6) 100%);
+    background-color: rgba(90,100,180,0.7);
+    background: linear-gradient(90deg, rgba(20,30,100,0.7) 0%, rgba(120,130,190,0.7) 100%);
     clip-path: polygon(
       0 0,
       100% 0,
