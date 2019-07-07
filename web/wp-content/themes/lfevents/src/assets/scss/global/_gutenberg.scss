@@ -118,7 +118,9 @@ body .main-container .main-grid .wp-block-gallery {
 		}
 	}
 
-	&.large img { max-width: 100%; }
-	&.medium img { max-width: 85%; }
-	&.small img { max-width: 70%; }
+	@include breakpoint(large) {
+		&.large img { max-width: 100%; }
+		&.medium img { max-width: 85%; }
+		&.small img { max-width: 70%; }
+	}
 }
