@@ -37,7 +37,7 @@ get_header(); ?>
 			$query->the_post();
 			?>
 			<div class="home-hero">
-				<div class="bg-image" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>);"></div>
+				<div class="bg-image" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div>
 				<div class="bg-animation"></div>
 				<div class="grid-container">
 					<?php
