@@ -17,13 +17,7 @@
 function lfe_get_related_events( $parent_id ) {
 	$related_events = [];
 
-	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
-
-	if ( 0 != $term[0]->parent ) {
-		$term = $term[0]->parent;
-	} else {
-		$term = $term[0]->term_id;
-	}
+	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
 
 	$args = array(
 		'post_type'   => 'page',
@@ -36,7 +30,7 @@ function lfe_get_related_events( $parent_id ) {
 			array(
 				'taxonomy' => 'lfevent-category',
 				'field'    => 'term_id',
-				'terms'    => $term,
+				'terms'    => $term[0],
 			),
 		),
 	);
@@ -111,7 +105,9 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
 	}
 
-	echo '<li><a href="' . esc_url( home_url( '/about/events-calendar/' ) ) . '">Past Events</a></li>'; //phpcs:ignore
+	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
+
+	echo '<li><a href="' . esc_url( home_url( '/about/events-calendar-archive/?_sft_lfevent-category=' . $term[0]->slug ) ) . '">Past Events</a></li>'; //phpcs:ignore
 
 	echo '</ul></li>';
 }
