@@ -1,0 +1,93 @@
+// --------------------------------------------------
+// Base: Typography
+// --------------------------------------------------
+
+//
+// Headings
+// --------------------------------------------------
+.header-xxlarge { @extend h1; }
+.header-xlarge {  @extend h2; }
+.header-large {   @extend h3; }
+.header-medium {  @extend h4; }
+.header-small {   @extend h5; }
+.header-tiny {    @extend h6; }
+
+h6,
+.header-tiny {
+  text-transform: uppercase;
+  font-weight: $global-weight-normal;
+  margin-bottom: 0.5em;
+}
+
+
+//
+// Buttons
+// --------------------------------------------------
+button {
+  cursor: pointer;
+}
+
+.button.gray {
+  background-color: $white-smoke;
+  color: darken($primary-color, 10%);
+
+  &:hover {
+    background-color: darken($white-smoke, 10%);
+    color: darken($primary-color, 20%);
+  }
+}
+
+
+//
+// Typography helper classes
+// --------------------------------------------------
+.font-default { font-family: $body-font-family; }
+.font-mono { font-family: $font-family-monospace; }
+
+.nowrap,
+.no-wrap {
+  white-space: nowrap;
+}
+
+.text-xxlarge { font-size: rem-calc(34); }
+.text-xlarge { font-size: rem-calc(25); }
+.text-large { font-size: rem-calc(20); }
+.text-medium { font-size: 1rem; }
+.text-small { font-size: rem-calc(13); }
+.text-tiny { font-size: rem-calc(10); }
+
+.text-weight-normal {
+  font-weight: $global-weight-normal;
+}
+
+.text-weight-bold {
+  font-weight: $global-weight-bold;
+}
+
+
+//
+// Blockquotes
+// --------------------------------------------------
+blockquote {
+
+  cite {
+    opacity: 0.75;
+  }
+}
+
+
+//
+// Lists
+// --------------------------------------------------
+dd + dt {
+  margin-top: $defnlist-term-margin-bottom;
+}
+
+
+//
+// Inputs
+// --------------------------------------------------
+::-ms-clear {
+  // nix IE's default clear buttons
+  display: none;
+}
