@@ -90,24 +90,35 @@ Frontend styles for gutenberg blocks
 body .main-container .main-grid .wp-block-gallery {
 	@include flex-align(center, null);
 
-	&.large { @include xy-grid-layout(1, '.blocks-gallery-item'); }
-	&.medium { @include xy-grid-layout(2, '.blocks-gallery-item'); }
-	&.small { @include xy-grid-layout(2, '.blocks-gallery-item'); }
-
-	@include breakpoint(medium) {
-		&.large { @include xy-grid-layout(2, '.blocks-gallery-item'); }
+	@for $i from 1 through 9 {
+		&.gallery-columns-#{$i} {
+			@include xy-grid-layout(2, '.blocks-gallery-item', true);
+		}
+		@include breakpoint(medium){
+			&.gallery-columns-#{$i} {
+				@include xy-grid-layout(4, '.blocks-gallery-item', true, (small: 30px));
+			}
+		}
+		@include breakpoint(large) {
+			&.gallery-columns-#{$i} {
+				@include xy-grid-layout($i, '.blocks-gallery-item', true, (small: 30px));
+			}
+		}
 	}
 
-	@include breakpoint(large) {
-		&.large { @include xy-grid-layout(3, '.blocks-gallery-item'); }
-		&.medium { @include xy-grid-layout(4, '.blocks-gallery-item'); }
-		&.small { @include xy-grid-layout(5, '.blocks-gallery-item'); }
-		// &.columns-6 { @include xy-grid-layout(4, '.blocks-gallery-item'); }
-	}
-
-  .blocks-gallery-item {
-    @include xy-gutters(3rem, padding, top left bottom right);
+	.blocks-gallery-item {
+		@include xy-gutters(3rem, padding, top left bottom right);
 		margin: 0 !important;
-    flex: 0 1 auto;
-  }
+		flex: 0 1 auto;
+
+		a, img, figure {
+			object-fit: contain;
+			display: flex;
+			justify-content: center;
+		}
+	}
+
+	&.large img { max-width: 100%; }
+	&.medium img { max-width: 85%; }
+	&.small img { max-width: 70%; }
 }
