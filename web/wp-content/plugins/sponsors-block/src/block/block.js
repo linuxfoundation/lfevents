@@ -188,7 +188,7 @@ registerBlockType( 'cgb/sponsors-block', {
 
         //JSX to return
         return (
-			<ul className={'wp-block-gallery alignwide columns-' + columns + ' is-cropped '}>{ displayImages(images) }</ul>
+			<ul className={'wp-block-gallery alignwide columns-' + columns + ' is-cropped ' + size}>{ displayImages(images) }</ul>
         );
 
     },
