@@ -357,7 +357,8 @@ class GF_Query_Condition {
 
 				if ( $this->left instanceof GF_Query_Column && $this->left->is_nullable_entry_column() ) {
 					if ( ( $this->operator == self::EQ && empty ( $this->right->value ) ) || ( $this->operator == self::NEQ && ! empty ( $this->right->value ) ) ) {
-						$right .= ' OR ' . $left . ' IS NULL';
+						$right .= ' OR ' . $left . ' IS NULL)';
+						$left = "($left";
 					}
 				}
 

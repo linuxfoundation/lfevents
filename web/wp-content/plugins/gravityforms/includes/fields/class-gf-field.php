@@ -253,7 +253,8 @@ class GF_Field extends stdClass implements ArrayAccess {
 
 		$field_label = $this->get_field_label( $force_frontend_label, $value );
 
-		$validation_message = ( $this->failed_validation && ! empty( $this->validation_message ) ) ? sprintf( "<div class='gfield_description validation_message'>%s</div>", $this->validation_message ) : '';
+		$validation_message_id = 'validation_message_' . $form['id'] . '_' . $this->id;
+		$validation_message = ( $this->failed_validation && ! empty( $this->validation_message ) ) ? sprintf( "<div id='%s' class='gfield_description validation_message' aria-live='polite'>%s</div>", $validation_message_id, $this->validation_message ) : '';
 
 		$is_form_editor  = $this->is_form_editor();
 		$is_entry_detail = $this->is_entry_detail();
@@ -1030,6 +1031,15 @@ class GF_Field extends stdClass implements ArrayAccess {
 	 * @return array|string
 	 */
 	public function get_value_default_if_empty( $value ) {
+
+		if ( is_array( $this->inputs ) && is_array( $value ) ) {
+			$defaults = $this->get_value_default();
+			foreach( $value as $index => &$input_value ) {
+				if ( rgblank( $input_value ) ) {
+					$input_value = rgar( $defaults, $index );
+				}
+			}
+		}
 
 		if ( ! GFCommon::is_empty_array( $value ) ) {
 			return $value;
