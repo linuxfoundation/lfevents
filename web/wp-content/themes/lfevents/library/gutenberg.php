@@ -164,7 +164,7 @@ if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
 					'name'    => __( 'Light Red', 'foundationpress' ),
 					'slug'    => 'light-red',
 					'color'   => '#922B21',
-				)
+				),
 			)
 		);
 
