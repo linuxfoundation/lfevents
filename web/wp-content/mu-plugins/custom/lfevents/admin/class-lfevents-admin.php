@@ -551,7 +551,7 @@ class LFEvents_Admin {
 			'id_prefix'       => 'lfes_',
 			'label'           => __( 'Speaker Details' ),
 			'post_type'       => array( 'lfe_speaker' ),
-			'data_key_prefix' => 'lfes_',
+			'data_key_prefix' => 'lfes_speaker_',
 			'icon_dashicon'   => 'admin-users',
 			'tabs'            => array(
 				array(
