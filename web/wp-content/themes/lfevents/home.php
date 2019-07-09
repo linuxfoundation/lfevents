@@ -60,6 +60,10 @@ get_template_part( 'template-parts/global-nav' );
 							$query->the_post();
 							$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
 							$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+							$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
+							$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
+							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+
 							?>
 							<article id="post-<?php the_ID(); ?>" class="cell large-6">
 								<div class="callout large-margin-bottom">
@@ -86,6 +90,19 @@ get_template_part( 'template-parts/global-nav' );
 											echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country );
 										}
 										echo '</small>';
+										?>
+									</p>
+									<p>
+										<?php
+										if ( $register_url ) {
+											echo '<a href="' . esc_url( $register_url ) . '">Register</a>';
+										}
+										if ( $speak_url ) {
+											echo '<a href="' . esc_url( $speak_url ) . '">Speak</a>';
+										}
+										if ( $sponsor_url ) {
+											echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+										}
 										?>
 									</p>
 								</div>

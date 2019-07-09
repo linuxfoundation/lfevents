@@ -270,6 +270,7 @@ class LFEvents_Admin {
 					'panels' => array(
 						array(
 							'label'    => __( 'General Settings' ),
+							'initial_open' => false,
 							'settings' => array(
 								array(
 									'type'          => 'text', // Required.
@@ -352,6 +353,7 @@ class LFEvents_Admin {
 						),
 						array(
 							'label'    => __( 'Call for Proposal' ),
+							'initial_open' => false,
 							'settings' => array(
 								array(
 									'type'          => 'checkbox', // Required.
@@ -404,6 +406,7 @@ class LFEvents_Admin {
 						),
 						array(
 							'label'    => __( 'Colors' ),
+							'initial_open' => false,
 							'settings' => array(
 								array(
 									'type'          => 'color',
@@ -464,6 +467,7 @@ class LFEvents_Admin {
 						),
 						array(
 							'label'    => __( 'Social' ),
+							'initial_open' => false,
 							'settings' => array(
 								array(
 									'type'            => 'image', // Required.
@@ -534,6 +538,46 @@ class LFEvents_Admin {
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://twitter.com/CloudNativeFdn' ),
+								),
+							),
+						),
+						array(
+							'label'    => __( 'Homepage' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'cta_register_url',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_register_url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'CTA Register URL' ),
+									'help'			=> __( 'The CTA buttons will only appear when a url is provided.' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/register/' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'cta_speak_url',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_speak_url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'CTA Speak URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/cfp/' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'cta_sponsor_url',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_sponsor_url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'CTA Sponsor URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/sponsors/become-and-sponsor/' ),
 								),
 							),
 						),
