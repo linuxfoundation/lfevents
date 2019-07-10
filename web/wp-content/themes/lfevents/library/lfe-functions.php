@@ -278,7 +278,7 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 		$start_date_pretty = $start_date->format( 'M j' );
 		$end_date_pretty = $end_date->format( 'jS, Y' );
 		// If years differ add suffix and year to start_date.
-		if ( $start_date->format( 'Y' )  != $end_date->format( 'Y' ) ) {
+		if ( $start_date->format( 'Y' ) != $end_date->format( 'Y' ) ) {
 			$start_date_pretty .= $start_date->format( 'S, Y' );
 		}
 

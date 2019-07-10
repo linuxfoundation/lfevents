@@ -90,17 +90,17 @@ get_template_part( 'template-parts/global-nav' );
 										echo '<a class="card-header-link" href="' . get_the_permalink( $post->ID ) . '">'; //phpcs:ignore
 									}
 
-										echo $event_title_content;
+									echo esc_html( $event_title_content );
 
-										echo '<span class="date">';
-										echo jb_verbose_date_range( $dt_date_start, $dt_date_end );
-										echo '</span>';
+									echo '<span class="date">';
+									echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
+									echo '</span>';
 
-										$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
-										if ( $country ) {
-											$country = $country[0]->name;
-											echo '<span class="country">' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country ) . '</span>';
-										}
+									$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+									if ( $country ) {
+										$country = $country[0]->name;
+										echo '<span class="country">' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country ) . '</span>';
+									}
 
 									if ( 'publish' == $post->post_status ) {
 										echo '</a>'; //phpcs:ignore
