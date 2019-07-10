@@ -90,7 +90,7 @@ get_template_part( 'template-parts/global-nav' );
 										echo '<a class="card-header-link" href="' . get_the_permalink( $post->ID ) . '">'; //phpcs:ignore
 									}
 
-									echo esc_html( $event_title_content );
+									echo $event_title_content; //phpcs:ignore
 
 									echo '<span class="date">';
 									echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
