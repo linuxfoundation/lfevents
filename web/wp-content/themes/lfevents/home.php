@@ -64,47 +64,69 @@ get_template_part( 'template-parts/global-nav' );
 							$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 
+							$menu_color = get_post_meta( $post->ID, 'lfes_menu_color', true );
+							$menu_color_2 = get_post_meta( $post->ID, 'lfes_menu_color_2', true );
+							$menu_color_3 = get_post_meta( $post->ID, 'lfes_menu_color_3', true );
+							$menu_text_color = get_post_meta( $post->ID, 'lfes_menu_text_color', true );
+							$background_style = 'background-color: ' . $menu_color . ';';
+							if ( $menu_color_2 ) {
+								$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+							}
+							$text_style = 'color: ' . $menu_text_color . ';';
+
+							$logo = get_post_meta( $post->ID, 'lfes_' . $menu_text_color . '_logo', true );
+							if ( $logo ) {
+								$event_title_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $post->ID ) . '">';  //phpcs:ignore
+							} else {
+								$event_title_content = get_the_title( $post->ID );
+							}
+
 							?>
-							<article id="post-<?php the_ID(); ?>" class="cell large-6">
-								<div class="callout large-margin-bottom">
-									<h4 class="h5 no-margin"><strong>
+							<article id="post-<?php the_ID(); ?>" class="cell large-6 home-card large-margin-bottom" style="<?php echo esc_html( $background_style . $text_style ); ?>">
+								<div class="bg-image" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div>
+								<div class="card-header">
 									<?php
 									if ( 'publish' == $post->post_status ) {
-										echo '<a href="' . get_the_permalink() . '">' . get_the_title() . '</a>'; //phpcs:ignore
-									} else {
-										the_title();
+										echo '<a class="card-header-link" href="' . get_the_permalink( $post->ID ) . '">'; //phpcs:ignore
 									}
-									?>
-									</strong></h4>
-									<p>
-										<?php
-										echo '<small>';
+
+										echo $event_title_content;
+
+										echo '<span class="date">';
 										if ( $dt_date_start != $dt_date_end ) {
 											echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
 										} else {
 											echo esc_html( $dt_date_start->format( 'm/j/Y' ) );
 										}
+										echo '</span>';
+
 										$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 										if ( $country ) {
 											$country = $country[0]->name;
-											echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country );
+											echo '<span class="country">' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country ) . '</span>';
 										}
-										echo '</small>';
-										?>
-									</p>
-									<p>
-										<?php
-										if ( $register_url ) {
-											echo '<a href="' . esc_url( $register_url ) . '">Register</a>';
-										}
-										if ( $speak_url ) {
-											echo '<a href="' . esc_url( $speak_url ) . '">Speak</a>';
-										}
-										if ( $sponsor_url ) {
-											echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
-										}
-										?>
-									</p>
+
+									if ( 'publish' == $post->post_status ) {
+										echo '</a>'; //phpcs:ignore
+									}
+									?>
+								</div>
+								<div class="card-footer">
+									<?php if ( $register_url || $speak_url || $sponsor_url ) { ?>
+										<div class="links" style="<?php echo esc_html( $background_style . $text_style ); ?>">
+											<?php
+											if ( $register_url ) {
+												echo '<a class="link" href="' . esc_url( $register_url ) . '">Register</a>';
+											}
+											if ( $speak_url ) {
+												echo '<a class="link" href="' . esc_url( $speak_url ) . '">Speak</a>';
+											}
+											if ( $sponsor_url ) {
+												echo '<a class="link" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+											}
+											?>
+										</div>
+									<?php } ?>
 								</div>
 							</article>
 							<?php
