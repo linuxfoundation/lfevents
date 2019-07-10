@@ -258,3 +258,46 @@ EOD;
 		echo $analytics_code; //phpcs:ignore
 	}
 }
+
+/**
+ * Makes the date pretty.  Adapted from https://9seeds.com/pretty-php-date-ranges/.
+ *
+ * @param datetime $start_date The start date.
+ * @param datetime $end_date The end date.
+ */
+function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
+
+	$date_range = '';
+
+	// If only one date, or dates are the same set to FULL verbose date.
+	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
+		$start_date_pretty = $start_date->format( 'M jS, Y' );
+		$end_date_pretty = $end_date->format( 'M jS, Y' );
+	} else {
+		 // Setup basic dates.
+		$start_date_pretty = $start_date->format( 'M j' );
+		$end_date_pretty = $end_date->format( 'jS, Y' );
+		// If years differ add suffix and year to start_date.
+		if ( $start_date->format( 'Y' )  != $end_date->format( 'Y' ) ) {
+			$start_date_pretty .= $start_date->format( 'S, Y' );
+		}
+
+		// If months differ add suffix and year to end_date.
+		if ( $start_date->format( 'M' ) != $end_date->format( 'M' ) ) {
+			$end_date_pretty = $end_date->format( 'M ' ) . $end_date_pretty;
+		}
+	}
+
+	// build date_range return string.
+	if ( ! empty( $start_date ) ) {
+		  $date_range .= $start_date_pretty;
+	}
+
+	// check if there is an end date and append if not identical.
+	if ( ! empty( $end_date ) ) {
+		if ( $end_date_pretty != $start_date_pretty ) {
+			  $date_range .= ' - ' . $end_date_pretty;
+		}
+	}
+	return $date_range;
+}
