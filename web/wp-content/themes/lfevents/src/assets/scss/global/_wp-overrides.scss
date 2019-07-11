@@ -55,3 +55,7 @@ p.wp-caption-text{
     @include thumbnail;
   }
 }
+
+body.page main img:first-of-type {
+  min-height: 204px;
+}
