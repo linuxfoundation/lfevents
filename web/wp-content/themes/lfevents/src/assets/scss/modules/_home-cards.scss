@@ -1,6 +1,17 @@
 .home-card {
   position: relative;
   text-align: center;
+  border-radius: rem-calc(6);
+  margin-bottom: 1rem;
+
+  @include breakpoint(large) {
+    border: 0.25rem solid $white;
+    margin-bottom: 0;
+  }
+
+  @include breakpoint(xxlarge) {
+    border: 0.125rem solid $white;
+  }
 
   .bg-image {
     background-size: cover;
@@ -15,22 +26,24 @@
     opacity: 0.5;
   }
 
-  .card-header-link {
-    display: block;
-    color: inherit;
-    margin: -8%;
-    padding: 8%;
-  }
-
   .card-header {
     position: relative;
     z-index: 2;
     padding: 8%;
   }
 
+  .card-header-link {
+    display: block;
+    color: inherit;
+  }
+
+  .meta-container {
+    display: block;
+    padding-top: 6%;
+  }
+
   .date {
     display: block;
-    padding-top: 8%;
     font-weight: $global-weight-bold;
   }
 
@@ -42,6 +55,7 @@
     position: relative;
     z-index: 2;
     padding: 0.75rem;
+    margin-top: -4%;
 
     .links {
       @include button-group('.link', 0);
