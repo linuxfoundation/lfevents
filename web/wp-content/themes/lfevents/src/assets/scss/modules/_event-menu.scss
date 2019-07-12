@@ -10,6 +10,7 @@
   display: block;
   width: auto;
   max-height: 4rem;
+  min-height: 4rem;
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
 }
@@ -91,7 +92,6 @@
 
   img {
     transition: transform 0.2s ease-in-out 0s;
-    min-height: 64px;
   }
 }
 
