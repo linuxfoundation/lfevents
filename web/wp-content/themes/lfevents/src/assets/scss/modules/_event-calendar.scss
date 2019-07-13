@@ -46,6 +46,10 @@
         margin: 0 0 1rem;
       }
 
+      input:focus {
+        box-shadow: none;
+      }
+
       .chosen-container {
         width: 100% !important;
         font-size: inherit;
