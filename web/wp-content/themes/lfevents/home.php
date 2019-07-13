@@ -91,21 +91,21 @@ get_template_part( 'template-parts/global-nav' );
 									echo '<div class="card-header">';
 								}
 
-									echo '<span class="logo-container">' . $event_title_content . '</span>'; //phpcs:ignore
+								echo '<span class="logo-container">' . $event_title_content . '</span>'; //phpcs:ignore
 
-									echo '<span class="meta-container">';
+								echo '<span class="meta-container">';
 
-										echo '<span class="date">';
-										echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
-										echo '</span>';
+								echo '<span class="date">';
+								echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
+								echo '</span>';
 
-										$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
-										if ( $country ) {
-											$country = $country[0]->name;
-											echo '<span class="country">' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country ) . '</span>';
-										}
+								$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+								if ( $country ) {
+									$country = $country[0]->name;
+									echo '<span class="country">' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country ) . '</span>';
+								}
 
-									echo '</span>';
+								echo '</span>';
 
 								if ( 'publish' == $post->post_status ) {
 									echo '</a>'; //phpcs:ignore
@@ -115,15 +115,15 @@ get_template_part( 'template-parts/global-nav' );
 
 								if ( $register_url || $speak_url || $sponsor_url ) {
 									echo '<div class="card-footer"><div class="links" style="' . esc_html( $background_style . $text_style ) . '">';
-										if ( $register_url ) {
-											echo '<a class="link" href="' . esc_url( $register_url ) . '">Register</a>';
-										}
-										if ( $speak_url ) {
-											echo '<a class="link" href="' . esc_url( $speak_url ) . '">Speak</a>';
-										}
-										if ( $sponsor_url ) {
-											echo '<a class="link" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
-										}
+									if ( $register_url ) {
+										echo '<a class="link" href="' . esc_url( $register_url ) . '">Register</a>';
+									}
+									if ( $speak_url ) {
+										echo '<a class="link" href="' . esc_url( $speak_url ) . '">Speak</a>';
+									}
+									if ( $sponsor_url ) {
+										echo '<a class="link" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+									}
 									echo '</div></div>';
 								}
 								?>
