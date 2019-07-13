@@ -97,7 +97,9 @@ echo '</div>';
 <script>
 // this script controls the appearence and behavior of the link to navigate between all and just upcoming events.
 $( document ).ready( function() {
-	$( '.event-calendar-container form' ).prepend( '<a class="button expanded" id="switch-archive-view" href="#"></a>' );
+	if ( $( '#switch-archive-view' ).length === 0 ) {
+		$( '.event-calendar-container form' ).prepend( '<a class="button expanded" id="switch-archive-view" href="#"></a>' );
+	}
 	var currentUrl = $( location ).attr( 'href' )
 	if ( -1 == currentUrl.indexOf( 'events-calendar-archive' ) ) {
 		//we are on the event-calendar page.
