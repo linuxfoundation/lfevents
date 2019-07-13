@@ -80,8 +80,24 @@
 
 .nav-previous {
   float:left;
+
+  a::before {
+    content: '\2190';
+    margin-right: 0.25em;
+  }
 }
 
 .nav-next {
   float:right;
+
+    a::after {
+      content: '\2192';
+      margin-left: 0.25em;
+    }
+}
+
+
+.nav-previous a,
+.nav-next a {
+  @include button(false, $off-white, $white-smoke, $primary-color, solid);
 }

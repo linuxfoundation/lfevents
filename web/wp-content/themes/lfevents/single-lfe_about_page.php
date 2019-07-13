@@ -25,7 +25,6 @@ get_template_part( 'template-parts/global-nav' );
 				<?php comments_template(); ?>
 			<?php endwhile; ?>
 		</main>
-		<?php /* get_sidebar(); */ ?>
 	</div>
 </div>
 <?php

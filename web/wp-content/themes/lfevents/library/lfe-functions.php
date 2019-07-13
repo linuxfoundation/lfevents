@@ -301,3 +301,12 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 	}
 	return $date_range;
 }
+
+
+/**
+ * Changes the ellipses after the excerpt.
+ */
+function new_excerpt_more( $more ) {
+	return '<span class="excerpt-ellipses">&hellip;</span>';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
