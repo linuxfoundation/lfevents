@@ -48,6 +48,27 @@
       @include breakpoint(large) {
         @include menu-direction(horizontal);
       }
+
+      > li {
+
+        a {
+          line-height: inherit;
+
+          &:hover {
+            background-color: rgba(0,0,0,0.2);
+            box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+          }
+        }
+
+        @include breakpoint(large) {
+          &.current-menu-item > a {
+            background-color: rgba(0,0,0,0.2);
+            box-shadow: 0 1.5rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+          }
+        }
+
+      }
+
     }
   }
 }
