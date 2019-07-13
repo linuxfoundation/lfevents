@@ -1,0 +1,77 @@
+.event-calendar-year {
+  padding: 0.5rem 1rem;
+  margin-bottom: $global-margin;
+  font-size: rem-calc(20);
+  font-weight: $global-weight-bold;
+  background-color: $charcoal;
+  color: $white;
+}
+
+.callout + .event-calendar-year {
+  margin-top: 2rem;
+}
+
+.event-calendar-month {
+  border-top: $hr-border;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  font-size: rem-calc(25);
+}
+
+.event-calendar-year + .event-calendar-month {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.event-calendar-container {
+
+  @include breakpoint(large) {
+    @include xy-grid($direction:horizontal, $wrap:true);
+    @include xy-gutters($negative:true);
+  }
+
+  form.searchandfilter {
+
+    #switch-archive-view {
+      font-weight: $global-weight-bold;
+      margin-bottom: 2rem;
+    }
+
+    ul {
+      margin-left: 0;
+
+      li {
+        padding: 0;
+        margin: 0 0 1rem;
+      }
+
+      .chosen-container {
+        width: 100% !important;
+        font-size: inherit;
+
+        .chosen-single {
+          border-radius: 0;
+          background: $white;
+        }
+      }
+
+      .search-filter-reset {
+        @include button($expand:true, $background:$white-smoke, $background-hover:$light-gray, $color:$primary-color, $style:solid);
+        margin-top: 2rem;
+      }
+    }
+
+    @include breakpoint(large) {
+      @include xy-cell(4);
+      order: 2;
+    }
+  }
+
+  .search-filter-results {
+    @include breakpoint(large) {
+      @include xy-cell(8);
+      order: 1;
+    }
+  }
+}

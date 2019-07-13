@@ -20,7 +20,7 @@
 	}
 	?>
 	</header>
-	<div class="--entry-content">
+	<div class="">
 		<?php the_content(); ?>
 		<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
 	</div>
