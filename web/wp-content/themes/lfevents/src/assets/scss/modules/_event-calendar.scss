@@ -38,10 +38,10 @@
       margin-bottom: 2rem;
     }
 
-    ul {
+    > ul {
       margin-left: 0;
 
-      li {
+      > li {
         padding: 0;
         margin: 0 0 1rem;
       }
@@ -53,6 +53,11 @@
         .chosen-single {
           border-radius: 0;
           background: $white;
+        }
+
+        .chosen-drop {
+          border-radius: 0;
+          box-shadow: 0 0.25rem 0 0 rgba(0,0,0,0.2);
         }
       }
 
