@@ -95,22 +95,32 @@ echo '</div>';
 ?>
 
 <script>
-// this script controls the appearence and behavior of the link to navigate between all and just upcoming events.
+// this controls the appearence and behavior of the link to navigate between upcoming and past events.
 $( document ).ready( function() {
 	if ( $( '#switch-archive-view' ).length === 0 ) {
-		$( '.event-calendar-container form' ).prepend( '<a class="button expanded" id="switch-archive-view" href="#"></a>' );
+		$( '.event-calendar-container form' ).prepend( `
+			<a class="" id="switch-archive-view" href="#">
+				<span class="switch tiny">
+					<input class="switch-input" type="checkbox" name="switch-archive-view-input" id="switch-archive-view-input">
+					<label class="switch-paddle" for="switch-archive-view-input"><span class="show-for-sr">Toggle Past Events</span></label>
+				</span>
+				<label id="switch-archive-view-label" for="switch-archive-view-input"></label>
+			</a>
+		` );
 	}
 	var currentUrl = $( location ).attr( 'href' )
-	if ( -1 == currentUrl.indexOf( 'events-calendar-archive' ) ) {
+	if ( -1 == currentUrl.indexOf( 'events-calendar/archive' ) ) {
 		//we are on the event-calendar page.
-		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar-archive' );
-		$( 'a#switch-archive-view' ).attr( "href", newUrl );
-		$( 'a#switch-archive-view' ).html( 'Show Past Events' );
+		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar/archive' );
+		$( '#switch-archive-view' ).attr( "href", newUrl );
+		$( '#switch-archive-view-label' ).html( 'Show Past Events' );
+		$( '#switch-archive-view-input' ).prop('checked', false);
 	} else {
-		//we are on the event-calendar-archive page.
-		newUrl = currentUrl.replace( 'events-calendar-archive', 'events-calendar' );
-		$( 'a#switch-archive-view' ).attr( "href", newUrl );
-		$( 'a#switch-archive-view' ).html( 'Show Upcoming Events' );
+		//we are on the event-calendar/archive page.
+		newUrl = currentUrl.replace( 'events-calendar/archive', 'events-calendar' );
+		$( '#switch-archive-view' ).attr( "href", newUrl );
+		$( '#switch-archive-view-label' ).html( 'Show Upcoming Events' );
+		$( '#switch-archive-view-input' ).prop('checked', true);
 	}
 });
 </script>

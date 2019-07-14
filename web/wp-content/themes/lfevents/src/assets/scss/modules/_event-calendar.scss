@@ -34,8 +34,17 @@
   form.searchandfilter {
 
     #switch-archive-view {
-      font-weight: $global-weight-bold;
-      margin-bottom: 2rem;
+      display: block;
+      margin-bottom: $global-margin;
+
+      .switch {
+        float: left;
+        margin-right: 0.5rem;
+      }
+      .switch + label {
+        line-height: rem-calc(24);
+        cursor: pointer;
+      }
     }
 
     > ul {
