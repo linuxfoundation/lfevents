@@ -40,10 +40,12 @@
       .switch {
         float: left;
         margin-right: 0.5rem;
+        pointer-events: none;
       }
       .switch + label {
         line-height: rem-calc(24);
         cursor: pointer;
+        pointer-events: none;
       }
     }
 
