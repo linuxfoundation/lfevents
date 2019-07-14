@@ -305,8 +305,10 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 
 /**
  * Changes the ellipses after the excerpt.
+ *
+ * @param string $more more text.
  */
 function new_excerpt_more( $more ) {
 	return '<span class="excerpt-ellipses">&hellip;</span>';
 }
-add_filter('excerpt_more', 'new_excerpt_more');
+add_filter( 'excerpt_more', 'new_excerpt_more' );

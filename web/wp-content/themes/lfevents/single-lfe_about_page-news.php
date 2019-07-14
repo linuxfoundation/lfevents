@@ -32,17 +32,19 @@ get_template_part( 'template-parts/global-nav' );
 				<div class="alignwide">
 					<div class="grid-x grid-margin-x medium-up-2 large-up-3">
 						<?php
-						query_posts('posts_per_page=9');
-						//The Loop
-						if ( have_posts() ) : while ( have_posts() ) : the_post();
-							echo '<div class="cell callout large-margin-bottom">';
-							echo '<h4 class="no-margin"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>'; //phpcs:ignore
-							echo '<p class="text-small">' . get_the_date() . '</p>'; //phpcs:ignore
-							echo '<p class="">' . get_the_excerpt() . '</p>'; //phpcs:ignore
-							echo '</div>';
-						endwhile; else:
+						query_posts( 'posts_per_page=9' );
+						// The Loop.
+						if ( have_posts() ) :
+							while ( have_posts() ) :
+								the_post();
+								echo '<div class="cell callout large-margin-bottom">';
+														echo '<h4 class="no-margin"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>'; //phpcs:ignore
+														echo '<p class="text-small">' . get_the_date() . '</p>'; //phpcs:ignore
+														echo '<p class="">' . get_the_excerpt() . '</p>'; //phpcs:ignore
+								echo '</div>';
+						endwhile;
 						endif;
-						//Reset Query
+						// Reset Query.
 						wp_reset_query();
 						?>
 					</div>

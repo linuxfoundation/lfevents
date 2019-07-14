@@ -551,7 +551,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_register_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Register URL' ),
-									'help'			=> __( 'The CTA buttons will only appear when a url is provided.' ),
+									'help'          => __( 'The CTA buttons will only appear when a url is provided.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
