@@ -73,6 +73,14 @@
   }
 }
 
+// presence indicator for the second events calendar page 
+@include breakpoint(large) {
+  body.lfe_about_page-template-events-calendar .main-header .main-menu ul > li#menu-item-498 > a {
+    background-color: rgba(0,0,0,0.2);
+    box-shadow: 0 1.5rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+  }
+}
+
 // WP post navigation
 .post-navigation {
   @include clearfix;
