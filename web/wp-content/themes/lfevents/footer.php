@@ -11,18 +11,7 @@
 ?>
 
 <footer class="site-footer">
-
-	<p class="copyright">Copyright © 2019 The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page. Linux is a registered trademark of Linus Torvalds.</p>
-
-	<ul class="linux-foundaiton-links">
-		<li><a href="https://www.linuxfoundation.org/terms/">Terms of Use</a></li>
-		<li><a href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a></li>
-		<li><a href="https://www.linuxfoundation.org/bylaws/">Bylaws</a></li>
-		<li><a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a></li>
-		<li><a href="https://www.linuxfoundation.org/antitrust-policy/">Antitrust Policy</a></li>
-		<li><a href="https://www.linuxfoundation.org/good-standing-policy/">Good Standing Policy</a></li>
-	</ul>
-
+	<?php dynamic_sidebar( 'footer-widgets' ); ?>
 </footer>
 
 <?php wp_footer(); ?>

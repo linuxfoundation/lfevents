@@ -18,7 +18,7 @@
     }
   }
 
-  .copyright {
+  > * {
 
     @include breakpoint(large) {
       max-width: 50rem;
@@ -32,21 +32,18 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    line-height: 3;
 
-    &.linux-foundaiton-links {
-      line-height: 3;
+    @include breakpoint(large) {
+      text-align: center;
+      margin-right: auto;
+      margin-left: auto;
+    }
 
-      @include breakpoint(large) {
-        text-align: center;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      li {
-        @include breakpoint(medium) {
-          display: inline-block;
-          margin-right: 1rem;
-        }
+    li {
+      @include breakpoint(medium) {
+        display: inline-block;
+        margin-right: 1rem;
       }
     }
   }
