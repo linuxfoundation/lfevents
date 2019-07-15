@@ -34,19 +34,8 @@
   form.searchandfilter {
 
     #switch-archive-view {
-      display: block;
-      margin-bottom: $global-margin;
-
-      .switch {
-        float: left;
-        margin-right: 0.5rem;
-        pointer-events: none;
-      }
-      .switch + label {
-        line-height: rem-calc(24);
-        cursor: pointer;
-        pointer-events: none;
-      }
+      font-weight: $global-weight-bold;
+      margin-bottom: 2rem;
     }
 
     > ul {
