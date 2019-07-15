@@ -8,6 +8,9 @@
 
 if ( ! function_exists( 'foundationpress_footer_widgets' ) ) :
 
+	/**
+	 * Register footer widget.
+	 */
 	function foundationpress_footer_widgets() {
 		register_sidebar(
 			array(
