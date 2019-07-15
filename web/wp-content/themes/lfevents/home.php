@@ -52,7 +52,7 @@ get_template_part( 'template-parts/global-nav' );
 							'meta_key'   => 'lfes_date_start',
 							'orderby'    => 'meta_value',
 							'order'      => 'ASC',
-							'post_status' => array( 'draft', 'publish' ),
+							'post_status' => array( 'publish' ),
 						)
 					);
 					if ( $query->have_posts() ) {
