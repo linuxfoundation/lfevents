@@ -125,17 +125,47 @@ function lfe_setup_theme_supported_features() {
 
 add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
 
-
 /**
- * We need this function to remove links on parent menu items.
+ * Returns markup for child pages for the Event menu.
  *
- * @param string $query Args for the wp_list_pages funciton.
- * @param string $background_style sets the solid or gradient background color.
+ * @param int    $parent_id Parent ID for Event.
+ * @param string $post_type Post type for Event.
+ * @param string $background_style sets the background color.
  */
-function lfe_remove_parent_links( $query, $background_style ) {
-	$pages = wp_list_pages( $query );
+function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
+
+	$args = array(
+		'child_of'     => $parent_id,
+		'meta_key'     => 'lfes_hide_from_menu',
+		'meta_value'   => true,
+		'post_type'    => $post_type,
+		'post_status'  => 'publish',
+	);
+
+	// first find which pages we need to exclude.
+	$pages = get_pages( $args );
+	$exclude_ids = '';
+	foreach ( $pages as $page ) {
+		$exclude_ids .= $page->ID . ',';
+	}
+	$args = array(
+		'child_of'     => $parent_id,
+		'sort_order'   => 'ASC',
+		'sort_column'  => 'menu_order',
+		'hierarchical' => 1,
+		'title_li'     => '',
+		'exclude'      => $exclude_ids,
+		'post_type'    => $post_type,
+		'post_status'  => 'publish',
+		'echo'         => false,
+	);
+
+	// then get the pages we need.
+	$pages = wp_list_pages( $args );
 	$pages = explode( '</li>', $pages );
 	$count = 0;
+
+	// now we remove the hyperlink for elements who have children.
 	foreach ( $pages as $page ) {
 		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
 			$page = explode( '<ul class=\'children\'>', $page );
@@ -149,7 +179,8 @@ function lfe_remove_parent_links( $query, $background_style ) {
 		$count++;
 	}
 	$pages = implode( '</li>', $pages );
-	echo $pages; //phpcs:ignore
+
+	return $pages; //phpcs:ignore
 }
 
 /**

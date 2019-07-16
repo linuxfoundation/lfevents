@@ -581,6 +581,24 @@ class LFEvents_Admin {
 								),
 							),
 						),
+						array(
+							'label'    => __( 'Page Options' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'checkbox', // Required.
+									'id'            => 'hide_from_menu',
+									'data_type'     => 'meta',
+									'data_key'      => 'hide_from_menu', // Required if 'data_type' is 'meta'.
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => false,
+									'use_toggle'    => false,
+									'input_label'   => __( 'Hide from Event menu', 'my_plugin' ), // Required.
+									'help'          => __( 'This will stop this particular page from showing on the Event top navigation menu.' ),
+								),
+							),
+						),
 					),
 				),
 			),

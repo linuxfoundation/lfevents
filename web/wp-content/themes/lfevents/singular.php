@@ -61,7 +61,7 @@ if ( $logo ) {
 				} else {
 					$background_style_solid = $background_style;
 				}
-				$children = lfe_remove_parent_links( 'title_li=&child_of=' . $parent_id . '&echo=0&sort_column=menu_order&post_type=' . $post->post_type, $background_style_solid );
+				$children = lfe_get_event_menu( $parent_id, $post->post_type, $background_style_solid );
 				if ( $children ) {
 					echo $children; //phpcs:ignore
 				}
