@@ -133,10 +133,10 @@ add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
  * @param string $background_style sets the background color.
  */
 function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
-	global $wpdb;
+	global $wpdb, $post;
 
 	// first find which pages we need to exclude.
-	$exclude = $wpdb->get_results( "select post_id from $wpdb->postmeta where meta_key = 'lfes_hide_from_menu' and meta_value = 1;", ARRAY_A );
+	$exclude = $wpdb->get_results( $wpdb->prepare( "select post_id from $wpdb->postmeta left join $wpdb->posts on post_id = id where meta_key = 'lfes_hide_from_menu' and meta_value = 1 and post_type = %s;", $post->post_type ), ARRAY_A );
 	$exclude_ids = '';
 	foreach ( $exclude as $ex ) {
 		$exclude_ids .= $ex['post_id'] . ',';
