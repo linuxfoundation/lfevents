@@ -59,3 +59,8 @@ p.wp-caption-text{
 body.page-parent main img:first-of-type {
   min-height: 204px;
 }
+
+// I'm hiding the ajax spinner for Gravity Forms because it was big an ugly.
+body img.gform_ajax_spinner {
+  display: none !important;
+ }
