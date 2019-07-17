@@ -133,21 +133,16 @@ add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
  * @param string $background_style sets the background color.
  */
 function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
-
-	$args = array(
-		'child_of'     => $parent_id,
-		'meta_key'     => 'lfes_hide_from_menu',
-		'meta_value'   => true,
-		'post_type'    => $post_type,
-		'post_status'  => 'publish',
-	);
+	global $wpdb;
 
 	// first find which pages we need to exclude.
-	$pages = get_pages( $args );
+	$exclude = $wpdb->get_results( "select post_id from $wpdb->postmeta where meta_key = 'lfes_hide_from_menu' and meta_value = 1;", ARRAY_A );
 	$exclude_ids = '';
-	foreach ( $pages as $page ) {
-		$exclude_ids .= $page->ID . ',';
+	foreach ( $exclude as $ex ) {
+		$exclude_ids .= $ex['post_id'] . ',';
 	}
+
+	// then get the pages we need.
 	$args = array(
 		'child_of'     => $parent_id,
 		'sort_order'   => 'ASC',
@@ -159,8 +154,6 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 		'post_status'  => 'publish',
 		'echo'         => false,
 	);
-
-	// then get the pages we need.
 	$pages = wp_list_pages( $args );
 	$pages = explode( '</li>', $pages );
 	$count = 0;
