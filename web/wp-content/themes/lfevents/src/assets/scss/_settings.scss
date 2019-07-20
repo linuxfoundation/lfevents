@@ -772,7 +772,7 @@ $switch-paddle-transition: all 0.25s ease-out;
 // 50. Table
 // ---------
 
-$table-background: transparent;
+$table-background: $white;
 $table-color-scale: 5%;
 $table-border: 0;
 $table-padding: rem-calc(8 10 10);
