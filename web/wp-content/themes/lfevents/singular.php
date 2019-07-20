@@ -88,7 +88,7 @@ if ( $logo ) {
 						$subpage_header_text_color = 'white';
 						$subpage_header_background_color = 'black';
 					}
-					$subpage_header_style = 'color:' . $subpage_header_text_color . ';' . 'background-color: ' . $subpage_header_background_color . ';' . '-webkit-text-fill-color: transparent;' . 'background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . '));' . 'background:      -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . '));' . '-webkit-background-clip: text;';
+					$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
 					?>
 					<header class="event-subpage-header" style="background-image:url(<?php the_post_thumbnail_url(); ?>); <?php echo esc_html( $text_style ); ?>">
 						<div class="overlay" style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>"></div>
