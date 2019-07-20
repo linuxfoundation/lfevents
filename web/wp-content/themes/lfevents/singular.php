@@ -81,7 +81,7 @@ if ( $logo ) {
 				the_post();
 
 				if ( has_post_thumbnail() && $post->post_parent ) {
-					if ( $menu_text_color == 'white' ) {
+					if ( 'white' == $menu_text_color ) {
 						$subpage_header_text_color = 'black';
 						$subpage_header_background_color = 'white';
 					} else {
