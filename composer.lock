@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d605ce1266b75383629875e8f40153dd",
+    "content-hash": "30ed7ce4bd5cc732044d9cb539eccef5",
     "packages": [
         {
             "name": "composer/installers",
@@ -577,24 +577,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/lh-hsts/"
-        },
-        {
-            "name": "wpackagist-plugin/otter-blocks",
-            "version": "1.2.3",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/otter-blocks/",
-                "reference": "tags/1.2.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/otter-blocks.1.2.3.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/otter-blocks/"
         },
         {
             "name": "wpackagist-plugin/pantheon-advanced-page-cache",
