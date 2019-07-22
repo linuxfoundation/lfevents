@@ -68,8 +68,18 @@
           }
         }
 
-      }
+        &.external-link > a::after {
+          content: url(/wp-content/themes/lfevents/dist/assets/images/external-link-alt-white.svg);
+          display: inline-block;
+          width: 0.875em;
+          margin-left: 0.25em;
+          opacity: 0.6;
+        }
 
+        &.external-link:hover > a::after {
+          opacity: 0.8;
+        }
+      }
     }
   }
 }

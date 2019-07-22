@@ -158,6 +158,10 @@
           margin: 0.5em;
         }
 
+        .children li:first-child a {
+          flex-direction: column;
+        }
+
         .children li:first-child img {
           width: 16rem;
 
@@ -166,35 +170,35 @@
           }
         }
 
-        .other-events-header a {
-          color: rgba(255,255,255,0.5);
-          font-weight: normal;
-          letter-spacing: 0.15em;
-          padding-top: 1.5em;
-          cursor: default;
-          text-transform: uppercase;
-          white-space: nowrap;
-          border-top: 4px solid rgba(255,255,255,0.2);
-
-          &:hover {
-            background-color: transparent;
-          }
-
-          &::before,
-          &::after {
-            content: '—';
-            margin: 0 0.5em;
-            color: rgba(255,255,255,0.5);
-          }
-
-          @include breakpoint(large) {
-            font-size: rem-calc(11);
-            border-right: 0;
-            border-left: 0;
-            padding-top: 1.5em;
-            padding-bottom: 1em;
-          }
-        }
+        // .other-events-header a {
+        //   color: rgba(255,255,255,0.5);
+        //   font-weight: normal;
+        //   letter-spacing: 0.15em;
+        //   padding-top: 1.5em;
+        //   cursor: default;
+        //   text-transform: uppercase;
+        //   white-space: nowrap;
+        //   border-top: 4px solid rgba(255,255,255,0.2);
+        //
+        //   &:hover {
+        //     background-color: transparent;
+        //   }
+        //
+        //   &::before,
+        //   &::after {
+        //     content: '—';
+        //     margin: 0 0.5em;
+        //     color: rgba(255,255,255,0.5);
+        //   }
+        //
+        //   @include breakpoint(large) {
+        //     font-size: rem-calc(11);
+        //     border-right: 0;
+        //     border-left: 0;
+        //     padding-top: 1.5em;
+        //     padding-bottom: 1em;
+        //   }
+        // }
       }
 
       a {
@@ -218,8 +222,10 @@
 
       > a {
         @include breakpoint(medium down) {
-          text-transform: uppercase;
+          // text-transform: uppercase;
           justify-content: left;
+          font-weight: 900;
+          font-size: rem-calc(14);
         }
       }
     }
@@ -313,15 +319,15 @@
       }
     }
 
-    .menu-item-pre-text {
-      @include breakpoint(large) {
-        display: block;
-        width: 100%;
-        font-weight: normal;
-        text-transform: uppercase;
-        opacity: 0.7;
-        margin: 0 0 0.25rem;
-      }
-    }
+    // .menu-item-pre-text {
+    //   @include breakpoint(large) {
+    //     display: block;
+    //     width: 100%;
+    //     font-weight: normal;
+    //     text-transform: uppercase;
+    //     opacity: 0.7;
+    //     margin: 0 0 0.25rem;
+    //   }
+    // }
   }
 }

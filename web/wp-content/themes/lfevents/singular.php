@@ -79,16 +79,33 @@ if ( $logo ) {
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				?>
-				<?php get_template_part( 'template-parts/content', 'page' ); ?>
 
-				<?php lfe_get_sponsors( $parent_id ); ?>
+				if ( has_post_thumbnail() && $post->post_parent ) {
+					if ( 'white' == $menu_text_color ) {
+						$subpage_header_text_color = 'black';
+						$subpage_header_background_color = 'white';
+					} else {
+						$subpage_header_text_color = 'white';
+						$subpage_header_background_color = 'black';
+					}
+					$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
+					?>
+					<header class="event-subpage-header" style="background-image:url(<?php the_post_thumbnail_url(); ?>); <?php echo esc_html( $text_style ); ?>">
+						<div class="overlay" style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>"></div>
+						<h1 style="background-color: <?php echo esc_html( $subpage_header_background_color ); ?>;">
+							<span style="<?php echo esc_html( $subpage_header_style ); ?>">
+								<?php the_title(); ?>
+							</span>
+						</h1>
+					</header>
+					<?php
+				}
 
-				<?php /* comments_template(); */ ?>
-			<?php endwhile; ?>
-
+				get_template_part( 'template-parts/content', 'page' );
+				lfe_get_sponsors( $parent_id );
+			endwhile;
+			?>
 		</main>
-		<?php /* get_sidebar(); */ ?>
 	</div>
 </div>
 

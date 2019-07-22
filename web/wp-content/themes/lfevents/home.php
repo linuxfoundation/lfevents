@@ -83,7 +83,7 @@ get_template_part( 'template-parts/global-nav' );
 
 							?>
 							<div id="post-<?php the_ID(); ?>" class="cell large-6 xxlarge-4 home-card large-margin-bottom--" style="<?php echo esc_html( $background_style . $text_style ); ?>">
-								<div class="bg-image" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div>
+								<div class="bg-image  <?php echo esc_html( $menu_text_color ); ?>-text" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div>
 								<?php
 								if ( 'publish' == $post->post_status ) {
 									echo '<a class="card-header-link card-header" href="' . get_the_permalink( $post->ID ) . '">'; //phpcs:ignore
