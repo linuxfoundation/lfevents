@@ -274,14 +274,21 @@ class LFEvents_Admin {
 							'settings' => array(
 								array(
 									'type'          => 'text', // Required.
-									'id'            => 'city',
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'            => 'description',
 									'data_type'     => 'meta',
-									'data_key'      => 'city', // Required if 'data_type' is 'meta'.
-									'label'         => __( 'Event city' ),
+									'data_key'      => 'description', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'         => __( 'Event description', 'my_plugin' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
-									'default_value' => '',
-									'placeholder'   => __( 'Paris' ),
+									'default_value' => '', // A string with a date that matches 'format'.
+									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'placeholder'        => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
 								),
 								array(
 									'type'          => 'text', // Required.
@@ -347,7 +354,68 @@ class LFEvents_Admin {
 									// where this setting is nested will be used.
 									'label'           => __( 'Black logo', 'my_plugin' ),
 									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+									'ui_border_top'   => false, // Display CSS border-top in the editor control.
+								),
+							),
+						),
+						array(
+							'label'    => __( 'Location' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'city',
+									'data_type'     => 'meta',
+									'data_key'      => 'city', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'City' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'Paris' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'venue',
+									'data_type'     => 'meta',
+									'data_key'      => 'venue', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Venue' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'San Diego Convention Center' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'street_address',
+									'data_type'     => 'meta',
+									'data_key'      => 'street_address', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Street Address' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( '2635 Homestead Rd' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'postal_code',
+									'data_type'     => 'meta',
+									'data_key'      => 'postal_code', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Postal Code' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( '95051' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'region',
+									'data_type'     => 'meta',
+									'data_key'      => 'region', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Province/State' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'CA' ),
 								),
 							),
 						),
@@ -564,7 +632,7 @@ class LFEvents_Admin {
 									'data_key'      => 'cta_speak_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Speak URL' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/cfp/' ),
 								),
@@ -575,7 +643,7 @@ class LFEvents_Admin {
 									'data_key'      => 'cta_sponsor_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Sponsor URL' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/sponsors/become-and-sponsor/' ),
 								),
