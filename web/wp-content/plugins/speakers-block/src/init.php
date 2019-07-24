@@ -103,7 +103,7 @@ function speakers_block_callback( $attributes, $content ) {
 		$gradient_color = 'rgba(33,35,38,0.15)';
 	}
 
-	$out = '<section class="speakers-section alignfull" style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%); color: ' . $text_color . ';"><h3 class="speakers-section-title">Featured Speakers</h3><ul class="speaker-list grid-x">';
+	$out = '<section class="speakers-section alignfull" style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%); color: ' . $text_color . ';"><ul class="speaker-list grid-x">';
 
 	foreach ( $speakers_to_show as $speaker ) {
 		$the_query = new WP_Query(
