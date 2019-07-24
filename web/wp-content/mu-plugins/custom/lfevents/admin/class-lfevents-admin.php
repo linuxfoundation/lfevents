@@ -610,7 +610,7 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Homepage' ),
+							'label'    => __( 'Homepage Tile' ),
 							'initial_open' => false,
 							'settings' => array(
 								array(
