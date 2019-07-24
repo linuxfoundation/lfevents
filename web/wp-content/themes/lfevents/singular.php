@@ -80,7 +80,12 @@ if ( $logo ) {
 			while ( have_posts() ) :
 				the_post();
 
-				if ( has_post_thumbnail() && $post->post_parent ) {
+				if ( $post->post_parent ) {
+					if ( has_post_thumbnail() ) {
+						$post_thumbnail_url = get_the_post_thumbnail_url();
+					} else {
+						$post_thumbnail_url = get_the_post_thumbnail_url( $parent_id );
+					}
 					if ( 'white' == $menu_text_color ) {
 						$subpage_header_text_color = 'black';
 						$subpage_header_background_color = 'white';
@@ -90,7 +95,7 @@ if ( $logo ) {
 					}
 					$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
 					?>
-					<header class="event-subpage-header" style="background-image:url(<?php the_post_thumbnail_url(); ?>); <?php echo esc_html( $text_style ); ?>">
+					<header class="event-subpage-header" style="background-image:url(<?php echo esc_html( $post_thumbnail_url ); ?>); <?php echo esc_html( $text_style ); ?>">
 						<div class="overlay" style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>"></div>
 						<h1 style="background-color: <?php echo esc_html( $subpage_header_background_color ); ?>;">
 							<span style="<?php echo esc_html( $subpage_header_style ); ?>">
