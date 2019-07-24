@@ -102,7 +102,11 @@ get_template_part( 'template-parts/global-nav' );
 								$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 								if ( $country ) {
 									$country = $country[0]->name;
-									echo '<span class="country">' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . ', ' . esc_html( $country ) . '</span>';
+									$city = get_post_meta( $post->ID, 'lfes_city', true );
+									if ( $city ) {
+										$city .= ', ';
+									}
+									echo '<span class="country">' . esc_html( $city ) . esc_html( $country ) . '</span>';
 								}
 
 								echo '</span>';
