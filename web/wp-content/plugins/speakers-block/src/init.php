@@ -126,7 +126,7 @@ function speakers_block_callback( $attributes, $content ) {
 				$out .= '		</div>';
 				$out .= '		<div class="text cell large-7">';
 				$out .= '			<a class="name" data-toggle="speaker-' . get_the_id() . '">' . get_the_title() . '</a>';
-				$out .= '			<a class="title" data-toggle="speaker-' . get_the_id() . '">' . get_post_meta( $post->ID, 'lfes_title', true ) . '</a>';
+				$out .= '			<a class="title" data-toggle="speaker-' . get_the_id() . '">' . get_post_meta( $post->ID, 'lfes_speaker_title', true ) . '</a>';
 				$out .= '			<div class="bio">';
 				$out .= '				<p>' . get_the_content() . '</p>';
 				$out .= '			</div>';
