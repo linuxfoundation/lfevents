@@ -165,6 +165,23 @@ class LFEvents_Admin {
 		);
 
 		register_post_type( 'lfe_speaker', $opts );
+
+		$opts = array(
+			'labels'       => array(
+				'name'          => __( 'Community Events' ),
+				'singular_name' => __( 'Community Event' ),
+				'all_items'     => __( 'All Community Events' ),
+			),
+			'public'       => true,
+			'has_archive'  => true,
+			'show_in_rest' => true,
+			'hierarchical' => true,
+			'menu_icon'    => 'dashicons-admin-site',
+			'rewrite'      => array( 'slug' => 'community-event' ),
+			'supports'     => array( 'title', 'editor', 'excerpt', 'revisions', 'custom-fields' ),
+		);
+
+		register_post_type( 'lfe_community_event', $opts );
 	}
 
 	/**
@@ -217,7 +234,7 @@ class LFEvents_Admin {
 			'hierarchical' => true,
 		];
 
-		register_taxonomy( 'lfevent-country', $this->post_types, $args );
+		register_taxonomy( 'lfevent-country', array_merge( $this->post_types, array( 'lfe_community_event' ) ), $args );
 	}
 
 	/**
@@ -733,6 +750,223 @@ class LFEvents_Admin {
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://cncf.io' ),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		// Push the $sidebar we just assigned to the variable
+		// to the array of $sidebars that comes in the function argument.
+		$sidebars[] = $sidebar;
+
+		$sidebar = array(
+			'id'              => 'lfevent-sidebar',
+			'id_prefix'       => 'lfes_',
+			'label'           => __( 'Event Settings' ),
+			'post_type'       => 'lfe_community_event',
+			'data_key_prefix' => 'lfes_community',
+			'icon_dashicon'   => 'list-view',
+			'tabs'            => array(
+				array(
+					'label'  => __( 'Tab label' ),
+					'panels' => array(
+						array(
+							'label'    => __( 'General Settings' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'            => 'description',
+									'data_type'     => 'meta',
+									'data_key'      => 'description', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'         => __( 'Event description', 'my_plugin' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '', // A string with a date that matches 'format'.
+									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'placeholder'        => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
+								),
+								array(
+									'type'          => 'text', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'            => 'date_start',
+									'data_type'     => 'meta',
+									'data_key'      => 'date_start', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'         => __( 'Event start date', 'my_plugin' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '', // A string with a date that matches 'format'.
+									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'placeholder'        => 'YYYY/MM/DD',
+								),
+								array(
+									'type'          => 'text', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'            => 'date_end',
+									'data_type'     => 'meta',
+									'data_key'      => 'date_end', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'         => __( 'Event end date', 'my_plugin' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '', // A string with a date that matches 'format'.
+									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'placeholder'        => 'YYYY/MM/DD',
+								),
+							),
+						),
+						array(
+							'label'    => __( 'Location' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'city',
+									'data_type'     => 'meta',
+									'data_key'      => 'city', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'City' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'Paris' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'venue',
+									'data_type'     => 'meta',
+									'data_key'      => 'venue', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Venue' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'San Diego Convention Center' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'street_address',
+									'data_type'     => 'meta',
+									'data_key'      => 'street_address', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Street Address' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( '2635 Homestead Rd' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'postal_code',
+									'data_type'     => 'meta',
+									'data_key'      => 'postal_code', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Postal Code' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( '95051' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'region',
+									'data_type'     => 'meta',
+									'data_key'      => 'region', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Province/State' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'CA' ),
+								),
+							),
+						),
+						array(
+							'label'    => __( 'Social' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'            => 'image', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'              => 'wechat',
+									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'        => 'wechat', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'           => __( 'WeChat QR code', 'my_plugin' ),
+									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'linkedin',
+									'data_type'     => 'meta',
+									'data_key'      => 'linkedin', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'LinkedIn url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.linkedin.com/company/cloud-native-computing-foundation' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'qq',
+									'data_type'     => 'meta',
+									'data_key'      => 'qq', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'QQ url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'http://v.qq.com/vplus/dbc4895dfc0a6ec609ad9e42a10507e0/videos' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'youtube',
+									'data_type'     => 'meta',
+									'data_key'      => 'youtube', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'YouTube url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.youtube.com/channel/UCvqbFHwN-nwalWPjPUKpvTA' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'facebook',
+									'data_type'     => 'meta',
+									'data_key'      => 'facebook', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Facebook url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.facebook.com/CloudNativeComputingFoundation/' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'twitter',
+									'data_type'     => 'meta',
+									'data_key'      => 'twitter', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Twitter url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://twitter.com/CloudNativeFdn' ),
 								),
 							),
 						),
