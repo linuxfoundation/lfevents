@@ -256,6 +256,7 @@ add_filter( 'script_loader_tag', 'lfe_instantpage_script_loader_tag', 10, 2 );
  */
 function lfe_custom_menu_page_removing() {
 	remove_menu_page( 'ultimate-blocks-settings' );
+	remove_menu_page( 'edit-comments.php' );
 }
 add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
 
