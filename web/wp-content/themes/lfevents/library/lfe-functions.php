@@ -102,7 +102,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 			$event_link_content = get_the_title( $p['ID'] );
 		}
 
-		echo '<li><a href="' . esc_url( get_permalink( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
+		echo '<li><a href="' . esc_url( lfe_get_event_url( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
 	}
 
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
@@ -385,4 +385,19 @@ function lfe_insert_structured_data() {
 	$out .= '</script>';
 
 	echo $out; //phpcs:ignore
+}
+
+
+/**
+ * Wraps the logic for redirecting to 3rd-party Event sites.
+ *
+ * @param int $post_id Post id.
+ */
+function lfe_get_event_url( $post_id ) {
+	$url = get_post_meta( $post_id, 'lfes_external_url', true );
+	if ( $url ) {
+		return $url;
+	} else {
+		return get_permalink( $post_id );
+	}
 }

@@ -86,7 +86,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="bg-image  <?php echo esc_html( $menu_text_color ); ?>-text" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div>
 								<?php
 								if ( 'publish' == $post->post_status ) {
-									echo '<a class="card-header-link card-header" href="' . get_the_permalink( $post->ID ) . '">'; //phpcs:ignore
+									echo '<a class="card-header-link card-header" href="' . lfe_get_event_url( $post->ID ) . '">'; //phpcs:ignore
 								} else {
 									echo '<div class="card-header">';
 								}
