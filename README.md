@@ -51,6 +51,8 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 
 7. Visit the local site URL saved from above.  To find it again run `lando info`.
 
+8. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
+
 ### Notes
 
 * You can stop Lando with `lando stop` and start it again with `lando start`
