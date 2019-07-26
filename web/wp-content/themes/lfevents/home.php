@@ -180,8 +180,9 @@ get_template_part( 'template-parts/global-nav' );
 						$query->the_post();
 						$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
 						$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
-						echo '<h5 class="no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
-						echo '<p class="text-small small-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ) . '</p>';
+
+						echo '<h5 class="no-margin"><a href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
+						echo '<p class="text-small small-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
 						$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 						if ( $country ) {
 							$country = $country[0]->name;
@@ -189,7 +190,7 @@ get_template_part( 'template-parts/global-nav' );
 							if ( $city ) {
 								$city .= ', ';
 							}
-							echo '<p class="text-small small-margin-bottom">' . esc_html( $city ) . esc_html( $country ) . '</p>';
+							echo ' | ' . esc_html( $city ) . esc_html( $country ) . '</p>';
 						}
 					}
 				}
