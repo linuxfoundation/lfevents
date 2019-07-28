@@ -52,3 +52,17 @@
     display: block;
   }
 }
+
+.gform_confirmation_wrapper {
+
+  .gform_confirmation_message {
+    @include callout(get-color(success));
+    color: $green-dark;
+    text-align: center;
+    font-size: rem-calc(18);
+
+    @include breakpoint(large) {
+      padding: 3rem;
+    }
+  }
+}
