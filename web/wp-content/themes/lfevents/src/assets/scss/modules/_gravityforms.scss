@@ -37,4 +37,18 @@
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
   }
+
+  .validation_error {
+    @include callout(get-color(alert));
+    font-size: rem-calc(14);
+  }
+
+  input[aria-invalid="true"] {
+    @include form-input-error();
+  }
+
+  .validation_message {
+    @include form-error;
+    display: block;
+  }
 }
