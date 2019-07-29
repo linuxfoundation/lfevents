@@ -3,14 +3,12 @@
   text-align: center;
   border-radius: rem-calc(6);
   margin-bottom: 1rem;
+  overflow: hidden;
 
   @include breakpoint(large) {
-    border: 0.25rem solid $white;
+    border: rem-calc(8) solid $white;
+    border-radius: rem-calc(14);
     margin-bottom: 0;
-  }
-
-  @include breakpoint(xxlarge) {
-    border: 0.125rem solid $white;
   }
 
   .bg-image {
@@ -44,6 +42,7 @@
   .meta-container {
     display: block;
     padding-top: 6%;
+    font-size: rem-calc(14);
   }
 
   .date {
@@ -58,14 +57,14 @@
   .card-footer {
     position: relative;
     z-index: 2;
-    padding: 0.75rem;
+    padding: 0.5rem;
     margin-top: -4%;
 
     .links {
       @include button-group('.link', 0);
       @include button-group-expand('.link', 0);
       margin: 0;
-      box-shadow: 0 0 0 0.75rem rgba(0,0,0,0.2);
+      box-shadow: 0 0 0 0.5rem rgba(0,0,0,0.2);
     }
 
     .link {

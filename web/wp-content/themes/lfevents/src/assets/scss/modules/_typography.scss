@@ -69,6 +69,15 @@ button {
   font-weight: $global-weight-bold;
 }
 
+.has-large-font-size {
+  font-size: rem-calc(19) !important;
+
+  @include breakpoint(medium) {
+    font-size: rem-calc(31) !important;
+  }
+}
+
+
 
 //
 // Blockquotes

@@ -138,10 +138,10 @@ get_template_part( 'template-parts/global-nav' );
 					}
 					?>
 				</div>
-				<a class="button" href="<?php echo esc_url( home_url( '/about/events-calendar' ) ); ?>">Full Events Calendar</a>
+				<a class="button large expanded" href="<?php echo esc_url( home_url( '/about/events-calendar' ) ); ?>">Full Events Calendar</a>
 			</div>
 			<div class="cell medium-5 large-4 xxlarge-3">
-				<h3 class="large-margin-bottom">Latest News</h3>
+				<h3 class="medium-margin-bottom">Latest News</h3>
 				<?php
 				// Latest News.
 				$query = new WP_Query(
@@ -156,14 +156,14 @@ get_template_part( 'template-parts/global-nav' );
 						$query->the_post();
 						echo '<h5 class="no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
 						echo '<p class="text-small small-margin-bottom">' . get_the_date() . '</p>';
-						echo '<p class="text-small large-margin-bottom">' . esc_html( get_the_excerpt() ) . '</p>';
+						echo '<p class="text-small medium-margin-bottom">' . esc_html( get_the_excerpt() ) . '</p>';
 					}
 				}
 				wp_reset_postdata();
 				?>
-				<a class="button" href="<?php echo esc_url( home_url( '/about/news' ) ); ?>">Read More News</a>
+				<a class="button expanded gray" href="<?php echo esc_url( home_url( '/about/news' ) ); ?>">Read More News</a>
 
-				<h3 class="large-margin-bottom">Community Events</h3>
+				<h3 class="medium-margin-bottom large-margin-top">Community Events</h3>
 				<?php
 				$query = new WP_Query(
 					array(
@@ -182,7 +182,7 @@ get_template_part( 'template-parts/global-nav' );
 						$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
 						echo '<h5 class="no-margin"><a href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
-						echo '<p class="text-small small-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
+						echo '<p class="text-small medium-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
 						$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 						if ( $country ) {
 							$country = $country[0]->name;
@@ -196,7 +196,7 @@ get_template_part( 'template-parts/global-nav' );
 				}
 				wp_reset_postdata();
 				?>
-				<a class="button" href="<?php echo esc_url( home_url( '/about/community' ) ); ?>">All Community Events</a>
+				<a class="button expanded gray" href="<?php echo esc_url( home_url( '/about/community' ) ); ?>">All Community Events</a>
 			</div>
 		</div>
 	</div>
