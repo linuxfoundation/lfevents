@@ -401,3 +401,13 @@ function lfe_get_event_url( $post_id ) {
 		return get_permalink( $post_id );
 	}
 }
+
+/**
+ * Sets the except length.
+ *
+ * @param int @length Number of words.
+ */
+function custom_excerpt_length( $length ) {
+	return 18;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
