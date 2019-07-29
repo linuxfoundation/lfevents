@@ -156,7 +156,7 @@ get_template_part( 'template-parts/global-nav' );
 						$query->the_post();
 						echo '<h5 class="no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
 						echo '<p class="text-small small-margin-bottom">' . get_the_date() . '</p>';
-						echo '<p class="text-small medium-margin-bottom">' . get_the_excerpt() . '</p>';
+						echo '<p class="text-small medium-margin-bottom">' . get_the_excerpt() . '</p>'; //phpcs:ignore
 					}
 				}
 				wp_reset_postdata();

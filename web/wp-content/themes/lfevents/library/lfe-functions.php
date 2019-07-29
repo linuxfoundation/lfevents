@@ -405,7 +405,7 @@ function lfe_get_event_url( $post_id ) {
 /**
  * Sets the except length.
  *
- * @param int @length Number of words.
+ * @param int $length Number of words.
  */
 function custom_excerpt_length( $length ) {
 	return 18;
