@@ -22,6 +22,7 @@ get_template_part( 'template-parts/global-nav' );
 					<div class="entry-content">
 						<header class="alignwide about-page-header">
 							<h1 class="entry-title"><?php the_title(); ?></h1>
+							<?php foundationpress_entry_meta(); ?>
 						</header>
 						<div class="alignwide">
 							<?php the_content(); ?>
