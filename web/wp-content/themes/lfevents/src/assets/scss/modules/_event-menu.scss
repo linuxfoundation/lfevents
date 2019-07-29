@@ -158,11 +158,11 @@
           margin: 0.5em;
         }
 
-        .children li:first-child a {
+        .children li:first-child a, .children li:last-child a {
           flex-direction: column;
         }
 
-        .children li:first-child img {
+        .children li:first-child img, .children li:last-child img {
           width: 16rem;
 
           @include breakpoint(large) {
