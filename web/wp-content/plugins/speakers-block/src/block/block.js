@@ -84,7 +84,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 			<InspectorControls>
 				<PanelBody><PanelRow>
 				<div>
-					<strong>Color 1 for the background gradient:</strong>
+					<p><strong>Color 1 for the background gradient:</strong></p>
 					<ColorPalette
 						value={color1}
 						onChange={onColor1Change}
@@ -92,7 +92,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 				</div>
 				</PanelRow><PanelRow>
 				<div>
-					<strong>Color 2 for the background gradient:</strong>
+					<p><strong>Color 2 for the background gradient:</strong></p>
 					<ColorPalette
 						value={color2}
 						onChange={onColor2Change}
