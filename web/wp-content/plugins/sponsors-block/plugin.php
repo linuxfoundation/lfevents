@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Sponsors block
+ * Plugin Name: Sponsors Block
  * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/sponsors-block
  * Description: Gutenberg block which allows for insertion of a gallery of sponsor logos that link to the sponsor home page.  This block is a fork of the regular Gutenberg Gallery block.
  * Author: cjyabraham

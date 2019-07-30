@@ -1,11 +1,10 @@
 <?php
 /**
- * Plugin Name: pricing-block — CGB Gutenberg Block Plugin
- * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: pricing-block — is a Gutenberg plugin created via create-guten-block.
- * Author: mrahmadawais, maedahbatool
- * Author URI: https://AhmadAwais.com/
- * Version: 1.0.0
+ * Plugin Name: Pricing Block
+ * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/pricing-block
+ * Description: Gutenberg block which inserts a pricing table which dynamically updates "Expired" notices with the date.
+ * Author: cjyabraham
+ * Version: 0.1.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *

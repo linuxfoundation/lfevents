@@ -68,12 +68,38 @@ function pricing_block_cgb_block_assets() { // phpcs:ignore
 			// Enqueue blocks.style.build.css on both frontend & backend.
 //			'style'         => 'pricing_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
-//			'editor_script' => 'pricing_block-cgb-block-js',
+			'editor_script' => 'pricing_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
 			'editor_style'  => 'pricing_block-cgb-block-editor-css',
+			'render_callback' => 'block_callback', // The render callback.
 		)
 	);
 }
 
+
 // Hook: Block assets.
 add_action( 'init', 'pricing_block_cgb_block_assets' );
+
+/**
+ * CALLBACK
+ *
+ * Render callback for the dynamic block.
+ *
+ * Instead of rendering from the block's save(), this callback will render the front-end
+ *
+ * @since    1.0.0
+ * @param array $att Attributes from the JS block.
+ * @return string Rendered HTML.
+ */
+function block_callback( $att ) {
+
+	$html = '<table class="wp-block-table alignwide"><thead><tr><th></th>';
+	$html .= '<th>EARLY BIRD<br>May 22 – June 9<br>11:59 pm Local</th></tr>';
+
+	$html .= '<tr><th>Corporate</th><th><s>$1,050</s>&nbsp;<br>EXPIRED</th><th>$1,250<br><br></th><th>$1,450<br><br></th><th>$1,550<br><br></th></tr>';
+	$html .= '</thead></table>';
+
+	return $html;
+
+}
+
