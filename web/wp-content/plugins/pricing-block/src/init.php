@@ -92,15 +92,50 @@ add_action( 'init', 'pricing_block_cgb_block_assets' );
  * @return string Rendered HTML.
  */
 function block_callback( $att ) {
-//	var_dump($att);
+	$top_labels = $att['topLabels'];
+	$dates = $att['dates'];
+	$left_labels = $att['leftLabels'];
+	$prices = $att['prices'];
+	$yesterday = new DateTime();
+	$yesterday->sub( new DateInterval( 'P1D' ) );
+	$column = 0;
+	$row = 0;
+
+	if ( ! $top_labels || ! $dates || ! $left_labels || ! $prices ) {
+		return '';
+	}
 
 	$html = '<table class="wp-block-table alignwide"><tr><th></th>';
-	$html .= '<th>EARLY BIRD<br>May 22 – June 9<br>11:59 pm Local</th></tr>';
+	foreach ( $top_labels as $label ) {
+		if ( $label ) {
+			$column++;
+			$date_start = new DateTime( $dates[ $column - 1 ] );
+			$date_end = new DateTime( $dates[ $column ] );
+			if ( $column > 1 ) {
+				$date_start->add( new DateInterval( 'P1D' ) );
+			}
+			$html .= '<th>' . $label . '<br>' . jb_verbose_date_range( $date_start, $date_end ) . '<br>11:59 pm Local</th>';
+		}
+	}
+	$html .= '</tr>';
 
-	$html .= '<tr><td>Corporate</td><td><s>$1,050</s>&nbsp;<br>EXPIRED</td><td>$1,250<br><br></td><td>$1,450<br><br></td><td>$1,550<br><br></td></tr>';
+	foreach ( $left_labels as $label ) {
+		if ( $label ) {
+			$html .= '<tr><td>' . $label . '</td>';
+			for ( $i = 0; $i < $column; $i++ ) {
+				$date_end = new DateTime( $dates[ $i + 1 ] );
+				if ( $date_end < $yesterday ) {
+					$html .= '<td class="expired"><s>' . $prices[ $i ][ $row ] . '</s><br>EXPIRED</td>';
+				} else {
+					$html .= '<td>' . $prices[ $i ][ $row ] . '</td>';
+				}
+			}
+			$row++;
+			$html .= '</tr>';
+		}
+	}
 	$html .= '</table>';
 
 	return $html;
 
 }
-

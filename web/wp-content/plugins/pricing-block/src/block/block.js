@@ -11,7 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { PlainText, InspectorControls, ColorPalette } = wp.editor;
+const { PlainText, InspectorControls, ColorPalette } = wp.blockEditor;
 
 /**
  * Register: aa Gutenberg Block.
@@ -49,7 +49,7 @@ registerBlockType( 'cgb/block-pricing-block', {
 		},
 		prices: {
 			type: 'array',
-			default: [[1050, 500, 150], [1250, 600, 150], [1450, 700, 150], [1550, 800, 150]]
+			default: [['$ 1,050', '$ 500', '$ 150'], ['$ 1,250', '$ 600', '$ 150'], ['$ 1,450', '$ 700', '$ 150'], ['$ 1,550', '$ 800', '$ 150']]
 		},
 		align: {
 			type: 'string',
@@ -91,60 +91,62 @@ registerBlockType( 'cgb/block-pricing-block', {
 
 		return (
 			<div className={ props.className }>
+				<h3>Event Pricing Table</h3>
+				<p>Fill in the rows and columns as appropriate for the Event and leave the remaining ones empty.</p>
 				<table>
 					<tr>
-						<th></th>
-						<th>
+						<td></td>
+						<td>
 							<PlainText
 								value={ topLabels[0] }
 								onChange={ value => updateTopLabels(value, 0)}
 							/>
-						</th>
-						<th>
+						</td>
+						<td>
 							<PlainText
 								value={ topLabels[1] }
 								onChange={ value => updateTopLabels(value, 1)}
 							/>
-						</th>
-						<th>
+						</td>
+						<td>
 							<PlainText
 								value={ topLabels[2] }
 								onChange={ value => updateTopLabels(value, 2)}
 							/>
-						</th>
-						<th>
+						</td>
+						<td>
 							<PlainText
 								value={ topLabels[3] }
 								onChange={ value => updateTopLabels(value, 3)}
 							/>
-						</th>
+						</td>
 					</tr>
 					<tr>
-						<td>
+						<td>Ticket sales open
 							<PlainText
 								value={ dates[0] }
 								onChange={ value => updateDates(value, 0)}
 							/>
 						</td>
-						<td>
+						<td>End of first round
 							<PlainText
 								value={ dates[1] }
 								onChange={ value => updateDates(value, 1)}
 							/>
 						</td>
-						<td>
+						<td>End of second round
 							<PlainText
 								value={ dates[2] }
 								onChange={ value => updateDates(value, 2)}
 							/>
 						</td>
-						<td>
+						<td>End of third round
 							<PlainText
 								value={ dates[3] }
 								onChange={ value => updateDates(value, 3)}
 							/>
 						</td>
-						<td>
+						<td>End of fourth round
 							<PlainText
 								value={ dates[4] }
 								onChange={ value => updateDates(value, 4)}
