@@ -92,12 +92,13 @@ add_action( 'init', 'pricing_block_cgb_block_assets' );
  * @return string Rendered HTML.
  */
 function block_callback( $att ) {
+//	var_dump($att);
 
-	$html = '<table class="wp-block-table alignwide"><thead><tr><th></th>';
+	$html = '<table class="wp-block-table alignwide"><tr><th></th>';
 	$html .= '<th>EARLY BIRD<br>May 22 – June 9<br>11:59 pm Local</th></tr>';
 
-	$html .= '<tr><th>Corporate</th><th><s>$1,050</s>&nbsp;<br>EXPIRED</th><th>$1,250<br><br></th><th>$1,450<br><br></th><th>$1,550<br><br></th></tr>';
-	$html .= '</thead></table>';
+	$html .= '<tr><td>Corporate</td><td><s>$1,050</s>&nbsp;<br>EXPIRED</td><td>$1,250<br><br></td><td>$1,450<br><br></td><td>$1,550<br><br></td></tr>';
+	$html .= '</table>';
 
 	return $html;
 

@@ -10,7 +10,8 @@ import './style.scss';
 import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType, PlainText } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { PlainText, InspectorControls, ColorPalette } = wp.editor;
 
 /**
  * Register: aa Gutenberg Block.
@@ -30,6 +31,9 @@ registerBlockType( 'cgb/block-pricing-block', {
 	title: __( 'Pricing Block' ), // Block title.
 	icon: 'calendar', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	supports: {
+		align: ['full']
+	},
 	attributes: {
 		topLabels: {
 			type: 'array',
@@ -45,8 +49,12 @@ registerBlockType( 'cgb/block-pricing-block', {
 		},
 		prices: {
 			type: 'array',
-			default: [[1050, 1250, 1450, 1550], [500, 600, 700, 800], [150, 150, 150, 150]]
+			default: [[1050, 500, 150], [1250, 600, 150], [1450, 700, 150], [1550, 800, 150]]
 		},
+		align: {
+			type: 'string',
+			default: 'full'
+		}
 	},
 
 	/**
@@ -58,12 +66,186 @@ registerBlockType( 'cgb/block-pricing-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		// Creates a <p class='wp-block-cgb-block-pricing-block'></p>.
+		const { setAttributes, attributes: { topLabels, dates, leftLabels, prices }} = props;
+		
+		function updateTopLabels(value, index) {
+			const newTopLabels = [...topLabels];
+			newTopLabels[index] = value;
+			setAttributes( {topLabels: newTopLabels});
+		}
+		function updateLeftLabels(value, index) {
+			const newLeftLabels = [...leftLabels];
+			newLeftLabels[index] = value;
+			setAttributes( {leftLabels: newLeftLabels});
+		}
+		function updateDates(value, index) {
+			const newDates = [...dates];
+			newDates[index] = value;
+			setAttributes( {dates: newDates});
+		}
+		function updatePrices(value, indexX, indexY) {
+			const newPrices = [...prices];
+			newPrices[indexX][indexY] = value;
+			setAttributes( {prices: newPrices});
+		}
+
 		return (
 			<div className={ props.className }>
 				<table>
-					<tr class="topLabels">
-						<td></td>
+					<tr>
+						<th></th>
+						<th>
+							<PlainText
+								value={ topLabels[0] }
+								onChange={ value => updateTopLabels(value, 0)}
+							/>
+						</th>
+						<th>
+							<PlainText
+								value={ topLabels[1] }
+								onChange={ value => updateTopLabels(value, 1)}
+							/>
+						</th>
+						<th>
+							<PlainText
+								value={ topLabels[2] }
+								onChange={ value => updateTopLabels(value, 2)}
+							/>
+						</th>
+						<th>
+							<PlainText
+								value={ topLabels[3] }
+								onChange={ value => updateTopLabels(value, 3)}
+							/>
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<PlainText
+								value={ dates[0] }
+								onChange={ value => updateDates(value, 0)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ dates[1] }
+								onChange={ value => updateDates(value, 1)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ dates[2] }
+								onChange={ value => updateDates(value, 2)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ dates[3] }
+								onChange={ value => updateDates(value, 3)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ dates[4] }
+								onChange={ value => updateDates(value, 4)}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<PlainText
+								value={ leftLabels[0] }
+								onChange={ value => updateLeftLabels(value, 0)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[0][0] }
+								onChange={ value => updatePrices(value, 0, 0)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[1][0] }
+								onChange={ value => updatePrices(value, 1, 0)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[2][0] }
+								onChange={ value => updatePrices(value, 2, 0)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[3][0] }
+								onChange={ value => updatePrices(value, 3, 0)}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<PlainText
+								value={ leftLabels[1] }
+								onChange={ value => updateLeftLabels(value, 1)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[0][1] }
+								onChange={ value => updatePrices(value, 0, 1)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[1][1] }
+								onChange={ value => updatePrices(value, 1, 1)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[2][1] }
+								onChange={ value => updatePrices(value, 2, 1)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[3][1] }
+								onChange={ value => updatePrices(value, 3, 1)}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<PlainText
+								value={ leftLabels[2] }
+								onChange={ value => updateLeftLabels(value, 2)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[0][2] }
+								onChange={ value => updatePrices(value, 0, 2)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[1][2] }
+								onChange={ value => updatePrices(value, 1, 2)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[2][2] }
+								onChange={ value => updatePrices(value, 2, 2)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[3][2] }
+								onChange={ value => updatePrices(value, 3, 2)}
+							/>
+						</td>
 					</tr>
 				</table>
 			</div>
