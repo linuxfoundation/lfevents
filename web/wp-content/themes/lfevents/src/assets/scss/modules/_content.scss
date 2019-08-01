@@ -192,3 +192,13 @@
   margin-bottom: 1.5em !important;
   padding: 1rem !important;
 }
+
+
+// Responsive embeds
+.wp-block-embed.is-type-video .wp-block-embed__wrapper {
+  @include responsive-embed(3 by 4);
+}
+
+.wp-block-embed.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
+  @include responsive-embed(16 by 9);
+}
