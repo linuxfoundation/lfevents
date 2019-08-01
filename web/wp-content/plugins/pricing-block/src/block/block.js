@@ -11,7 +11,9 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { PlainText, InspectorControls, ColorPalette } = wp.blockEditor;
+const { PlainText, InspectorControls, withColors, PanelColorSettings } = wp.blockEditor;
+const { PanelBody, PanelRow, TextControl, SelectControl } = wp.components; //Import Button from wp.components
+
 
 /**
  * Register: aa Gutenberg Block.
@@ -45,15 +47,28 @@ registerBlockType( 'cgb/block-pricing-block', {
 		},
 		leftLabels: {
 			type: 'array',
-			default: ['Corporate', 'Individual', 'Academic']
+			default: ['Corporate', 'Individual', 'Academic', '']
 		},
 		prices: {
 			type: 'array',
-			default: [['$ 1,050', '$ 500', '$ 150'], ['$ 1,250', '$ 600', '$ 150'], ['$ 1,450', '$ 700', '$ 150'], ['$ 1,550', '$ 800', '$ 150']]
+			default: [['$ 1,050', '$ 500', '$ 150', ''], ['$ 1,250', '$ 600', '$ 150', ''], ['$ 1,450', '$ 700', '$ 150', ''], ['$ 1,550', '$ 800', '$ 150', '']]
 		},
 		align: {
 			type: 'string',
 			default: 'full'
+		},
+		color1: {
+			type: 'string'
+		},
+		color2: {
+			type: 'string'
+		},
+		expireText: {
+			type: 'string',
+			default: 'Expired'
+		},
+		timeZone: {
+			type: 'string'
 		}
 	},
 
@@ -65,8 +80,8 @@ registerBlockType( 'cgb/block-pricing-block', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	edit: function( props ) {
-		const { setAttributes, attributes: { topLabels, dates, leftLabels, prices }} = props;
+	edit: withColors( 'color1', 'color2' ) (function( props ) {
+		const { setAttributes, attributes: { topLabels, dates, leftLabels, prices, expireText, timeZone }} = props;
 		
 		function updateTopLabels(value, index) {
 			const newTopLabels = [...topLabels];
@@ -89,10 +104,48 @@ registerBlockType( 'cgb/block-pricing-block', {
 			setAttributes( {prices: newPrices});
 		}
 
-		return (
+		return [
+			<InspectorControls>
+				<PanelColorSettings
+					title='Color Settings'
+					initialOpen={true}
+					colorSettings={[
+						{
+							value: props.color1.color,
+							onChange: props.setColor1,
+							label: 'Color 1'
+						},
+						{
+							value: props.color2.color,
+							onChange: props.setColor2,
+							label: 'Color 2'
+						},
+					]}
+				>
+				</PanelColorSettings>
+				<PanelBody><PanelRow>
+				<div>
+					<TextControl
+						label='Text to show when the price level has expired:'
+						value={ expireText }
+						onChange={ value => setAttributes({expireText: value})}
+	                />
+					<SelectControl
+						label='Local timezone of the Event:'
+						value={ timeZone }
+						onChange={ value => setAttributes({timeZone: value})}
+						options={ [
+							{ label: 'Large', value: 'large' },
+							{ label: 'Medium', value: 'medium' },
+							{ label: 'Small', value: 'small' },
+						] }
+					/>
+				</div>
+				</PanelRow></PanelBody>
+			</InspectorControls>,
 			<div className={ props.className }>
 				<h3>Event Pricing Table</h3>
-				<p>Fill in the rows and columns as appropriate for the Event and leave the remaining ones empty.</p>
+				<p>Fill in the rows and columns as appropriate for the Event and leave the remaining ones empty. Make sure your dates are of the format yyyy/mm/dd.</p>
 				<table>
 					<tr>
 						<td></td>
@@ -249,10 +302,42 @@ registerBlockType( 'cgb/block-pricing-block', {
 							/>
 						</td>
 					</tr>
+					<tr>
+						<td>
+							<PlainText
+								value={ leftLabels[3] }
+								onChange={ value => updateLeftLabels(value, 3)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[0][3] }
+								onChange={ value => updatePrices(value, 0, 3)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[1][3] }
+								onChange={ value => updatePrices(value, 1, 3)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[2][3] }
+								onChange={ value => updatePrices(value, 2, 3)}
+							/>
+						</td>
+						<td>
+							<PlainText
+								value={ prices[3][3] }
+								onChange={ value => updatePrices(value, 3, 3)}
+							/>
+						</td>
+					</tr>
 				</table>
 			</div>
-		);
-	},
+		];
+	}),
 
 	/**
 	 * The save function defines the way in which the different attributes should be combined

@@ -109,8 +109,12 @@ function block_callback( $att ) {
 	foreach ( $top_labels as $label ) {
 		if ( $label ) {
 			$column++;
-			$date_start = new DateTime( $dates[ $column - 1 ] );
-			$date_end = new DateTime( $dates[ $column ] );
+			try {
+				$date_start = new DateTime( $dates[ $column - 1 ] );
+				$date_end = new DateTime( $dates[ $column ] );
+			} catch (Exception $e) {
+				return;
+			}
 			if ( $column > 1 ) {
 				$date_start->add( new DateInterval( 'P1D' ) );
 			}
