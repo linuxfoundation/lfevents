@@ -39,19 +39,19 @@ registerBlockType( 'cgb/block-pricing-block', {
 	attributes: {
 		topLabels: {
 			type: 'array',
-			default: ['Early Bird', 'Standard', 'Late', 'Onsite']
+			default: ['', '', '', '']
 		},
 		dates: {
 			type: 'array',
-			default: ['2020/05/01', '2020/06/01', '2020/07/01', '2020/08/01', '2020/09/01']
+			default: ['', '', '', '', '']
 		},
 		leftLabels: {
 			type: 'array',
-			default: ['Corporate', 'Individual', 'Academic', '']
+			default: ['', '', '', '']
 		},
 		prices: {
 			type: 'array',
-			default: [['$ 1,050', '$ 500', '$ 150', ''], ['$ 1,250', '$ 600', '$ 150', ''], ['$ 1,450', '$ 700', '$ 150', ''], ['$ 1,550', '$ 800', '$ 150', '']]
+			default: [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']]
 		},
 		align: {
 			type: 'string',
@@ -69,7 +69,7 @@ registerBlockType( 'cgb/block-pricing-block', {
 		},
 		timeZone: {
 			type: 'string',
-			default: 'UTC-7'
+			default: '-0700'
 		}
 	},
 
@@ -206,24 +206,28 @@ registerBlockType( 'cgb/block-pricing-block', {
 							<PlainText
 								value={ topLabels[0] }
 								onChange={ value => updateTopLabels(value, 0)}
+								placeholder='Early Bird'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ topLabels[1] }
 								onChange={ value => updateTopLabels(value, 1)}
+								placeholder='Standard'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ topLabels[2] }
 								onChange={ value => updateTopLabels(value, 2)}
+								placeholder='Late'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ topLabels[3] }
 								onChange={ value => updateTopLabels(value, 3)}
+								placeholder='Onsite'
 							/>
 						</td>
 					</tr>
@@ -232,30 +236,35 @@ registerBlockType( 'cgb/block-pricing-block', {
 							<PlainText
 								value={ dates[0] }
 								onChange={ value => updateDates(value, 0)}
+								placeholder='2020/05/01'
 							/>
 						</td>
 						<td>End of first round
 							<PlainText
 								value={ dates[1] }
 								onChange={ value => updateDates(value, 1)}
+								placeholder='2020/06/01'
 							/>
 						</td>
 						<td>End of second round
 							<PlainText
 								value={ dates[2] }
 								onChange={ value => updateDates(value, 2)}
+								placeholder='2020/07/01'
 							/>
 						</td>
 						<td>End of third round
 							<PlainText
 								value={ dates[3] }
 								onChange={ value => updateDates(value, 3)}
+								placeholder='2020/08/01'
 							/>
 						</td>
 						<td>End of fourth round
 							<PlainText
 								value={ dates[4] }
 								onChange={ value => updateDates(value, 4)}
+								placeholder='2020/09/01'
 							/>
 						</td>
 					</tr>
@@ -264,30 +273,35 @@ registerBlockType( 'cgb/block-pricing-block', {
 							<PlainText
 								value={ leftLabels[0] }
 								onChange={ value => updateLeftLabels(value, 0)}
+								placeholder='Corporate'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[0][0] }
 								onChange={ value => updatePrices(value, 0, 0)}
+								placeholder='$ 1,050'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[1][0] }
 								onChange={ value => updatePrices(value, 1, 0)}
+								placeholder='$ 1,250'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[2][0] }
 								onChange={ value => updatePrices(value, 2, 0)}
+								placeholder='$ 1,450'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[3][0] }
 								onChange={ value => updatePrices(value, 3, 0)}
+								placeholder='$ 1,550'
 							/>
 						</td>
 					</tr>
@@ -296,30 +310,35 @@ registerBlockType( 'cgb/block-pricing-block', {
 							<PlainText
 								value={ leftLabels[1] }
 								onChange={ value => updateLeftLabels(value, 1)}
+								placeholder='Individual'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[0][1] }
 								onChange={ value => updatePrices(value, 0, 1)}
+								placeholder='$ 500'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[1][1] }
 								onChange={ value => updatePrices(value, 1, 1)}
+								placeholder='$ 600'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[2][1] }
 								onChange={ value => updatePrices(value, 2, 1)}
+								placeholder='$ 700'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[3][1] }
 								onChange={ value => updatePrices(value, 3, 1)}
+								placeholder='$ 800'
 							/>
 						</td>
 					</tr>
@@ -328,30 +347,35 @@ registerBlockType( 'cgb/block-pricing-block', {
 							<PlainText
 								value={ leftLabels[2] }
 								onChange={ value => updateLeftLabels(value, 2)}
+								placeholder='Academic'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[0][2] }
 								onChange={ value => updatePrices(value, 0, 2)}
+								placeholder='$ 150'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[1][2] }
 								onChange={ value => updatePrices(value, 1, 2)}
+								placeholder='$ 150'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[2][2] }
 								onChange={ value => updatePrices(value, 2, 2)}
+								placeholder='$ 150'
 							/>
 						</td>
 						<td>
 							<PlainText
 								value={ prices[3][2] }
 								onChange={ value => updatePrices(value, 3, 2)}
+								placeholder='$ 150'
 							/>
 						</td>
 					</tr>

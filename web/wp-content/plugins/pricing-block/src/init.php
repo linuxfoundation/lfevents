@@ -97,9 +97,15 @@ function block_callback( $att ) {
 	$left_labels = $att['leftLabels'];
 	$prices = $att['prices'];
 	$expire_text = $att['expireText'];
+	if ( ! $expire_text ) {
+		$expire_text = 'Expired';
+	}
 	$color1 = $att['color1'];
 	$color2 = $att['color2'];
 	$tz = $att['timeZone'];
+	if ( ! $tz ) {
+		$tz = '-0700';
+	}
 	$yesterday = new DateTime( 'now', new DateTimeZone( $tz ) );
 	$yesterday->sub( new DateInterval( 'P1D' ) );
 
