@@ -96,8 +96,13 @@ function block_callback( $att ) {
 	$dates = $att['dates'];
 	$left_labels = $att['leftLabels'];
 	$prices = $att['prices'];
-	$yesterday = new DateTime();
+	$expire_text = $att['expireText'];
+	$color1 = $att['color1'];
+	$color2 = $att['color2'];
+	$tz = $att['timeZone'];
+	$yesterday = new DateTime( 'now', new DateTimeZone( $tz ) );
 	$yesterday->sub( new DateInterval( 'P1D' ) );
+
 	$column = 0;
 	$row = 0;
 
@@ -110,8 +115,8 @@ function block_callback( $att ) {
 		if ( $label ) {
 			$column++;
 			try {
-				$date_start = new DateTime( $dates[ $column - 1 ] );
-				$date_end = new DateTime( $dates[ $column ] );
+				$date_start = new DateTime( $dates[ $column - 1 ], new DateTimeZone( $tz ) );
+				$date_end = new DateTime( $dates[ $column ], new DateTimeZone( $tz ) );
 			} catch (Exception $e) {
 				return;
 			}
@@ -127,9 +132,9 @@ function block_callback( $att ) {
 		if ( $label ) {
 			$html .= '<tr><td>' . $label . '</td>';
 			for ( $i = 0; $i < $column; $i++ ) {
-				$date_end = new DateTime( $dates[ $i + 1 ] );
-				if ( $date_end < $yesterday ) {
-					$html .= '<td class="expired"><s>' . $prices[ $i ][ $row ] . '</s><br>EXPIRED</td>';
+				$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
+			if ( $date_end < $yesterday ) {
+					$html .= '<td class="expired"><s>' . $prices[ $i ][ $row ] . '</s><br>' . $expire_text . '</td>';
 				} else {
 					$html .= '<td>' . $prices[ $i ][ $row ] . '</td>';
 				}
