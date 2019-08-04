@@ -19,7 +19,7 @@ get_template_part( 'template-parts/global-nav' );
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="entry-content">
-						<header class="alignwide about-page-header">
+						<header id="event-calendar-header" class="alignwide about-page-header">
 							<h1 class="entry-title"><?php the_title(); ?></h1>
 						</header>
 						<div class="alignwide">
