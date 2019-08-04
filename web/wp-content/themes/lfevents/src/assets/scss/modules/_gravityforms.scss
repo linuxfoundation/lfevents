@@ -40,6 +40,7 @@
   }
 
   .ginput_complex {
+    margin-bottom: $global-margin;
 
     @include breakpoint(medium) {
 
@@ -100,7 +101,8 @@
     padding-bottom: 0.8rem;
   }
 
-  .validation_error {
+  .validation_error,
+  .gfield_error {
     @include callout(get-color(alert));
     font-size: rem-calc(14);
   }
