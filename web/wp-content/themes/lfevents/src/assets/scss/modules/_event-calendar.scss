@@ -31,6 +31,12 @@
     @include xy-gutters($negative:true);
   }
 
+  > * {
+    @include breakpoint(large) {
+      @include xy-cell(12);
+    }
+  }
+
   form.searchandfilter {
 
     #switch-archive-view {
