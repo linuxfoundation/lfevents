@@ -68,8 +68,8 @@ get_template_part( 'template-parts/global-nav' );
 							<div id="post-<?php the_ID(); ?>" class="cell medium-6 large-4-">
 
 								<h4 class="medium-margin-right small-margin-bottom line-height-tight">
-									<a href="<?php echo lfe_get_event_url( $post->ID ); ?>">
-										<strong><?php echo get_the_title( $post->ID ); ?></strong>
+									<a href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
+										<strong><?php echo esc_html( get_the_title( $post->ID ) ); ?></strong>
 									</a>
 								</h4>
 
@@ -146,7 +146,6 @@ get_template_part( 'template-parts/global-nav' );
 						$query->the_post();
 						echo '<h5 class="text-medium no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
 						echo '<p class="text-tiny medium-margin-bottom">' . get_the_date() . '</p>';
-						// echo '<p class="text-small medium-margin-bottom">' . get_the_excerpt() . '</p>'; //phpcs:ignore
 					}
 				}
 				wp_reset_postdata();
