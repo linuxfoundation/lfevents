@@ -11,7 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { PlainText, InspectorControls, withColors, PanelColorSettings } = wp.blockEditor;
+const { PlainText, InspectorControls, PanelColorSettings } = wp.blockEditor;
 const { PanelBody, PanelRow, TextControl, SelectControl } = wp.components; //Import Button from wp.components
 
 
@@ -81,8 +81,8 @@ registerBlockType( 'cgb/block-pricing-block', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	edit: withColors( 'color1', 'color2' ) (function( props ) {
-		const { setAttributes, attributes: { topLabels, dates, leftLabels, prices, expireText, timeZone }} = props;
+	edit: (function( props ) {
+		const { setAttributes, attributes: { topLabels, dates, leftLabels, color1, color2, prices, expireText, timeZone }} = props;
 		
 		function updateTopLabels(value, index) {
 			const newTopLabels = [...topLabels];
@@ -112,15 +112,21 @@ registerBlockType( 'cgb/block-pricing-block', {
 					initialOpen={true}
 					colorSettings={[
 						{
-							value: props.color1.color,
-							onChange: props.setColor1,
+							value: color1,
+							onChange: colorValue =>
+								setAttributes({
+									color1: colorValue
+								}),
 							label: 'Color 1'
 						},
 						{
-							value: props.color2.color,
-							onChange: props.setColor2,
+							value: color2,
+							onChange: colorValue =>
+								setAttributes({
+									color2: colorValue
+								}),
 							label: 'Color 2'
-						},
+						}
 					]}
 				>
 				</PanelColorSettings>
