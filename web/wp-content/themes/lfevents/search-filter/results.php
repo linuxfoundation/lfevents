@@ -118,19 +118,19 @@ echo '</div>';
 // this controls the appearence and behavior of the link to navigate between upcoming and past events.
 $( document ).ready( function() {
 	if ( $( '#switch-archive-view' ).length === 0 ) {
-		$( '.event-calendar-container form' ).prepend( '<a class="button expanded" id="switch-archive-view" href="#"></a>' );
+		$( '#event-calendar-header' ).append( '<a class="button" id="switch-archive-view" href="#"></a>' );
 	}
 	var currentUrl = $( location ).attr( 'href' )
 	if ( -1 == currentUrl.indexOf( 'events-calendar/archive' ) ) {
 		//we are on the event-calendar page.
 		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar/archive' );
 		$( '#switch-archive-view' ).attr( "href", newUrl );
-		$( '#switch-archive-view' ).html( 'Show Past Events' );
+		$( '#switch-archive-view' ).html( 'View Past Events' );
 	} else {
 		//we are on the event-calendar/archive page.
 		newUrl = currentUrl.replace( 'events-calendar/archive', 'events-calendar' );
 		$( '#switch-archive-view' ).attr( "href", newUrl );
-		$( '#switch-archive-view' ).html( 'Show Upcoming Events' );
+		$( '#switch-archive-view' ).html( 'View Upcoming Events' );
 	}
 });
 </script>
