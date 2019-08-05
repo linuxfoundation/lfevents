@@ -11,7 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { PlainText, InspectorControls, ColorPalette } = wp.editor;
+const { PlainText, InspectorControls, PanelColorSettings } = wp.blockEditor;
 const { RadioControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
 
 
@@ -62,18 +62,6 @@ registerBlockType( 'cgb/block-speakers-block', {
 	edit: function( props ) {
 		const { setAttributes, attributes: { speakers, color1, color2, text_color }} = props;
 		
-		function onColor1Change(changes) {
-			setAttributes({
-				color1: changes
-			})
-		}
-
-		function onColor2Change(changes) {
-			setAttributes({
-				color2: changes
-			})
-		}
-
 		function onTextColorChange(changes) {
 			setAttributes({
 				text_color: changes
@@ -82,23 +70,30 @@ registerBlockType( 'cgb/block-speakers-block', {
 
 		return [	
 			<InspectorControls>
+				<PanelColorSettings
+					title='Color Settings'
+					initialOpen={true}
+					colorSettings={[
+						{
+							value: color1,
+							onChange: colorValue =>
+								setAttributes({
+									color1: colorValue
+								}),
+							label: 'Color 1'
+						},
+						{
+							value: color2,
+							onChange: colorValue =>
+								setAttributes({
+									color2: colorValue
+								}),
+							label: 'Color 2'
+						}
+					]}
+				>
+				</PanelColorSettings>
 				<PanelBody><PanelRow>
-				<div>
-					<p><strong>Color 1 for the background gradient:</strong></p>
-					<ColorPalette
-						value={color1}
-						onChange={onColor1Change}
-					/>
-				</div>
-				</PanelRow><PanelRow>
-				<div>
-					<p><strong>Color 2 for the background gradient:</strong></p>
-					<ColorPalette
-						value={color2}
-						onChange={onColor2Change}
-					/>
-				</div>
-				</PanelRow><PanelRow>
 				<div>
 					<RadioControl
 						label='Text color:'
