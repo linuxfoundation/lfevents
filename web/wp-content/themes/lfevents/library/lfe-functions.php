@@ -225,7 +225,7 @@ function lfe_scripts() {
 	// https://instant.page/.
 	wp_enqueue_script( 'instantpage', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'instantpage-1.2.2.js' ), array(), '1.2.2', true );
 
-	$chinese_domains = "'www.lfasiallc.com', 'old-events.lfasiallc.com', 'events.linuxfoundation.cn', 'old-events.linuxfoundation.cn'";
+	$chinese_domains = "'www.lfasiallc.com', 'events2.lfasiallc.com', 'events.linuxfoundation.cn', 'events2.linuxfoundation.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	if ( strpos( $chinese_domains, $current_domain ) ) {
 		// scripts for Chinese-audience sites.
@@ -264,7 +264,7 @@ add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
  * Inserts Google Analytics code on live sites.
  */
 function lfe_insert_google_analytics() {
-	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'old-events.linuxfoundation.org', 'old-events.lfasiallc.com', 'events.linuxfoundation.cn', 'old-events.linuxfoundation.cn'";
+	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events2.linuxfoundation.org', 'events2.lfasiallc.com', 'events.linuxfoundation.cn', 'events2.linuxfoundation.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
 <!-- Google Analytics -->
