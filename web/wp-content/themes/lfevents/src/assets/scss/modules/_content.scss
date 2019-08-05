@@ -194,6 +194,15 @@
 }
 
 
+.event-meta {
+  color: $charcoal;
+
+  .icon--inline {
+    color: $gray;
+  }
+}
+
+
 // Responsive embeds
 .wp-block-embed.is-type-video .wp-block-embed__wrapper {
   @include responsive-embed(3 by 4);

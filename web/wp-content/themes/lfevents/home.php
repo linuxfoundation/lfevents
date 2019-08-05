@@ -40,8 +40,8 @@ get_template_part( 'template-parts/global-nav' );
 
 	<div class="grid-container xlarge-padding-bottom">
 		<div class="grid-x grid-margin-x">
-			<div class="cell medium-7 large-8 xxlarge-9">
-				<div class="grid-x large-margin-bottom">
+			<div class="cell medium-8 large-9">
+				<div class="grid-x grid-margin-x grid-margin-y large-margin-bottom">
 					<?php
 					// Upcoming Events.
 					$query = new WP_Query(
@@ -63,107 +63,97 @@ get_template_part( 'template-parts/global-nav' );
 							$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
 							$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
-
-							$menu_color = get_post_meta( $post->ID, 'lfes_menu_color', true );
-							$menu_color_2 = get_post_meta( $post->ID, 'lfes_menu_color_2', true );
-							$menu_color_3 = get_post_meta( $post->ID, 'lfes_menu_color_3', true );
-							$menu_text_color = get_post_meta( $post->ID, 'lfes_menu_text_color', true );
-							$background_style = 'background-color: ' . $menu_color . ';';
-							if ( $menu_color_2 ) {
-								$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
-							}
-							$text_style = 'color: ' . $menu_text_color . ';';
-
-							$logo = get_post_meta( $post->ID, 'lfes_' . $menu_text_color . '_logo', true );
-							if ( $logo ) {
-								$event_title_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $post->ID ) . '">';  //phpcs:ignore
-							} else {
-								$event_title_content = get_the_title( $post->ID );
-							}
-
 							?>
-							<div id="post-<?php the_ID(); ?>" class="cell large-6 xxlarge-4 home-card large-margin-bottom--" style="<?php echo esc_html( $background_style . $text_style ); ?>">
-								<div class="bg-image  <?php echo esc_html( $menu_text_color ); ?>-text" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div>
-								<?php
-								if ( 'publish' == $post->post_status ) {
-									echo '<a class="card-header-link card-header" href="' . lfe_get_event_url( $post->ID ) . '">'; //phpcs:ignore
-								} else {
-									echo '<div class="card-header">';
-								}
 
-								echo '<span class="logo-container">' . $event_title_content . '</span>'; //phpcs:ignore
+							<div id="post-<?php the_ID(); ?>" class="cell medium-6 large-4-">
 
-								echo '<span class="meta-container">';
+								<h4 class="medium-margin-right small-margin-bottom line-height-tight">
+									<a href="<?php echo lfe_get_event_url( $post->ID ); ?>">
+										<strong><?php echo get_the_title( $post->ID ); ?></strong>
+									</a>
+								</h4>
 
-								echo '<span class="date">';
-								echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
-								echo '</span>';
+								<p class="event-meta text-small small-margin-bottom">
+									<span class="date small-margin-right">
+										<svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon--inline"><g class="fa-group"><path fill="currentColor" d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12z" class="fa-secondary"></path><path fill="currentColor" d="M448 112v48H0v-48a48 48 0 0 1 48-48h48V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h128V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h48a48 48 0 0 1 48 48z" class="fa-primary"></path></g></svg>
+										<?php echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ); ?>
+									</span>
 
-								$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
-								if ( $country ) {
-									$country = $country[0]->name;
-									$city = get_post_meta( $post->ID, 'lfes_city', true );
-									if ( $city ) {
-										$city .= ', ';
-									}
-									echo '<span class="country">' . esc_html( $city ) . esc_html( $country ) . '</span>';
-								}
+									<span class="country">
+										<svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline"><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" class=""></path></svg>
+										<?php
+										$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+										if ( $country ) {
+											$country = $country[0]->name;
+											$city = get_post_meta( $post->ID, 'lfes_city', true );
+											if ( $city ) {
+												$city .= ', ';
+											}
+											echo esc_html( $city ) . esc_html( $country );
+										}
+										?>
+									</span>
+								</p>
 
-								echo '</span>';
-
-								if ( 'publish' == $post->post_status ) {
-									echo '</a>'; //phpcs:ignore
-								} else {
-									echo '</div>';
-								}
-
-								if ( $register_url || $speak_url || $sponsor_url ) {
-									echo '<div class="card-footer"><div class="links" style="' . esc_html( $background_style . $text_style ) . '">';
+								<p class="">
+									<?php
 									if ( $register_url ) {
-										echo '<a class="link" href="' . esc_url( $register_url ) . '">Register</a>';
+										echo '<a class="button small tiny-margin-right uppercase text-weight-bold" href="' . esc_url( $register_url ) . '" >Register</a>';
+									} else {
+										echo '<a class="button disabled small tiny-margin-right uppercase text-weight-bold" disabled aria-disabled>Register</a>';
 									}
+
 									if ( $speak_url ) {
-										echo '<a class="link" href="' . esc_url( $speak_url ) . '">Speak</a>';
+										echo '<a class="button blue-dark small tiny-margin-right uppercase text-weight-bold" href="' . esc_url( $speak_url ) . '">Speak</a>';
+									} else {
+										echo '<a class="button blue-dark small tiny-margin-right uppercase text-weight-bold" disabled aria-disabled>Speak</a>';
 									}
+
 									if ( $sponsor_url ) {
-										echo '<a class="link" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+										echo '<a class="button orange small tiny-margin-right uppercase text-weight-bold" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+									} else {
+										echo '<a class="button orange small tiny-margin-right uppercase text-weight-bold" disabled aria-disabled>Sponsor</a>';
 									}
-									echo '</div></div>';
-								}
-								?>
+									?>
+								</p>
+
 							</div>
+
 							<?php
 						}
 						wp_reset_postdata();
 					}
 					?>
 				</div>
-				<a class="button large expanded" href="<?php echo esc_url( home_url( '/about/events-calendar' ) ); ?>">Full Events Calendar</a>
+				<a class="button gray large expanded" href="<?php echo esc_url( home_url( '/about/events-calendar' ) ); ?>">
+					<svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon--inline"><g class="fa-group"><path fill="currentColor" d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12z" class="fa-secondary"></path><path fill="currentColor" d="M448 112v48H0v-48a48 48 0 0 1 48-48h48V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h128V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h48a48 48 0 0 1 48 48z" class="fa-primary"></path></g></svg>
+					<strong>Search the full event calendar&hellip;</strong>
+					<small class="text-small small-margin-top uppercase display-block">(all upcoming &amp; past events)</small>
+				</a>
 			</div>
-			<div class="cell medium-5 large-4 xxlarge-3">
-				<h3 class="medium-margin-bottom">Latest News</h3>
+			<div class="cell medium-4 large-3">
+				<h4 class="medium-margin-bottom">Latest News</h4>
 				<?php
-				// Latest News.
 				$query = new WP_Query(
 					array(
 						'post_type' => 'post',
 						'no_found_rows' => true,
-						'posts_per_page' => 3,
+						'posts_per_page' => 5,
 					)
 				);
 				if ( $query->have_posts() ) {
 					while ( $query->have_posts() ) {
 						$query->the_post();
-						echo '<h5 class="no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
-						echo '<p class="text-small small-margin-bottom">' . get_the_date() . '</p>';
-						echo '<p class="text-small medium-margin-bottom">' . get_the_excerpt() . '</p>'; //phpcs:ignore
+						echo '<h5 class="text-medium no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
+						echo '<p class="text-tiny medium-margin-bottom">' . get_the_date() . '</p>';
+						// echo '<p class="text-small medium-margin-bottom">' . get_the_excerpt() . '</p>'; //phpcs:ignore
 					}
 				}
 				wp_reset_postdata();
 				?>
-				<a class="button expanded gray" href="<?php echo esc_url( home_url( '/about/news' ) ); ?>">Read More News</a>
+				<p class="xlarge-margin-bottom"><a href="<?php echo esc_url( home_url( '/about/news' ) ); ?>"><strong>More News&hellip;</strong></a></p>
 
-				<h3 class="medium-margin-bottom large-margin-top">Community Events</h3>
+				<h4 class="medium-margin-bottom large-margin-top">Community Events</h4>
 				<?php
 				$query = new WP_Query(
 					array(
@@ -181,8 +171,8 @@ get_template_part( 'template-parts/global-nav' );
 						$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
 						$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
-						echo '<h5 class="no-margin"><a href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
-						echo '<p class="text-small medium-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
+						echo '<h5 class="text-medium no-margin"><a href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
+						echo '<p class="text-tiny medium-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
 						$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 						if ( $country ) {
 							$country = $country[0]->name;
@@ -196,7 +186,7 @@ get_template_part( 'template-parts/global-nav' );
 				}
 				wp_reset_postdata();
 				?>
-				<a class="button expanded gray" href="<?php echo esc_url( home_url( '/about/community' ) ); ?>">All Community Events</a>
+				<p class="xlarge-margin-bottom"><a href="<?php echo esc_url( home_url( '/about/community' ) ); ?>"><strong>More Community Events&hellip;</strong></a></p>
 			</div>
 		</div>
 	</div>

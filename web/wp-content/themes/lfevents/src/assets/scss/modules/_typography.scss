@@ -42,6 +42,22 @@ button {
   }
 }
 
+.button.blue-dark {
+  background-color: $blue-dark;
+
+  &:hover {
+    background-color: darken($blue-dark, 10%);
+  }
+}
+
+.button.orange {
+  background-color: $orange;
+
+  &:hover {
+    background-color: darken($orange, 10%);
+  }
+}
+
 
 //
 // Typography helper classes
@@ -77,6 +93,15 @@ button {
   }
 }
 
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  word-spacing: 0.2em;
+}
+
+.line-height-tight {
+  line-height: 1.1;
+}
 
 
 //
@@ -95,6 +120,16 @@ blockquote {
 // --------------------------------------------------
 dd + dt {
   margin-top: $defnlist-term-margin-bottom;
+}
+
+
+//
+// Images
+// --------------------------------------------------
+.icon--inline {
+  display: inline-block;
+  height: 1em;
+  vertical-align: -0.125em;
 }
 
 
