@@ -95,11 +95,12 @@ get_template_part( 'template-parts/global-nav' );
 										?>
 									</span>
 
-									<span class="description">
+								</p>
+
+								<p class="description">
 										<?php
 										echo esc_html( $description );
 										?>
-									</span>
 								</p>
 
 								<p class="">
