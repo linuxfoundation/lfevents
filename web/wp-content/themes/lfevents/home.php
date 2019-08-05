@@ -63,6 +63,7 @@ get_template_part( 'template-parts/global-nav' );
 							$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
 							$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+							$description = get_post_meta( $post->ID, 'lfes_description', true );
 							?>
 
 							<div id="post-<?php the_ID(); ?>" class="cell medium-6 large-4-">
@@ -93,26 +94,26 @@ get_template_part( 'template-parts/global-nav' );
 										}
 										?>
 									</span>
+
+									<span class="description">
+										<?php
+										echo esc_html( $description );
+										?>
+									</span>
 								</p>
 
 								<p class="">
 									<?php
 									if ( $register_url ) {
 										echo '<a class="button small tiny-margin-right uppercase text-weight-bold" href="' . esc_url( $register_url ) . '" >Register</a>';
-									} else {
-										echo '<a class="button disabled small tiny-margin-right uppercase text-weight-bold" disabled aria-disabled>Register</a>';
 									}
 
 									if ( $speak_url ) {
 										echo '<a class="button blue-dark small tiny-margin-right uppercase text-weight-bold" href="' . esc_url( $speak_url ) . '">Speak</a>';
-									} else {
-										echo '<a class="button blue-dark small tiny-margin-right uppercase text-weight-bold" disabled aria-disabled>Speak</a>';
 									}
 
 									if ( $sponsor_url ) {
 										echo '<a class="button orange small tiny-margin-right uppercase text-weight-bold" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
-									} else {
-										echo '<a class="button orange small tiny-margin-right uppercase text-weight-bold" disabled aria-disabled>Sponsor</a>';
 									}
 									?>
 								</p>
