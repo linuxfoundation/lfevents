@@ -59,3 +59,13 @@ p.wp-caption-text{
 body.page-parent .entry-content > div:first-of-type img:first-of-type {
   min-height: 204px;
 }
+
+.photonic-loading { 
+  display: none !important; 
+}
+
+div.entry-content .photonic-stream {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
