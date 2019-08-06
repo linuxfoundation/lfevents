@@ -97,10 +97,10 @@ get_template_part( 'template-parts/global-nav' );
 
 								</p>
 
-								<p class="description">
-										<?php
-										echo esc_html( $description );
-										?>
+								<p class="text-small small-margin-bottom">
+									<?php
+									echo esc_html( $description );
+									?>
 								</p>
 
 								<p class="">
