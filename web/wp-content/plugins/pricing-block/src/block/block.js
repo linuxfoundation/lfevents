@@ -63,6 +63,12 @@ registerBlockType( 'cgb/block-pricing-block', {
 		color2: {
 			type: 'string'
 		},
+		color3: {
+			type: 'string'
+		},
+		color4: {
+			type: 'string'
+		},
 		expireText: {
 			type: 'string',
 			default: 'Expired'
@@ -82,8 +88,8 @@ registerBlockType( 'cgb/block-pricing-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: (function( props ) {
-		const { setAttributes, attributes: { topLabels, dates, leftLabels, color1, color2, prices, expireText, timeZone }} = props;
-		
+		const { setAttributes, attributes: { topLabels, dates, leftLabels, color1, color2, color3, color4, prices, expireText, timeZone }} = props;
+
 		function updateTopLabels(value, index) {
 			const newTopLabels = [...topLabels];
 			newTopLabels[index] = value;
@@ -126,6 +132,22 @@ registerBlockType( 'cgb/block-pricing-block', {
 									color2: colorValue
 								}),
 							label: 'Color 2'
+						},
+						{
+							value: color3,
+							onChange: colorValue =>
+								setAttributes({
+									color3: colorValue
+								}),
+							label: 'Color 3'
+						},
+						{
+							value: color4,
+							onChange: colorValue =>
+								setAttributes({
+									color4: colorValue
+								}),
+							label: 'Color 4'
 						}
 					]}
 				>
