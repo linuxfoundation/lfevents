@@ -102,6 +102,8 @@ function block_callback( $att ) {
 	}
 	$color1 = $att['color1'];
 	$color2 = $att['color2'];
+	$color3 = $att['color3'];
+	$color4 = $att['color4'];
 	$tz = $att['timeZone'];
 	if ( ! $tz ) {
 		$tz = '-0700';
@@ -116,10 +118,14 @@ function block_callback( $att ) {
 		return '';
 	}
 
-	$html = '<table class="wp-block-table alignwide"><tr><th></th>';
+	$html = '<table class="pricing-table wp-block-table alignwide"><tr><th></th>';
 	foreach ( $top_labels as $label ) {
 		if ( $label ) {
 			$column++;
+			if ( $column === 1 ) { $style = 'color:' . $color1 . ';'; }
+			if ( $column === 2 ) { $style = 'color:' . $color2 . ';'; }
+			if ( $column === 3 ) { $style = 'color:' . $color3 . ';'; }
+			if ( $column === 4 ) { $style = 'color:' . $color4 . ';'; }
 			try {
 				$date_start = new DateTime( $dates[ $column - 1 ], new DateTimeZone( $tz ) );
 				$date_end = new DateTime( $dates[ $column ], new DateTimeZone( $tz ) );
@@ -129,20 +135,31 @@ function block_callback( $att ) {
 			if ( $column > 1 ) {
 				$date_start->add( new DateInterval( 'P1D' ) );
 			}
-			$html .= '<th>' . $label . '<br>' . jb_verbose_date_range( $date_start, $date_end ) . '<br>11:59 pm Local</th>';
+			$html .= '<th style="' . $style . '">';
+			$html .= '<h4 class="column-header no-margin" style="' . $style . '">' . $label . '</h4>';
+			$html .= '<p class="no-margin" style="' . $style . '">' . jb_verbose_date_range( $date_start, $date_end ) . '</p>';
+			$html .= '<p class="text-tiny no-margin" style="' . $style . '">11:59 PM Local</p>';
+			$html .= '</th>';
 		}
 	}
 	$html .= '</tr>';
 
 	foreach ( $left_labels as $label ) {
 		if ( $label ) {
-			$html .= '<tr><td>' . $label . '</td>';
+			$html .= '<tr><td style="color:' . $color1 . ';">' . $label . '</td>';
 			for ( $i = 0; $i < $column; $i++ ) {
 				$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
-			if ( $date_end < $yesterday ) {
-					$html .= '<td class="expired"><s>' . $prices[ $i ][ $row ] . '</s><br>' . $expire_text . '</td>';
+				if ( $i === 0 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color1 . ';'; }
+				if ( $i === 1 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color2 . ';'; }
+				if ( $i === 2 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color3 . ';'; }
+				if ( $i === 3 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color4 . ';'; }
+				if ( $date_end < $yesterday ) {
+					$html .= '<td class="price expired" style="' . $style . '">';
+					$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
+					$html .= '<span class="expired-label">' . $expire_text . '</span>';
+					$html .= '</td>';
 				} else {
-					$html .= '<td>' . $prices[ $i ][ $row ] . '</td>';
+					$html .= '<td class="price" style="' . $style . '">' . $prices[ $i ][ $row ] . '</td>';
 				}
 			}
 			$row++;

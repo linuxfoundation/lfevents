@@ -5,10 +5,10 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-pricing-block  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
+.wp-block-cgb-block-pricing-block {
+  background: #ccffdd;
+  border: 0.2rem solid Black;
+  color: Black;
   margin: 0 auto;
   max-width: 740px;
   padding: 2rem;
@@ -20,5 +20,9 @@
 }
 
 .block-editor .wp-block-cgb-block-pricing-block .block-editor-plain-text {
-  border: 1px solid grey;
+  border: 1px solid Grey;
+}
+
+.wp-block-cgb-block-pricing-block * {
+  color: Black !important;
 }
