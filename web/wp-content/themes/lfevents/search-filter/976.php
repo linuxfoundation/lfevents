@@ -42,26 +42,32 @@ if ( $query->have_posts() ) {
 		}
 		?>
 		<article id="post-<?php the_ID(); ?>" class="cell medium-6 callout">
-			<h4 class="h5 no-margin"><strong>
+			<h4 class="h5 medium-margin-right small-margin-bottom line-height-tight"><strong>
 			<?php
 			echo '<a href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">' . esc_html( get_the_title() ) . '</a>';
 			?>
 			</strong></h4>
-			<p>
-				<?php
-				echo '<small>';
-				if ( $dt_date_start != $dt_date_end ) {
-					echo esc_html( $dt_date_start->format( 'm/j/Y' ) . ' - ' . $dt_date_end->format( 'm/j/Y' ) );
-				} else {
-					echo esc_html( $dt_date_start->format( 'm/j/Y' ) );
-				}
-				$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
-				if ( $country ) {
-					$country = $country[0]->name;
-					echo ' | ' . esc_html( get_post_meta( $post->ID, 'lfes_community_city', true ) ) . ', ' . esc_html( $country );
-				}
-				echo '</small>';
-				?>
+			<p class="event-meta text-small small-margin-bottom">
+				<span class="date small-margin-right">
+					<svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon--inline"><g class="fa-group"><path fill="currentColor" d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12z" class="fa-secondary"></path><path fill="currentColor" d="M448 112v48H0v-48a48 48 0 0 1 48-48h48V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h128V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h48a48 48 0 0 1 48 48z" class="fa-primary"></path></g></svg>
+					<?php echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ); ?>
+				</span>
+
+				<span class="country">
+					<svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline"><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" class=""></path></svg>
+					<?php
+					$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+					if ( $country ) {
+						$country = $country[0]->name;
+						$city = get_post_meta( $post->ID, 'lfes_community_city', true );
+						if ( $city ) {
+							$city .= ', ';
+						}
+						echo esc_html( $city ) . esc_html( $country );
+					}
+					?>
+				</span>
+
 			</p>
 		</article>
 		<?php
