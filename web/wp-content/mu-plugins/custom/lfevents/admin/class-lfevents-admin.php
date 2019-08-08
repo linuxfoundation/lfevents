@@ -137,10 +137,11 @@ class LFEvents_Admin {
 			'hierarchical' => true,
 			'menu_icon'    => 'dashicons-admin-page',
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
+			'menu_position' => 30,
 		);
 
 		$current_year = date( 'Y' );
-		for ( $x = 2019; $x <= $current_year; $x++ ) {
+		for ( $x = 2017; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
 				'name'          => $x . ' Events',
 				'singular_name' => $x . ' Event',
