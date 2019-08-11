@@ -321,7 +321,7 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 	// check if there is an end date and append if not identical.
 	if ( ! empty( $end_date ) ) {
 		if ( $end_date_pretty != $start_date_pretty ) {
-			  $date_range .= ' - ' . $end_date_pretty;
+			  $date_range .= '–' . $end_date_pretty;
 		}
 	}
 	return $date_range;

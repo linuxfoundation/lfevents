@@ -118,56 +118,110 @@ function block_callback( $att ) {
 		return '';
 	}
 
-	$html = '<table class="pricing-table wp-block-table alignwide"><tr><th></th>';
-	foreach ( $top_labels as $label ) {
-		if ( $label ) {
-			$column++;
-			if ( $column === 1 ) { $style = 'color:' . $color1 . ';'; }
-			if ( $column === 2 ) { $style = 'color:' . $color2 . ';'; }
-			if ( $column === 3 ) { $style = 'color:' . $color3 . ';'; }
-			if ( $column === 4 ) { $style = 'color:' . $color4 . ';'; }
-			try {
-				$date_start = new DateTime( $dates[ $column - 1 ], new DateTimeZone( $tz ) );
-				$date_end = new DateTime( $dates[ $column ], new DateTimeZone( $tz ) );
-			} catch (Exception $e) {
-				return;
-			}
-			if ( $column > 1 ) {
-				$date_start->add( new DateInterval( 'P1D' ) );
-			}
-			$html .= '<th style="' . $style . '">';
-			$html .= '<h4 class="column-header no-margin" style="' . $style . '">' . $label . '</h4>';
-			$html .= '<p class="no-margin" style="' . $style . '">' . jb_verbose_date_range( $date_start, $date_end ) . '</p>';
-			$html .= '<p class="text-tiny no-margin" style="' . $style . '">11:59 PM Local</p>';
-			$html .= '</th>';
-		}
-	}
-	$html .= '</tr>';
+	// $html = '<table class="pricing-table wp-block-table alignwide"><tr><th></th>';
+	// foreach ( $top_labels as $label ) {
+	// 	if ( $label ) {
+	// 		$column++;
+	// 		if ( $column === 1 ) { $style = 'color:' . $color1 . ';'; }
+	// 		if ( $column === 2 ) { $style = 'color:' . $color2 . ';'; }
+	// 		if ( $column === 3 ) { $style = 'color:' . $color3 . ';'; }
+	// 		if ( $column === 4 ) { $style = 'color:' . $color4 . ';'; }
+	// 		try {
+	// 			$date_start = new DateTime( $dates[ $column - 1 ], new DateTimeZone( $tz ) );
+	// 			$date_end = new DateTime( $dates[ $column ], new DateTimeZone( $tz ) );
+	// 		} catch (Exception $e) {
+	// 			return;
+	// 		}
+	// 		if ( $column > 1 ) {
+	// 			$date_start->add( new DateInterval( 'P1D' ) );
+	// 		}
+	// 		$html .= '<th style="' . $style . '">';
+	// 		$html .= '<h4 class="column-header no-margin" style="' . $style . '">' . $label . '</h4>';
+	// 		$html .= '<p class="no-margin" style="' . $style . '">' . jb_verbose_date_range( $date_start, $date_end ) . '</p>';
+	// 		$html .= '<p class="text-tiny no-margin" style="' . $style . '">11:59 PM Local</p>';
+	// 		$html .= '</th>';
+	// 	}
+	// }
+	// $html .= '</tr>';
+	//
+	// foreach ( $left_labels as $label ) {
+	// 	if ( $label ) {
+	// 		$html .= '<tr><td style="color:' . $color1 . ';">' . $label . '</td>';
+	// 		for ( $i = 0; $i < $column; $i++ ) {
+	// 			$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
+	// 			if ( $i === 0 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color1 . ';'; }
+	// 			if ( $i === 1 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color2 . ';'; }
+	// 			if ( $i === 2 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color3 . ';'; }
+	// 			if ( $i === 3 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color4 . ';'; }
+	// 			if ( $date_end < $yesterday ) {
+	// 				$html .= '<td class="price expired" style="' . $style . '">';
+	// 				$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
+	// 				$html .= '<span class="expired-label">' . $expire_text . '</span>';
+	// 				$html .= '</td>';
+	// 			} else {
+	// 				$html .= '<td class="price" style="' . $style . '">' . $prices[ $i ][ $row ] . '</td>';
+	// 			}
+	// 		}
+	// 		$row++;
+	// 		$html .= '</tr>';
+	// 	}
+	// }
+	// $html .= '</table>';
 
+	$html .= '<div class="pricing-grid alignwide">';
 	foreach ( $left_labels as $label ) {
 		if ( $label ) {
-			$html .= '<tr><td style="color:' . $color1 . ';">' . $label . '</td>';
-			for ( $i = 0; $i < $column; $i++ ) {
-				$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
-				if ( $i === 0 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color1 . ';'; }
-				if ( $i === 1 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color2 . ';'; }
-				if ( $i === 2 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color3 . ';'; }
-				if ( $i === 3 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color4 . ';'; }
-				if ( $date_end < $yesterday ) {
-					$html .= '<td class="price expired" style="' . $style . '">';
-					$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
-					$html .= '<span class="expired-label">' . $expire_text . '</span>';
-					$html .= '</td>';
-				} else {
-					$html .= '<td class="price" style="' . $style . '">' . $prices[ $i ][ $row ] . '</td>';
+			$html .= '<div class="attendee-type" style="color:' . $color1 . ';">';
+
+			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . ';">' . $label . '</h4>';
+			for ( $i = 0; $i < 4; $i++ ) {
+				if ( $top_labels[ $i ] ) {
+					if ( $i === 0 ) { $color = $color1; }
+					if ( $i === 1 ) { $color = $color2; }
+					if ( $i === 2 ) { $color = $color3; }
+					if ( $i === 3 ) { $color = $color4; }
+					try {
+						$date_start = new DateTime( $dates[ $i ], new DateTimeZone( $tz ) );
+						$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
+					} catch (Exception $e) {
+						return;
+					}
+					if ( $i > 0 ) {
+						$date_start->add( new DateInterval( 'P1D' ) );
+					}
+					if ( $date_end < $yesterday ) {
+						$expired = 'expired';
+					} else {
+						$expired = '';
+					}
+					$html .= '<div class="price-cell ' . $expired . '" style="background-color:' . $color . ';">';
+
+					$html .= '<div class="price-window" style="background-color:' . $color . '">';
+					$html .= '<h5 class="price-window--name">' . $top_labels[ $i ];
+					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end ) . '</small>';
+					$html .= '</h5>';
+					$html .= '</div>';
+
+
+					$html .= '<div class="price-amount">';
+					if ( $date_end < $yesterday ) {
+						$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
+						$html .= '<span class="expired-label">' . $expire_text . '</span>';
+					} else {
+						$html .= $prices[ $i ][ $row ];
+					}
+					$html .= '</div>';
+
+					$html .= '</div>';
 				}
 			}
+
 			$row++;
-			$html .= '</tr>';
+
+			$html .= '</div>';
 		}
 	}
-	$html .= '</table>';
+	$html .= '</div>';
 
 	return $html;
-
 }
