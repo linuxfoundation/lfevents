@@ -13,6 +13,10 @@
   padding: 1rem;
 
   @include breakpoint(large) {
+    padding: 0.5rem;
+  }
+
+  @include breakpoint(xxlarge) {
     padding: 1rem 1.5rem;
   }
 
@@ -31,6 +35,16 @@
     img {
       width: rem-calc(340);
       max-width: 70vw;
+
+      @include breakpoint(large) {
+        max-width: rem-calc(260);
+      }
+      @include breakpoint(xlarge) {
+        // max-width: rem-calc(300);
+      }
+      @include breakpoint(xxlarge) {
+        max-width: rem-calc(340);
+      }
     }
   }
 
@@ -58,6 +72,21 @@
             background-color: rgba(0,0,0,0.2);
             box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
           }
+
+          @include breakpoint(large) {
+            font-size: rem-calc(12);
+            padding-right: 0.75rem;
+            padding-left: 0.75rem;
+          }
+          @include breakpoint(xlarge) {
+            font-size: rem-calc(14);
+            padding-right: 1rem;
+            padding-left: 1rem;
+          }
+          @include breakpoint(xxlarge) {
+            font-size: rem-calc(16);
+          }
+
         }
 
         @include breakpoint(large) {
