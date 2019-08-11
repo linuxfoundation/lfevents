@@ -141,3 +141,23 @@
 .nav-next a {
   @include button(false, $off-white, $white-smoke, $primary-color, solid);
 }
+
+
+// Homepage call-to-action buttons
+.homepage--call-to-action {
+
+  a {
+    display: inline-block;
+    margin: 0.85em 1em;
+    font-size: rem-calc(12);
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:first-child {
+      @include button();
+      font-size: rem-calc(12);
+      border-radius: rem-calc(8);
+      margin: 0;
+    }
+  }
+}
