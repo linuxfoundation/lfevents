@@ -105,6 +105,7 @@ function block_callback( $att ) {
 	$color2 = $att['color2'];
 	$color3 = $att['color3'];
 	$color4 = $att['color4'];
+	$color_text = $att['colorText'];
 	$tz = $att['timeZone'];
 	if ( ! $tz ) {
 		$tz = '-0700';
@@ -122,7 +123,7 @@ function block_callback( $att ) {
 	$html .= '<div class="pricing-grid alignwide">';
 	foreach ( $left_labels as $label ) {
 		if ( $label ) {
-			$html .= '<div class="attendee-type" style="color:' . $color1 . ';">';
+			$html .= '<div class="attendee-type" style="color:' . $color_text . ';">';
 
 			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . ';">' . $label . '</h4>';
 			for ( $i = 0; $i < 4; $i++ ) {
