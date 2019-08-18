@@ -160,6 +160,15 @@
     position: relative;
 		text-align: center;
 
+		a img {
+			transform-origin: 50% 50%;
+			transition: transform 0.2s;
+
+			&:hover {
+				transform: scale(1.1);
+			}
+		}
+
     .logo {
       margin: 0 0 3vw;
 
