@@ -58,6 +58,9 @@ if ( ! function_exists( 'stackable_premium_block_editor_assets' ) ) {
 			STACKABLE_VERSION
 		);
 
+		// Add translations.
+		wp_set_script_translations( 'ugb-block-js-premium', STACKABLE_I18N );
+
 		wp_enqueue_style(
 			'ugb-block-editor-css-premium',
 			plugins_url( 'dist/editor_blocks__premium_only.css', STACKABLE_FILE ),
