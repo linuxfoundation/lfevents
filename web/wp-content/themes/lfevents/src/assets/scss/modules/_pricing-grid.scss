@@ -1,6 +1,6 @@
 .pricing-grid {
   width: auto;
-  margin: auto;
+  margin: 0 auto $global-margin;
 
   @include breakpoint(large) {
     text-align: center;

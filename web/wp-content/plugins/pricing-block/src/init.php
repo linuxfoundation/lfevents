@@ -64,9 +64,10 @@ function pricing_block_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-pricing-block', array(
+		'cgb/block-pricing-block',
+		array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-//			'style'         => 'pricing_block-cgb-style-css',
+			// 'style'         => 'pricing_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
 			'editor_script' => 'pricing_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
@@ -104,6 +105,7 @@ function block_callback( $att ) {
 	$color2 = $att['color2'];
 	$color3 = $att['color3'];
 	$color4 = $att['color4'];
+	$color_text = $att['colorText'];
 	$tz = $att['timeZone'];
 	if ( ! $tz ) {
 		$tz = '-0700';
@@ -118,72 +120,27 @@ function block_callback( $att ) {
 		return '';
 	}
 
-	// $html = '<table class="pricing-table wp-block-table alignwide"><tr><th></th>';
-	// foreach ( $top_labels as $label ) {
-	// 	if ( $label ) {
-	// 		$column++;
-	// 		if ( $column === 1 ) { $style = 'color:' . $color1 . ';'; }
-	// 		if ( $column === 2 ) { $style = 'color:' . $color2 . ';'; }
-	// 		if ( $column === 3 ) { $style = 'color:' . $color3 . ';'; }
-	// 		if ( $column === 4 ) { $style = 'color:' . $color4 . ';'; }
-	// 		try {
-	// 			$date_start = new DateTime( $dates[ $column - 1 ], new DateTimeZone( $tz ) );
-	// 			$date_end = new DateTime( $dates[ $column ], new DateTimeZone( $tz ) );
-	// 		} catch (Exception $e) {
-	// 			return;
-	// 		}
-	// 		if ( $column > 1 ) {
-	// 			$date_start->add( new DateInterval( 'P1D' ) );
-	// 		}
-	// 		$html .= '<th style="' . $style . '">';
-	// 		$html .= '<h4 class="column-header no-margin" style="' . $style . '">' . $label . '</h4>';
-	// 		$html .= '<p class="no-margin" style="' . $style . '">' . jb_verbose_date_range( $date_start, $date_end ) . '</p>';
-	// 		$html .= '<p class="text-tiny no-margin" style="' . $style . '">11:59 PM Local</p>';
-	// 		$html .= '</th>';
-	// 	}
-	// }
-	// $html .= '</tr>';
-	//
-	// foreach ( $left_labels as $label ) {
-	// 	if ( $label ) {
-	// 		$html .= '<tr><td style="color:' . $color1 . ';">' . $label . '</td>';
-	// 		for ( $i = 0; $i < $column; $i++ ) {
-	// 			$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
-	// 			if ( $i === 0 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color1 . ';'; }
-	// 			if ( $i === 1 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color2 . ';'; }
-	// 			if ( $i === 2 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color3 . ';'; }
-	// 			if ( $i === 3 ) { $style = 'box-shadow: inset 0 0 0 9999px ' . $color4 . ';'; }
-	// 			if ( $date_end < $yesterday ) {
-	// 				$html .= '<td class="price expired" style="' . $style . '">';
-	// 				$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
-	// 				$html .= '<span class="expired-label">' . $expire_text . '</span>';
-	// 				$html .= '</td>';
-	// 			} else {
-	// 				$html .= '<td class="price" style="' . $style . '">' . $prices[ $i ][ $row ] . '</td>';
-	// 			}
-	// 		}
-	// 		$row++;
-	// 		$html .= '</tr>';
-	// 	}
-	// }
-	// $html .= '</table>';
-
 	$html .= '<div class="pricing-grid alignwide">';
 	foreach ( $left_labels as $label ) {
 		if ( $label ) {
-			$html .= '<div class="attendee-type" style="color:' . $color1 . ';">';
+			$html .= '<div class="attendee-type" style="color:' . $color_text . ';">';
 
 			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . ';">' . $label . '</h4>';
 			for ( $i = 0; $i < 4; $i++ ) {
 				if ( $top_labels[ $i ] ) {
-					if ( $i === 0 ) { $color = $color1; }
-					if ( $i === 1 ) { $color = $color2; }
-					if ( $i === 2 ) { $color = $color3; }
-					if ( $i === 3 ) { $color = $color4; }
+					if ( 0 === $i ) {
+						$color = $color1;
+					} elseif ( 1 === $i ) {
+						$color = $color2;
+					} elseif ( 2 === $i ) {
+						$color = $color3;
+					} elseif ( 3 === $i ) {
+						$color = $color4;
+					}
 					try {
 						$date_start = new DateTime( $dates[ $i ], new DateTimeZone( $tz ) );
 						$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
-					} catch (Exception $e) {
+					} catch ( Exception $e ) {
 						return;
 					}
 					if ( $i > 0 ) {
@@ -201,8 +158,6 @@ function block_callback( $att ) {
 					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end ) . '</small>';
 					$html .= '</h5>';
 					$html .= '</div>';
-
-
 					$html .= '<div class="price-amount">';
 					if ( $date_end < $yesterday ) {
 						$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
