@@ -52,6 +52,20 @@ Frontend styles for gutenberg blocks
 			// background: transparent;
 		}
 	}
+
+	@each $name, $size in $button-sizes {
+		&.#{$name} .wp-block-button__link {
+			font-size: $size;
+		}
+	}
+	&.xlarge .wp-block-button__link {
+		font-size: 2rem;
+	}
+
+	&.expanded,
+	&.expanded .wp-block-button__link {
+		width: 100%;
+	}
 }
 
 /** === File === */

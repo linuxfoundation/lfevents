@@ -239,6 +239,11 @@ body {
 		@extend .button;
 	}
 
+	// add styling for default rounded buttons
+	&.is-style-default .wp-block-button__link {
+		border-radius: rem-calc(8);
+	}
+
 	// add special styling for squared buttons
 	&.is-style-squared .wp-block-button__link {
 		border-radius: 0;
@@ -255,6 +260,20 @@ body {
 	&.is-style-outline:focus,
 	&.is-style-outline:active {
 		background: transparent;
+	}
+
+	@each $name, $size in $button-sizes {
+		&.#{$name} .wp-block-button__link {
+			font-size: $size;
+		}
+	}
+	&.xlarge .wp-block-button__link {
+		font-size: 2rem;
+	}
+
+	&.expanded,
+	&.expanded .wp-block-button__link {
+		width: 100%;
 	}
 }
 
