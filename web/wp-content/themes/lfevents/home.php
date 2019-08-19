@@ -66,7 +66,7 @@ get_template_part( 'template-parts/global-nav' );
 							$description = get_post_meta( $post->ID, 'lfes_description', true );
 							?>
 
-							<div id="post-<?php the_ID(); ?>" class="cell medium-6 large-4-">
+							<div id="post-<?php the_ID(); ?>" class="cell medium-6">
 
 								<h4 class="medium-margin-right small-margin-bottom line-height-tight">
 									<a href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
