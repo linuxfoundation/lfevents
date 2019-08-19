@@ -108,13 +108,12 @@ registerBlockType( 'cgb/sponsors-block', {
     //JSX to return
     return [
       <InspectorControls>
-      <PanelBody
-        title='Columns'
-      >
+      <PanelBody>
         <TextControl
           label='Sponsor Tier Name:'
           value={ tierName }
           onChange={ onTierNameChange }
+          placeholder='DIAMOND'
         />
         <SelectControl
           label={ __( 'Logo Size:' ) }
