@@ -74,7 +74,7 @@ get_template_part( 'template-parts/global-nav' );
 									</a>
 								</h4>
 
-								<p class="event-meta text-small no-margin-bottom">
+								<p class="event-meta text-small small-margin-bottom">
 									<span class="date small-margin-right">
 										<svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon--inline"><g class="fa-group"><path fill="currentColor" d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12z" class="fa-secondary"></path><path fill="currentColor" d="M448 112v48H0v-48a48 48 0 0 1 48-48h48V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h128V16a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v48h48a48 48 0 0 1 48 48z" class="fa-primary"></path></g></svg>
 										<?php echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ); ?>
@@ -98,29 +98,27 @@ get_template_part( 'template-parts/global-nav' );
 								</p>
 
 								<?php
-								$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
-								if ( '0' === $cfp_active ) {
-									echo '<p class="text-small small-margin-bottom"><i>CFP Status: No Call for Proposals</i></p>';
-								} elseif ( ! ( $cfp_date_start ) ) {
-									echo '<p class="text-small small-margin-bottom"><i>CFP Status: Details Coming Soon</i></p>';
-								} elseif ( strtotime( $cfp_date_end ) < time() ) {
-									echo '<p class="text-small small-margin-bottom"><i>CFP Status: Closed</i></p>';
-								} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
-									echo '<p class="text-small small-margin-bottom"><i>CFP Status: Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) ) . '</i></p>';
-								} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
-									echo '<p class="text-small small-margin-bottom"><i>CFP Status: Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) ) . '</i></p>';
-								}
+								// $cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
+								// if ( '0' === $cfp_active ) {
+								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: No Call for Proposals</i></p>';
+								// } elseif ( ! ( $cfp_date_start ) ) {
+								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Details Coming Soon</i></p>';
+								// } elseif ( strtotime( $cfp_date_end ) < time() ) {
+								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Closed</i></p>';
+								// } elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
+								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) ) . '</i></p>';
+								// } elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
+								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) ) . '</i></p>';
+								// }
 								?>
-
 
 								<p class="text-small small-margin-bottom">
 									<?php
-									// echo esc_html( $description );
-									echo esc_html( $description ) . ' <a href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
+									echo esc_html( $description );
 									?>
 								</p>
 
-								<!-- <p class="homepage--call-to-action">
+								<p class="homepage--call-to-action">
 									<?php
 									if ( $register_url ) {
 										echo '<a href="' . esc_url( $register_url ) . '" >Register</a>';
@@ -134,7 +132,7 @@ get_template_part( 'template-parts/global-nav' );
 										echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
 									}
 									?>
-								</p> -->
+								</p>
 
 							</div>
 
