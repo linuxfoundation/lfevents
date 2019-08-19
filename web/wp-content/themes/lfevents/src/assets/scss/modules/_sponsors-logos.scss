@@ -9,7 +9,7 @@
 	letter-spacing: 0.2em !important;
 	border-bottom: 1px solid currentColor;
 	text-align: center;
-	margin: $global-margin;
+	margin: $global-margin $global-margin rem-calc(40);
 	padding: rem-calc(40) 0 rem-calc(10);
 	}
 
@@ -30,27 +30,22 @@
 	&.smallest .logo { width: rem-calc(100); }
 
 	&.largest {
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			@include xy-grid-layout(2, '.sponsors-logo-item', true);
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			@include xy-grid-layout(3, '.sponsors-logo-item', true);
-		}
-		@include breakpoint(xxlarge){
-			&:not(.orphan-by-4) {
-				@include xy-grid-layout(4, '.sponsors-logo-item', true);
-			}
 		}
 	}
 
 	&.larger {
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			@include xy-grid-layout(2, '.sponsors-logo-item', true);
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			@include xy-grid-layout(3, '.sponsors-logo-item', true);
 		}
-		@include breakpoint(xxlarge){
+		@include breakpoint(xxlarge) {
 			&:not(.orphan-by-4) {
 				@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			}
@@ -58,16 +53,16 @@
 	}
 
 	&.large {
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			@include xy-grid-layout(2, '.sponsors-logo-item', true);
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			@include xy-grid-layout(3, '.sponsors-logo-item', true);
 			&:not(.orphan-by-4) {
 				@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(xxlarge){
+		@include breakpoint(xxlarge) {
 			@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			&:not(.orphan-by-5) {
 				@include xy-grid-layout(5, '.sponsors-logo-item', true);
@@ -77,15 +72,15 @@
 
 	&.medium {
 		@include xy-grid-layout(2, '.sponsors-logo-item', true);
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			@include xy-grid-layout(3, '.sponsors-logo-item', true);
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			&:not(.orphan-by-4) {
 				@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(xxlarge){
+		@include breakpoint(xxlarge) {
 			@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			&:not(.orphan-by-5) {
 				@include xy-grid-layout(5, '.sponsors-logo-item', true);
@@ -95,18 +90,18 @@
 
 	&.small {
 		@include xy-grid-layout(3, '.sponsors-logo-item', true);
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			&:not(.orphan-by-4) {
 				@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			@include xy-grid-layout(4, '.sponsors-logo-item', true);
 			&:not(.orphan-by-5) {
 				@include xy-grid-layout(5, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(xxlarge){
+		@include breakpoint(xxlarge) {
 			@include xy-grid-layout(5, '.sponsors-logo-item', true);
 			&:not(.orphan-by-6) {
 				@include xy-grid-layout(6, '.sponsors-logo-item', true);
@@ -116,18 +111,18 @@
 
 	&.smaller {
 		@include xy-grid-layout(4, '.sponsors-logo-item', true);
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			&:not(.orphan-by-5) {
 				@include xy-grid-layout(5, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			@include xy-grid-layout(5, '.sponsors-logo-item', true);
 			&:not(.orphan-by-6) {
 				@include xy-grid-layout(6, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(xxlarge){
+		@include breakpoint(xxlarge) {
 			@include xy-grid-layout(6, '.sponsors-logo-item', true);
 			&:not(.orphan-by-7) {
 				@include xy-grid-layout(7, '.sponsors-logo-item', true);
@@ -137,18 +132,18 @@
 
 	&.smallest {
 		@include xy-grid-layout(5, '.sponsors-logo-item', true);
-		@include breakpoint(medium){
+		@include breakpoint(medium) {
 			&:not(.orphan-by-6) {
 				@include xy-grid-layout(6, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(large){
+		@include breakpoint(large) {
 			@include xy-grid-layout(6, '.sponsors-logo-item', true);
 			&:not(.orphan-by-7) {
 				@include xy-grid-layout(7, '.sponsors-logo-item', true);
 			}
 		}
-		@include breakpoint(xxlarge){
+		@include breakpoint(xxlarge) {
 			@include xy-grid-layout(7, '.sponsors-logo-item', true);
 			&:not(.orphan-by-8) {
 				@include xy-grid-layout(8, '.sponsors-logo-item', true);
