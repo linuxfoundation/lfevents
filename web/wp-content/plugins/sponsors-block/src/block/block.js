@@ -80,7 +80,9 @@ registerBlockType( 'cgb/sponsors-block', {
     const displayImages = (images) => {
       return (
         //Loops through the images
-        images.map( (image) => {
+        images.sort(function (a, b) {
+          return a.filename.toLowerCase().localeCompare(b.filename.toLowerCase());
+        }).map( (image) => {
           return (
             <div class="sponsors-logo-item">
               <img className='logo admin-preview' src={image.url} key={ images.id } />
@@ -168,7 +170,9 @@ registerBlockType( 'cgb/sponsors-block', {
     // Displays the images
     const displayImages = (images) => {
       return (
-        images.map( (image,index) => {
+        images.sort(function (a, b) {
+          return a.filename.toLowerCase().localeCompare(b.filename.toLowerCase());
+        }).map( (image,index) => {
           if ( image.description ) {
             return (
               <div class="sponsors-logo-item">
