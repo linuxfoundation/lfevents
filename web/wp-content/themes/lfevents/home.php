@@ -94,23 +94,7 @@ get_template_part( 'template-parts/global-nav' );
 										}
 										?>
 									</span>
-
 								</p>
-
-								<?php
-								// $cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
-								// if ( '0' === $cfp_active ) {
-								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: No Call for Proposals</i></p>';
-								// } elseif ( ! ( $cfp_date_start ) ) {
-								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Details Coming Soon</i></p>';
-								// } elseif ( strtotime( $cfp_date_end ) < time() ) {
-								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Closed</i></p>';
-								// } elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
-								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Closes ' . esc_html( $dt_cfp_date_end->format( 'l, F j, Y' ) ) . '</i></p>';
-								// } elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
-								// 	echo '<p class="text-small small-margin-bottom"><i>CFP Status: Opens ' . esc_html( $dt_cfp_date_start->format( 'l, F j, Y' ) ) . '</i></p>';
-								// }
-								?>
 
 								<p class="text-small small-margin-bottom">
 									<?php
