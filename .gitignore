@@ -119,7 +119,6 @@ Thumbs.db
 !web/wp-content/plugins/gravityplus-dynamic-population
 
 # Allowing other premium plugins #
-!web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/wp-rss-feed-to-post
 

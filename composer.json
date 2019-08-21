@@ -35,7 +35,8 @@
     "wpackagist-plugin/gutenberg":"^6.1.1",
     "wpackagist-plugin/wp-nested-pages":"^3.0.11",
     "wpackagist-plugin/clone-page-tree":"^0.1.0",
-    "wpackagist-plugin/wp-rss-aggregator":"^4.15"
+    "wpackagist-plugin/wp-rss-aggregator":"^4.15",
+    "wpackagist-plugin/stackable-ultimate-gutenberg-blocks":"^1.17.1"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2.1",
