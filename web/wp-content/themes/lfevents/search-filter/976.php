@@ -31,6 +31,20 @@ if ( $query->have_posts() ) {
 		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
 		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
+		$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
+		$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
+		$dt_now = new DateTime( 'now' );
+		if ( $dt_date_end_1d_after < $dt_now ) {
+			// event has passed and we should set it to draft.
+			wp_update_post(
+				array(
+					'ID'          => $post->ID,
+					'post_status' => 'draft',
+				)
+			);
+			continue;
+		}
+
 		if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
 			$y = (int) $dt_date_start->format( 'Y' );
 			echo '<h2 class="cell event-calendar-year">' . esc_html( $y ) . '</h2>';
