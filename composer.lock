@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "379435a713d7454afdc19508b8d35315",
+    "content-hash": "97b00c6c58c767671ed9b104128808c5",
     "packages": [
         {
             "name": "composer/installers",
@@ -545,6 +545,24 @@
             "homepage": "https://wordpress.org/plugins/clone-page-tree/"
         },
         {
+            "name": "wpackagist-plugin/gravity-forms-custom-post-types",
+            "version": "3.1.15",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gravity-forms-custom-post-types/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gravity-forms-custom-post-types.zip?timestamp=1554488172"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gravity-forms-custom-post-types/"
+        },
+        {
             "name": "wpackagist-plugin/gutenberg",
             "version": "6.3.0",
             "source": {
@@ -600,15 +618,15 @@
         },
         {
             "name": "wpackagist-plugin/photonic",
-            "version": "2.27",
+            "version": "2.28",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/photonic/",
-                "reference": "tags/2.27"
+                "reference": "tags/2.28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/photonic.2.27.zip"
+                "url": "https://downloads.wordpress.org/plugin/photonic.2.28.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -708,15 +726,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
-            "version": "1.5.2",
+            "version": "1.6.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-mail-smtp/",
-                "reference": "tags/1.5.2"
+                "reference": "tags/1.6.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.1.5.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.1.6.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2638,16 +2656,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.14",
+            "version": "7.5.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2834789aeb9ac182ad69bfdf9ae91856a59945ff"
+                "reference": "d79c053d972856b8b941bb233e39dc521a5093f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2834789aeb9ac182ad69bfdf9ae91856a59945ff",
-                "reference": "2834789aeb9ac182ad69bfdf9ae91856a59945ff",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d79c053d972856b8b941bb233e39dc521a5093f0",
+                "reference": "d79c053d972856b8b941bb233e39dc521a5093f0",
                 "shasum": ""
             },
             "require": {
@@ -2707,8 +2725,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -2718,7 +2736,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-07-15T06:24:08+00:00"
+            "time": "2019-08-21T07:05:16+00:00"
         },
         {
             "name": "psr/container",
