@@ -125,7 +125,7 @@ function block_callback( $att ) {
 		if ( $label ) {
 			$html .= '<div class="attendee-type" style="color:' . $color_text . ';">';
 
-			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . ';">' . $label . '</h4>';
+			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . '; border-color:' . $color1 . ';">' . $label . '</h4>';
 			for ( $i = 0; $i < 4; $i++ ) {
 				if ( $top_labels[ $i ] ) {
 					if ( 0 === $i ) {
