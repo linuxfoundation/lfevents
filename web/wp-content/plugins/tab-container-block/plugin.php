@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Tab Container Block
  * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/tab-container-block
- * Description: This is a custom container block that allows certain parameters for using within a tabbed interface.
+ * Description: This is a custom container block that is intended to be used to generate a tabbed interface.
  * Author: cjyabraham
  * Version: 0.1.0
  * License: GPL2+
