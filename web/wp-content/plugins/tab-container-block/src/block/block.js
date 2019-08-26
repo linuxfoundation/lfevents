@@ -11,8 +11,7 @@ import './style.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { InnerBlocks } = wp.editor;
-const { InspectorControls } = wp.blockEditor;
+const { InnerBlocks, InspectorControls } = wp.blockEditor;
 const { TextControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
 const TEMPLATE = [
 	['core/heading', { placeholder: 'Section Title' }],

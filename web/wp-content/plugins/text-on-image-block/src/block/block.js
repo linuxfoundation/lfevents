@@ -11,11 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType, getBlockDefaultClassName } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { 
-    InspectorControls,
-    RichText,
-    MediaUpload
-} = wp.editor;
+const { RichText, MediaUpload } = wp.blockEditor;
 
 /**
  * Register: aa Gutenberg Block.
@@ -74,30 +70,30 @@ registerBlockType( 'cgb/block-text-on-image-block', {
         }
 		return (
 			<div className={className}>
-			<div className="media">
-				<MediaUpload 
-					onSelect={selectImage}
-					render={ ({open}) => {
-						return (
-							<button onClick={open}>
-								<img 
-									src={attributes.imgUrl}
-									/>
-							</button>
-						);
-					}}
-				/>
-			</div>
-			<div className="copy">
-				<RichText 
-					className="copy-bd"
-					tagName="div"
-					placeholder="Enter your text here that will float on top of the image."
-					value={attributes.bodyContent}
-					onChange={changeBodyContent}
+				<div className="media">
+					<MediaUpload 
+						onSelect={selectImage}
+						render={ ({open}) => {
+							return (
+								<button onClick={open}>
+									<img 
+										src={attributes.imgUrl}
+										/>
+								</button>
+							);
+						}}
 					/>
+				</div>
+				<div className="copy">
+					<RichText 
+						className="copy-bd"
+						tagName="div"
+						placeholder="Enter text here that will float on top of the image."
+						value={attributes.bodyContent}
+						onChange={changeBodyContent}
+						/>
+				</div>
 			</div>
-		</div>
 		);
 	},
 
