@@ -1,41 +1,114 @@
 .home-hero {
   position: relative;
-  padding-top: 6vw;
-  padding-bottom: 9vw;
-  margin-bottom: 4vw;
+  margin-bottom: $global-margin;
+  padding-top: 33vw;
   top: -1px; // prevent faint line between nav and hero
+
+  @include breakpoint(large) {
+    padding-top: 0;
+  }
 
   .bg-animation {
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: auto;
     left: 0;
+    height: 33vw;
     z-index: 1;
+
+    @include breakpoint(large) {
+      bottom: 0;
+      left: 50%;
+      height: auto;
+    }
   }
 
-  .bg-image {
-    background-size: cover;
-    mix-blend-mode: soft-light;
+  .bg-images {
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: auto;
     left: 0;
+    height: 33vw;
     z-index: 3;
-    opacity: 0.4;
+    mix-blend-mode: screen;
+
+    @include breakpoint(large) {
+      bottom: 0;
+      left: 50%;
+      height: auto;
+    }
+
+    .bg-image {
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      animation: anim 12s infinite;
+
+      &:nth-child(1) { animation-delay: 0s; }
+      &:nth-child(2) { animation-delay: 4s; }
+      &:nth-child(3) { animation-delay: 8s; }
+      &:nth-child(4) { animation-delay: 12s; }
+      &:nth-child(5) { animation-delay: 16s; }
+      &:nth-child(6) { animation-delay: 20s; }
+      &:nth-child(7) { animation-delay: 24s; }
+      &:nth-child(8) { animation-delay: 28s; }
+      &:nth-child(9) { animation-delay: 32s; }
+
+      &:nth-last-child(3):first-child,
+      &:nth-last-child(3):first-child ~ & {
+        animation-duration: 12s;
+      }
+
+      &:nth-last-child(6):first-child,
+      &:nth-last-child(6):first-child ~ & {
+        animation-duration: 24s;
+      }
+
+      &:nth-last-child(9):first-child,
+      &:nth-last-child(9):first-child ~ & {
+        animation-duration: 32s;
+      }
+    }
   }
 
   .grid-container {
     position: relative;
     z-index: 4;
-    color: $white;
-  }
+    padding-top: $global-margin;
+    padding-bottom: $global-margin;
 
-  h1, h2, h3, h4, h5, h6 {
-    max-width: 60rem;
-  }
+    @include breakpoint(large) {
+      padding-top: $global-margin*2;
+      padding-bottom: $global-margin*2;
+      background: linear-gradient(90deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 80%);
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 100%;
+        bottom: 0;
+        width: 50vw;
+        background-color: rgb(255,255,255);
+      }
 
+      h1, h2, h3, h4, h5, h6 {
+        max-width: 43rem;
+        text-shadow: 0 0 20px #fff;
+      }
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.home-hero {
   &::before,
   .bg-animation::before,
   .bg-animation::after {
@@ -43,10 +116,16 @@
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: auto;
     left: 0;
+    height: 33vw;
     z-index: 2;
     mix-blend-mode: multiply;
+
+    @include breakpoint(large) {
+      bottom: 0;
+      height: auto;
+    }
   }
 
   &::before {
@@ -58,11 +137,14 @@
       100% 100%,
       0 calc(100% - 2vw)
     );
-    bottom: -0.5vw;
     animation: edge1 15s alternate infinite;
+    @include breakpoint(large) {
+      left: 50%;
+    }
   }
 
   .bg-animation::before {
+    left: 0;
     background-color: rgba(160,80,100,0.7);
     background: linear-gradient(90deg, rgba(170,90,110,0.7) 0%, rgba(90,10,30,0.7) 100%);
     clip-path: polygon(
@@ -75,6 +157,7 @@
   }
 
   .bg-animation::after {
+    left: 0;
     background-color: rgba(90,100,180,0.7);
     background: linear-gradient(90deg, rgba(20,30,100,0.7) 0%, rgba(120,130,190,0.7) 100%);
     clip-path: polygon(
@@ -142,4 +225,11 @@
       0 calc(100% - 1vw)
     );
   }
+}
+
+@keyframes anim {
+  0% { opacity: 0; z-index: 100;}
+  15% { opacity: 1;}
+  50% { opacity: 1;}
+  100% { opacity: 0; z-index: 1;}
 }
