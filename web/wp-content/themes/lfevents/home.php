@@ -36,7 +36,8 @@ get_template_part( 'template-parts/global-nav' );
 				);
 				$images = get_posts( $args );
 				$i = 0;
-				if ( $images ) { ?>
+				if ( $images ) {
+					?>
 					<div class="bg-images">
 						<?php
 						foreach ( $images as $key => $image ) {
