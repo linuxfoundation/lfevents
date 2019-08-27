@@ -24,35 +24,38 @@ get_template_part( 'template-parts/global-nav' );
 			$query->the_post();
 			?>
 			<div class="home-hero">
-				<?php  $args = array(
+				<?php
+				$args = array(
 					'post_parent'    => $post->ID,
 					'post_type'      => 'attachment',
-					'numberposts'    => -1, // show all
+					'numberposts'    => -1, // show all.
 					'post_status'    => 'any',
 					'post_mime_type' => 'image',
 					'orderby'        => 'menu_order',
-					'order'          => 'ASC'
+					'order'          => 'ASC',
 				);
-				$images = get_posts($args);
+				$images = get_posts( $args );
 				$i = 0;
 				if ( $images ) { ?>
-				<div class="bg-images">
-					<?php foreach ( $images as $key=>$image ) {
-						if ( $i == 0 ) {
-							$active = 'active';
-						} else {
-							$active = '';
+					<div class="bg-images">
+						<?php
+						foreach ( $images as $key => $image ) {
+							if ( 0 == $i ) {
+								$active = 'active';
+							} else {
+								$active = '';
+							}
+							?>
+							<div class="bg-image <?php echo esc_html( $active ); ?>" style="background-image: url(<?php echo esc_html( wp_get_attachment_url( $image->ID ) ); ?>);"></div>
+							<?php
+							$i++;
 						}
 						?>
-						<div class="bg-image <?php echo $active; ?>" style="background-image: url(<?php echo esc_html( wp_get_attachment_url( $image->ID ) ); ?>);"></div>
-				  <?php
-					$i++;
-					}
-					?>
-				</div>
-				<?php } ?>
+					</div>
+					<?php
+				}
+				?>
 
-<?php /* <div class="bg-image" style="background-image: url(<?php echo esc_html( get_the_post_thumbnail_url() ); ?>);"></div> */ ?>
 				<div class="bg-animation"></div>
 				<div class="grid-container">
 					<?php
