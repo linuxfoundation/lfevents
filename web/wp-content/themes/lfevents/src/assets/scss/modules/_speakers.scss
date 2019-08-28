@@ -117,13 +117,16 @@
 
           svg {
             fill: #fff;
+            width: rem-calc(30);
             height: rem-calc(30);
 
             @include breakpoint(large) {
+              width: rem-calc(24);
               height: rem-calc(24);
             }
 
             @include breakpoint(xxlarge) {
+              width: rem-calc(18);
               height: rem-calc(18);
             }
           }
