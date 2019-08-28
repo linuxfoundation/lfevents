@@ -103,13 +103,16 @@
       svg {
         display: block;
         fill: currentColor;
+        width: rem-calc(30);
         height: rem-calc(30);
 
         @include breakpoint(medium) {
+          width: rem-calc(40);
           height: rem-calc(40);
         }
 
         @include breakpoint(xlarge) {
+          width: rem-calc(50);
           height: rem-calc(50);
         }
       }
