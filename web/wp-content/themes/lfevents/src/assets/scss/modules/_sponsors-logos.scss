@@ -21,13 +21,13 @@
 
 	// Size logos with modular scale - https://www.modularscale.com/?300&&1.2009
 	// A 1.2009 ratio (rounded) gets 7 tiers from 300 to 100.
-	&.largest  .logo { width: rem-calc(300); }
-	&.larger   .logo { width: rem-calc(250); }
-	&.large    .logo { width: rem-calc(208); }
-	&.medium   .logo { width: rem-calc(173); }
-	&.small    .logo { width: rem-calc(144); }
-	&.smaller  .logo { width: rem-calc(120); }
-	&.smallest .logo { width: rem-calc(100); }
+	&.largest  .logo { width: rem-calc(300); height: rem-calc(300 / 1.95); }
+	&.larger   .logo { width: rem-calc(250); height: rem-calc(250 / 1.95); }
+	&.large    .logo { width: rem-calc(208); height: rem-calc(208 / 1.95); }
+	&.medium   .logo { width: rem-calc(173); height: rem-calc(173 / 1.95); }
+	&.small    .logo { width: rem-calc(144); height: rem-calc(144 / 1.95); }
+	&.smaller  .logo { width: rem-calc(120); height: rem-calc(120 / 1.95); }
+	&.smallest .logo { width: rem-calc(100); height: rem-calc(100 / 1.95); }
 
 	&.largest {
 		@include breakpoint(medium) {
