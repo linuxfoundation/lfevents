@@ -88,3 +88,16 @@ function tab_container_block_cgb_block_assets() { // phpcs:ignore
 
 // Hook: Block assets.
 add_action( 'init', 'tab_container_block_cgb_block_assets' );
+
+
+/**
+ * Adds the menu section to the bottom of the content of each post.
+ *
+ * @param string $content Content of the post.
+ */
+function tcb_content_filter( $content ) {
+	
+
+	return $content;
+}
+add_filter( 'the_content', 'tcb_content_filter' );
