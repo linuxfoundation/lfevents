@@ -33,17 +33,23 @@
     padding: 0.5rem;
 
     img {
-      width: rem-calc(340);
-      max-width: 70vw;
+      width: 63vw;
+      height: 4.5vw; // width ÷ 14
 
+      @include breakpoint(medium) {
+        width: rem-calc(260);
+        height: rem-calc(18.571); // width ÷ 14
+      }
       @include breakpoint(large) {
-        max-width: rem-calc(260);
+        width: rem-calc(260);
+        height: rem-calc(18.571); // width ÷ 14
       }
       @include breakpoint(xlarge) {
         // max-width: rem-calc(300);
       }
       @include breakpoint(xxlarge) {
-        max-width: rem-calc(340);
+        width: rem-calc(340);
+        height: rem-calc(24.285); // width ÷ 14
       }
     }
   }
