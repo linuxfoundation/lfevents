@@ -43,6 +43,9 @@ registerBlockType( 'cgb/block-tab-container-block', {
 	attributes: {
 		menuTitle: {
 			type: 'string'
+		},
+		id: {
+			type: 'string'
 		}
 	},
 
@@ -58,7 +61,7 @@ registerBlockType( 'cgb/block-tab-container-block', {
 	 * @returns {Mixed} JSX Component.
 	 */
 	edit: ( props ) => {
-		const { setAttributes, attributes: { menuTitle }} = props;
+		const { setAttributes, attributes: { menuTitle, id }} = props;
 
 		// Creates a <p class='wp-block-cgb-block-tab-container-block'></p>.
 		return [
@@ -68,6 +71,15 @@ registerBlockType( 'cgb/block-tab-container-block', {
 					label='Menu title:'
 					value={ menuTitle }
 					onChange={ value => setAttributes({menuTitle: value})}
+					placeholder='Design Options'
+				/>
+				</PanelRow><PanelRow>
+				<TextControl
+					label='Url slug:'
+					value={ id }
+					onChange={ value => setAttributes({id: value.replace(' ','-').toLowerCase()})}
+					help='Enter a title to designate how you want the url slug to appear for this section.'
+					placeholder='design-options'
 				/>
 				</PanelRow></PanelBody>
 			</InspectorControls>,
@@ -89,10 +101,10 @@ registerBlockType( 'cgb/block-tab-container-block', {
 	 * @returns {Mixed} JSX Frontend HTML.
 	 */
 	save: ( props ) => {
-		const { setAttributes, attributes: { menuTitle }} = props;
+		const { setAttributes, attributes: { menuTitle, id }} = props;
 
 		return (
-			<div className={ props.className } data-menu-title={ menuTitle }>
+			<div className={ props.className } data-menu-title={ menuTitle } id={ id }>
 				<InnerBlocks.Content />
 			</div>
 		);
