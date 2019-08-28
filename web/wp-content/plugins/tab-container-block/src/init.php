@@ -96,7 +96,11 @@ add_action( 'init', 'tab_container_block_cgb_block_assets' );
  * @param string $content Content of the post.
  */
 function tcb_content_filter( $content ) {
-	
+	// get all div tags of class "wp-block-cgb-block-tab-container-block".
+
+	// grab the data-menu-title and id from each tag to construct the menu.
+
+	// add the menu markup to the end of $content.
 
 	return $content;
 }
