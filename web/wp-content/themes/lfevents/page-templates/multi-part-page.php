@@ -10,7 +10,7 @@
  *
  * @param string $content Content of the post.
  */
-function tcb_content_filter( $content ) {
+function lfe_content_filter( $content ) {
 	// get all div tags of class "wp-block-cgb-block-tab-container-block".
 	$tag_regex = '/<[^>]*class="[^"]*\bwp-block-cgb-block-tab-container-block\b[^"]*"[^>]*>/i';
 	preg_match_all( $tag_regex, $content, $matches );
@@ -34,7 +34,7 @@ function tcb_content_filter( $content ) {
 	// add the menu markup to the end of $content.
 	return $content . $menu;
 }
-add_filter( 'the_content', 'tcb_content_filter' );
+add_filter( 'the_content', 'lfe_content_filter' );
 
 get_header();
 
