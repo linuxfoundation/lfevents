@@ -1,6 +1,6 @@
 <?php
 /**
- * The default template for displaying page content
+ * This template is used specifically within the page-templates/multi-part-page.php page template.
  *
  * @package FoundationPress
  * @since FoundationPress 1.0.0

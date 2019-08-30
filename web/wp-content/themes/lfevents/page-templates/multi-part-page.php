@@ -36,4 +36,5 @@ function lfe_content_filter( $content ) {
 }
 add_filter( 'the_content', 'lfe_content_filter' );
 
+// shares the markup with the regular singular.php page template although it pulls in its own template part.
 include( get_template_directory() . '/singular.php' );
