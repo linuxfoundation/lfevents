@@ -106,7 +106,11 @@ if ( $logo ) {
 					<?php
 				}
 
-				get_template_part( 'template-parts/content', 'page' );
+				if ( is_page_template( 'page-templates/multi-part-page.php' ) ) {
+					get_template_part( 'template-parts/content', 'multi-part-page' );
+				} else {
+					get_template_part( 'template-parts/content', 'page' );
+				}
 				lfe_get_sponsors( $parent_id );
 			endwhile;
 			?>
