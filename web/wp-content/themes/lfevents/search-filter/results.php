@@ -145,14 +145,14 @@ $( document ).ready( function() {
 		$( '#event-calendar-header' ).append( '<a class="button" id="switch-archive-view" href="#"></a>' );
 	}
 	var currentUrl = $( location ).attr( 'href' )
-	if ( -1 == currentUrl.indexOf( 'events-calendar/archive' ) ) {
+	if ( -1 == currentUrl.indexOf( 'calendar/archive' ) ) {
 		//we are on the event-calendar page.
-		newUrl = currentUrl.replace( 'events-calendar', 'events-calendar/archive' );
+		newUrl = currentUrl.replace( 'calendar', 'calendar/archive' );
 		$( '#switch-archive-view' ).attr( "href", newUrl );
 		$( '#switch-archive-view' ).html( 'View Past Events' );
 	} else {
 		//we are on the event-calendar/archive page.
-		newUrl = currentUrl.replace( 'events-calendar/archive', 'events-calendar' );
+		newUrl = currentUrl.replace( 'calendar/archive', 'calendar' );
 		$( '#switch-archive-view' ).attr( "href", newUrl );
 		$( '#switch-archive-view' ).html( 'View Upcoming Events' );
 	}
