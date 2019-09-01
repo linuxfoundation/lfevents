@@ -6,8 +6,6 @@
  * @since 1.0
  */
 
-use Psr\Log\LogLevel;
-
 /**
  * The Converter class. This class containts methods that
  * convert feed items to WordPress posts
@@ -313,9 +311,9 @@ final class WPRSS_FTP_Converter {
         // Get the post status
         $post_status = $options['post_status'];
 
-        if ($post_status !== 'scheduled') {
+        if ($post_status !== 'future') {
             // Use the current date if the item's date is in the future
-            $date_timestamp = $post_status !== 'schedule'
+            $date_timestamp = $post_status !== 'future'
                 ? min($current_date, $date_timestamp)
                 : $date_timestamp;
 
@@ -387,7 +385,7 @@ final class WPRSS_FTP_Converter {
 
 		// Prepare the post data
 		$post = array(
-			'post_title'		=>	(string)$post_title,
+			'post_title'		=>	html_entity_decode((string)$post_title),
 			'post_content'		=>	(string)$post_content,
 			'post_excerpt'		=>	(string)$post_excerpt,
 			'post_date'			=>	$post_date,
@@ -662,58 +660,71 @@ final class WPRSS_FTP_Converter {
 
 		// If using force full content option / meta
 		if ( WPRSS_FTP_Utils::multiboolean( $options['force_full_content'] ) === TRUE ) {
-			
-			$service = WPRSS_FTP_Settings::get_instance()->get('full_text_rss_service');
-			$service = apply_filters( 'wprss_ftp_service_before_full_text_feed_url', $service );
-			switch( $service ) {
-				case 'free':
-					$key = WPRSS_FTP_FULL_TEXT_RSS_KEY;
-					$API_HASH = sha1( $key . $feed_url );
-					$encoded_url = urlencode( $feed_url );
-                    $homeUrl = urlencode(home_url());
-					// Prepare the fulltext sources
-					$full_text_sources = apply_filters(
-						'wprss_ftp_full_text_sources',
-						array(
-							"http://fulltext.wprssaggregator.com/makefulltextfeed.php?key=1&hash=$API_HASH&links=preserve&origin={$homeUrl}&exc=1&url=",
-							"http://ftr-premium.fivefilters.org/makefulltextfeed.php?key=1920&hash=$API_HASH&max=10&links=preserve&exc=1&url=",						
-						)
-					);
-					// Start with no feed to use
-					$feed_url_to_use = NULL;
-
-					// Load SimplePie
-					require_once ( ABSPATH . WPINC . '/class-feed.php' );
-
-					// For each source ...
-					foreach ( $full_text_sources as $full_text_source ) {
-						// Prepare the feed
-						$full_text_feed_url = $full_text_source . $encoded_url;
-						$feed = wprss_fetch_feed( $full_text_feed_url, $feed_ID );
-
-						// If the feed has no errors, the we will use this feed
-						if ( !is_wp_error( $feed ) && !$feed->error() ) {
-							$feed_url_to_use = $full_text_source . $encoded_url;
-							break;
-						}
-					}
-					
-					// If after trying all the sources, the feed to use is still NULL, then no source was valid.
-					// Return the same url passed as parameter, Otherwise, return the full text rss feed url
-					if ( $feed_url_to_use === NULL ) {
-                        WPRSS_FTP_Utils::get_logger($feed_ID)->warning('All full text RSS services failed to provide a valid feed.');
-					}
-					return ( $feed_url_to_use === NULL )? $feed_url : $feed_url_to_use;
-
-				// For other services
-				default:
-					return apply_filters( 'wprss_ftp_misc_full_text_url', $feed_url, $feed_ID, $service );
-			}
+			return self::get_full_content_url( $feed_url, $feed_ID );
 		}
 		// Otherwise, return back the given url
 		else return $feed_url;
 	}
 
+    /**
+     * Retrieves the full content URL.
+     *
+     * @since 3.9.1
+     *
+     * @param string $feed_url
+     * @param int    $feed_ID
+     * @param bool   $force_feed
+     *
+     * @return string
+     */
+	public static function get_full_content_url($feed_url, $feed_ID = null, $force_feed = false)
+    {
+        $service = WPRSS_FTP_Settings::get_instance()->get('full_text_rss_service');
+        $service = apply_filters( 'wprss_ftp_service_before_full_text_feed_url', $service );
+
+        if ($service === 'free') {
+            $key = WPRSS_FTP_FULL_TEXT_RSS_KEY;
+            $API_HASH = sha1( $key . $feed_url );
+            $encoded_url = urlencode( $feed_url );
+            $homeUrl = urlencode(home_url());
+            // Prepare the fulltext sources
+            $full_text_sources = apply_filters(
+                'wprss_ftp_full_text_sources',
+                array(
+                    "http://fulltext.wprssaggregator.com/makefulltextfeed.php?key=1&hash=$API_HASH&links=preserve&origin={$homeUrl}&exc=1&url=",
+                    "http://ftr-premium.fivefilters.org/makefulltextfeed.php?key=1920&hash=$API_HASH&max=10&links=preserve&exc=1&url=",
+                )
+            );
+            // Start with no feed to use
+            $feed_url_to_use = NULL;
+
+            // Load SimplePie
+            require_once ( ABSPATH . WPINC . '/class-feed.php' );
+
+            // For each source ...
+            foreach ( $full_text_sources as $full_text_source ) {
+                // Prepare the feed
+                $full_text_feed_url = $full_text_source . $encoded_url;
+                $feed = wprss_fetch_feed( $full_text_feed_url, $feed_ID, $force_feed );
+
+                // If the feed has no errors, the we will use this feed
+                if ( !is_wp_error( $feed ) && !$feed->error() ) {
+                    $feed_url_to_use = $full_text_source . $encoded_url;
+                    break;
+                }
+            }
+
+            // If after trying all the sources, the feed to use is still NULL, then no source was valid.
+            // Return the same url passed as parameter, Otherwise, return the full text rss feed url
+            if ( $feed_url_to_use === NULL ) {
+                WPRSS_FTP_Utils::get_logger($feed_ID)->warning('All full text RSS services failed to provide a valid feed.');
+            }
+            return ( $feed_url_to_use === NULL )? $feed_url : $feed_url_to_use;
+        }
+
+        // For other services
+        return apply_filters( 'wprss_ftp_misc_full_text_url', $feed_url, $feed_ID, $service );
+    }
 
 	/**
 	 * Trims the post's content and updates its content or excerpt, depending on its

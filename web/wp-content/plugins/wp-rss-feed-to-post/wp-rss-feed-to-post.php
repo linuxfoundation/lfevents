@@ -3,7 +3,7 @@
  * Plugin Name: WP RSS Aggregator - Feed to Post
  * Plugin URI: https://www.wprssaggregator.com/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpraplugin
  * Description: Adds feed-to-post conversion functionality to WP RSS Aggregator.
- * Version: 3.9
+ * Version: 3.9.1
  * Author: RebelCode
  * Author URI: https://www.wprssaggregator.com
  * Text Domain: wprss
@@ -28,9 +28,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+use Aventura\Wprss\FeedToPost\Addon;
+use Aventura\Wprss\FeedToPost\Factory;
+use Psr\Container\ContainerInterface;
+
 /* Set the version number of the plugin. */
 if( !defined( 'WPRSS_FTP_VERSION' ) )
-	define( 'WPRSS_FTP_VERSION', '3.9' );
+	define( 'WPRSS_FTP_VERSION', '3.9.1' );
 
 /* Set the database version number of the plugin. */
 if( !defined( 'WPRSS_FTP_DB_VERSION' ) )
@@ -91,8 +95,9 @@ if ( !defined( 'WPRSS_FTP_FEEDS_API_REQUEST_FORMAT' ) ) {
 }
 
 // If total number of users is greater than this, Chosen Ajax will be used
-if( !defined( 'WPRSS_FTP_USER_AJAX_COUNT_THRESHOLD' ) )
-	define( 'WPRSS_FTP_USER_AJAX_COUNT_THRESHOLD', 20 );
+if( !defined( 'WPRSS_FTP_USER_AJAX_COUNT_THRESHOLD' ) ) {
+    define('WPRSS_FTP_USER_AJAX_COUNT_THRESHOLD', 20);
+}
 
 // Amount of seconds for cache files to be considered valid
 if ( !defined( 'WPRSS_FTP_IMAGE_CACHE_TTL' ) )
@@ -112,70 +117,134 @@ if ( !defined( 'WPRSS_FTP_IMAGE_CACHE_ORIG_FILENAME_LENGTH' ) )
 
 // Adding autoload paths
 add_action('plugins_loaded', function() {
-    // Set the "active" constant based on whether core is loaded
-    define('WPRSS_FTP_ACTIVE', defined('WPRSS_VERSION'));
+	$coreActive = defined('WPRSS_VERSION');
+
+	if (!$coreActive || version_compare(WPRSS_VERSION, WPRSS_FTP::WPRSS_MIN_VERSION, '<')) {
+		add_action('admin_notices', 'wprss_f2p_missing_core_notice');
+
+		return;
+	}
+
+    // Set the "active" constant
+    define('WPRSS_FTP_ACTIVE', true);
 
     if (!WPRSS_FTP_ACTIVE) {
         return;
     }
 
+	// Load Composer autoloader if it exists
+	if (file_exists(WPRSS_FTP_DIR . 'vendor/autoload.php')) {
+		require_once WPRSS_FTP_DIR . 'vendor/autoload.php';
+	}
+
+	// Register the old aventura namespace for autoloading
 	wprss_autoloader()->add('Aventura\\Wprss\\FeedToPost', WPRSS_FTP_INC);
 
+	// Load required files
+    require_once ( WPRSS_FTP_INC . 'licensing.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-utils.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-appender.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-settings.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-meta.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-converter.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-images.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-display.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-extractor.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-custom-conversions.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-debug.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-url-shortener.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-legacy.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-taxonomies.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-help.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-edit-flow.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-admin-user-ajax.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-feed-assistant.php' );
+    require_once ( WPRSS_FTP_INC . 'wprss-ftp-logger.php' );
+
+    // Load text domain
+	load_plugin_textdomain('wprss', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+
 	// Begin "execution"
-	try {
-		wprss_feedtopost_addon();
-	} catch (Exception $e) {
-		if (WP_DEBUG && WP_DEBUG_DISPLAY) {
-			throw $e;
-		}
-		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		deactivate_plugins(WPRSS_FTP_PATH);
-		wp_die(
-			sprintf(
-				__('%1$s. %2$s has been deactivated.', 'wprss'),
-				$e->getMessage(),
-				WPRSS_FTP_SL_ITEM_NAME
-			),
-			'Critical dependency not satisfied',
-			array('back_link' => true)
-		);
-	}
+    WPRSS_FTP::get_instance();
+    wprss_feedtopost_addon();
+
+    if (get_transient('wprss_f2p_activated') === '1') {
+        delete_transient('wprss_f2p_activated');
+
+	    // Add the database version setting.
+	    update_option( 'wprss_ftp_db_version', WPRSS_FTP_DB_VERSION );
+
+	    WPRSS_FTP_Meta::multisite_fix();
+
+	    // Close append/prepend metaboxes for user
+	    WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-prepend-metabox' );
+	    WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-append-metabox' );
+	    WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-extraction-metabox' );
+	    WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-custom-fields-metabox' );
+    }
 });
 
-$c_autoloader = __DIR__ . '/vendor/autoload.php';
-if (file_exists($c_autoloader)) {
-    require_once $c_autoloader;
-}
-
-// Load licensing loader file
-require_once ( WPRSS_FTP_INC . 'licensing.php' );
-
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-utils.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-appender.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-settings.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-meta.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-converter.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-images.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-display.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-extractor.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-custom-conversions.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-debug.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-url-shortener.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-legacy.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-taxonomies.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-help.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-edit-flow.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-admin-user-ajax.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-feed-assistant.php' );
-require_once ( WPRSS_FTP_INC . 'wprss-ftp-logger.php' );
-
 add_action('wpra_after_run', function ($c = null) {
-    if ($c instanceof \Psr\Container\ContainerInterface) {
+    if ($c instanceof ContainerInterface) {
         // Removes the handler from Core 4.14 that removes the WordPress featured image meta box
         // Feed to Post needs this meta box until is image importing it completely delegated to core.
         remove_action('add_meta_boxes', $c->get('wpra/images/ft_image/meta_box/handler'));
     }
 });
+
+register_activation_hook(__FILE__, 'wprss_f2p_on_activation');
+/**
+ * Runs when the plugin is activated. Checks WP version, and prepares the DB
+ *
+ * @since 1.0
+ */
+function wprss_f2p_on_activation() {
+	/* Prevents activation of plugin if compatible version of WordPress not found */
+	if ( version_compare( get_bloginfo( 'version' ),  WPRSS_FTP::WP_MIN_VERSION, '<' ) ) {
+		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+		deactivate_plugins(basename(__FILE__));     // Deactivate plugin
+		wp_die(wprss_f2p_wp_version_message(), array('back_link' => true));
+	}
+
+	set_transient('wprss_f2p_activated', '1');
+}
+
+/**
+ * Throw an error if WP RSS Aggregator is not installed.
+ *
+ * @since 3.9.1
+ */
+function wprss_f2p_missing_core_notice()
+{
+	printf(
+		'<div class="notice notice-error"><p>%s</p></div>',
+		sprintf(
+			__(
+				'The <b>WP RSS Aggregator - Feed to Post</b> add-on requires the <b>WP RSS Aggregator</b> plugin to be installed and activated, at version <b>%s</b> or later.',
+				'wprss'
+			),
+			'<b>' . WPRSS_FTP::WPRSS_MIN_VERSION . '</b>'
+		)
+	);
+}
+
+
+/**
+ * Throw an error if the WordPress version is too old.
+ *
+ * @since 3.9.1
+ */
+function wprss_f2p_wp_version_message()
+{
+	return sprintf(
+        __(
+            'The <b>WP RSS Aggregator - Feed to Post</b> add-on requires the WordPress version <b>%s</b> or later.',
+            'wprss'
+        ),
+        '<b>' . WPRSS_FTP::WP_MIN_VERSION . '</b>'
+    );
+}
+
 
 /**
  * The main plugin class.
@@ -204,27 +273,6 @@ final class WPRSS_FTP {
 	const WPRSS_MIN_VERSION = '4.10';
 
 	const ADMIN_INIT_JS_HANDLE = 'wprss-f2p-admin-init';
-
-	/**
-	 * Text Domain to use with localization
-	 *
-	 * @since 1.0
-	 */
-	private static $TEXT_DOMAIN = 'wprss';
-
-	/**
-	 * The add-ons that will get deactivated when Feed-to-Post is active.
-	 * @since 1.0
-	 */
-	private static $ADDONS_TO_DISABLE = array(
-		//'wp-rss-categories/wp-rss-categories.php'					=>	'Categories',
-		//'wp-rss-excerpts-thumbnails/wp-rss-excerpts-thumbnails.php'	=>	'Excerpts & Thumbnails'
-	);
-
-	/**
-	 * Temportary store for disabled WPRSS Aggregator add-ons
-	 */
-	private static $disabled_addons = NULL;
 
 	/**
 	 * Instance Singleton
@@ -274,13 +322,6 @@ final class WPRSS_FTP {
 		add_action( 'init', array( $this, 'check_request' ) );
 
 		add_filter( 'wprss_register_addon', array($this, 'register_addon') );
-
-		// Activation / Deactivation hooks
-		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
-
-		// Initialization
-		$this->check_plugin_dependencies();
-		$this->load_textdomain();
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts_and_styles' ) );
 		add_action( 'admin_head', array( $this, 'wprss_ftp_admin_head' ) );
@@ -437,17 +478,6 @@ final class WPRSS_FTP {
 	}
 
 
-    /**
-     * Loads the plugin's translated strings.
-     *
-     * @since  3.3.1
-     * @return void
-     */
-    public function load_textdomain() {
-        load_plugin_textdomain( WPRSS_TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-    }
-
-
 	/**
 	 * Overrides the core's shortcode output
 	 *
@@ -497,78 +527,6 @@ final class WPRSS_FTP {
 		return $args;
 	}
 
-
-    /**
-     * Checks if all critical plugins are present, and deactivates self if they are not.
-     *
-     * @since 3.7
-     */
-    public function check_plugin_dependencies()
-    {
-        if (!$this->check_for_aggregator()) {
-			wp_die(  self::wprss_dependancy_msg() , 'WP RSS Aggregator Feed-to-Post', array( 'back_link' => true ) );
-        }
-    }
-
-
-	/**
-	 * Runs when the plugin is activated. Checks WP verison, and prepares the DB
-	 *
-	 * @since 1.0
-	 */
-	public function on_activation() {
-		/* Prevents activation of plugin if compatible version of WordPress not found */
-		if ( version_compare( get_bloginfo( 'version' ),  self::WP_MIN_VERSION, '<' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-			deactivate_plugins ( plugin_basename( __FILE__ ));
-			wp_die(  self::wp_dependancy_msg() , 'WP RSS Aggregator Feed-to-Post', array( 'back_link' => true ) );
-		}
-
-		// Add the database version setting.
-		update_option( 'wprss_ftp_db_version', WPRSS_FTP_DB_VERSION );
-		// Trash all imported feed items
-		$this->remove_imported_feed_items();
-
-		WPRSS_FTP_Meta::multisite_fix();
-
-		// force_full_content fix for 2.0 update
-		$ftp_settings = $this->settings();
-		$ftp_settings['force_full_content'] = 'false';
-		update_option( WPRSS_FTP_Settings::OPTIONS_NAME, $ftp_settings );
-
-		// Close append/prepend metaboxes for user
-		WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-prepend-metabox' );
-		WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-append-metabox' );
-		WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-extraction-metabox' );
-		WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-custom-fields-metabox' );
-
-		// Source link conversion update
-		WPRSS_FTP_Utils::source_link_update();
-	}
-
-
-	/**
-	 * Checks for the presence of the WP RSS Aggregator core plugin.
-	 *
-	 * @since 1.0
-	 */
-	function check_for_aggregator() {
-		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		if ( !defined( 'WPRSS_VERSION' ) ) {
-			deactivate_plugins ( plugin_basename( __FILE__ ));     // Deactivate plugin
-			add_action( 'all_admin_notices', array( $this, 'notify_about_aggregator_dependancy' ) );
-            return false;
-		}
-		elseif ( version_compare( WPRSS_VERSION, self::WPRSS_MIN_VERSION, '<' ) ) {
-			add_action( 'all_admin_notices', array( $this, 'notify_about_aggregator_dependancy' ) );
-			deactivate_plugins ( plugin_basename( __FILE__ ));     // Deactivate plugin
-            return false;
-		}
-
-        return true;
-	}
-
-
 	/**
 	 * Checks for the transient that indicates the need to show admin notices, and shows the notices accordingly.
 	 *
@@ -611,49 +569,6 @@ final class WPRSS_FTP {
 				call_user_func_array( $callback, array( $param ) );
 			}
 		}
-	}
-
-
-	/**
-	 * Shows a message that notifies the user about the disabled addons
-	 *
-	 * @since 1.0
-	 */
-	public function notify_about_disabled_addons() {
-		?>
-		<div class="updated">
-			<p>
-				<?php echo self::disabled_addons_msg(); ?>:
-				<strong><?php echo implode( ', ', self::$disabled_addons ); ?></strong>.
-					<?php
-					printf(
-						__(
-							'<a href="%1$s" target="_blank">Read why here</a> and <a href="%2$s" target="_blank">how to re-enable it here.</a>',
-							WPRSS_TEXT_DOMAIN
-						),
-						'http://www.wprssaggregator.com/docs/add-compatibility',
-						'http://www.wprssaggregator.com/docs/using-the-shortcodes'
-					);
-					?>
-			</p>
-		</div>
-		<?php
-	}
-
-
-	/**
-	 * Shows a message that notifies the user that the add-on requires the core aggregator plugin.
-	 *
-	 * @since 1.0
-	 */
-	public function notify_about_aggregator_dependancy(){
-		?>
-		<div class="updated">
-			<p>
-				<?php echo self::wprss_dependancy_msg(); ?>
-			</p>
-		</div>
-		<?php
 	}
 
 	/**
@@ -874,14 +789,23 @@ final class WPRSS_FTP {
 				else {
 					$label = $post_type;
 					$post_type_class = array('wprss-post-type-name');
-
 				}
 
-				$post_status = $settings['post_status'];
-				$post_statuses = WPRSS_FTP_Settings::get_post_statuses();
-				$post_status_name = $post_statuses[$post_status];
+				$status_str = '';
+				if ($post_type !== 'wprss_feed_item') {
+					$post_status = $settings['post_status'];
+					$post_statuses = WPRSS_FTP_Settings::get_post_statuses();
+					$post_status_name = $post_statuses[$post_status];
+					$status_str = sprintf(' (<span class="wprss-post-status-name">%s</span>)', $post_status_name);
+				}
 
-				echo sprintf('<p><span class="%3$s">%1$s</span> (<span class="wprss-post-status-name">%2$s</span>)</p>', __( $label ), __( $post_status_name ), implode(' ', $post_type_class));
+				echo sprintf(
+						'<p><span class="%1$s">%2$s</span> %3$s</p>',
+						implode(' ', $post_type_class),
+						$label,
+						$status_str
+				);
+
 				break;
 		}
 	}
@@ -1161,41 +1085,6 @@ final class WPRSS_FTP {
 
 
 	/**
-	 * Returns the message that tells the user that his WordPress version is too low.
-	 *
-	 * @since 3.0
-	 * @return string
-	 */
-	public static function wp_dependancy_msg() {
-		return sprintf( __( 'The Feed to Post add-on requires WordPress version <strong>%s</strong> or higher.' ), self::WP_MIN_VERSION );
-	}
-
-
-	/**
-	 * Returns the message that tells the user that his WP RSS Aggregator version is too low.
-	 *
-	 * @since 3.0
-	 * @return string
-	 */
-	public static function wprss_dependancy_msg() {
-		return sprintf( __( '<p>The %3$s - %1$s plugin has been <strong>deactivated</strong> due to unsatisfied critical dependencies.</br>'
-            . 'Please install and activate %3$s, at version <strong>%2$s</strong> or higher, for the %1$s add-on to work.</br>'
-            . 'You can read more about %3$s dependencies <a target="_blank" href="http://docs.wprssaggregator.com/broken-plugin-dependencies/">here</a>.</p>' ), WPRSS_FTP_SL_ITEM_NAME, self::WPRSS_MIN_VERSION, 'WP RSS Aggregator' );
-	}
-
-
-	/**
-	 * Returns the message that lists the add-ons disabled by Feed to Post.
-	 *
-	 * @since 3.0
-	 * @return string
-	 */
-	public static function disabled_addons_msg() {
-		return __( 'The following WP RSS Aggregator add-ons have been disabled by the Feed-to-Post add-on', WPRSS_TEXT_DOMAIN );
-	}
-
-
-	/**
 	 * Returns the message that notifies the user that posts are being deleted in the background.
 	 *
 	 * @since 3.0
@@ -1345,93 +1234,24 @@ final class WPRSS_FTP {
     }
 }
 
-
 /**
- * Generate the singleton instance for the first time.
- */
-WPRSS_FTP::get_instance();
-
-
-
-
-
-
-/**
- * Returns the Spinnerchief Addon class singleton instance.
+ * Returns the Feed to Post add-on singleton instance.
  *
- * @return \Aventura\Wprss\FeedToPost\Addon
+ * @return Addon
+ *
+ * @throws Exception
  */
-function wprss_feedtopost_addon() {
-    static $addon = null;
+function wprss_feedtopost_addon()
+{
+	static $addon = null;
 
-    // One time initialization
-    if (is_null($addon)) {
-        static $timesCalled = 0;
-        if ($timesCalled) {
-            throw new Exception(sprintf('%1$s has been initialized recursively', WPRSS_FTP_SL_ITEM_NAME));
-        }
-        $timesCalled++;
-
-        /**
-         * Basically, we could just do this here:
-         * Factory::create();
-         *
-         * However, the actual setup allows for even further customization.
-         * In fact, the factory can be substituted by some entirely different factory,
-         * that creates and initializes a different plugin in a different way.
-         *
-         * Also, while all classes here are PSR-4, they cannot be autoloaded before the autoloader has the
-         * relevant namespace registered. However, that happens when all plugins are loaded to ensure that the
-         * autoloader exists - it is in the Core, which has a possibility of being after the add-on in the load order.
-         * That's why a temporary autolaoder is used at initialization time.
-         */
-        $scAutoload = function($className) {
-            $nsBasePrefix = 'Aventura\\Wprss';
-            if (strpos($className, $nsBasePrefix) !== 0) {
-                return;
-            }
-
-            $addonName = WPRSS_FTP_SL_ITEM_NAME;
-            $coreName = 'WP RSS Aggregator';
-            $ns = '\\';
-            $nsCorePrefix = 'Core';
-            $nsAddonPrefix = 'FeedToPost';
-            $nsAddon = implode($ns, array($nsBasePrefix, $nsAddonPrefix));
-            $nsCore = implode($ns, array($nsBasePrefix, $nsCorePrefix));
-            $ds = DIRECTORY_SEPARATOR;
-            $basePath = WPRSS_FTP_INC;
-            $className = trim(trim($className), $ns);
-            $relativePath = str_ireplace($ns, $ds, $className);
-            $fullPath = $basePath . $relativePath . '.php';
-
-            $isCoreClass = strpos($className, $nsCore) === 0;
-            $error = sprintf('Could not initialize %1$s: ', $addonName);
-            if (!file_exists($fullPath)) {
-                if ($isCoreClass) {
-                    throw new \Exception(sprintf($error . 'Looks like %1$s is not activated', $coreName));
-                }
-                throw new \Exception(sprintf($error.'Class "%1$s" is required for the initialization process and does not exist', $className));
-            }
-
-            // Lowd dat faiel!
-            require_once($fullPath);
-        };
-        spl_autoload_register($scAutoload);
-
-        $factoryClassName = apply_filters('wprss_f2p_plugin_factory_class_name',
-            'Aventura\\Wprss\\FeedToPost\\Factory');
-
-        if (!class_exists($factoryClassName)) {
-            throw new Aventura\Wprss\FeedToPost\Exception(
-                sprintf('Could not initialize add-on: Factory class "%1$s" does not exist', $factoryClassName));
-        }
-
-        $addon = call_user_func_array(array($factoryClassName, 'create'), array(array(
-            'basename'      => __FILE__,
-            'name'          => WPRSS_FTP_SL_ITEM_NAME
-        )));
-        spl_autoload_unregister($scAutoload);
-    }
+	// One time initialization
+	if (is_null($addon)) {
+		$addon = Factory::create(array(
+			'basename' => __FILE__,
+			'name' => WPRSS_FTP_SL_ITEM_NAME,
+		));
+	}
 
 	return $addon;
 }

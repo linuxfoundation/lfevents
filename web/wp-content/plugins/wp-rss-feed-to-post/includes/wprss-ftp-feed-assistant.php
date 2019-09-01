@@ -66,7 +66,8 @@ class WPRSS_FTP_Feed_Assistant {
 			'num_items' => 1,
 			'apply_filters' => FALSE,
 			'post_id' => NULL,
-			'force_feed' => FALSE
+			'force_feed' => FALSE,
+			'full_content' => FALSE,
 		);
 
 		if ( isset($_GET['url']) ) {
@@ -87,6 +88,10 @@ class WPRSS_FTP_Feed_Assistant {
 
 		if ( isset($_GET['force_feed']) ) {
 			$params['force_feed'] = WPRSS_FTP_Utils::multiboolean($_GET['force_feed']);
+		}
+
+		if ( isset($_GET['full_content']) ) {
+			$params['full_content'] = WPRSS_FTP_Utils::multiboolean($_GET['full_content']);
 		}
 
 		return $params;
@@ -127,11 +132,15 @@ class WPRSS_FTP_Feed_Assistant {
 
 		$this->params = $this->sanitize_request_parameters($params);
 
+		$url = $this->params['full_content']
+			? WPRSS_FTP_Converter::get_full_content_url($this->params['url'], null, $this->params['force_feed'])
+			: $this->params['url'];
+
 		// Fetch the feed and pluck off the amount of items requested.
 		if ( version_compare( WPRSS_VERSION, '4.6.12', '>' ) ) {
-			$items = wprss_get_feed_items( $this->params['url'], NULL, $this->params['force_feed'] );
+			$items = wprss_get_feed_items( $url, NULL, $this->params['force_feed'] );
 		} else {
-			$items = wprss_get_feed_items( $this->params['url'], NULL );
+			$items = wprss_get_feed_items( $url, NULL );
 		}
 
 		if ( !$items ) {
@@ -292,10 +301,16 @@ class WPRSS_FTP_Feed_Assistant {
 			}
 		}
 
+		$noImagesHint = $this->params['full_content']
+			? __("No images were found in the feed.", 'wprss')
+			: __("No images were found in the feed. Try enabling <strong>'Force Full Content.'</strong>", 'wprss');
+
+		$foundImageHint = sprintf(__("Found highest-resolution image in the item's %s", 'wprss'), $autoselect_name);
+
 		$ret['hint'] = array(
 			'id' => 'wprss_ftp_featured_image',
 			'placement' => 'wprss-tooltip-field_f2p_featured_image',
-			'text' => empty($autoselect_val) ? __("No images were found in the feed. Try enabling <strong>'Force Full Content.'</strong>", WPRSS_TEXT_DOMAIN) : sprintf(__("Found highest-resolution image in the item's %s", WPRSS_TEXT_DOMAIN), $autoselect_name),
+			'text' => empty($autoselect_val) ? $noImagesHint : $foundImageHint,
 			'type' => empty($autoselect_val) ? 'warning' : 'ok',
 			'autoselectValue' => empty($autoselect_val) ? 'first' : $autoselect_val,
 			'autoselectName' => empty($autoselect_val) ? 'content' : $autoselect_name

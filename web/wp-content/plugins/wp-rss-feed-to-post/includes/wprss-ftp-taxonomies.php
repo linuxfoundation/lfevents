@@ -451,8 +451,16 @@ function wprss_ftp_add_taxonomies_to_post( $post_id, $feed_id, $sp_item ) {
  * @return boolean TRUE if the taxonomy term should be applied, else FALSE.
  */
 function wprss_ftp_should_apply_taxonomy( $entry, $item ) {
-	$subjects = $entry['filter_subject'];
-	$keywords = explode( ',', $entry['filter_keywords'] );
+	$subjects = isset($entry['filter_subject'])
+        ? $entry['filter_subject']
+        : [];
+
+	$keywords = isset($entry['filter_keywords'])
+        ? $entry['filter_keywords']
+        : '';
+	$keywords = explode( ',', $keywords );
+
+
     $method = isset($entry['post_taxonomy_compare_method'])
         ? $entry['post_taxonomy_compare_method']
         : WPRSS_FTP_Meta::get_instance()->getDefaultTaxonomyCompareMethod();

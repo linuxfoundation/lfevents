@@ -1476,8 +1476,12 @@ final class WPRSS_FTP_Settings {
 
 		<!-- Author to use -->
 		<span id="wprss-ftp-authors-options">
-			<label for="<?php echo $ids['def_author']; ?>">Use </label>
-			<?php $users = WPRSS_FTP_Meta::get_users_array( WPRSS_FTP_Admin_User_Ajax::get_instance()->is_over_threshold() ? (array)$def_author : false ) ?>
+			<?php
+			$userIds = WPRSS_FTP_Admin_User_Ajax::get_instance()->is_over_threshold()
+				? [$def_author, get_current_user_id()]
+				: false;
+			$users = WPRSS_FTP_Meta::get_users_array($userIds);
+			?>
 			<?php echo WPRSS_FTP_Utils::array_to_select( $users, array(
 					'id'		=>	$ids['def_author'],
 					'name'		=>	$names['def_author'],
@@ -1565,7 +1569,11 @@ final class WPRSS_FTP_Settings {
 				<?php _e( 'Fallback user:', WPRSS_TEXT_DOMAIN ); ?>
 			</label>
 			<?php endif; ?>
-			<?php $fallback_users = WPRSS_FTP_Meta::get_users_array( WPRSS_FTP_Admin_User_Ajax::get_instance()->is_over_threshold() ? (array)$fallback_author : false, true, true ) ?>
+			<?php
+			$userIds = WPRSS_FTP_Admin_User_Ajax::get_instance()->is_over_threshold()
+				? array_merge($userIds, [$fallback_author])
+				: false;
+			$fallback_users = WPRSS_FTP_Meta::get_users_array($userIds, true, true) ?>
 			<?php
 				echo WPRSS_FTP_Utils::array_to_select( $fallback_users, array(
 					'id'		=>	$ids['fallback_author'],

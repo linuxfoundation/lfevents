@@ -69,5 +69,6 @@ jQuery( document ).ready( function($) {
 
 	runFeedAssistant();
 	$('#wprss_url').on('input propertychange paste', debounceFeedAssistant);
-	$('#wprss-force-feed').click( runFeedAssistant );
+	$('#wprss-force-feed').on( 'change', runFeedAssistant );
+	$('#wprss_ftp_force_full_content').on( 'change', runFeedAssistant );
 });

@@ -1,3 +1,15 @@
+3.9.1 (2019-08-21)
+Changed: Updated how the plugin checks for dependencies.
+Changed: Error messages are now consistent with other add-ons.
+Changed: The post status is hidden in the Feed Sources table when importing as Feed Items.
+Changed: HTML entities in post titles are now automatically decoded.
+Changed: Changing the "Force full content" option refreshes the preview.
+Fixed: YoastSEO canonical link is always set, even when the canonical link option is disabled.
+Fixed: Could not open "Post author" drop-downs if the selected user was deleted.
+Fixed: PHP notices for undefined "filter_subject" and "filter_keywords" indices.
+Fixed: Use of incorrect post status slug for "Scheduled".
+Fixed: PHP notice when filtering post_content and global post is not available.
+
 3.9 (2019-07-25)
 Added: Integration with the PowerPress plugin.
 Added: New option to disable importing all image sizes.

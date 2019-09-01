@@ -180,7 +180,7 @@ add_filter('wprss_ftp_post_meta', function($meta, $insertedId, $source, $item) {
     $canonicalLink = isset($options['canonical_link'])? $options['canonical_link'] : false;
 
     // Abort if canonical link option is not enabled
-    if (!$canonicalLink) {
+    if (!WPRSS_FTP_Utils::multiboolean($canonicalLink)) {
         return $meta;
     }
 

@@ -53,6 +53,11 @@ final class WPRSS_FTP_Display {
 	 */
 	public static function post_content( $content ) {
 		global $post;
+
+		if (!$post) {
+			return $content;
+		}
+
 		$source = WPRSS_FTP_Meta::get_instance()->get_meta( $post->ID, 'feed_source' );
 
 		// IF AN IMPORTED POST

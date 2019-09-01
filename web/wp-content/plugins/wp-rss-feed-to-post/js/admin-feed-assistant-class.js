@@ -222,7 +222,8 @@
 					url: url,
 					num_items: num_items ? num_items : 1,
 					post_id: $('#wprss-ftp-post-id').attr('data-post-id'),
-					force_feed: $('#wprss-force-feed').attr('checked') == 'checked'
+					force_feed: $('#wprss-force-feed').attr('checked') == 'checked',
+					full_content: $('#wprss_ftp_force_full_content').attr('checked') == 'checked',
 				}
 			}).then(function(response, textStatus, jqXHR) {
 				if (response.hints !== undefined) {
