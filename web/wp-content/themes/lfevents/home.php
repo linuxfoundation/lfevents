@@ -85,6 +85,7 @@ get_template_part( 'template-parts/global-nav' );
 							'orderby'    => 'meta_value',
 							'order'      => 'ASC',
 							'post_status' => array( 'publish' ),
+							'posts_per_page' => 100,
 						)
 					);
 					if ( $query->have_posts() ) {
