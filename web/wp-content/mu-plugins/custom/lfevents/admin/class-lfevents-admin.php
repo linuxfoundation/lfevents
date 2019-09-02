@@ -225,10 +225,20 @@ class LFEvents_Admin {
 
 		register_taxonomy( 'lfevent-category', $this->post_types, $args );
 
-		$labels = [
-			'name'          => _x( 'Event Countries', 'taxonomy general name' ),
-			'singular_name' => _x( 'Event Country', 'taxonomy singular name' ),
-		];
+		$labels = array(
+			'name'              => _x( 'Event Countries', 'taxonomy general name', 'textdomain' ),
+			'singular_name'     => _x( 'Event Country', 'taxonomy singular name', 'textdomain' ),
+			'search_items'      => __( 'Search Countries', 'textdomain' ),
+			'all_items'         => __( 'All Countries', 'textdomain' ),
+			'parent_item'       => __( 'Parent Continent', 'textdomain' ),
+			'parent_item_colon' => __( 'Parent Continent:', 'textdomain' ),
+			'edit_item'         => __( 'Edit Country', 'textdomain' ),
+			'update_item'       => __( 'Update Country', 'textdomain' ),
+			'add_new_item'      => __( 'Add New Country', 'textdomain' ),
+			'new_item_name'     => __( 'New Country Name', 'textdomain' ),
+			'menu_name'         => __( 'Event Countries', 'textdomain' ),
+		);
+
 		$args   = [
 			'labels'       => $labels,
 			'show_in_rest' => true,
