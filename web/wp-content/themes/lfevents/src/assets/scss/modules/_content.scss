@@ -214,10 +214,20 @@
 }
 
 
+// Sidebar widgets
 .sidebar-widgets {
   .widget + .widget {
     margin-top: rem-calc(40);
     padding-top: rem-calc(30);
     border-top: $hr-border;
+  }
+}
+
+
+// Styles for IE only
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  // countdown clock
+  .ub_countdown_circular_container {
+    display: none;
   }
 }
