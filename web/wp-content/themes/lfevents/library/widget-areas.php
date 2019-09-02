@@ -6,17 +6,17 @@
  * @since FoundationPress 1.0.0
  */
 
-if ( ! function_exists( 'foundationpress_footer_widgets' ) ) :
+if ( ! function_exists( 'lf_widget_areas' ) ) :
 
 	/**
-	 * Register footer widget.
+	 * Register widget areas.
 	 */
-	function foundationpress_footer_widgets() {
+	function lf_widget_areas() {
 		register_sidebar(
 			array(
 				'id'            => 'footer-widgets',
-				'name'          => __( 'Footer widgets', 'foundationpress' ),
-				'description'   => __( 'Drag widgets to this container.', 'foundationpress' ),
+				'name'          => __( 'Footer widgets', 'lfevent' ),
+				'description'   => __( 'Drag widgets to this container.', 'lfevent' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h6>',
@@ -24,7 +24,19 @@ if ( ! function_exists( 'foundationpress_footer_widgets' ) ) :
 			)
 		);
 
+		register_sidebar(
+			array(
+				'id'            => 'community-events-widgets',
+				'name'          => __( 'Community Events Sidebar', 'lfevent' ),
+				'description'   => __( 'Drag widgets to this container.', 'lfevent' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h6>',
+				'after_title'   => '</h6>',
+			)
+		);
 	}
 
-	add_action( 'widgets_init', 'foundationpress_footer_widgets' );
+	add_action( 'widgets_init', 'lf_widget_areas' );
+
 endif;

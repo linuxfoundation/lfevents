@@ -83,7 +83,7 @@ Frontend styles for gutenberg blocks
 	margin-left: auto;
 	margin-right: auto;
 	// max-width: calc(#{map-deep-get($breakpoints, medium)} - #{map-deep-get($grid-column-gutter, small)} - #{map-deep-get($grid-column-gutter, small)});
-	max-width: map-deep-get($breakpoints, large);
+	max-width: map-deep-get($breakpoints, xlarge);
 
 	&.alignwide {
 		clear: both;
@@ -91,7 +91,7 @@ Frontend styles for gutenberg blocks
 		@include breakpoint(medium) {
 			width: 100%;
 			// max-width: map-deep-get($breakpoints, large);
-			max-width: calc(100% - $global-margin*2);
+			// max-width: calc(100% - $global-margin*2);
 		}
 	}
 

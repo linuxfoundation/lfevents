@@ -1,6 +1,10 @@
 .gform_wrapper {
   padding: 0 0 $global-margin;
 
+  .gform_title {
+    font-size: rem-calc(20);
+  }
+
   .gform_heading {
     font-weight: $global-weight-bold;
     margin-bottom: $global-margin;

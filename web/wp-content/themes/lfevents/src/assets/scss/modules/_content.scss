@@ -212,3 +212,12 @@
 .wp-block-embed.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
   @include responsive-embed(16 by 9);
 }
+
+
+.sidebar-widgets {
+  .widget + .widget {
+    margin-top: rem-calc(40);
+    padding-top: rem-calc(30);
+    border-top: $hr-border;
+  }
+}
