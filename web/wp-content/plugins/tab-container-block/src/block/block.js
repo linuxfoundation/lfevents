@@ -104,7 +104,7 @@ registerBlockType( 'cgb/block-tab-container-block', {
 		const { setAttributes, attributes: { menuTitle, id }} = props;
 
 		return (
-			<div className={ props.className } data-menu-title={ menuTitle } id={ id }>
+			<div className={ props.className } data-menu-title={ menuTitle } id={ id } data-magellan-target={ id }>
 				<InnerBlocks.Content />
 			</div>
 		);

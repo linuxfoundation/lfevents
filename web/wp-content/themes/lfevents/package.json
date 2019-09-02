@@ -25,7 +25,7 @@
     "responsive"
   ],
   "dependencies": {
-    "foundation-sites": "6.5.1",
+    "foundation-sites": "6.5.3",
     "jquery": "^3.4.1",
     "motion-ui": "~1.2.2",
     "what-input": "^4.1.3"

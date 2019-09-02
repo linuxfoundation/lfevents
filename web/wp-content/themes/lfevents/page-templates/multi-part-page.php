@@ -6,7 +6,7 @@
  */
 
 /**
- * Adds the menu section to the bottom of the content of each post.
+ * Adds the menu section to the top of the content of each post.
  *
  * @param string $content Content of the post.
  */
@@ -15,11 +15,13 @@ function lfe_content_filter( $content ) {
 	$tag_regex = '/<[^>]*class="[^"]*\bwp-block-cgb-block-tab-container-block\b[^"]*"[^>]*>/i';
 	preg_match_all( $tag_regex, $content, $matches );
 
-	if ( ! $matches ) {
+	if ( ! $matches[0] ) {
 		return $content;
 	}
 
-	$menu = '<div class="tab-container-block-menu"><ul>';
+	$menu = '<nav data-sticky-container>';
+	$menu .= '<div class="sticky" data-sticky data-margin-top="6" data-anchor="multi-part-page" data-sticky-on="large">';
+	$menu .= '<ul data-magellan data-offset="60" data-deep-linking="true" data-update-history="false">';
 
 	// grab the data-menu-title and id from each tag to construct the menu.
 	foreach ( $matches[0] as $match ) {
@@ -29,10 +31,17 @@ function lfe_content_filter( $content ) {
 		$menu .= '<li><a href="#' . $id[1] . '">' . $menu_title[1] . '</a></li>';
 	}
 
-	$menu .= '</ul></div>';
+	$menu .= '</ul>';
+	$menu .= '</div>';
+	$menu .= '</nav>';
+
+	$menu_and_content = '<div id="multi-part-page">';
+	$menu_and_content .= '<div class="multi-part-page--menu">' . $menu . '</div>';
+	$menu_and_content .= '<div class="multi-part-page--content">' . $content . '</div>';
+	$menu_and_content .= '</div>';
 
 	// add the menu markup to the end of $content.
-	return $content . $menu;
+	return $menu_and_content;
 }
 add_filter( 'the_content', 'lfe_content_filter' );
 

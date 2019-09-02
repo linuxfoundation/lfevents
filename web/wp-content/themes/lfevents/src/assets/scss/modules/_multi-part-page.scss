@@ -1,0 +1,47 @@
+#multi-part-page {
+
+  @include breakpoint(large) {
+    @include xy-grid;
+  }
+}
+
+.multi-part-page--menu {
+
+  @include breakpoint(large) {
+    @include xy-cell(3);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding-bottom: rem-calc(40);
+
+    li {
+      margin-top: rem-calc(10);
+      line-height: 1.3;
+    }
+
+    a {
+      font-weight: bold;
+
+      @include breakpoint(large) {
+        display: block;
+        padding: rem-calc(10) rem-calc(12);
+      }
+
+      &.is-active {
+        background-color: rgba(0,0,0,0.1);
+        background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+        border-radius: rem-calc(4);
+        color: $charcoal;
+      }
+    }
+  }
+}
+
+.multi-part-page--content {
+
+  @include breakpoint(large) {
+    @include xy-cell(9);
+  }
+}
