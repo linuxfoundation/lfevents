@@ -7,6 +7,11 @@
 
 .multi-part-page--menu {
 
+  @include breakpoint(medium down) {
+    border-bottom: $hr-border;
+    margin-bottom: $global-margin;
+  }
+
   @include breakpoint(large) {
     @include xy-cell(3);
   }
@@ -14,7 +19,7 @@
   ul {
     list-style: none;
     margin: 0;
-    padding-bottom: rem-calc(40);
+    padding-bottom: $global-margin;
 
     li {
       margin-top: rem-calc(10);
