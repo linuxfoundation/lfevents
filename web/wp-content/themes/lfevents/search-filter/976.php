@@ -19,6 +19,7 @@
  * http://codex.wordpress.org/Template_Tags
  */
 
+/**
+ * This file is temporary until we blow away the dev db.
+ */
 include( get_template_directory() . '/search-filter/147.php' );
-
-?>
