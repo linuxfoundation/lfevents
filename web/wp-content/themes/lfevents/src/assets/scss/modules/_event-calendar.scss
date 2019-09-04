@@ -47,37 +47,55 @@
   padding-top: 0;
 }
 
-.event-calendar-container {
-
-  @include breakpoint(large) {
-    @include xy-grid($direction:horizontal, $wrap:true);
-    @include xy-gutters($negative:true);
-
-    > * {
-      @include xy-cell(12);
-    }
-
-    form.searchandfilter {
-      @include xy-cell(4);
-      order: 2;
-    }
-
-    .search-filter-results {
-      @include xy-cell(8);
-      order: 1;
-    }
-  }
-}
+// .event-calendar-container {
+//
+//   @include breakpoint(large) {
+//     @include xy-grid($direction:horizontal, $wrap:true);
+//     @include xy-gutters($negative:true);
+//
+//     > * {
+//       @include xy-cell(12);
+//     }
+//
+//     form.searchandfilter {
+//       @include xy-cell(4);
+//       order: 2;
+//     }
+//
+//     .search-filter-results {
+//       @include xy-cell(8);
+//       order: 1;
+//     }
+//   }
+// }
 
 
 form.searchandfilter {
+  margin-bottom: $global-margin;
 
   > ul {
-    margin-left: 0;
+    margin: 0 -$global-margin;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
     > li {
       padding: 0;
-      margin: 0 0 1rem;
+      margin: 0;
+      padding: $global-margin;
+      width: rem-calc(400);
+      max-width: 100%;
+
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &.sf-field-reset {
+        max-width: 20%;
+      }
     }
 
     input:focus {
@@ -101,7 +119,7 @@ form.searchandfilter {
 
     .search-filter-reset {
       @include button($expand:true, $background:$white-smoke, $background-hover:darken($white-smoke,3%), $color:$primary-color, $style:solid);
-      margin-top: 2rem;
+      margin: 0;
       border-radius: rem-calc(8);
       box-shadow: 0 0.25em 0 0 rgba(0,0,0,0.1);
     }

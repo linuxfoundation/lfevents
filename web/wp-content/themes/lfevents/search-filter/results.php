@@ -63,7 +63,7 @@ if ( $query->have_posts() ) {
 			}
 		}
 		?>
-		<article id="post-<?php the_ID(); ?>" class="cell medium-6 callout large-margin-bottom">
+		<article id="post-<?php the_ID(); ?>" class="cell medium-6 large-4 callout large-margin-bottom">
 
 			<h5 class="medium-margin-right small-margin-bottom line-height-tight">
 				<strong>
