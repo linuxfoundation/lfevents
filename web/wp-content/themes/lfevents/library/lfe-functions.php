@@ -428,8 +428,12 @@ function lfe_custom_post_meta( $meta, $post_id, $feed_source, $feed_item ) {
 			$dt_date_start = new DateTime( $dt_date_start );
 			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_start->format( 'Y/m/d' ) );
 		}
+		if ( $dt_date_end ) {
+			$dt_date_end = new DateTime( $dt_date_end );
+			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_end->format( 'Y/m/d' ) );
+		}
 	}
 
 	return $meta;
 }
-//add_filter( 'wprss_ftp_post_meta', 'lfe_custom_post_meta', 10, 4 );
+add_filter( 'wprss_ftp_post_meta', 'lfe_custom_post_meta', 10, 4 );
