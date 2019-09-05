@@ -432,4 +432,4 @@ function lfe_custom_post_meta( $meta, $post_id, $feed_source, $feed_item ) {
 
 	return $meta;
 }
-add_filter( 'wprss_ftp_post_meta', 'lfe_custom_post_meta', 10, 4 );
+//add_filter( 'wprss_ftp_post_meta', 'lfe_custom_post_meta', 10, 4 );
