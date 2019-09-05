@@ -411,3 +411,25 @@ function custom_excerpt_length( $length ) {
 	return 18;
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+/**
+ * Exposes the meta data of a post that results from import of a feed item.
+ *
+ * @param array          $meta The original meta data array.
+ * @param int            $post_id The ID of the post, which is being processed.
+ * @param int            $feed_source The ID of the feed source post, which the current item is being imported by.
+ * @param SimplePie_Item $feed_item The feed item, which is being imported.
+ * @return array The new meta data array.
+ */
+function lfe_custom_post_meta( $meta, $post_id, $feed_source, $feed_item ) {
+	if ( 243 === $feed_source || 1180 === $feed_source ) {
+		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
+		if ( $dt_date_start ) {
+			$dt_date_start = new DateTime( $dt_date_start );
+			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_start->format( 'Y/m/d' ) );
+		}
+	}
+
+	return $meta;
+}
+add_filter( 'wprss_ftp_post_meta', 'lfe_custom_post_meta', 10, 4 );
