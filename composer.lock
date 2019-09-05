@@ -203,16 +203,16 @@
         },
         {
             "name": "pantheon-systems/wordpress-composer",
-            "version": "5.2.2",
+            "version": "5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pantheon-systems/wordpress-composer.git",
-                "reference": "2a41a60bb25a4879c1b94c4c3c5b244e9135dbca"
+                "reference": "b8ad67f697fd48469c6faac8a31bbc83bcc5c98b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/2a41a60bb25a4879c1b94c4c3c5b244e9135dbca",
-                "reference": "2a41a60bb25a4879c1b94c4c3c5b244e9135dbca",
+                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/b8ad67f697fd48469c6faac8a31bbc83bcc5c98b",
+                "reference": "b8ad67f697fd48469c6faac8a31bbc83bcc5c98b",
                 "shasum": ""
             },
             "require": {
@@ -230,10 +230,10 @@
             ],
             "description": "WordPress for Pantheon with a composer.json file.",
             "support": {
-                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/5.2.2",
+                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/5.2.3",
                 "issues": "https://github.com/pantheon-systems/wordpress-composer/issues"
             },
-            "time": "2019-06-18T19:34:32+00:00"
+            "time": "2019-09-05T03:08:00+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -731,15 +731,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
-            "version": "1.6.0",
+            "version": "1.6.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-mail-smtp/",
-                "reference": "tags/1.6.0"
+                "reference": "tags/1.6.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.1.6.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.1.6.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
