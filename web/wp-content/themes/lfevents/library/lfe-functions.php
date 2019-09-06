@@ -413,16 +413,13 @@ function custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 /**
- * Exposes the meta data of a post that results from import of a feed item.
+ * Fixes the meta tags of the post imported from RSS to get them in the right formats.
  *
- * @param array          $meta The original meta data array.
- * @param int            $post_id The ID of the post, which is being processed.
- * @param int            $feed_source The ID of the feed source post, which the current item is being imported by.
- * @param SimplePie_Item $feed_item The feed item, which is being imported.
- * @return array The new meta data array.
+ * @param int $post_id The ID of the post, which is being processed.
+ * @param int $feed_id The ID of the feed source post, which the current item is being imported by.
  */
-function lfe_custom_post_meta( $meta, $post_id, $feed_source, $feed_item ) {
-	if ( 243 === $feed_source || 1180 === $feed_source ) {
+function lfe_fix_community_post( $post_id, $feed_id ) {
+	if ( 243 === $feed_id || 1180 === $feed_id ) {
 		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
 		if ( $dt_date_start ) {
 			$dt_date_start = new DateTime( $dt_date_start );
@@ -433,7 +430,5 @@ function lfe_custom_post_meta( $meta, $post_id, $feed_source, $feed_item ) {
 			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_end->format( 'Y/m/d' ) );
 		}
 	}
-
-	return $meta;
 }
-add_filter( 'wprss_ftp_post_meta', 'lfe_custom_post_meta', 10, 4 );
+add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
