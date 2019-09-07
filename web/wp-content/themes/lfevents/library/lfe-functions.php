@@ -413,7 +413,7 @@ function custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 /**
- * Fixes the meta tags of the post imported from RSS to get them in the right formats.
+ * Fixes the meta tags of the Community Event post imported from RSS to get them in the right formats.
  *
  * @param int $post_id The ID of the post, which is being processed.
  * @param int $feed_id The ID of the feed source post, which the current item is being imported by.
