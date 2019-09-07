@@ -102,7 +102,7 @@ get_template_part( 'template-parts/global-nav' );
 							<div id="post-<?php the_ID(); ?>" class="cell medium-6">
 
 								<h4 class="medium-margin-right small-margin-bottom line-height-tight">
-									<a href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
+									<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
 										<strong><?php echo esc_html( get_the_title( $post->ID ) ); ?></strong>
 									</a>
 								</h4>

@@ -71,11 +71,11 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #0099cc,
-  secondary: #666666,
-  success: #3adb76,
-  warning: #ffae00,
-  alert: #cc4b37,
+  primary: $lf-light-blue,
+  secondary: $lf-gray-hatch,
+  success: $lf-green,
+  warning: $lf-yellow,
+  alert: $lf-red,
 );
 // $light-gray: #e6e6e6;
 // $medium-gray: #cacaca;
@@ -169,8 +169,8 @@ $code-font-weight: $global-weight-normal;
 $code-background: $white-smoke;
 $code-border: 1px solid $silver;
 $code-padding: rem-calc(2 5 1);
-$anchor-color: $primary-color;
-$anchor-color-hover: #0077BB;
+$anchor-color: $lf-light-blue-hatch;
+$anchor-color-hover: $lf-dark-blue;
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
 $hr-width: auto;
