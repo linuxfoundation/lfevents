@@ -55,9 +55,10 @@ include( get_template_directory() . '/singular.php' );
 $( document ).ready( function() {
 	// if a menu item isn't visible, scroll it into view
 	$('#multi-part-page--magellan').on('update.zf.magellan', function (ev, elem) {
-		var menuItem = elem[0];
-		if (menuItem) {
-			menuItem.scrollIntoView({
+		var activeMenuItem = elem[0];
+		var isSticky = $('.is-stuck')[0] ? true : false;
+		if (activeMenuItem && isSticky) {
+			activeMenuItem.scrollIntoView({
 				block: "nearest"
 			});
 		}
