@@ -22,7 +22,7 @@ function lfe_content_filter( $content ) {
 	$menu = '<nav data-sticky-container>';
 	$menu .= '<div class="sticky" data-sticky data-margin-top="6" data-anchor="multi-part-page" data-sticky-on="large">';
 	$menu .= '<h6 class="hide-for-large text-center large-text-left text-small">Skip to page section</h6>';
-	$menu .= '<ul data-magellan data-offset="60" data-deep-linking="true" data-update-history="false">';
+	$menu .= '<ul id="multi-part-page--magellan" data-magellan data-offset="60" data-deep-linking="true" data-update-history="false">';
 
 	// grab the data-menu-title and id from each tag to construct the menu.
 	foreach ( $matches[0] as $match ) {
@@ -48,3 +48,19 @@ add_filter( 'the_content', 'lfe_content_filter' );
 
 // shares the markup with the regular singular.php page template although it pulls in its own template part.
 include( get_template_directory() . '/singular.php' );
+
+?>
+
+<script>
+$( document ).ready( function() {
+	// if a menu item isn't visible, scroll it into view
+	$('#multi-part-page--magellan').on('update.zf.magellan', function (ev, elem) {
+		var menuItem = elem[0];
+		if (menuItem) {
+			menuItem.scrollIntoView({
+				block: "nearest"
+			});
+		}
+	});
+});
+</script>
