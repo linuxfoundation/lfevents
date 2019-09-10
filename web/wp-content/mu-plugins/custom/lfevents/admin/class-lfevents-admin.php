@@ -301,7 +301,7 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'textarea', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
 									// The prefix set in the sidebar option 'id_prefix' will be applied.
