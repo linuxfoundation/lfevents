@@ -192,3 +192,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
+
+
+
+// Special LFEvents Redirects.
+
+if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
+	if ( ( php_sapi_name() != "cli" ) ) {
+		// header( 'HTTP/1.0 301 Moved Permanently' );
+		// header( 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'] );
+echo 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'];
+		if (extension_loaded('newrelic')) {
+			newrelic_name_transaction("redirect");
+		}
+
+		exit();
+	}
+}
