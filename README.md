@@ -33,7 +33,7 @@ All these tests are run by CircleCI on each commit to the master branch, whenver
 2. Run `lando init` and use the following values when prompted:
   * `From where should we get your app's codebase?` > `current working directory`
   * `What recipe do you want to use?` > `pantheon`
-  * `Enter a Pantheon machine token` > `[enter the GitHub token you got above]`
+  * `Enter a Pantheon machine token` > `[enter the Pantheon token you got above]`
   * `Which site?` > `lfeventsci`
 
 3. Run `lando start` and note the local site URL provided at the end of the process
