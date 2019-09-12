@@ -2,11 +2,12 @@
   padding: 0 0 $global-margin;
 
   .gform_title {
-    font-size: rem-calc(20);
+    // font-size: rem-calc(20);
+    @extend h4;
   }
 
   .gform_heading {
-    font-weight: $global-weight-bold;
+    // font-weight: $global-weight-bold;
     margin-bottom: $global-margin;
     opacity: 0.8;
   }
