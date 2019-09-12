@@ -71,7 +71,7 @@
 
 
 form.searchandfilter {
-  margin-bottom: $global-margin;
+  margin-bottom: $global-margin*2;
 
   > ul {
     margin: 0 -$global-margin;
@@ -94,7 +94,9 @@ form.searchandfilter {
       }
 
       &.sf-field-reset {
-        max-width: 20%;
+        @include breakpoint(medium) {
+          max-width: 20%;
+        }
       }
     }
 
