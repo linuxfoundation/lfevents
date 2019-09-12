@@ -124,5 +124,4 @@ class LFEvents_Public {
 			}
 		}
 	}
-
 }

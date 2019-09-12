@@ -161,6 +161,7 @@ class LFEvents {
 		$this->loader->add_action( 'init', $plugin_admin, 'change_page_label' );
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'event_filters' );
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'event_list_filter' );
+		$this->loader->add_action( 'save_post', $plugin_admin, 'synchronize_noindex_meta' );
 
 	}
 

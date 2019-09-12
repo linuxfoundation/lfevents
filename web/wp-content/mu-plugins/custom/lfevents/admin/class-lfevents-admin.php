@@ -931,6 +931,20 @@ class LFEvents_Admin {
 		$query->set( 'order', 'ASC' );
 		$query->set( 'orderby', 'parent' );
 	}
+
+	/**
+	 * If the Event has a external url set then this sets the noindex meta to true and vice versa.
+	 *
+	 * @param int $post_id The post id.
+	 */
+	public function synchronize_noindex_meta( $post_id ) {
+		$external_url = get_post_meta( $post_id, 'lfes_external_url', true );
+		if ( $external_url ) {
+			update_post_meta( $post_id, '_genesis_noindex', true );
+		} else {
+			delete_post_meta( $post_id, '_genesis_noindex' );
+		}
+	}
 }
 
 
