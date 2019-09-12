@@ -72,8 +72,8 @@ get_template_part( 'template-parts/global-nav' );
 
 	<div class="grid-container xlarge-padding-bottom">
 		<div class="grid-x grid-margin-x">
-			<div class="cell medium-8 large-9">
-				<div class="grid-x grid-margin-x grid-margin-y large-margin-bottom">
+			<div class="cell medium-8 large-9 xlarge-margin-bottom">
+				<div class="grid-x grid-margin-x grid-margin-y medium-margin-bottom">
 					<?php
 					// Upcoming Events.
 					$query = new WP_Query(

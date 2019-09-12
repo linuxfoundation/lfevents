@@ -22,7 +22,7 @@ get_template_part( 'template-parts/global-nav' );
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 					</header>
 				</div>
-				<div class="cell large-8">
+				<div class="cell large-8 xlarge-margin-bottom">
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 						<div class="entry-content">
 							<div class="alignwide">
