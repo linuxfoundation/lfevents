@@ -1767,6 +1767,11 @@ abstract class GFAddOn {
 		$default_value       = rgar( $field, 'value' ) ? rgar( $field, 'value' ) : rgar( $field, 'default_value' );
 		$value               = $this->get_setting( $field['name'], $default_value );
 
+		// Add autocomplete attribute for password inputs.
+		if ( 'password' === $field['input_type'] ) {
+			$attributes['autocomplete'] = 'autocomplete="off"';
+		}
+
 		$html    = '';
 
 		$html .= '<input
@@ -2540,6 +2545,7 @@ abstract class GFAddOn {
 		$key_field['name']    .= '_key';
 		$key_field['choices']  = isset( $field['field_map'] ) ? $field['field_map'] : null;
 		$key_field['class']    = 'key key_{i}';
+		$key_field['title']    = rgar( $field, 'key_field_title' );
 
 		// Define custom key field properties.
 		$custom_key_field['name']  .= '_custom_key_{i}';
@@ -2552,6 +2558,7 @@ abstract class GFAddOn {
 		// Define value field properties.
 		$value_field['name']  .= '_custom_value';
 		$value_field['class']  = 'value value_{i}';
+		$value_field['title']  = rgar( $field, 'value_field_title' );
 
 		// Remove unneeded field properties.
 		unset( $field['field_map'], $value_field['field_map'], $key_field['field_map'], $custom_key_field['field_map'] );
@@ -2561,9 +2568,17 @@ abstract class GFAddOn {
 			$html .= $this->get_error_icon( $field );
 		}
 
+		$header = '';
+		if ( ! empty( $key_field['title'] ) || ! empty ( $value_field['title'] ) ) {
+			$header = '<th>' . $key_field['title'] . '</th>' .'
+					   <th>' . $value_field['title'] . '</th>';
+
+		}
+
 		// Display dynamic field map table.
 		$html .= '
             <table class="settings-field-map-table" cellspacing="0" cellpadding="0">
+            	' . $header . '
                 <tbody class="repeater">
 	                <tr>
 	                    '. $this->get_mapping_field( 'key', $key_field, $custom_key_field ) .'
@@ -5358,22 +5373,24 @@ abstract class GFAddOn {
 		}
 
 		global $wpdb;
-		$lead_meta_table = GFFormsModel::get_lead_meta_table_name();
 
 		$forms        = GFFormsModel::get_forms();
 		$all_form_ids = array();
 
 		// remove entry meta
+		$meta_table = version_compare( GFFormsModel::get_database_version(), '2.3-dev-1', '<' ) ? GFFormsModel::get_lead_meta_table_name() : GFFormsModel::get_entry_meta_table_name();
+		remove_filter( 'query', array( 'GFForms', 'filter_query' ) );
 		foreach ( $forms as $form ) {
 			$all_form_ids[] = $form->id;
 			$entry_meta     = $this->get_entry_meta( array(), $form->id );
 			if ( is_array( $entry_meta ) ) {
 				foreach ( array_keys( $entry_meta ) as $meta_key ) {
-					$sql = $wpdb->prepare( "DELETE from $lead_meta_table WHERE meta_key=%s", $meta_key );
+					$sql = $wpdb->prepare( "DELETE from $meta_table WHERE meta_key=%s", $meta_key );
 					$wpdb->query( $sql );
 				}
 			}
 		}
+		add_filter( 'query', array( 'GFForms', 'filter_query' ) );
 
 		//remove form settings
 		if ( ! empty( $all_form_ids ) ) {

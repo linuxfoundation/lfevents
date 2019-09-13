@@ -1,48 +1,49 @@
-### 2.4.10.9
-- Fixed an issue where the source field setting would not display the previously selected option when copying values of another field.
+### 2.4.12 | 2019-08-28
+- Added security enhancements.
+- Added From Email validation in the notifications settings.
+- Added From Email warning message in the notification settings when the site domain is not being used for this setting.
+- Added [gform_export_line](https://docs.gravityforms.com/gform_export_line/) filter to allow modifying each line of the export separately.
+- Updated the default placeholder for new Website fields. Credit: The GravityView team.
+- Fixed a typo preventing the year sub-label input from displaying when editing a date field and having sub-label placement set to be above inputs.
+- Fixed Dashicons not appearing in the block editor when using a Classic block with a Gravity Forms shortcode whose form contains a Rich Text Editor enabled Paragraph field.
+- Fixed legacy database errors and notices generated during the uninstall process for add-ons.
+- Fixed a PHP fatal error which can occur during entry export if invalid values are entered in the start or end date filters.
+- Fixed PHP errors which could occur if the gform_recent_forms user meta does not contain the expected value.
+- API: Fixed an issue with the way REST API v2 is handling entry values for legacy (pre v2.2) Multi Select fields.
 
 
-### 2.4.10.8
-- Fixed an issue with the Rich Text Editor for the Paragraph and Post Body fields with WordPress 5.2 when submit button conditional logic is configured.
-- Fixed an issue with PHP 7.0+ where the submission could die when an invalid calculation formula is evaluated. Credit: The GravityView team.
-- Fixed a PHP notice during validation of the Password strength if JavaScript is disabled in the browser. Credit: The GravityView team.
-
-
-### 2.4.10.7
-- Fixed the required Address field city input missing the aria-required attribute when the zip input is located before the city.
-
-
-### 2.4.10.6
-- Fixed an issue with the background tasks response in the system report containing extraneous characters.
-
-
-### 2.4.10.5
-- API: Fixed an issue with GFAPI::update_entry_field() not saving zero when passed as an integer if the input doesn't have an existing entry value.
-
-
-### 2.4.10.4
-- API: Fixed an issue with GFAPI::submit_form() and the POST forms/[form ID]/submissions endpoint where validation fails for product fields.
-
-
-### 2.4.10.3 | 2019-06-17
-- API: Added GFAPI::log_debug() and GFAPI::log_error() which write to the "Gravity Forms API" log.
-- API: Added logging helpers and logging statements to various methods in REST API v2.
-- API: Updated REST API v1 to write to the "Gravity Forms API" log.
-
-
-### 2.4.10.2 | 2019-06-14
+### 2.4.11 | 2019-07-10
+- Added security enhancements. Credit: SimranJeet Singh (@TurbanatorSJS).
+- Added accessibility enhancements.
+- Updated the minimum version of WordPress required for support to 5.1.
+- Updated the system report to include timezone details.
 - Updated new Drop Down type Quantity fields to default to numeric choices. Credit: The GravityView team.
 - Updated the Website type field input markup, removing the unused maxLength attribute. Credit: The GravityView team.
 - Updated the Single Line Text field to validate the value length during submission when the maxLength property is configured. Credit: The GravityView team.
-- Fixed GFAPI::update_entry() and GFAPI::update_entry_field() for repeater fields.
-
-
-### 2.4.10.1 | 2019-06-13
-- Updated the system report to include timezone details.
-- Updated the minimum version of WordPress required for support to 5.1.
+- Fixed an issue where special characters (e.g. accented characters) in List and Multi-Select fields are ignored when searching for entries.
+- Fixed form scripts not enqueueing when Form block is nested.
+- Fixed an issue where the use of GLOB_BRACE during the daily cron task can cause PHP errors in non-GNU operating systems.
+- Fixed an issue with conditional notification routing when checking if a field value ends with a 0 due to it being treated as an empty string rather than an integer.
+- Fixed the legacy table access PHP notices being displayed when deleting a site on multi-site installations.
+- Fixed an issue with the Address field in the form editor where the source field setting doesn't display the previously selected option when copying values of another field.
+- Fixed an issue with the Rich Text Editor for the Paragraph and Post Body fields with WordPress 5.2 when submit button conditional logic is configured.
+- Fixed an issue with PHP 7.0+ where the submission could die when an invalid calculation formula is evaluated. Credit: The GravityView team.
+- Fixed a PHP notice during validation of the Password strength if JavaScript is disabled in the browser. Credit: The GravityView team.
 - Fixed an issue with submitting when multiple AJAX enabled forms are embedded into one page and invisible reCAPTCHAs are present.
 - Fixed an issue when tabbing through a form where an invisible reCAPTCHA is present.
 - Fixed an issue where a field's character count text could duplicate when submitting an AJAX enabled form.
+- Fixed the required Address field city input missing the aria-required attribute when the zip input is located before the city.
+- Fixed an issue with the background tasks response in the system report containing extraneous characters.
+- API: Added GFAPI::log_debug() and GFAPI::log_error() which write to the "Gravity Forms API" log.
+- API: Added support for the id query param on the export entries page (/wp-admin/admin.php?page=gf_export&view=export_entry&id=[FORM ID]) to preselect the form. Credit: The GravityView team.
+- API: Added logging helpers and logging statements to various methods in REST API v2.
+- API: Updated REST API v1 to write to the "Gravity Forms API" log.
+- API: Fixed GFAPI::update_entry() and GFAPI::update_entry_field() for repeater fields.
+- API: Fixed an issue with GFAPI::update_entry_field() not saving zero when passed as an integer if the input doesn't have an existing entry value.
+- API: Fixed an issue with GFAPI::submit_form() and the POST forms/[form ID]/submissions endpoint where validation fails for product fields.
+- AF: Added header title support for dynamic field map settings fields.
+- AF: Updated + and - icons so that they are consistent accross all settings fields.
+
 
 
 ### 2.4.10 | 2019-06-12
@@ -1322,7 +1323,7 @@ Description Filter which checks whether the operator is valid. Allows …)* filt
 - Added security enhancements to the entry export process.
 - Added $support_placeholders parameter to GFCommon::get_select_choices() method.
 - Added gf_input_change() JS function.
-- Added action-based system to conditional_logic.js; new method will trigger conditional logic from generic *gform_input_change* event. Allows more granular control of the order in which input-change-event-based functionality (i.e. conditional logic) is triggered.
+- Added action-based system to conditional_logic.js; new method will trigger conditional logic from generic *[gform_input_change](https://docs.gravityforms.com/gform_input_change/)* event. Allows more granular control of the order in which input-change-event-based functionality (i.e. conditional logic) is triggered.
 - Added 'fields' property to *gf_form_conditional_logic* JS object. Used to determine field's with conditional logic dependent on the current field. This differs from the 'dependents' property in that the dependents property refers to fields that should be shown/hidden based on a "parent" field (i.e. fields within a Section Break).
 - Added new JS helper functions: rgar() and rgars(); work just like their PHP counterparts.
 - Added field type specific classes to input containers.

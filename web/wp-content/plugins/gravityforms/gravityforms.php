@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: https://www.gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 2.4.10.9
+Version: 2.4.12
 Author: rocketgenius
 Author URI: https://www.rocketgenius.com
 License: GPL-2.0+
@@ -215,7 +215,7 @@ class GFForms {
 	 *
 	 * @var string $version The version number.
 	 */
-	public static $version = '2.4.10.9';
+	public static $version = '2.4.12';
 
 	/**
 	 * Handles background upgrade tasks.
@@ -737,19 +737,10 @@ class GFForms {
 	 * Self-heals suspicious files.
 	 *
 	 * @since  Unknown
-	 * @access private
-	 *
-	 * @uses   GFForms::heal_wp_upload_dir()
-	 * @uses   GFFormsModel::get_upload_root()
-	 * @uses   GFForms::rename_suspicious_files_recursive()
-	 *
-	 * @return void
 	 */
 	private static function do_self_healing() {
 
 		GFCommon::log_debug( __METHOD__ . '(): Start self healing' );
-
-		self::heal_wp_upload_dir();
 
 		$gf_upload_root = GFFormsModel::get_upload_root();
 
@@ -805,12 +796,13 @@ class GFForms {
 	/**
 	 * Renames suspicious content within the wp_upload directory.
 	 *
-	 * @since   Unknown
-	 * @access  private
+	 * @deprecated  2.4.11
 	 *
-	 * @used-by GFForms::do_self_healing()
+	 * @since       Unknown
 	 */
 	private static function heal_wp_upload_dir() {
+	    _deprecated_function( 'heal_wp_upload_dir', '2.4.11' );
+
 		$wp_upload_dir = wp_upload_dir();
 
 		$wp_upload_path = $wp_upload_dir['basedir'];
@@ -822,7 +814,7 @@ class GFForms {
 		// ignores all errors
 		set_error_handler( '__return_false', E_ALL );
 
-		foreach ( glob( $wp_upload_path . DIRECTORY_SEPARATOR . '*_input_*.{php,php5}', GLOB_BRACE ) as $filename ) {
+		foreach ( glob( $wp_upload_path . DIRECTORY_SEPARATOR . '*_input_*.php' ) as $filename ) {
 			$mini_hash = substr( wp_hash( $filename ), 0, 6 );
 			$newName   = sprintf( '%s.%s.bak', $filename, $mini_hash );
 			rename( $filename, $newName );
@@ -2434,8 +2426,8 @@ class GFForms {
 				 */
 				'previewDisabled' => apply_filters( 'gform_shortcode_preview_disabled', true ),
 				'strings'         => array(
-					'pleaseSelectAForm'   => esc_html__( 'Please select a form.', 'gravityforms' ),
-					'errorLoadingPreview' => esc_html__( 'Failed to load the preview for this form.', 'gravityforms' ),
+					'pleaseSelectAForm'   => wp_strip_all_tags( __( 'Please select a form.', 'gravityforms' ) ),
+					'errorLoadingPreview' => wp_strip_all_tags( __( 'Failed to load the preview for this form.', 'gravityforms' ) ),
 				)
 			) );
 		}
@@ -3369,7 +3361,11 @@ class GFForms {
 	 */
 	public static function update_form_active() {
 		check_ajax_referer( 'rg_update_form_active', 'rg_update_form_active' );
-		RGFormsModel::update_form_active( $_POST['form_id'], $_POST['is_active'] );
+		if ( GFCommon::current_user_can_any( 'gravityforms_edit_forms' ) ) {
+			GFFormsModel::update_form_active( $_POST['form_id'], $_POST['is_active'] );
+		} else {
+			wp_die( -1, 403 );
+		}
 	}
 
 	/**
@@ -3384,7 +3380,11 @@ class GFForms {
 	 */
 	public static function update_notification_active() {
 		check_ajax_referer( 'rg_update_notification_active', 'rg_update_notification_active' );
-		RGFormsModel::update_notification_active( $_POST['form_id'], $_POST['notification_id'], $_POST['is_active'] );
+		if ( GFCommon::current_user_can_any( 'gravityforms_edit_forms' ) ) {
+			GFFormsModel::update_notification_active( $_POST['form_id'], $_POST['notification_id'], $_POST['is_active'] );
+		} else {
+			wp_die( -1, 403 );
+		}
 	}
 
 	/**
@@ -3399,7 +3399,11 @@ class GFForms {
 	 */
 	public static function update_confirmation_active() {
 		check_ajax_referer( 'rg_update_confirmation_active', 'rg_update_confirmation_active' );
-		RGFormsModel::update_confirmation_active( $_POST['form_id'], $_POST['confirmation_id'], $_POST['is_active'] );
+		if ( GFCommon::current_user_can_any( 'gravityforms_edit_forms' ) ) {
+			GFFormsModel::update_confirmation_active( $_POST['form_id'], $_POST['confirmation_id'], $_POST['is_active'] );
+		} else {
+			wp_die( -1, 403 );
+		}
 	}
 
 	/**
@@ -5207,7 +5211,7 @@ class GFForms {
 			return;
 		}
 		GFCommon::log_debug( __METHOD__ . '(): Start deleting old export files' );
-		foreach ( glob( $export_folder . DIRECTORY_SEPARATOR . '*.csv', GLOB_BRACE ) as $filename ) {
+		foreach ( glob( $export_folder . DIRECTORY_SEPARATOR . '*.csv' ) as $filename ) {
 			$timestamp = filemtime( $filename );
 			if ( $timestamp < time() - DAY_IN_SECONDS ) {
 				// Delete files over a day old
@@ -5239,7 +5243,7 @@ class GFForms {
 			return;
 		}
 		GFCommon::log_debug( __METHOD__ . '(): Start deleting old log files' );
-		foreach ( glob( $logs_folder . DIRECTORY_SEPARATOR . '*.txt', GLOB_BRACE ) as $filename ) {
+		foreach ( glob( $logs_folder . DIRECTORY_SEPARATOR . '*.txt' ) as $filename ) {
 			$timestamp = filemtime( $filename );
 			if ( $timestamp < time() - MONTH_IN_SECONDS ) {
 				// Delete files over one month old
