@@ -938,6 +938,10 @@ class LFEvents_Admin {
 	 * @param int $post_id The post id.
 	 */
 	public function synchronize_noindex_meta( $post_id ) {
+		if ( ! in_array( get_post_type( $post_id ), $this->post_types ) ) {
+			return;
+		}
+
 		$external_url = get_post_meta( $post_id, 'lfes_external_url', true );
 		if ( $external_url ) {
 			update_post_meta( $post_id, '_genesis_noindex', true );
