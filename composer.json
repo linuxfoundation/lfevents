@@ -32,7 +32,7 @@
     "wpackagist-plugin/photonic":"^2.23",
     "wpackagist-plugin/china-video-block":"^0.1.0",
     "wpackagist-plugin/ultimate-blocks":"^1.1.9",
-    "wpackagist-plugin/gutenberg":"^6.1.1",
+    "wpackagist-plugin/gutenberg":"6.3.0",
     "wpackagist-plugin/wp-nested-pages":"^3.0.11",
     "wpackagist-plugin/clone-page-tree":"^0.1.0",
     "wpackagist-plugin/wp-rss-aggregator":"^4.15",
