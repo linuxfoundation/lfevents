@@ -137,7 +137,7 @@ registerBlockType( 'cgb/block-tab-container-block', {
 
 		return (
 			<div className={ props.className } data-menu-title={ menuTitle } data-menu-slug={ id }>
-        <a id={ id } class="magellan-anchor" data-magellan-target={ id }></a>
+        <a id={ id } class="magellan-anchor" data-magellan-target={ id } rel="noopener noreferrer"></a>
 				<InnerBlocks.Content />
 			</div>
 		);
