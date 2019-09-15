@@ -75,4 +75,19 @@
   @include breakpoint(large) {
     @include xy-cell(9);
   }
+
+  .wp-block-cgb-block-tab-container-block {
+    padding-bottom: $global-margin;
+    position: relative;
+  }
+}
+
+.magellan-anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  @include breakpoint(large) {
+    top: -4rem;
+  }
 }
