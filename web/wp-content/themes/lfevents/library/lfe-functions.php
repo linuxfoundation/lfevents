@@ -119,7 +119,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 function lfe_setup_theme_supported_features() {
 
 	// Add support for Block Styles.
-	add_theme_support( 'align-wide' );
+	// add_theme_support( 'align-wide' );
 
 }
 

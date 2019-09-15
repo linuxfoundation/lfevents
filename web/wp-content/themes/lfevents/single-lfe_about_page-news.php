@@ -19,7 +19,7 @@ get_template_part( 'template-parts/global-nav' );
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="entry-content">
-						<header class="alignwide about-page-header">
+						<header class="about-page-header">
 							<h1 class="entry-title"><?php the_title(); ?></h1>
 						</header>
 						<?php the_content(); ?>
@@ -29,7 +29,7 @@ get_template_part( 'template-parts/global-nav' );
 				<?php comments_template(); ?>
 			<?php endwhile; ?>
 			<div class="entry-content">
-				<div class="alignwide">
+				<div class="">
 					<div class="grid-x grid-margin-x medium-up-2 large-up-3">
 						<?php
 						query_posts( 'posts_per_page=60' );

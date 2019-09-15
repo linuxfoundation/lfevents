@@ -19,10 +19,10 @@ get_template_part( 'template-parts/global-nav' );
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="entry-content">
-						<header id="event-calendar-header" class="alignwide about-page-header">
+						<header id="event-calendar-header" class="about-page-header">
 							<h1 class="entry-title"><?php the_title(); ?></h1>
 						</header>
-						<div class="alignwide">
+						<div class="">
 							<div class="event-calendar-container">
 								<?php the_content(); ?>
 							</div>
