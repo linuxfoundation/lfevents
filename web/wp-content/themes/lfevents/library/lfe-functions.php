@@ -177,13 +177,13 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 }
 
 /**
- * Outputs the Sponsors page for an Event if a Sponsors page exists.
+ * Outputs the Sponsors List page for an Event if a Sponsors List page exists.
  *
  * @param int $parent_id ID of top parent post of the Event.
  */
 function lfe_get_sponsors( $parent_id ) {
 	global $post;
-	if ( 'sponsors' === $post->post_name ) {
+	if ( 'sponsor-list' === $post->post_name ) {
 		return;
 	}
 
@@ -192,7 +192,7 @@ function lfe_get_sponsors( $parent_id ) {
 	$args = array(
 		'post_type' => $post_types,
 		'post_parent' => $parent_id,
-		'name' => 'sponsors',
+		'name' => 'sponsor-list',
 		'no_found_rows' => true,  // used to improve performance.
 		'update_post_meta_cache' => false, // used to improve performance.
 		'update_post_term_cache' => false, // used to improve performance.

@@ -110,7 +110,7 @@ class LFEvents_Public {
 				'post_parent' => $post->ID,
 				'post_type'   => $post->post_type,
 				'numberposts' => 1,
-				'post_status' => 'Published',
+				'post_status' => 'publish',
 				'orderby'     => 'menu_order',
 				'order'       => 'ASC',
 			);
