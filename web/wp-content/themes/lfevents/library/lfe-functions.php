@@ -112,15 +112,6 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	echo '</ul></li>';
 }
 
-
-/**
- * Theme support
- */
-// function lfe_setup_theme_supported_features() {
-// }
-
-// add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
-
 /**
  * Returns markup for child pages for the Event menu.
  *
