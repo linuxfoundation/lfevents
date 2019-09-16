@@ -44,7 +44,7 @@
     }
 
     li {
-      margin-top: rem-calc(10);
+      margin-top: rem-calc(20);
       line-height: 1.3;
 
       @include breakpoint(large) {

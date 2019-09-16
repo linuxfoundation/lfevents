@@ -2,6 +2,12 @@
   background-color: $white;
   position: relative;
   z-index: 1;
+
+  a[href] {
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 100%;
+  }
 }
 
 .main-grid {
