@@ -182,12 +182,21 @@
     z-index: 1;
     float: left;
     margin: 0 0 0 $global-margin*-1;
-    padding: rem-calc(15) rem-calc(50) rem-calc(18);
+    padding: rem-calc(15) $global-margin*1.5 rem-calc(18) $global-margin;
     font-weight: $global-weight-bold;
     line-height: 1.2;
-    max-width: 14em;
+    max-width: calc(100% - #{$global-margin});
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+
+    @include breakpoint(medium down) {
+      font-size: calc(1rem + 1vw);
+    }
+
+    @include breakpoint(large) {
+      max-width: 14em;
+      padding: rem-calc(15) rem-calc(50) rem-calc(18);
+    }
   }
 }
 
