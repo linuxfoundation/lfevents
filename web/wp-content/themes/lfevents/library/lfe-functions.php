@@ -495,3 +495,37 @@ function wrap_gform_cdata_close($content = '') {
 	return $content;
 }
 add_filter('gform_cdata_close', 'wrap_gform_cdata_close');
+
+
+/**
+ * Fix up preconnect and preload to better optimize loading
+ * Preconnect is priority, must have crossorigin; Prefetch just opens connection
+ */
+function change_to_preconnect_resource_hints( $hints, $relation_type ) {
+
+	if ( 'preconnect' === $relation_type ) {
+		$hints[] = array(
+            'crossorigin' => '',
+            'href'        => '//code.jquery.com',
+        );
+		$hints[] = array(
+						'crossorigin' => '',
+						'href'        => '//www.google-analytics.com',
+);
+	}
+	if ( 'dns-prefetch' === $relation_type ) {
+		// create array of URLs to remove from prefetch
+		$url_arr = array( 'code.jquery.com', 's.w.org' );
+
+		foreach ( $url_arr as $url ) {
+			if ( ( $key = array_search( $url, $hints ) ) !== false ) {
+				unset( $hints[ $key ] );
+			}
+		}
+		// add in any addresses here that you want to prefetch
+		// $hints[] = '//cdn.polyfill.io';
+		// $hints[] = '//www.googletagmanager.com';
+	}
+	return $hints;
+	}
+add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
