@@ -522,7 +522,7 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 				unset( $hints[ $key ] );
 			}
 		}
-		// add in any addresses here that you want to prefetch
+		// add in and uncomment any addresses here that you want to prefetch
 		// $hints[] = '//cdn.polyfill.io';
 		// $hints[] = '//www.googletagmanager.com';
 	}
