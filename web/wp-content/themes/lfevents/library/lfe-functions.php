@@ -456,7 +456,7 @@ if (!(is_admin())) {
 }
 
 /**
- * Move all scripts to footer
+ * Move all scripts to footer if outside admin area
  */
 if (!(is_admin())) {
 function remove_head_scripts() {
