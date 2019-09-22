@@ -204,13 +204,13 @@ function lfe_get_sponsors( $parent_id ) {
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
 			?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<div class="entry-content">
-					<?php the_content(); ?>
-					<?php edit_post_link( __( '(Edit Sponsors)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
-				</div>
-			</article>
-			<?php
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+  <div class="entry-content">
+    <?php the_content(); ?>
+    <?php edit_post_link( __( '(Edit Sponsors)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
+  </div>
+</article>
+<?php
 		}
 	}
 	wp_reset_postdata(); // Restore original Post Data.
@@ -433,3 +433,40 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 	}
 }
 add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
+
+
+/**
+ * Make all JS defer onload (in conjunction with moving jQuery to footer)
+ */
+if (!(is_admin())) {
+	function defer_parsing_of_js($url)
+	{
+			if (false === strpos($url, '.js')) {
+					return $url;
+			}
+
+			// this needs to match jquery file name, typically jquery.js
+			if (strpos($url, 'jquery-3.4.1.min.js')) {
+					return $url;
+			}
+
+			return "$url' defer onload='";
+	}
+	add_filter('clean_url', 'defer_parsing_of_js', 11, 1);
+}
+
+/**
+ * Move all scripts to footer
+ */
+if (!(is_admin())) {
+function remove_head_scripts() {
+	remove_action('wp_head', 'wp_print_scripts');
+	remove_action('wp_head', 'wp_print_head_scripts', 9);
+	remove_action('wp_head', 'wp_enqueue_scripts', 1);
+
+	add_action('wp_footer', 'wp_print_scripts', 5);
+	add_action('wp_footer', 'wp_enqueue_scripts', 5);
+	add_action('wp_footer', 'wp_print_head_scripts', 5);
+	}
+	add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
+}
