@@ -102,7 +102,7 @@ class LFEvents_Public {
 	/**
 	 * Sets up redirects.
 	 */
-	public function lfe_redirects() {
+	public function redirects() {
 		global $post;
 
 		if ( in_array( $post->post_type, lfe_get_post_types() ) && $post->post_parent ) {
@@ -124,4 +124,12 @@ class LFEvents_Public {
 			}
 		}
 	}
+
+	/**
+	 * Remove wp-embed script to speed things up https://kinsta.com/knowledgebase/disable-embeds-wordpress/.
+	 */
+	public function my_deregister_scripts() {
+		wp_dequeue_script( 'wp-embed' );
+	}
+
 }
