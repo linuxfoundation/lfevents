@@ -27,7 +27,6 @@ PATHS:
   # Paths to JavaScript entry points for webpack to bundle modules
   entries:
     - "src/assets/js/app.js"
-    - "src/assets/js/instantpage-1.2.2.js"
     - "src/assets/js/china.js"
   # Paths for the package task to include/exclude in .zip archive
   package:

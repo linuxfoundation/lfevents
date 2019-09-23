@@ -38,7 +38,8 @@
     "wpackagist-plugin/wp-rss-aggregator":"^4.15",
     "wpackagist-plugin/stackable-ultimate-gutenberg-blocks":"^1.17.1",
     "wpackagist-plugin/gravity-forms-custom-post-types":"^3.1.15",
-    "wpackagist-plugin/imsanity":"^2.4.3"
+    "wpackagist-plugin/imsanity":"^2.4.3",
+    "wpackagist-plugin/flying-pages":"^2.0.8"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2.1",

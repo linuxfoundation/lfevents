@@ -209,9 +209,6 @@ function lfe_get_sponsors( $parent_id ) {
  */
 function lfe_scripts() {
 
-	// https://instant.page/.
-	wp_enqueue_script( 'instantpage', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'instantpage-1.2.2.js' ), array(), '1.2.2', true );
-
 	$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	if ( strpos( $chinese_domains, $current_domain ) ) {
@@ -222,21 +219,6 @@ function lfe_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
-
-/**
- * Adds the module tag to the instant.page script.
- *
- * @param string $tag the tag.
- * @param string $handle the handle.
- */
-function lfe_instantpage_script_loader_tag( $tag, $handle ) {
-	if ( 'instantpage' === $handle ) {
-		$tag = str_replace( 'text/javascript', 'module', $tag );
-	}
-	return $tag;
-}
-
-add_filter( 'script_loader_tag', 'lfe_instantpage_script_loader_tag', 10, 2 );
 
 /**
  * Removes the annoying Ultimate Blocks menu in the admin
