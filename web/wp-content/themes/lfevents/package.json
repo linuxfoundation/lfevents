@@ -58,7 +58,7 @@
     "gulp-zip": "^4.2.0",
     "js-yaml": "^3.13.1",
     "panini": "^1.6.3",
-    "rimraf": "^2.6.3",
+    "rimraf": "^2.7.1",
     "style-sherpa": "^1.0.1",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.12.0",
