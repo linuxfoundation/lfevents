@@ -33,6 +33,10 @@ function lfe_get_related_events( $parent_id ) {
 				'terms'    => $term[0],
 			),
 		),
+		'orderby'   => 'meta_value',
+		'meta_key'  => 'lfes_date_start',
+		'order'     => 'ASC',
+		'posts_per_page' => 2
 	);
 
 	$the_query = new WP_Query( $args );
