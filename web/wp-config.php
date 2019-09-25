@@ -193,19 +193,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
 
+/* Uncomment this when going live.
+if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
+	// Redirect to https://$primary_domain in the Live environment.
+	if ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+		$primary_domain = 'events.linuxfoundation.org';
+	} else {
+		// Redirect to HTTPS on every Pantheon environment.
+		$primary_domain = $_SERVER['HTTP_HOST']; //phpcs:ignore
+	}
+	$requires_redirect = false;
+
+	// Ensure the site is being served from the primary domain.
+	if ( $_SERVER['HTTP_HOST'] != $primary_domain ) {
+		$requires_redirect = true;
+	}
+
+	// If you're not using HSTS in the pantheon.yml file, uncomment this next block.
+	// if (!isset($_SERVER['HTTP_USER_AGENT_HTTPS'])
+	//     || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON') {
+	//   $requires_redirect = true;
+	// }
+
+	if ( true === $requires_redirect ) {
+		// Name transaction "redirect" in New Relic for improved reporting (optional).
+		if ( extension_loaded( 'newrelic' ) ) {
+			newrelic_name_transaction( 'redirect' );
+		}
+
+		header( 'HTTP/1.0 301 Moved Permanently' );
+		header( 'Location: https://' . $primary_domain . $_SERVER['REQUEST_URI'] );
+		exit();
+	}
+}
 
 
-// Special LFEvents Redirects.
-
+// Special LFEvents Redirects for the /events/ subdirectory.
 if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
 	if ( ( php_sapi_name() != "cli" ) ) {
-		// header( 'HTTP/1.0 301 Moved Permanently' );
-		// header( 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'] );
-echo 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'];
-		if (extension_loaded('newrelic')) {
-			newrelic_name_transaction("redirect");
+		header( 'HTTP/1.0 301 Moved Permanently' );
+		header( 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'] );
+
+		if ( extension_loaded( 'newrelic' ) ) {
+			newrelic_name_transaction( 'redirect' );
 		}
 
 		exit();
 	}
 }
+*/
