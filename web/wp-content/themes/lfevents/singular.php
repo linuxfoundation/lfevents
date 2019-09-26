@@ -88,9 +88,9 @@ if ( $logo ) {
 				if ( $post->post_parent ) {
 
 					if ( has_post_thumbnail() ) {
-						$post_thumbnail_url = wp_get_attachment_image(get_post_thumbnail_id($post->ID), '', false, array('class' => 'fp-large'));
+						$post_thumbnail_url = wp_get_attachment_image(get_post_thumbnail_id($post->ID), 'fp-large', false, array('class' => 'f'));
 					} else {
-						$post_thumbnail_url = wp_get_attachment_image(get_post_thumbnail_id($parent_id), '', false, array('class' => 'fp-large'));
+						$post_thumbnail_url = wp_get_attachment_image(get_post_thumbnail_id($parent_id), 'fp-large', false, array('class' => ''));
 					}
 					if ( 'white' == $menu_text_color ) {
 						$subpage_header_text_color = 'black';
