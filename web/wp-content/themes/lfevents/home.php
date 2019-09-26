@@ -97,6 +97,15 @@ get_template_part( 'template-parts/global-nav' );
 							$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 							$description = get_post_meta( $post->ID, 'lfes_description', true );
+
+							$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+							$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
+							$dt_now = new DateTime( 'now' );
+							if ( $dt_date_end_1d_after < $dt_now ) {
+								// event has passed so don't show it on the homepage.
+								continue;
+							}
+
 							?>
 
 							<div id="post-<?php the_ID(); ?>" class="cell medium-6">
