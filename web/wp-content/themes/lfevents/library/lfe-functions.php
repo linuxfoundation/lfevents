@@ -529,11 +529,3 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 	return $hints;
 	}
 add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
-
-
-// debug
-function r($var){
-	echo '<pre>';
-	print_r($var);
-	echo '</pre>';
-}
