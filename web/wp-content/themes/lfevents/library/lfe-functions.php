@@ -434,43 +434,40 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 }
 add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
 
-/* Will only run on front end of site */
-if ( ! ( is_admin() ) ) {
-	/**
-	 * Make all JS defer onload (in conjunction with moving jQuery to footer).
-	 *
-	 * @param string $url the URL.
-	 */
-	function defer_parsing_of_js( $url ) {
-		if ( false === strpos( $url, '.js' ) ) {
-				return $url;
-		}
+/**
+ * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
+ *
+ * @param string $hints returns hints.
+ * @param string $relation_type returns priority.
+ */
+function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 
-			// this needs to match jquery file name, typically jquery.js.
-		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
-				return $url;
-		}
-
-			return "$url' defer onload='";
+	if ( 'preconnect' === $relation_type ) {
+		$hints[] = array(
+			'crossorigin' => '',
+			'href'        => '//code.jquery.com',
+		);
+		$hints[] = array(
+			'crossorigin' => '',
+			'href'        => '//www.google-analytics.com',
+		);
 	}
-	add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
-}
-/* Will only run on front end of site */
-if ( ! ( is_admin() ) ) {
-	/**
-	 * Move all scripts to footer if outside admin area.
-	 */
-	function remove_head_scripts() {
-		remove_action( 'wp_head', 'wp_print_scripts' );
-		remove_action( 'wp_head', 'wp_print_head_scripts', 9 );
-		remove_action( 'wp_head', 'wp_enqueue_scripts', 1 );
+	if ( 'dns-prefetch' === $relation_type ) {
+		// create array of URLs to remove from prefetch.
+		$url_arr = array( 'code.jquery.com', 's.w.org' );
 
-		add_action( 'wp_footer', 'wp_print_scripts', 5 );
-		add_action( 'wp_footer', 'wp_enqueue_scripts', 5 );
-		add_action( 'wp_footer', 'wp_print_head_scripts', 5 );
+		foreach ( $url_arr as $url ) {
+			$key = array_search( $url, $hints );
+			if ( false !== $key ) {
+				unset( $hints[ $key ] );
+			}
+		}
+		// add in any addresses here that you want to prefetch.
+		$hints[] = '';
 	}
-	add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
+	return $hints;
 }
+add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
 
 /**
  * Fix Gravity Forms loading its scripts too early.
@@ -502,37 +499,21 @@ function wrap_gform_cdata_close( $content = '' ) {
 }
 add_filter( 'gform_cdata_close', 'wrap_gform_cdata_close' );
 
-/**
- * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
- *
- * @param string $hints returns hints.
- * @param string $relation_type returns priority.
- */
-function change_to_preconnect_resource_hints( $hints, $relation_type ) {
-
-	if ( 'preconnect' === $relation_type ) {
-		$hints[] = array(
-			'crossorigin' => '',
-			'href'        => '//code.jquery.com',
-		);
-		$hints[] = array(
-			'crossorigin' => '',
-			'href'        => '//www.google-analytics.com',
-		);
-	}
-	if ( 'dns-prefetch' === $relation_type ) {
-		// create array of URLs to remove from prefetch.
-		$url_arr = array( 'code.jquery.com', 's.w.org' );
-
-		foreach ( $url_arr as $url ) {
-			$key = array_search( $url, $hints );
-			if ( false !== $key ) {
-				unset( $hints[ $key ] );
-			}
+/* Will only run on front end of site */
+if ( ! is_admin() ) {
+	/**
+	 * Make all JS defer onload (in conjunction with moving jQuery to footer).
+	 *
+	 * @param string $url the URL.
+	 */
+	function defer_parsing_of_js( $url ) {
+		if ( false === strpos( $url, '.js' ) ) {
+			return $url;
 		}
-		// add in and uncomment any addresses here that you want to prefetch.
-		$hints[] = '';
+		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
+			return $url;
+		}
+		return "$url' defer";
 	}
-	return $hints;
+	add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
 }
-add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );

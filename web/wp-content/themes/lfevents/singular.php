@@ -86,12 +86,6 @@ if ( $logo ) {
 			the_post();
 
 			if ( $post->post_parent ) {
-
-				if ( has_post_thumbnail() ) {
-					$post_thumbnail_url = wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'fp-large', false, array( 'class' => 'f' ) );
-				} else {
-					$post_thumbnail_url = wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-large', false, array( 'class' => '' ) );
-				}
 				if ( 'white' == $menu_text_color ) {
 					$subpage_header_text_color       = 'black';
 					$subpage_header_background_color = 'white';
@@ -108,7 +102,13 @@ if ( $logo ) {
 			 style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 		</div>
 		<figure class="figure-container">
-				<?php echo esc_html( $post_thumbnail_url ); ?>
+				<?php
+				if ( has_post_thumbnail() ) {
+					echo wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'fp-large', false, array( 'class' => 'f' ) );
+				} else {
+					echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-large', false, array( 'class' => '' ) );
+				}
+				?>
 		</figure>
 
 		<h1 class="content-wrapper"
