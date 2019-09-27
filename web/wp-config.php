@@ -242,3 +242,9 @@ if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
 	}
 }
 */
+if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
+	if ( ( php_sapi_name() != "cli" ) ) {
+		echo 'This url will be redirected to: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'];
+		exit;
+	}
+}
