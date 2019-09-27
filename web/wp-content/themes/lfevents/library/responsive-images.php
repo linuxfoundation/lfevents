@@ -23,12 +23,12 @@ add_image_size( 'fp-medium', 1024 );
 add_image_size( 'fp-large', 1200 );
 add_image_size( 'fp-xlarge', 1920 );
 
-// profile pictures
-add_image_size('profile-120', 120, 120);
-add_image_size('profile-200', 200, 200);
+// profile pictures.
+add_image_size( 'profile-120', 120, 120 );
+add_image_size( 'profile-200', 200, 200 );
 
-// venue location image
-add_image_size('venue', 600, 600, false);
+// venue location image.
+add_image_size( 'venue', 600, 600, false );
 
 /**
  * Register the new image sizes for use in the add media modal in wp-admin.

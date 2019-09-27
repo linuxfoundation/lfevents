@@ -19,7 +19,7 @@ function lfe_content_filter( $content ) {
 		return $content;
 	}
 
-	$menu = '<nav data-sticky-container>';
+	$menu  = '<nav data-sticky-container>';
 	$menu .= '<div class="sticky" data-sticky data-margin-top="6" data-anchor="multi-part-page" data-sticky-on="large">';
 	$menu .= '<h6 class="hide-for-large text-center large-text-left text-small">Skip to page section</h6>';
 	$menu .= '<ul id="multi-part-page--magellan" data-magellan data-offset="60" data-deep-linking="true" data-update-history="false">';
@@ -36,7 +36,7 @@ function lfe_content_filter( $content ) {
 	$menu .= '</div>';
 	$menu .= '</nav>';
 
-	$menu_and_content = '<div id="multi-part-page">';
+	$menu_and_content  = '<div id="multi-part-page">';
 	$menu_and_content .= '<div class="multi-part-page--menu">' . $menu . '</div>';
 	$menu_and_content .= '<div class="multi-part-page--content">' . $content . '</div>';
 	$menu_and_content .= '</div>';
@@ -47,7 +47,7 @@ function lfe_content_filter( $content ) {
 add_filter( 'the_content', 'lfe_content_filter' );
 
 // shares the markup with the regular singular.php page template although it pulls in its own template part.
-include( get_template_directory() . '/singular.php' );
+require get_template_directory() . '/singular.php';
 
 ?>
 

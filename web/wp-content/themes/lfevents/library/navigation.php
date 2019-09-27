@@ -9,7 +9,7 @@
 
 register_nav_menus(
 	array(
-		'about-pages-nav'  => esc_html__( 'About Pages Nav', 'foundationpress' ),
+		'about-pages-nav' => esc_html__( 'About Pages Nav', 'foundationpress' ),
 	)
 );
 

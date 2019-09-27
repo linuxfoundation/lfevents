@@ -20,13 +20,13 @@ function lfe_get_related_events( $parent_id ) {
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
 
 	$args = array(
-		'post_type'   => 'page',
-		'post_parent' => 0,
-		'no_found_rows' => true,  // used to improve performance.
+		'post_type'              => 'page',
+		'post_parent'            => 0,
+		'no_found_rows'          => true,  // used to improve performance.
 		'update_post_meta_cache' => false, // used to improve performance.
 		'update_post_term_cache' => false, // used to improve performance.
-		'post__not_in' => array( $parent_id ), // ignores current post.
-		'tax_query'   => array(
+		'post__not_in'           => array( $parent_id ), // ignores current post.
+		'tax_query'              => array(
 			array(
 				'taxonomy' => 'lfevent-category',
 				'field'    => 'term_id',
@@ -136,14 +136,14 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 	global $wpdb, $post;
 
 	// first find which pages we need to exclude.
-	$exclude = $wpdb->get_results( $wpdb->prepare( "select post_id from $wpdb->postmeta left join $wpdb->posts on post_id = id where meta_key = 'lfes_hide_from_menu' and meta_value = 1 and post_type = %s;", $post->post_type ), ARRAY_A );
+	$exclude     = $wpdb->get_results( $wpdb->prepare( "select post_id from $wpdb->postmeta left join $wpdb->posts on post_id = id where meta_key = 'lfes_hide_from_menu' and meta_value = 1 and post_type = %s;", $post->post_type ), ARRAY_A );
 	$exclude_ids = '';
 	foreach ( $exclude as $ex ) {
 		$exclude_ids .= $ex['post_id'] . ',';
 	}
 
 	// then get the pages we need.
-	$args = array(
+	$args  = array(
 		'child_of'     => $parent_id,
 		'sort_order'   => 'ASC',
 		'sort_column'  => 'menu_order',
@@ -161,7 +161,7 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 	// now we remove the hyperlink for elements who have children.
 	foreach ( $pages as $page ) {
 		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
-			$page = explode( '<ul class=\'children\'>', $page );
+			$page    = explode( '<ul class=\'children\'>', $page );
 			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
 			if ( count( $page ) == 3 ) {
 				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
@@ -190,10 +190,10 @@ function lfe_get_sponsors( $parent_id ) {
 	$post_types = lfe_get_post_types();
 
 	$args = array(
-		'post_type' => $post_types,
-		'post_parent' => $parent_id,
-		'name' => 'sponsor-list',
-		'no_found_rows' => true,  // used to improve performance.
+		'post_type'              => $post_types,
+		'post_parent'            => $parent_id,
+		'name'                   => 'sponsor-list',
+		'no_found_rows'          => true,  // used to improve performance.
 		'update_post_meta_cache' => false, // used to improve performance.
 		'update_post_term_cache' => false, // used to improve performance.
 	);
@@ -206,11 +206,11 @@ function lfe_get_sponsors( $parent_id ) {
 			?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
   <div class="entry-content">
-    <?php the_content(); ?>
-    <?php edit_post_link( __( '(Edit Sponsors)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
+			<?php the_content(); ?>
+			<?php edit_post_link( __( '(Edit Sponsors)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
   </div>
 </article>
-<?php
+			<?php
 		}
 	}
 	wp_reset_postdata(); // Restore original Post Data.
@@ -226,7 +226,7 @@ function lfe_scripts() {
 	wp_enqueue_script( 'instantpage', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'instantpage-1.2.2.js' ), array(), '1.2.2', true );
 
 	$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn'";
-	$current_domain = parse_url( home_url(), PHP_URL_HOST );
+	$current_domain  = parse_url( home_url(), PHP_URL_HOST );
 	if ( strpos( $chinese_domains, $current_domain ) ) {
 		// scripts for Chinese-audience sites.
 		wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'china.js' ), array(), '1.2.2', true );
@@ -252,7 +252,7 @@ function lfe_instantpage_script_loader_tag( $tag, $handle ) {
 add_filter( 'script_loader_tag', 'lfe_instantpage_script_loader_tag', 10, 2 );
 
 /**
- * Removes the annoying Ultimate Blocks menu in the admin
+ * Removes the annoying Ultimate Blocks menu in the admin.
  */
 function lfe_custom_menu_page_removing() {
 	remove_menu_page( 'ultimate-blocks-settings' );
@@ -264,9 +264,9 @@ add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
  * Inserts Google Analytics code on live sites.
  */
 function lfe_insert_google_analytics() {
-	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn'";
-	$current_domain = parse_url( home_url(), PHP_URL_HOST );
-	$analytics_code = <<<EOD
+	$domains         = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn'";
+	$current_domain  = parse_url( home_url(), PHP_URL_HOST );
+	$analytics_code  = <<<EOD
 <!-- Google Analytics -->
 		<script>
 		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -297,11 +297,11 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 	// If only one date, or dates are the same set to FULL verbose date.
 	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
 		$start_date_pretty = $start_date->format( 'M jS, Y' );
-		$end_date_pretty = $end_date->format( 'M jS, Y' );
+		$end_date_pretty   = $end_date->format( 'M jS, Y' );
 	} else {
 		 // Setup basic dates.
 		$start_date_pretty = $start_date->format( 'M j' );
-		$end_date_pretty = $end_date->format( 'jS, Y' );
+		$end_date_pretty   = $end_date->format( 'jS, Y' );
 		// If years differ add suffix and year to start_date.
 		if ( $start_date->format( 'Y' ) != $end_date->format( 'Y' ) ) {
 			$start_date_pretty .= $start_date->format( 'S, Y' );
@@ -350,8 +350,8 @@ function lfe_insert_structured_data() {
 	}
 
 	$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
-	$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+	$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+	$country       = wp_get_post_terms( $post->ID, 'lfevent-country' );
 	if ( $country ) {
 		$country = $country[0]->name;
 	}
@@ -421,7 +421,7 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 function lfe_fix_community_post( $post_id, $feed_id ) {
 	if ( 243 == $feed_id || 1333 == $feed_id ) {
 		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
-		$dt_date_end = get_post_meta( $post_id, 'lfes_community_date_end', true );
+		$dt_date_end   = get_post_meta( $post_id, 'lfes_community_date_end', true );
 		if ( $dt_date_start ) {
 			$dt_date_start = new DateTime( $dt_date_start );
 			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_start->format( 'Y/m/d' ) );
@@ -434,98 +434,109 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 }
 add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
 
+/* Will only run on front end of site */
+if ( ! ( is_admin() ) ) {
+	/**
+	 * Make all JS defer onload (in conjunction with moving jQuery to footer).
+	 *
+	 * @param string $url the URL.
+	 */
+	function defer_parsing_of_js( $url ) {
+		if ( false === strpos( $url, '.js' ) ) {
+				return $url;
+		}
 
-/**
- * Make all JS defer onload (in conjunction with moving jQuery to footer)
- */
-if (!(is_admin())) {
-	function defer_parsing_of_js($url)
-	{
-			if (false === strpos($url, '.js')) {
-					return $url;
-			}
-
-			// this needs to match jquery file name, typically jquery.js
-			if (strpos($url, 'jquery-3.4.1.min.js')) {
-					return $url;
-			}
+			// this needs to match jquery file name, typically jquery.js.
+		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
+				return $url;
+		}
 
 			return "$url' defer onload='";
 	}
-	add_filter('clean_url', 'defer_parsing_of_js', 11, 1);
+	add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
 }
+/* Will only run on front end of site */
+if ( ! ( is_admin() ) ) {
+	/**
+	 * Move all scripts to footer if outside admin area.
+	 */
+	function remove_head_scripts() {
+		remove_action( 'wp_head', 'wp_print_scripts' );
+		remove_action( 'wp_head', 'wp_print_head_scripts', 9 );
+		remove_action( 'wp_head', 'wp_enqueue_scripts', 1 );
 
-/**
- * Move all scripts to footer if outside admin area
- */
-if (!(is_admin())) {
-function remove_head_scripts() {
-	remove_action('wp_head', 'wp_print_scripts');
-	remove_action('wp_head', 'wp_print_head_scripts', 9);
-	remove_action('wp_head', 'wp_enqueue_scripts', 1);
-
-	add_action('wp_footer', 'wp_print_scripts', 5);
-	add_action('wp_footer', 'wp_enqueue_scripts', 5);
-	add_action('wp_footer', 'wp_print_head_scripts', 5);
+		add_action( 'wp_footer', 'wp_print_scripts', 5 );
+		add_action( 'wp_footer', 'wp_enqueue_scripts', 5 );
+		add_action( 'wp_footer', 'wp_print_head_scripts', 5 );
 	}
 	add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
 }
 
 /**
- * Fix Gravity Forms loading its scripts too early
+ * Fix Gravity Forms loading its scripts too early.
  */
-
-function gf_init_scripts()
-{
-    return true;
+function gf_init_scripts() {
+	return true;
 }
-add_filter('gform_init_scripts_footer', 'gf_init_scripts');
+add_filter( 'gform_init_scripts_footer', 'gf_init_scripts' );
 
 /**
  *  Gravity Forms inline JS to footer
- * */
-function wrap_gform_cdata_open($content = '') {
+ *
+ * @param string $content returns the cdata.
+ */
+function wrap_gform_cdata_open( $content = '' ) {
 	$content = 'document.addEventListener( "DOMContentLoaded", function() { ';
 			return $content;
-	}
-add_filter('gform_cdata_open', 'wrap_gform_cdata_open');
+}
+add_filter( 'gform_cdata_open', 'wrap_gform_cdata_open' );
 
-function wrap_gform_cdata_close($content = '') {
+/**
+ *  Gravity Forms inline JS to footer
+ *
+ * @param string $content returns the end of cdata.
+ */
+function wrap_gform_cdata_close( $content = '' ) {
 	$content = ' }, false );';
 	return $content;
 }
-add_filter('gform_cdata_close', 'wrap_gform_cdata_close');
-
+add_filter( 'gform_cdata_close', 'wrap_gform_cdata_close' );
 
 /**
- * Fix up preconnect and preload to better optimize loading
- * Preconnect is priority, must have crossorigin; Prefetch just opens connection
+ * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
+ *
+ * @param string $hints returns hints.
+ * @param string $relation_type returns priority.
  */
 function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 
 	if ( 'preconnect' === $relation_type ) {
 		$hints[] = array(
-            'crossorigin' => '',
-            'href'        => '//code.jquery.com',
-        );
+			'crossorigin' => '',
+			'href'        => '//code.jquery.com',
+		);
 		$hints[] = array(
-						'crossorigin' => '',
-						'href'        => '//www.google-analytics.com',
-);
+			'crossorigin' => '',
+			'href'        => '//www.google-analytics.com',
+		);
 	}
 	if ( 'dns-prefetch' === $relation_type ) {
-		// create array of URLs to remove from prefetch
+		// create array of URLs to remove from prefetch.
 		$url_arr = array( 'code.jquery.com', 's.w.org' );
 
 		foreach ( $url_arr as $url ) {
-			if ( ( $key = array_search( $url, $hints ) ) !== false ) {
+			$key = array_search( $url, $hints );
+			if ( false !== $key ) {
 				unset( $hints[ $key ] );
 			}
 		}
-		// add in and uncomment any addresses here that you want to prefetch
-		// $hints[] = '//cdn.polyfill.io';
-		// $hints[] = '//www.googletagmanager.com';
+		// add in and uncomment any addresses here that you want to prefetch.
+
+		/*
+		$hints[] = '//cdn.polyfill.io';
+		$hints[] = '//www.googletagmanager.com';
+		*/
 	}
 	return $hints;
-	}
+}
 add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
