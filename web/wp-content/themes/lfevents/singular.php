@@ -108,7 +108,7 @@ if ( $logo ) {
 			 style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 		</div>
 		<figure class="figure-container">
-				<?php echo $post_thumbnail_url; ?>
+				<?php echo esc_html($post_thumbnail_url); ?>
 		</figure>
 
 		<h1 class="content-wrapper"
