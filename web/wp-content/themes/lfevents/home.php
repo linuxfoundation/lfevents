@@ -217,8 +217,16 @@ get_template_part( 'template-parts/global-nav' );
 						$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
 						$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
-						echo '<h5 class="text-medium no-margin"><a href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
-						echo '<p class="text-tiny medium-margin-bottom">' . esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
+						echo '<h5 class="text-medium no-margin">';
+						echo '<a target="_blank" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
+						echo esc_html( get_the_title() );
+						echo '&nbsp;';
+						echo get_template_part( 'template-parts/svg/external-link' );
+						echo '</a>';
+						echo '</h5>';
+
+						echo '<p class="text-tiny medium-margin-bottom">';
+						echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
 						$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 						if ( $country ) {
 							$country = $country[0]->name;
@@ -226,8 +234,9 @@ get_template_part( 'template-parts/global-nav' );
 							if ( $city ) {
 								$city .= ', ';
 							}
-							echo ' | ' . esc_html( $city ) . esc_html( $country ) . '</p>';
+							echo ' | ' . esc_html( $city ) . esc_html( $country );
 						}
+						echo '</p>';
 					}
 				}
 				wp_reset_postdata();
