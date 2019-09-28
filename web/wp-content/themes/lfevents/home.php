@@ -221,7 +221,7 @@ get_template_part( 'template-parts/global-nav' );
 						echo '<a target="_blank" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
 						echo esc_html( get_the_title() );
 						echo '&nbsp;';
-						echo get_template_part( 'template-parts/svg/external-link' );
+						echo esc_html( get_template_part( 'template-parts/svg/external-link' ) );
 						echo '</a>';
 						echo '</h5>';
 
