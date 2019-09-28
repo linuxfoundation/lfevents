@@ -45,7 +45,6 @@ endif;
 ?>
 
 <?php
-
 	/*
 	Do not delete these lines.
 	Prevent access to this file directly

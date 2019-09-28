@@ -10,7 +10,6 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
-
 	/*
 	<header>
 		<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -22,7 +21,6 @@
 		<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
 	</div>
 	<?php
-
 	/*
 	<footer>
 		<?php
