@@ -104,6 +104,10 @@ if ( $logo ) {
 						</h1>
 					</header>
 					<?php
+				} else {
+					?>
+					<h1 class="show-for-sr"><?php the_title(); ?></h1>
+					<?php
 				}
 
 				if ( is_page_template( 'page-templates/multi-part-page.php' ) ) {
