@@ -20,3 +20,4 @@
 		<?php lfe_insert_structured_data(); ?>
 	</head>
 	<body <?php body_class(); ?>>
+		<div class="site-container">

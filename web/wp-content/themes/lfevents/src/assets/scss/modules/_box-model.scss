@@ -2,6 +2,15 @@
 // Module: Box Model
 // --------------------------------------------------
 
+.site-container {
+  position: relative;
+  overflow: hidden;
+  max-width: rem-calc(1800);
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 0 rem-calc(400) rem-calc(200) rgba(0,0,0,0.2);
+}
+
 .relative { position: relative; }
 .static { position: static; }
 

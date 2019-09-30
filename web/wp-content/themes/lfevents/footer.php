@@ -15,5 +15,6 @@
 </footer>
 
 <?php wp_footer(); ?>
+</div> <!-- end .site-container -->
 </body>
 </html>
