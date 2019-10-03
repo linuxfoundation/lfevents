@@ -202,4 +202,4 @@ To upgrade the version of a dependency, follow these steps:
 
 ## Sponsors
 
-<a href="http://browserstack.com"><img src="browserstack.svg"></a>
+<a href="http://browserstack.com"><img style="max-width: 30%" src="browserstack.svg"></a>
