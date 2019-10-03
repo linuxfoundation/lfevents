@@ -40,4 +40,19 @@ $custom-colors: (
 	.has-#{$color}-color {
 		color: $code;
 	}
+
+	.wp-block-button__link {
+
+		&.has-#{$color}-background-color {
+			background-color: $code;
+
+			&:hover {
+				background-color: scale-color($code, $lightness: -15%);
+			}
+		}
+
+		&.has-#{$color}-color {
+				color: $code;
+		}
+	}
 }

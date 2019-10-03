@@ -1,163 +1,160 @@
 .main-container {
-	background-color: $white;
-	position: relative;
-	z-index: 1;
+  background-color: $white;
+  position: relative;
+  z-index: 1;
+
+  a[href] {
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 100%;
+  }
 }
 
 .main-grid {
-	@include xy-grid();
-	// padding-top: 1rem;
+  @include xy-grid();
+  // padding-top: 1rem;
 
-	@include breakpoint(medium) {
-		// padding-top: 3rem;
-	}
+  @include breakpoint(medium) {
+    // padding-top: 3rem;
+  }
 
-	&.sidebar-left {
-		// Place the sidebar below main content on small screens ...
-		@include breakpoint(small) {
-			.main-content {
-				order: 1;
-			}
-			.sidebar {
-				order: 2;
-			}
-		}
+  &.sidebar-left {
+    // Place the sidebar below main content on small screens ...
+    @include breakpoint(small) {
+      .main-content { order: 1; }
+      .sidebar { order: 2; }
+    }
 
-		// ... and to the left on medium-up screens, when using the sidebar-left template
-		@include breakpoint(medium) {
-			.main-content {
-				order: 2;
-			}
-			.sidebar {
-				order: 1;
-			}
-		}
-	}
+    // ... and to the left on medium-up screens, when using the sidebar-left template
+    @include breakpoint(medium) {
+      .main-content { order: 2; }
+      .sidebar { order: 1; }
+    }
+  }
 
-	// Full width template
-	.main-content-full-width {
-		@include xy-cell(12);
-	}
+  // Full width template
+  .main-content-full-width {
+    @include xy-cell(12);
+  }
 
-	// Default template
-	.main-content {
-		@include breakpoint(small) {
-			@include xy-cell(12);
-		}
+  // Default template
+  .main-content {
+    @include breakpoint(small) {
+      @include xy-cell(12);
+    }
 
-		@include breakpoint(medium) {
-			// @include xy-cell(8);
-		}
-	}
+    @include breakpoint(medium) {
+      // @include xy-cell(8);
+    }
+  }
 
-	.sidebar {
-		@include breakpoint(small) {
-			@include xy-cell(12);
-		}
+  .sidebar {
+    @include breakpoint(small) {
+      @include xy-cell(12);
+    }
 
-		@include breakpoint(medium) {
-			// @include xy-cell(4);
-			padding-top: 1rem;
-		}
-	}
+    @include breakpoint(medium) {
+      // @include xy-cell(4);
+      padding-top: 1rem;
+    }
+
+  }
 }
+
 
 // Full image + a callout of text
 .lfe-image-and-text {
-	background-size: cover;
+  background-size: cover;
 
-	img {
-		position: relative;
-		z-index: -2;
-	}
+  img {
+    position: relative;
+    z-index: -2;
+  }
 
-	.text {
-		background-color: $white;
-		padding: 1rem;
-		border-radius: 0.5rem;
-		position: relative;
-	}
+  .text {
+    background-color: $white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    position: relative;
+  }
 
-	blockquote {
-		margin-left: 2rem;
-		padding: 0;
-		border-left: 0;
+  blockquote {
+    margin-left: 2rem;
+    padding: 0;
+    border-left: 0;
 
-		&::before {
-			content: "\201F";
-			float: left;
-			font-size: 6rem;
-			line-height: 1;
-			width: 3rem;
-			margin-top: -1rem;
-			margin-left: -3rem;
-			opacity: 0.4;
-			text-align: center;
-		}
+    &::before {
+      content: "\201F";
+      float: left;
+      font-size: 6rem;
+      line-height: 1;
+      width: 3rem;
+      margin-top: -1rem;
+      margin-left: -3rem;
+      opacity: 0.4;
+      text-align: center;
+    }
 
-		cite {
-			margin-top: 0.5rem;
-		}
-	}
+    cite {
+      margin-top: 0.5rem;
+    }
+  }
 
-	@include breakpoint(medium down) {
-		background-image: none !important;
+  @include breakpoint(medium down) {
+    background-image: none !important;
 
-		.text {
-			margin: -1rem 1rem 1rem 1rem;
+    .text {
+      margin: -1rem 1rem 1rem 1rem;
 
-			&:before {
-				position: absolute;
-				z-index: -1;
-				top: -0.5rem;
-				left: -0.5rem;
-				right: -0.5rem;
-				height: 4rem;
-				border-radius: 0.5rem;
-				background: linear-gradient(rgba(0, 0, 0, 0.1), transparent);
-				content: '';
-			}
-		}
-	}
+      &:before {
+        position: absolute;
+        z-index: -1;
+        top: -0.5rem;
+        left: -0.5rem;
+        right: -0.5rem;
+        height: 4rem;
+        border-radius: 0.5rem;
+        background: linear-gradient(rgba(0,0,0,0.1), transparent);
+        content: '';
+      }
+    }
+  }
 
-	@include breakpoint(large) {
-		padding: 10vw;
+  @include breakpoint(large) {
+    padding: 10vw;
 
-		img {
-			// opacity: 0;
-			display: none;
-		}
+    img {
+      // opacity: 0;
+      display: none;
+    }
 
-		.text {
-			padding: 2rem;
-		}
-		&.pull-right .text {
-			margin-left: 50vw;
-		}
-		&.pull-left .text {
-			margin-right: 50vw;
-		}
-	}
+    .text {
+      padding: 2rem;
+    }
+    &.pull-right .text {  margin-left: 50vw; }
+    &.pull-left .text {  margin-right: 50vw; }
+  }
 }
 
+
 .about-page-header {
-	border-bottom: $hr-border;
-	padding-top: $global-margin * 2;
-	padding-bottom: $global-margin;
-	margin-bottom: $global-margin * 2;
+  border-bottom: $hr-border;
+  padding-top: $global-margin * 2;
+  padding-bottom: $global-margin;
+  margin-bottom: $global-margin * 2;
 
-	& > * {
-		margin-bottom: 0;
-	}
+  & > * {
+    margin-bottom: 0;
+  }
 
-	& + * {
-		margin-top: 0 !important;
-		padding-top: 0 !important;
-	}
+  & + * {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
 }
 
 .excerpt-ellipses {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 .event-subpage-header {
@@ -195,30 +192,33 @@
 }
 
 .section-header {
-	text-transform: uppercase !important;
-	letter-spacing: 0.2em !important;
-	word-spacing: 0.2em !important;
-	margin-bottom: 1.5em !important;
-	padding: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2em !important;
+  word-spacing: 0.2em !important;
+  margin-bottom: 1.5em !important;
+  padding: 1rem !important;
 }
+
 
 .event-meta {
-	color: $charcoal;
-	font-weight: 600;
+  color: $charcoal;
+  font-weight: 600;
 
-	.icon--inline {
-		color: $lf-red;
-	}
+  .icon--inline {
+    color: $lf-red;
+  }
 }
+
 
 // Responsive embeds
 .wp-block-embed.is-type-video .wp-block-embed__wrapper {
-	@include responsive-embed(3 by 4);
+  @include responsive-embed(3 by 4);
 }
 
 .wp-block-embed.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
-	@include responsive-embed(16 by 9);
+  @include responsive-embed(16 by 9);
 }
+
 
 // Sidebar widgets
 .sidebar-widgets {

@@ -18,14 +18,14 @@ get_template_part( 'template-parts/global-nav' );
 				the_post();
 				?>
 				<div class="cell">
-					<header class="alignwide about-page-header">
+					<header class="about-page-header">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 					</header>
 				</div>
 				<div class="cell large-8 xlarge-margin-bottom">
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 						<div class="entry-content">
-							<div class="alignwide">
+							<div class="">
 								<?php the_content(); ?>
 							</div>
 						</div>

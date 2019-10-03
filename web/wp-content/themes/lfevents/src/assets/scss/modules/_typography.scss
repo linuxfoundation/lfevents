@@ -139,6 +139,16 @@ dd + dt {
   width: 1em;
   height: 1em;
   vertical-align: -0.125em;
+
+  &.small {
+    font-size: 0.875em;
+    position: relative;
+    bottom: 0.05em;
+  }
+
+  &.semitransparent {
+    opacity: 0.6;
+  }
 }
 
 

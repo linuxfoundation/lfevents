@@ -208,16 +208,18 @@ abbr, abbr[title] {
 
 
 /** === Content Width === */
-// .wp-block {
-// 	width: calc(100% - (2 * 10));
-// 	@each $breakpoint, $size in $grid-margin-gutters {
-//
-// 		@include breakpoint($breakpoint) {
-// 			width: calc(100% - #{$size});
-// 		}
-//
-// 	}
-// }
+.wp-block {
+	max-width: map-deep-get($breakpoints, xlarge);
+
+	// width: calc(100% - (2 * 10));
+	// @each $breakpoint, $size in $grid-margin-gutters {
+	//
+	// 	@include breakpoint($breakpoint) {
+	// 		width: calc(100% - #{$size});
+	// 	}
+	//
+	// }
+}
 
 /** === Base Typography === */
 body {

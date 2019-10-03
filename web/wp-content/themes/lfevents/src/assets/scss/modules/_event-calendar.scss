@@ -47,55 +47,35 @@
   padding-top: 0;
 }
 
-// .event-calendar-container {
-//
-//   @include breakpoint(large) {
-//     @include xy-grid($direction:horizontal, $wrap:true);
-//     @include xy-gutters($negative:true);
-//
-//     > * {
-//       @include xy-cell(12);
-//     }
-//
-//     form.searchandfilter {
-//       @include xy-cell(4);
-//       order: 2;
-//     }
-//
-//     .search-filter-results {
-//       @include xy-cell(8);
-//       order: 1;
-//     }
-//   }
-// }
-
-
 form.searchandfilter {
-  margin-bottom: $global-margin*2;
+  margin-bottom: $global-margin;
 
   > ul {
-    margin: 0 -$global-margin;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 
     > li {
+      margin: 0 0 $global-margin;
       padding: 0;
-      margin: 0;
-      padding: $global-margin;
-      width: rem-calc(400);
+      width: 100%;
       max-width: 100%;
 
-      &:first-child {
-        margin-left: 0;
+      @include breakpoint(medium) {
+        width: rem-calc(350);
+        &:not(:last-child){
+          padding-right: $global-margin;
+        }
       }
-      &:last-child {
-        margin-right: 0;
+
+      @include breakpoint(large) {
+        width: 38%;
       }
 
       &.sf-field-reset {
         @include breakpoint(medium) {
-          max-width: 20%;
+          max-width: 24%;
         }
       }
     }
@@ -104,9 +84,41 @@ form.searchandfilter {
       box-shadow: none;
     }
 
+    select {
+      margin: 0;
+    }
+
     .chosen-container {
       width: 100% !important;
-      font-size: inherit;
+      font-size: $input-font-size;
+      line-height: $input-line-height;
+
+      a {
+        line-height: $input-line-height;
+        border: $input-border;
+        padding: $input-padding;
+        box-shadow: none;
+        height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1) !important;
+        color: $input-color !important;
+      }
+
+      .chosen-single div {
+        width: auto;
+
+        b {
+          // @include background-triangle($select-triangle-color);
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28130, 136, 146%29'></polygon></svg>") !important;
+          background-origin: content-box !important;
+          background-position: right (-$form-spacing) center !important;
+          background-repeat: no-repeat !important;
+          background-size: 9px 6px !important;
+          padding-right: ($form-spacing * 1.5) !important;
+        }
+      }
+
+      &.chosen-with-drop .chosen-single div b {
+        // background-position: -18px 10px;
+      }
 
       .chosen-single {
         border-radius: 0;
