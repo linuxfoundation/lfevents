@@ -197,3 +197,9 @@ To upgrade the version of a dependency, follow these steps:
 5. Test the dev instance to make sure all looks good
 
 6. Deploy live
+
+-----
+
+## Sponsors
+
+<a href="http://browserstack.com"><img src="browserstack.svg"></a>
