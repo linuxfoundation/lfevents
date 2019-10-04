@@ -160,10 +160,11 @@
 .event-subpage-header {
 	@include clearfix();
 	margin: 0 -0.625rem $global-margin;
-	display: flex;
-	height: 200px;
+  height: 200px;
+  padding-top: 14vw;
+  padding-bottom: 7vw;
 	@media (min-width: 1024px) {
-		height: 50vh;
+    height: 50vh;
 	}
 
 	.overlay {
@@ -180,7 +181,6 @@
 	}
 
 	h1 {
-		align-self: center;
 		// margin: 0 0 0 $global-margin*-1;
     padding: rem-calc(15) $global-margin*1.5 rem-calc(18) $global-margin;
 		font-weight: $global-weight-bold;
