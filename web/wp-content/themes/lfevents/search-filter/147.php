@@ -24,12 +24,12 @@ global $post;
 echo '<div class="grid-x grid-margin-x">';
 
 if ( $query->have_posts() ) {
-	$y = 0;
+	$y     = 0;
 	$month = 0;
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
-		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
+		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
 		$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 		$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
@@ -77,7 +77,7 @@ if ( $query->have_posts() ) {
 					$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 					if ( $country ) {
 						$country = $country[0]->name;
-						$city = get_post_meta( $post->ID, 'lfes_community_city', true );
+						$city    = get_post_meta( $post->ID, 'lfes_community_city', true );
 						if ( $city ) {
 							$city .= ', ';
 						}

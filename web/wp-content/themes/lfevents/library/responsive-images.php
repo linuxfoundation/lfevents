@@ -11,7 +11,8 @@
 //
 // Sizes are optimized and cropped for landscape aspect ratio
 // and optimized for HiDPI displays on 'small' and 'medium' screen sizes.
-add_image_size( 'featured-small', 640, 200, true ); // name, width, height, crop.
+// name, width, height, crop.
+add_image_size( 'featured-small', 640, 200, true );
 add_image_size( 'featured-medium', 1280, 400, true );
 add_image_size( 'featured-large', 1440, 400, true );
 add_image_size( 'featured-xlarge', 1920, 400, true );
@@ -21,6 +22,13 @@ add_image_size( 'fp-small', 640 );
 add_image_size( 'fp-medium', 1024 );
 add_image_size( 'fp-large', 1200 );
 add_image_size( 'fp-xlarge', 1920 );
+
+// profile pictures.
+add_image_size( 'profile-120', 120, 120 );
+add_image_size( 'profile-200', 200, 200 );
+
+// venue location image.
+add_image_size( 'venue', 600, 600, false );
 
 /**
  * Register the new image sizes for use in the add media modal in wp-admin.

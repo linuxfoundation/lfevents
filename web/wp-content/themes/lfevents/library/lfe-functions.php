@@ -225,7 +225,7 @@ function lfe_scripts() {
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
 
 /**
- * Removes the annoying Ultimate Blocks menu in the admin
+ * Removes the annoying Ultimate Blocks menu in the admin.
  */
 function lfe_custom_menu_page_removing() {
 	remove_menu_page( 'ultimate-blocks-settings' );
@@ -406,3 +406,87 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 	}
 }
 add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
+
+/**
+ * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
+ *
+ * @param string $hints returns hints.
+ * @param string $relation_type returns priority.
+ */
+function change_to_preconnect_resource_hints( $hints, $relation_type ) {
+
+	if ( 'preconnect' === $relation_type ) {
+		$hints[] = array(
+			'crossorigin' => '',
+			'href'        => '//code.jquery.com',
+		);
+		$hints[] = array(
+			'crossorigin' => '',
+			'href'        => '//www.google-analytics.com',
+		);
+	}
+	if ( 'dns-prefetch' === $relation_type ) {
+		// create array of URLs to remove from prefetch.
+		$url_arr = array( 'code.jquery.com', 's.w.org' );
+
+		foreach ( $url_arr as $url ) {
+			$key = array_search( $url, $hints );
+			if ( false !== $key ) {
+				unset( $hints[ $key ] );
+			}
+		}
+		// add in any addresses here that you want to prefetch.
+		$hints[] = '';
+	}
+	return $hints;
+}
+add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
+
+/**
+ * Fix Gravity Forms loading its scripts too early.
+ */
+function gf_init_scripts() {
+	return true;
+}
+add_filter( 'gform_init_scripts_footer', 'gf_init_scripts' );
+
+/**
+ *  Gravity Forms inline JS to footer
+ *
+ * @param string $content returns the cdata.
+ */
+function wrap_gform_cdata_open( $content = '' ) {
+	$content = 'document.addEventListener( "DOMContentLoaded", function() { ';
+			return $content;
+}
+add_filter( 'gform_cdata_open', 'wrap_gform_cdata_open' );
+
+/**
+ *  Gravity Forms inline JS to footer
+ *
+ * @param string $content returns the end of cdata.
+ */
+function wrap_gform_cdata_close( $content = '' ) {
+	$content = ' }, false );';
+	return $content;
+}
+add_filter( 'gform_cdata_close', 'wrap_gform_cdata_close' );
+
+/* Will only run on front end of site */
+if ( ! is_admin() ) {
+	/**
+	 * Make all JS defer onload (in conjunction with moving jQuery to footer).
+	 *
+	 * @param string $url the URL.
+	 */
+	function defer_parsing_of_js( $url ) {
+		if ( false === strpos( $url, '.js' ) ) {
+			return $url;
+		}
+		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
+			return $url;
+		}
+		return "$url' defer";
+	}
+	add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
+}

@@ -74,52 +74,60 @@ if ( $logo ) {
 </div>
 
 <div class="main-container">
-	<div class="main-grid">
-		<main class="main-content-full-width">
-			<?php
-			while ( have_posts() ) :
-				the_post();
-
-				if ( $post->post_parent ) {
-					if ( has_post_thumbnail() ) {
-						$post_thumbnail_url = get_the_post_thumbnail_url();
-					} else {
-						$post_thumbnail_url = get_the_post_thumbnail_url( $parent_id );
-					}
-					if ( 'white' == $menu_text_color ) {
-						$subpage_header_text_color = 'black';
-						$subpage_header_background_color = 'white';
-					} else {
-						$subpage_header_text_color = 'white';
-						$subpage_header_background_color = 'black';
-					}
-					$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
-					?>
-					<header class="event-subpage-header" style="background-image:url(<?php echo esc_html( $post_thumbnail_url ); ?>); <?php echo esc_html( $text_style ); ?>">
-						<div class="overlay" style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>"></div>
-						<h1 style="background-color: <?php echo esc_html( $subpage_header_background_color ); ?>;">
-							<span style="<?php echo esc_html( $subpage_header_style ); ?>">
-								<?php the_title(); ?>
-							</span>
-						</h1>
-					</header>
-					<?php
+  <div class="main-grid">
+	<main class="main-content-full-width">
+		<?php
+		while ( have_posts() ) :
+			the_post();
+			if ( $post->post_parent ) {
+				if ( 'white' == $menu_text_color ) {
+					$subpage_header_text_color       = 'black';
+					$subpage_header_background_color = 'white';
 				} else {
-					?>
+					$subpage_header_text_color       = 'white';
+					$subpage_header_background_color = 'black';
+				}
+				$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
+				?>
+	  <header class="event-subpage-header background-image-wrapper"
+			  style="<?php echo esc_html( $text_style ); ?>">
+		<div class="overlay"
+			 style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
+		</div>
+		<figure class="figure-container">
+				<?php
+				if ( has_post_thumbnail() ) {
+					echo wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'fp-large', false, array( 'class' => 'f' ) );
+				} else {
+					echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-large', false, array( 'class' => '' ) );
+				}
+				?>
+		</figure>
+
+		<h1 class="content-wrapper"
+			style="background-color: <?php echo esc_html( $subpage_header_background_color ); ?>;">
+		  <span style="<?php echo esc_html( $subpage_header_style ); ?>">
+				<?php the_title(); ?>
+		  </span>
+		</h1>
+	  </header>
+				<?php
+			} else {
+				?>
 					<h1 class="show-for-sr"><?php the_title(); ?></h1>
 					<?php
-				}
+			}
 
-				if ( is_page_template( 'page-templates/multi-part-page.php' ) ) {
-					get_template_part( 'template-parts/content', 'multi-part-page' );
-				} else {
-					get_template_part( 'template-parts/content', 'page' );
-				}
-				lfe_get_sponsors( $parent_id );
+			if ( is_page_template( 'page-templates/multi-part-page.php' ) ) {
+				get_template_part( 'template-parts/content', 'multi-part-page' );
+			} else {
+				get_template_part( 'template-parts/content', 'page' );
+			}
+			lfe_get_sponsors( $parent_id );
 			endwhile;
-			?>
-		</main>
-	</div>
+		?>
+	</main>
+  </div>
 </div>
 
 <div class="event-footer"

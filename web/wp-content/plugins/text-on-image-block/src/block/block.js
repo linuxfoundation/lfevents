@@ -41,7 +41,7 @@ registerBlockType( 'cgb/block-text-on-image-block', {
         },
         imgUrl: {
             type: 'string',
-            default: 'http://placehold.it/500'
+            default: 'https://placehold.it/500'
 		}
 	},
 
@@ -71,12 +71,12 @@ registerBlockType( 'cgb/block-text-on-image-block', {
 		return (
 			<div className={className}>
 				<div className="media">
-					<MediaUpload 
+					<MediaUpload
 						onSelect={selectImage}
 						render={ ({open}) => {
 							return (
 								<button onClick={open}>
-									<img 
+									<img
 										src={attributes.imgUrl}
 										/>
 								</button>
@@ -85,7 +85,7 @@ registerBlockType( 'cgb/block-text-on-image-block', {
 					/>
 				</div>
 				<div className="copy">
-					<RichText 
+					<RichText
 						className="copy-bd"
 						tagName="div"
 						placeholder="Enter text here that will float on top of the image."
@@ -108,16 +108,16 @@ registerBlockType( 'cgb/block-text-on-image-block', {
 	save: function( props ) {
 		const className = getBlockDefaultClassName('cgb/block-text-on-image-block');
 		const { attributes } = props;
-	
+
 		return (
 			<div class="alignfull lfe-image-and-text pull-right" style={ "background-image:url(" + attributes.imgUrl + ");"}>
 				<img src={attributes.imgUrl} />
 				<div class="text">
 					<blockquote>
-					<RichText.Content 
-					className="copy-bd" 
-					tagName="div" 
-					value={attributes.bodyContent} 
+					<RichText.Content
+					className="copy-bd"
+					tagName="div"
+					value={attributes.bodyContent}
 					/>
 					</blockquote>
 				</div>
