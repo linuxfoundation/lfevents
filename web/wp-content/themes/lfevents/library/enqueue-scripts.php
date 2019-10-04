@@ -54,16 +54,9 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// Deregister the jquery-migrate version bundled with WordPress.
 		wp_deregister_script( 'jquery-migrate' );
 
-		// CDN hosted jQuery migrate for compatibility with jQuery 3.x.
-		wp_register_script( 'jquery-migrate', 'https://code.jquery.com/jquery-migrate-3.1.0.min.js', array( 'jquery' ), '3.1.0', false );
-
-		// Enqueue jQuery migrate. Uncomment the line below to enable.
-		// wp_enqueue_script( 'jquery-migrate' );
 		// Enqueue Foundation scripts.
 		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ) ), true );
 
-		// Enqueue FontAwesome from CDN. Uncomment the line below if you need FontAwesome.
-		// wp_enqueue_script( 'fontawesome', 'https://use.fontawesome.com/5016a31c8c.js', array(), '4.7.0', true );
 		// Add the comment-reply library on pages where it is necessary.
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );

@@ -172,14 +172,15 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1;
+    height: 100%;
+		width: 100%;
+		z-index: 3;
     mix-blend-mode: multiply;
     opacity: 0.8;
   }
 
   h1 {
     position: relative;
-    z-index: 1;
     float: left;
     margin: 0 0 0 $global-margin*-1;
     padding: rem-calc(15) $global-margin*1.5 rem-calc(18) $global-margin;
@@ -235,18 +236,54 @@
 
 // Sidebar widgets
 .sidebar-widgets {
-  .widget + .widget {
-    margin-top: rem-calc(40);
-    padding-top: rem-calc(30);
-    border-top: $hr-border;
-  }
+	.widget + .widget {
+		margin-top: rem-calc(40);
+		padding-top: rem-calc(30);
+		border-top: $hr-border;
+	}
 }
-
 
 // Styles for IE only
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  // countdown clock
-  .ub_countdown_circular_container {
-    display: none;
-  }
+	// countdown clock
+	.ub_countdown_circular_container {
+		display: none;
+	}
+}
+
+// Images in background (re-usable!)
+// apply to container
+.background-image-wrapper {
+	overflow: hidden;
+	position: relative;
+}
+
+figure {
+	// properly reset for all browsers
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+}
+
+// apply to figure
+.figure-container img {
+	width: 100%;
+	// height: 100%;
+	object-fit: cover;
+	position: absolute;
+	z-index: 1;
+	// added below to stop flexbox messing with the height on load.
+	display: block;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: 100%;
+}
+
+// apply to content inside
+.content-wrapper {
+	position: relative;
+	z-index: 10;
 }
