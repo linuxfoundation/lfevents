@@ -178,7 +178,7 @@ if ( $logo ) {
 				get_template_part( 'template-parts/svg/twitter' );
 				echo '</a></li>';
 			}
-		
+
 			echo '</ul>';
 		}
 		?>
