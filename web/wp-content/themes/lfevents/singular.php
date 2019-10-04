@@ -79,7 +79,6 @@ if ( $logo ) {
 		<?php
 		while ( have_posts() ) :
 			the_post();
-
 			if ( $post->post_parent ) {
 				if ( 'white' == $menu_text_color ) {
 					$subpage_header_text_color       = 'black';
@@ -90,7 +89,6 @@ if ( $logo ) {
 				}
 				$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
 				?>
-
 	  <header class="event-subpage-header background-image-wrapper"
 			  style="<?php echo esc_html( $text_style ); ?>">
 		<div class="overlay"
@@ -114,7 +112,12 @@ if ( $logo ) {
 		</h1>
 	  </header>
 				<?php
+			} else {
+				?>
+					<h1 class="show-for-sr"><?php the_title(); ?></h1>
+					<?php
 			}
+
 			if ( is_page_template( 'page-templates/multi-part-page.php' ) ) {
 				get_template_part( 'template-parts/content', 'multi-part-page' );
 			} else {
