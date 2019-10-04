@@ -124,8 +124,6 @@ if ( $logo ) {
 
 <div class="event-footer"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
-	<h3 class="event-social-links-header">Follow Us</h3>
-	<ul class="event-social-links">
 
 		<?php
 		$wechat = get_post_meta( $parent_id, 'lfes_wechat', true );
@@ -135,41 +133,47 @@ if ( $logo ) {
 		$facebook = get_post_meta( $parent_id, 'lfes_facebook', true );
 		$twitter = get_post_meta( $parent_id, 'lfes_twitter', true );
 
-		if ( $wechat ) {
-			echo '<li>';
-			echo '<a data-toggle="wechat-dropdown">';
-			get_template_part( 'template-parts/svg/wechat' );
-			echo '</a>';
-			echo '<div class="dropdown-pane" id="wechat-dropdown" data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="0" data-position="top" data-alignment="center">' . wp_get_attachment_image( esc_html( $wechat ) ) . '</div>';
-			echo '</li>';
-		}
-		if ( $linkedin ) {
-			echo '<li><a target="_blank" href="' . esc_html( $linkedin ) . '">';
-			get_template_part( 'template-parts/svg/linkedin' );
-			echo '</a></li>';
-		}
-		if ( $qq ) {
-			echo '<li><a target="_blank" href="' . esc_html( $qq ) . '">';
-			get_template_part( 'template-parts/svg/qq' );
-			echo '</a></li>';
-		}
-		if ( $youtube ) {
-			echo '<li><a target="_blank" href="' . esc_html( $youtube ) . '">';
-			get_template_part( 'template-parts/svg/youtube' );
-			echo '</a></li>';
-		}
-		if ( $facebook ) {
-			echo '<li><a target="_blank" href="' . esc_html( $facebook ) . '">';
-			get_template_part( 'template-parts/svg/facebook' );
-			echo '</a></li>';
-		}
-		if ( $twitter ) {
-			echo '<li><a target="_blank" href="' . esc_html( $twitter ) . '">';
-			get_template_part( 'template-parts/svg/twitter' );
-			echo '</a></li>';
+		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
+			echo '<h3 class="event-social-links-header">Follow Us</h3>';
+			echo '<ul class="event-social-links">';
+
+			if ( $wechat ) {
+				echo '<li>';
+				echo '<a data-toggle="wechat-dropdown">';
+				get_template_part( 'template-parts/svg/wechat' );
+				echo '</a>';
+				echo '<div class="dropdown-pane" id="wechat-dropdown" data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="0" data-position="top" data-alignment="center">' . wp_get_attachment_image( esc_html( $wechat ) ) . '</div>';
+				echo '</li>';
+			}
+			if ( $linkedin ) {
+				echo '<li><a target="_blank" href="' . esc_html( $linkedin ) . '">';
+				get_template_part( 'template-parts/svg/linkedin' );
+				echo '</a></li>';
+			}
+			if ( $qq ) {
+				echo '<li><a target="_blank" href="' . esc_html( $qq ) . '">';
+				get_template_part( 'template-parts/svg/qq' );
+				echo '</a></li>';
+			}
+			if ( $youtube ) {
+				echo '<li><a target="_blank" href="' . esc_html( $youtube ) . '">';
+				get_template_part( 'template-parts/svg/youtube' );
+				echo '</a></li>';
+			}
+			if ( $facebook ) {
+				echo '<li><a target="_blank" href="' . esc_html( $facebook ) . '">';
+				get_template_part( 'template-parts/svg/facebook' );
+				echo '</a></li>';
+			}
+			if ( $twitter ) {
+				echo '<li><a target="_blank" href="' . esc_html( $twitter ) . '">';
+				get_template_part( 'template-parts/svg/twitter' );
+				echo '</a></li>';
+			}
+		
+			echo '</ul>';
 		}
 		?>
-	</ul>
 </div>
 
 <?php
