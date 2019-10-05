@@ -34,7 +34,7 @@ Frontend styles for gutenberg blocks
 
 	// add special styling for squared buttons
 	&.is-style-squared .wp-block-button__link {
-		border-radius: 0;
+		border-radius: 0 !important;
 	}
 
 	// add outline styles
