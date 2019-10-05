@@ -1,6 +1,10 @@
 .gform_wrapper {
   padding: 0 0 $global-margin;
 
+  [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
+    color: $input-color !important;
+  }
+
   .gform_title {
     // font-size: rem-calc(20);
     @extend h4;
@@ -110,6 +114,12 @@
   .gfield_error {
     @include callout(get-color(alert));
     font-size: rem-calc(14);
+
+    &,
+    .gfield_required,
+    .gfield_label {
+      color: get-color(alert) !important;
+    }
   }
 
   input[aria-invalid="true"] {
@@ -118,6 +128,7 @@
 
   .validation_message {
     @include form-error;
+    color: get-color(alert) !important;
     display: block;
   }
 }
@@ -134,4 +145,8 @@
       padding: 3rem;
     }
   }
+}
+
+.ginput_recaptcha {
+  margin-bottom: $global-margin;
 }
