@@ -96,3 +96,9 @@ Frontend styles for gutenberg blocks
 		& + .alignfull { margin-top: -1.5rem !important; }
 	}
 }
+
+.alignwide {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: map-deep-get($breakpoints, xlarge);
+}
