@@ -90,10 +90,17 @@ Frontend styles for gutenberg blocks
 		width: calc(100% + 1.25rem);
 		margin-right: -0.625rem;
 		margin-left: -0.625rem;
+		padding-right: rem-calc(10);
+		padding-left: rem-calc(10);
 
 		// Flush align all the sections!!!
 		& { margin-bottom: 1.5rem !important; }
 		& + .alignfull { margin-top: -1.5rem !important; }
+
+		.alignwide {
+			padding-right: 0;
+			padding-left: 0;
+		}
 	}
 }
 
@@ -101,4 +108,9 @@ Frontend styles for gutenberg blocks
 	margin-left: auto;
 	margin-right: auto;
 	max-width: map-deep-get($breakpoints, xlarge);
+}
+
+.ugb-container__wrapper > .ugb-container__content-wrapper > .ugb-container--height-short {
+	padding-top: 0;
+	padding-bottom: 0;
 }
