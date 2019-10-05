@@ -91,7 +91,7 @@ if ( $query->have_posts() ) {
 		<?php
 	}
 } else {
-	echo 'No Results Found';
+	echo '<div class="cell medium-6 large-4 callout large-margin-bottom">No Results Found</div>';
 }
 echo '</div>';
 ?>
