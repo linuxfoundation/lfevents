@@ -210,10 +210,10 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	}
 
 	// If you're not using HSTS in the pantheon.yml file, uncomment this next block.
-	// if (!isset($_SERVER['HTTP_USER_AGENT_HTTPS'])
-	//     || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON') {
-	//   $requires_redirect = true;
-	// }
+	if (!isset($_SERVER['HTTP_USER_AGENT_HTTPS'])
+	    || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON') {
+	  $requires_redirect = true;
+	}
 
 	if ( true === $requires_redirect ) {
 		// Name transaction "redirect" in New Relic for improved reporting (optional).
