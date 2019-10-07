@@ -103,21 +103,15 @@ form.searchandfilter {
       }
 
       .chosen-single div {
-        width: auto;
+        width: calc(1rem + 1px);
 
         b {
-          // @include background-triangle($select-triangle-color);
-          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28130, 136, 146%29'></polygon></svg>") !important;
-          background-origin: content-box !important;
-          background-position: right (-$form-spacing) center !important;
-          background-repeat: no-repeat !important;
-          background-size: 9px 6px !important;
-          padding-right: ($form-spacing * 1.5) !important;
+          @include css-triangle( 4px, $gray, down );
+          background-image: none;
+          border-top-width: 6px;
+          position: absolute;
+          top: calc(50% - 3px);
         }
-      }
-
-      &.chosen-with-drop .chosen-single div b {
-        // background-position: -18px 10px;
       }
 
       .chosen-single {

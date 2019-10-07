@@ -38,7 +38,7 @@ get_template_part( 'template-parts/global-nav' );
 							while ( have_posts() ) :
 								the_post();
 								echo '<div class="cell callout large-margin-bottom">';
-								echo '<h4 class="no-margin"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>'; //phpcs:ignore
+								echo '<h4 class="no-margin line-height-tight"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>'; //phpcs:ignore
 								echo '<p class="text-small">' . get_the_date() . '</p>'; //phpcs:ignore
 								echo '<p class="">' . get_the_excerpt() . '</p>'; //phpcs:ignore
 								echo '</div>';
