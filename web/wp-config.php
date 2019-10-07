@@ -193,7 +193,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
 
-/* Uncomment this when going live.
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	// Redirect to https://$primary_domain in the Live environment.
 	if ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
@@ -241,10 +240,4 @@ if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
 		exit();
 	}
 }
-*/
-if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
-	if ( ( php_sapi_name() != "cli" ) ) {
-		echo 'This url will be redirected to: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'];
-		exit;
-	}
-}
+
