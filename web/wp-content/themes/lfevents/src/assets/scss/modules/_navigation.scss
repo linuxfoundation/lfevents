@@ -12,7 +12,7 @@
   color: #ffffff;
   padding: 1rem;
 
-  @include breakpoint(small only) {
+  @include breakpoint(medium down) {
     &.is-at-bottom {
       top: 0 !important;
     }
