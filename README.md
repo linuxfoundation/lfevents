@@ -53,6 +53,8 @@ All these tests are run by CircleCI on each commit to the master branch, wheneve
 
 8. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
 
+9. Get your browser to trust the Lando SSL certificate by following [these instructions](https://docs.lando.dev/config/security.html#trusting-the-ca).  This step isn't essnetial but will stop you having to keep bypassing the privacy warning in your browser.  On MacOS, I also had to manually go into Keychain Access and set the *.lndo.site certificate to “Always Trust”. See [screenshot](ca-screenshot.png).
+
 ### Notes
 
 * You can stop Lando with `lando stop` and start it again with `lando start`
