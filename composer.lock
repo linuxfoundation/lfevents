@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37986d310aa32eee4ae1537e1d8c27de",
+    "content-hash": "2ecf0af842b45597413277aa54486f82",
     "packages": [
         {
             "name": "composer/installers",
@@ -710,6 +710,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/post-type-switcher/"
+        },
+        {
+            "name": "wpackagist-plugin/redirection",
+            "version": "4.4.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/redirection/",
+                "reference": "tags/4.4.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/redirection.4.4.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/redirection/"
         },
         {
             "name": "wpackagist-plugin/safe-svg",
@@ -2922,12 +2940,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "9942bfb2b2980de5e6971cbfa463d236f7865f02"
+                "reference": "8a9c65d4dc3421877d806cb99b60d7f33689ca51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9942bfb2b2980de5e6971cbfa463d236f7865f02",
-                "reference": "9942bfb2b2980de5e6971cbfa463d236f7865f02",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/8a9c65d4dc3421877d806cb99b60d7f33689ca51",
+                "reference": "8a9c65d4dc3421877d806cb99b60d7f33689ca51",
                 "shasum": ""
             },
             "conflict": {
@@ -2950,7 +2968,6 @@
                 "contao/core": ">=2,<3.5.39",
                 "contao/core-bundle": ">=4,<4.4.39|>=4.5,<4.7.5",
                 "contao/listing-bundle": ">=4,<4.4.8",
-                "contao/newsletter-bundle": ">=4,<4.1",
                 "datadog/dd-trace": ">=0.30,<0.30.2",
                 "david-garcia/phpwhois": "<=4.3.1",
                 "doctrine/annotations": ">=1,<1.2.7",
@@ -3131,7 +3148,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2019-10-07T22:05:53+00:00"
+            "time": "2019-10-08T10:45:32+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
