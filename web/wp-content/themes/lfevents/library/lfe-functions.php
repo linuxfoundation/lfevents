@@ -341,6 +341,11 @@ function lfe_insert_structured_data() {
 		$country = $country[0]->name;
 	}
 
+	$image_url = get_post_meta( $post->ID, '_social_image_url', true );
+	if ( ! $image_url ) {
+		$image_url = get_the_post_thumbnail_url();
+	}
+
 	$out = '';
 
 	$out .= '<script type="application/ld+json">';
@@ -363,7 +368,7 @@ function lfe_insert_structured_data() {
 	$out .= '  }';
 	$out .= '},';
 	$out .= '	"image": [ ';
-	$out .= '	  "' . esc_html( get_the_post_thumbnail_url() ) . '"';
+	$out .= '	  "' . esc_html( $image_url ) . '"';
 	$out .= '	 ],';
 	$out .= '	"description": "' . esc_html( get_post_meta( $post->ID, 'lfes_description', true ) ) . '"';
 	$out .= '}';
