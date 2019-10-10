@@ -121,6 +121,7 @@ Thumbs.db
 # Allowing other premium plugins #
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/wp-rss-feed-to-post
+!web/wp-content/plugins/post-meta-controls
 
 # Allowing custom plugins
 !web/wp-content/plugins/speakers-block
