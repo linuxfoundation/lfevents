@@ -41,7 +41,7 @@ define( 'FORCE_SSL_ADMIN', true );
 /**
  * Limit post revisions
  */
-define( 'WP_POST_REVISIONS', 3 );
+define( 'WP_POST_REVISIONS', 10 );
 
 /*
  * If NOT on Pantheon
