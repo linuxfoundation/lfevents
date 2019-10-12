@@ -507,3 +507,79 @@ if ( ! is_admin() ) {
 	}
 	add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
 }
+
+add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_generation_args', 10, 3 );
+/**
+ * Adjusts image generation parameters for snackables.  It will get the snackable from the parent page.
+ *
+ * @link https://theseoframework.com/docs/api/filters/#append-image-generators-for-social-images
+ *
+ * @param array      $params  : [
+ *    string  size:     The image size to use.
+ *    boolean multi:    Whether to allow multiple images to be returned.
+ *    array   cbs:      The callbacks to parse. Ideally be generators, so we can halt remotely.
+ *    array   fallback: The callbacks to parse. Ideally be generators, so we can halt remotely.
+ * ].
+ * @param array|null $args    The query arguments. Contains 'id' and 'taxonomy'.
+ *                            Is null when query is autodetermined.
+ * @param string     $context The filter context. Default 'social'.
+ *                            May be (for example) 'breadcrumb' or 'article' for structured data.
+ * @return array $params
+ */
+function my_tsf_custom_image_generation_args( $params = [], $args = null, $context = 'social' ) {
+
+	// Let's not mess with non-social sharing images.
+	if ( 'social' !== $context ) {
+		return $params;
+	}
+
+	$has_parent = false;
+
+	if ( null === $args ) {
+		// In the loop.
+		if ( is_singular() ) {
+			// We don't trust WP in giving the right ID in the loop.
+			$has_parent = wp_get_post_parent_id( the_seo_framework()->get_the_real_ID() );
+		}
+	} else {
+		// Out the loop. Use $args to evaluate the query...
+		if ( ! $args['taxonomy'] ) {
+			// Singular.
+			$has_parent = wp_get_post_parent_id( $args['id'] );
+		}
+	}
+
+	if ( $has_parent ) {
+		$params['cbs'] = array_merge(
+			[ '_parent' => 'my_tsf_get_parent_social_meta_image' ],
+			$params['cbs']
+		);
+	}
+
+	return $params;
+}
+/**
+ * Generates image URL and ID via my_get_image_value.
+ *
+ * @generator
+ *
+ * @param array|null $args The query arguments. Accepts 'id' and 'taxonomy'.
+ *                         Leave null to autodetermine query.
+ * @param string     $size The size of the image to get.
+ * @yield array : {
+ *    string url: The image URL location,
+ *    int    id:  The image ID,
+ * }
+ */
+function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
+
+	$tsf = the_seo_framework();
+	// Obtain the post parent ID...
+	$post_id   = isset( $args['id'] ) ? $args['id'] : $tsf->get_the_real_ID();
+	$parent_id = wp_get_post_parent_id( $post_id );
+
+	yield [
+		'url' => $tsf->get_post_meta_item( '_social_image_url', $parent_id ),
+		'id'  => $tsf->get_post_meta_item( '_social_image_id', $parent_id ),
+	];
+}
