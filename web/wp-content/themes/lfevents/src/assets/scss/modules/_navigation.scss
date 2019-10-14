@@ -51,11 +51,12 @@
         height: rem-calc(18.571); // width ÷ 14
       }
       @include breakpoint(xlarge) {
-        // max-width: rem-calc(300);
+        width: rem-calc(300);
+        height: rem-calc(21.428); // width ÷ 14
       }
       @include breakpoint(xxlarge) {
-        width: rem-calc(340);
-        height: rem-calc(24.285); // width ÷ 14
+        width: rem-calc(380);
+        height: rem-calc(27.143); // width ÷ 14
       }
     }
   }
