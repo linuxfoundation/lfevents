@@ -22,11 +22,11 @@
 }
 
 .event-calendar-year {
-  // padding: 0.25rem 0 0;
   margin-bottom: $global-margin * 1.5;
-  font-size: rem-calc(20);
+  font-size: rem-calc(31);
   font-weight: $global-weight-bold;
   border-bottom: 3px solid $gray;
+  padding: 0 0 0.25em;
   color: $charcoal;
 }
 
