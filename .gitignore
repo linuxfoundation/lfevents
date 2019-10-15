@@ -122,6 +122,7 @@ Thumbs.db
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/wp-rss-feed-to-post
 !web/wp-content/plugins/post-meta-controls
+!web/wp-content/plugins/wp-media-library-categories
 
 # Allowing custom plugins
 !web/wp-content/plugins/speakers-block
