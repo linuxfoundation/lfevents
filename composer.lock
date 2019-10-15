@@ -203,16 +203,16 @@
         },
         {
             "name": "pantheon-systems/wordpress-composer",
-            "version": "5.2.3",
+            "version": "5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pantheon-systems/wordpress-composer.git",
-                "reference": "b8ad67f697fd48469c6faac8a31bbc83bcc5c98b"
+                "reference": "aaa6df2b0fcf2c19d84b3e8fe364a169168449fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/b8ad67f697fd48469c6faac8a31bbc83bcc5c98b",
-                "reference": "b8ad67f697fd48469c6faac8a31bbc83bcc5c98b",
+                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/aaa6df2b0fcf2c19d84b3e8fe364a169168449fc",
+                "reference": "aaa6df2b0fcf2c19d84b3e8fe364a169168449fc",
                 "shasum": ""
             },
             "require": {
@@ -230,10 +230,10 @@
             ],
             "description": "WordPress for Pantheon with a composer.json file.",
             "support": {
-                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/5.2.3",
+                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/5.2.4",
                 "issues": "https://github.com/pantheon-systems/wordpress-composer/issues"
             },
-            "time": "2019-09-05T03:08:00+00:00"
+            "time": "2019-10-14T22:21:13+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -497,15 +497,15 @@
         },
         {
             "name": "wpackagist-plugin/autodescription",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/autodescription/",
-                "reference": "trunk"
+                "reference": "tags/4.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/autodescription.zip?timestamp=1568655698"
+                "url": "https://downloads.wordpress.org/plugin/autodescription.4.0.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -803,15 +803,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
-            "version": "3.1.6",
+            "version": "3.1.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
-                "reference": "tags/3.1.6"
+                "reference": "tags/3.1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.6.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.7.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
