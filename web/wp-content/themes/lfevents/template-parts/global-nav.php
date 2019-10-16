@@ -7,7 +7,7 @@
  */
 
 
-if ( 'lfeventsci' == $_ENV['PANTHEON_SITE_NAME'] ) {
+if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 	$home_img = 'logo_lfevents_white.svg';
 } else {
 	$home_img = 'logo_lfasiallc_white.svg';

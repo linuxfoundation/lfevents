@@ -195,8 +195,10 @@ require_once( ABSPATH . 'wp-settings.php' );
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	// Redirect to https://$primary_domain in the Live environment.
-	if ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+	if ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 		$primary_domain = 'events.linuxfoundation.org';
+	} elseif ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfasiallcci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+		$primary_domain = 'live-lfasiallcci.pantheonsite.io';
 	} else {
 		// Redirect to HTTPS on every Pantheon environment.
 		$primary_domain = $_SERVER['HTTP_HOST']; //phpcs:ignore
@@ -209,8 +211,7 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	}
 
 	// If you're not using HSTS in the pantheon.yml file, uncomment this next block.
-	if (!isset($_SERVER['HTTP_USER_AGENT_HTTPS'])
-	    || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON') {
+	if (!isset($_SERVER['HTTP_USER_AGENT_HTTPS']) || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON') {
 	  $requires_redirect = true;
 	}
 
@@ -231,7 +232,12 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
 	if ( ( php_sapi_name() != "cli" ) ) {
 		header( 'HTTP/1.0 301 Moved Permanently' );
-		header( 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'] );
+
+		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+			header( 'Location: https://events19.linuxfoundation.org' . $_SERVER['REQUEST_URI'] );
+		} else {
+			header( 'Location: https://events19.lfasiallc.com' . $_SERVER['REQUEST_URI'] );
+		}
 
 		if ( extension_loaded( 'newrelic' ) ) {
 			newrelic_name_transaction( 'redirect' );

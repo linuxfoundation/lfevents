@@ -180,7 +180,7 @@ get_template_part( 'template-parts/global-nav' );
 			</div>
 			<div class="cell medium-4 large-3">
 				<?php
-				if ( 'lfeventsci' == $_ENV['PANTHEON_SITE_NAME'] ) {
+				if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 					get_template_part( 'template-parts/sidebar-lfeventsci' );
 				} else {
 					get_template_part( 'template-parts/sidebar-lfasiallcci' );
