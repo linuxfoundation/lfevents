@@ -6,6 +6,12 @@
  * @since FoundationPress 1.0.0
  */
 
+
+if ( 'lfeventsci' == $_ENV['PANTHEON_SITE_NAME'] ) {
+	$home_img = 'logo_lfevents_white.svg';
+} else {
+	$home_img = 'logo_lfasiallc_white.svg';
+}
 ?>
 
 <div data-sticky-container>
@@ -15,7 +21,7 @@
 			<span class="hamburger-icon"></span>
 		</button>
 
-		<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_white.svg' ); //phpcs:ignore ?>"></a>
+		<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
 
 		<nav id="main-menu" class="main-menu show-for-large" data-toggler="show-for-large" role="navigation">
 			<?php foundationpress_about_pages_nav(); ?>
