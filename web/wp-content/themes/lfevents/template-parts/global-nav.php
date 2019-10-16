@@ -6,7 +6,6 @@
  * @since FoundationPress 1.0.0
  */
 
-
 if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 	$home_img = 'logo_lfevents_white.svg';
 } else {
