@@ -174,8 +174,14 @@ get_template_part( 'template-parts/global-nav' );
 				</div>
 				<a class="button gray large expanded" href="<?php echo esc_url( home_url( '/about/calendar' ) ); ?>">
 					<?php get_template_part( 'template-parts/svg/calendar' ); ?>
-					<strong>Search Our Events Calendar</strong>
-					<small class="text-small small-margin-top uppercase display-block">(all upcoming &amp; past events)</small>
+					<?php 
+					if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+						echo '<strong>Search Our Events Calendar</strong>';
+						echo '<small class="text-small small-margin-top uppercase display-block">(all upcoming &amp; past events)</small>';
+					} else {
+						echo '<strong>搜索我们的活动日历<br/>Search Our Events Calendar</strong>';
+					}
+					?>
 				</a>
 			</div>
 			<div class="cell medium-4 large-3">
