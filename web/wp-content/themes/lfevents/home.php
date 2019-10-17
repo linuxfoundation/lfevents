@@ -179,7 +179,8 @@ get_template_part( 'template-parts/global-nav' );
 						echo '<strong>Search Our Events Calendar</strong>';
 						echo '<small class="text-small small-margin-top uppercase display-block">(all upcoming &amp; past events)</small>';
 					} else {
-						echo '<strong>搜索我们的活动日历<br/>Search Our Events Calendar</strong>';
+						echo '<strong>搜索我们的活动日历</strong>';
+						echo '<small class="text-small small-margin-top uppercase display-block">Search Our Events Calendar</small>';
 					}
 					?>
 				</a>
