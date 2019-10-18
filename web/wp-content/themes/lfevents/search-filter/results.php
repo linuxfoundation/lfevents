@@ -159,12 +159,12 @@ $( document ).ready( function() {
 	if ( -1 == currentUrl.indexOf( 'calendar/archive' ) ) {
 		//we are on the event-calendar page.
 		newUrl = currentUrl.replace( 'calendar', 'calendar/archive' );
-		$( '#switch-archive-view' ).attr( "href", newUrl );
+		$( '#switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
 		$( '#switch-archive-view' ).html( viewPastEventsText );
 	} else {
 		//we are on the event-calendar/archive page.
 		newUrl = currentUrl.replace( 'calendar/archive', 'calendar' );
-		$( '#switch-archive-view' ).attr( "href", newUrl );
+		$( '#switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
 		$( '#switch-archive-view' ).html( viewUpcomingEventsText );
 	}
 });
