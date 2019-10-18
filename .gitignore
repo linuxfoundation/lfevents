@@ -123,6 +123,7 @@ Thumbs.db
 !web/wp-content/plugins/wp-rss-feed-to-post
 !web/wp-content/plugins/post-meta-controls
 !web/wp-content/plugins/wp-media-library-categories
+!web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
 
 # Allowing custom plugins
 !web/wp-content/plugins/speakers-block
