@@ -175,7 +175,7 @@ get_template_part( 'template-parts/global-nav' );
 				<a class="button gray large expanded" href="<?php echo esc_url( home_url( '/about/calendar' ) ); ?>">
 					<?php get_template_part( 'template-parts/svg/calendar' ); ?>
 					<?php
-					if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+					if ( is_lfeventsci() ) {
 						echo '<strong>Search Our Events Calendar</strong>';
 						echo '<small class="text-small small-margin-top uppercase display-block">(all upcoming &amp; past events)</small>';
 					} else {
@@ -187,7 +187,7 @@ get_template_part( 'template-parts/global-nav' );
 			</div>
 			<div class="cell medium-4 large-3">
 				<?php
-				if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+				if ( is_lfeventsci() ) {
 					get_template_part( 'template-parts/sidebar-lfeventsci' );
 				} else {
 					get_template_part( 'template-parts/sidebar-lfasiallcci' );

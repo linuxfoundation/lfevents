@@ -8,6 +8,17 @@
  */
 
 /**
+ * Says whether it's the lfeventsci pantheon instance.
+ */
+function is_lfeventsci() {
+	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
  * Gets related LFEvents for current post.  Only returns Events for the current year.
  *
  * @param int $parent_id ID of top parent post of the Event.
@@ -319,7 +330,7 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 			$date_range_ch .= '日';
 		}
 	}
-	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+	if ( is_lfeventsci() ) {
 		return $date_range;
 	} else {
 		return $date_range_ch . ' ' . $date_range;
