@@ -143,7 +143,7 @@ echo '</div>';
 $( document ).ready( function() {
 
 	<?php
-	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+	if ( is_lfeventsci() ) {
 		echo 'var viewPastEventsText = \'View Past Events\';';
 		echo 'var viewUpcomingEventsText = \'View Upcoming Events\';';
 	} else {

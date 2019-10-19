@@ -8,6 +8,17 @@
  */
 
 /**
+ * Says whether it's the lfeventsci pantheon instance.
+ */
+function is_lfeventsci() {
+	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
  * Gets related LFEvents for current post.  Only returns Events for the current year.
  *
  * @param int $parent_id ID of top parent post of the Event.
@@ -283,10 +294,14 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
 		$start_date_pretty = $start_date->format( 'M j, Y' );
 		$end_date_pretty = $end_date->format( 'M j, Y' );
+		$start_date_pretty_ch = $start_date->format( 'Y年m月j' );
+		$end_date_pretty_ch = $end_date->format( 'm月j日' );
 	} else {
 		 // Setup basic dates.
 		$start_date_pretty = $start_date->format( 'M j' );
 		$end_date_pretty = $end_date->format( 'j, Y' );
+		$start_date_pretty_ch = $start_date->format( 'Y年m月j' );
+		$end_date_pretty_ch = $end_date->format( 'j日' );
 		// If years differ add suffix and year to start_date.
 		if ( $start_date->format( 'Y' ) != $end_date->format( 'Y' ) ) {
 			$start_date_pretty .= $start_date->format( ', Y' );
@@ -295,21 +310,30 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 		// If months differ add suffix and year to end_date.
 		if ( $start_date->format( 'M' ) != $end_date->format( 'M' ) ) {
 			$end_date_pretty = $end_date->format( 'M ' ) . $end_date_pretty;
+			$end_date_pretty_ch = $end_date->format( 'm月' ) . $end_date_pretty_ch;
 		}
 	}
 
 	// build date_range return string.
 	if ( ! empty( $start_date ) ) {
 		  $date_range .= $start_date_pretty;
+		  $date_range_ch .= $start_date_pretty_ch;
 	}
 
 	// check if there is an end date and append if not identical.
 	if ( ! empty( $end_date ) ) {
 		if ( $end_date_pretty != $start_date_pretty ) {
 			  $date_range .= '–' . $end_date_pretty;
+			  $date_range_ch .= '–' . $end_date_pretty_ch;
+		} else {
+			$date_range_ch .= '日';
 		}
 	}
-	return $date_range;
+	if ( is_lfeventsci() ) {
+		return $date_range;
+	} else {
+		return $date_range_ch . ' ' . $date_range;
+	}
 }
 
 
