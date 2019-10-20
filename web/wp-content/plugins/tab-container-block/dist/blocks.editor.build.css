@@ -11,9 +11,5 @@
  * which makes it higher in priority.
  */
 .wp-block-cgb-block-tab-container-block {
-  background: #1e8cbe87;
-  border: 0.2rem solid #292929;
-  color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
+  border: 2px dashed #ddd;
+  padding: 1rem; }
