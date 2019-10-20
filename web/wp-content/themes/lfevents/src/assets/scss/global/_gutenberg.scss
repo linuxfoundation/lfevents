@@ -76,31 +76,41 @@ Frontend styles for gutenberg blocks
 }
 
 /** === Align Wide/Full === */
-.entry-content > *,
-.entry-summary > *,
-.entry-header > *,
-.entry-footer > * {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: map-deep-get($breakpoints, xlarge);
+.entry-content,
+.entry-summary,
+.entry-header,
+.entry-footer {
 
-	&.alignfull {
-		clear: both;
-		max-width: none;
-		width: calc(100% + 1.25rem);
-		margin-right: -0.625rem;
-		margin-left: -0.625rem;
-		padding-right: rem-calc(10);
-		padding-left: rem-calc(10);
+	& > * {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: map-deep-get($breakpoints, xlarge);
 
-		// Flush align all the sections!!!
-		& { margin-bottom: 1.5rem !important; }
-		& + .alignfull { margin-top: -1.5rem !important; }
+		&.alignfull {
+			clear: both;
+			max-width: none;
+			width: calc(100% + 1.25rem);
+			margin-right: -0.625rem;
+			margin-left: -0.625rem;
+			padding-right: rem-calc(10);
+			padding-left: rem-calc(10);
 
-		.alignwide {
-			padding-right: 0;
-			padding-left: 0;
+			// Flush align all the sections!!!
+			& { margin-bottom: 1.5rem !important; }
+			& + .alignfull { margin-top: -1.5rem !important; }
+
+			.alignwide {
+				padding-right: 0;
+				padding-left: 0;
+			}
 		}
+	}
+
+	// TODO: The above star selector for max content width is heavy-handed.
+	// Refactor content width styles so the following ul fix isn't needed.
+
+	& > ul {
+		padding-left: 1.25rem;
 	}
 }
 
