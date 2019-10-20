@@ -36,10 +36,9 @@ get_template_part( 'template-parts/global-nav' );
 				);
 				$images = get_posts( $args );
 				$i = 0;
-				$bg_images_count = sizeof($images);
 				if ( $images ) {
 					?>
-					<div class="bg-images has-<?php echo esc_html( $bg_images_count ); ?>">
+					<div class="bg-images">
 						<?php
 						foreach ( $images as $key => $image ) {
 							?>
