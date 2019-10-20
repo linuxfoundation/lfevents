@@ -12,4 +12,10 @@
   // margin: 0 auto;
   // max-width: 740px;
   padding: 1rem;
+
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
 }

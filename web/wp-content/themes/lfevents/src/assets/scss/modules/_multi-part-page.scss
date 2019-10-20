@@ -77,6 +77,7 @@
   }
 
   .wp-block-cgb-block-tab-container-block {
+    @include clearfix;
     padding-bottom: $global-margin;
     position: relative;
   }
