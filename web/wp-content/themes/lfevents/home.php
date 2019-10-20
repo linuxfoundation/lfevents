@@ -36,18 +36,14 @@ get_template_part( 'template-parts/global-nav' );
 				);
 				$images = get_posts( $args );
 				$i = 0;
+				$bg_images_count = sizeof($images);
 				if ( $images ) {
 					?>
-					<div class="bg-images">
+					<div class="bg-images has-<?php echo esc_html( $bg_images_count ); ?>">
 						<?php
 						foreach ( $images as $key => $image ) {
-							if ( 0 == $i ) {
-								$active = 'active';
-							} else {
-								$active = '';
-							}
 							?>
-							<div class="bg-image <?php echo esc_html( $active ); ?>" style="background-image: url(<?php echo esc_html( wp_get_attachment_url( $image->ID ) ); ?>);"></div>
+							<div class="bg-image" style="background-image: url(<?php echo esc_html( wp_get_attachment_url( $image->ID ) ); ?>);"></div>
 							<?php
 							$i++;
 						}
@@ -198,5 +194,21 @@ get_template_part( 'template-parts/global-nav' );
 	</div>
 
 </div>
+
+<script>
+$( document ).ready( function() {
+	$('.bg-images > .bg-image:gt(0)').hide();
+
+	setInterval(function() {
+		$('.bg-images > .bg-image:first')
+		.fadeOut(1000)
+		.next()
+		.fadeIn(1000)
+		.end()
+		.appendTo('.bg-images');
+	}, 4000);
+});
+</script>
+
 <?php
 get_footer();
