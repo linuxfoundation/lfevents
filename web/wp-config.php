@@ -198,7 +198,7 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	if ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 		$primary_domain = 'events.linuxfoundation.org';
 	} elseif ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfasiallcci' === $_ENV['PANTHEON_SITE_NAME'] ) {
-		$primary_domain = 'live-lfasiallcci.pantheonsite.io';
+		$primary_domain = 'www.lfasiallc.com';
 	} else {
 		// Redirect to HTTPS on every Pantheon environment.
 		$primary_domain = $_SERVER['HTTP_HOST']; //phpcs:ignore
