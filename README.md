@@ -10,6 +10,8 @@ LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI 
 
 All these tests are run by CircleCI on each commit to the master branch, whenever a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
 
+For instructions on how to configure [the resulting site](https://events.linuxfoundation.org) to host events, please see the [Admin Instructions](https://docs.google.com/document/d/1mvIuw-R9k_gbnZn_iV04qNTjG33u_lXwFlN7s-lgJ1Y/edit?usp=sharing).
+
 -----
 
 ## Install Local Instance
