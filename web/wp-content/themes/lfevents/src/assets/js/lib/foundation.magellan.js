@@ -127,12 +127,13 @@ class Magellan extends Plugin {
 				_this.$element
 					.on(
 						{
-							'resizeme.zf.trigger': _this.reflow.bind(  _this ),
+							'resizeme.zf.trigger': _this.reflow.bind( _this ),
 							'scrollme.zf.trigger': _this._updateActive.bind( _this )
 						}
 					)
 					.on(
-						'click.zf.magellan', 'a[href^="#"]',
+						'click.zf.magellan',
+						'a[href^="#"]',
 						function ( e ) {
 							e.preventDefault();
 							var arrival = this.getAttribute( 'href' );
@@ -169,7 +170,9 @@ class Magellan extends Plugin {
 		};
 
 		SmoothScroll.scrollToLoc(
-			loc, options, function() {
+			loc,
+			options,
+			function() {
 				_this._inTransition = false;
 			}
 		)
@@ -201,9 +204,11 @@ class Magellan extends Plugin {
 
 		let activeIdx;
 		// Before the first point: no link.
-		if ( newScrollPos < this.points[0] ) { /* do nothing */ }
+		if ( newScrollPos < this.points[ 0 ] ) { /* do nothing */ }
 		// At the bottom of the page: last link.
-		else if ( newScrollPos + this.winHeight === this.docHeight ) { activeIdx = this.points.length - 1; }
+		else if ( newScrollPos + this.winHeight === this.docHeight ) {
+			activeIdx = this.points.length - 1;
+		}
 		// Otherwhise, use the last visible link.
 		else {
 			const visibleLinks = this.points.filter(
@@ -223,7 +228,7 @@ class Magellan extends Plugin {
 		} else {
 			this.$active = $();
 		}
-		const isNewActive = !( !this.$active.length && !$oldActive.length ) && !this.$active.is( $oldActive );
+		const isNewActive = ! ( ! this.$active.length && ! $oldActive.length ) && ! this.$active.is( $oldActive );
 		const isNewHash = activeHash !== window.location.hash;
 
 		// Update the active link element.
@@ -249,6 +254,7 @@ class Magellan extends Plugin {
 
 		if ( isNewActive ) {
 			/**
+			 *
 			 * Fires when magellan is finished updating to the new active element.
 			 * @event Magellan#update
 			 */
