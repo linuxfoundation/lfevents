@@ -112,12 +112,12 @@ get_template_part( 'template-parts/global-nav' );
 								</h4>
 
 								<p class="event-meta text-small small-margin-bottom">
-									<span class="date small-margin-right">
+									<span class="date small-margin-right display-inline-block">
 										<?php get_template_part( 'template-parts/svg/calendar' ); ?>
 										<?php echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ); ?>
 									</span>
 
-									<span class="country">
+									<span class="country display-inline-block">
 										<?php get_template_part( 'template-parts/svg/map-marker' ); ?>
 										<?php
 										$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
