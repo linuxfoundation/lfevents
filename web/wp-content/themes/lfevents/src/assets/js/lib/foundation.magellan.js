@@ -28,6 +28,7 @@ import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
 class Magellan extends Plugin {
 	/**
 	 * Creates a new instance of Magellan.
+   *
 	 * @class
 	 * @name Magellan
 	 * @fires Magellan#init
@@ -48,7 +49,8 @@ class Magellan extends Plugin {
 
 	/**
 	 * Initializes the Magellan plugin and calls functions to get equalizer functioning on load.
-	 * @private
+   *
+   * @private
 	 */
 	_init() {
 		var id = this.$element[0].id || GetYoDigits(6, 'magellan');
@@ -69,6 +71,7 @@ class Magellan extends Plugin {
 	/**
 	 * Calculates an array of pixel values that are the demarcation lines between locations on the page.
 	 * Can be invoked if new elements are added or the size of a location changes.
+   *
 	 * @function
 	 */
 	calcPoints() {
@@ -90,6 +93,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Initializes events for Magellan.
+   *
 	 * @private
 	 */
 	_events() {
@@ -134,6 +138,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Function to scroll to a given location on the page.
+   *
 	 * @param {String} loc - a properly formatted jQuery id selector. Example: '#foo'
 	 * @function
 	 */
@@ -155,6 +160,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Calls necessary functions to update Magellan upon DOM change
+   *
 	 * @function
 	 */
 	reflow() {
@@ -164,6 +170,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Updates the visibility of an active location link, and updates the url hash for the page, if deepLinking enabled.
+   *
 	 * @private
 	 * @function
 	 * @fires Magellan#update
@@ -232,6 +239,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Destroys an instance of Magellan and resets the url of the window.
+   *
 	 * @function
 	 */
 	_destroy() {
@@ -254,6 +262,7 @@ class Magellan extends Plugin {
 Magellan.defaults = {
 	/**
 	 * Amount of time, in ms, the animated scrolling should take between locations.
+   *
 	 * @option
 	 * @type {number}
 	 * @default 500
@@ -261,6 +270,7 @@ Magellan.defaults = {
 	animationDuration: 500,
 	/**
 	 * Animation style to use when scrolling between locations. Can be `'swing'` or `'linear'`.
+   *
 	 * @option
 	 * @type {string}
 	 * @default 'linear'
@@ -269,6 +279,7 @@ Magellan.defaults = {
 	animationEasing: 'linear',
 	/**
 	 * Number of pixels to use as a marker for location changes.
+   *
 	 * @option
 	 * @type {number}
 	 * @default 50
@@ -276,6 +287,7 @@ Magellan.defaults = {
 	threshold: 50,
 	/**
 	 * Class applied to the active locations link on the magellan container.
+   *
 	 * @option
 	 * @type {string}
 	 * @default 'is-active'
@@ -283,6 +295,7 @@ Magellan.defaults = {
 	activeClass: 'is-active',
 	/**
 	 * Allows the script to manipulate the url of the current page, and if supported, alter the history.
+   *
 	 * @option
 	 * @type {boolean}
 	 * @default false
@@ -290,6 +303,7 @@ Magellan.defaults = {
 	deepLinking: false,
 	/**
 	 * Update the browser history with the active link, if deep linking is enabled.
+   *
 	 * @option
 	 * @type {boolean}
 	 * @default false
@@ -297,6 +311,7 @@ Magellan.defaults = {
 	updateHistory: false,
 	/**
 	 * Number of pixels to offset the scroll of the page on item click if using a sticky nav bar.
+   *
 	 * @option
 	 * @type {number}
 	 * @default 0
