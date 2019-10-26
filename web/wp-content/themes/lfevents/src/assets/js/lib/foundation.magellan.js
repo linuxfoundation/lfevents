@@ -37,11 +37,11 @@ class Magellan extends Plugin {
 	 */
 	_setup(element, options) {
 		this.$element = element;
-		this.options = $.extend({ }, Magellan.defaults, this.$element.data(), options);
+		this.options = $.extend( { }, Magellan.defaults, this.$element.data(), options );
 		this.className = 'Magellan'; // ie9 back compat.
 
 		// Triggers init is idempotent, just need to make sure it is initialized.
-		Triggers.init($);
+		Triggers.init( $ );
 
 		this._init();
 		this.calcPoints();
@@ -53,7 +53,7 @@ class Magellan extends Plugin {
 	 * @private
 	 */
 	_init() {
-		var id = this.$element[0].id || GetYoDigits(  6, 'magellan' );
+		var id = this.$element[ 0 ].id || GetYoDigits(  6, 'magellan' );
 		var _this = this;
 		this.$targets = $( '[data-magellan-target]' );
 		this.$links = this.$element.find( 'a' );
@@ -85,12 +85,14 @@ class Magellan extends Plugin {
 		this.winHeight = Math.round( Math.max( window.innerHeight, html.clientHeight ) );
 		this.docHeight = Math.round( Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ) );
 
-		this.$targets.each(function(){
-			var $tar = $( this ),
-					pt = Math.round( $tar.offset().top - _this.options.threshold );
-			$tar.targetPoint = pt;
-			_this.points.push( pt );
-		});
+		this.$targets.each(
+			function(){
+				var $tar = $( this ),
+						pt = Math.round( $tar.offset().top - _this.options.threshold );
+				$tar.targetPoint = pt;
+				_this.points.push( pt );
+			}
+		);
 	}
 
 	/**
@@ -104,17 +106,20 @@ class Magellan extends Plugin {
 				opts = {
 					duration: _this.options.animationDuration,
 					easing: _this.options.animationEasing
-				};
+		};
 
-		$( window ).one( 'load', function(){
-			if(_this.options.deepLinking){
-				if(location.hash){
-					_this.scrollToLoc(location.hash);
+		$( window ).one(
+			'load',
+			function(){
+				if(_this.options.deepLinking){
+					if(location.hash){
+						_this.scrollToLoc(location.hash);
+					}
 				}
+				_this.calcPoints();
+				_this._updateActive();
 			}
-			_this.calcPoints();
-			_this._updateActive();
-		});
+		);
 
 		_this.onLoadListener = onLoad($(window), function () {
 			_this.$element
