@@ -111,8 +111,8 @@ class Magellan extends Plugin {
 		$( window ).one(
 			'load',
 			function(){
-				if ( _this.options.deepLinking ){
-					if ( location.hash ){
+				if ( _this.options.deepLinking ) {
+					if ( location.hash ) {
 						_this.scrollToLoc( location.hash );
 					}
 				}
@@ -122,14 +122,18 @@ class Magellan extends Plugin {
 		);
 
 		_this.onLoadListener = onLoad(
-			$( window ), function () {
+			$( window ),
+			function () {
 				_this.$element
-					.on({
-						'resizeme.zf.trigger': _this.reflow.bind(  _this ),
-						'scrollme.zf.trigger': _this._updateActive.bind( _this )
-					})
 					.on(
-						'click.zf.magellan', 'a[href^="#"]', function ( e ) {
+						{
+							'resizeme.zf.trigger': _this.reflow.bind(  _this ),
+							'scrollme.zf.trigger': _this._updateActive.bind( _this )
+						}
+					)
+					.on(
+						'click.zf.magellan', 'a[href^="#"]',
+						function ( e ) {
 							e.preventDefault();
 							var arrival = this.getAttribute( 'href' );
 							_this.scrollToLoc( arrival );
@@ -196,11 +200,11 @@ class Magellan extends Plugin {
 		this.scrollPos = newScrollPos;
 
 		let activeIdx;
-		// Before the first point: no link
+		// Before the first point: no link.
 		if ( newScrollPos < this.points[0] ) { /* do nothing */ }
-		// At the bottom of the page: last link
+		// At the bottom of the page: last link.
 		else if ( newScrollPos + this.winHeight === this.docHeight ) { activeIdx = this.points.length - 1; }
-		// Otherwhise, use the last visible link
+		// Otherwhise, use the last visible link.
 		else {
 			const visibleLinks = this.points.filter(
 				( p, i ) => {
@@ -222,16 +226,16 @@ class Magellan extends Plugin {
 		const isNewActive = !( !this.$active.length && !$oldActive.length ) && !this.$active.is( $oldActive );
 		const isNewHash = activeHash !== window.location.hash;
 
-		// Update the active link element
+		// Update the active link element.
 		if ( isNewActive ) {
 			$oldActive.removeClass( this.options.activeClass );
 			this.$active.addClass( this.options.activeClass );
 		}
 
-		// Update the hash (it may have changed with the same active link)
+		// Update the hash (it may have changed with the same active link).
 		if ( this.options.deepLinking && isNewHash ) {
 			if ( window.history.pushState ) {
-				// Set or remove the hash (see: https://stackoverflow.com/a/5298684/4317384
+				// Set or remove the hash (see: https://stackoverflow.com/a/5298684/4317384.
 				const url = activeHash ? activeHash : window.location.pathname + window.location.search;
 				if ( this.options.updateHistory ) {
 					window.history.pushState( {}, '', url );
