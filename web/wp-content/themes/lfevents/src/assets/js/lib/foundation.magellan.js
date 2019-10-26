@@ -53,7 +53,7 @@ class Magellan extends Plugin {
 	 * @private
 	 */
 	_init() {
-		var id = this.$element[ 0 ].id || GetYoDigits(  6, 'magellan' );
+		var id = this.$element[ 0 ].id || GetYoDigits( 6, 'magellan' );
 		var _this = this;
 		this.$targets = $( '[data-magellan-target]' );
 		this.$links = this.$element.find( 'a' );
@@ -111,9 +111,9 @@ class Magellan extends Plugin {
 		$( window ).one(
 			'load',
 			function(){
-				if(_this.options.deepLinking){
-					if(location.hash){
-						_this.scrollToLoc(location.hash);
+				if ( _this.options.deepLinking ){
+					if ( location.hash ){
+						_this.scrollToLoc( location.hash );
 					}
 				}
 				_this.calcPoints();
@@ -121,26 +121,30 @@ class Magellan extends Plugin {
 			}
 		);
 
-		_this.onLoadListener = onLoad($(window), function () {
-			_this.$element
-				.on({
-					'resizeme.zf.trigger': _this.reflow.bind(_this),
-					'scrollme.zf.trigger': _this._updateActive.bind(_this)
-				})
-				.on('click.zf.magellan', 'a[href^="#"]', function (e) {
-					e.preventDefault();
-					var arrival = this.getAttribute('href');
-					_this.scrollToLoc(arrival);
-				});
-		});
+		_this.onLoadListener = onLoad(
+			$( window ), function () {
+				_this.$element
+					.on({
+						'resizeme.zf.trigger': _this.reflow.bind(  _this ),
+						'scrollme.zf.trigger': _this._updateActive.bind( _this )
+					})
+					.on(
+						'click.zf.magellan', 'a[href^="#"]', function ( e ) {
+							e.preventDefault();
+							var arrival = this.getAttribute( 'href' );
+							_this.scrollToLoc( arrival );
+						}
+					);
+			}
+		);
 
-		this._deepLinkScroll = function(e) {
-			if(_this.options.deepLinking) {
-				_this.scrollToLoc(window.location.hash);
+		this._deepLinkScroll = function( e ) {
+			if ( _this.options.deepLinking ) {
+				_this.scrollToLoc( window.location.hash );
 			}
 		};
 
-		$(window).on('hashchange', this._deepLinkScroll);
+		$( window ).on( 'hashchange', this._deepLinkScroll );
 	}
 
 	/**
@@ -149,7 +153,7 @@ class Magellan extends Plugin {
 	 * @param {String} loc - a properly formatted jQuery id selector. Example: '#foo'
 	 * @function
 	 */
-	scrollToLoc(loc) {
+	scrollToLoc( loc ) {
 		this._inTransition = true;
 		var _this = this;
 
@@ -160,9 +164,11 @@ class Magellan extends Plugin {
 			offset: this.options.offset
 		};
 
-		SmoothScroll.scrollToLoc(loc, options, function() {
-			_this._inTransition = false;
-		})
+		SmoothScroll.scrollToLoc(
+			loc, options, function() {
+				_this._inTransition = false;
+			}
+		)
 	}
 
 	/**
@@ -183,64 +189,66 @@ class Magellan extends Plugin {
 	 * @fires Magellan#update
 	 */
 	_updateActive(/*evt, elem, scrollPos*/) {
-		if(this._inTransition) return;
+		if ( this._inTransition ) return;
 
-		const newScrollPos = parseInt(window.pageYOffset, 10);
+		const newScrollPos = parseInt( window.pageYOffset, 10 );
 		const isScrollingUp = this.scrollPos > newScrollPos;
 		this.scrollPos = newScrollPos;
 
 		let activeIdx;
 		// Before the first point: no link
-		if(newScrollPos < this.points[0]){ /* do nothing */ }
+		if ( newScrollPos < this.points[0] ) { /* do nothing */ }
 		// At the bottom of the page: last link
-		else if(newScrollPos + this.winHeight === this.docHeight){ activeIdx = this.points.length - 1; }
+		else if ( newScrollPos + this.winHeight === this.docHeight ) { activeIdx = this.points.length - 1; }
 		// Otherwhise, use the last visible link
-		else{
-			const visibleLinks = this.points.filter((p, i) => {
-				return (p - this.options.offset - (isScrollingUp ? this.options.threshold : 0)) <= newScrollPos;
-			});
+		else {
+			const visibleLinks = this.points.filter(
+				( p, i ) => {
+					return ( p - this.options.offset - ( isScrollingUp ? this.options.threshold : 0 ) ) <= newScrollPos;
+				}
+			);
 			activeIdx = visibleLinks.length ? visibleLinks.length - 1 : 0;
 		}
 
 		// Get the new active link
 		const $oldActive = this.$active;
 		let activeHash = '';
-		if(typeof activeIdx !== 'undefined'){
-			this.$active = this.$links.filter('[href="#' + this.$targets.eq(activeIdx).data('magellan-target') + '"]');
-			if (this.$active.length) activeHash = this.$active[0].getAttribute('href');
-		}else{
+		if ( typeof activeIdx !== 'undefined' ) {
+			this.$active = this.$links.filter( '[href="#' + this.$targets.eq( activeIdx ).data( 'magellan-target' ) + '"]' );
+			if ( this.$active.length ) activeHash = this.$active[ 0 ].getAttribute( 'href' );
+		} else {
 			this.$active = $();
 		}
-		const isNewActive = !(!this.$active.length && !$oldActive.length) && !this.$active.is($oldActive);
+		const isNewActive = !( !this.$active.length && !$oldActive.length ) && !this.$active.is( $oldActive );
 		const isNewHash = activeHash !== window.location.hash;
 
 		// Update the active link element
-		if(isNewActive) {
-			$oldActive.removeClass(this.options.activeClass);
-			this.$active.addClass(this.options.activeClass);
+		if ( isNewActive ) {
+			$oldActive.removeClass( this.options.activeClass );
+			this.$active.addClass( this.options.activeClass );
 		}
 
 		// Update the hash (it may have changed with the same active link)
-		if(this.options.deepLinking && isNewHash){
-			if(window.history.pushState){
+		if ( this.options.deepLinking && isNewHash ) {
+			if ( window.history.pushState ) {
 				// Set or remove the hash (see: https://stackoverflow.com/a/5298684/4317384
 				const url = activeHash ? activeHash : window.location.pathname + window.location.search;
-				if(this.options.updateHistory){
-					window.history.pushState({}, '', url);
-				}else{
-					window.history.replaceState({}, '', url);
+				if ( this.options.updateHistory ) {
+					window.history.pushState( {}, '', url );
+				} else {
+					window.history.replaceState( {}, '', url );
 				}
 			} else {
 				window.location.hash = activeHash;
 			}
 		}
 
-		if (isNewActive) {
+		if ( isNewActive ) {
 			/**
 			 * Fires when magellan is finished updating to the new active element.
 			 * @event Magellan#update
 			 */
-			this.$element.trigger('update.zf.magellan', [this.$active]);
+			this.$element.trigger( 'update.zf.magellan', [ this.$active ] );
 		}
 	}
 
@@ -250,16 +258,16 @@ class Magellan extends Plugin {
 	 * @function
 	 */
 	_destroy() {
-		this.$element.off('.zf.trigger .zf.magellan')
-				.find(`.${this.options.activeClass}`).removeClass(this.options.activeClass);
+		this.$element.off( '.zf.trigger .zf.magellan' )
+				.find( `.${this.options.activeClass}` ).removeClass( this.options.activeClass );
 
-		if(this.options.deepLinking){
-			var hash = this.$active[0].getAttribute('href');
-			window.location.hash.replace(hash, '');
+		if ( this.options.deepLinking ) {
+			var hash = this.$active[ 0 ].getAttribute( 'href' );
+			window.location.hash.replace( hash, '' );
 		}
 
-		$(window).off('hashchange', this._deepLinkScroll)
-		if (this.onLoadListener) $(window).off(this.onLoadListener);
+		$( window ).off( 'hashchange', this._deepLinkScroll )
+		if ( this.onLoadListener ) $( window ).off( this.onLoadListener );
 	}
 }
 
