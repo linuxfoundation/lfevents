@@ -28,7 +28,7 @@ import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
 class Magellan extends Plugin {
 	/**
 	 * Creates a new instance of Magellan.
-   *
+	 *
 	 * @class
 	 * @name Magellan
 	 * @fires Magellan#init
@@ -37,10 +37,10 @@ class Magellan extends Plugin {
 	 */
 	_setup(element, options) {
 		this.$element = element;
-		this.options = $.extend({}, Magellan.defaults, this.$element.data(), options);
-		this.className = 'Magellan'; // ie9 back compat
+		this.options = $.extend({ }, Magellan.defaults, this.$element.data(), options);
+		this.className = 'Magellan'; // ie9 back compat.
 
-		// Triggers init is idempotent, just need to make sure it is initialized
+		// Triggers init is idempotent, just need to make sure it is initialized.
 		Triggers.init($);
 
 		this._init();
@@ -49,21 +49,23 @@ class Magellan extends Plugin {
 
 	/**
 	 * Initializes the Magellan plugin and calls functions to get equalizer functioning on load.
-   *
-   * @private
+	 *
+	 * @private
 	 */
 	_init() {
-		var id = this.$element[0].id || GetYoDigits(6, 'magellan');
+		var id = this.$element[0].id || GetYoDigits(  6, 'magellan' );
 		var _this = this;
-		this.$targets = $('[data-magellan-target]');
-		this.$links = this.$element.find('a');
-		this.$element.attr({
-			'data-resize': id,
-			'data-scroll': id,
-			'id': id
-		});
+		this.$targets = $( '[data-magellan-target]' );
+		this.$links = this.$element.find( 'a' );
+		this.$element.attr(
+			{
+				'data-resize': id,
+				'data-scroll': id,
+				'id': id
+			}
+		);
 		this.$active = $();
-		this.scrollPos = parseInt(window.pageYOffset, 10);
+		this.scrollPos = parseInt( window.pageYOffset, 10 );
 
 		this._events();
 	}
@@ -71,7 +73,7 @@ class Magellan extends Plugin {
 	/**
 	 * Calculates an array of pixel values that are the demarcation lines between locations on the page.
 	 * Can be invoked if new elements are added or the size of a location changes.
-   *
+	 *
 	 * @function
 	 */
 	calcPoints() {
@@ -80,31 +82,31 @@ class Magellan extends Plugin {
 				html = document.documentElement;
 
 		this.points = [];
-		this.winHeight = Math.round(Math.max(window.innerHeight, html.clientHeight));
-		this.docHeight = Math.round(Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight));
+		this.winHeight = Math.round( Math.max( window.innerHeight, html.clientHeight ) );
+		this.docHeight = Math.round( Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ) );
 
 		this.$targets.each(function(){
-			var $tar = $(this),
-					pt = Math.round($tar.offset().top - _this.options.threshold);
+			var $tar = $( this ),
+					pt = Math.round( $tar.offset().top - _this.options.threshold );
 			$tar.targetPoint = pt;
-			_this.points.push(pt);
+			_this.points.push( pt );
 		});
 	}
 
 	/**
 	 * Initializes events for Magellan.
-   *
+	 *
 	 * @private
 	 */
 	_events() {
 		var _this = this,
-				$body = $('html, body'),
+				$body = $( 'html, body' ),
 				opts = {
 					duration: _this.options.animationDuration,
 					easing: _this.options.animationEasing
 				};
 
-		$(window).one('load', function(){
+		$( window ).one( 'load', function(){
 			if(_this.options.deepLinking){
 				if(location.hash){
 					_this.scrollToLoc(location.hash);
@@ -138,7 +140,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Function to scroll to a given location on the page.
-   *
+	 *
 	 * @param {String} loc - a properly formatted jQuery id selector. Example: '#foo'
 	 * @function
 	 */
@@ -160,7 +162,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Calls necessary functions to update Magellan upon DOM change
-   *
+	 *
 	 * @function
 	 */
 	reflow() {
@@ -170,7 +172,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Updates the visibility of an active location link, and updates the url hash for the page, if deepLinking enabled.
-   *
+	 *
 	 * @private
 	 * @function
 	 * @fires Magellan#update
@@ -239,7 +241,7 @@ class Magellan extends Plugin {
 
 	/**
 	 * Destroys an instance of Magellan and resets the url of the window.
-   *
+	 *
 	 * @function
 	 */
 	_destroy() {
@@ -262,7 +264,7 @@ class Magellan extends Plugin {
 Magellan.defaults = {
 	/**
 	 * Amount of time, in ms, the animated scrolling should take between locations.
-   *
+	 *
 	 * @option
 	 * @type {number}
 	 * @default 500
@@ -270,7 +272,7 @@ Magellan.defaults = {
 	animationDuration: 500,
 	/**
 	 * Animation style to use when scrolling between locations. Can be `'swing'` or `'linear'`.
-   *
+	 *
 	 * @option
 	 * @type {string}
 	 * @default 'linear'
@@ -279,7 +281,7 @@ Magellan.defaults = {
 	animationEasing: 'linear',
 	/**
 	 * Number of pixels to use as a marker for location changes.
-   *
+	 *
 	 * @option
 	 * @type {number}
 	 * @default 50
@@ -287,7 +289,7 @@ Magellan.defaults = {
 	threshold: 50,
 	/**
 	 * Class applied to the active locations link on the magellan container.
-   *
+	 *
 	 * @option
 	 * @type {string}
 	 * @default 'is-active'
@@ -295,7 +297,7 @@ Magellan.defaults = {
 	activeClass: 'is-active',
 	/**
 	 * Allows the script to manipulate the url of the current page, and if supported, alter the history.
-   *
+	 *
 	 * @option
 	 * @type {boolean}
 	 * @default false
@@ -303,7 +305,7 @@ Magellan.defaults = {
 	deepLinking: false,
 	/**
 	 * Update the browser history with the active link, if deep linking is enabled.
-   *
+	 *
 	 * @option
 	 * @type {boolean}
 	 * @default false
@@ -311,7 +313,7 @@ Magellan.defaults = {
 	updateHistory: false,
 	/**
 	 * Number of pixels to offset the scroll of the page on item click if using a sticky nav bar.
-   *
+	 *
 	 * @option
 	 * @type {number}
 	 * @default 0
