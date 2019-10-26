@@ -196,7 +196,9 @@ class Magellan extends Plugin {
 	 * @fires Magellan#update
 	 */
 	_updateActive(/*evt, elem, scrollPos*/) {
-		if ( this._inTransition ) return;
+		if ( this._inTransition ) {
+			return
+		};
 
 		const newScrollPos = parseInt( window.pageYOffset, 10 );
 		const isScrollingUp = this.scrollPos > newScrollPos;
@@ -204,7 +206,9 @@ class Magellan extends Plugin {
 
 		let activeIdx;
 		// Before the first point: no link.
-		if ( newScrollPos < this.points[ 0 ] ) { /* do nothing */ }
+		if ( newScrollPos < this.points[ 0 ] ) {
+			// do nothing.
+		}
 		// At the bottom of the page: last link.
 		else if ( newScrollPos + this.winHeight === this.docHeight ) {
 			activeIdx = this.points.length - 1;
@@ -219,12 +223,14 @@ class Magellan extends Plugin {
 			activeIdx = visibleLinks.length ? visibleLinks.length - 1 : 0;
 		}
 
-		// Get the new active link
+		// Get the new active link.
 		const $oldActive = this.$active;
 		let activeHash = '';
 		if ( typeof activeIdx !== 'undefined' ) {
 			this.$active = this.$links.filter( '[href="#' + this.$targets.eq( activeIdx ).data( 'magellan-target' ) + '"]' );
-			if ( this.$active.length ) activeHash = this.$active[ 0 ].getAttribute( 'href' );
+			if ( this.$active.length ) {
+				activeHash = this.$active[ 0 ].getAttribute( 'href' );
+			}
 		} else {
 			this.$active = $();
 		}
@@ -256,6 +262,7 @@ class Magellan extends Plugin {
 			/**
 			 *
 			 * Fires when magellan is finished updating to the new active element.
+			 *
 			 * @event Magellan#update
 			 */
 			this.$element.trigger( 'update.zf.magellan', [ this.$active ] );
@@ -277,7 +284,9 @@ class Magellan extends Plugin {
 		}
 
 		$( window ).off( 'hashchange', this._deepLinkScroll )
-		if ( this.onLoadListener ) $( window ).off( this.onLoadListener );
+		if ( this.onLoadListener ) {
+			$( window ).off( this.onLoadListener );
+		}
 	}
 }
 
