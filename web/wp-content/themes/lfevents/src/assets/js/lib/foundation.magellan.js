@@ -208,13 +208,9 @@ class Magellan extends Plugin {
 		// Before the first point: no link.
 		if ( newScrollPos < this.points[ 0 ] ) {
 			// do nothing.
-		}
-		// At the bottom of the page: last link.
-		else if ( newScrollPos + this.winHeight === this.docHeight ) {
+		} else if ( newScrollPos + this.winHeight === this.docHeight ) {
 			activeIdx = this.points.length - 1;
-		}
-		// Otherwhise, use the last visible link.
-		else {
+		} else {
 			const visibleLinks = this.points.filter(
 				( p, i ) => {
 					return ( p - this.options.offset - ( isScrollingUp ? this.options.threshold : 0 ) ) <= newScrollPos;
