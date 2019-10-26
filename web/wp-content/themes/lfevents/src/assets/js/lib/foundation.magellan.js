@@ -213,7 +213,7 @@ class Magellan extends Plugin {
 		} else {
 			const visibleLinks = this.points.filter(
 				( p, i ) => {
-					return ( p - this.options.offset - ( isScrollingUp ? this.options.threshold : 0 ) ) <= newScrollPos;
+				return ( p - this.options.offset - ( isScrollingUp ? this.options.threshold : 0 ) ) <= newScrollPos;
 				}
 			);
 			activeIdx = visibleLinks.length ? visibleLinks.length - 1 : 0;
