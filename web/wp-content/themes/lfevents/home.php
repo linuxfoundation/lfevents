@@ -77,7 +77,10 @@ get_template_part( 'template-parts/global-nav' );
 							'post_parent' => 0,
 							'no_found_rows' => true,
 							'meta_key'   => 'lfes_date_start',
-							'orderby'    => 'meta_value',
+							'orderby'    => array(
+								'meta_value' => 'ASC',
+								'title'      => 'ASC',
+							),
 							'order'      => 'ASC',
 							'post_status' => array( 'publish' ),
 							'posts_per_page' => 100,
