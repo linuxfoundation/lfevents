@@ -94,6 +94,7 @@ get_template_part( 'template-parts/global-nav' );
 							$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
 							$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+							$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
 							$description = get_post_meta( $post->ID, 'lfes_description', true );
 
 							$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
@@ -156,7 +157,11 @@ get_template_part( 'template-parts/global-nav' );
 										echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
 									}
 
-									if ( ! $register_url && ! $speak_url && ! $sponsor_url ) {
+									if ( $schedule_url ) {
+										echo '<a href="' . esc_url( $schedule_url ) . '">Schedule</a>';
+									}
+
+									if ( ! $register_url && ! $speak_url && ! $sponsor_url && ! $schedule_url ) {
 										echo '<a href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
 									}
 									?>

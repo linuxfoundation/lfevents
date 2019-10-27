@@ -687,6 +687,17 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/sponsors/become-and-sponsor/' ),
 								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'cta_schedule_url',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_schedule_url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'CTA Schedule URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/schedule/' ),
+								),
 							),
 						),
 						array(
