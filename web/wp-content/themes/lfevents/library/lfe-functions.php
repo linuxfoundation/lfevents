@@ -122,7 +122,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 
-	echo '<li><a href="' . esc_url( home_url( '/about/calendar/archive/' ) ) . '?_sft_lfevent-category=' . $term[0]->slug . '"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_' . $menu_text_color . '.svg' ) . '"><span class="subtext">Past ' . $term[0]->name . '</span></a></li>'; //phpcs:ignore
+	echo '<li><a href="' . esc_url( home_url( '/about/calendar/archive/' ) ) . '?_sft_lfevent-category=' . $term[0]->slug . '"><span class="subtext">Past ' . $term[0]->name . '</span></a></li>'; //phpcs:ignore
 
 	echo '</ul></li>';
 }
