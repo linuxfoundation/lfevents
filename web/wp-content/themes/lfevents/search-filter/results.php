@@ -26,6 +26,14 @@ echo '<div class="grid-x grid-margin-x">';
 if ( $query->have_posts() ) {
 	$y = 0;
 	$month = 0;
+
+	$full_count = $wpdb->get_var( "select count(*) from wp_posts where wp_posts.post_type = 'case_study' and wp_posts.post_status = 'publish'" );
+	if ( $full_count == $query->found_posts ) {	
+		echo '<p class="results-count">Displaying ' . $query->found_posts . ' case studies</p>';
+	} else {
+		echo '<p class="results-count">Displaying ' . $query->found_posts . ' of ' . $full_count . ' case studies</p>';
+	}
+
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		if ( 'page' == $post->post_type ) {
