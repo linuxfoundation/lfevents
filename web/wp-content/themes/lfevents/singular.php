@@ -19,59 +19,65 @@ if ( $post->post_parent ) {
 	$parent_id = $post->ID;
 }
 
-// menu background color.
-$menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
-$menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
-$menu_color_3 = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
-$menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
-$background_style = 'background-color: ' . $menu_color . ';';
-if ( $menu_color_2 ) {
-	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
-}
-$text_style = 'color: ' . $menu_text_color . ';';
+$no_topnav = get_post_meta( $post->ID, 'lfes_no_topnav', true );
+if ( ! $no_topnav ) {
+	// menu background color.
+	$menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
+	$menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+	$menu_color_3 = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
+	$menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
+	$background_style = 'background-color: ' . $menu_color . ';';
+	if ( $menu_color_2 ) {
+		$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+	}
+	$text_style = 'color: ' . $menu_text_color . ';';
 
-$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
-if ( $logo ) {
-	$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
-} else {
-	$event_link_content = get_the_title( $parent_id );
-}
+	$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
+	if ( $logo ) {
+		$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
+	} else {
+		$event_link_content = get_the_title( $parent_id );
+	}
 
-?>
+	?>
 
-<div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html( $background_style . $text_style ); ?>">
+	<div data-sticky-container>
+		<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html( $background_style . $text_style ); ?>">
 
-		<div class="pre-nav">
-			<?php
-			echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
-			?>
-
-			<button class="menu-toggler button alignright" data-toggle="event-menu">
-				<span class="hamburger-icon"></span>
-			</button>
-		</div>
-
-		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
-			<ul class="event-menu-list">
-				<li class="page_item event-home-link" id="popout-header-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>" style="background-color:<?php echo $menu_color; ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
+			<div class="pre-nav">
 				<?php
-				if ( $menu_color_3 ) {
-					$background_style_solid = 'background: ' . $menu_color_3 . ';';
-				} else {
-					$background_style_solid = $background_style;
-				}
-				$children = lfe_get_event_menu( $parent_id, $post->post_type, $background_style_solid );
-				if ( $children ) {
-					echo $children; //phpcs:ignore
-				}
-				lfe_get_other_events( $parent_id, $background_style_solid, $menu_text_color );
+				echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 				?>
-			</ul>
-		</nav>
 
-	</header>
-</div>
+				<button class="menu-toggler button alignright" data-toggle="event-menu">
+					<span class="hamburger-icon"></span>
+				</button>
+			</div>
+
+			<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
+				<ul class="event-menu-list">
+					<li class="page_item event-home-link" id="popout-header-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>" style="background-color:<?php echo $menu_color; ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
+					<?php
+					if ( $menu_color_3 ) {
+						$background_style_solid = 'background: ' . $menu_color_3 . ';';
+					} else {
+						$background_style_solid = $background_style;
+					}
+					$children = lfe_get_event_menu( $parent_id, $post->post_type, $background_style_solid );
+					if ( $children ) {
+						echo $children; //phpcs:ignore
+					}
+					lfe_get_other_events( $parent_id, $background_style_solid, $menu_text_color );
+					?>
+				</ul>
+			</nav>
+
+		</header>
+	</div>
+
+	<?php
+}
+?>
 
 <div class="main-container">
   <div class="main-grid">
