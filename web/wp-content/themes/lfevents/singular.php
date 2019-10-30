@@ -19,8 +19,8 @@ if ( $post->post_parent ) {
 	$parent_id = $post->ID;
 }
 
-$no_topnav = get_post_meta( $post->ID, 'lfes_no_topnav', true );
-if ( ! $no_topnav ) {
+$splash_page = get_post_meta( $post->ID, 'lfes_splash_page', true );
+if ( ! $splash_page ) {
 	// menu background color.
 	$menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
 	$menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
@@ -75,6 +75,27 @@ if ( ! $no_topnav ) {
 		</header>
 	</div>
 
+	<?php
+} else {
+
+	if ( is_lfeventsci() ) {
+		$home_img = 'logo_lfevents_white.svg';
+	} else {
+		$home_img = 'logo_lfasiallc_white.svg';
+	}
+	?>
+	
+	<div data-sticky-container>
+		<header class="main-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;">
+	
+			<button class="menu-toggler button alignright hide-for-large" data-toggle="main-menu">
+				<span class="hamburger-icon"></span>
+			</button>
+	
+			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
+	
+		</header>
+	</div>
 	<?php
 }
 ?>
