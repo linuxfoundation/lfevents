@@ -105,7 +105,7 @@ Frontend styles for gutenberg blocks
 			}
 		}
 
-		&.alignfull:not(:last-child) {
+		&.alignfull:last-child {
 			margin-bottom: 0 !important;
 		}
 	}
