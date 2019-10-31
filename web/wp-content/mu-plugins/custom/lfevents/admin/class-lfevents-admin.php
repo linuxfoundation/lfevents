@@ -716,6 +716,18 @@ class LFEvents_Admin {
 									'input_label'   => __( 'Hide from Event menu', 'my_plugin' ), // Required.
 									'help'          => __( 'This will stop this particular page from showing on the Event top navigation menu.' ),
 								),
+								array(
+									'type'          => 'checkbox', // Required.
+									'id'            => 'splash_page',
+									'data_type'     => 'meta',
+									'data_key'      => 'splash_page', // Required if 'data_type' is 'meta'.
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => false,
+									'use_toggle'    => false,
+									'input_label'   => __( 'Splash Page', 'my_plugin' ), // Required.
+									'help'          => __( 'This will make the page display a minimal topnav appropriate for an event splash page.' ),
+								),
 							),
 						),
 					),

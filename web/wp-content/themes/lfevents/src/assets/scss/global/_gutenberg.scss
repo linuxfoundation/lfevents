@@ -104,6 +104,10 @@ Frontend styles for gutenberg blocks
 				padding-left: 0;
 			}
 		}
+
+		&.alignfull:last-child {
+			margin-bottom: 0 !important;
+		}
 	}
 
 	// TODO: The above star selector for max content width is heavy-handed.
