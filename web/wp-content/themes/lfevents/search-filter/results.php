@@ -38,7 +38,7 @@ if ( $query->have_posts() ) {
 			$post_types .= "'lfevent" . $x . "'";
 		}
 
-		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type IN (" . $post_types . ") AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" );
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type IN (" . $post_types . ") AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" ); //phpcs:ignore
 	}
 
 	$y = 0;
