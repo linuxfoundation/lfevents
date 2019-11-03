@@ -19,28 +19,39 @@
  * http://codex.wordpress.org/Template_Tags
  */
 
-global $post;
+global $post, $wpdb;
 
 echo '<div class="grid-x grid-margin-x">';
 
 if ( $query->have_posts() ) {
+	if ( 138 == $query->query['search_filter_id'] ) {
+		$is_upcoming_events = true;
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0" );
+	} else {
+		$is_upcoming_events = false;
+		$post_types   = '';
+		$current_year = date( 'Y' );
+		for ( $x = 2017; $x <= $current_year; $x++ ) {
+			if ( $post_types ) {
+				$post_types .= ', ';
+			}
+			$post_types .= "'lfevent" . $x . "'";
+		}
+
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type IN (" . $post_types . ") AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" );
+	}
+
 	$y = 0;
 	$month = 0;
 
-	$full_count = $wpdb->get_var( "select count(*) from wp_posts where wp_posts.post_type = 'case_study' and wp_posts.post_status = 'publish'" );
-	if ( $full_count == $query->found_posts ) {	
-		echo '<p class="results-count">Displaying ' . $query->found_posts . ' case studies</p>';
+	if ( $full_count == $query->found_posts ) {
+		echo '<p class="cell results-count">Displaying ' . esc_html( $query->found_posts ) . ' events</p>';
 	} else {
-		echo '<p class="results-count">Displaying ' . $query->found_posts . ' of ' . $full_count . ' case studies</p>';
+		echo '<p class="cell results-count">Displaying ' . esc_html( $query->found_posts ) . ' of ' . esc_html( $full_count ) . ' events</p>';
 	}
 
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		if ( 'page' == $post->post_type ) {
-			$is_upcoming_events = true;
-		} else {
-			$is_upcoming_events = false;
-		}
 		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
 		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
 		$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
