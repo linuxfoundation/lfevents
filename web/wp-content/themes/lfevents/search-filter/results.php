@@ -36,10 +36,12 @@ if ( $query->have_posts() ) {
 	$y = 0;
 	$month = 0;
 
-	if ( $full_count == $query->found_posts ) {
-		echo '<p class="cell results-count">Displaying ' . esc_html( $query->found_posts ) . ' events</p>';
-	} else {
-		echo '<p class="cell results-count">Displaying ' . esc_html( $query->found_posts ) . ' of ' . esc_html( $full_count ) . ' events</p>';
+	if ( $full_count > 1 ) {
+		if ( $full_count == $query->found_posts ) {
+			echo '<p class="cell results-count">Displaying ' . esc_html( $query->found_posts ) . ' events</p>';
+		} else {
+			echo '<p class="cell results-count">Displaying ' . esc_html( $query->found_posts ) . ' of ' . esc_html( $full_count ) . ' events</p>';
+		}
 	}
 
 	while ( $query->have_posts() ) {
