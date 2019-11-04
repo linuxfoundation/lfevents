@@ -44,6 +44,12 @@ function lfe_get_related_events( $parent_id ) {
 				'terms'    => $term[0],
 			),
 		),
+		'meta_query' => array(
+			array(
+				'key'     => 'lfes_event_has_passed',
+				'compare' => 'NOT EXISTS',
+			),
+		),
 		'orderby'   => 'meta_value',
 		'meta_key'  => 'lfes_date_start',
 		'order'     => 'ASC',
