@@ -106,6 +106,13 @@
           &.current-menu-item > a,
           &.current-lfe_about_page-ancestor > a {
             background-color: rgba(0,0,0,0.2);
+            box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+          }
+        }
+
+        @include breakpoint(xxlarge) {
+          &.current-menu-item > a,
+          &.current-lfe_about_page-ancestor > a {
             box-shadow: 0 1.5rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
           }
         }
