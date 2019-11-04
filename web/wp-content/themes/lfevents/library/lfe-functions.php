@@ -34,8 +34,6 @@ function lfe_get_related_events( $parent_id ) {
 		'post_type'   => 'page',
 		'post_parent' => 0,
 		'no_found_rows' => true,  // used to improve performance.
-		'update_post_meta_cache' => false, // used to improve performance.
-		'update_post_term_cache' => false, // used to improve performance.
 		'post__not_in' => array( $parent_id ), // ignores current post.
 		'tax_query'   => array(
 			array(
