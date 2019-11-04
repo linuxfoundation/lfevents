@@ -24,7 +24,7 @@ global $post, $wpdb;
 echo '<div class="grid-x grid-margin-x">';
 
 if ( $query->have_posts() ) {
-	if ( 138 == $query->query['search_filter_id'] ) {
+	if ( 138 == $query->query['search_filter_id'] || 42 == $query->query['search_filter_id'] ) {
 		$is_upcoming_events = true;
 		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_event_has_passed' ) AND (wp_postmeta.meta_value != 1) AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0" );
 	} else {
