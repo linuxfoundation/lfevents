@@ -81,6 +81,13 @@ get_template_part( 'template-parts/global-nav' );
 								'meta_value' => 'ASC',
 								'title'      => 'ASC',
 							),
+							'meta_query' => array(
+								array(
+									'key'     => 'lfes_event_has_passed',
+									'compare' => '!=',
+									'value' => '1',
+								),
+							),
 							'order'      => 'ASC',
 							'post_status' => array( 'publish' ),
 							'posts_per_page' => 100,
@@ -96,15 +103,6 @@ get_template_part( 'template-parts/global-nav' );
 							$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 							$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
 							$description = get_post_meta( $post->ID, 'lfes_description', true );
-
-							$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-							$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
-							$dt_now = new DateTime( 'now' );
-							if ( $dt_date_end_1d_after < $dt_now ) {
-								// event has passed so don't show it on the homepage.
-								continue;
-							}
-
 							?>
 
 							<div id="post-<?php the_ID(); ?>" class="cell medium-6">
