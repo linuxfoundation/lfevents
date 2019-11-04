@@ -47,7 +47,8 @@ function lfe_get_related_events( $parent_id ) {
 		'meta_query' => array(
 			array(
 				'key'     => 'lfes_event_has_passed',
-				'compare' => 'NOT EXISTS',
+				'compare' => '!=',
+				'value' => '1',
 			),
 		),
 		'orderby'   => 'meta_value',
