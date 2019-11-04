@@ -29,16 +29,8 @@ if ( $query->have_posts() ) {
 		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0" );
 	} else {
 		$is_upcoming_events = false;
-		$post_types   = '';
-		$current_year = date( 'Y' );
-		for ( $x = 2017; $x <= $current_year; $x++ ) {
-			if ( $post_types ) {
-				$post_types .= ', ';
-			}
-			$post_types .= "'lfevent" . $x . "'";
-		}
-
-		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type IN (" . $post_types . ") AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" ); //phpcs:ignore
+		$post_types = lfe_get_post_types();
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_date_start' ) AND wp_posts.post_type IN ('" . implode( "', '", $post_types ) . "') AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" ); //phpcs:ignore
 	}
 
 	$y = 0;
@@ -59,6 +51,18 @@ if ( $query->have_posts() ) {
 		$dt_cfp_date_start = new DateTime( $cfp_date_start );
 		$dt_cfp_date_end = new DateTime( $cfp_date_end );
 		$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
+		$lfes_event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
+
+		if ( ! $lfes_event_has_passed ) {
+			// check to see if event has passed.
+			$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+			$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
+			$dt_now = new DateTime( 'now' );
+			if ( $dt_date_end_1d_after < $dt_now ) {
+				// event has passed and we should set lfes_event_has_passed.
+				update_post_meta( $post->ID, 'lfes_event_has_passed', true );
+			}
+		}
 
 		if ( $is_upcoming_events ) {
 			if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
