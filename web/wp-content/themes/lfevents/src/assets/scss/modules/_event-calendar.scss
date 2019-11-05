@@ -48,6 +48,7 @@
 }
 
 form.searchandfilter {
+  margin-bottom: $global-margin;
 
   > ul {
     margin: 0;
@@ -134,7 +135,7 @@ form.searchandfilter {
 }
 
 .results-count {
+  margin-top: -$global-margin;
   margin-bottom: $global-margin * 2;
   color: $dark-gray;
-  // font-weight: 200;
 }
