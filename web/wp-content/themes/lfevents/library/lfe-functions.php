@@ -127,7 +127,11 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 
-	echo '<li><a href="' . esc_url( home_url( '/about/calendar/archive/' ) ) . '?_sft_lfevent-category=' . $term[0]->slug . '"><span class="subtext">Past ' . $term[0]->name . '</span></a></li>'; //phpcs:ignore
+	if ( $term[0] ) {
+		echo '<li><a href="' . esc_url( home_url( '/about/calendar/archive/' ) ) . '?_sft_lfevent-category=' . $term[0]->slug . '"><span class="subtext">Past ' . $term[0]->name . '</span></a></li>'; //phpcs:ignore
+	} else {
+		echo '<li><a href="' . esc_url( home_url( '/about/calendar/archive/' ) ) . '"><span class="subtext">All Past Events</span></a></li>'; //phpcs:ignore
+	}
 
 	echo '</ul></li>';
 }
