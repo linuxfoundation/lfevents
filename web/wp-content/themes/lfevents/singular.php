@@ -118,9 +118,9 @@ if ( ! $splash_page ) {
 		<figure class="figure-container">
 				<?php
 				if ( has_post_thumbnail() ) {
-					echo wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'fp-large', false, array( 'class' => 'f' ) );
+					echo wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'fp-xlarge', false, array( 'class' => 'f' ) );
 				} else {
-					echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-large', false, array( 'class' => '' ) );
+					echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-xlarge', false, array( 'class' => '' ) );
 				}
 				?>
 		</figure>
