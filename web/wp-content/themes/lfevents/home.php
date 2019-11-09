@@ -81,13 +81,6 @@ get_template_part( 'template-parts/global-nav' );
 								'meta_value' => 'ASC',
 								'title'      => 'ASC',
 							),
-							'meta_query' => array(
-								array(
-									'key'     => 'lfes_event_has_passed',
-									'compare' => '!=',
-									'value' => '1',
-								),
-							),
 							'order'      => 'ASC',
 							'post_status' => array( 'publish' ),
 							'posts_per_page' => 100,
@@ -96,6 +89,12 @@ get_template_part( 'template-parts/global-nav' );
 					if ( $query->have_posts() ) {
 						while ( $query->have_posts() ) {
 							$query->the_post();
+							$hide_from_listings = get_post_meta( $post->ID, 'lfes_hide_from_listings', true );
+							$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
+							if ( 'hide' === $hide_from_listings || $event_has_passed ) {
+								continue;
+							}
+
 							$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
 							$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
 							$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );

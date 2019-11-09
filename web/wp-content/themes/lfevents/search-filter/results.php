@@ -26,11 +26,11 @@ echo '<div class="grid-x grid-margin-x">';
 if ( $query->have_posts() ) {
 	if ( 138 == $query->query['search_filter_id'] || 42 == $query->query['search_filter_id'] ) {
 		$is_upcoming_events = true;
-		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_event_has_passed' ) AND (wp_postmeta.meta_value != 1) AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0" );
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value != 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0" );
 	} else {
 		$is_upcoming_events = false;
 		$post_types = lfe_get_post_types();
-		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE ( wp_postmeta.meta_key = 'lfes_event_has_passed' ) AND (wp_postmeta.meta_value = 1) AND wp_posts.post_type IN ('" . implode( "', '", $post_types ) . "') AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" ); //phpcs:ignore
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value = 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type IN ('" . implode( "', '", $post_types ) . "') AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" ); //phpcs:ignore
 	}
 
 	$y = 0;
@@ -53,9 +53,9 @@ if ( $query->have_posts() ) {
 		$dt_cfp_date_start = new DateTime( $cfp_date_start );
 		$dt_cfp_date_end = new DateTime( $cfp_date_end );
 		$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
-		$lfes_event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
+		$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
 
-		if ( ! $lfes_event_has_passed ) {
+		if ( ! $event_has_passed ) {
 			// check to see if event has passed.
 			$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
 			$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );

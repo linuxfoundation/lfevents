@@ -286,18 +286,18 @@ class LFEvents_Admin {
 		);
 
 		$sidebar = array(
-			'id'              => 'lfevent-sidebar',
+			'id'              => 'lfevent-sidebar-event',
 			'id_prefix'       => 'lfes_',
 			'label'           => __( 'Event Settings' ),
 			'post_type'       => $this->post_types,
 			'data_key_prefix' => 'lfes_',
-			'icon_dashicon'   => 'list-view',
+			'icon_dashicon'   => 'format-gallery',
 			'tabs'            => array(
 				array(
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General Settings' ),
+							'label'    => __( 'General' ),
 							'initial_open' => false,
 							'settings' => array(
 								array(
@@ -701,8 +701,65 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Page Options' ),
+							'label'    => __( 'Advanced' ),
 							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'radio',
+									'id'            => 'hide_from_listings',
+									'data_type'     => 'meta',
+									'data_key'      => 'hide_from_listings', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Hide from Homepage and Calendars' ),
+									'help'          => __( 'This will hide the Event form the homepage and calendars.' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => 'show',
+									'options'         => array( // Required.
+										'show' => __( 'Show', 'my_plugin' ),
+										'hide' => __( 'Hide', 'my_plugin' ),
+									),
+								),
+								array(
+									'type'          => 'radio',
+									'id'            => 'event_has_passed',
+									'data_type'     => 'meta',
+									'data_key'      => 'event_has_passed', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Event Has Passed' ),
+									'help'          => __( 'This value will update automatically so no need to touch it.' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '0',
+									'options'         => array( // Required.
+										'1' => __( 'True', 'my_plugin' ),
+										'0' => __( 'False', 'my_plugin' ),
+									),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		// Push the $sidebar we just assigned to the variable
+		// to the array of $sidebars that comes in the function argument.
+		$sidebars[] = $sidebar;
+
+
+		$sidebar = array(
+			'id'              => 'lfevent-sidebar-page',
+			'id_prefix'       => 'lfes_',
+			'label'           => __( 'Page Settings' ),
+			'post_type'       => $this->post_types,
+			'data_key_prefix' => 'lfes_',
+			'icon_dashicon'   => 'media-spreadsheet',
+			'tabs'            => array(
+				array(
+					'label'  => __( 'Tab label' ),
+					'panels' => array(
+						array(
+							'label'    => __( 'General' ),
+							'initial_open' => true,
 							'settings' => array(
 								array(
 									'type'          => 'checkbox', // Required.
@@ -738,6 +795,7 @@ class LFEvents_Admin {
 		// Push the $sidebar we just assigned to the variable
 		// to the array of $sidebars that comes in the function argument.
 		$sidebars[] = $sidebar;
+
 
 		$sidebar = array(
 			'id'              => 'lfe-speaker-sidebar',
@@ -820,7 +878,7 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General Settings' ),
+							'label'    => __( 'General' ),
 							'initial_open' => true,
 							'settings' => array(
 								array(
