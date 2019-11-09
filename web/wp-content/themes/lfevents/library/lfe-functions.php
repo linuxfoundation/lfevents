@@ -294,8 +294,9 @@ EOD;
  *
  * @param datetime $start_date The start date.
  * @param datetime $end_date The end date.
+ * @param string   $ch_separator The separator to use between english and chinese dates.
  */
-function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
+function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ' ) {
 
 	$date_range = '';
 
@@ -341,7 +342,7 @@ function jb_verbose_date_range( $start_date = '', $end_date = '' ) {
 	if ( is_lfeventsci() ) {
 		return $date_range;
 	} else {
-		return $date_range_ch . ' ' . $date_range;
+		return $date_range_ch . $ch_separator . $date_range;
 	}
 }
 

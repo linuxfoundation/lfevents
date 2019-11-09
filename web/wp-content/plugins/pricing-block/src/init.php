@@ -155,7 +155,7 @@ function block_callback( $att ) {
 
 					$html .= '<div class="price-window" style="background-color:' . $color . '">';
 					$html .= '<h5 class="price-window--name">' . $top_labels[ $i ];
-					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end ) . '</small>';
+					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end, '<br>' ) . '</small>';
 					$html .= '</h5>';
 					$html .= '</div>';
 					$html .= '<div class="price-amount">';
