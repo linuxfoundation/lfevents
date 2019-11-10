@@ -55,6 +55,9 @@ if ( $query->have_posts() ) {
 		$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
 		$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
 
+		// WILL DELETE THIS LINE.
+		update_post_meta( $post->ID, 'lfes_hide_from_listings', false );
+
 		if ( ! $event_has_passed ) {
 			// check to see if event has passed.
 			$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
