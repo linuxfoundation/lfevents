@@ -170,4 +170,16 @@
       text-align: center;
     }
   }
+
+  // overrides for the LFAsia
+  .lfasiallcci & {
+
+    @include breakpoint(large) {
+      padding-top: 5.5rem;
+
+      .price-window {
+        height: 5.5rem;
+      }
+    }
+  }
 }
