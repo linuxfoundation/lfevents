@@ -7,17 +7,24 @@
   }
 }
 
-#switch-archive-view {
+.switch-archive-view {
   font-weight: $global-weight-bold;
-  margin-bottom: 0;
   float: right;
 
   @include breakpoint(small only) {
     font-size: rem-calc(12);
   }
 
-  @include breakpoint(medium) {
-    margin-top: 1rem;
+  &.top {
+    margin-bottom: 0;
+
+    @include breakpoint(medium) {
+      margin-top: 1rem;
+    }
+  }
+
+  &.bottom {
+    margin-bottom: $global-margin * 3;
   }
 }
 

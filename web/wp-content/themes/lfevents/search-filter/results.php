@@ -179,20 +179,21 @@ $( document ).ready( function() {
 	}
 	?>
 
-	if ( $( '#switch-archive-view' ).length === 0 ) {
-		$( '#event-calendar-header' ).append( '<a class="button" id="switch-archive-view" href="#"></a>' );
+	if ( $( '.switch-archive-view' ).length === 0 ) {
+		$( '#event-calendar-header' ).append( '<a class="button switch-archive-view top" href="#"></a>' );
+		$( '.search-filter-results' ).append( '<hr><div class="clearfix"><a class="button switch-archive-view bottom" href="#"></a></div>' );
 	}
 	var currentUrl = $( location ).attr( 'href' )
 	if ( -1 == currentUrl.indexOf( 'calendar/archive' ) ) {
 		//we are on the event-calendar page.
 		newUrl = currentUrl.replace( 'calendar', 'calendar/archive' );
-		$( '#switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
-		$( '#switch-archive-view' ).html( viewPastEventsText );
+		$( '.switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
+		$( '.switch-archive-view' ).html( viewPastEventsText );
 	} else {
 		//we are on the event-calendar/archive page.
 		newUrl = currentUrl.replace( 'calendar/archive', 'calendar' );
-		$( '#switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
-		$( '#switch-archive-view' ).html( viewUpcomingEventsText );
+		$( '.switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
+		$( '.switch-archive-view' ).html( viewUpcomingEventsText );
 	}
 });
 </script>
