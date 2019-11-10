@@ -19,5 +19,5 @@
 		<?php wp_head(); ?>
 		<?php lfe_insert_structured_data(); ?>
 	</head>
-	<body <?php body_class(); ?>>
+	<body <?php body_class( $_ENV['PANTHEON_SITE_NAME'] ); ?>>
 		<div class="site-container">
