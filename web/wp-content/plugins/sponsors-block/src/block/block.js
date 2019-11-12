@@ -176,7 +176,7 @@ registerBlockType( 'cgb/sponsors-block', {
           if ( image.description ) {
             return (
               <div class="sponsors-logo-item">
-                <a href={image.description} target="_blank">
+                <a href={image.description}>
                   <img
                     src={image.url}
                     alt={image.alt}
