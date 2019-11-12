@@ -120,7 +120,7 @@ registerBlockType( 'cgb/sponsors-block', {
           value={ tierSize }
           onChange={ onTierSizeChange }
           options={ [
-            { value: 'Jumbo', label: 'Jumbo' },
+            { value: 'jumbo', label: 'Jumbo' },
             { value: 'largest', label: 'Largest' },
             { value: 'larger', label: 'Larger' },
             { value: 'large', label: 'Large' },
