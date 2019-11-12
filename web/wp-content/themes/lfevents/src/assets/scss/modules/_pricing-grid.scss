@@ -175,10 +175,18 @@
   .lfasiallcci & {
 
     @include breakpoint(large) {
-      padding-top: 5.5rem;
+      padding-top: 7rem;
 
       .price-window {
-        height: 5.5rem;
+        height: 7rem;
+      }
+
+      .price-window--name {
+        line-height: 1.2;
+      }
+
+      .price-window--date-range {
+        margin-top: rem-calc(4);
       }
     }
   }
