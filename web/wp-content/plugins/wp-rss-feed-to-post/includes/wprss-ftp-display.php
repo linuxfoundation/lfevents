@@ -41,6 +41,10 @@ final class WPRSS_FTP_Display {
         // Filter the canonical URL for imported posts, so that the <link rel="canonical"> tag has a "href" attribute
         // that links to the original article
         add_filter( 'get_canonical_url', array( 'WPRSS_FTP_Display', 'canonical_url' ), 10, 2 );
+
+        // Filter YoastSEO's Facebook OpenGraph URL to point to the imported post. By default, YoastSEO uses the
+        // canonical link, which Feed to Post sets to the original article.
+        add_filter('wpseo_opengraph_url', array( 'WPRSS_FTP_Display', 'yoast_seo_og_url' ) );
 	}
 
 
@@ -206,6 +210,34 @@ final class WPRSS_FTP_Display {
         ?><meta name="generator" content="Feed to Post <?php echo WPRSS_FTP_VERSION; ?>" /><?php
         echo "\n";
 	}
+
+    /**
+     * Filter's YoastSEO's OpenGraph URL to point to the imported post, not the actual one.
+     *
+     * @since 3.10
+     *
+     * @param string $url The URL to filter.
+     *
+     * @return string The filtered URL.
+     */
+    public static function yoast_seo_og_url($url) {
+        // Get the current post
+        global $post;
+        if (!$post) {
+            return $url;
+        }
+
+        // Get the feed source for this post
+        $source = WPRSS_FTP_Meta::get_instance()->get_meta($post->ID, 'feed_source');
+
+        // If not an imported post, abort
+        if ($source === '') {
+            return $url;
+        }
+
+        // Return the local permalink of the post
+        return get_permalink($post);
+    }
 
     /**
      * Filters the canonical link for imported posts.

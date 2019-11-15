@@ -44,7 +44,8 @@ function get_items( $request ) {
 	$data = $request->get_params();
 
 	if ( empty( $data['post_id'] ) || empty( $data['post_type'] ) ) {
-		return null;
+		// Gutenberg throws the error invalid_json if null is sent.
+		return false;
 	}
 
 	$post_id   = $data['post_id'];
@@ -54,11 +55,13 @@ function get_items( $request ) {
 	$props_raw = apply_filters( 'pmc_create_sidebar', array() );
 
 	if ( ! is_array( $props_raw ) ) {
-		return null;
+		// Gutenberg throws the error invalid_json if null is sent.
+		return false;
 	}
 
 	if ( empty( $props_raw ) ) {
-		return null;
+		// Gutenberg throws the error invalid_json if null is sent.
+		return false;
 	}
 
 	// Create the class instances for each item: sidebars, tabs, panels and settings.
@@ -71,7 +74,8 @@ function get_items( $request ) {
 		empty( $instances['panels'] ) ||
 		empty( $instances['settings'] )
 	) {
-		return null;
+		// Gutenberg throws the error invalid_json if null is sent.
+		return false;
 	}
 
 	// Set this property here, as the post id wasn't available before.
@@ -94,7 +98,8 @@ function get_items( $request ) {
 		empty( $props['panels'] ) ||
 		empty( $props['settings'] )
 	) {
-		return null;
+		// Gutenberg throws the error invalid_json if null is sent.
+		return false;
 	}
 
 	return $props;

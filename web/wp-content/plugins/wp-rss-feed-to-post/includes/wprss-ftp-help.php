@@ -150,6 +150,7 @@ if ( class_exists('WPRSS_Help') ) {
                                         This option will not shorten the actual contents of the posts. Instead, it will create a copy of the contents, trim it and put it as the posts\' excerpts.
                                         Use this option if your theme supports excerpts and you wish to show excerpts on your site when listing multiple posts, but show the full content of the post on the post\'s page.',
 
+		'trimming_ellipsis'			=>  __('Tick this box to add an ellipsis (triple dots) at the end of the trimmed text', 'wprss'),
     );
 
     $help->add_tooltips( $tooltips, WPRSS_FTP_HELP_PREFIX );

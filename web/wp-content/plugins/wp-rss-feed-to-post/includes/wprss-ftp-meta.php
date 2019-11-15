@@ -546,6 +546,11 @@ class WPRSS_FTP_Meta {
 						'excerpt'		=>	__( 'Generate an excerpt', WPRSS_TEXT_DOMAIN ),
 					),
 				),
+				'trimming_ellipsis' => array(
+					'label'		=>	__( 'Add ellipsis', WPRSS_TEXT_DOMAIN ),
+					'type'		=>	'checkbox',
+					'default'	=>	'false',
+				),
 			),
 
             'integrations' => array(

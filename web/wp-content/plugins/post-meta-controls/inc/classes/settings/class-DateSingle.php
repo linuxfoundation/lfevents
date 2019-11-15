@@ -18,7 +18,7 @@ class DateSingle extends Setting {
 			'default_value'     => '',
 			'format'            => 'DD/MM/YYYY',
 			'locale'            => 'en',
-			'unavailable_dates' => [],
+			'unavailable_dates' => array( array( 'before', 'today' ) ),
 		);
 
 		$parent_defaults = Setting::get_defaults();

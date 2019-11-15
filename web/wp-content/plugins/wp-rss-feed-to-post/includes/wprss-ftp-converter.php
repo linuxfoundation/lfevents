@@ -361,23 +361,17 @@ final class WPRSS_FTP_Converter {
 		$post_site		= apply_filters( 'wprss_ftp_converter_post_site',	  $options['post_site'], $source );
 		$post_comments = ( WPRSS_FTP_Utils::multiboolean( $post_comments ) === TRUE )? 'open' : 'close';
 
+		// Do not let WordPress sanitize the excerpt
+		// WordPress sanitizes the excerpt because it's expected to be typed manually by the user and sent in POST
+		// However, our excerpt is being inserted as a raw string with the above custom sanitization
+		remove_all_filters( 'excerpt_save_pre' );
+
 		// Get excerpt if option is enabled
-        $post_excerpt = '';
-        if (isset($options['import_excerpt']) && WPRSS_FTP_Utils::multiboolean($options['import_excerpt']) === true) {
-            $post_excerpt = apply_filters( 'wprss_ftp_converter_post_excerpt',  $item->get_description(true), $source );
-            // Decode HTML entities back to their respective characters
-            $post_excerpt = html_entity_decode($post_excerpt);
-            // Add a space between any HTML elements
-            $post_excerpt = str_replace('>', ' >', $post_excerpt);
-            // Strip all HTML tags
-            $post_excerpt = strip_tags($post_excerpt);
-            // Remove any redundant spaces
-            $post_excerpt = str_replace('  ', ' ', trim($post_excerpt));
-            // Do not let WordPress sanitize the excerpt
-            // WordPress sanitizes the excerpt because it's expected to be typed manually by the user and sent in POST
-            // However, our excerpt is being inserted as a raw string with the above custom sanitization
-            remove_all_filters( 'excerpt_save_pre' );
-        }
+		$post_excerpt = '';
+		if (isset($options['import_excerpt']) && WPRSS_FTP_Utils::multiboolean($options['import_excerpt']) === true) {
+			$post_excerpt = apply_filters( 'wprss_ftp_converter_post_excerpt',  $item->get_description(true), $source );
+			$post_excerpt = self::clean_excerpt($post_excerpt);
+		}
 
 		/*==============================================
 		 * 3) CREATE THE POST
@@ -644,6 +638,29 @@ final class WPRSS_FTP_Converter {
 		return $return;
 	}
 
+	/**
+	 * Cleans a post excerpt string by removing all HTML tags, decoding entities and ensuring correct spacing after
+	 * the clean up is complete.
+	 *
+	 * @since 3.10
+	 *
+	 * @param string $excerpt The excerpt to clean.
+	 *
+	 * @return string
+	 */
+	public static function clean_excerpt($excerpt)
+	{
+		// Decode HTML entities back to their respective characters
+		$excerpt = html_entity_decode($excerpt);
+		// Add a space between any HTML elements
+		$excerpt = str_replace('>', ' >', $excerpt);
+		// Strip all HTML tags
+		$excerpt = strip_tags($excerpt);
+		// Remove any redundant spaces
+		$excerpt = str_replace('  ', ' ', trim($excerpt));
+
+		return $excerpt;
+	}
 
 	/**
 	 * Checks if the feed source uses the force full content option or meta option, and
@@ -758,9 +775,22 @@ final class WPRSS_FTP_Converter {
 			
 			// Generate the trimmed content
 			$trimmed_content = wprss_trim_words( $post_content, intval( $word_limit ), $keep_tags );
-			// If trimming type is set to save it as post_content in the databae
-			$to_update = ( $trimming_type == 'db' )? 'post_content' : 'post_excerpt';
-			
+
+			// If trimming type is set to save it as post_content in the database
+			$to_update = ($trimming_type == 'db') ? 'post_content' : 'post_excerpt';
+
+			// If trimming content into post excerpt, clean the content and add ellipsis if that option is enabled
+			if ($to_update === 'post_excerpt') {
+				$trimmed_content = self::clean_excerpt($trimmed_content);
+
+				$ellipsis = WPRSS_FTP_Meta::get_instance()->get_meta( $source_id, 'trimming_ellipsis' );
+				$ellipsis = (WPRSS_FTP_Utils::multiboolean( $ellipsis ) === true);
+
+				if ($ellipsis) {
+					$trimmed_content .= ' ...';
+				}
+			}
+
 			if ( $allow_embedded_content ) kses_remove_filters();
 
 			// Update the post

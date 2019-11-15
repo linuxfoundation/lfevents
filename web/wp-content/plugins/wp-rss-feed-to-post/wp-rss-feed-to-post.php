@@ -3,7 +3,7 @@
  * Plugin Name: WP RSS Aggregator - Feed to Post
  * Plugin URI: https://www.wprssaggregator.com/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpraplugin
  * Description: Adds feed-to-post conversion functionality to WP RSS Aggregator.
- * Version: 3.9.1
+ * Version: 3.10
  * Author: RebelCode
  * Author URI: https://www.wprssaggregator.com
  * Text Domain: wprss
@@ -34,7 +34,7 @@ use Psr\Container\ContainerInterface;
 
 /* Set the version number of the plugin. */
 if( !defined( 'WPRSS_FTP_VERSION' ) )
-	define( 'WPRSS_FTP_VERSION', '3.9.1' );
+	define( 'WPRSS_FTP_VERSION', '3.10' );
 
 /* Set the database version number of the plugin. */
 if( !defined( 'WPRSS_FTP_DB_VERSION' ) )
@@ -607,15 +607,17 @@ final class WPRSS_FTP {
 
 		wp_register_style( 'wprss_ftp_admin_styles', WPRSS_FTP_CSS . 'admin-styles.css' );
 		wp_enqueue_style( 'wprss_ftp_admin_styles', WPRSS_FTP_CSS . 'admin-styles.css' );
-		wp_enqueue_script( 'wprss_ftp_admin_scripts', WPRSS_FTP_JS . 'admin-scripts.js', array( self::ADMIN_INIT_JS_HANDLE ) );
-		wp_localize_script( 'wprss_ftp_admin_scripts', 'wprss_ftp_admin_scripts', array(
-			'loading_taxonomies' 		=> __('Loading taxonomies...', WPRSS_TEXT_DOMAIN),
-			'feed_post_type_warning'	=> __('You are importing into WP RSS Aggregator\'s <strong>Feed Items</strong>.<br/>Some Feed to Post settings will <strong>not</strong> affect the items imported.', WPRSS_TEXT_DOMAIN)
-		) );
 
 		// If a WP RSS Agg page
 		if ( $screen->post_type === 'wprss_feed' ) {
 			do_action( 'wprss_ftp_enqueue_wprss_feed_scripts_before' );
+
+			wp_enqueue_script( 'wprss_ftp_admin_scripts', WPRSS_FTP_JS . 'admin-scripts.js', array( self::ADMIN_INIT_JS_HANDLE ) );
+			wp_localize_script( 'wprss_ftp_admin_scripts', 'wprss_ftp_admin_scripts', array(
+				'loading_taxonomies' 		=> __('Loading taxonomies...', WPRSS_TEXT_DOMAIN),
+				'feed_post_type_warning'	=> __('You are importing into WP RSS Aggregator\'s <strong>Feed Items</strong>.<br/>Some Feed to Post settings will <strong>not</strong> affect the items imported.', WPRSS_TEXT_DOMAIN)
+			) );
+
 			wp_register_script( 'wprss-ftp-jquery-chosen', WPRSS_FTP_JS . 'jquery-chosen/chosen.jquery.min.js', array('jquery') );
 			wp_register_script( 'wprss-ftp-taxonomy-js', WPRSS_FTP_JS . 'admin-taxonomies.js', array('jquery', 'wprss-ftp-jquery-chosen') );
 			wp_localize_script( 'wprss-ftp-taxonomy-js', 'wprss_ftp_taxonomy_js', array(

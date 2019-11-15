@@ -1,3 +1,10 @@
+3.10 (2019-10-02)
+Added: New option to add an ellipsis to the end of trimmed content.
+Changed: Removed old commented code in admin scripts file.
+Fixed: Some scripts were causing the Customizer page to break and stop loading.
+Fixed: The canonical link for imported posts was incorrect when the SEOPress plugin was active.
+Fixed: The Facebook OpenGraph "url" tag added by YoastSEO used the canonical link URL.
+
 3.9.1 (2019-08-21)
 Changed: Updated how the plugin checks for dependencies.
 Changed: Error messages are now consistent with other add-ons.

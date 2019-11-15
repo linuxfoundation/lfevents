@@ -15,10 +15,10 @@ class DateRange extends Setting {
 	protected function set_defaults() {
 		$this_defaults = array(
 			'type'              => 'date_range',
-			'default_value'     => [],
+			'default_value'     => array(),
 			'format'            => 'DD/MM/YYYY',
 			'locale'            => 'en',
-			'unavailable_dates' => [],
+			'unavailable_dates' => array( array( 'before', 'today' ) ),
 		);
 
 		$parent_defaults = Setting::get_defaults();
