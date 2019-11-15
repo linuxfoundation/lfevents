@@ -678,6 +678,18 @@ window.wpmlc = window.wpmlc || { l10n: {} };
                 'customize' === wpmlc.l10n.current_screen ||
                 'widgets' === wpmlc.l10n.current_screen ) {
 
+                if ( wpmlc.l10n.wp_version >= '5.3' ) {
+                    /*
+                    * Create a h2 heading before the select elements that filter attachments.
+                    * This heading is visible in the modal and visually hidden in the grid.
+                    */
+                    this.toolbar.set( 'filters-heading', new wp.media.view.Heading( {
+                        priority:   -100,
+                        text:       l10n.filterAttachments,
+                        level:      'h2',
+                        className:  'media-attachments-filter-heading'
+                    }).render() );
+                }
 
                 if ( -1 !== $.inArray( 'types', wpmlc.l10n.filters_to_show ) ) {
 
@@ -930,6 +942,11 @@ window.wpmlc = window.wpmlc || { l10n: {} };
                 this.toolbar.set( 'search', new media.view.Search({
                     controller: this.controller,
                     model:      this.collection.props,
+                    attributes: {
+                        type:        'search',
+                        value: l10n.searchMediaLabel,
+                        placeholder: l10n.searchMediaPlaceholder
+                    },
                     priority:   -30
                 }).render() );
             }
@@ -1061,41 +1078,40 @@ window.wpmlc = window.wpmlc || { l10n: {} };
             this.views.add( this.uploader );
         },
 
-        createAttachments: function() {
-            this.attachments = new media.view.Attachments({
-                controller:           this.controller,
-                collection:           this.collection,
-                selection:            this.options.selection,
-                model:                this.model,
-                sortable:             this.options.sortable,
-                scrollElement:        this.options.scrollElement,
-                idealColumnWidth:     this.options.idealColumnWidth,
-
-                // The single `Attachment` view to be used in the `Attachments` view.
-                AttachmentView: this.options.AttachmentView
-            });
-
-            // Add keydown listener to the instance of the Attachments view
-            this.attachments.listenTo( this.controller, 'attachment:keydown:arrow',     this.attachments.arrowEvent );
-            this.attachments.listenTo( this.controller, 'attachment:details:shift-tab', this.attachments.restoreFocus );
-
-            this.views.add( this.attachments );
-
-
-            if ( this.controller.isModeActive( 'grid' ) ||
-                this.controller.isModeActive( 'wpmlc-grid' ) ) {
-
-                this.attachmentsNoResults = new media.View({
-                    controller: this.controller,
-                    tagName: 'p'
-                });
-
-                this.attachmentsNoResults.$el.addClass( 'hidden no-media' );
-                this.attachmentsNoResults.$el.html( l10n.noItemsFound );
-
-                this.views.add( this.attachmentsNoResults );
-            }
-        }
+        // createAttachments: function() {
+        //     this.attachments = new media.view.Attachments({
+        //         controller:           this.controller,
+        //         collection:           this.collection,
+        //         selection:            this.options.selection,
+        //         model:                this.model,
+        //         sortable:             this.options.sortable,
+        //         scrollElement:        this.options.scrollElement,
+        //         idealColumnWidth:     this.options.idealColumnWidth,
+        //
+        //         // The single `Attachment` view to be used in the `Attachments` view.
+        //         AttachmentView: this.options.AttachmentView
+        //     });
+        //
+        //     // Add keydown listener to the instance of the Attachments view
+        //     this.attachments.listenTo( this.controller, 'attachment:keydown:arrow',     this.attachments.arrowEvent );
+        //     this.attachments.listenTo( this.controller, 'attachment:details:shift-tab', this.attachments.restoreFocus );
+        //
+        //     this.views.add( this.attachments );
+        //
+        //     if ( this.controller.isModeActive( 'grid' ) ||
+        //         this.controller.isModeActive( 'wpmlc-grid' ) ) {
+        //
+        //         this.attachmentsNoResults = new media.View({
+        //             controller: this.controller,
+        //             tagName: 'p'
+        //         });
+        //
+        //         this.attachmentsNoResults.$el.addClass( 'hidden no-media' );
+        //         this.attachmentsNoResults.$el.html( l10n.noItemsFound );
+        //
+        //         this.views.add( this.attachmentsNoResults );
+        //     }
+        // }
     });
 
 

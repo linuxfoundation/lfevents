@@ -22,7 +22,7 @@
     padding: 10px 10px 5px;
 }
 .compat-item .term-list li {
-    line-height: 22px;
+    line-height: 1.5;
 }
 .compat-item .term-list li input[type="checkbox"] {
     margin: -4px 4px 0 0 !important;
@@ -227,7 +227,7 @@ body.upload-php.wpmlc-grid #wpbody-content > #screen-meta {
     color: #777;
     font-size: 20px;
     font-weight: 400;
-    line-height: 28px;
+    line-height: 1.4;
     margin: 0 300px 0 0;
     padding: 40px 0 0;
     text-align: center;
@@ -302,7 +302,7 @@ body.upload-php.wpmlc-grid #wpbody-content > #screen-meta {
     cursor: pointer;
     font-size: 24px;
     height: 24px;
-    line-height: 24px;
+    line-height: 1;
     margin: 0 5px 0 0;
     padding: 2px;
     width: 24px;
@@ -321,7 +321,7 @@ body.upload-php.wpmlc-grid #wpbody-content > #screen-meta {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     display: inline-block;
     height: 14px;
-    line-height: 14px;
+    line-height: 1;
     margin: 10px 0 0;
     padding: 3px 10px;
     text-decoration: none;
@@ -352,20 +352,17 @@ body.wpmlc-media-css .attachments-browser .media-toolbar-secondary {
     width: auto;
 }
 body.wpmlc-media-css .media-modal-content .media-frame select.attachment-filters {
-    height: 28px;
-    line-height: 28px;
     max-width: calc(48% - 12px);
     margin-right: 10px;
-    vertical-align: middle;
+    vertical-align: bottom;
     width: auto;
 }
-body.wpmlc-media-css .attachments-browser .media-toolbar-secondary > .media-button {
+body.wpmlc-media-css:not(.post-type-attachment) .attachments-browser .media-toolbar-secondary > .media-button {
     margin: 10px 10px 0 0;
+    vertical-align: bottom;
 }
 body.wpmlc-media-css .media-modal-content .attachments-browser .search {
-    margin-top: 10px;
-    padding: 6px 8px;
-    vertical-align: middle;
+    vertical-align: bottom;
     width: auto;
 }
 @media only screen and (max-width: 900px) {
