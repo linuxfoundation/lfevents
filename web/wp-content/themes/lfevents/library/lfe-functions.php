@@ -28,32 +28,55 @@ function is_lfeventsci() {
 function lfe_get_related_events( $parent_id ) {
 	$related_events = [];
 
-	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
+	$related_events_override = get_post_meta( $parent_id, 'lfes_related_events', true );
 
-	$args = array(
-		'post_type'   => 'page',
-		'post_parent' => 0,
-		'no_found_rows' => true,  // used to improve performance.
-		'post__not_in' => array( $parent_id ), // ignores current post.
-		'tax_query'   => array(
-			array(
-				'taxonomy' => 'lfevent-category',
-				'field'    => 'term_id',
-				'terms'    => $term[0],
+	if ( $related_events_override ) {
+		$args = array(
+			'post_type'   => 'page',
+			'post_parent' => 0,
+			'post__in' => explode( ',', $related_events_override ), // ignores current post.
+			'no_found_rows' => true,  // used to improve performance.
+			'meta_query' => array(
+				array(
+					'key'     => 'lfes_event_has_passed',
+					'compare' => '!=',
+					'value' => '1',
+				),
 			),
-		),
-		'meta_query' => array(
-			array(
-				'key'     => 'lfes_event_has_passed',
-				'compare' => '!=',
-				'value' => '1',
+			'orderby'   => 'meta_value',
+			'meta_key'  => 'lfes_date_start',
+			'order'     => 'ASC',
+		);
+
+	} else {
+		$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
+
+		$args = array(
+			'post_type'   => 'page',
+			'post_parent' => 0,
+			'no_found_rows' => true,  // used to improve performance.
+			'post__not_in' => array( $parent_id ), // ignores current post.
+			'tax_query'   => array(
+				array(
+					'taxonomy' => 'lfevent-category',
+					'field'    => 'term_id',
+					'terms'    => $term[0],
+				),
 			),
-		),
-		'orderby'   => 'meta_value',
-		'meta_key'  => 'lfes_date_start',
-		'order'     => 'ASC',
-		'posts_per_page' => 2,
-	);
+			'meta_query' => array(
+				array(
+					'key'     => 'lfes_event_has_passed',
+					'compare' => '!=',
+					'value' => '1',
+				),
+			),
+			'orderby'   => 'meta_value',
+			'meta_key'  => 'lfes_date_start',
+			'order'     => 'ASC',
+			'posts_per_page' => 2,
+		);
+
+	}
 
 	$the_query = new WP_Query( $args );
 

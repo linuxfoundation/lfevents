@@ -734,6 +734,18 @@ class LFEvents_Admin {
 										'0' => __( 'False', 'my_plugin' ),
 									),
 								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'related_events',
+									'data_type'     => 'meta',
+									'data_key'      => 'related_events', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Related Events Override' ),
+									'help'          => __( 'This is a comma-delimited list of Event IDs that, when set, will be listed instead of the normal related Events in the View All Events menu.' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( '1365,2122,3112' ),
+								),
 							),
 						),
 					),
@@ -744,7 +756,6 @@ class LFEvents_Admin {
 		// Push the $sidebar we just assigned to the variable
 		// to the array of $sidebars that comes in the function argument.
 		$sidebars[] = $sidebar;
-
 
 		$sidebar = array(
 			'id'              => 'lfevent-sidebar-page',
@@ -795,7 +806,6 @@ class LFEvents_Admin {
 		// Push the $sidebar we just assigned to the variable
 		// to the array of $sidebars that comes in the function argument.
 		$sidebars[] = $sidebar;
-
 
 		$sidebar = array(
 			'id'              => 'lfe-speaker-sidebar',
