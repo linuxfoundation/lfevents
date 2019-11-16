@@ -17,9 +17,13 @@ browser: "phantomjs"
 
 # (required) The paths to capture. All paths should exist for both of the domains specified above.
 paths:
-  home:     /
-  hello-world:    /hello-world
-  search:  /?s=hello
+  home: /
+  news: /2019/11/14/new-website-performance/
+  community: /about/community/
+  calendar: /about/calendar/
+  past-events: /about/calendar/archive/
+  kubecon-na: /kubecon-cloudnativecon-north-america/
+  kubecon-cfp: /kubecon-cloudnativecon-north-america/program/cfp/
 
 # (required) Screen widths (and optional height) to resize the browser to before taking the screenshot.
 screen_widths:
@@ -58,5 +62,5 @@ mode: diffs_first
 
 # this is currently configured to compare the live site with a local Lando build
 domains:
-  current:  "http://live-lfeventsci.pantheonsite.io"
-  new:      "http://lfeventsci.lndo.site:8000/"  
+  current:  "https://events.linuxfoundation.org"
+  new:      "https://lfeventsci.lndo.site"  
