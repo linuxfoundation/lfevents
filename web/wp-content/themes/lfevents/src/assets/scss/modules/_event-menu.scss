@@ -31,6 +31,12 @@
     color: inherit !important;
   }
 
+  @include breakpoint(medium down) {
+    &.is-at-bottom {
+      top: 0 !important;
+    }
+  }
+
   .pre-nav {
     display: flex;
     align-content: stretch;
