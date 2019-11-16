@@ -37,7 +37,6 @@
     "wpackagist-plugin/clone-page-tree":"^0.1.0",
     "wpackagist-plugin/wp-rss-aggregator":"^4.15",
     "wpackagist-plugin/gravity-forms-custom-post-types":"^3.1.15",
-    "wpackagist-plugin/imsanity":"^2.4.3",
     "wpackagist-plugin/flying-pages":"^2.0.8",
     "wpackagist-plugin/redirection":"4.4.2"
   },

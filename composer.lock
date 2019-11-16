@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7277863f453c6bc33f3c47b8fd433d5",
+    "content-hash": "f99f9d29a83f912c4d50b7601a229204",
     "packages": [
         {
             "name": "composer/installers",
@@ -602,24 +602,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/gutenberg/"
-        },
-        {
-            "name": "wpackagist-plugin/imsanity",
-            "version": "2.4.3",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/imsanity/",
-                "reference": "tags/2.4.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/imsanity.2.4.3.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/imsanity/"
         },
         {
             "name": "wpackagist-plugin/lh-hsts",
@@ -1945,16 +1927,16 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "7ca61c24dc301cc9d47d6fb459b3d39f2d54b7e5"
+                "reference": "44af6f3a2e2e04f2af46bcb302ad9600cba41c7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/7ca61c24dc301cc9d47d6fb459b3d39f2d54b7e5",
-                "reference": "7ca61c24dc301cc9d47d6fb459b3d39f2d54b7e5",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/44af6f3a2e2e04f2af46bcb302ad9600cba41c7d",
+                "reference": "44af6f3a2e2e04f2af46bcb302ad9600cba41c7d",
                 "shasum": ""
             },
             "require": {
@@ -1991,7 +1973,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2019-11-14T14:22:47+00:00"
+            "time": "2019-11-15T16:17:10+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
