@@ -1,0 +1,9 @@
+//
+// Overrides for Foundation's Sticky
+// --------------------------------------------------
+
+.sticky[data-sticky-on="large"] {
+  @include breakpoint(medium down) {
+    top: 0 !important;
+  }
+}
