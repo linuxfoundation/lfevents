@@ -27,8 +27,8 @@ paths:
 
 # (required) Screen widths (and optional height) to resize the browser to before taking the screenshot.
 screen_widths:
-  - 320x20000
-  - 1280x20000
+  - 320x10000
+  - 1280x10000
 
 # (optional) JavaScript file to execute before taking screenshot of every path. Default: nil
 #before_capture: 'javascript/disable_javascript--phantom.js'
@@ -41,7 +41,7 @@ directory: 'shots'
 fuzz: '20%'
 
 # (optional) The maximum acceptable level of difference (in %) between two images before Wraith reports a failure. Default: 0
-threshold: 100
+threshold: 5
 
 # (optional) Specify the template (and generated thumbnail sizes) for the gallery output.
 gallery:
