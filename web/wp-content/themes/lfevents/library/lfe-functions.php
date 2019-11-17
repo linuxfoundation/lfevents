@@ -470,7 +470,7 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
  * @param int $feed_id The ID of the feed source post, which the current item is being imported by.
  */
 function lfe_fix_community_post( $post_id, $feed_id ) {
-	if ( 243 == $feed_id || 1333 == $feed_id ) {
+	if ( 243 == $feed_id ) {
 		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
 		$dt_date_end = get_post_meta( $post_id, 'lfes_community_date_end', true );
 		if ( $dt_date_start ) {
