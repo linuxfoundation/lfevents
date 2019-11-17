@@ -24,6 +24,7 @@ paths:
   past-events: /about/calendar/archive/
   kubecon-na: /kubecon-cloudnativecon-north-america/
   kubecon-cfp: /kubecon-cloudnativecon-north-america/program/cfp/
+  kubecon-china: /kubecon-cloudnativecon-open-source-summit-china/
 
 # (required) Screen widths (and optional height) to resize the browser to before taking the screenshot.
 screen_widths:
