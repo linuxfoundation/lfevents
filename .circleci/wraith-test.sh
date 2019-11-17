@@ -47,7 +47,7 @@ set -ex
 
 # Run the Wraith tests
 cd wraith
-cp configs/capture.yaml.template configs/capture.yaml 
+cp configs/$TERMINUS_S.capture.yaml.template configs/capture.yaml 
 cat >>configs/capture.yaml <<EOL
 # (required) The domains to take screenshots of.
 domains:
