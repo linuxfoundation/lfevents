@@ -207,7 +207,7 @@ jobs:
 
     wraith_test_lfeventsci:
         docker:
-            - image: romracer/wraithbot
+            - image: liquidweb/wraith
 
         steps:
             - checkout
@@ -221,7 +221,7 @@ jobs:
 
     wraith_test_lfasiallcci:
         docker:
-            - image: romracer/wraithbot
+            - image: liquidweb/wraith
 
         steps:
             - checkout
