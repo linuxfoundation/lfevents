@@ -310,7 +310,7 @@ function lfe_insert_google_analytics() {
 EOD;
 	$analytics_code .= "<script async src='https://www.google-analytics.com/analytics.js'></script>\n\t\t<!-- End Google Analytics -->\n"; //phpcs:ignore
 
-	if ( strpos( $domains, $current_domain ) ) {
+	if ( strpos( $domains, $current_domain ) && ! is_user_logged_in() ) {
 		// this is a live site so output the analytics code.
 		echo $analytics_code; //phpcs:ignore
 	}
