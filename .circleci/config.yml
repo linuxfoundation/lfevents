@@ -207,7 +207,7 @@ jobs:
 
     wraith_test_lfeventsci:
         docker:
-            - image: liquidweb/wraith
+            - image: dockerify/wraith
 
         steps:
             - checkout
@@ -221,7 +221,7 @@ jobs:
 
     wraith_test_lfasiallcci:
         docker:
-            - image: liquidweb/wraith
+            - image: dockerify/wraith
 
         steps:
             - checkout
