@@ -3,7 +3,7 @@
  * Plugin Name: Media Library Categories Premium
  * Plugin URI: https://1.envato.market/c/1206953/275988/4415?subId1=wpmlcp&subId2=plugin&u=https%3A%2F%2Fcodecanyon.net%2Fitem%2Fmedia-library-categories-premium%2F6691290
  * Description: Adds the ability to use categories in the media library.
- * Version: 2.5
+ * Version: 2.6
  * Author: Jeffrey-WP
  * Text Domain: wp-media-library-categories
  * Domain Path: /languages
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class wpMediaLibraryCategories {
 
-    public $plugin_version = '2.5';
+    public $plugin_version = '2.6';
 
     /**
      * Initialize the hooks and filters
@@ -51,6 +51,8 @@ class wpMediaLibraryCategories {
             add_action( 'admin_enqueue_scripts', array( $this, 'wpmediacategory_enqueue_media_action' ) );
             # Elementor Page Builder plugin support
             add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'wpmediacategory_elementor_scripts' ) );
+            # Initialize the settings data
+            add_action( 'admin_init', array( $this, 'wpmediacategory_settings_init' ) );
 
         }
     }
@@ -83,16 +85,13 @@ class wpMediaLibraryCategories {
         // Check transient, if available display notice
         if ( get_transient( 'wpmlc-admin-activation-notice' ) ) {
 
-            // Default taxonomy
-            $taxonomy = 'category';
-            // Add filter to change the default taxonomy
-            $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+            // Get taxonomy name
+            $taxonomy = $this->get_wpmlc_taxonomy();
             if ( $taxonomy == 'category' ) { // check if category hasn't already been changed
                 ?>
                 <div class="notice notice-info is-dismissible">
                     <p><?php _e( 'Thank you for using the <strong>Media Library Categories Premium</strong> plugin.', 'wp-media-library-categories' ); ?></p>
-                    <p><?php _e( 'By default the WordPress Media Library uses the same categories as WordPress does (such as in posts &amp; pages).<br />
-                    If you want to use separate categories for the WordPress Media Library take a look at our <a href="https://codecanyon.net/item/media-library-categories-premium/6691290/support?ref=jeffrey-wp" target="_blank">Frequently asked questions</a>.', 'wp-media-library-categories' ); ?></p>
+                    <p><?php _e( 'By default the WordPress Media Library uses the same categories as WordPress does (such as in posts &amp; pages).<br />If you want to use separate categories for the WordPress Media Library you can change this in the <a href="' . admin_url( 'options-media.php#wpmlc_settings' ) . '">media settings</a>.', 'wp-media-library-categories' ); ?></p>
                 </div>
                 <?php
             }
@@ -108,10 +107,8 @@ class wpMediaLibraryCategories {
      * @action init
      */
     public function wpmediacategory_init() {
-        // Default taxonomy
-        $taxonomy = 'category';
-        // Add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
 
         if ( taxonomy_exists( $taxonomy ) ) {
             register_taxonomy_for_object_type( $taxonomy, 'attachment' );
@@ -133,10 +130,8 @@ class wpMediaLibraryCategories {
     public function wpmediacategory_change_category_update_count_callback() {
         global $wp_taxonomies;
 
-        // Default taxonomy
-        $taxonomy = 'category';
-        // Add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
 
         if ( $taxonomy == 'category' ) {
             if ( ! taxonomy_exists( 'category' ) ) {
@@ -157,10 +152,8 @@ class wpMediaLibraryCategories {
     public function wpmediacategory_update_count_callback( $terms = array(), $taxonomy = 'category' ) {
         global $wpdb;
 
-        // default taxonomy
-        $taxonomy = 'category';
-        // add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
 
         // select id & count from taxonomy
         $query = "SELECT term_taxonomy_id, MAX(total) AS total FROM ((
@@ -187,10 +180,8 @@ class wpMediaLibraryCategories {
 
         if ( isset( $atts['category'] ) ) {
 
-            // Default taxonomy
-            $taxonomy = 'category';
-            // Add filter to change the default taxonomy
-            $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+            // Get taxonomy name
+            $taxonomy = $this->get_wpmlc_taxonomy();
 
             $category = $atts['category'];
             $include  = isset( $result['include'] ) ? $result['include'] : '';
@@ -294,10 +285,8 @@ class wpMediaLibraryCategories {
      */
     public function wpmediacategory_set_attachment_category( $post_ID ) {
 
-        // default taxonomy
-        $taxonomy = 'category';
-        // add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
 
         // if attachment already have categories, stop here
         if ( wp_get_object_terms( $post_ID, $taxonomy ) ) {
@@ -321,10 +310,8 @@ class wpMediaLibraryCategories {
     public function wpmediacategory_add_category_filter() {
         global $pagenow;
         if ( 'upload.php' == $pagenow ) {
-            // Default taxonomy
-            $taxonomy = 'category';
-            // Add filter to change the default taxonomy
-            $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+            // Get taxonomy name
+            $taxonomy = $this->get_wpmlc_taxonomy();
             if ( $taxonomy != 'category' ) {
                 $dropdown_options = array(
                     'taxonomy'        => $taxonomy,
@@ -359,10 +346,8 @@ class wpMediaLibraryCategories {
      * @action admin_footer-upload.php
      */
     public function wpmediacategory_custom_bulk_admin_footer() {
-        // default taxonomy
-        $taxonomy = 'category';
-        // add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
         $terms = get_terms( $taxonomy, 'hide_empty=0' );
         if ( $terms && ! is_wp_error( $terms ) ) :
 
@@ -516,13 +501,12 @@ class wpMediaLibraryCategories {
      * @action plugin_action_links_*
      */
     public function wpmediacategory_add_plugin_action_links( $links ) {
-        // default taxonomy
-        $taxonomy = 'category';
-        // add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
         return array_merge(
             array(
-                'settings' => '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/edit-tags.php?taxonomy=' . $taxonomy . '&amp;post_type=attachment">' . __( 'Categories', 'wp-media-library-categories' ) . '</a>'
+                'categories' => '<a href="' . admin_url( 'edit-tags.php?taxonomy=' . $taxonomy . '&post_type=attachment' ) . '">' . __( 'Categories', 'wp-media-library-categories' ) . '</a>',
+                'settings'   => '<a href="' . admin_url( 'options-media.php#wpmlc_settings' ) . '">' . __( 'Settings', 'wp-media-library-categories' ) . '</a>',
             ),
             $links
         );
@@ -684,10 +668,8 @@ class wpMediaLibraryCategories {
 
         global $plugin_version, $current_screen, $wp_version;
 
-        // Default taxonomy
-        $taxonomy = 'category';
-        // Add filter to change the default taxonomy
-        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
 
         $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
@@ -752,6 +734,84 @@ class wpMediaLibraryCategories {
     function wpmediacategory_elementor_scripts() {
 
         $this->load_media_view_scripts();
+
+    }
+
+    /**
+     * Get taxonomy name.
+     */
+    public function get_wpmlc_taxonomy() {
+
+        // Default taxonomy
+        $taxonomy = 'category';
+        // Add filter to change the default taxonomy (so we can set the override in a custom script)
+        $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+
+        // Get filter from settings page
+        $options = get_option( 'wpmlc_settings' );
+        if ( ! empty( $options ) && ! empty( $options['wpmediacategory_taxonomy'] ) ) {
+            $taxonomy = $options['wpmediacategory_taxonomy'];
+        }
+
+        return $taxonomy;
+
+    }
+
+    /**
+     * Initialize the settings data.
+     *
+     * @action admin_init
+     */
+    public function wpmediacategory_settings_init() {
+        register_setting( 'media', 'wpmlc_settings' );
+
+        add_settings_section(
+            'wpmlc_section',
+            '',
+            array( $this, 'wpmlc_settings_section' ),
+            'media'
+        );
+
+        add_settings_field(
+            'wpmlc_settings_field',
+            __( 'Custom taxonomy slug', 'wp-media-library-categories' ),
+            array( $this, 'wpmlc_settings_field' ),
+            'media',
+            'wpmlc_section'
+        );
+
+    }
+
+    /**
+     * Render callback for the section description.
+     */
+    public function wpmlc_settings_section() {
+        echo '<h2 id="wpmlc_settings" class="title">' . __( 'Media Library Categories', 'wp-media-library-categories' ) . '</h2>';
+
+        $taxonomy_code_override = apply_filters( 'wpmediacategory_taxonomy', 'category' );
+        if ( $taxonomy_code_override !== 'category' ) {
+            ?>
+            <div class="notice notice-warning is-dismissible">
+                <p><?php printf( 'You are already using a custom taxonomy slug called "<strong>%s</strong>" in the code of your (child) theme. It will be ignored if you use the custom taxonomy slug below.', $taxonomy_code_override ); ?></p>
+                <button type="button" class="notice-dismiss">
+                    <span class="screen-reader-text"><?php _e( 'Dismiss this notice.' ); ?></span>
+                </button>
+            </div>
+            <?php
+        }
+
+        echo '<p>' . sprintf( 'Separate the media categories from the default WordPress categories by entering a custom taxonomy slug below (different then "<strong>%s</strong>").', 'category' ) . '</p>';
+    }
+
+    /**
+     * Render the field position.
+     */
+    public function wpmlc_settings_field() {
+
+        // Get taxonomy name
+        $taxonomy = $this->get_wpmlc_taxonomy();
+
+        echo '<input type="text" name="wpmlc_settings[wpmediacategory_taxonomy]" value="' . ( ( $taxonomy === 'category' ) ? '' : $taxonomy ) . '" placeholder="category">';
 
     }
 

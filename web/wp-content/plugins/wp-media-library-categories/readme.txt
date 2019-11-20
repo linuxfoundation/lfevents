@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: category, categories, media, library, medialibrary, image, images, media category, media categories
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 2.5
+Stable tag: 2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,15 +34,7 @@ To upload the plugin through WordPress, instead of FTP:
 == Frequently Asked Questions ==
 
 = How to use separate categories for the WordPress Media Library (and don't use the same categories as in posts & pages)? =
-By default the WordPress Media Library uses the same categories as WordPress does (such as in posts & pages). If you want to use separate categories for the WordPress Media Library add this code to the file functions.php located in your theme or child-theme:
-/**
-* separate media categories from post categories
-* use a custom category called 'category_media' for the categories in the media library
-*/
-add_filter( 'wpmediacategory_taxonomy', function(){ return 'category_media'; } ); //requires PHP 5.3 or newer
-
-Or if you have an older PHP version:
-add_filter( 'wpmediacategory_taxonomy', create_function( '', 'return "category_media";' ) );  //requires PHP 4.0.1 or newer
+By default the WordPress Media Library uses the same categories as WordPress does (such as in posts & pages). If you want to use separate categories you can use a custom taxonomy, this can be set under Settings → Media (or click on the settings quicklink on the WordPress plugins overview page).
 
 
 = How to use category in the [gallery] shortcode? =
