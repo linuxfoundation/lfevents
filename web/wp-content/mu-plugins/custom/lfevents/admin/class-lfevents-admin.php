@@ -469,6 +469,7 @@ class LFEvents_Admin {
 									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
 									// where this setting is nested will be used.
 									'label'           => __( 'Favicon', 'my_plugin' ),
+									'help'            => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
 									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top'   => true, // Display CSS border-top in the editor control.
 								),

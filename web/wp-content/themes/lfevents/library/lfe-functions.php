@@ -322,16 +322,16 @@ EOD;
 function lfe_insert_favicon() {
 	global $parent_id;
 
-	$out = '<link rel="shortcut icon" href="';
+	$out = '<link rel="icon" type="image/png" sizes="32x32" href="';
 
 	$favicon = get_post_meta( $parent_id, 'lfes_favicon', true );
 	if ( $favicon ) {
 		$out .= wp_get_attachment_url( $favicon );
 	} else {
-		$out .= get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'favicon_16.png' );
+		$out .= get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'favicon-32x32.png' );
 	}
 
-	$out .= '" />';
+	$out .= '">';
 
 	echo $out; //phpcs:ignore
 }
