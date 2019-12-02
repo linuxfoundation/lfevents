@@ -3,7 +3,7 @@
  * Plugin Name: Media Library Categories Premium
  * Plugin URI: https://1.envato.market/c/1206953/275988/4415?subId1=wpmlcp&subId2=plugin&u=https%3A%2F%2Fcodecanyon.net%2Fitem%2Fmedia-library-categories-premium%2F6691290
  * Description: Adds the ability to use categories in the media library.
- * Version: 2.6
+ * Version: 2.7
  * Author: Jeffrey-WP
  * Text Domain: wp-media-library-categories
  * Domain Path: /languages
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class wpMediaLibraryCategories {
 
-    public $plugin_version = '2.6';
+    public $plugin_version = '2.7';
 
     /**
      * Initialize the hooks and filters
@@ -47,7 +47,7 @@ class wpMediaLibraryCategories {
             add_filter( 'ajax_query_attachments_args', array( $this, 'wpmediacategory_ajax_query_attachments_args' ) );
             add_action( 'wp_ajax_save-attachment-compat', array( $this, 'wpmediacategory_save_attachment_compat' ), 0 );
             add_filter( 'attachment_fields_to_edit', array( $this, 'wpmediacategory_attachment_fields_to_edit' ), 10, 2 );
-            # Load categories in media modal
+            # Enqueue admin scripts and styles
             add_action( 'admin_enqueue_scripts', array( $this, 'wpmediacategory_enqueue_media_action' ) );
             # Elementor Page Builder plugin support
             add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'wpmediacategory_elementor_scripts' ) );
@@ -85,13 +85,13 @@ class wpMediaLibraryCategories {
         // Check transient, if available display notice
         if ( get_transient( 'wpmlc-admin-activation-notice' ) ) {
 
-            // Get taxonomy name
+            // Get taxonomy slug
             $taxonomy = $this->get_wpmlc_taxonomy();
             if ( $taxonomy == 'category' ) { // check if category hasn't already been changed
                 ?>
                 <div class="notice notice-info is-dismissible">
                     <p><?php _e( 'Thank you for using the <strong>Media Library Categories Premium</strong> plugin.', 'wp-media-library-categories' ); ?></p>
-                    <p><?php _e( 'By default the WordPress Media Library uses the same categories as WordPress does (such as in posts &amp; pages).<br />If you want to use separate categories for the WordPress Media Library you can change this in the <a href="' . admin_url( 'options-media.php#wpmlc_settings' ) . '">media settings</a>.', 'wp-media-library-categories' ); ?></p>
+                    <p><?php echo sprintf( __( 'By default the WordPress Media Library uses the same categories as WordPress does (such as in posts &amp; pages).<br />If you want to use separate categories for the WordPress Media Library you can change this in the <a href="%s">media settings</a>.', 'wp-media-library-categories' ), admin_url( 'options-media.php#wpmlc_settings' ) ); ?></p>
                 </div>
                 <?php
             }
@@ -107,7 +107,7 @@ class wpMediaLibraryCategories {
      * @action init
      */
     public function wpmediacategory_init() {
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
 
         if ( taxonomy_exists( $taxonomy ) ) {
@@ -130,7 +130,7 @@ class wpMediaLibraryCategories {
     public function wpmediacategory_change_category_update_count_callback() {
         global $wp_taxonomies;
 
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
 
         if ( $taxonomy == 'category' ) {
@@ -152,7 +152,7 @@ class wpMediaLibraryCategories {
     public function wpmediacategory_update_count_callback( $terms = array(), $taxonomy = 'category' ) {
         global $wpdb;
 
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
 
         // select id & count from taxonomy
@@ -180,7 +180,7 @@ class wpMediaLibraryCategories {
 
         if ( isset( $atts['category'] ) ) {
 
-            // Get taxonomy name
+            // Get taxonomy slug
             $taxonomy = $this->get_wpmlc_taxonomy();
 
             $category = $atts['category'];
@@ -285,7 +285,7 @@ class wpMediaLibraryCategories {
      */
     public function wpmediacategory_set_attachment_category( $post_ID ) {
 
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
 
         // if attachment already have categories, stop here
@@ -310,11 +310,12 @@ class wpMediaLibraryCategories {
     public function wpmediacategory_add_category_filter() {
         global $pagenow;
         if ( 'upload.php' == $pagenow ) {
-            // Get taxonomy name
+            // Get taxonomy slug
             $taxonomy = $this->get_wpmlc_taxonomy();
             if ( $taxonomy != 'category' ) {
                 $dropdown_options = array(
                     'taxonomy'        => $taxonomy,
+                    'class'           => 'postform wpmlc-taxonomy-filter',
                     'name'            => $taxonomy,
                     'show_option_all' => __( 'View all categories', 'wp-media-library-categories' ),
                     'hide_empty'      => false,
@@ -327,6 +328,7 @@ class wpMediaLibraryCategories {
             } else {
                 $dropdown_options = array(
                     'taxonomy'        => $taxonomy,
+                    'class'           => 'postform wpmlc-taxonomy-filter',
                     'show_option_all' => __( 'View all categories', 'wp-media-library-categories' ),
                     'hide_empty'      => false,
                     'hierarchical'    => true,
@@ -346,7 +348,7 @@ class wpMediaLibraryCategories {
      * @action admin_footer-upload.php
      */
     public function wpmediacategory_custom_bulk_admin_footer() {
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
         $terms = get_terms( $taxonomy, 'hide_empty=0' );
         if ( $terms && ! is_wp_error( $terms ) ) :
@@ -369,8 +371,8 @@ class wpMediaLibraryCategories {
                 echo "jQuery('<option>').val('wpmediacategory_remove_" . $term->term_taxonomy_id . "').text('" . $sTxtRemove . "').appendTo('#wpmediacategory_optgroup2');";
             }
             // remove all categories
-            echo "jQuery('<option>').val('wpmediacategory_remove_0').text('" . esc_js(  __( 'Remove all categories', 'wp-media-library-categories' ) ) . "').appendTo('#wpmediacategory_optgroup1');";
-            echo "jQuery('<option>').val('wpmediacategory_remove_0').text('" . esc_js(  __( 'Remove all categories', 'wp-media-library-categories' ) ) . "').appendTo('#wpmediacategory_optgroup2');";
+            echo "jQuery('<option>').val('wpmediacategory_remove_0').text('" . esc_js( __( 'Remove all categories', 'wp-media-library-categories' ) ) . "').appendTo('#wpmediacategory_optgroup1');";
+            echo "jQuery('<option>').val('wpmediacategory_remove_0').text('" . esc_js( __( 'Remove all categories', 'wp-media-library-categories' ) ) . "').appendTo('#wpmediacategory_optgroup2');";
             echo "});";
             echo "</script>";
 
@@ -501,7 +503,7 @@ class wpMediaLibraryCategories {
      * @action plugin_action_links_*
      */
     public function wpmediacategory_add_plugin_action_links( $links ) {
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
         return array_merge(
             array(
@@ -664,11 +666,11 @@ class wpMediaLibraryCategories {
     /**
      * Enqueue media view scripts and styles
      */
-    function load_media_view_scripts() {
+    public function load_media_view_scripts() {
 
         global $plugin_version, $current_screen, $wp_version;
 
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
 
         $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
@@ -710,6 +712,13 @@ class wpMediaLibraryCategories {
             $media_views_l10n
         );
 
+        // Get select2 setting
+        $select2 = $this->get_wpmlc_select2();
+        if ( $select2 === '1' ) {
+            wp_enqueue_script( 'wpmediacategory-select2', plugins_url( 'js/select2' . $suffix . '.js', __FILE__ ), array( 'jquery' ), '4.0.12-custom', true );
+            wp_enqueue_style( 'wpmediacategory-select2', plugins_url( 'css/select2' . $suffix . '.css', __FILE__ ), array(), '4.0.12' );
+        }
+
         wp_enqueue_style( 'wpmediacategory', plugins_url( 'css/wpmlcp' . $suffix . '.css', __FILE__ ), array(), $plugin_version );
     }
 
@@ -738,7 +747,7 @@ class wpMediaLibraryCategories {
     }
 
     /**
-     * Get taxonomy name.
+     * Get taxonomy slug.
      */
     public function get_wpmlc_taxonomy() {
 
@@ -747,13 +756,31 @@ class wpMediaLibraryCategories {
         // Add filter to change the default taxonomy (so we can set the override in a custom script)
         $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
 
-        // Get filter from settings page
+        // Get custom taxonomy slug from settings page
         $options = get_option( 'wpmlc_settings' );
         if ( ! empty( $options ) && ! empty( $options['wpmediacategory_taxonomy'] ) ) {
             $taxonomy = $options['wpmediacategory_taxonomy'];
         }
 
         return $taxonomy;
+
+    }
+
+    /**
+     * Get Select2 value.
+     */
+    public function get_wpmlc_select2() {
+
+        // Default value
+        $select2 = false;
+
+        // Get select2 value from settings page
+        $options = get_option( 'wpmlc_settings' );
+        if ( ! empty( $options ) && ! empty( $options['select2'] ) ) {
+            $select2 = $options['select2'];
+        }
+
+        return $select2;
 
     }
 
@@ -780,19 +807,28 @@ class wpMediaLibraryCategories {
             'wpmlc_section'
         );
 
+        add_settings_field(
+            'wpmlc_settings_field2',
+            __( 'Autocomplete search dropdown', 'wp-media-library-categories' ),
+            array( $this, 'wpmlc_settings_field2' ),
+            'media',
+            'wpmlc_section'
+        );
+
     }
 
     /**
      * Render callback for the section description.
      */
     public function wpmlc_settings_section() {
-        echo '<h2 id="wpmlc_settings" class="title">' . __( 'Media Library Categories', 'wp-media-library-categories' ) . '</h2>';
+        echo '<div id="wpmlc_settings">';
+        echo '<h2 class="title">' . __( 'Media Library Categories', 'wp-media-library-categories' ) . '</h2>';
 
         $taxonomy_code_override = apply_filters( 'wpmediacategory_taxonomy', 'category' );
         if ( $taxonomy_code_override !== 'category' ) {
             ?>
             <div class="notice notice-warning is-dismissible">
-                <p><?php printf( 'You are already using a custom taxonomy slug called "<strong>%s</strong>" in the code of your (child) theme. It will be ignored if you use the custom taxonomy slug below.', $taxonomy_code_override ); ?></p>
+                <p><?php printf( __( 'You are already using a custom taxonomy slug called "<strong>%s</strong>" in the code of your (child) theme. It will be ignored if you use the custom taxonomy slug below.', 'wp-media-library-categories' ), $taxonomy_code_override ); ?></p>
                 <button type="button" class="notice-dismiss">
                     <span class="screen-reader-text"><?php _e( 'Dismiss this notice.' ); ?></span>
                 </button>
@@ -800,18 +836,44 @@ class wpMediaLibraryCategories {
             <?php
         }
 
-        echo '<p>' . sprintf( 'Separate the media categories from the default WordPress categories by entering a custom taxonomy slug below (different then "<strong>%s</strong>").', 'category' ) . '</p>';
+        echo '<p style="margin-bottom:0">' . sprintf( __( 'Separate the media categories from the default WordPress categories by entering a custom taxonomy slug below (different than "<strong>%s</strong>").', 'wp-media-library-categories' ), 'category' ) . '</p>';
+        echo '&nbsp;';
+        ?>
+        <script>
+        document.addEventListener( 'DOMContentLoaded', function() {
+            var wpmlc_settings = document.getElementById( 'wpmlc_settings' );
+            if ( window.location.hash === '#wpmlc_settings' ) {
+                wpmlc_settings.classList.add( 'highlight' );
+                wpmlc_settings.nextElementSibling.classList.add( 'highlight' );
+            }
+            wpmlc_settings.nextElementSibling.style.marginTop = 0;
+        } );
+        </script>
+        </div>
+        <?php
     }
 
     /**
-     * Render the field position.
+     * Render the field Custom taxonomy slug.
      */
     public function wpmlc_settings_field() {
 
-        // Get taxonomy name
+        // Get taxonomy slug
         $taxonomy = $this->get_wpmlc_taxonomy();
 
         echo '<input type="text" name="wpmlc_settings[wpmediacategory_taxonomy]" value="' . ( ( $taxonomy === 'category' ) ? '' : $taxonomy ) . '" placeholder="category">';
+
+    }
+
+    /**
+     * Render the field Autocomplete search dropdown.
+     */
+    public function wpmlc_settings_field2() {
+
+        // Get select2 setting
+        $select2 = $this->get_wpmlc_select2();
+
+        echo '<label><input type="checkbox" name="wpmlc_settings[select2]" value="1" ' . ( ( $select2 === '1' ) ? ' checked="checked"' : '' ) . '> ' . __( 'Add autocomplete search to the category dropdown in the Media Library.', 'wp-media-library-categories' ) . '</label>';
 
     }
 

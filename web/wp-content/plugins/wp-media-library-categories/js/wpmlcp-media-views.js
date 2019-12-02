@@ -166,7 +166,7 @@ window.wpmlc = window.wpmlc || { l10n: {} };
 
             _.each( tcount, function( count, term_id ) {
 
-                var $option = $( '.wpmlc-taxonomy-filters option[value="'+term_id+'"]' ),
+                var $option = $( '.wpmlc-taxonomy-filter option[value="'+term_id+'"]' ),
                     text = $option.text();
 
                 text = text.replace( /\(.*?\)/, '('+count+')' );
@@ -378,7 +378,7 @@ window.wpmlc = window.wpmlc || { l10n: {} };
         className: function() {
 
             // TODO: get rid of excess class name that duplicates id
-            return 'attachment-filters wpmlc-taxonomy-filters attachment-'+this.options.taxonomy+'-filter';
+            return 'attachment-filters wpmlc-taxonomy-filter attachment-'+this.options.taxonomy+'-filter';
         },
 
         createFilters: function() {

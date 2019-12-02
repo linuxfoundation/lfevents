@@ -72,8 +72,14 @@ class wpmediacategory_walker_media_taxonomy_checklist extends Walker {
 
         // Default taxonomy
         $taxonomy = 'category';
-        // Add filter to change the default taxonomy
+        // Add filter to change the default taxonomy (so we can set the override in a custom script)
         $taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
+
+        // Get custom taxonomy slug from settings page
+        $options = get_option( 'wpmlc_settings' );
+        if ( ! empty( $options ) && ! empty( $options['wpmediacategory_taxonomy'] ) ) {
+            $taxonomy = $options['wpmediacategory_taxonomy'];
+        }
 
         $name = 'tax_input[' . $taxonomy . ']';
 
