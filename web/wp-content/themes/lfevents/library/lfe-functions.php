@@ -317,6 +317,26 @@ EOD;
 }
 
 /**
+ * Inserts Event-specific favicon if set, otherwise falls back to site favicon.
+ */
+function lfe_insert_favicon() {
+	global $parent_id;
+
+	$out = '<link rel="shortcut icon" href="';
+
+	$favicon = get_post_meta( $parent_id, 'lfes_favicon', true );
+	if ( $favicon ) {
+		$out .= wp_get_attachment_url( $favicon );
+	} else {
+		$out .= get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'favicon_16.png' );
+	}
+
+	$out .= '" />';
+
+	echo $out; //phpcs:ignore
+}
+
+/**
  * Makes the date pretty.  Adapted from https://9seeds.com/pretty-php-date-ranges/.
  *
  * @param datetime $start_date The start date.

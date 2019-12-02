@@ -355,6 +355,24 @@ class LFEvents_Admin {
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
+									'type'          => 'text', // Required.
+									'id'            => 'external_url',
+									'data_type'     => 'meta',
+									'data_key'      => 'external_url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'URL to External Event site' ),
+									'help'          => __( 'Set this value only when the Event site is located on an external site.' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => 'https://www.cloudfoundry.org/event/summit/',
+								),
+							),
+						),
+						array(
+							'label'    => __( 'Design' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
 									'type'            => 'image', // Required.
 									// Optionally, an id may be specified. It will be used by the plugin to
 									// identify the setting and will be applied to the control html.
@@ -385,16 +403,74 @@ class LFEvents_Admin {
 									'ui_border_top'   => false, // Display CSS border-top in the editor control.
 								),
 								array(
-									'type'          => 'text', // Required.
-									'id'            => 'external_url',
+									'type'          => 'color',
+									'id'            => 'menu_color',
 									'data_type'     => 'meta',
-									'data_key'      => 'external_url', // Required if 'data_type' is 'meta'.
-									'label'         => __( 'URL to External Event site' ),
-									'help'          => __( 'Set this value only when the Event site is located on an external site.' ),
+									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu Background Color' ),
+									// 'help'          => __( 'Choose a color for the topnav menu' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
-									'default_value' => '',
-									'placeholder'   => 'https://www.cloudfoundry.org/event/summit/',
+									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'menu_color_2',
+									'data_type'     => 'meta',
+									'data_key'      => 'menu_color_2', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu Gradient Color' ),
+									// 'help'          => __( 'Choose a second menu color to create a gradient' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'menu_color_3',
+									'data_type'     => 'meta',
+									'data_key'      => 'menu_color_3', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu Dropdown Color' ),
+									// 'help'          => __( 'Choose a color for the topnav dropdown' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
+								),
+								array(
+									'type'          => 'radio',
+									'id'            => 'menu_text_color',
+									'data_type'     => 'meta',
+									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Menu Text Color' ),
+									// 'help'          => __( 'Choose a color for the menu text' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => 'white', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'options'         => array( // Required.
+										'white' => __( 'White', 'my_plugin' ),
+										'black' => __( 'Black', 'my_plugin' ),
+									),
+								),
+								array(
+									'type'            => 'image', // Required.
+									// Optionally, an id may be specified. It will be used by the plugin to
+									// identify the setting and will be applied to the control html.
+									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'id'              => 'favicon',
+									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'        => 'favicon', // Required if 'data_type' is 'meta' or 'localstorage'.
+									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
+									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
+									// where this setting is nested will be used.
+									'label'           => __( 'Favicon', 'my_plugin' ),
+									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top'   => true, // Display CSS border-top in the editor control.
 								),
 							),
 						),
@@ -509,67 +585,6 @@ class LFEvents_Admin {
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'YYYY/MM/DD',
-								),
-							),
-						),
-						array(
-							'label'    => __( 'Colors' ),
-							'initial_open' => false,
-							'settings' => array(
-								array(
-									'type'          => 'color',
-									'id'            => 'menu_color',
-									'data_type'     => 'meta',
-									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu Background Color' ),
-									// 'help'          => __( 'Choose a color for the topnav menu' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
-									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'       => $palette,
-								),
-								array(
-									'type'          => 'color',
-									'id'            => 'menu_color_2',
-									'data_type'     => 'meta',
-									'data_key'      => 'menu_color_2', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu Gradient Color' ),
-									// 'help'          => __( 'Choose a second menu color to create a gradient' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
-									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'       => $palette,
-								),
-								array(
-									'type'          => 'color',
-									'id'            => 'menu_color_3',
-									'data_type'     => 'meta',
-									'data_key'      => 'menu_color_3', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu Dropdown Color' ),
-									// 'help'          => __( 'Choose a color for the topnav dropdown' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
-									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'       => $palette,
-								),
-								array(
-									'type'          => 'radio',
-									'id'            => 'menu_text_color',
-									'data_type'     => 'meta',
-									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
-									'label'         => __( 'Menu Text Color' ),
-									// 'help'          => __( 'Choose a color for the menu text' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
-									'default_value' => 'white', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
-									'options'         => array( // Required.
-										'white' => __( 'White', 'my_plugin' ),
-										'black' => __( 'Black', 'my_plugin' ),
-									),
 								),
 							),
 						),

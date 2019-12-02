@@ -10,14 +10,14 @@
  * @since FoundationPress 1.0.0
  */
 
-get_header();
-
 if ( $post->post_parent ) {
 	$ancestors = get_post_ancestors( $post->ID );
 	$parent_id = $ancestors[ count( $ancestors ) - 1 ];
 } else {
 	$parent_id = $post->ID;
 }
+
+get_header();
 
 $splash_page = get_post_meta( $post->ID, 'lfes_splash_page', true );
 if ( ! $splash_page ) {
