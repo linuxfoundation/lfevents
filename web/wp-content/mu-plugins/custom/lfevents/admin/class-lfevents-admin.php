@@ -140,7 +140,7 @@ class LFEvents_Admin {
 			'menu_position' => 30,
 		);
 
-		$current_year = date( 'Y' );
+		$current_year = gmdate( 'Y' );
 		for ( $x = 2017; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
 				'name'          => $x . ' Events',
@@ -213,15 +213,15 @@ class LFEvents_Admin {
 	 * Registers the LFEvent categories
 	 */
 	public function register_event_categories() {
-		$labels = [
+		$labels = array(
 			'name'          => _x( 'Event Categories', 'taxonomy general name' ),
 			'singular_name' => _x( 'Event Category', 'taxonomy singular name' ),
-		];
-		$args   = [
+		);
+		$args   = array(
 			'labels'       => $labels,
 			'show_in_rest' => true,
 			'hierarchical' => true,
-		];
+		);
 
 		register_taxonomy( 'lfevent-category', $this->post_types, $args );
 
@@ -239,11 +239,11 @@ class LFEvents_Admin {
 			'menu_name'         => __( 'Event Countries', 'textdomain' ),
 		);
 
-		$args   = [
+		$args   = array(
 			'labels'       => $labels,
 			'show_in_rest' => true,
 			'hierarchical' => true,
-		];
+		);
 
 		register_taxonomy( 'lfevent-country', array_merge( $this->post_types, array( 'lfe_community_event' ) ), $args );
 	}
