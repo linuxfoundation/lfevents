@@ -762,6 +762,29 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => __( '1365,2122,3112' ),
 								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'extra_vae_link_text',
+									'data_type'     => 'meta',
+									'data_key'      => 'extra_vae_link_text', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Extra View All Events Link' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'CNCF Homepage' ),
+								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'extra_vae_link_url',
+									'data_type'     => 'meta',
+									'data_key'      => 'extra_vae_link_url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Link URL' ),
+									'help'          => __( 'This extra link will appear second in the View All Events dropdown.' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.cncf.io/' ),
+								),
 							),
 						),
 					),
