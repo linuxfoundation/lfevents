@@ -162,12 +162,12 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 
 	$extra_link_text = get_post_meta( $parent_id, 'lfes_extra_vae_link_text', true );
 	$extra_link_url = get_post_meta( $parent_id, 'lfes_extra_vae_link_url', true );
-	// if ( $extra_link_text && $extra_link_url ) {
+	if ( $extra_link_text && $extra_link_url ) {
 		echo '<li class="external-link"><a target="_blank" href="' . $extra_link_url . '"><span class="subtext">'; //phpcs:ignore
 		echo $extra_link_text;
 		echo esc_html( get_template_part( 'template-parts/svg/external-link' ) ); //phpcs:ignore
 		echo '</span></a></li>'; //phpcs:ignore
-	// }
+	}
 
 	echo '</ul></li>';
 }
