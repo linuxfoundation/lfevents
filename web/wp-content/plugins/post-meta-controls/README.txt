@@ -3,7 +3,7 @@ Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.1
 Tested up to: 5.3
-Stable tag: 1.2.0
+Stable tag: 1.3.1
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +59,14 @@ Installation from the WordPress admin.
 
 
 == Changelog ==
+
+= 1.3.1 =
+* Fixed bug that didn't load correctly small images in the editor.
+* Minor bug fixes.
+
+= 1.3.0 =
+* Added minimum_days option in date_range.
+* Added maximum_days option in date_range.
 
 = 1.2.0 =
 * Added unavailable_dates option in date_single and date_range.
