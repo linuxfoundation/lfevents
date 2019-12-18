@@ -55,7 +55,7 @@ get_template_part( 'template-parts/global-nav' );
 								if ( $the_query->have_posts() ) {
 									while ( $the_query->have_posts() ) {
 										$the_query->the_post();
-										echo '<option value="' . lfe_get_event_url( $post->ID ) . '" >' . get_the_title() . '</option>';
+										echo '<option value="' . esc_html( lfe_get_event_url( $post->ID ) ) . '" >' . esc_html( get_the_title() ) . '</option>';
 									}
 								}
 								wp_reset_postdata(); // Restore original Post Data.
