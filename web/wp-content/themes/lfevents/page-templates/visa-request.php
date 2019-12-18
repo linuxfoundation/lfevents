@@ -7,8 +7,10 @@
  */
 
 get_header();
-get_template_part( 'template-parts/global-nav' );
+wp_enqueue_script( 'lfe_sfmc-forms', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ) ), true );
 wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), 1, true );
+
+get_template_part( 'template-parts/global-nav' );
 ?>
 
 <div class="main-container">
@@ -27,7 +29,7 @@ wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', ar
 
 						<div class="wp-block-ugb-container alignwide ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-normal ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
 
-						<form id="myform" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
+						<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
 
 						<label>
 							Select the event you would like a visa form for:
@@ -62,8 +64,8 @@ wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', ar
 						</label>
 
 						<label for="attendeeType">
-							Attendee type *
-							<select name="attendeeType" id="attendeeType" required>
+							Attendee type
+							<select name="attendeeType" required>
 								<option value="I will be attending">I will be attending</option>
 								<option value="I have been invited to speak">I have been invited to speak</option>
 							</select>						
@@ -412,36 +414,6 @@ wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', ar
 		</main>
 	</div>
 </div>
-
-<script>
-function onSubmit(token) {
-	var f = jQuery("#myform")
-	jQuery.ajax({
-		url: f.attr("action"),
-		type: 'POST',
-		data: f.serialize(),
-		beforeSend: function() {
-			jQuery("#myform").toggle();
-			jQuery("#message").html("Thank you for your submission.").addClass("callout success");
-		}
-		,
-		success: function(data) {
-			msg = jQuery(data).find("p").text();
-			jQuery("#message").html(msg);
-		}
-	});
-}
-
-jQuery(document).ready(function() {
-	var f = jQuery("#myform")
-	f.on("click", "#submitbtn", function(e) {
-		if(f[0].checkValidity()) {
-			e.preventDefault();
-			grecaptcha.execute();
-		}
-	});
-});
-</script>
 
 <?php
 get_footer();
