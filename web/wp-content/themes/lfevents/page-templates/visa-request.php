@@ -89,11 +89,8 @@ get_template_part( 'template-parts/global-nav' );
 						</label>
 
 						<label for="email">
-							Email *
+							Email <em>(must match email address you used to register for the event)</em> *
 							<input type="email" name="email" required>
-							<div class="note">
-								Must match email address you used to register for the event
-							</div>
 						</label>
 
 						<label for="passport">
