@@ -281,7 +281,7 @@ function lfe_get_sponsors( $parent_id ) {
  */
 function lfe_scripts() {
 
-	$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn'";
+	$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	if ( strpos( $chinese_domains, $current_domain ) ) {
 		// scripts for Chinese-audience sites.
@@ -305,7 +305,7 @@ add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
  * Inserts Google Analytics code on live sites.
  */
 function lfe_insert_google_analytics() {
-	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn'";
+	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
 <!-- Google Analytics -->
