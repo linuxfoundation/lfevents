@@ -197,11 +197,12 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	// Redirect to https://$primary_domain in the Live environment.
 	if ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 		$primary_domain = 'events.linuxfoundation.org';
-	} elseif ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfasiallcci' === $_ENV['PANTHEON_SITE_NAME'] && $_SERVER['HTTP_HOST'] != 'events.linuxfoundation.cn' && $_SERVER['HTTP_HOST'] != 'lfasiallc.cn' && $_SERVER['HTTP_HOST'] != 'www.lfasiallc.cn' ) {
+	} elseif ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfasiallcci' === $_ENV['PANTHEON_SITE_NAME'] && ( $_SERVER['HTTP_HOST'] === 'events.linuxfoundation.cn' || $_SERVER['HTTP_HOST'] === 'lfasiallc.cn' ) ) {
+		$primary_domain = 'www.lfasiallc.cn';
+	} elseif ( 'live' === $_ENV['PANTHEON_ENVIRONMENT'] && 'lfasiallcci' === $_ENV['PANTHEON_SITE_NAME'] && $_SERVER['HTTP_HOST'] != 'www.lfasiallc.cn' ) {
 		$primary_domain = 'www.lfasiallc.com';
 	} else {
-		// Redirect to HTTPS on every Pantheon environment.
-		$primary_domain = $_SERVER['HTTP_HOST']; //phpcs:ignore
+		$primary_domain = $_SERVER['HTTP_HOST'];
 	}
 	$requires_redirect = false;
 
@@ -211,8 +212,8 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	}
 
 	// If you're not using HSTS in the pantheon.yml file, uncomment this next block.
-	if (!isset($_SERVER['HTTP_USER_AGENT_HTTPS']) || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON') {
-	  $requires_redirect = true;
+	if ( !isset( $_SERVER['HTTP_USER_AGENT_HTTPS'] ) || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON' ) {
+		$requires_redirect = true;
 	}
 
 	if ( true === $requires_redirect ) {
