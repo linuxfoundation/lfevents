@@ -10,29 +10,29 @@
  * @param {*} token callback token.
  */
 function onSubmit(token) {
-	var f = jQuery( "#sfmc-form" )
-	jQuery.ajax(
+	var f = $( "#sfmc-form" )
+	$.ajax(
 		{
 			url: f.attr( "action" ),
 			type: 'POST',
 			data: f.serialize(),
 			beforeSend: function() {
-				jQuery( "#sfmc-form" ).toggle();
-				jQuery( "#message" ).html( "Thank you for your submission." ).addClass( "callout success" );
+				$( "#sfmc-form" ).toggle();
+				$( "#message" ).html( "Thank you for your submission." ).addClass( "callout success" );
 			}
 			,
 			success: function(data) {
-				var msg = jQuery( data ).find( "p" ).text();
-				jQuery( "#message" ).html( msg );
+				var msg = $( data ).find( "p" ).text();
+				$( "#message" ).html( msg );
 			}
 		}
 	);
 }
 window.onSubmit = onSubmit; // need to do this to export the onSubmit function from the module scope created by WebPack.
 
-jQuery( document ).ready(
+$( document ).ready(
 	function() {
-		var f = jQuery( "#sfmc-form" )
+		var f = $( "#sfmc-form" )
 		f.on(
 			"click",
 			"#submitbtn",
