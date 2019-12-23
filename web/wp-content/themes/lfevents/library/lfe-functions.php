@@ -593,9 +593,9 @@ if ( ! is_admin() ) {
 		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
 			return $url;
 		}
-		return "$url' defer";
+		return str_replace( ' src', ' defer src', $url );
 	}
-	add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
+	add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
 }
 
 add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_generation_args', 10, 3 );
