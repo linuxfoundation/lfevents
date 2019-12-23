@@ -48,8 +48,8 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// Deregister the jquery version bundled with WordPress.
 		wp_deregister_script( 'jquery' );
 
-		// CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-		wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.4.1.min.js', array(), '3.4.1', false );
+		// jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
+		wp_enqueue_script( 'jquery', get_stylesheet_directory_uri() . '/src/assets/js/jquery/' . foundationpress_asset_path( 'jquery-3.4.1.min.js' ), array(), '3.4.1', false );
 
 		// Deregister the jquery-migrate version bundled with WordPress.
 		wp_deregister_script( 'jquery-migrate' );

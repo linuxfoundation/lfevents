@@ -525,16 +525,12 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 	if ( 'preconnect' === $relation_type ) {
 		$hints[] = array(
 			'crossorigin' => '',
-			'href'        => '//code.jquery.com',
-		);
-		$hints[] = array(
-			'crossorigin' => '',
 			'href'        => '//www.google-analytics.com',
 		);
 	}
 	if ( 'dns-prefetch' === $relation_type ) {
 		// create array of URLs to remove from prefetch.
-		$url_arr = array( 'code.jquery.com', 's.w.org' );
+		$url_arr = array( 's.w.org' );
 
 		foreach ( $url_arr as $url ) {
 			$key = array_search( $url, $hints );
