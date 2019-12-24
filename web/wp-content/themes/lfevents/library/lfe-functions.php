@@ -530,7 +530,7 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 	}
 	if ( 'dns-prefetch' === $relation_type ) {
 		// create array of URLs to remove from prefetch.
-		$url_arr = array( 's.w.org' );
+		$url_arr = array( 'https://s.w.org/images/core/emoji/12.0.0-1/svg/' );
 
 		foreach ( $url_arr as $url ) {
 			$key = array_search( $url, $hints );
@@ -539,7 +539,8 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 			}
 		}
 		// add in any addresses here that you want to prefetch.
-		$hints[] = '';
+		// $hints[] = ''; //.
+
 	}
 	return $hints;
 }
