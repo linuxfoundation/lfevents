@@ -528,23 +528,11 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 			'href'        => '//www.google-analytics.com',
 		);
 	}
-	if ( 'dns-prefetch' === $relation_type ) {
-		// create array of URLs to remove from prefetch.
-		$url_arr = array( 'https://s.w.org/images/core/emoji/12.0.0-1/svg/' );
-
-		foreach ( $url_arr as $url ) {
-			$key = array_search( $url, $hints );
-			if ( false !== $key ) {
-				unset( $hints[ $key ] );
-			}
-		}
-		// add in any addresses here that you want to prefetch.
-		// $hints[] = ''; //.
-
-	}
 	return $hints;
 }
 add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
+
+add_filter( 'emoji_svg_url', '__return_false' );
 
 /**
  * Fix Gravity Forms loading its scripts too early.
