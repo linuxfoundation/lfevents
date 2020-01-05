@@ -128,8 +128,23 @@ class LFEvents_Public {
 	/**
 	 * Remove wp-embed script to speed things up https://kinsta.com/knowledgebase/disable-embeds-wordpress/.
 	 */
-	public function my_deregister_scripts() {
+	public function deregister_scripts() {
 		wp_dequeue_script( 'wp-embed' );
+	}
+
+	/**
+	 * Changes www.lfasiallc.com hardcoded domains to www.lfasiallc.cn when the requested url is lfasiallc.cn
+	 *
+	 * @param string $content Post content.
+	 */
+	public function rewrite_china_domains( $content ) {
+		$search = 'www.lfasiallc.com';
+		$target = 'www.lfasiallc.cn';
+
+		if ( $_SERVER['HTTP_HOST'] === $target ) {
+			$content = str_replace( $search, $target, $content );
+		}
+		return $content;
 	}
 
 }
