@@ -35,16 +35,22 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell large-6">
 									<label>
 										Select the event you would like a visa form for:
-										<select>
+										<select name="event" id="event">
 											<?php
 											$args = array(
 												'post_type'   => 'page',
 												'post_parent' => 0,
 												'no_found_rows' => true,  // used to improve performance.
 												'meta_query' => array(
+													'relation' => 'AND',
 													array(
 														'key'     => 'lfes_event_has_passed',
 														'compare' => '!=',
+														'value' => '1',
+													),
+													array(
+														'key'     => 'lfes_visa_request',
+														'compare' => '=',
 														'value' => '1',
 													),
 												),

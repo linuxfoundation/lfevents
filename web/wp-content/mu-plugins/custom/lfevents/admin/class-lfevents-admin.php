@@ -366,6 +366,17 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => 'https://www.cloudfoundry.org/event/summit/',
 								),
+								array(
+									'type'          => 'checkbox', // Required.
+									'id'            => 'visa_request',
+									'data_type'     => 'meta',
+									'data_key'      => 'visa_request', // Required if 'data_type' is 'meta'.
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => false,
+									'use_toggle'    => false,
+									'input_label'     => __( 'Eligible for Visa Request', 'my_plugin' ), // Required.
+								),
 							),
 						),
 						array(
