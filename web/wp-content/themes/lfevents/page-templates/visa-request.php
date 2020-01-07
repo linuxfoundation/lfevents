@@ -90,6 +90,7 @@ get_template_part( 'template-parts/global-nav' );
 										First name *
 										<input type="text" name="FirstName" required>
 									</label>
+									<p class="help-text">(must match passport)</p>
 								</div>
 								<div class="cell large-5">
 									<label>
@@ -117,12 +118,14 @@ get_template_part( 'template-parts/global-nav' );
 									<label>
 										Passport number *
 										<input type="text" name="passport" required>
+										<p class="help-text">(must match passport)</p>
 									</label>
 								</div>
 								<div class="cell large-4">
 									<label>
 										Date of birth *
 										<input type="date" name="dateOfBirth" required>
+										<p class="help-text">(must match passport)</p>
 									</label>
 								</div>
 								<div class="cell large-5">
