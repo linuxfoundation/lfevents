@@ -652,6 +652,11 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 	// Obtain the post parent ID...
 	$post_id   = isset( $args['id'] ) ? $args['id'] : $tsf->get_the_real_ID();
 	$parent_id = wp_get_post_parent_id( $post_id );
+	$parent2_id = wp_get_post_parent_id( $parent_id );
+
+	if ( $parent2_id ) {
+		$parent_id = $parent2_id;
+	}
 
 	yield array(
 		'url' => $tsf->get_post_meta_item( '_social_image_url', $parent_id ),
