@@ -603,6 +603,10 @@ add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_ge
  */
 function my_tsf_custom_image_generation_args( $params = array(), $args = null, $context = 'social' ) {
 
+	if ( isset( $params['cbs']['content'] ) ) {
+		$params['cbs']['content'] = 'my_content_image_generator';
+	}
+
 	// Let's not mess with non-social sharing images.
 	if ( 'social' !== $context ) {
 		return $params;
@@ -629,10 +633,6 @@ function my_tsf_custom_image_generation_args( $params = array(), $args = null, $
 			array( '_parent' => 'my_tsf_get_parent_social_meta_image' ),
 			$params['cbs']
 		);
-	}
-
-	if ( isset( $params['cbs']['content'] ) ) {
-		$params['cbs']['content'] = 'my_content_image_generator';
 	}
 
 	return $params;
@@ -695,7 +695,7 @@ function my_content_image_generator( $args = null, $size = 'full' ) {
 			$content = $tsf->get_post_content( $args['id'] );
 		}
 	}
-	$matches = [];
+	$matches = array();
 	// strlen( '<img src=a>' ) === 11; yes, that's a valid self-closing tag with a relative source.
 	if ( strlen( $content ) > 10 && false !== stripos( $content, '<img' ) ) {
 		preg_match_all(
@@ -708,17 +708,24 @@ function my_content_image_generator( $args = null, $size = 'full' ) {
 	if ( $matches ) {
 		foreach ( $matches as $match ) {
 			// Skip SVG files...
-			if ( false !== strpos( pathinfo( $match[2], PATHINFO_EXTENSION ), 'svg' ) ) continue;
+			if ( false !== strpos( pathinfo( $match[2], PATHINFO_EXTENSION ), 'svg' ) ) {
+				continue;
+			}
 			// Assume every URL to be correct? Yes. WordPress assumes that too.
-			yield [
-				'url' => $match[2] ?: '',
+			if ( $match[2] ) {
+				$url = $match[2];
+			} else {
+				$url = '';
+			}
+			yield array(
+				'url' => $url,
 				'id'  => 0,
-			];
+			);
 		}
 	} else {
-		yield [
+		yield array(
 			'url' => '',
 			'id'  => 0,
-		];
+		);
 	}
 }
