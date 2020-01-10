@@ -377,6 +377,17 @@ class LFEvents_Admin {
 									'use_toggle'    => false,
 									'input_label'     => __( 'Eligible for Visa Request', 'my_plugin' ), // Required.
 								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'salesforce_id',
+									'data_type'     => 'meta',
+									'data_key'      => 'salesforce_id', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'SalesForce ID' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => 'a0A2M00000VcC9HUAV',
+								),
 							),
 						),
 						array(

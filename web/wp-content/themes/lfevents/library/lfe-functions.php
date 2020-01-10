@@ -603,6 +603,10 @@ add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_ge
  */
 function my_tsf_custom_image_generation_args( $params = array(), $args = null, $context = 'social' ) {
 
+	if ( isset( $params['cbs']['content'] ) ) {
+		$params['cbs']['content'] = 'my_content_image_generator';
+	}
+
 	// Let's not mess with non-social sharing images.
 	if ( 'social' !== $context ) {
 		return $params;
@@ -633,6 +637,7 @@ function my_tsf_custom_image_generation_args( $params = array(), $args = null, $
 
 	return $params;
 }
+
 /**
  * Generates image URL and ID via my_get_image_value.
  *
@@ -652,9 +657,75 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 	// Obtain the post parent ID...
 	$post_id   = isset( $args['id'] ) ? $args['id'] : $tsf->get_the_real_ID();
 	$parent_id = wp_get_post_parent_id( $post_id );
+	$parent2_id = wp_get_post_parent_id( $parent_id );
+
+	if ( $parent2_id ) {
+		$parent_id = $parent2_id;
+	}
 
 	yield array(
 		'url' => $tsf->get_post_meta_item( '_social_image_url', $parent_id ),
 		'id'  => $tsf->get_post_meta_item( '_social_image_id', $parent_id ),
 	);
+}
+
+/**
+ * Custom generator function used to skip svgs.  See https://wordpress.org/support/topic/social-image-is-svg/#post-12306230 .
+ *
+ * @generator
+ *
+ * @param array|null $args The query arguments. Accepts 'id' and 'taxonomy'.
+ *                         Leave null to autodetermine query.
+ * @param string     $size The size of the image to get.
+ * @yield array : {
+ *    string url: The image URL location,
+ *    int    id:  The image ID,
+ * }
+ */
+function my_content_image_generator( $args = null, $size = 'full' ) {
+	$tsf = \the_seo_framework();
+	if ( null === $args ) {
+		if ( $tsf->is_singular() ) {
+			$content = $tsf->get_post_content();
+		}
+	} else {
+		if ( $args['taxonomy'] ) {
+			$content = '';
+		} else {
+			$content = $tsf->get_post_content( $args['id'] );
+		}
+	}
+	$matches = array();
+	// strlen( '<img src=a>' ) === 11; yes, that's a valid self-closing tag with a relative source.
+	if ( strlen( $content ) > 10 && false !== stripos( $content, '<img' ) ) {
+		preg_match_all(
+			'/<img[^>]+src=(\"|\')?([^\"\'>\s]+)\1?.*?>/mi',
+			$content,
+			$matches,
+			PREG_SET_ORDER
+		);
+	}
+	if ( $matches ) {
+		foreach ( $matches as $match ) {
+			// Skip SVG files...
+			if ( false !== strpos( pathinfo( $match[2], PATHINFO_EXTENSION ), 'svg' ) ) {
+				continue;
+			}
+			// Assume every URL to be correct? Yes. WordPress assumes that too.
+			if ( $match[2] ) {
+				$url = $match[2];
+			} else {
+				$url = '';
+			}
+			yield array(
+				'url' => $url,
+				'id'  => 0,
+			);
+		}
+	} else {
+		yield array(
+			'url' => '',
+			'id'  => 0,
+		);
+	}
 }
