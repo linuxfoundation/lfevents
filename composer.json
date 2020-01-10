@@ -38,6 +38,7 @@
     "wpackagist-plugin/wp-rss-aggregator":"^4.15",
     "wpackagist-plugin/gravity-forms-custom-post-types":"^3.1.15",
     "wpackagist-plugin/flying-pages":"^2.0.8",
+    "wpackagist-plugin/shortpixel-image-optimiser":"^4.15.3",
     "wpackagist-plugin/redirection":"^4.4.2"
   },
   "require-dev": {
