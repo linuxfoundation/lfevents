@@ -135,12 +135,21 @@ function speakers_block_callback( $attributes, $content ) {
 		$out .= '<li id="speaker-' . $id . '" class="speaker cell small-6 medium-4 xxlarge-3" data-toggler=".open" style="background: linear-gradient(-45deg, transparent 30%, ' . $gradient_color . ' 100%);">';
 		$out .= '	<div class="grid-x">';
 		$out .= '		<div class="cell large-5">';
-		$out .= '			<div class="headshot" style="background-image:url(' . get_the_post_thumbnail_url() . ');" data-toggle="speaker-' . $id . '">';
+		if ( get_the_content() ) {
+			$out .= '			<div class="headshot" style="background-image:url(' . get_the_post_thumbnail_url() . ');" data-toggle="speaker-' . $id . '">';
+		} else {
+			$out .= '			<div class="headshot" style="background-image:url(' . get_the_post_thumbnail_url() . ');">';
+		}
 		$out .= '			</div>';
 		$out .= '		</div>';
 		$out .= '		<div class="text cell large-7">';
-		$out .= '			<a class="name" data-toggle="speaker-' . $id . '">' . utf8_decode( get_the_title() ) . '</a>';
-		$out .= '			<a class="title" data-toggle="speaker-' . $id . '">' . get_post_meta( $id, 'lfes_speaker_title', true ) . '</a>';
+		if ( get_the_content() ) {
+			$out .= '			<a class="name" data-toggle="speaker-' . $id . '">' . utf8_decode( get_the_title() ) . '</a>';
+			$out .= '			<a class="title" data-toggle="speaker-' . $id . '">' . get_post_meta( $id, 'lfes_speaker_title', true ) . '</a>';
+		} else {
+			$out .= '			<span class="name">' . utf8_decode( get_the_title() ) . '</span>';
+			$out .= '			<span class="title">' . get_post_meta( $id, 'lfes_speaker_title', true ) . '</span>';
+		}
 		$out .= '			<div class="bio">';
 		$out .= '				<p>' . get_the_content() . '</p>';
 		$out .= '			</div>';
