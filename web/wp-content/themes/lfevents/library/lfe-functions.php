@@ -293,7 +293,7 @@ function lfe_scripts() {
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
 
 /**
- * Removes the annoying Ultimate Blocks menu in the admin.
+ * Removes unneeded admin menu items.
  */
 function lfe_custom_menu_page_removing() {
 	remove_menu_page( 'ultimate-blocks-settings' );
