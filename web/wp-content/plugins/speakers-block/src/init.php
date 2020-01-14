@@ -28,14 +28,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 function speakers_block_cgb_block_assets() { // phpcs:ignore
-	// Register block styles for both frontend + backend.
-	// wp_register_style(
-	// 	'speakers_block-cgb-style-css', // Handle.
-	// 	plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-	// 	array( 'wp-editor' ), // Dependency to include the CSS after it.
-	// 	null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
-	// );
-
 	// Register block editor script for backend.
 	wp_register_script(
 		'speakers_block-cgb-block-js', // Handle.
@@ -64,7 +56,8 @@ function speakers_block_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-speakers-block', array(
+		'cgb/block-speakers-block',
+		array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			// 'style'         => 'speakers_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
@@ -90,9 +83,12 @@ function speakers_block_callback( $attributes, $content ) {
 		return;
 	}
 
-	$speakers_ids = array_map( function( $speaker ) {
-		return intval( $speaker['value'] );
-	}, $attributes['speakers'] );
+	$speakers_ids = array_map(
+		function( $speaker ) {
+			return intval( $speaker['value'] );
+		},
+		$attributes['speakers']
+	);
 
 	$query = new WP_Query(
 		array(
@@ -103,7 +99,7 @@ function speakers_block_callback( $attributes, $content ) {
 			'post_status'            => 'publish',
 			'posts_per_page'         => 50,
 			'post__in'               => $speakers_ids,
-			'orderby'                => 'post__in'
+			'orderby'                => 'post__in',
 		)
 	);
 
@@ -144,10 +140,10 @@ function speakers_block_callback( $attributes, $content ) {
 		$out .= '		</div>';
 		$out .= '		<div class="text cell large-7">';
 		if ( get_the_content() ) {
-			$out .= '			<a class="name" data-toggle="speaker-' . $id . '">' . utf8_decode( get_the_title() ) . '</a>';
+			$out .= '			<a class="name" data-toggle="speaker-' . $id . '">' . esc_html( get_the_title() ) . '</a>';
 			$out .= '			<a class="title" data-toggle="speaker-' . $id . '">' . get_post_meta( $id, 'lfes_speaker_title', true ) . '</a>';
 		} else {
-			$out .= '			<span class="name">' . utf8_decode( get_the_title() ) . '</span>';
+			$out .= '			<span class="name">' . esc_html( get_the_title() ) . '</span>';
 			$out .= '			<span class="title">' . get_post_meta( $id, 'lfes_speaker_title', true ) . '</span>';
 		}
 		$out .= '			<div class="bio">';
