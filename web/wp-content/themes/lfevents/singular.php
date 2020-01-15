@@ -163,7 +163,11 @@ if ( ! $splash_page ) {
 		$twitter = get_post_meta( $parent_id, 'lfes_twitter', true );
 
 		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
-			echo '<h3 class="event-social-links-header">Follow Us</h3>';
+			if ( is_lfeventsci() ) {
+				echo '<h3 class="event-social-links-header">Follow Us</h3>';
+			} else {
+				echo '<h3 class="event-social-links-header">关注我们 Follow Us</h3>';
+			}
 			echo '<ul class="event-social-links">';
 
 			if ( $wechat ) {
