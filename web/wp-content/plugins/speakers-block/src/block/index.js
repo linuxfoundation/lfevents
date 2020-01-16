@@ -9,16 +9,16 @@
 import './styles/style.scss';
 import './styles/editor.scss';
 
-import './store.js';
-
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { InspectorControls, PanelColorSettings } = wp.blockEditor;
-const { Spinner, RadioControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
-const { withSelect } = wp.data;
+const { RadioControl, PanelBody, PanelRow } = wp.components; //Import Button from wp.components
+const { apiFetch } = wp;
 
-import Select, { components } from 'react-select';
+import AsyncSelect from 'react-select/async';
+import { components } from 'react-select';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import debounce from 'debounce-promise';
 
 /**
  * Register: aa Gutenberg Block.
@@ -57,27 +57,14 @@ registerBlockType( 'cgb/block-speakers-block', {
 		},
 	},
 
-	edit: withSelect( ( select ) => {
-		return {
-			speakersList: select( 'linux/speakers-block' ).receiveSpeakersList(),
-		};
-	} )( props => {
-		const { setAttributes, className, speakersList, attributes: { speakers, color1, color2, textColor } } = props;
+	edit: ( props ) => {
+		const { setAttributes, attributes: { speakers, color1, color2, textColor } } = props;
 
-		function onTextColorChange( changes ) {
+		const onTextColorChange = ( changes ) => {
 			setAttributes( {
 				textColor: changes,
 			} );
-		}
-
-		if ( ! speakersList.length ) {
-			return (
-				<p className={ className } >
-					<Spinner />
-					{ __( 'Loading Data...' ) }
-				</p>
-			);
-		}
+		};
 
 		const onDragEnd = ( result ) => {
 			// dropped outside the list
@@ -128,6 +115,27 @@ registerBlockType( 'cgb/block-speakers-block', {
 			);
 		};
 
+		const prepareOptions = ( list ) => {
+			return list.map( ( item ) => {
+				return {
+					value: item.id,
+					label: item.title.rendered,
+				};
+			} );
+		};
+
+		const searchSpeakers = inputValue => {
+			return apiFetch( {
+				path: '/wp/v2/lfe_speaker/?per_page=100&search=' + inputValue.replace( /\W/g, '' ),
+			} ).then( posts => {
+				return prepareOptions( posts );
+			} );
+		};
+
+		const loadOptions = debounce( ( inputValue ) => searchSpeakers( inputValue ), 1000, {
+			leading: false,
+		} );
+
 		return [
 			<InspectorControls key="speakers-block-panel">
 				<PanelColorSettings
@@ -175,11 +183,12 @@ registerBlockType( 'cgb/block-speakers-block', {
 								<div
 									{ ...provided.droppableProps }
 									ref={ provided.innerRef }>
-									<Select
+									<AsyncSelect
 										styles={ { menu: ( styles ) => ( { ...styles, zIndex: 99 } ) } }
 										isMulti
 										value={ speakers }
-										options={ speakersList }
+										defaultOptions
+										loadOptions={ loadOptions }
 										components={ { MultiValueContainer: DragAndDropContainer } }
 										onChange={ ( value ) => setAttributes( { speakers: value } ) }
 									/>
@@ -191,5 +200,5 @@ registerBlockType( 'cgb/block-speakers-block', {
 				</p>
 			</div>,
 		];
-	} ),
+	},
 } );
