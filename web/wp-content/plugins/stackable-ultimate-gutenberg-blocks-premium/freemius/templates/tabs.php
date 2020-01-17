@@ -20,7 +20,7 @@
 
     $menu_items = $fs->get_menu_items();
 
-    $show_settings_with_tabs = $fs->show_settings_with_tabs();
+    $is_free_wp_org_theme = $fs->is_free_wp_org_theme();
 
     $tabs = array();
     foreach ( $menu_items as $priority => $items ) {
@@ -34,7 +34,7 @@
                     continue;
                 }
 
-                if ( ! $show_settings_with_tabs || ! $fs->is_submenu_item_visible( $submenu_name, true ) ) {
+                if ( ! $is_free_wp_org_theme || ! $fs->is_submenu_item_visible( $submenu_name, true ) ) {
                     continue;
                 }
             }

@@ -99,11 +99,6 @@
          * @var null|number
          */
         public $bundle_id;
-        /**
-         * @since 2.3.1
-         * @var null|string
-         */
-        public $bundle_public_key;
 
         const AFFILIATE_MODERATION_CUSTOMERS = 'customers';
 
