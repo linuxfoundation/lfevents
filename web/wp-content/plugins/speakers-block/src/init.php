@@ -132,10 +132,11 @@ function speakers_block_callback( $attributes, $content ) {
 		$out .= '	<div class="grid-x">';
 		$out .= '		<div class="cell large-5">';
 		if ( get_the_content() ) {
-			$out .= '			<div class="headshot" style="background-image:url(' . get_the_post_thumbnail_url() . ');" data-toggle="speaker-' . $id . '">';
+			$out .= '			<div class="headshot" data-toggle="speaker-' . $id . '">';
 		} else {
-			$out .= '			<div class="headshot" style="background-image:url(' . get_the_post_thumbnail_url() . ');">';
+			$out .= '			<div class="headshot">';
 		}
+		$out .= get_the_post_thumbnail( $id, 'profile-200' );
 		$out .= '			</div>';
 		$out .= '		</div>';
 		$out .= '		<div class="text cell large-7">';

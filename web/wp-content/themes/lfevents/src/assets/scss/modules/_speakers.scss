@@ -41,6 +41,14 @@
       background-size: cover;
       background-position: center;
       mix-blend-mode: luminosity; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
+      overflow: hidden;
+      position: relative;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
       &[data-toggle] {
         cursor: pointer;
