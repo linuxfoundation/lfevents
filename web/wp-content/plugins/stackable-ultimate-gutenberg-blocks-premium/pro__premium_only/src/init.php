@@ -14,14 +14,19 @@ if ( ! function_exists( 'stackable_premium_block_assets' ) ) {
 	*/
 	function stackable_premium_block_assets() {
 
-		wp_enqueue_style(
-			'ugb-style-css-premium',
-			plugins_url( 'dist/frontend_blocks__premium_only.css', STACKABLE_FILE ),
-			array( 'ugb-style-css' ),
-			STACKABLE_VERSION
-		);
+		$enqueue_styles_in_frontend = apply_filters( 'stackable_enqueue_styles', ! is_admin() );
+		$enqueue_scripts_in_frontend = apply_filters( 'stackable_enqueue_scripts', ! is_admin() );
 
-		if ( ! is_admin() ) {
+		if ( is_admin() || $enqueue_styles_in_frontend ) {
+			wp_enqueue_style(
+				'ugb-style-css-premium',
+				plugins_url( 'dist/frontend_blocks__premium_only.css', STACKABLE_FILE ),
+				array( 'ugb-style-css' ),
+				STACKABLE_VERSION
+			);
+		}
+
+		if ( $enqueue_scripts_in_frontend ) {
 			wp_enqueue_script(
 				'ugb-block-frontend-js-premium',
 				plugins_url( 'dist/frontend_blocks__premium_only.js', STACKABLE_FILE ),
@@ -42,19 +47,11 @@ if ( ! function_exists( 'stackable_premium_block_editor_assets' ) ) {
 	 */
 	function stackable_premium_block_editor_assets() {
 
-		// Enqueue CodeMirror for Custom CSS.
-		wp_enqueue_code_editor( array(
-			'type' => 'text/css', // @see https://developer.wordpress.org/reference/functions/wp_get_code_editor_settings/
-			'codemirror' => array(
-				'indentUnit' => 2,
-				'tabSize' => 2,
-			),
-		) );
-
+		// This should enqueue BEFORE the main Stackable block script.
 		wp_enqueue_script(
 			'ugb-block-js-premium',
 			plugins_url( 'dist/editor_blocks__premium_only.js', STACKABLE_FILE ),
-			array( 'ugb-block-js', 'code-editor' ),
+			array( 'ugb-block-js-vendor', 'code-editor', 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor', 'wp-util', 'wp-plugins', 'wp-edit-post', 'wp-i18n' ),
 			STACKABLE_VERSION
 		);
 
@@ -68,5 +65,5 @@ if ( ! function_exists( 'stackable_premium_block_editor_assets' ) ) {
 			STACKABLE_VERSION
 		);
 	}
-	add_action( 'enqueue_block_editor_assets', 'stackable_premium_block_editor_assets' );
+	add_action( 'enqueue_block_editor_assets', 'stackable_premium_block_editor_assets', 9 );
 }
