@@ -18,15 +18,14 @@ if ( !function_exists( 'sugb_fs' ) ) {
             // Include Freemius SDK.
             require_once dirname( __FILE__ ) . '/freemius/start.php';
             $sugb_fs = fs_dynamic_init( array(
-                'id'              => '1748',
-                'slug'            => 'stackable-ultimate-gutenberg-blocks',
-                'type'            => 'plugin',
-                'public_key'      => 'pk_771ae29c5255d20a4880980729a17',
-                'is_premium'      => true,
-                'has_addons'      => false,
-                'has_paid_plans'  => true,
-                'has_affiliation' => 'selected',
-                'menu'            => array(
+                'id'             => '1748',
+                'slug'           => 'stackable-ultimate-gutenberg-blocks',
+                'type'           => 'plugin',
+                'public_key'     => 'pk_771ae29c5255d20a4880980729a17',
+                'is_premium'     => true,
+                'has_addons'     => false,
+                'has_paid_plans' => true,
+                'menu'           => array(
                 'slug'       => 'stackable',
                 'first-path' => 'admin.php?page=stackable',
                 'account'    => true,
@@ -34,7 +33,7 @@ if ( !function_exists( 'sugb_fs' ) ) {
                 'contact'    => true,
                 'support'    => true,
             ),
-                'is_live'         => true,
+                'is_live'        => true,
             ) );
         }
         
