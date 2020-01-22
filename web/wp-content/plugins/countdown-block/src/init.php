@@ -41,7 +41,7 @@ function countdown_block_assets() { // phpcs:ignore
 	wp_register_style(
 		'countdown-block-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
-		array( 'wp-edit-blocks' ),
+		array(),
 		filemtime( countdown_block_get_plugin_path() . 'dist/blocks.style.build.css' )
 	);
 
