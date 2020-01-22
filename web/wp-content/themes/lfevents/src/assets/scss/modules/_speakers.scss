@@ -17,6 +17,10 @@
     list-style: none;
     margin: 0;
     justify-content: center;
+
+    .grid-x {
+      flex-wrap: wrap;
+    }
   }
 
   .speaker {
@@ -74,7 +78,7 @@
     }
 
     .text {
-
+      width: 100%;
       @include breakpoint(large) {
         padding-top: 1rem;
       }
