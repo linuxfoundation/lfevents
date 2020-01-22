@@ -729,3 +729,17 @@ function my_content_image_generator( $args = null, $size = 'full' ) {
 		);
 	}
 }
+
+/**
+ * Programmatically flushes the Pantheon site cache when a sponsor-list post is updated.
+ * This kind of a post shows up on many pages so that's why we need such a heavy cache clear.
+ *
+ * @param int $post_id ID of post updated.
+ */
+function lfe_save_post_hook( $post_id ) {
+	$post = get_post( $post_id );
+	if ( 'sponsor-list' === $post->post_name && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
+		pantheon_wp_clear_edge_all();
+	}
+}
+add_action( 'save_post', 'lfe_save_post_hook' );
