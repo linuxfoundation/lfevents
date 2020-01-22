@@ -1004,10 +1004,7 @@ window.wpmlc = window.wpmlc || { l10n: {} };
 
         createSingle: function() {
 
-            // argument models not empty?
-            if ( arguments[1].models.length > 0 ) {
-                original.AttachmentsBrowser.createSingle.apply( this, arguments );
-            }
+            original.AttachmentsBrowser.createSingle.apply( this, arguments );
 
             if ( this.controller.isModeActive( 'wpmlc-grid' ) ) {
 
