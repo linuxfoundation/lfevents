@@ -78,7 +78,7 @@
     }
 
     .text {
-      width: 100%;
+      //width: 100%;
       @include breakpoint(large) {
         padding-top: 1rem;
       }
