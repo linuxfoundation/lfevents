@@ -149,10 +149,10 @@ window.wpmlc = window.wpmlc || { l10n: {} };
             if ( toolbar ) {
                 wpmlcMessage = success ? toolbar.get( 'wpmlcAttachmentSuccess' ) : toolbar.get( 'wpmlcAttachmentError' );
 
-                wpmlcMessage.$el.fadeIn( 200 );
-                setTimeout( function() {
-                    wpmlcMessage.$el.fadeOut( 100 );
-                }, 800 );
+                // wpmlcMessage.$el.fadeIn( 200 );
+                // setTimeout( function() {
+                //     wpmlcMessage.$el.fadeOut( 100 );
+                // }, 800 );
             }
 
             this.controller.trigger( 'attachment:compat:ready', ['ready'] );
@@ -812,7 +812,7 @@ window.wpmlc = window.wpmlc || { l10n: {} };
                     filters: Filters,
                     style: 'primary',
                     disabled: true,
-                    text: mediaTrash ? l10n.trashSelected : l10n.deleteSelected,
+                    text: mediaTrash ? l10n.trashSelected : l10n.deletePermanently,
                     controller: this.controller,
                     priority: -60
                 }).render() );
@@ -844,9 +844,9 @@ window.wpmlc = window.wpmlc || { l10n: {} };
                     filters: Filters,
                     style: 'primary',
                     disabled: true,
-                    text: mediaTrash ? l10n.trashSelected : l10n.deleteSelected,
+                    text: mediaTrash ? l10n.trashSelected : l10n.deletePermanently,
                     controller: this.controller,
-                    priority: -60,
+                    priority: -80,
                     click: function() {
                         var changed = [], removed = [],
                             selection = this.controller.state().get( 'selection' ),
@@ -1004,7 +1004,12 @@ window.wpmlc = window.wpmlc || { l10n: {} };
 
         createSingle: function() {
 
-            original.AttachmentsBrowser.createSingle.apply( this, arguments );
+            // argument models not empty?
+            if ( typeof arguments[1] !== 'undefined' ) {
+                if ( arguments[1].models.length > 0 ) {
+                    original.AttachmentsBrowser.createSingle.apply( this, arguments );
+                }
+            }
 
             if ( this.controller.isModeActive( 'wpmlc-grid' ) ) {
 

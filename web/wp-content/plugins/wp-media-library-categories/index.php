@@ -3,7 +3,7 @@
  * Plugin Name: Media Library Categories Premium
  * Plugin URI: https://1.envato.market/c/1206953/275988/4415?subId1=wpmlcp&subId2=plugin&u=https%3A%2F%2Fcodecanyon.net%2Fitem%2Fmedia-library-categories-premium%2F6691290
  * Description: Adds the ability to use categories in the media library.
- * Version: 2.7
+ * Version: 2.7.3
  * Author: Jeffrey-WP
  * Text Domain: wp-media-library-categories
  * Domain Path: /languages
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class wpMediaLibraryCategories {
 
-    public $plugin_version = '2.7';
+    public $plugin_version = '2.7.3';
 
     /**
      * Initialize the hooks and filters
@@ -675,7 +675,7 @@ class wpMediaLibraryCategories {
 
         $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-        wp_enqueue_script( 'wpmlcp-media-views', plugins_url( 'js/wpmlcp-media-views' . $suffix . '.js', __FILE__ ), array( 'media-views' ), $plugin_version, true );
+        wp_enqueue_script( 'wpmlcp-media-views', plugins_url( 'js/wpmlcp-media-views-273' . $suffix . '.js', __FILE__ ), array( 'media-views' ), $plugin_version, true );
 
         $term_list = wp_terms_checklist( 0, array(
             'taxonomy'      => $taxonomy,
