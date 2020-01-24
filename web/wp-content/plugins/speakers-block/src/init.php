@@ -160,7 +160,7 @@ function speakers_block_callback( $attributes, $content ) {
 		$out .= '			</ul>';
 		$out .= '		</div>';
 		$out .= '			<div class="bio">';
-		$out .= '				<p>' . get_the_content() . '</p>';
+		$out .= '				' . get_the_content();
 		$out .= '			</div>';
 		$out .= '	</div>';
 		$out .= '</li>';
