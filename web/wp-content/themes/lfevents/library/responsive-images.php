@@ -14,7 +14,8 @@ add_image_size( 'fp-large', 1200 );
 add_image_size( 'fp-xlarge', 1920 );
 
 // profile pictures.
-add_image_size( 'profile-200', 200, 200 );
+add_image_size( 'profile-200', 200, 200, array( 'center', 'center' ) );
+add_image_size( 'profile-310', 310, 310, array( 'center', 'center' ) );
 
 // venue location image.
 add_image_size( 'venue', 600, 600, false );

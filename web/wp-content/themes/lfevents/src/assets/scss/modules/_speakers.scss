@@ -17,6 +17,10 @@
     list-style: none;
     margin: 0;
     justify-content: center;
+
+    .grid-x {
+      flex-wrap: wrap;
+    }
   }
 
   .speaker {
@@ -41,6 +45,17 @@
       background-size: cover;
       background-position: center;
       mix-blend-mode: luminosity; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
+      overflow: hidden;
+      position: relative;
+
+      img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
 
       &[data-toggle] {
         cursor: pointer;
@@ -63,7 +78,7 @@
     }
 
     .text {
-
+      //width: 100%;
       @include breakpoint(large) {
         padding-top: 1rem;
       }
@@ -100,38 +115,32 @@
           }
         }
       }
-
-      .bio {
-        margin-top: 0.75rem;
-        font-size: rem-calc(14);
-      }
-
       .social-media-links {
         list-style: none;
         margin: 0.75rem 0 0;
-
+  
         li {
           display: inline-block;
           margin-right: 0.5rem;
-
+  
           a {
             opacity: 0.5;
-
+  
             &:hover {
               opacity: 1;
             }
           }
-
+  
           svg {
             fill: #fff;
             width: rem-calc(30);
             height: rem-calc(30);
-
+  
             @include breakpoint(large) {
               width: rem-calc(24);
               height: rem-calc(24);
             }
-
+  
             @include breakpoint(xxlarge) {
               width: rem-calc(18);
               height: rem-calc(18);
@@ -139,7 +148,13 @@
           }
         }
       }
+
     }
+    .bio {
+      margin-top: 0.75rem;
+      font-size: rem-calc(14);
+    }
+
 
     // Toggling stuff
     .bio {
