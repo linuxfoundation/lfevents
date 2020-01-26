@@ -169,6 +169,21 @@ class LFEvents_Admin {
 
 		$opts = array(
 			'labels'       => array(
+				'name'          => __( 'Sponsors' ),
+				'singular_name' => __( 'Sponsor' ),
+				'all_items'     => __( 'All Sponsors' ),
+			),
+			'show_in_rest' => true,
+			'public' => true,
+			'menu_icon'    => 'dashicons-star-filled',
+			'rewrite'      => array( 'slug' => 'sponsors' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+		);
+
+		register_post_type( 'lfe_sponsor', $opts );
+
+		$opts = array(
+			'labels'       => array(
 				'name'          => __( 'Community Events' ),
 				'singular_name' => __( 'Community Event' ),
 				'all_items'     => __( 'All Community Events' ),
@@ -925,6 +940,42 @@ class LFEvents_Admin {
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://cncf.io' ),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		// Push the $sidebar we just assigned to the variable
+		// to the array of $sidebars that comes in the function argument.
+		$sidebars[] = $sidebar;
+
+		$sidebar = array(
+			'id'              => 'lfe-sponsor-sidebar',
+			'id_prefix'       => 'lfes_sponsor_',
+			'label'           => __( 'Sponsor Details' ),
+			'post_type'       => array( 'lfe_sponsor' ),
+			'data_key_prefix' => 'lfes_sponsor_',
+			'icon_dashicon'   => 'star-filled',
+			'tabs'            => array(
+				array(
+					'label'  => __( 'Tab label' ),
+					'panels' => array(
+						array(
+							'label'    => __( 'Sponsor Details' ),
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'url',
+									'data_type'     => 'meta',
+									'data_key'      => 'url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Forwarding URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://cloud.google.com/' ),
 								),
 							),
 						),
