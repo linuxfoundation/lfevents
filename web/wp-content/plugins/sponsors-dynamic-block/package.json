@@ -1,0 +1,16 @@
+{
+  "name": "sponsors-dynamic-block-cgb-guten-block",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cgb-scripts start",
+    "build": "cgb-scripts build",
+    "eject": "cgb-scripts eject"
+  },
+  "dependencies": {
+    "cgb-scripts": "1.17.0",
+    "debounce-promise": "^3.1.2",
+    "react-beautiful-dnd": "^12.2.0",
+    "react-select": "^3.0.8"
+  }
+}

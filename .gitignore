@@ -126,6 +126,8 @@ Thumbs.db
 web/wp-content/plugins/speakers-block/node_modules
 !web/wp-content/plugins/sponsors-block
 web/wp-content/plugins/sponsors-block/node_modules
+!web/wp-content/plugins/sponsors-dynamic-block
+web/wp-content/plugins/sponsors-dynamic-block/node_modules
 !web/wp-content/plugins/text-on-image-block
 web/wp-content/plugins/text-on-image-block/node_modules
 !web/wp-content/plugins/pricing-block
