@@ -769,14 +769,14 @@ function lfe_migrate_sponsors( $content ) {
 		$out .= '<ul>';
 		while ( $query->have_posts() ) {
 			$query->the_post();
-
-			if ( ! post_exists_by_slug( $post->post_name ) ) {
+			$new_slug = str_replace( array( '-spn', '_spn', '-01' ), '', $post->post_name );
+			if ( ! post_exists_by_slug( $new_slug ) ) {
 				$new_post_id = wp_insert_post(
 					array(
 						'comment_status'    => 'closed',
 						'ping_status'       => 'closed',
-						'post_name'         => $post->post_name,
-						'post_title'        => $post->post_name,
+						'post_name'         => $new_slug,
+						'post_title'        => $new_slug,
 						'post_status'       => 'publish',
 						'post_type'         => 'lfe_sponsor',
 						'meta_input'   => array(
@@ -785,7 +785,7 @@ function lfe_migrate_sponsors( $content ) {
 					)
 				);
 				set_post_thumbnail( $new_post_id, $post->ID );
-				$out .= '<li>' . get_the_title() . ' was inserted as post ID <a href="' . get_edit_post_link( $new_post_id ) . '">' . $new_post_id . '</a></li>';
+				$out .= '<li>' . $new_slug . ' was inserted as post ID <a href="' . get_edit_post_link( $new_post_id ) . '">' . $new_post_id . '</a></li>';
 			}
 		}
 		$out .= '</ul>';
