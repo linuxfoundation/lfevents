@@ -212,3 +212,9 @@ figure {
 	position: relative;
 	z-index: 10;
 }
+
+.prevent-orphaned-icon {
+  .icon--inline {
+    margin-right:  -1em;
+  }
+}
