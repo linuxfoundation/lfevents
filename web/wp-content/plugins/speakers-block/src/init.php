@@ -94,7 +94,6 @@ function speakers_block_callback( $attributes, $content ) {
 		array(
 			'no_found_rows'          => true,
 			'update_post_term_cache' => false,
-			'update_post_meta_cache' => false,
 			'post_type'              => 'lfe_speaker',
 			'post_status'            => 'publish',
 			'posts_per_page'         => 50,
