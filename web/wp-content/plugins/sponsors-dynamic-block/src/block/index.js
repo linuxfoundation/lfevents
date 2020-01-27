@@ -189,6 +189,7 @@ registerBlockType( 'cgb/block-sponsors-dynamic-block', {
 							) }
 						</Droppable>
 					</DragDropContext>
+					<em>Note: Sponsors will appear alphabetical on the site.</em>
 				</p>
 			</div>,
 		];
