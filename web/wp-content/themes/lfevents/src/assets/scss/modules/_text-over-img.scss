@@ -6,6 +6,10 @@
   background-size: cover;
   padding-right: 0 !important;
   padding-left: 0 !important;
+  position: relative;
+  padding: 0 !important;
+  overflow: hidden;
+  max-height: 532px;
 
   img {
     position: relative;
@@ -17,7 +21,10 @@
     background-color: $white;
     padding: 1rem;
     border-radius: 0.5rem;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    max-width: 616px;
+    transform: translateY(-50%);
   }
 
   blockquote {
@@ -63,12 +70,6 @@
   }
 
   @include breakpoint(large) {
-    padding: 10vw !important;
-
-    img {
-      display: none;
-    }
-
     .text {
       padding: 2rem;
       margin: 1rem;
