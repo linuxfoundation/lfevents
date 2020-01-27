@@ -1,0 +1,53 @@
+
+.shortpixel.notice
+{
+   //padding: 18px;
+   min-height: 50px;
+   padding: 8px;
+
+   img
+   {
+    // max-height: 50px;
+   }
+   .notice-dismiss
+   {
+     margin-top: 10px;
+   }
+   span
+   {
+     display: inline-block;
+     vertical-align: middle;
+     &.icon {
+
+       margin: 0 25px 0 0;
+     }
+
+   }
+}
+
+
+
+// compat list if.
+.shortpixel.notice
+{
+  .sp-conflict-plugins {
+      display: table;
+      border-spacing: 10px;
+      border-collapse: separate;
+      li {
+          display: table-row;
+      }
+      li > * {
+          display: table-cell;
+      }
+  }
+
+  li.sp-conflict-plugins-list {
+      line-height: 28px;
+      list-style: disc;
+      margin-left: 80px;
+  }
+  li.sp-conflict-plugins-list a.button {
+      margin-left: 10px;
+  }
+}

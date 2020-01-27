@@ -1,0 +1,48 @@
+
+
+.view-edit-media
+{
+    .debugInfo
+    {
+      pre
+      {
+        font-size: 11px;
+    //    overflow: hidden;
+      }
+    }
+    .sp-column-stats
+    {
+      position: relative;
+
+      .sp-column-actions
+      {
+        margin-right: 5px;
+        margin-top: 16px;
+      }
+      .edit-media-stats
+      {
+        border: 1px solid #ccc;
+        padding: 16px;
+
+        li
+        {
+          margin: 0;
+          line-height: 20px;
+        }
+      }
+    }
+    .main-actions
+    {
+      display: inline-block;
+      width: 100%;
+      //text-align: center;
+      .button.button-smaller
+      {
+        //float: none;
+        padding: 6px 15px;
+        height: auto;
+        float: none;
+      }
+    }
+
+} // view-edit-media

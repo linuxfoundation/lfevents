@@ -1,0 +1,29 @@
+{
+    "repositories": [
+        {
+            "packagist.org": false,
+            "type": "path",
+            "url": "../modules/*",
+	    "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "shortpixel/notices":">=1.3",
+        "shortpixel/build" : "@dev"
+    },
+    "require-dev": {
+	"phpunit/phpunit": "^7",
+	"mikey179/vfsstream": "^1"
+   },
+
+    "scripts": {
+        "post-update-cmd" : "\\ShortPixel\\Build\\Build::BuildIt",
+        "buildSP" : "\\ShortPixel\\Build\\Build::BuildIt"
+    },
+    "extra": {
+         "targetNamespace" : "ShortPixel"
+    }
+
+}

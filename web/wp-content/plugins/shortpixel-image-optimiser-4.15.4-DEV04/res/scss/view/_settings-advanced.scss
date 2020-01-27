@@ -1,0 +1,26 @@
+/* Specific styles for advanced settings tab */
+
+#shortpixel-settings-tabs  #tab-adv-settings
+{
+
+  .addCustomFolder
+  {
+    margin: 10px 0;
+    .add-folder-text
+    {
+      margin-left: 5px;
+    }
+    input[type="text"]
+    {
+      width: 50em;
+      max-width: 70%;
+    }
+    input[name="saveAdv"]
+    {
+      margin-left: 8px;
+    }
+  }
+
+
+
+}

@@ -1,0 +1,25 @@
+.shortpixel.notice {
+  min-height: 50px;
+  padding: 8px; }
+  .shortpixel.notice .notice-dismiss {
+    margin-top: 10px; }
+  .shortpixel.notice span {
+    display: inline-block;
+    vertical-align: middle; }
+    .shortpixel.notice span.icon {
+      margin: 0 25px 0 0; }
+
+.shortpixel.notice .sp-conflict-plugins {
+  display: table;
+  border-spacing: 10px;
+  border-collapse: separate; }
+  .shortpixel.notice .sp-conflict-plugins li {
+    display: table-row; }
+  .shortpixel.notice .sp-conflict-plugins li > * {
+    display: table-cell; }
+.shortpixel.notice li.sp-conflict-plugins-list {
+  line-height: 28px;
+  list-style: disc;
+  margin-left: 80px; }
+.shortpixel.notice li.sp-conflict-plugins-list a.button {
+  margin-left: 10px; }
