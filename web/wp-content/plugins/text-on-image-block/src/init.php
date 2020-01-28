@@ -93,7 +93,7 @@ function text_on_image_block_callback( $attributes ) {
 	ob_start();
 
 	?>
-	<div class="alignfull lfe-image-and-text pull-right">
+	<div class="alignfull lfe-image-and-text pull-right" style="background-image: url(<?php echo wp_get_attachment_image_url( $image_id, 'full' ); ?>);">
 		<?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
 		<div class="text">
 			<blockquote>
