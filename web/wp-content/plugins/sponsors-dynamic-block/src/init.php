@@ -109,6 +109,10 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 	$tier_name = $attributes['tierName'];
 	$tier_size = $attributes['tierSize'];
 
+	if ( ! $tier_size ) {
+		$tier_size = 'medium';
+	}
+
 	$out = '<div class="wp-block-cgb-sponsors-block">';
 	$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
 	$out .= '<div class="sponsors-logos ' . $tier_size . ' ' . get_sponsor_logos_class( $query->found_posts ) . '">';
