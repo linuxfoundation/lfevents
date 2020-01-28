@@ -375,7 +375,18 @@ class LFEvents_Admin {
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'Eligible for Visa Request', 'my_plugin' ), // Required.
+									'input_label'     => __( 'List on general visa request form', 'my_plugin' ), // Required.
+								),
+								array(
+									'type'          => 'checkbox', // Required.
+									'id'            => 'travel_fund_request',
+									'data_type'     => 'meta',
+									'data_key'      => 'travel_fund_request', // Required if 'data_type' is 'meta'.
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => false,
+									'use_toggle'    => false,
+									'input_label'     => __( 'List on general travel fund form', 'my_plugin' ), // Required.
 								),
 								array(
 									'type'          => 'text', // Required.
