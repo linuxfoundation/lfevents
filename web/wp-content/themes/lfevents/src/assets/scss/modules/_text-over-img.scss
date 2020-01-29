@@ -54,6 +54,7 @@
 
     .text {
       margin: -1rem 1rem 1rem 1rem;
+      position: relative;
 
       &:before {
         position: absolute;
@@ -77,4 +78,27 @@
     &.pull-right .text {  margin-left: 50%; }
     &.pull-left .text {  margin-right: 50%; }
   }
+
+  @media print,screen and (min-width: 64em) {
+    .lfe-image-and-text {
+        padding:10vw!important
+    }
+
+    .lfe-image-and-text img {
+        display: none
+    }
+
+    .lfe-image-and-text .text {
+        padding: 2rem;
+        margin: 1rem
+    }
+
+    .lfe-image-and-text.pull-right .text {
+        margin-left: 50%
+    }
+
+    .lfe-image-and-text.pull-left .text {
+        margin-right: 50%
+    }
+}
 }
