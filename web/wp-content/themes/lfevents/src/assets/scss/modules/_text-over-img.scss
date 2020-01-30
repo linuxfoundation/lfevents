@@ -51,10 +51,17 @@
 
   @include breakpoint(medium down) {
     background-image: none !important;
+    max-height: none;
+
+    .lfe-image-and-text {
+      max-height: none;
+    }
 
     .text {
       margin: -1rem 1rem 1rem 1rem;
       position: relative;
+      top: auto;
+      transform: none;
 
       &:before {
         position: absolute;
@@ -81,7 +88,7 @@
 
   @media print,screen and (min-width: 64em) {
     .lfe-image-and-text {
-        padding:10vw!important
+        padding:10vw!important;
     }
 
     .lfe-image-and-text img {
@@ -90,7 +97,7 @@
 
     .lfe-image-and-text .text {
         padding: 2rem;
-        margin: 1rem
+        margin: 1rem;
     }
 
     .lfe-image-and-text.pull-right .text {
