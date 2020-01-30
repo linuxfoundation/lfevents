@@ -56,8 +56,11 @@ export default class Edit extends Component {
 		};
 
 		const searchSponsors = inputValue => {
+			const date = new Date();
+			const time = date.getTime();
+			const value = inputValue.replace( /\W/g, '' );
 			return apiFetch( {
-				path: '/wp/v2/lfe_sponsor/?per_page=100&search=' + inputValue.replace( /\W/g, '' ),
+				path: `/wp/v2/lfe_sponsor/?per_page=100&search=${ value }&v=${ time }`,
 			} ).then( posts => {
 				return prepareOptions( posts );
 			} );
