@@ -731,15 +731,88 @@ function my_content_image_generator( $args = null, $size = 'full' ) {
 }
 
 /**
- * Programmatically flushes the Pantheon site cache when a sponsor-list post is updated.
- * This kind of a post shows up on many pages so that's why we need such a heavy cache clear.
+ * Programmatically flushes the Pantheon site cache when a sponsor CPT is updated.
+ * A sponsor could potentially show up on many pages so that's why we need such a heavy reset of the cache.
  *
  * @param int $post_id ID of post updated.
  */
 function lfe_save_post_hook( $post_id ) {
 	$post = get_post( $post_id );
-	if ( 'sponsor-list' === $post->post_name && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
+	if ( 'lfe_sponsor' === $post->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
 		pantheon_wp_clear_edge_all();
 	}
 }
 add_action( 'save_post', 'lfe_save_post_hook' );
+
+/**
+ * Creates Sponsor CPTs for all sponsor media items.
+ *
+ * @param string $content The post content.
+ */
+function lfe_migrate_sponsors( $content ) {
+	global $post;
+	if ( 'migrate-sponsors' != $post->post_name ) {
+		return $content;
+	}
+
+	$args = array(
+		'post_status' => 'any',
+		'post_type'   => 'attachment',
+		'posts_per_page' => -1,
+		'post_mime_type' => 'image/svg+xml',
+		'category_name' => 'sponsor',
+	);
+	$query = new WP_Query( $args );
+	$out = '';
+
+	if ( $query->have_posts() ) {
+		$out .= '<ul>';
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$new_slug = str_replace( array( '-spn', '_spn', '-01' ), '', $post->post_name );
+			if ( ! post_exists_by_slug( $new_slug ) ) {
+				$new_post_id = wp_insert_post(
+					array(
+						'comment_status'    => 'closed',
+						'ping_status'       => 'closed',
+						'post_name'         => $new_slug,
+						'post_title'        => $new_slug,
+						'post_status'       => 'publish',
+						'post_type'         => 'lfe_sponsor',
+						'meta_input'   => array(
+							'lfes_sponsor_url' => $post->post_content,
+						),
+					)
+				);
+				set_post_thumbnail( $new_post_id, $post->ID );
+				$out .= '<li>' . $new_slug . ' was inserted as post ID <a href="' . get_edit_post_link( $new_post_id ) . '">' . $new_post_id . '</a></li>';
+			}
+		}
+		$out .= '</ul>';
+	}
+
+	return $out;
+}
+add_filter( 'the_content', 'lfe_migrate_sponsors' );
+
+/**
+ * Post_exists_by_slug.
+ *
+ * @param int $post_slug Name of post.
+ * @return mixed boolean false if no post exists; post ID otherwise.
+ */
+function post_exists_by_slug( $post_slug ) {
+	$args_posts = array(
+		'post_status'    => 'any',
+		'name'           => $post_slug,
+		'posts_per_page' => 1,
+		'post_type'         => 'lfe_sponsor',
+	);
+	$loop_posts = new WP_Query( $args_posts );
+	if ( ! $loop_posts->have_posts() ) {
+		return false;
+	} else {
+		$loop_posts->the_post();
+		return $loop_posts->post->ID;
+	}
+}

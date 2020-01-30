@@ -125,8 +125,11 @@ registerBlockType( 'cgb/block-speakers-block', {
 		};
 
 		const searchSpeakers = inputValue => {
+			const date = new Date();
+			const time = date.getTime();
+			const value = inputValue.replace( /\W/g, '' );
 			return apiFetch( {
-				path: '/wp/v2/lfe_speaker/?per_page=100&search=' + inputValue.replace( /\W/g, '' ),
+				path: `/wp/v2/lfe_speaker/?per_page=100&search=${ value }&v=${ time }`,
 			} ).then( posts => {
 				return prepareOptions( posts );
 			} );
