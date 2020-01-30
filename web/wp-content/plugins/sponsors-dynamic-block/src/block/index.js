@@ -15,7 +15,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
 registerBlockType( 'cgb/block-sponsors-dynamic-block', {
-	title: __( 'Sponsors Dynamic' ),
+	title: __( 'Sponsors' ),
 	icon: 'editor-kitchensink',
 	category: 'common',
 	keywords: [
