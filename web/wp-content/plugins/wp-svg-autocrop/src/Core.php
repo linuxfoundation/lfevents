@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:ignoreFile
 namespace WpSvgAutocrop;
 
 if ( ! function_exists( 'add_action' ) ) {
@@ -12,9 +12,7 @@ class Core {
 
 	public function __construct() {
 		$this->load_controllers(
-			[
-
-			]
+			array( 'Upload', )
 		);
 	}
 
@@ -32,19 +30,5 @@ class Core {
 
 	private function handle_instance( $class ) {
 		return new $class();
-	}
-
-	public static function plugins_url( $path ) {
-		return esc_url( plugins_url( $path, dirname( __FILE__ ) ) );
-	}
-
-	public static function plugin_dir_path( $path = '' ) {
-		return plugin_dir_path( dirname( __FILE__ ) ) . $path;
-	}
-
-	public static function filemtime( $path ) {
-		$file = self::plugin_dir_path( $path );
-
-		return file_exists( $file ) ? filemtime( $file ) : WP_SVG_AUTOCROP_VERSION;
 	}
 }

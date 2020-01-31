@@ -16,8 +16,13 @@ if ( ! function_exists( 'add_action' ) ) {
 
 define( 'WP_SVG_AUTOCROP_VERSION', '0.1.0' );
 
-add_action( 'plugins_loaded', 'wp_svg_autocrop_verify_dependencies' );
+add_action( 'plugins_loaded', 'wp_svg_autocrop_verify_dependencies', 0 );
 
+/**
+ * Load the plugin classes.
+ *
+ * @return void
+ */
 function wp_svg_autocrop_initialize() {
 	if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 		require __DIR__ . '/vendor/autoload.php';
@@ -26,6 +31,11 @@ function wp_svg_autocrop_initialize() {
 	}
 }
 
+/**
+ * Verify the plugin dependencies.
+ *
+ * @return void
+ */
 function wp_svg_autocrop_verify_dependencies() {
 	$is_active_save_svg = class_exists( 'safe_svg' );
 
@@ -39,6 +49,14 @@ function wp_svg_autocrop_verify_dependencies() {
 	add_action( 'admin_init', 'wp_svg_autocrop_deactivate' );
 }
 
+/**
+ * Default admin notice markup.
+ *
+ * @param string $message The message text.
+ * @param string $type The notice type (error, info, warning).
+ *
+ * @return void
+ */
 function wp_svg_autocrop_admin_notice_html( $message, $type = 'error' ) {
 	?>
 	<div class="<?php echo esc_html( $type ); ?> notice is-dismissible">
@@ -54,16 +72,33 @@ function wp_svg_autocrop_admin_notice_html( $message, $type = 'error' ) {
 	}
 }
 
+/**
+ * Function to add the missing dependency message.
+ *
+ * @return void
+ */
 function wp_svg_autocrop_missing_dependency() {
 	wp_svg_autocrop_admin_notice_html(
 		__( 'Safe SVG plugin is required.', 'wp-svg-autocrop' )
 	);
 }
 
+/**
+ * Add a custom admin notice.
+ *
+ * @param string $name The function name to be called.
+ *
+ * @return void
+ */
 function wp_svg_load_notice( $name ) {
 	add_action( 'admin_notices', "wp_svg_autocrop_{$name}" );
 }
 
+/**
+ * Deactivate the plugin.
+ *
+ * @return void
+ */
 function wp_svg_autocrop_deactivate() {
 	deactivate_plugins( plugin_basename( __FILE__ ) );
 }
