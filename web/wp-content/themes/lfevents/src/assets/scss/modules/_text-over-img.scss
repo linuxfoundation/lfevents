@@ -6,6 +6,10 @@
   background-size: cover;
   padding-right: 0 !important;
   padding-left: 0 !important;
+  position: relative;
+  padding: 0 !important;
+  overflow: hidden;
+  max-height: 532px;
 
   img {
     position: relative;
@@ -17,7 +21,10 @@
     background-color: $white;
     padding: 1rem;
     border-radius: 0.5rem;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    max-width: 616px;
+    transform: translateY(-50%);
   }
 
   blockquote {
@@ -44,9 +51,17 @@
 
   @include breakpoint(medium down) {
     background-image: none !important;
+    max-height: none;
+
+    .lfe-image-and-text {
+      max-height: none;
+    }
 
     .text {
       margin: -1rem 1rem 1rem 1rem;
+      position: relative;
+      top: auto;
+      transform: none;
 
       &:before {
         position: absolute;
@@ -63,12 +78,6 @@
   }
 
   @include breakpoint(large) {
-    padding: 10vw !important;
-
-    img {
-      display: none;
-    }
-
     .text {
       padding: 2rem;
       margin: 1rem;
@@ -76,4 +85,27 @@
     &.pull-right .text {  margin-left: 50%; }
     &.pull-left .text {  margin-right: 50%; }
   }
+
+  @media print,screen and (min-width: 64em) {
+    .lfe-image-and-text {
+        padding:10vw!important;
+    }
+
+    .lfe-image-and-text img {
+        display: none
+    }
+
+    .lfe-image-and-text .text {
+        padding: 2rem;
+        margin: 1rem;
+    }
+
+    .lfe-image-and-text.pull-right .text {
+        margin-left: 50%
+    }
+
+    .lfe-image-and-text.pull-left .text {
+        margin-right: 50%
+    }
+}
 }

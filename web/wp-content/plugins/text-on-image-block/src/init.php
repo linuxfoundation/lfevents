@@ -30,27 +30,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'text_on_image_block-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-editor' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+		'text_on_image_block-cgb-style-css',
+		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		array( 'wp-editor' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'text_on_image_block-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
-		true // Enqueue the script in the footer.
+		'text_on_image_block-cgb-block-js',
+		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
+		true
 	);
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'text_on_image_block-cgb-block-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+		'text_on_image_block-cgb-block-editor-css',
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		array( 'wp-edit-blocks' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
 
 	/**
@@ -64,16 +64,44 @@ function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-text-on-image-block', array(
-			// Enqueue blocks.style.build.css on both frontend & backend.
-//			'style'         => 'text_on_image_block-cgb-style-css',
-			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'text_on_image_block-cgb-block-js',
-			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'text_on_image_block-cgb-block-editor-css',
+		'cgb/block-text-on-image-block',
+		array(
+			'editor_script'   => 'text_on_image_block-cgb-block-js',
+			'editor_style'    => 'text_on_image_block-cgb-block-editor-css',
+			'render_callback' => 'text_on_image_block_callback',
 		)
 	);
 }
 
 // Hook: Block assets.
 add_action( 'init', 'text_on_image_block_cgb_block_assets' );
+
+/**
+ * Callback for speakers block.
+ *
+ * @param array $attributes Atts.
+ */
+function text_on_image_block_callback( $attributes ) {
+	$image_url = isset( $attributes['imgUrl'] ) ? $attributes['imgUrl'] : false;
+	$image_id  = isset( $attributes['imgId'] ) ? $attributes['imgId'] : false;
+	$text      = isset( $attributes['bodyContent'] ) ? $attributes['bodyContent'] : '';
+
+	if ( empty( $image_url ) && empty( $text ) && empty( $image_id ) ) {
+		return;
+	}
+
+	ob_start();
+
+	?>
+	<div class="alignfull lfe-image-and-text pull-right" style="background-image: url(<?php echo wp_get_attachment_image_url( $image_id, 'full' ); ?>);">
+		<?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
+		<div class="text">
+			<blockquote>
+				<div class="copy-bd"><?php echo apply_filters( 'the_content', $text ); // phpcs:ignore ?></div>
+			</blockquote>
+		</div>
+	</div>
+	<?php
+
+	return ob_get_clean();
+}
