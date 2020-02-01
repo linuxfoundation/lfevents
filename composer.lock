@@ -538,15 +538,15 @@
         },
         {
             "name": "wpackagist-plugin/clone-page-tree",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/clone-page-tree/",
-                "reference": "trunk"
+                "reference": "tags/0.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/clone-page-tree.zip?timestamp=1559706063"
+                "url": "https://downloads.wordpress.org/plugin/clone-page-tree.0.1.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
