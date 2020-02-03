@@ -3,7 +3,7 @@
  * Plugin Name: WP RSS Aggregator - Feed to Post
  * Plugin URI: https://www.wprssaggregator.com/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpraplugin
  * Description: Adds feed-to-post conversion functionality to WP RSS Aggregator.
- * Version: 3.10
+ * Version: 3.11
  * Author: RebelCode
  * Author URI: https://www.wprssaggregator.com
  * Text Domain: wprss
@@ -31,10 +31,11 @@
 use Aventura\Wprss\FeedToPost\Addon;
 use Aventura\Wprss\FeedToPost\Factory;
 use Psr\Container\ContainerInterface;
+use RebelCode\Wpra\FeedToPost\Modules\TemplatesModule;
 
 /* Set the version number of the plugin. */
 if( !defined( 'WPRSS_FTP_VERSION' ) )
-	define( 'WPRSS_FTP_VERSION', '3.10' );
+	define( 'WPRSS_FTP_VERSION', '3.11' );
 
 /* Set the database version number of the plugin. */
 if( !defined( 'WPRSS_FTP_DB_VERSION' ) )
@@ -182,6 +183,8 @@ add_action('plugins_loaded', function() {
 	    WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-extraction-metabox' );
 	    WPRSS_FTP_Utils::close_ftp_metabox_for_user_by_default( get_current_user_id(), 'wprss-ftp-custom-fields-metabox' );
     }
+
+    wpra_load_module('f2p/templates', new TemplatesModule());
 });
 
 add_action('wpra_after_run', function ($c = null) {
@@ -270,7 +273,7 @@ final class WPRSS_FTP {
 	 * Dependency versions.
 	 */
 	const WP_MIN_VERSION = '4.0';
-	const WPRSS_MIN_VERSION = '4.10';
+	const WPRSS_MIN_VERSION = '4.13';
 
 	const ADMIN_INIT_JS_HANDLE = 'wprss-f2p-admin-init';
 
@@ -351,8 +354,6 @@ final class WPRSS_FTP {
 
 		// Filter the query that shows the feed items per source
 		add_filter( 'wprss_view_feed_items_meta_query', array( $this, 'view_posts_from_source_meta_query' ), 10 , 2 );
-		// Filter the query that deletes feed items per source
-		add_filter( 'wprss_delete_per_source_query', array( $this, 'delete_posts_from_source_query' ), 10 , 2 );
 
 		// Filter to change post title
 		//add_filter( 'the_title', array( $this, 'link_posts_to_external'), 10 , 2 );
@@ -361,9 +362,6 @@ final class WPRSS_FTP {
 
 		// Override's the core's shortcode output
 		add_filter( 'wprss_shortcode_output', array( $this, 'override_shortcode' ) );
-
-		// Change the post type for the wprss_get_feed_items_for_source function
-		add_filter( 'wprss_get_feed_items_for_source_args', array( $this, 'get_feed_items_for_source_args' ), 10, 2 );
 
 		// Add columns to the Feed Sources table
 		add_filter( 'wprss_set_feed_custom_columns', array( $this, 'add_wprss_feed_columns' ) );
@@ -1040,6 +1038,7 @@ final class WPRSS_FTP {
 		if ( $source !== '' && !is_single() ) {
 			// Check whether the title is to be linked to the external, original post
 			$filter_value = apply_filters( 'wprss_ftp_link_post_title', FALSE );
+			$setting_value = WPRSS_FTP_Utils::multiboolean($this->settings->get('link_posts_to_original'));
 			// Get the permalink meta data for the post
 			$permalink = get_post_meta( $postId, 'wprss_item_permalink', TRUE );
 
@@ -1054,6 +1053,9 @@ final class WPRSS_FTP {
 			else {
 				$link_external = ( $filter_value === TRUE || strval($filter_value) === strval($source) );
 			}
+
+			// "OR" with the setting value. If the setting is enabled, the filter is ignored.
+			$link_external = $link_external || $setting_value;
 
 			// If link_external is TRUE, return the permalink of the original article.
 			// Otherwise, return the regular WordPress post url

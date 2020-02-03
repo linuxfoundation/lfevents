@@ -147,11 +147,13 @@ class WPRSS_FTP_Feed_Assistant {
 			$this->send_error( sprintf(__('Couldn\'t fetch any feed items from %s', WPRSS_TEXT_DOMAIN), $this->params['url']) );
 		}
 
+		$total = count($items);
 		$items = array_slice( $items, 0, $this->params['num_items'] );
 
 		$response = array(
 			'hints' => array(),
-			'preview' => array()
+			'preview' => array(),
+            'total' => $total,
 		);
 
 		// Iterate over the feed items...

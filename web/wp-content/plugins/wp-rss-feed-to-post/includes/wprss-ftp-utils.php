@@ -240,12 +240,11 @@ final class WPRSS_FTP_Utils {
      * @since 1.7
      */
     public static function is_multisite() {
-        if ( function_exists( 'wp_get_sites' ) && function_exists( 'is_multisite' ) )
+        if ( function_exists( 'is_multisite' ) )
             return is_multisite();
         else
             return FALSE;
     }
-
 
     /**
      * Returns TRUE if using WP multisite and the current user is the super admin, FALSE if not,
@@ -257,11 +256,26 @@ final class WPRSS_FTP_Utils {
         if ( self::is_multisite() === FALSE )
             return FALSE;
         else
-            return ( count( wp_get_sites() ) === 0 )?
+            return ( count( self::wp_get_sites() ) === 0 )?
                 __( 'We could not retrieve the list of sites, because the network has no sites or is too large!', WPRSS_TEXT_DOMAIN )
             :	( is_multisite() && is_main_site() );
     }
 
+    /**
+     * Proxy for the WordPress `get_sites()` function. If the function is not available, it uses the old deprecated
+     * function and suppresses the deprecation notice.
+     *
+     * @since 3.11
+     */
+    public static function wp_get_sites() {
+        if (function_exists('get_sites')) {
+            return array_map(function (WP_Site $site) {
+                return $site->to_array();
+            }, get_sites());
+        }
+
+        return wp_get_sites();
+    }
 
     /**
      * Returns a list of site names. Used for dropdowns in metaboxes
@@ -269,7 +283,7 @@ final class WPRSS_FTP_Utils {
      * @since 1.7
      */
     public static function get_sites() {
-        $site_objects = wp_get_sites();
+        $site_objects = self::wp_get_sites();
         $sites = array();
         foreach ( $site_objects as $i => $obj ) {
             $text = $obj['path'];

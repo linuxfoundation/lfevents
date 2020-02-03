@@ -141,7 +141,7 @@ class LFEvents_Admin {
 		);
 
 		$current_year = gmdate( 'Y' );
-		for ( $x = 2017; $x <= $current_year; $x++ ) {
+		for ( $x = 2016; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
 				'name'          => $x . ' Events',
 				'singular_name' => $x . ' Event',
@@ -166,6 +166,21 @@ class LFEvents_Admin {
 		);
 
 		register_post_type( 'lfe_speaker', $opts );
+
+		$opts = array(
+			'labels'       => array(
+				'name'          => __( 'Sponsors' ),
+				'singular_name' => __( 'Sponsor' ),
+				'all_items'     => __( 'All Sponsors' ),
+			),
+			'show_in_rest' => true,
+			'public' => true,
+			'menu_icon'    => 'dashicons-star-filled',
+			'rewrite'      => array( 'slug' => 'sponsors' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+		);
+
+		register_post_type( 'lfe_sponsor', $opts );
 
 		$opts = array(
 			'labels'       => array(
@@ -375,7 +390,18 @@ class LFEvents_Admin {
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'Eligible for Visa Request', 'my_plugin' ), // Required.
+									'input_label'     => __( 'List on general visa request form', 'my_plugin' ), // Required.
+								),
+								array(
+									'type'          => 'checkbox', // Required.
+									'id'            => 'travel_fund_request',
+									'data_type'     => 'meta',
+									'data_key'      => 'travel_fund_request', // Required if 'data_type' is 'meta'.
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => false,
+									'use_toggle'    => false,
+									'input_label'     => __( 'List on general travel fund form', 'my_plugin' ), // Required.
 								),
 								array(
 									'type'          => 'text', // Required.
@@ -925,6 +951,42 @@ class LFEvents_Admin {
 									'ui_border_top' => false, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://cncf.io' ),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		// Push the $sidebar we just assigned to the variable
+		// to the array of $sidebars that comes in the function argument.
+		$sidebars[] = $sidebar;
+
+		$sidebar = array(
+			'id'              => 'lfe-sponsor-sidebar',
+			'id_prefix'       => 'lfes_sponsor_',
+			'label'           => __( 'Sponsor Details' ),
+			'post_type'       => array( 'lfe_sponsor' ),
+			'data_key_prefix' => 'lfes_sponsor_',
+			'icon_dashicon'   => 'star-filled',
+			'tabs'            => array(
+				array(
+					'label'  => __( 'Tab label' ),
+					'panels' => array(
+						array(
+							'label'    => __( 'Sponsor Details' ),
+							'settings' => array(
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'url',
+									'data_type'     => 'meta',
+									'data_key'      => 'url', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Forwarding URL' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://cloud.google.com/' ),
 								),
 							),
 						),

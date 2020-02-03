@@ -24,12 +24,21 @@ if ( class_exists('WPRSS_Help') ) {
 		'force_full_content'		=>	__("Check this box to forcefully attempt to retrieve the full feed content, if the feed only provides excerpts. This uses the free full text service by default, which is limited to 5 feed items per source. To pull in the full content for all posts you must use the premium Full Text RSS Feeds add-on alongside Feed to Post.", WPRSS_TEXT_DOMAIN),
         'import_excerpt'			=>	__('Check this box to import the feed item\'s short description as the post\'s excerpt.', WPRSS_TEXT_DOMAIN),
 		'allow_embedded_content'	=>	__("Check this box to allow embedded content in posts (<code>iframe</code>, <code>embed</code> and <code>object</code> content).", WPRSS_TEXT_DOMAIN),
-		'source_link'				=>	__("Check this box to add a link back to the original post, at the beginning of the post's content.", WPRSS_TEXT_DOMAIN),
+		'link_posts_to_original'    =>  __('Check this box to make posts link to the original article instead of to the imported copy.', 'wprss'),
+        'source_link'				=>	__("Check this box to add a link back to the original post, at the beginning of the post's content.", WPRSS_TEXT_DOMAIN),
         'source_link_singular'      =>  __("Check this box to show the source link only when viewing a post by itself and not when viewing a series of posts.", WPRSS_TEXT_DOMAIN),
 		'source_link_text'			=>	__("Enter the text to use when linking back to the original post source.
 
-										Wrap a phrase in asterisk symbols (<strong>*link to post*</strong>) to turn it into the link to the <strong>original post</strong>,
-										or in double asterisk symbols (<strong>**link to source**</strong>) to turn it into a link to the post <strong>feed source</strong>", WPRSS_TEXT_DOMAIN),
+										Wrap a phrase in asterisk symbols to turn it into the link to the <strong>original post</strong>, or in double asterisk symbols to turn it into a link to the <strong>source website</strong>.
+
+										Examples:
+										<code>*link to post*</code>
+										<code>**link to site**</code>
+
+										Any occurrences of <code>[source]</code> will also be changed into the name of the post's <strong>feed source</strong>. This can be combined with double asterisks:
+
+										<code>**[source]**</code>
+										", WPRSS_TEXT_DOMAIN),
 		'canonical_link'			=>	__('Check this box to add a rel="canonical" link to the head of imported posts.', WPRSS_TEXT_DOMAIN),
 		'allow_local_requests'		=>	__('Check this box if having trouble saving feed item images locally. This allows requests to local IPs.', WPRSS_TEXT_DOMAIN),
 		'full_text_rss_service'		=>	__('Choose the service to use for converting your RSS feeds into full text RSS feeds.

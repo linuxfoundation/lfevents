@@ -430,6 +430,10 @@ a.ftp-edit-tax {
 	line-height: 28px;
 }
 
+div.chosen-container input {
+	/* Fix for WordPress 5.3+ making chosen elements fatter */
+	min-height: 0;
+}
 div.chosen-container > ul > li > input {
 	box-sizing: content-box;
 	-moz-box-sizing: content-box;

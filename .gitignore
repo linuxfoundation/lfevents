@@ -112,21 +112,17 @@ Thumbs.db
 ##########
 .sass-cache
 
-# Allowing Gravity Forms plugins #
+# Allowing premium plugins #
 !web/wp-content/plugins/gravityforms
-
-# Allowing other premium plugins #
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/wp-rss-feed-to-post
-!web/wp-content/plugins/wp-media-library-categories
 !web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
-!web/wp-content/plugins/shortpixel-image-optimiser-4.15.4-DEV04
 
 # Allowing custom plugins
 !web/wp-content/plugins/speakers-block
 web/wp-content/plugins/speakers-block/node_modules
-!web/wp-content/plugins/sponsors-block
-web/wp-content/plugins/sponsors-block/node_modules
+!web/wp-content/plugins/sponsors-dynamic-block
+web/wp-content/plugins/sponsors-dynamic-block/node_modules
 !web/wp-content/plugins/text-on-image-block
 web/wp-content/plugins/text-on-image-block/node_modules
 !web/wp-content/plugins/pricing-block

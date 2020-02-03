@@ -189,9 +189,12 @@ add_filter('wprss_ftp_post_meta', function($meta, $insertedId, $source, $item) {
         ? $meta['!wprss_item_permalink']
         : '';
 
-    // YoastSEO and SEOPress canonical link meta data
+    // YoastSEO canonical link
     $meta['!_yoast_wpseo_canonical'] = $permalink;
+    // SEOPress canonical link
     $meta['!_seopress_robots_canonical'] = $permalink;
+    // All in One SEO Pack canonical link
+    $meta['!_aioseop_custom_link'] = $permalink;
 
     return $meta;
 }, 10, 4);

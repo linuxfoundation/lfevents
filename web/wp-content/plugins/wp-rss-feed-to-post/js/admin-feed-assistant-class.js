@@ -135,8 +135,9 @@
 		@function 	_showPreviews	 				Fills out the Feed Preview metabox
 		@private
 		@param 		{Array}			previews		Array of Preview JSON objects sent by the back-end
+		@param 		Integer			total			The total number of items in the feed.
 		*/
-		_showPreviews: function(previews) {
+		_showPreviews: function(previews, total) {
 			var i = 0,
 				feedPreviewMB = $("#preview_meta_box"),
 				previewDiv = feedPreviewMB.find('.inside'),
@@ -155,7 +156,7 @@
 				return;
 			}
 
-			feedPreviewHTML += '<h4>Previewing latest ' + previews.length + ' feed items.</h4>';
+			feedPreviewHTML += '<h4>Previewing the latest ' + previews.length + ' out of ' + total + ' items.</h4>';
 			feedPreviewHTML += '<ul>';
 
 			for (i = 0; i < previews.length; i++) {
@@ -231,7 +232,7 @@
 				}
 
 				if (response.preview !== undefined) {
-					feedAssistant._showPreviews(response.preview);
+					feedAssistant._showPreviews(response.preview, response.total);
 				}
 
 				if (response.force_feed !== undefined) {

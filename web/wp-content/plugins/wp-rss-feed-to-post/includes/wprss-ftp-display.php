@@ -73,6 +73,7 @@ final class WPRSS_FTP_Display {
 			$display_settings = wprss_get_display_settings( $core_settings );
 
 			$link = WPRSS_FTP_Meta::get_instance()->get_meta( $post->ID, 'wprss_item_permalink', false );
+			$feed_title = get_post($source)->post_title;
 			$feed_link = get_post_meta( $source, 'wprss_site_url', true );
 
 			// Check the prepend/append text
@@ -93,6 +94,8 @@ final class WPRSS_FTP_Display {
 			if ( WPRSS_FTP_Display::show_appended_text('source_link', NULL, $options) ) {
 				// Prepare to data
 				$text = $options['source_link_text'];
+				// Replace the source name placeholder
+                $text = str_replace('[source]', $feed_title, $text);
 				// Search for an asterisk sign
 				$search = stripos( $text, '*');
 

@@ -143,7 +143,9 @@ final class WPRSS_FTP_Settings {
 
 			'taxonomies'				=>	'',
 
-			'powerpress_enabled'        => 'false'
+			'powerpress_enabled'        => 'false',
+
+			'link_posts_to_original'    => 'false',
 		));
 	}
 
@@ -383,6 +385,15 @@ final class WPRSS_FTP_Settings {
 			array( $this, 'render_comment_status' ),	// The function that renders the option interface
 			'wprss_settings_ftp',						// The page on which this option will be displayed
 			'wprss_settings_ftp_general_section'		// The section to which this field belongs
+		);
+
+		// Link posts to the original article
+		add_settings_field(
+            'wprss-link-posts-to-original',
+            __('Posts link to the original article', 'wprss'),
+            [$this, 'render_link_posts_to_original'],
+            'wprss_settings_ftp',
+            'wprss_settings_ftp_general_section'
 		);
 
 		// SOURCE LINK
@@ -797,6 +808,28 @@ final class WPRSS_FTP_Settings {
 		echo WPRSS_Help::get_instance()->do_tooltip( WPRSS_FTP_HELP_PREFIX.'comment_status' );
 	}
 
+
+	/**
+     * @since 3.11
+     *
+     * @param $args
+     */
+	public function render_link_posts_to_original($args)
+	{
+	    $value = $this->get('link_posts_to_original');
+	    $value = WPRSS_FTP_Utils::multiboolean($value);
+
+	    echo WPRSS_FTP_Utils::boolean_to_checkbox(
+            $value,
+			array(
+				'id'		=>	'ftp-link-posts-to-original',
+				'name'		=>	self::OPTIONS_NAME . '[link_posts_to_original]',
+				'value'		=>	'true',
+			)
+		);
+
+		echo WPRSS_Help::get_instance()->do_tooltip( WPRSS_FTP_HELP_PREFIX.'link_posts_to_original' );
+	}
 
 	/**
 	 * Renders the source_link checkbox
