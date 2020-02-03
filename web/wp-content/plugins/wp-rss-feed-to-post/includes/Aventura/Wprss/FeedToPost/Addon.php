@@ -54,8 +54,6 @@ class Addon extends Core\Plugin\AddonAbstract
      * @since 3.7
      */
     public function hook() {
-		$this->on( '!admin_init', array($this, 'checkPluginDependency') );
-
         // These hook themselves in automatically on creation
         $this->getSettings();
 		$this->getAssets();
@@ -103,21 +101,6 @@ class Addon extends Core\Plugin\AddonAbstract
 	}
 
 	/**
-	 * Checks if the plugins required are active and at the appropriate version.
-	 *
-     * @since 3.7
-	 */
-	public function checkPluginDependency()
-    {
-		if ( !static::isPluginActive( static::BASENAME_WPRACORE )
-                || version_compare( WPRSS_VERSION, static::CORE_MIN_VERSION, '<' ) ) {
-			add_action( 'admin_notices', array( $this, 'showCoreDependencyBrokenNotice' ) );
-			$this->deactivate();
-			return;
-		}
-	}
-
-	/**
 	 * Renders a view and returns the render as a string. Does not echo the view.
 	 *
      * @since 3.7
@@ -132,44 +115,6 @@ class Addon extends Core\Plugin\AddonAbstract
 		ob_start();
 		require $viewfile;
 		return ob_get_clean();
-	}
-
-	/**
-	 * Shows an admin notice that notifies the user that this add-on requires the core WP RSS Aggregator, and also shows the
-	 * minimum required version.
-     *
-     * @since 3.7
-	 */
-	public function showCoreDependencyBrokenNotice()
-    {
-        echo static::_getNoticeHtml(
-            $this->__(array(
-                'The <strong>%1$s</strong> add-on requires the <strong>%2$s</strong> plugin at version <strong>%3$s</strong> or later to work correctly.',
-                $this->getName(),
-                'WP RSS Aggregator',
-                static::CORE_MIN_VERSION
-            )),
-            'error'
-        );
-	}
-
-	/**
-	 * Shows an admin notice that notifies the user that this add-on requires Feed to Post, and also shows the
-	 * minimum required version.
-     *
-     * @since 3.7
-	 */
-	public function showF2pDependencyBrokenNotice()
-    {
-        echo static::_getNoticeHtml(
-            $this->__(array(
-                'The <strong>%1$s</strong> add-on requires the <strong>%2$s</strong> plugin at version <strong>%3$s</strong> or later to work correctly.',
-                $this->getName(),
-                'WP RSS Aggregator - Feed to Post',
-                static::FTP_MIN_VERSION
-            )),
-            'error'
-        );
 	}
 
 

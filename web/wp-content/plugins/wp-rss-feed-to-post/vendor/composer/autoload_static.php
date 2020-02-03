@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit92aaee50679905d08637954cb2d7e5a8
 {
     public static $prefixLengthsPsr4 = array (
+        'R' => 
+        array (
+            'RebelCode\\Wpra\\FeedToPost\\' => 26,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -18,6 +22,10 @@ class ComposerStaticInit92aaee50679905d08637954cb2d7e5a8
     );
 
     public static $prefixDirsPsr4 = array (
+        'RebelCode\\Wpra\\FeedToPost\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -28,28 +36,11 @@ class ComposerStaticInit92aaee50679905d08637954cb2d7e5a8
         ),
     );
 
-    public static $classMap = array (
-        'Barryvdh\\Composer\\CleanupPlugin' => __DIR__ . '/..' . '/rebelcode/composer-cleanup-plugin/src/CleanupPlugin.php',
-        'Barryvdh\\Composer\\CleanupRules' => __DIR__ . '/..' . '/rebelcode/composer-cleanup-plugin/src/CleanupRules.php',
-        'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
-        'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
-        'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
-        'Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareInterface.php',
-        'Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareTrait.php',
-        'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
-        'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
-        'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
-        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit92aaee50679905d08637954cb2d7e5a8::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit92aaee50679905d08637954cb2d7e5a8::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit92aaee50679905d08637954cb2d7e5a8::$classMap;
 
         }, null, ClassLoader::class);
     }

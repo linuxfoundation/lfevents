@@ -29,14 +29,15 @@ final class WPRSS_FTP_Converter {
 		return $existing_permalinks;
 	}
 
-
-	/**
-	 * Converts a single wprss_feed_item to a post.
-	 * 
-	 * @param feed 		The wprss_feed_item object to convert
-	 * @param source 	The wprss_feed id of the feed item. Used to retrieve settings for conversion.
-	 * @since 1.0
-	 */
+    /**
+     * Converts a single wprss_feed_item to a post.
+     *
+     * @since 1.0
+     *
+     * @param SimplePie_Item $item      The wprss_feed_item object to convert
+     * @param int|string     $source    The wprss_feed id of the feed item. Used to retrieve settings for conversion.
+     * @param string         $permalink The permalink of the item.
+     */
 	public static function convert_to_post( $item, $source, $permalink ) {
 	    $logger = WPRSS_FTP_Utils::get_logger( $source );
 	    $logger->info('Starting conversion to post');
@@ -121,7 +122,8 @@ final class WPRSS_FTP_Converter {
 			/* Get the author from the feed
 			 * If author not found - use fallback user
 			 */
-			if ( $author = $item->get_author() ) {
+            $author = $item->get_author();
+			if ( $author ) {
 			    $has_author_name = $author->get_name() !== '' && is_string( $author->get_name() );
 			    $has_author_email = $author->get_email() !== '' && is_string( $author->get_email() );
 			}
@@ -393,7 +395,7 @@ final class WPRSS_FTP_Converter {
 
 		$logger->debug('Filtering post arguments');
 
-		/**
+		/*
 		 * Filter the post args.
 		 * @var array $post		Array containing the post fields
 		 * @var WP_Post $source		An post that represents the feed source
@@ -421,8 +423,9 @@ final class WPRSS_FTP_Converter {
 		$switch_success = FALSE;
 		if ( WPRSS_FTP_Utils::is_multisite() && $post_site !== '' ) {
 			global $switched;
+            $switch_success = switch_to_blog( $post_site );
 
-			if( $switch_success = switch_to_blog( $post_site ) ) {
+			if( $switch_success ) {
                 $logger->warning('Switched site to {site}', [
                     'site' => $post_site
                 ]);
@@ -491,7 +494,8 @@ final class WPRSS_FTP_Converter {
 
 			$thumbnail = '';
 			$enclosure_image = '';
-			if ( $enclosure = $item->get_enclosure() ) {
+            $enclosure = $item->get_enclosure();
+			if ( $enclosure ) {
 				$thumbnail = $enclosure->get_thumbnail();
                                 $thumbnail = htmlspecialchars_decode($thumbnail);
 				$enclosure_image = $enclosure->get_link();
@@ -602,7 +606,28 @@ final class WPRSS_FTP_Converter {
 
 				do_action( 'wprss_ftp_converter_inserted_post', $inserted_id, $source );
 
-				self::trim_words_for_post( $inserted_id, $source );
+				$imgsObj = WPRSS_FTP_Images::get_instance();
+
+				// Get the images in the post
+				$post = get_post($inserted_id);
+				$images = $imgsObj->find_images($post->post_content, $source);
+
+				// Determine and save the featured image
+				$ftImageUrl = $imgsObj->save_ft_image_for_post($inserted_id, $source, $images);
+				// If a featured image was determined, remove it from the list of found images
+				// This will prevent it from being import again later
+				if (!empty($ftImageUrl)) {
+					$ftImageIdx = array_search($ftImageUrl, $images);
+					if ($ftImageIdx !== false) {
+						unset($images[$ftImageIdx]);
+					}
+				}
+
+				// Trim the content
+				self::trim_words_for_post($inserted_id, $source);
+
+				// Save the rest of the images
+				$imgsObj->save_images($images, $inserted_id, $source);
 			}
 		}
 		else {

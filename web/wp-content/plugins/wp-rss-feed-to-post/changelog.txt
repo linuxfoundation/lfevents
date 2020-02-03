@@ -1,3 +1,15 @@
+3.11 (2019-12-11)
+Added: A new "tags" shortcode parameter to only show posts with certain tags.
+Added: A new settings option for making posts link to the original article.
+Added: The source link can now include the name of the feed source.
+Changed: The add-on now requires WP RSS Aggregator v4.13 or later.
+Changed: Updated styles to match WordPress v5.3's style changes.
+Fixed: The canonical link for imported posts was incorrect when the "All in One SEO Pack" plugin was active.
+Fixed: The add-on no longer affects the "Imported Items" count in the feed sources table.
+Fixed: When deleting items for a feed source, items imported while the add-on was deactivated are not deleted.
+Fixed: The add-on failed to detect the WP RSS Aggregator plugin when installed via Composer.
+Fixed: A notice on the Edit Feed Source page about the `wp_get_sites()` function being deprecated.
+
 3.10 (2019-10-02)
 Added: New option to add an ellipsis to the end of trimmed content.
 Changed: Removed old commented code in admin scripts file.
