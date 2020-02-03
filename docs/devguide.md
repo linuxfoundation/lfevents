@@ -42,8 +42,8 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 
 6. You will need to compile the theme css/js before the site will render correctly:
    1. Go to the theme directory: `cd web/wp-content/themes/lfevents`
-   2. Install the Node.js dependencies: `npm ci` 
-   (Note: use `ci` instead of `install` [so that you don't overwrite package-lock.json](https://docs.npmjs.com/cli/ci.html))
+   2. Install the Node.js dependencies: `npm update --no-save` 
+   (Note: use `update --no-save` so that you don't overwrite package-lock.json)
    3. Compile the files: `npm run build`
 
 7. Visit the local site URL saved from above.  To find it again run `lando info`.
