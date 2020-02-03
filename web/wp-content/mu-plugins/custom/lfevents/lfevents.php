@@ -87,7 +87,7 @@ function lfe_get_post_types() {
 	$post_types   = array( 'page' );
 	$current_year = gmdate( 'Y' );
 
-	for ( $x = 2017; $x <= $current_year; $x++ ) {
+	for ( $x = 2016; $x <= $current_year; $x++ ) {
 		$post_types[] = 'lfevent' . $x;
 	}
 	return $post_types;

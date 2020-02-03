@@ -141,7 +141,7 @@ class LFEvents_Admin {
 		);
 
 		$current_year = gmdate( 'Y' );
-		for ( $x = 2017; $x <= $current_year; $x++ ) {
+		for ( $x = 2016; $x <= $current_year; $x++ ) {
 			$opts['labels']  = array(
 				'name'          => $x . ' Events',
 				'singular_name' => $x . ' Event',
