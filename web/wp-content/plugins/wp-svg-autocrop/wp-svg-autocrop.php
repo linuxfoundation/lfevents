@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP SVG Autocrop
+ * Plugin Name: SVG Autocrop
  * Description: Optimizes SVG files and trims them to have just a 1 pixel border, among other things.
  * Version:     0.1.0
  * Author:      fuerzastudio
@@ -61,7 +61,7 @@ function wp_svg_autocrop_admin_notice_html( $message, $type = 'error' ) {
 	?>
 	<div class="<?php echo esc_html( $type ); ?> notice is-dismissible">
 		<p>
-			<strong><?php esc_html_e( 'WP SVG Autocrop', 'wp-svg-autocrop' ); ?>: </strong>
+			<strong><?php esc_html_e( 'SVG Autocrop', 'wp-svg-autocrop' ); ?>: </strong>
 			<?php echo $message; // phpcs:ignore ?>
 		</p>
 	</div>

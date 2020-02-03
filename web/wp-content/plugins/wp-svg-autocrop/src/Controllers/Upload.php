@@ -44,9 +44,21 @@ class Upload {
 		if ( $response->success ) {
 			file_put_contents( $file['tmp_name'], $response->result );
 		} else {
-			$file['error'] = '[WP SVG Autocrop]: ' . $response->error;
+			$file['error'] = '[SVG Autocrop]: ' . $this->prepare_error_message( $response->error );
 		}
 
 		return $file;
+	}
+
+	private function prepare_error_message( $message ) {
+		if ( strpos( $message, 'SVG file contains an image' ) !== false ) {
+			return rtrim( $message, '.\t\n ' ) . '.' . PHP_EOL . ' See more details in https://github.com/cncf/wp-svg-autocrop#why-cant-my-svg-include-a-png-or-jpg';
+		}
+
+		if ( strpos( $message, 'SVG file has a <text> element' ) !== false ) {
+			return rtrim( $message, '.\t\n ' ) . '.' . PHP_EOL . ' See more details in https://github.com/cncf/wp-svg-autocrop#why-cant-my-svg-include-text-or-tspan-tags';
+		}
+
+		return $message;
 	}
 }
