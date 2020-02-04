@@ -110,7 +110,7 @@ function wp_svg_autocrop_deactivate() {
  * @param int $handle Handle.
  */
 function wp_svg_autocrop_custom_curl_timeout( $handle ) {
-	curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 20 );
-	curl_setopt( $handle, CURLOPT_TIMEOUT, 20 );
+	curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 30 );
+	curl_setopt( $handle, CURLOPT_TIMEOUT, 30 );
 }
 add_action( 'http_api_curl', 'wp_svg_autocrop_custom_curl_timeout', 9999, 1 );
