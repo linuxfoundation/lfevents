@@ -51,7 +51,7 @@ class Upload {
 	}
 
 	private function prepare_error_message( $message ) {
-		if ( strpos( $message, 'SVG file contains an image' ) !== false ) {
+		if ( strpos( $message, 'SVG file contains an image' ) !== false || strpos( $message, 'SVG file embeds a png' ) !== false ) {
 			return rtrim( $message, '.\t\n ' ) . '.' . PHP_EOL . ' See more details in https://github.com/cncf/wp-svg-autocrop#why-cant-my-svg-include-a-png-or-jpg';
 		}
 
