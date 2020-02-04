@@ -102,3 +102,15 @@ function wp_svg_load_notice( $name ) {
 function wp_svg_autocrop_deactivate() {
 	deactivate_plugins( plugin_basename( __FILE__ ) );
 }
+
+/**
+ * Setting a custom timeout value for cURL to avoid timeouts.
+ * Using a high value for priority to ensure the function runs after any other added to the same action hook.
+ *
+ * @param int $handle Handle.
+ */
+function wp_svg_autocrop_custom_curl_timeout( $handle ) {
+	curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 20 );
+	curl_setopt( $handle, CURLOPT_TIMEOUT, 20 );
+}
+add_action( 'http_api_curl', 'wp_svg_autocrop_custom_curl_timeout', 9999, 1 );
