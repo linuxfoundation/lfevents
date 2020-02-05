@@ -302,28 +302,48 @@ function lfe_custom_menu_page_removing() {
 add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
 
 /**
- * Inserts Google Analytics code on live sites.
+ * Inserts Google Tag Manager <head> code on live sites.
  */
-function lfe_insert_google_analytics() {
+function lfe_insert_google_tag_manager_head() {
 	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
-<!-- Google Analytics -->
-		<script>
-		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-		ga('create', 'UA-831873-5', 'auto', {allowLinker: true});
-		ga('require', 'linker');
-		ga('linker:autoLink', [$domains] );
-		ga('send', 'pageview');
-		</script>
+<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-TK7D99');</script>
+	<!-- End Google Tag Manager -->
+
 EOD;
-	$analytics_code .= "<script async src='https://www.google-analytics.com/analytics.js'></script>\n\t\t<!-- End Google Analytics -->\n"; //phpcs:ignore
 
 	if ( strpos( $domains, $current_domain ) && ! is_user_logged_in() ) {
 		// this is a live site so output the analytics code.
 		echo $analytics_code; //phpcs:ignore
 	}
 }
+
+/**
+ * Inserts Google Tag Manager <body> code on live sites.
+ */
+function lfe_insert_google_tag_manager_body() {
+	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+	$current_domain = parse_url( home_url(), PHP_URL_HOST );
+	$analytics_code = <<<EOD
+<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TK7D99"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+EOD;
+
+	if ( strpos( $domains, $current_domain ) && ! is_user_logged_in() ) {
+		// this is a live site so output the analytics code.
+		echo $analytics_code; //phpcs:ignore
+	}
+}
+
 
 /**
  * Inserts Event-specific favicon if set, otherwise falls back to site favicon.
@@ -525,7 +545,7 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 	if ( 'preconnect' === $relation_type ) {
 		$hints[] = array(
 			'crossorigin' => '',
-			'href'        => '//www.google-analytics.com',
+			'href'        => '//www.googletagmanager.com',
 		);
 	}
 	return $hints;

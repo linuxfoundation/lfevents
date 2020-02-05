@@ -22,9 +22,10 @@
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="msapplication-config" content="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'browserconfig.xml' );  //phpcs:ignore?>">
 		<meta name="theme-color" content="#ffffff">
-		<?php lfe_insert_google_analytics(); ?>
+		<?php lfe_insert_google_tag_manager_head(); ?>
 		<?php wp_head(); ?>
 		<?php lfe_insert_structured_data(); ?>
 	</head>
 	<body <?php body_class( $_ENV['PANTHEON_SITE_NAME'] ); ?>>
+		<?php lfe_insert_google_tag_manager_body(); ?>
 		<div class="site-container">
