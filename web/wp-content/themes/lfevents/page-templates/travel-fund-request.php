@@ -121,7 +121,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell large-12" id="orgPayingDiv" style="display:none">
 									<label>
 										If you checked Partial Assistance above, please explain what the company will or will not pay for *
-										<textarea rows="2" type="text" name="orgPaying" required></textarea>
+										<textarea rows="2" type="text" id="orgPaying" name="orgPaying"></textarea>
 									</label>
 								</div>
 								<div class="cell large-12">
@@ -290,8 +290,10 @@ get_template_part( 'template-parts/global-nav' );
 						$("#receivedFunds").change( function() {
 							if ( this.value == "Partial" ){
 								$("#orgPayingDiv").show();
+								$("#orgPaying").prop("required", true);
 							}else{
 								$("#orgPayingDiv").hide();
+								$("#orgPaying").prop("required", false);
 							} 
 						});
 						</script>
