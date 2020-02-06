@@ -29,7 +29,7 @@ get_template_part( 'template-parts/global-nav' );
 
 						<div class="wp-block-ugb-container alignwide ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-short ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
 
-						<form id="sfmc-form" action="https://qb2k13xll1.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
+						<form id="sfmc-form" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
 
 							<div class="grid-x grid-margin-x">
 								<div class="cell medium-6">
@@ -106,9 +106,9 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6">
 									<label>
 										Can you receive funds from your organization? *
-										<select name="receivedFunds" required>
+										<select id="receivedFunds" name="receivedFunds" required>
 											<option value="No">No</option>
-											<option value="Partial">Partial</option>
+											<option value="Partial">Partial Assistance</option>
 										</select>
 									</label>
 								</div>
@@ -116,6 +116,12 @@ get_template_part( 'template-parts/global-nav' );
 									<label>
 										Link to your LinkedIn, personal website or GitHub page *
 										<input type="text" name="socialLink" required>
+									</label>
+								</div>
+								<div class="cell large-12" id="orgPayingDiv" style="display:none">
+									<label>
+										If you checked Partial Assistance above, please explain what the company will or will not pay for *
+										<textarea rows="2" type="text" name="orgPaying" required></textarea>
 									</label>
 								</div>
 								<div class="cell large-12">
@@ -151,7 +157,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6">
 									<label>
 										How many nights do you require hotel accommodations? (up to 4 nights only) *
-										<input type="text" name="numOfNights" required>
+										<input type="number" name="numOfNights" min="1" max="4" required>
 									</label>
 								</div>
 								<div class="cell medium-6">
@@ -194,7 +200,8 @@ get_template_part( 'template-parts/global-nav' );
 									</ul>
 								</div>
 							</div>
-							<div id="lineItemFormList" class="grid-x grid-margin-x">
+							<div id="lineItemFormList">
+							<div class="grid-x grid-margin-x" id="lineItem0" style="margin-bottom: 1.5rem; border-bottom: 1px #ddd dotted;">
 								<div class="cell medium-6">
 									<label>
 										Name (e.g. Hyatt or American Airlines) *
@@ -222,15 +229,72 @@ get_template_part( 'template-parts/global-nav' );
 										<input type="file" class="cloneThis" name="expenses.0.fileToUpload" required accept="image/jpeg,application/pdf,image/tiff">
 									</label>
 								</div>
+								<div class="cell medium-3">
+									<input style="display:none"  class="button cloneThis" type="button" data-line-item="0" value="Remove Expense Item" onclick="return confirm('Are you sure you want to delete this line item?') ? removeThis(this): false;"/>
+								</div>
 							</div>
-
-
+							</div>
+							<div class="cell medium-3">
+									<input class="button" type="button" value="Add Another Expense Item" onClick="addnewForm();" />
+							</div>
 							<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
 
 							<input class="button large expanded" id="submitbtn" type="submit" value="Request Travel Fund">
 						</form>
 
 						<div id="message"></div>
+
+						<script>
+						//Code to Add the Multiple Forms
+						var count = 1;
+						function addnewForm() {
+							var items = document.getElementById("lineItem0");
+							var clonedItems = items.cloneNode(true);
+							var inputs = clonedItems.getElementsByClassName("cloneThis");
+							clonedItems.id = "lineItem" + count;
+							for (var i = 0; i < inputs.length; i++) {
+								if (inputs[i].type !== 'button') {
+									var labelArr = inputs[i].name.split(".");
+									labelArr[1] = count;
+									label = labelArr.join(".");
+									inputs[i].name = label;
+									inputs[i]['data-line-item'] = count;
+									if (!inputs[i].name.includes('Type')) {
+										inputs[i].value = "";
+									}
+								} else {
+									inputs[i].setAttribute('data-line-item', count);
+									inputs[i].style.display = "block";
+								}
+
+							}
+							count++;
+							document.getElementById("lineItemFormList").appendChild(clonedItems);
+						}
+
+						function removeThis(elem) {
+							let lineItem = elem.dataset.lineItem;
+							let lineItemFormList = document.getElementById('lineItemFormList');
+							let childLength = lineItemFormList.children.length;
+
+							console.log(lineItem);
+
+							if (childLength > 1 && lineItem !== "0") {
+								let lineItemForm = document.getElementById("lineItem" + lineItem);
+								lineItemForm.remove();
+							} else {
+								alert("There must be at least one line item.");
+							}
+						}
+
+						$("#receivedFunds").change( function() {
+							if ( this.value == "Partial" ){
+								$("#orgPayingDiv").show();
+							}else{
+								$("#orgPayingDiv").hide();
+							} 
+						});
+						</script>
 
 						</div></div></div>
 
