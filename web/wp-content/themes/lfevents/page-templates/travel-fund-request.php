@@ -152,7 +152,7 @@ get_template_part( 'template-parts/global-nav' );
 								</div>
 								<div class="cell large-12">
 									<label>
-										Briefly describe the ways in which you are involved in technology and/or open source communities, and why you’d like to attend this conference. *
+										Briefly describe the ways in which you are involved in technology and/or open source communities, and why you’d like to attend this conference *
 										<textarea rows="4" type="text" name="reasonToAttend" required></textarea>
 									</label>
 								</div>
