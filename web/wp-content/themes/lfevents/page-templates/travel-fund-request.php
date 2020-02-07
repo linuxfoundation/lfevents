@@ -157,28 +157,23 @@ get_template_part( 'template-parts/global-nav' );
 									</label>
 								</div>
 								<div class="cell large-12">
-									Do you belong to an underrepresented and/or marginalized group? Please check all that apply:
-									<label>
-										<input type="checkbox" name="group" value="LGBTQ">LGBTQ
-									</label>
-									<label>
-										<input type="checkbox" name="group" value="Woman">Woman
-									</label>
-									<label>
-										<input type="checkbox" name="group" value="Person of Color">Person of Color
-									</label>
-									<label>
-										<input type="checkbox" name="group" value="Person with Disability">Person with Disability
-									</label>
-									<label>
-										<input type="checkbox" name="group" onclick="toggleOtherInput(this)" value="Other">Other
-									</label>
+									<label>Do you belong to an underrepresented and/or marginalized group? Please check all that apply:</label>
+									<fieldset class="large-5 cell">
+										<input type="checkbox" name="group" id="groupLGBTQ" value="LGBTQ"><label for="groupLGBTQ">LGBTQ</label>
+										<input type="checkbox" name="group" id="groupWoman" value="Woman"><label for="groupWoman">Woman</label>
+										<input type="checkbox" name="group" id="groupPoC" value="Person of Color"><label for="groupPoC">Person of Color</label>
+										<input type="checkbox" name="group" id="groupPwD" value="Person with Disability"><label for="groupPwD">Person with Disability</label>
+										<input type="checkbox" name="group" id="groupOther" onclick="toggleOtherInput(this)" value="Other"><label for="groupOther">Other</label>
+									</fieldset>
 								</div>
 								<div class="cell medium-6" id="otherDescriptionDiv" style="display:none">
 									<label>
 										<input type="text" placeholder="Please describe your group" name="otherDescription" id="otherDescription">
 									</label>
 								</div>
+							</div>
+							<div class="grid-x grid-margin-x">
+
 								<div class="cell medium-6">
 									<label>
 										Where would you be travelling from? *
@@ -222,7 +217,7 @@ get_template_part( 'template-parts/global-nav' );
 
 							<div class="grid-x grid-margin-x">
 								<div class="cell large-12">
-									<h4>Estimated Expenses</h4>
+									<h5>Estimated Expenses</h5>
 									<p>Please provide estimates (cost and screenshot) for accommodation and airfare, should you require both.</p>
 									<p>Please note:</p>
 									<ul>
@@ -269,10 +264,11 @@ get_template_part( 'template-parts/global-nav' );
 									<input class="button" type="button" value="Add Another Expense Item" onClick="addnewForm();" />
 							</div>
 							<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+							<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
+
 
 							<input class="button large expanded" id="submitbtn" type="submit" value="Request Travel Fund">
 						</form>
-
 						<div id="message"></div>
 
 						<script>
