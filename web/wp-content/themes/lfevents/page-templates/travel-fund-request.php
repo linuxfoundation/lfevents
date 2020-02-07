@@ -227,7 +227,7 @@ get_template_part( 'template-parts/global-nav' );
 								</div>
 							</div>
 							<div id="lineItemFormList">
-							<div class="grid-x grid-margin-x" id="lineItem0" style="margin-bottom: 1.5rem; border-bottom: 1px #ddd dotted;">
+							<div class="grid-x grid-margin-x" id="lineItem0" style="margin: 1.5rem; border-bottom: 1px #ddd dotted;">
 								<div class="cell medium-6">
 									<label>
 										Name (e.g. Hyatt or American Airlines) *
