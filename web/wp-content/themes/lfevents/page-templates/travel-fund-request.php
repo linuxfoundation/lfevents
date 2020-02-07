@@ -32,7 +32,7 @@ get_template_part( 'template-parts/global-nav' );
 						<form id="sfmc-form" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
 
 							<div class="grid-x grid-margin-x">
-								<div class="cell medium-6">
+								<div class="cell medium-7">
 									<label>
 										Select the event for which you would like to request travel funding:
 										<select name="event" id="event">
@@ -71,7 +71,33 @@ get_template_part( 'template-parts/global-nav' );
 											}
 											wp_reset_postdata(); // Restore original Post Data.
 											?>
+											<option value="a0A2M00000VHQAMUA5">Other</option>
 										</select>
+									</label>
+								</div>
+								
+								<div class="cell medium-6 other-event-div" style="display:none">
+									<label>
+										Event Name *
+										<input class="other-event-input" type="text" name="otherEventName" id="otherEventName">
+									</label>
+								</div>
+								<div class="cell medium-6 other-event-div" style="display:none">
+									<label>
+										Event Location *
+										<input class="other-event-input" type="text" name="otherEventLocation" id="otherEventLocation">
+									</label>
+								</div>
+								<div class="cell medium-6 other-event-div" style="display:none">
+									<label>
+										Event Start Date (MM/DD/YYYY) *
+										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventStartDate" id="otherEventStartDate">
+									</label>
+								</div>
+								<div class="cell medium-6 other-event-div" style="display:none">
+									<label>
+										Event End Date (MM/DD/YYYY) *
+										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventEndDate" id="otherEventEndDate">
 									</label>
 								</div>
 							</div>
@@ -145,7 +171,12 @@ get_template_part( 'template-parts/global-nav' );
 										<input type="checkbox" name="group" value="Person with Disability">Person with Disability
 									</label>
 									<label>
-										<input type="checkbox" name="group" value="Other">Other
+										<input type="checkbox" name="group" onclick="toggleOtherInput(this)" value="Other">Other
+									</label>
+								</div>
+								<div class="cell medium-6" id="otherDescriptionDiv" style="display:none">
+									<label>
+										<input type="text" placeholder="Please describe your group" name="otherDescription" id="otherDescription">
 									</label>
 								</div>
 								<div class="cell medium-6">
@@ -294,6 +325,28 @@ get_template_part( 'template-parts/global-nav' );
 							}else{
 								$("#orgPayingDiv").hide();
 								$("#orgPaying").prop("required", false);
+							} 
+						});
+
+						function toggleOtherInput(othersCheckbox){
+							var x = document.getElementById("otherDescription");
+							var xdiv = document.getElementById("otherDescriptionDiv");
+							if (othersCheckbox.checked) {
+								x.setAttribute("required","");
+								xdiv.style.display = "block";
+							}else{
+								x.removeAttribute("required");
+								xdiv.style.display = "none";
+							}
+						}
+
+						$("#event").change( function() {
+							if ( this.value == "a0A2M00000VHQAMUA5" ){
+								$(".other-event-div").show();
+								$(".other-event-input").prop("required", true);
+							}else{
+								$(".other-event-div").hide();
+								$(".other-event-input").prop("required", false);
 							} 
 						});
 						</script>
