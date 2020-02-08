@@ -263,7 +263,7 @@ get_template_part( 'template-parts/global-nav' );
 							<div class="cell medium-3">
 									<input class="button" type="button" value="Add Another Expense Item" onClick="addnewForm();" />
 							</div>
-							<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+							<div data-callback="onTFSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
 							<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
 
 
@@ -275,8 +275,7 @@ get_template_part( 'template-parts/global-nav' );
 
 						let travelFundForm = document.getElementById("travelFundForm");
 						let formSubmission = 0;
-						travelFundForm.onsubmit = function (e) {
-							e.preventDefault();
+						function onTFSubmit(token) {
 							let fd = new FormData(travelFundForm);
 
 							var checkboxes = document.getElementsByName('group');	
@@ -293,7 +292,6 @@ get_template_part( 'template-parts/global-nav' );
 								if (this.readyState == 4 && this.status == 200) {
 									let response = JSON.parse(this.responseText);
 									if (response.status === 1) {
-										travelFundForm.style.display = "none";
 										$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).addClass( "callout success" );
 									}
 								}
@@ -302,7 +300,6 @@ get_template_part( 'template-parts/global-nav' );
 									if (response.status === 0) {
 										let msg = response.message;
 										if (msg.includes("DUPLICATE_VALUE")) {
-											travelFundForm.style.display = "none";
 											$( "#message" ).html( "You have already submitted a travel funding request for this event." ).addClass( "callout success" );
 										}
 									}
@@ -311,10 +308,28 @@ get_template_part( 'template-parts/global-nav' );
 							xhttp.onerror = function () {
 								alert("Some error occurred during travel request creation!");
 							}
-							xhttp.open('POST', 'https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf', true);
+							xhttp.open('POST', travelFundForm.getAttribute("action"), true);
 							xhttp.send(fd);
 
 						}
+
+						$( document ).ready(
+							function() {
+								var f = $( "#travelFundForm" )
+								f.on(
+									"click",
+									"#submitbtn",
+									function(e) {
+										if (f[0].checkValidity()) {
+											e.preventDefault();
+											travelFundForm.style.display = "none";
+											$( "#message" ).html( "Sending your form submission..." ).addClass( "callout success" );
+											grecaptcha.execute();
+										}
+									}
+								);
+							}
+						);
 
 
 						//Code to Add the Multiple Forms
