@@ -13,6 +13,9 @@ window.removeThis = removeThis;
 let travelFundForm = document.getElementById("travelFundForm");
 let formSubmission = 0;
 function onTFSubmit(token) {
+	travelFundForm.style.display = "none";
+	$( "#message" ).html( "Sending your travel fund request..." ).addClass( "callout success" );
+
 	let fd = new FormData(travelFundForm);
 
 	var checkboxes = document.getElementsByName('group');	
@@ -59,8 +62,6 @@ $( document ).ready(
 			function(e) {
 				if (f[0].checkValidity()) {
 					e.preventDefault();
-					travelFundForm.style.display = "none";
-					$( "#message" ).html( "Sending your travel fund request..." ).addClass( "callout success" );
 					grecaptcha.execute();
 				}
 			}
