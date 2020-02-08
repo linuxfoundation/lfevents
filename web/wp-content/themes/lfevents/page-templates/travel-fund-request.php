@@ -108,19 +108,19 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6">
 									<label>
 										First name *
-										<input type="text" name="FirstName" required>
+										<input type="text" name="firstName" required>
 									</label>
 								</div>
 								<div class="cell medium-6">
 									<label>
 										Last name *
-										<input type="text" name="LastName" required>
+										<input type="text" name="lastName" required>
 									</label>
 								</div>
 								<div class="cell medium-6">
 									<label>
 										Email *
-										<input type="email" name="email" required>
+										<input type="email" name="emailAddress" required>
 									</label>
 								</div>
 								<div class="cell medium-6">
