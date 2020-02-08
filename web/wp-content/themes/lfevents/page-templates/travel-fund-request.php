@@ -189,7 +189,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6">
 									<label>
 										Estimated travel costs ($USD) for event (include all costs you are requesting, including airfare and hotel accommodations) *
-										<input type="text" name="estimateCost" required>
+										<input type="number" name="estimateCost" required>
 									</label>
 								</div>
 								<div class="cell medium-6">
@@ -246,7 +246,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6">
 									<label>
 										Price ($USD) *
-										<input type="text" class="cloneThis" name="expenses.0.Value" required>
+										<input type="number" class="cloneThis" name="expenses.0.Value" required>
 									</label>
 								</div>
 								<div class="cell medium-6">
