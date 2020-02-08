@@ -141,7 +141,7 @@ class LFEvents_Public {
 		$search = 'www.lfasiallc.com';
 		$target = 'www.lfasiallc.cn';
 
-		if ( $_SERVER['HTTP_HOST'] === $target ) {
+		if ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] === $target ) {
 			$content = str_replace( $search, $target, $content );
 		}
 		return $content;

@@ -10,46 +10,46 @@ window.toggleOtherInput = toggleOtherInput;
 window.removeThis = removeThis;
 
 
-let travelFundForm = document.getElementById("travelFundForm");
+let travelFundForm = document.getElementById( "travelFundForm" );
 let formSubmission = 0;
 function onTFSubmit(token) {
 	travelFundForm.style.display = "none";
 	$( "#message" ).html( "Sending your travel fund request..." ).addClass( "callout success" );
 
-	let fd = new FormData(travelFundForm);
+	let fd = new FormData( travelFundForm );
 
-	var checkboxes = document.getElementsByName('group');	
+	var checkboxes = document.getElementsByName( 'group' );
 	var checkedValues = "";
-	for (var i = 0, n = checkboxes.length; i < n; i++){
-		if (checkboxes[i].checked){
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		if (checkboxes[i].checked) {
 			checkedValues += checkboxes[i].value + ",";
 		}
 	}
-	fd.set('group', checkedValues);
+	fd.set( 'group', checkedValues );
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
-			let response = JSON.parse(this.responseText);
+			let response = JSON.parse( this.responseText );
 			if (response.status === 1) {
 				$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).addClass( "callout success" );
 			}
 		}
 		if (this.readyState == 4 && this.status == 500) {
-			let response = JSON.parse(this.responseText);
+			let response = JSON.parse( this.responseText );
 			if (response.status === 0) {
 				let msg = response.message;
-				if (msg.includes("DUPLICATE_VALUE")) {
+				if (msg.includes( "DUPLICATE_VALUE" )) {
 					$( "#message" ).html( "You have already submitted a travel funding request for this event." ).addClass( "callout success" );
 				}
 			}
 		}
 	}
 	xhttp.onerror = function () {
-		alert("Some error occurred during travel request creation!");
+		alert( "Some error occurred during travel request creation!" );
 	}
-	xhttp.open('POST', travelFundForm.getAttribute("action"), true);
-	xhttp.send(fd);
+	xhttp.open( 'POST', travelFundForm.getAttribute( "action" ), true );
+	xhttp.send( fd );
 
 }
 
@@ -70,74 +70,79 @@ $( document ).ready(
 );
 
 
-//Code to Add the Multiple Forms
+// Code to Add the Multiple Forms.
 var count = 1;
 function addnewForm() {
-	var items = document.getElementById("lineItem0");
-	var clonedItems = items.cloneNode(true);
-	var inputs = clonedItems.getElementsByClassName("cloneThis");
+	var items = document.getElementById( "lineItem0" );
+	var clonedItems = items.cloneNode( true );
+	var inputs = clonedItems.getElementsByClassName( "cloneThis" );
 	clonedItems.id = "lineItem" + count;
-	for (var i = 0; i < inputs.length; i++) {
+	var numElements = inputs.length;
+	for (var i = 0; i < numElements; i++) {
 		if (inputs[i].type !== 'button') {
-			var labelArr = inputs[i].name.split(".");
+			var labelArr = inputs[i].name.split( "." );
 			labelArr[1] = count;
-			var label = labelArr.join(".");
+			var label = labelArr.join( "." );
 			inputs[i].name = label;
 			inputs[i]['data-line-item'] = count;
-			if (!inputs[i].name.includes('Type')) {
+			if ( ! inputs[i].name.includes( 'Type' )) {
 				inputs[i].value = "";
 			}
 		} else {
-			inputs[i].setAttribute('data-line-item', count);
+			inputs[i].setAttribute( 'data-line-item', count );
 			inputs[i].style.display = "block";
 		}
 
 	}
 	count++;
-	document.getElementById("lineItemFormList").appendChild(clonedItems);
+	document.getElementById( "lineItemFormList" ).appendChild( clonedItems );
 }
 
 function removeThis(elem) {
 	let lineItem = elem.dataset.lineItem;
-	let lineItemFormList = document.getElementById('lineItemFormList');
+	let lineItemFormList = document.getElementById( 'lineItemFormList' );
 	let childLength = lineItemFormList.children.length;
 
 	if (childLength > 1 && lineItem !== "0") {
-		let lineItemForm = document.getElementById("lineItem" + lineItem);
+		let lineItemForm = document.getElementById( "lineItem" + lineItem );
 		lineItemForm.remove();
 	} else {
-		alert("There must be at least one line item.");
+		alert( "There must be at least one line item." );
 	}
 }
 
-$("#receivedFunds").change( function() {
-	if ( this.value == "Partial" ){
-		$("#orgPayingDiv").show();
-		$("#orgPaying").prop("required", true);
-	}else{
-		$("#orgPayingDiv").hide();
-		$("#orgPaying").prop("required", false);
-	} 
-});
+$( "#receivedFunds" ).change(
+	function() {
+		if ( this.value == "Partial" ) {
+			  $( "#orgPayingDiv" ).show();
+			  $( "#orgPaying" ).prop( "required", true );
+		} else {
+			$( "#orgPayingDiv" ).hide();
+			$( "#orgPaying" ).prop( "required", false );
+		}
+	}
+);
 
 function toggleOtherInput(othersCheckbox){
-	var x = document.getElementById("otherDescription");
-	var xdiv = document.getElementById("otherDescriptionDiv");
+	var x = document.getElementById( "otherDescription" );
+	var xdiv = document.getElementById( "otherDescriptionDiv" );
 	if (othersCheckbox.checked) {
-		x.setAttribute("required","");
+		x.setAttribute( "required","" );
 		xdiv.style.display = "block";
-	}else{
-		x.removeAttribute("required");
+	} else {
+		x.removeAttribute( "required" );
 		xdiv.style.display = "none";
 	}
 }
 
-$("#event").change( function() {
-	if ( this.value == "a0A2M00000VHQAMUA5" ){
-		$(".other-event-div").show();
-		$(".other-event-input").prop("required", true);
-	}else{
-		$(".other-event-div").hide();
-		$(".other-event-input").prop("required", false);
-	} 
-});
+$( "#event" ).change(
+	function() {
+		if ( this.value == "a0A2M00000VHQAMUA5" ) {
+			  $( ".other-event-div" ).show();
+			  $( ".other-event-input" ).prop( "required", true );
+		} else {
+			$( ".other-event-div" ).hide();
+			$( ".other-event-input" ).prop( "required", false );
+		}
+	}
+);
