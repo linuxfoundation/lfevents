@@ -7,7 +7,7 @@
  */
 
 get_header();
-wp_enqueue_script( 'lfe_sfmc-forms', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ) ), true );
+//wp_enqueue_script( 'lfe_sfmc-forms', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ) ), true );
 wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), 1, true );
 
 get_template_part( 'template-parts/global-nav' );
@@ -29,7 +29,7 @@ get_template_part( 'template-parts/global-nav' );
 
 						<div class="wp-block-ugb-container alignwide ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-short ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
 
-						<form id="sfmc-form" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
+						<form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
 
 							<div class="grid-x grid-margin-x">
 								<div class="cell medium-7">
@@ -272,6 +272,51 @@ get_template_part( 'template-parts/global-nav' );
 						<div id="message"></div>
 
 						<script>
+
+						let travelFundForm = document.getElementById("travelFundForm");
+						let formSubmission = 0;
+						travelFundForm.onsubmit = function (e) {
+							e.preventDefault();
+							let fd = new FormData(travelFundForm);
+
+							var checkboxes = document.getElementsByName('group');	
+							var checkedValues = "";
+							for (var i = 0, n = checkboxes.length; i < n; i++){
+								if (checkboxes[i].checked){
+									checkedValues += checkboxes[i].value + ",";
+								}
+							}
+							fd.set('group', checkedValues);
+
+							var xhttp = new XMLHttpRequest();
+							xhttp.onreadystatechange = function () {
+								if (this.readyState == 4 && this.status == 200) {
+									let response = JSON.parse(this.responseText);
+									if (response.status === 1) {
+										travelFundForm.style.display = "none";
+										$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).addClass( "callout success" );
+									}
+								}
+								if (this.readyState == 4 && this.status == 500) {
+									let response = JSON.parse(this.responseText);
+									if (response.status === 0) {
+										let msg = response.message;
+										if (msg.includes("DUPLICATE_VALUE")) {
+											travelFundForm.style.display = "none";
+											$( "#message" ).html( "You have already submitted a travel funding request for this event." ).addClass( "callout success" );
+										}
+									}
+								}
+							}
+							xhttp.onerror = function () {
+								alert("Some error occurred during travel request creation!");
+							}
+							xhttp.open('POST', 'https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf', true);
+							xhttp.send(fd);
+
+						}
+
+
 						//Code to Add the Multiple Forms
 						var count = 1;
 						function addnewForm() {
