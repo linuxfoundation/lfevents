@@ -100,14 +100,14 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 	}
 
 	if ( $time_left > 0 ) {
-		return '<div ' . ( '' == $block_id ? '' : 'id="ub_countdown_' . $block_id . '"' ) . 'class="ub-countdown' .
+		return '<div data-nosnippet ' . ( '' == $block_id ? '' : 'id="ub_countdown_' . $block_id . '"' ) . 'class="ub-countdown' .
 				( isset( $class_name ) ? ' ' . esc_attr( $class_name ) : '' ) .
 				'" data-expirymessage="' . $expiry_message . '" data-end_date="' . $end_date . '">
 			' . $selected_format
 			. '</div>';
 	}
 
-	return '<div class="ub-countdown' . ( isset( $class_name ) ? ' ' . esc_attr( $class_name ) : '' ) . '" ' .
+	return '<div data-nosnippet class="ub-countdown' . ( isset( $class_name ) ? ' ' . esc_attr( $class_name ) : '' ) . '" ' .
 		( '' == $block_id ? 'style="text-align:' . $message_align . ';' : 'id="ub_countdown_' . $block_id . '"' ) . '>' . $expiry_message . '</div>';
 }
 
