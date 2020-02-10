@@ -1,0 +1,10 @@
+{
+  "name": "fuerza/wp-svg-autocrop",
+  "description": "Optimizes SVG files and trims them to have just a 1 pixel border, among other things.",
+  "type": "wordpress-plugin",
+  "autoload": {
+    "psr-4": {
+      "WpSvgAutocrop\\": "src/"
+    }
+  }
+}
