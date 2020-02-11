@@ -83,14 +83,6 @@ if ( ! class_exists( 'Fuerza_Import_Countries' ) ) {
 			$count = 0;
 
 			foreach ( $countries as $item ) {
-
-				if ( $count === 100 ) {
-					$message = "<p>Created terms: {$count}</p>";
-					$message .='<p>Please, run again to avoid timeout.</p>';
-					$message .= sprintf( '<a class="button" href="%s">Import</a>', admin_url( '?fz-countries=import' ) );
-					wp_die( $message, 'LF Events', array( 'back_link' => true ) );
-				}
-
 				$is_continent = $this->is_continent( $item[7] );
 				$name         = $is_continent ? $item[1] : $item[7];
 				$slug         = strtolower( $is_continent ? $item[3] : $item[4] );
