@@ -1,0 +1,14 @@
+@media (max-width: 375px) {
+  .home {
+    .select2-search {
+      .select2-search__field {
+        background-color: #fff;
+        border: none;
+        box-shadow: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
