@@ -1355,8 +1355,6 @@ document.getElementById('txtUrl').value = window.location.href;
 ## Travel Fund Request
 
 ```html
-<div class="wp-block-ugb-container alignwide ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-short ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
-
 <form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
   <input type="hidden" name="event" id="event" value="a0A2M00000Vc2xa">
 
@@ -1528,6 +1526,4 @@ document.getElementById('txtUrl').value = window.location.href;
 <div id="message"></div>
 <script type='text/javascript' defer src='https://www.recaptcha.net/recaptcha/api.js?ver=1'></script>
 <script type='text/javascript' defer src='https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/travel-fund-form.js?ver=1581396079'></script>
-
-</div>
 ```
