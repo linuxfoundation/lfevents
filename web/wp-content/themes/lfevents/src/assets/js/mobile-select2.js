@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     $('select[data-combobox=1]').each(function(index, element){
       element.style.pointerEvents = 'none';
+      element.style.display = 'none';
     });
 
     $('select[data-combobox=1]').on('select2:open', function(){
