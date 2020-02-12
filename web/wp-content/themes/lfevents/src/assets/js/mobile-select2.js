@@ -1,6 +1,6 @@
 $(document).ready(function() {
   if (window.innerWidth < 768) {
-    function fixMobile() {
+    function fixMobileSelect2() {
       $('select[data-combobox=1]').select2({
         minimumResultsForSearch: Infinity
       });
@@ -14,11 +14,10 @@ $(document).ready(function() {
       });
     }
 
-    fixMobile();
+    fixMobileSelect2();
 
-    $(document).on("sf:ajaxfinish", ".searchandfilter", function() {
-      console.log('sf:ajaxfinish');
-      fixMobile();
+    $(document).on('sf:ajaxfinish', '.searchandfilter', function() {
+      fixMobileSelect2();
     });
   }
 });
