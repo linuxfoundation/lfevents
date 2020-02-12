@@ -5,7 +5,6 @@ $(document).ready(function() {
     });
 
     $('select[data-combobox=1]').each(function(index, element){
-      element.style.pointerEvents = 'none';
       element.style.display = 'none';
     });
 
