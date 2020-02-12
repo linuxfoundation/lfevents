@@ -11,12 +11,10 @@ Antarctica,Antarctica,AN,AN,AQ,ATA,10,Antarctica,Antarctica (the territory South
 North America,North America,NA,NA,AG,ATG,28,Antigua and Barbuda,Antigua and Barbuda,
 South America,South America,SA,SA,AR,ARG,32,Argentina,Argentina,Argentine Republic
 Asia,Asia Pacific,AS,AS,AM,ARM,51,Armenia,Armenia,Republic of
-Europe,Europe,EU,EU,AM,ARM,51,Armenia,Armenia,Republic of
 North America,North America,NA,NA,AW,ABW,533,Aruba,Aruba,
 Oceania,Asia Pacific,OC,AS,AU,AUS,36,Australia,Australia,Commonwealth of
 Europe,Europe,EU,EU,AT,AUT,40,Austria,Austria,Republic of
 Asia,Asia Pacific,AS,AS,AZ,AZE,31,Azerbaijan,Azerbaijan,Republic of
-Europe,Europe,EU,EU,AZ,AZE,31,Azerbaijan,Azerbaijan,Republic of
 North America,North America,NA,NA,BS,BHS,44,Bahamas,Bahamas,Commonwealth of the
 Asia,Asia Pacific,AS,AS,BH,BHR,48,Bahrain,Bahrain,Kingdom of
 Asia,Asia Pacific,AS,AS,BD,BGD,50,Bangladesh,Bangladesh,People's Republic of
@@ -60,7 +58,6 @@ Africa,Africa,AF,AF,CI,CIV,384,Cote d'Ivoire,Cote d'Ivoire,Republic of
 Europe,Europe,EU,EU,HR,HRV,191,Croatia,Croatia,Republic of
 North America,North America,NA,NA,CU,CUB,192,Cuba,Cuba,Republic of
 North America,North America,NA,NA,CW,CUW,531,Curaçao,Curaçao,
-Asia,Asia Pacific,AS,AS,CY,CYP,196,Cyprus,Cyprus,Republic of
 Europe,Europe,EU,EU,CY,CYP,196,Cyprus,Cyprus,Republic of
 Europe,Europe,EU,EU,CZ,CZE,203,Czech Republic,Czech Republic,
 Europe,Europe,EU,EU,DK,DNK,208,Denmark,Denmark,Kingdom of
@@ -119,7 +116,6 @@ Asia,Asia Pacific,AS,AS,JP,JPN,392,Japan,Japan,
 Europe,Europe,EU,EU,JE,JEY,832,Jersey,Jersey,Bailiwick of
 Asia,Asia Pacific,AS,AS,JO,JOR,400,Jordan,Jordan,Hashemite Kingdom of
 Asia,Asia Pacific,AS,AS,KZ,KAZ,398,Kazakhstan,Kazakhstan,Republic of
-Europe,Europe,EU,EU,KZ,KAZ,398,Kazakhstan,Kazakhstan,Republic of
 Africa,Africa,AF,AF,KE,KEN,404,Kenya,Kenya,Republic of
 Oceania,Asia Pacific,OC,AS,KI,KIR,296,Kiribati,Kiribati,Republic of
 Asia,Asia Pacific,AS,AS,KP,PRK,408,North Korea,Korea,Democratic People's Republic of
@@ -188,7 +184,6 @@ North America,North America,NA,NA,PR,PRI,630,Puerto Rico,Puerto Rico,Commonwealt
 Asia,Asia Pacific,AS,AS,QA,QAT,634,Qatar,Qatar,State of
 Africa,Africa,AF,AF,RE,REU,638,Reunion,Reunion,
 Europe,Europe,EU,EU,RO,ROU,642,Romania,Romania,
-Asia,Asia Pacific,AS,AS,RU,RUS,643,Russian Federation,Russian Federation,
 Europe,Europe,EU,EU,RU,RUS,643,Russian Federation,Russian Federation,
 Africa,Africa,AF,AF,RW,RWA,646,Rwanda,Rwanda,Republic of
 North America,North America,NA,NA,BL,BLM,652,Saint Barthelemy,Saint Barthelemy,
@@ -234,7 +229,6 @@ Oceania,Asia Pacific,OC,AS,TK,TKL,772,Tokelau,Tokelau,
 Oceania,Asia Pacific,OC,AS,TO,TON,776,Tonga,Tonga,Kingdom of
 North America,North America,NA,NA,TT,TTO,780,Trinidad and Tobago,Trinidad and Tobago,Republic of
 Africa,Africa,AF,AF,TN,TUN,788,Tunisia,Tunisia,Tunisian Republic
-Asia,Asia Pacific,AS,AS,TR,TUR,792,Turkey,Turkey,Republic of
 Europe,Europe,EU,EU,TR,TUR,792,Turkey,Turkey,Republic of
 Asia,Asia Pacific,AS,AS,TM,TKM,795,Turkmenistan,Turkmenistan,
 North America,North America,NA,NA,TC,TCA,796,Turks and Caicos Islands,Turks and Caicos Islands,
