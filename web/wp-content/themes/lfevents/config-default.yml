@@ -30,6 +30,7 @@ PATHS:
     - "src/assets/js/china.js"
     - "src/assets/js/sfmc-forms.js"
     - "src/assets/js/travel-fund-form.js"
+    - "src/assets/js/mobile-select2.js"
   # Paths for the package task to include/exclude in .zip archive
   package:
     - "**/*"

@@ -287,6 +287,13 @@ function lfe_scripts() {
 		// scripts for Chinese-audience sites.
 		wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'china.js' ), array(), '1.2.2', true );
 	}
+	wp_enqueue_script(
+		'lfe_mobile_select2',
+		get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'mobile-select2.js' ),
+		array( 'search-filter-plugin-select2', 'search-filter-plugin-build' ),
+		filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'mobile-select2.js' ) ),
+		true
+	);
 
 }
 
