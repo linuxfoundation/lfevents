@@ -28,6 +28,7 @@
     "wpackagist-plugin/safe-svg":"^1.9.3",
     "wpackagist-plugin/autodescription":"^4.0.1",
     "wpackagist-plugin/post-type-switcher":"^3.1.0",
+    "wpackagist-plugin/svg-autocrop":"^0.1.0",
     "wpackagist-plugin/photonic":"^2.23",
     "wpackagist-plugin/post-meta-controls":"^1.2.0",
     "wpackagist-plugin/china-video-block":"^0.2.0",
