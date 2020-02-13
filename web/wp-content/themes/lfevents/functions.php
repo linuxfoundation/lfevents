@@ -59,5 +59,3 @@ require_once 'library/gutenberg.php';
 
 /** Add LFEvents funcitons */
 require_once 'library/lfe-functions.php';
-
-require_once 'library/class-fuerza-import-countries.php';
