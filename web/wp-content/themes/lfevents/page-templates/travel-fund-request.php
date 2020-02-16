@@ -252,7 +252,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6">
 									<label>
 										Upload Estimated Expenses *
-										<input type="file" class="cloneThis fileInput" name="expenses.0.fileToUpload" required accept="image/jpeg,image/png,application/pdf,image/tiff">
+										<input type="file" onchange="fileSizeValidation();" class="cloneThis fileInput" name="expenses.0.fileToUpload" required accept="image/jpeg,image/png,application/pdf,image/tiff">
 									</label>
 								</div>
 								<div class="cell medium-3">
