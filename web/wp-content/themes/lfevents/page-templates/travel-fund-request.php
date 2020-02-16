@@ -91,13 +91,13 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell medium-6 other-event-div" style="display:none">
 									<label>
 										Event Start Date (MM/DD/YYYY) *
-										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventStartDate" id="otherEventStartDate">
+										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventStartDate" id="otherEventStartDate">
 									</label>
 								</div>
 								<div class="cell medium-6 other-event-div" style="display:none">
 									<label>
 										Event End Date (MM/DD/YYYY) *
-										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventEndDate" id="otherEventEndDate">
+										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventEndDate" id="otherEventEndDate">
 									</label>
 								</div>
 							</div>

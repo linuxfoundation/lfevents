@@ -127,7 +127,7 @@ get_template_part( 'template-parts/global-nav' );
 								<div class="cell large-4">
 									<label>
 										Date of birth (MM/DD/YYYY) *
-										<input type="text" name="dateOfBirth" placeholder="MM/DD/YYYY" required pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
+										<input type="text" name="dateOfBirth" placeholder="MM/DD/YYYY" required pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d">
 										<p class="help-text">(must match passport)</p>
 									</label>
 								</div>
