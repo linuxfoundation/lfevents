@@ -514,6 +514,7 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 /**
  * Fixes the meta tags of the Community Event post imported from RSS to get them in the right formats.
+ * Also prepends the title with "Kubernetes Community Day "
  *
  * @param int $post_id The ID of the post, which is being processed.
  * @param int $feed_id The ID of the feed source post, which the current item is being imported by.
@@ -535,6 +536,11 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 			$country_term = get_term_by( 'slug', $countrycode, 'lfevent-country' );
 			wp_set_post_terms( $post_id, $country_term->term_id, 'lfevent-country' );
 		}
+		$my_post = array(
+			'ID'           => $post_id,
+			'post_title'   => 'Kubernetes Community Day ' . get_the_title( $post_id ),
+		);
+		wp_update_post( $my_post );
 	}
 }
 add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
