@@ -533,7 +533,7 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 		}
 		if ( $countrycode ) {
 			$country_term = get_term_by( 'slug', $countrycode, 'lfevent-country' );
-			wp_set_post_terms( $post_id, $country_term->ID, 'lfevent-country' );
+			wp_set_post_terms( $post_id, 61, 'lfevent-country' );
 		}
 	}
 }
