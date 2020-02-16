@@ -522,6 +522,7 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 	if ( 243 == $feed_id ) {
 		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
 		$dt_date_end = get_post_meta( $post_id, 'lfes_community_date_end', true );
+		$countrycode = trim( get_post_meta( $post_id, 'lfes_countrycode', true ) );
 		if ( $dt_date_start ) {
 			$dt_date_start = new DateTime( $dt_date_start );
 			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_start->format( 'Y/m/d' ) );
@@ -529,6 +530,10 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 		if ( $dt_date_end ) {
 			$dt_date_end = new DateTime( $dt_date_end );
 			update_post_meta( $post_id, 'lfes_community_date_end', $dt_date_end->format( 'Y/m/d' ) );
+		}
+		if ( $countrycode ) {
+			$country_term = get_term_by( 'slug', $countrycode, 'lfevent-country' );
+			wp_set_post_terms( $post_id, $country_term->ID, 'lfevent-country' );
 		}
 	}
 }
