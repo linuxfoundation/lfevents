@@ -531,6 +531,8 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 		if ( $dt_date_end ) {
 			$dt_date_end = new DateTime( $dt_date_end );
 			update_post_meta( $post_id, 'lfes_community_date_end', $dt_date_end->format( 'Y/m/d' ) );
+		} else {
+			update_post_meta( $post_id, 'lfes_community_date_end', $dt_date_start->format( 'Y/m/d' ) );
 		}
 		if ( $countrycode ) {
 			$country_term = get_term_by( 'slug', $countrycode, 'lfevent-country' );
