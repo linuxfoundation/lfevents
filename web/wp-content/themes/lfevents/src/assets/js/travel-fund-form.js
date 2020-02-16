@@ -27,12 +27,24 @@ function onTFSubmit(token) {
 	}
 	fd.set( 'group', checkedValues );
 
+	var i = 0;
+	var filesToUpload = [];
+
+	while (fd.get('expenses.' + i + '.Name') != null) {
+		filesToUpload.push({
+			id: fd.get('expenses.' + i + '.Name'),
+			file: fd.get('expenses.' + i + '.fileToUpload')
+		});
+		fd.delete('expenses.' + i + '.fileToUpload');
+		i++;
+	}
+
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			let response = JSON.parse( this.responseText );
 			if (response.status === 1) {
-				$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).addClass( "callout success" );
+				uploadFiles(response.data.expenses, filesToUpload);
 			}
 		}
 		if (this.readyState == 4 && this.status == 500) {
@@ -146,3 +158,71 @@ $( "#event" ).change(
 		}
 	}
 );
+
+function fileSizeValidation() {
+	var inputfiles = document.getElementsByClassName('fileInput');
+	// Check if any file is selected.
+	if (inputfiles.length > 0) {
+		for (var i = 0; i <= inputfiles.length - 1; i++) {
+			var fi = inputfiles[i];
+			if (fi.files.length > 0) {
+				for (var j = 0; j <= fi.files.length - 1; j++) {
+					var fsize = fi.files.item(j).size;
+					var file = Math.round((fsize / 1024 / 1024));
+					// The size of the file.
+					if (file >= 5) {
+						alert("Please select a file less than 5MB.");
+						return false;
+					}
+				}
+			}
+		}
+	}
+}
+
+function uploadFiles(lineItems, filesToUpload) {
+	var success = 0;
+	var fail = 0;
+	var totalFiles = lineItems.length;
+	var toatlProcessed = 0
+
+	filesToUpload.forEach(file => {
+		var lineItemId = lineItems.find(lineItem => {
+			return lineItem.name == file.id
+		});
+		let fd = new FormData();
+		fd.append("files", file.file);
+		//upload file
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState === 4) {
+				let response = JSON.parse(this.responseText);
+				if (this.status === 200 && response.status === 1) {
+					++success;
+				}
+				if (this.status == 500) {
+					fail = fail + 1;
+				}
+				toatlProcessed++;
+				if (totalFiles == toatlProcessed) {
+					updateMessage(success, fail);
+				}
+			}
+
+		}
+		xhttp.onerror = function() {
+			fail += 1;
+		}
+		xhttp.open('POST', 'https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf/travelfundlineitem/' + lineItemId.Id + '/upload', true);
+		xhttp.send(fd);
+	});
+
+}
+
+function updateMessage(success, fail) {
+	if (fail == 0) {
+		$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).addClass( "callout success" );
+	} else {
+		alert('There were some errors while uploading file(s)');
+	}
+}
