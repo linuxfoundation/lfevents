@@ -125,7 +125,7 @@ class LFEvents_Admin {
 			'hierarchical' => true,
 			'menu_icon'    => 'dashicons-info',
 			'rewrite'      => array( 'slug' => 'about' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'page-attributes' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'page-attributes', 'author' ),
 		);
 
 		register_post_type( 'lfe_about_page', $opts );
@@ -136,7 +136,7 @@ class LFEvents_Admin {
 			'show_in_rest' => true,
 			'hierarchical' => true,
 			'menu_icon'    => 'dashicons-admin-page',
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes', 'author' ),
 			'menu_position' => 30,
 		);
 
@@ -162,7 +162,7 @@ class LFEvents_Admin {
 			'public' => true,
 			'menu_icon'    => 'dashicons-groups',
 			'rewrite'      => array( 'slug' => 'speakers' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
 		);
 
 		register_post_type( 'lfe_speaker', $opts );
@@ -177,7 +177,7 @@ class LFEvents_Admin {
 			'public' => true,
 			'menu_icon'    => 'dashicons-star-filled',
 			'rewrite'      => array( 'slug' => 'sponsors' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
 		);
 
 		register_post_type( 'lfe_sponsor', $opts );
@@ -194,7 +194,7 @@ class LFEvents_Admin {
 			'hierarchical' => true,
 			'menu_icon'    => 'dashicons-admin-site',
 			'rewrite'      => array( 'slug' => 'community' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields' ),
+			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
 		);
 
 		register_post_type( 'lfe_community_event', $opts );
