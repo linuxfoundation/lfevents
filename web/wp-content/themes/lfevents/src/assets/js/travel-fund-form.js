@@ -14,10 +14,6 @@ window.fileSizeValidation = fileSizeValidation;
 let travelFundForm = document.getElementById( "travelFundForm" );
 let formSubmission = 0;
 function onTFSubmit(token) {
-	if ( fileSizeValidation() == false ) {
-		return false;
-	}
-
 	travelFundForm.style.display = "none";
 	$( "#message" ).html( "Sending your travel fund request..." ).addClass( "callout success" );
 
@@ -81,6 +77,9 @@ $( document ).ready(
 			function(e) {
 				if (f[0].checkValidity()) {
 					e.preventDefault();
+					if ( fileSizeValidation() == false ) {
+						return false;
+					}
 					grecaptcha.execute();
 				}
 			}
@@ -181,6 +180,7 @@ function fileSizeValidation() {
 					// The size of the file.
 					if ( file >= 5 ) {
 						alert( "Please select a file less than 5MB." );
+						inputfiles[i].value = '';
 						return false;
 					}
 				}
