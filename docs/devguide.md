@@ -130,7 +130,7 @@ vendor/bin/behat --config=behat-local.yml
 
 ## Wraith Tests
 
-[Wraith](https://github.com/BBC-News/wraith) performs visual regression tests by comparing two versions of the site.  It is a great way to spot unintended render issues across the site.  
+[Wraith](https://github.com/BBC-News/wraith) performs visual regression tests by comparing two versions of the site.  It is a great way to spot unintended render issues across the site.  It is currently set to run on each checkin to the master branch.
 
 Install wraith system-wide using [the instructions here](http://bbc-news.github.io/wraith/index.html).
 
