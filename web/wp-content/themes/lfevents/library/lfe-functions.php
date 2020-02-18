@@ -782,6 +782,9 @@ add_action( 'save_post', 'lfe_save_post_hook' );
 // From https://pantheon.io/docs/mu-plugin#wp-rest-api-code-classlanguage-textwp-jsoncode-endpoints-cache.
 $regex_json_path_patterns = array(
 	'#^/wp-json/post-meta-controls/v1/?#',
+	'#^/wp-json/wp/v2/lfe_sponsor?#',
+	'#^/wp-json/wp/v2/lfe_speaker?#',
+
 );
 foreach ( $regex_json_path_patterns as $regex_json_path_pattern ) {
 	if ( preg_match( $regex_json_path_pattern, $_SERVER['REQUEST_URI'] ) ) { //phpcs:ignore
