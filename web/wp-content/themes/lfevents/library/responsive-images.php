@@ -66,7 +66,7 @@ function foundationpress_adjust_image_sizes_attr( $sizes, $size ) {
 
 	return $sizes;
 }
-// add_filter( 'wp_calculate_image_sizes', 'foundationpress_adjust_image_sizes_attr', 10, 2 );
+// add_filter( 'wp_calculate_image_sizes', 'foundationpress_adjust_image_sizes_attr', 10, 2 ); // .
 
 /**
  * Remove inline width and height attributes for post thumbnails.
