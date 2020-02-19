@@ -1163,6 +1163,17 @@ class LFEvents_Admin {
 			delete_post_meta( $post_id, '_genesis_noindex' );
 		}
 	}
+
+	/**
+	 * Turns off the WP image compression used when creating thumbnails.
+	 *
+	 * @param int $quality Image quality.
+	 * @param obj $context Context.
+	 */
+	public function change_jpeg_quality( $quality, $context ) {
+		return 100;
+	}
+
 }
 
 
