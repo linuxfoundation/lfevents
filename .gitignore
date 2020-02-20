@@ -131,3 +131,5 @@ web/wp-content/plugins/pricing-block/node_modules
 web/wp-content/plugins/tab-container-block/node_modules
 !web/wp-content/plugins/countdown-block
 web/wp-content/plugins/countdown-block/node_modules
+!web/wp-content/plugins/lf-headline
+web/wp-content/plugins/lf-headline/node_modules
