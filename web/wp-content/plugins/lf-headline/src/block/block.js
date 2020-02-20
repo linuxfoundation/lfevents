@@ -9,91 +9,91 @@
 import './editor.scss';
 import './style.scss';
 
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
+const { Fragment } = wp.element;
+const { InspectorControls, PanelColorSettings, RichText } = wp.blockEditor || wp.editor;
+const { PanelBody, DateTimePicker } = wp.components;
 
-/**
- * Register: aa Gutenberg Block.
- *
- * Registers a new block provided a unique name and an object defining its
- * behavior. Once registered, the block is made editor as an option to any
- * editor interface where blocks are implemented.
- *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully
- *                             registered; otherwise `undefined`.
- */
-registerBlockType( 'cgb/block-lf-headline', {
-	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'lf-headline - CGB Block' ), // Block title.
-	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+registerBlockType( 'lf/headline', {
+	title: __( 'Headline' ),
+	icon: 'info',
+	category: 'common',
 	keywords: [
-		__( 'lf-headline — CGB Block' ),
-		__( 'CGB Example' ),
-		__( 'create-guten-block' ),
+		__( 'Headline' ),
+		__( 'Linux' ),
+		__( 'Linux Headline' ),
 	],
-
-	/**
-	 * The edit function describes the structure of your block in the context of the editor.
-	 * This represents what the editor will render when the block is used.
-	 *
-	 * The "edit" property must be a valid function.
-	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 *
-	 * @param {Object} props Props.
-	 * @returns {Mixed} JSX Component.
-	 */
+	attributes: {
+		text: {
+			type: 'string',
+		},
+		backgroundColor: {
+			type: 'string',
+		},
+		textColor: {
+			type: 'string',
+		},
+		expireAt: {
+			type: 'number',
+			default: 60 * ( 1440 + Math.ceil( Date.now() / 60000 ) ), // 24 hours from Date.now
+		},
+	},
 	edit: ( props ) => {
-		// Creates a <p class='wp-block-cgb-block-lf-headline'></p>.
-		return (
-			<div className={ props.className }>
-				<p>— Hello from the backend.</p>
-				<p>
-					CGB BLOCK: <code>lf-headline</code> is a new Gutenberg block
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
-			</div>
-		);
-	},
+		const { attributes, setAttributes } = props;
+		const { text, backgroundColor, textColor, expireAt } = attributes;
+		const styles = {
+			backgroundColor: backgroundColor,
+			color: textColor,
+		};
 
-	/**
-	 * The save function defines the way in which the different attributes should be combined
-	 * into the final markup, which is then serialized by Gutenberg into post_content.
-	 *
-	 * The "save" property must be specified and must be a valid function.
-	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 *
-	 * @param {Object} props Props.
-	 * @returns {Mixed} JSX Frontend HTML.
-	 */
-	save: ( props ) => {
 		return (
-			<div className={ props.className }>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>lf-headline</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
-			</div>
+			<Fragment>
+				<InspectorControls>
+					<PanelColorSettings
+						title="Color Settings"
+						initialOpen={ true }
+						colorSettings={ [
+							{
+								value: backgroundColor,
+								onChange: colorValue =>
+									setAttributes( {
+										backgroundColor: colorValue,
+									} ),
+								label: 'Background Color',
+							},
+							{
+								value: textColor,
+								onChange: colorValue =>
+									setAttributes( {
+										textColor: colorValue,
+									} ),
+								label: 'Text Color',
+							},
+						] }
+					>
+					</PanelColorSettings>
+					<PanelBody title={ __( 'Expire Date' ) }>
+						<DateTimePicker
+							currentDate={ expireAt * 1000 }
+							onChange={ value => {
+								setAttributes( {
+									expireAt: Math.floor( Date.parse( value ) / 1000 ),
+								} );
+							} }
+						/>
+					</PanelBody>
+				</InspectorControls>
+				<div style={ styles } className="wp-block-lf-headline">
+					<RichText
+						tagName="div"
+						value={ text }
+						onChange={ ( value ) => setAttributes( { text: value } ) }
+						placeholder={ __( 'Enter headline text...' ) }
+					/>
+				</div>
+			</Fragment>
 		);
 	},
+	save: () => null,
 } );

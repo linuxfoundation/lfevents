@@ -4,11 +4,30 @@
  * CSS for both Frontend+Backend.
  */
 
-.wp-block-cgb-block-lf-headline  {
-  background: $red;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+.wp-block-lf-headline  {
+	--bg-color: #ffffff;
+	--text-color: #212326;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	margin: 0 auto;
+	height: 40px;
+	margin-bottom: 1.5rem;
+
+	p {
+		-webkit-font-smoothing: auto;
+		font-size: 18px;
+		line-height: 1;
+		margin: 0 auto;
+		max-width: 1279px;
+		opacity: 1;
+		padding: 10px;
+		text-align: center;
+		width: 100%;
+
+		a {
+			color: var(--text-color);
+			font-weight: bold;
+			text-decoration: underline;
+		}
+	}
 }

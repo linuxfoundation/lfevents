@@ -1,1 +1,25 @@
-.wp-block-cgb-block-cgb{color:#292929;background:#bada55;border:0.2rem solid #292929;padding:2rem}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.wp-block-lf-headline {
+  background: #ffffff;
+  color: #212326;
+  margin: 0 auto;
+  max-width: 740px; }
+  .wp-block-lf-headline .components-dropdown {
+    display: none; }
+  .wp-block-lf-headline div {
+    padding: 10px;
+    text-align: center; }
+    .wp-block-lf-headline div a {
+      font-weight: bold;
+      text-decoration: underline; }

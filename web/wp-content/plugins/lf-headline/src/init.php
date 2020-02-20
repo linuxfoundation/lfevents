@@ -31,37 +31,26 @@ function lf_headline_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
 		'lf_headline-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		is_admin() ? array( 'wp-editor' ) : null,
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
 	// Register block editor script for backend.
 	wp_register_script(
 		'lf_headline-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
+		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
 		true // Enqueue the script in the footer.
 	);
 
 	// Register block editor styles for backend.
 	wp_register_style(
 		'lf_headline-cgb-block-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
-	);
-
-	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
-	wp_localize_script(
-		'lf_headline-cgb-block-js',
-		'cgbGlobal', // Array containing dynamic data for a JS Global.
-		[
-			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
-			// Add more data here that you want to access from `cgbGlobal` object.
-		]
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		array( 'wp-edit-blocks' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
 
 	/**
@@ -75,15 +64,43 @@ function lf_headline_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-lf-headline', array(
-			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'lf_headline-cgb-style-css',
-			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'lf_headline-cgb-block-js',
-			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'lf_headline-cgb-block-editor-css',
+		'lf/headline',
+		array(
+			'style'           => 'lf_headline-cgb-style-css',
+			'editor_script'   => 'lf_headline-cgb-block-js',
+			'editor_style'    => 'lf_headline-cgb-block-editor-css',
+			'render_callback' => 'lf_headline_callback',
 		)
 	);
+}
+
+function lf_headline_callback( $attributes ) { // phpcs:ignore
+	ob_start();
+
+	$text             = isset( $attributes['text'] ) ? $attributes['text'] : false;
+	$background_color = isset( $attributes['backgroundColor'] ) ? $attributes['backgroundColor'] : '';
+	$text_color       = isset( $attributes['textColor'] ) ? $attributes['textColor'] : '#212326';
+	$expire_at        = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
+	$time_left        = $expire_at - time();
+
+	if ( empty( $text ) ) {
+		return;
+	}
+
+	if ( $time_left < 0 ) {
+		return;
+	}
+
+	$styles = '--bg-color: ' . esc_attr( $background_color ) . ';';
+	$styles .= ' --text-color: ' . esc_attr( $text_color ) . ';';
+
+	?>
+	<div class="wp-block-lf-headline" style="<?php echo esc_html( $styles ); ?>">
+		<?php echo apply_filters( 'the_content', $text ); // phpcs:ignore ?>
+	</div>
+	<?php
+
+	return ob_get_clean();
 }
 
 // Hook: Block assets.

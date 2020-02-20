@@ -5,11 +5,23 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-lf-headline  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
+.wp-block-lf-headline  {
+  background: #ffffff;
+  color: #212326;
   margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+	max-width: 740px;
+
+	.components-dropdown {
+		display: none;
+	}
+
+	div {
+		padding: 10px;
+		text-align: center;
+
+		a {
+			font-weight: bold;
+			text-decoration: underline;
+		}
+	}
 }
