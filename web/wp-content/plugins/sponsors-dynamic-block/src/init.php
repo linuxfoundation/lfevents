@@ -122,10 +122,16 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 
 		$id = get_the_ID();
 		$forwarding_url = esc_url( get_post_meta( $id, 'lfes_sponsor_url', true ) );
+		$size = get_post_meta( $id, 'lfes_sponsor_size', true );
 
 		$out .= '<div class="sponsors-logo-item">';
 		if ( $forwarding_url ) {
-			$out .= '<a href="' . $forwarding_url . '" target="_blank">';
+			$out .= '<a href="' . $forwarding_url . '"';
+			if ( is_numeric( $size ) && '100' !== $size ) {
+				$scale = $size / 100;
+				$out .= ' style="-webkit-transform: scale(' . $scale . '); -ms-transform: scale(' . $scale . '); transform: scale(' . $scale . ');"';
+			}
+			$out .= ' target="_blank">';
 		}
 		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo' ) );
 		if ( $forwarding_url ) {
