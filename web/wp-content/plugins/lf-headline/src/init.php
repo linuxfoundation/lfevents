@@ -66,7 +66,6 @@ function lf_headline_cgb_block_assets() { // phpcs:ignore
 	register_block_type(
 		'lf/headline',
 		array(
-			'style'           => 'lf_headline-cgb-style-css',
 			'editor_script'   => 'lf_headline-cgb-block-js',
 			'editor_style'    => 'lf_headline-cgb-block-editor-css',
 			'render_callback' => 'lf_headline_callback',
