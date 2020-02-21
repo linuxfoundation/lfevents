@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: LF | Headline Block
- * Description: Create a custom headline Gutenberg block.
+ * Plugin Name: LF | Alert Block
+ * Description: Create a custom alert Gutenberg block.
  * Author: fuerzastudio
  * Version: 1.0.0
  * License: GPL2+

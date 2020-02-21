@@ -1,5 +1,5 @@
 /**
- * BLOCK: lf-headline
+ * BLOCK: lf-alert
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
@@ -15,14 +15,14 @@ const { Fragment } = wp.element;
 const { InspectorControls, PanelColorSettings, RichText } = wp.blockEditor || wp.editor;
 const { PanelBody, DateTimePicker } = wp.components;
 
-registerBlockType( 'lf/headline', {
-	title: __( 'Headline' ),
+registerBlockType( 'lf/alert', {
+	title: __( 'Alert' ),
 	icon: 'info',
 	category: 'common',
 	keywords: [
-		__( 'Headline' ),
+		__( 'Alert' ),
 		__( 'Linux' ),
-		__( 'Linux Headline' ),
+		__( 'Linux Alert' ),
 	],
 	attributes: {
 		text: {
@@ -84,12 +84,12 @@ registerBlockType( 'lf/headline', {
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<div style={ styles } className="wp-block-lf-headline">
+				<div style={ styles } className="wp-block-lf-alert">
 					<RichText
 						tagName="div"
 						value={ text }
 						onChange={ ( value ) => setAttributes( { text: value } ) }
-						placeholder={ __( 'Enter headline text...' ) }
+						placeholder={ __( 'Enter alert text...' ) }
 					/>
 				</div>
 			</Fragment>

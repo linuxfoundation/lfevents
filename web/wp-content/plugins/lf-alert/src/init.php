@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-function lf_headline_cgb_block_assets() { // phpcs:ignore
+function lf_alert_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'lf_headline-cgb-style-css', // Handle.
+		'lf_alert-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
 		is_admin() ? array( 'wp-editor' ) : null,
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
@@ -38,7 +38,7 @@ function lf_headline_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'lf_headline-cgb-block-js', // Handle.
+		'lf_alert-cgb-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
@@ -47,7 +47,7 @@ function lf_headline_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'lf_headline-cgb-block-editor-css', // Handle.
+		'lf_alert-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
 		array( 'wp-edit-blocks' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
@@ -64,16 +64,16 @@ function lf_headline_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'lf/headline',
+		'lf/alert',
 		array(
-			'editor_script'   => 'lf_headline-cgb-block-js',
-			'editor_style'    => 'lf_headline-cgb-block-editor-css',
-			'render_callback' => 'lf_headline_callback',
+			'editor_script'   => 'lf_alert-cgb-block-js',
+			'editor_style'    => 'lf_alert-cgb-block-editor-css',
+			'render_callback' => 'lf_alert_callback',
 		)
 	);
 }
 
-function lf_headline_callback( $attributes ) { // phpcs:ignore
+function lf_alert_callback( $attributes ) { // phpcs:ignore
 	ob_start();
 
 	$text             = isset( $attributes['text'] ) ? $attributes['text'] : false;
@@ -94,7 +94,7 @@ function lf_headline_callback( $attributes ) { // phpcs:ignore
 	$styles .= ' --text-color: ' . esc_attr( $text_color ) . ';';
 
 	?>
-	<div class="wp-block-lf-headline" style="<?php echo esc_html( $styles ); ?>">
+	<div class="wp-block-lf-alert" style="<?php echo esc_html( $styles ); ?>">
 		<?php echo apply_filters( 'the_content', $text ); // phpcs:ignore ?>
 	</div>
 	<?php
@@ -103,4 +103,4 @@ function lf_headline_callback( $attributes ) { // phpcs:ignore
 }
 
 // Hook: Block assets.
-add_action( 'init', 'lf_headline_cgb_block_assets' );
+add_action( 'init', 'lf_alert_cgb_block_assets' );
