@@ -17,9 +17,9 @@
   max-width: 740px; }
   .wp-block-lf-headline .components-dropdown {
     display: none; }
-  .wp-block-lf-headline div {
+  .wp-block-lf-headline div.rich-text {
     padding: 10px;
     text-align: center; }
-    .wp-block-lf-headline div a {
+    .wp-block-lf-headline div.rich-text a {
       font-weight: bold;
       text-decoration: underline; }
