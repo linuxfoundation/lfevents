@@ -25,7 +25,7 @@ function onSubmit(token) {
 				$( "#message" ).html( msg );
 			},
 			error: function() {
-				alert("There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.");
+				alert( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." );
 			}
 		}
 	);
