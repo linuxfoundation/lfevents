@@ -193,18 +193,18 @@ figure {
 
 // apply to figure
 .figure-container img {
-	width: 100%;
-	// height: 100%;
-	object-fit: cover;
-	position: absolute;
-	z-index: 1;
-	// added below to stop flexbox messing with the height on load.
-	display: block;
-	top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: auto;
-    width: 100%;
+  max-width: none;
+  min-width: 100%;
+  max-height: none;
+  min-height: 100%;
+  object-fit: cover !important;
+  position: absolute;
+  z-index: 1;
+  // added below to stop flexbox messing with the height on load.
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 // apply to content inside
