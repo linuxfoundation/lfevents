@@ -197,7 +197,7 @@ figure {
   min-width: 100%;
   max-height: none;
   min-height: 100%;
-  object-fit: cover !important;
+  object-fit: cover;
   position: absolute;
   z-index: 1;
   // added below to stop flexbox messing with the height on load.
