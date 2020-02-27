@@ -106,9 +106,6 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 			' . $selected_format
 			. '</div>';
 	}
-
-	return '<div data-nosnippet class="ub-countdown' . ( isset( $class_name ) ? ' ' . esc_attr( $class_name ) : '' ) . '" ' .
-		( '' == $block_id ? 'style="text-align:' . $message_align . ';' : 'id="ub_countdown_' . $block_id . '"' ) . '>' . $expiry_message . '</div>';
 }
 
 function countdown_block_generate_circle( $label, $value, $limit, $color ) { // phpcs:ignore
