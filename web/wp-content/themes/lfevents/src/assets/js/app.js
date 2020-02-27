@@ -30,6 +30,9 @@ function updateBannerSize() {
   if(w <= 900 && charCount > 105) {
     $('html').addClass('double-top-banner');
   }
+  if(w <= 768 && charCount >= 85) {
+    $('html').addClass('double-top-banner');
+  }
   if(w <= 600) {
     if(charCount > 65) {
       $('html').addClass('double-top-banner');
