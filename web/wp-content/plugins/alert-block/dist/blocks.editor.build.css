@@ -10,16 +10,16 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.wp-block-lf-alert {
+.wp-block-alert-block {
   background: #ffffff;
   color: #212326;
   margin: 0 auto;
   max-width: 740px; }
-  .wp-block-lf-alert .components-dropdown {
+  .wp-block-alert-block .components-dropdown {
     display: none; }
-  .wp-block-lf-alert div.rich-text {
+  .wp-block-alert-block div.rich-text {
     padding: 10px;
     text-align: center; }
-    .wp-block-lf-alert div.rich-text a {
+    .wp-block-alert-block div.rich-text a {
       font-weight: bold;
       text-decoration: underline; }

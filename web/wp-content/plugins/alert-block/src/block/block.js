@@ -1,5 +1,5 @@
 /**
- * BLOCK: lf-alert
+ * BLOCK: alert-block
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
@@ -84,7 +84,7 @@ registerBlockType( 'lf/alert', {
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<div style={ styles } className="wp-block-lf-alert">
+				<div style={ styles } className="wp-block-alert-block">
 					<RichText
 						tagName="div"
 						value={ text }

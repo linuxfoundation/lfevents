@@ -131,5 +131,5 @@ web/wp-content/plugins/pricing-block/node_modules
 web/wp-content/plugins/tab-container-block/node_modules
 !web/wp-content/plugins/countdown-block
 web/wp-content/plugins/countdown-block/node_modules
-!web/wp-content/plugins/lf-alert
-web/wp-content/plugins/lf-alert/node_modules
+!web/wp-content/plugins/alert-block
+web/wp-content/plugins/alert-block/node_modules
