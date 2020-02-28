@@ -18,12 +18,16 @@ function onSubmit(token) {
 			data: f.serialize(),
 			beforeSend: function() {
 				$( "#sfmc-form" ).toggle();
-				$( "#message" ).html( "Thank you for your submission." ).addClass( "callout success" );
-			}
-			,
+				$( "#message" ).html( "Thank you for your submission.  Your request is being processed..." ).addClass( "callout success" );
+			},
 			success: function(data) {
 				var msg = $( data ).find( "p" ).text();
 				$( "#message" ).html( msg );
+			},
+			error: function(xhr, status, error) {
+				var errorMessage = xhr.status + ': ' + xhr.statusText;
+				$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.<br>(" + errorMessage + ")" );
+				alert( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." );
 			}
 		}
 	);

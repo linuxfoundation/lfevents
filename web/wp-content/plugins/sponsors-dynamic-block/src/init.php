@@ -131,7 +131,7 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 				$scale = $size / 100;
 				$out .= ' style="-webkit-transform: scale(' . $scale . '); -ms-transform: scale(' . $scale . '); transform: scale(' . $scale . ');"';
 			}
-			$out .= ' target="_blank">';
+			$out .= ' target="_blank" rel="noreferrer noopener">';
 		}
 		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo' ) );
 		if ( $forwarding_url ) {
