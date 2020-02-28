@@ -4,7 +4,7 @@
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0 auto;
-  height: 40px;
+  height: auto;
   margin-bottom: 1.5rem;
   max-width: none;
   width: 100%;
@@ -25,20 +25,5 @@
       font-weight: bold;
       text-decoration: underline;
     }
-  }
-}
-.double-top-banner .alert-block {
-  height: 60px;
-}
-  //LOGGED IN STYLES
-.triple-top-banner {
-  .alert-block {
-    height: 85px;
-  }
-}
-
-.quadruple-top-banner {
-  .alert-block {
-    height: 120px;
   }
 }

@@ -94,7 +94,7 @@ function lf_alert_callback( $attributes ) { // phpcs:ignore
 	$styles .= ' --text-color: ' . esc_attr( $text_color ) . ';';
 
 	?>
-	<div class="alert-block" style="<?php echo esc_html( $styles ); ?>">
+	<div class="alert-block alignfull" style="<?php echo esc_html( $styles ); ?>">
 		<?php echo apply_filters( 'the_content', $text ); // phpcs:ignore ?>
 	</div>
 	<?php
