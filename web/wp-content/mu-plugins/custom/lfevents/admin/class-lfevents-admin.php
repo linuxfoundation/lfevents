@@ -600,21 +600,14 @@ class LFEvents_Admin {
 									'input_label'     => __( 'CFP for Event', 'my_plugin' ), // Required.
 								),
 								array(
-									'type'          => 'text', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'text',
 									'id'            => 'cfp_date_start',
 									'data_type'     => 'meta',
-									'data_key'      => 'cfp_date_start', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'cfp_date_start',
 									'label'         => __( 'CFP start date', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'default_value' => '',
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
@@ -723,11 +716,33 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_register_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Register URL' ),
-									'help'          => __( 'The CTA buttons will only appear when a url is provided.' ),
+									'help'          => __( 'This CTA button will be displayed for the following date range.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/register/' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'cta_register_date_start',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_register_date_start',
+									'label'         => __( 'CTA Register start date', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'default_value' => '',
+									'placeholder'        => 'YYYY/MM/DD',
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'cta_register_date_end',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_register_date_end',
+									'label'         => __( 'CTA Register end date', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'default_value' => '',
+									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text', // Required.
@@ -735,8 +750,9 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_speak_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Speak URL' ),
+									'help'          => __( 'This CTA button will be displayed during the date range specificed above in the Call For Proposal section.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/cfp/' ),
 								),
@@ -746,10 +762,33 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_sponsor_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Sponsor URL' ),
+									'help'          => __( 'This CTA button will be displayed for the following date range.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/sponsors/become-and-sponsor/' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'cta_sponsor_date_start',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_sponsor_date_start',
+									'label'         => __( 'CTA Sponsor start date', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'default_value' => '',
+									'placeholder'        => 'YYYY/MM/DD',
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'cta_sponsor_date_end',
+									'data_type'     => 'meta',
+									'data_key'      => 'cta_sponsor_date_end',
+									'label'         => __( 'CTA Sponsor end date', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'default_value' => '',
+									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text', // Required.
@@ -757,8 +796,9 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_schedule_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Schedule URL' ),
+									'help'          => __( 'This CTA button will be displayed whenever a url is provided here.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/schedule/' ),
 								),
