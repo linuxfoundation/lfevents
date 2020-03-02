@@ -4,6 +4,7 @@ This page lists the form code needed by site admins when setting up a new Event.
 
 ## Table of Contents
 - [Newsletter](#newsletter)
+- [Visa Request](#visa-request)
 - [Contact Us](#contact-us)
 - [Kubecon Sponsor](#kubecon-sponsor)
 - [Travel Fund Request](#travel-fund-request)
