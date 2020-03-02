@@ -1,29 +1,30 @@
 .alert-block  {
-  --bg-color: #ffffff;
-  --text-color: #212326;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: #ffffff;
+  color: #212326;
   margin: 0 auto;
   height: auto;
   margin-bottom: 1.5rem;
   max-width: none;
   width: 100%;
 
-  p {
+  .wrp {
     -webkit-font-smoothing: auto;
-    font-size: 18px;
-    line-height: 1.2;
     margin: 0 auto;
     max-width: 1279px;
-    opacity: 1;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    max-width: 1279px;
     padding: 10px;
     text-align: center;
     width: 100%;
 
     a {
-      color: var(--text-color);
-      font-weight: bold;
+      color: inherit;
       text-decoration: underline;
+    }
+
+    h1, h2, h3, h4, h5, p {
+      margin: 0 auto;
     }
   }
 }
