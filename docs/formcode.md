@@ -688,6 +688,16 @@ This page lists the form code needed by site admins when setting up a new Event.
 </form>
 
 <div id="message"></div>
+<script>
+$( document ).ready(
+	function() {
+		$( ".date-dropdown" ).change( function () {
+			var date = $("#dob-month").val() + "/" + $("#dob-day").val() + "/" + $("#dob-year").val();
+			$( "#dateOfBirth" ).val( date );
+		});
+	}
+);
+</script>
 <script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
 <script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152849"></script>
 ```
