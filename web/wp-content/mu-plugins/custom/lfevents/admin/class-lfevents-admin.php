@@ -716,33 +716,11 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_register_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Register URL' ),
-									'help'          => __( 'This CTA button will be displayed for the following date range.' ),
+									'help'          => __( 'This CTA button will be displayed until the Event end date.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/register/' ),
-								),
-								array(
-									'type'          => 'text',
-									'id'            => 'cta_register_date_start',
-									'data_type'     => 'meta',
-									'data_key'      => 'cta_register_date_start',
-									'label'         => __( 'CTA Register start date', 'my_plugin' ),
-									'register_meta' => true,
-									'ui_border_top' => false,
-									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
-								),
-								array(
-									'type'          => 'text',
-									'id'            => 'cta_register_date_end',
-									'data_type'     => 'meta',
-									'data_key'      => 'cta_register_date_end',
-									'label'         => __( 'CTA Register end date', 'my_plugin' ),
-									'register_meta' => true,
-									'ui_border_top' => false,
-									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text', // Required.
@@ -750,7 +728,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_speak_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Speak URL' ),
-									'help'          => __( 'This CTA button will be displayed during the date range specificed above in the Call For Proposal section.' ),
+									'help'          => __( 'This CTA button will be displayed during the Call For Proposal date range.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
@@ -762,22 +740,11 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_sponsor_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Sponsor URL' ),
-									'help'          => __( 'This CTA button will be displayed for the following date range.' ),
+									'help'          => __( 'This CTA button will be displayed whenever a url is provided and until the following end date, if one is provided:' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/sponsors/become-and-sponsor/' ),
-								),
-								array(
-									'type'          => 'text',
-									'id'            => 'cta_sponsor_date_start',
-									'data_type'     => 'meta',
-									'data_key'      => 'cta_sponsor_date_start',
-									'label'         => __( 'CTA Sponsor start date', 'my_plugin' ),
-									'register_meta' => true,
-									'ui_border_top' => false,
-									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -796,7 +763,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_schedule_url', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'CTA Schedule URL' ),
-									'help'          => __( 'This CTA button will be displayed whenever a url is provided here.' ),
+									'help'          => __( 'This CTA button will be displayed whenever a url is provided.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
