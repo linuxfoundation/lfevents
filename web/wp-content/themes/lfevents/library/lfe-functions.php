@@ -804,3 +804,14 @@ foreach ( $regex_json_path_patterns as $regex_json_path_pattern ) {
 		break;
 	}
 }
+
+
+/**
+ * Returns a banner saying the event has passed for past events.
+ *
+ * @param int $parent_id Parent ID.
+ */
+function lfe_get_passed_event_banner( $parent_id ) {
+	echo 'This event has passed. View the upcoming <a class="text-weight-bold" style="color:inherit;text-decoration:underline;">Kubernetes Forum Bengaluru</a>.';
+
+}
