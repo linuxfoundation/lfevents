@@ -1,0 +1,18 @@
+.wp-block-button-with-expiry {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  a {
+    border-radius: 4px;
+    padding-bottom: .375em;
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+    padding-top: .375em;
+
+    &:hover {
+      opacity: .85;
+    }
+  }
+}
