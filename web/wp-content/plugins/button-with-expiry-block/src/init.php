@@ -95,5 +95,4 @@ function button_with_expiry_callback( $attributes ) { // phpcs:ignore
 	return ob_get_clean();
 }
 
-// Hook: Block assets.
 add_action( 'init', 'button_with_expiry_block_assets' );
