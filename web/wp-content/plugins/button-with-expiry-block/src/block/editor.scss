@@ -1,0 +1,18 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.wp-block-button-with-expiry {
+  margin: 0 auto;
+  max-width: 740px;
+	padding: 2rem;
+
+	.button-text {
+		position: relative;
+		left: 40%;
+		border-radius: 4px !important;
+	}
+}
