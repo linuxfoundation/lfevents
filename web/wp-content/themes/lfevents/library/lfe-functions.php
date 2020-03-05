@@ -823,15 +823,15 @@ function lfe_passed_event_banner( $parent_id ) {
 			$event_has_passed = get_post_meta( $latest_event->ID, 'lfes_event_has_passed', true );
 
 			if ( ! $event_has_passed ) {
-				echo 'Please visit the upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_permalink( $latest_event->ID ) ) . '">' . esc_html( get_the_title( $latest_event->ID ) ) . '</a>.';
+				echo 'Please visit the upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_permalink( $latest_event->ID ) ) . '">' . esc_html( get_the_title( $latest_event->ID ) ) . '.</a>';
 				return;
 			}
 		}
 	}
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 	if ( $term[0] ) {
-		echo 'View the upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_home_url( null, '/about/calendar/?_sft_lfevent-category=' . $term[0]->slug ) ) . '"> ' . esc_html( $term[0]->name ) . '</a>.';
+		echo 'View the upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_home_url( null, '/about/calendar/?_sft_lfevent-category=' . $term[0]->slug ) ) . '"> ' . esc_html( $term[0]->name ) . '.</a>';
 	} else {
-		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_home_url( null, '/about/calendar/' ) ) . '">Linux Foundation events</a>.';
+		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_home_url( null, '/about/calendar/' ) ) . '">Linux Foundation events.</a>';
 	}
 }
