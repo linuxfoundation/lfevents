@@ -815,7 +815,7 @@ function lfe_passed_event_banner( $parent_id ) {
 	$post_type = get_post_type( $parent_id );
 	echo 'This event has passed. ';
 	if ( 'page' !== $post_type ) {
-		$parent = get_post($parent_id); 
+		$parent = get_post( $parent_id );
 		$slug = $parent->post_name;
 		$latest_event = get_page_by_path( $slug, OBJECT, 'page' );
 
