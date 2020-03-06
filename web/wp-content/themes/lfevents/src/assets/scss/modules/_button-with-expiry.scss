@@ -1,3 +1,14 @@
+.wp-block-group.buttons {
+  .wp-block-group__inner-container {
+    display: flex;
+    justify-content: center;
+
+    .wp-block-button-with-expiry {
+      margin-right: 2rem;
+    }
+  }
+}
+
 .wp-block-button-with-expiry {
   align-items: center;
   display: flex;
