@@ -131,3 +131,6 @@ web/wp-content/plugins/pricing-block/node_modules
 web/wp-content/plugins/tab-container-block/node_modules
 !web/wp-content/plugins/countdown-block
 web/wp-content/plugins/countdown-block/node_modules
+!web/wp-content/plugins/lfevents-forms
+web/wp-content/plugins/lfevents-forms/node_modules
+
