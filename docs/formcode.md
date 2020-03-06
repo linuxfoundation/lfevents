@@ -8,7 +8,7 @@ This page lists the form code needed by site admins when setting up a new Event.
 - [Contact Us](#contact-us)
 - [Kubecon Sponsor](#kubecon-sponsor)
 - [Travel Fund Request](#travel-fund-request)
-- [Live Stream Sign Up](#live-stream-sign-up)
+- [Live Stream](#live-stream)
 
 
 ## Newsletter
@@ -1558,7 +1558,7 @@ Parameters to change
 <script type='text/javascript' defer src='https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/travel-fund-form.js?ver=1581396079'></script>
 ```
 
-## Live Stream Sign Up
+## Live Stream
 Parameters to change
 - `<form action=...` attribute to be the url where the form submits for the particular Event
 - `window.location.href` to be the redirect url
