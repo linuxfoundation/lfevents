@@ -8,9 +8,12 @@ This page lists the form code needed by site admins when setting up a new Event.
 - [Contact Us](#contact-us)
 - [Kubecon Sponsor](#kubecon-sponsor)
 - [Travel Fund Request](#travel-fund-request)
+- [Live Stream Sign Up](#live-stream-sign-up)
 
 
 ## Newsletter
+Parameters to change
+- `<form action=...` attribute to be the url where the form submits for the particular Event
 
 ```html
 <div id="message"></div>
@@ -47,6 +50,8 @@ This page lists the form code needed by site admins when setting up a new Event.
 
 
 ## Visa Request
+Parameters to change
+- `<input name="event" value="...` attribute to be the event id
 
 ```html
 <form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
@@ -1376,6 +1381,8 @@ document.getElementById('txtUrl').value = window.location.href;
 ```
 
 ## Travel Fund Request
+Parameters to change
+- `<input name="event" value="...` attribute to be the event id
 
 ```html
 <form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
@@ -1549,4 +1556,81 @@ document.getElementById('txtUrl').value = window.location.href;
 <div id="message"></div>
 <script type='text/javascript' defer src='https://www.recaptcha.net/recaptcha/api.js?ver=1'></script>
 <script type='text/javascript' defer src='https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/travel-fund-form.js?ver=1581396079'></script>
+```
+
+## Live Stream Sign Up
+Parameters to change
+- `<form action=...` attribute to be the url where the form submits for the particular Event
+- `window.location.href` to be the redirect url
+
+```html
+<form id="ls-form" action="https://cloud.email.thelinuxfoundation.org/LFMS2020-LiveStream-Submission" method="POST">
+<div class="grid-x grid-margin-x">
+  <label class="cell medium-6" for="FirstName">First name *
+    <input type="text" name="FirstName" placeholder="First name" required="">
+  </label>
+
+  <label class="cell medium-6" for="LastName">Last name *
+    <input type="text" name="LastName" placeholder="Last name" required="">
+  </label>
+
+  <label class="cell medium-6" for="Company">Company *
+    <input type="text" name="Company" placeholder="Company" required="">
+  </label>
+
+  <label class="cell medium-6" for="EmailAddress">Email *
+    <input type="email" name="EmailAddress" placeholder="Email address" required="">
+  </label>
+
+</div>
+
+<div data-callback="onSubmitLS" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+
+<input class="button expanded" type="submit" value="SUBMIT" id="submitbtn">
+</form>
+<div id="message"></div>
+<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
+
+<script>
+function onSubmitLS(token) {
+	var f = $( "#ls-form" )
+	$.ajax(
+		{
+			url: f.attr( "action" ),
+			type: 'POST',
+			data: f.serialize(),
+			beforeSend: function() {
+				$( "#ls-form" ).toggle();
+				$( "#message" ).html( "Thank you for your submission.  Your request is being processed..." ).addClass( "callout success" );
+			},
+			success: function(data) {
+				var msg = $( data ).find( "p" ).text();
+                $( "#message" ).html( msg );
+                window.location.href = "https://events.linuxfoundation.org/lf-member-summit/program/keynote-live-stream-access/";
+			},
+			error: function(xhr, status, error) {
+				var errorMessage = xhr.status + ': ' + xhr.statusText;
+				$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.<br>(" + errorMessage + ")" ).removeClass( "success" ).addClass( "alert" );
+				alert( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." );
+			}
+		}
+	);
+}
+
+$( document ).ready(
+	function() {
+		var f = $( "#ls-form" )
+		f.on(
+			"click",
+			"#submitbtn",
+			function(e) {
+				if (f[0].checkValidity()) {
+					e.preventDefault();
+					grecaptcha.execute();
+				}
+			}
+		);
+	}
+);
+</script>
 ```
