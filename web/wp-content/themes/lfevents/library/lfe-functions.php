@@ -771,3 +771,8 @@ function lfe_passed_event_banner( $parent_id ) {
 		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/">Linux Foundation events.</a>';
 	}
 }
+
+
+// this causes the RSS Aggregator to delete and re-import all feed items on every import:
+// https://kb.wprssaggregator.com/article/191-keep-feed-in-sync-with-current-state.
+add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );
