@@ -66,5 +66,24 @@ function lfevents_forms_block_assets() { // phpcs:ignore
 	);
 }
 
-// Hook: Block assets.
+/**
+ * Create a custom category for blocks.
+ *
+ * @param array $categories All registered categories.
+ *
+ * @return array
+ */
+function lfevents_forms_block_category( $categories ) {
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug'  => 'lfe-forms',
+				'title' => 'LFEvents Forms',
+			),
+		)
+	);
+}
+
 add_action( 'init', 'lfevents_forms_block_assets' );
+add_filter( 'block_categories', 'lfevents_forms_block_category' );

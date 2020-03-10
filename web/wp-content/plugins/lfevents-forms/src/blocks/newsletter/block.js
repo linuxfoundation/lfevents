@@ -11,7 +11,7 @@ const { PanelBody, TextControl } = wp.components;
 registerBlockType( 'lf/form-newsletter', {
 	title: __( 'Newsletter Form' ),
 	icon: 'list-view',
-	category: 'common',
+	category: 'lfe-forms',
 	keywords: [
 		__( 'Newsletter' ),
 		__( 'Newsletter Form' ),

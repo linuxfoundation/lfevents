@@ -11,7 +11,7 @@ const { PanelBody, TextControl } = wp.components;
 registerBlockType( 'lf/form-visa-request', {
 	title: __( 'Visa Request Form' ),
 	icon: 'list-view',
-	category: 'common',
+	category: 'lfe-forms',
 	keywords: [
 		__( 'Visa Request' ),
 		__( 'Visa Request Form' ),
