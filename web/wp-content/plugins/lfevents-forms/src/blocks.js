@@ -11,3 +11,4 @@
 
 import './blocks/newsletter/block.js';
 import './blocks/visa-request/block.js';
+import './blocks/live-stream/block.js';

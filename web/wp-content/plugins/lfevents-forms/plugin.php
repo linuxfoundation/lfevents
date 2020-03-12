@@ -22,6 +22,7 @@ $plugin_path = plugin_dir_path( __FILE__ );
  */
 require_once $plugin_path . 'src/blocks/newsletter/index.php';
 require_once $plugin_path . 'src/blocks/visa-request/index.php';
+require_once $plugin_path . 'src/blocks/live-stream/index.php';
 
 /**
  * Block Initializer.

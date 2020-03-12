@@ -8,37 +8,48 @@ const { Fragment } = wp.element;
 const { InspectorControls } = wp.blockEditor || wp.editor;
 const { PanelBody, TextControl } = wp.components;
 
-registerBlockType( 'lf/form-newsletter', {
-	title: __( 'Newsletter Form' ),
+registerBlockType( 'lf/form-live-stream', {
+	title: __( 'Live Stream' ),
 	icon: 'list-view',
 	category: 'lfe-forms',
 	keywords: [
-		__( 'Newsletter' ),
-		__( 'Newsletter Form' ),
+		__( 'Live Stream' ),
+		__( 'Live Stream Form' ),
 		__( 'Linux' ),
 	],
 	attributes: {
 		action: {
 			type: 'string',
 		},
+		redirectUrl: {
+			type: 'string',
+		},
 	},
 	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
-		const { action } = attributes;
+		const { action, redirectUrl } = attributes;
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __( 'Form Action' ) }>
+					<PanelBody title={ __( 'Form Options' ) }>
 						<TextControl
+							label="Action"
 							value={ action }
 							onChange={ value => {
 								setAttributes( { action: value } );
 							} }
 						/>
+						<TextControl
+							label="Redirect URL"
+							value={ redirectUrl }
+							onChange={ value => {
+								setAttributes( { redirectUrl: value } );
+							} }
+						/>
 					</PanelBody>
 				</InspectorControls>
 				<div className={ props.className }>
-					<h4>LFEvents: Newsletter Form</h4>
+					<h4>LFEvents: Live Stream Form</h4>
 				</div>
 			</Fragment>
 		);
