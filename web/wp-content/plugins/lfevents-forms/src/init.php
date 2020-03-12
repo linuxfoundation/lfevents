@@ -85,5 +85,61 @@ function lfevents_forms_block_category( $categories ) {
 	);
 }
 
+function lfevents_forms_block_add_frontend_assets() { // phpcs:ignore
+	$present_blocks = lfevents_forms_get_present_blocks();
+	$allowed_blocks = array( 'lf/form-newsletter', 'lf/form-visa-request' );
+
+	foreach ( $present_blocks as $block ) {
+		if ( in_array( $block['blockName'], $allowed_blocks ) ) {
+			wp_enqueue_script(
+				'lfevents_forms-sfmc',
+				plugins_url( 'src/blocks/sfmc-forms.js', dirname( __FILE__ ) ),
+				array( 'jquery' ),
+				filemtime( plugin_dir_path( __FILE__ ) . 'blocks/sfmc-forms.js' ),
+				true
+			);
+		}
+	}
+}
+
+if ( ! function_exists( 'lfevents_forms_checkout_inner_blocks' ) ) {
+	function lfevents_forms_checkout_inner_blocks( $block ) { // phpcs:ignore
+		static $current_blocks = array();
+
+		$current = $block;
+
+		if ( 'core/block' == $block['blockName'] ) {
+			$current = parse_blocks( get_post_field( 'post_content', $block['attrs']['ref'] ) )[0];
+		}
+
+		if ( '' != $current['blockName'] ) {
+			array_push( $current_blocks, $current );
+			if ( count( $current['innerBlocks'] ) > 0 ) {
+				foreach ( $current['innerBlocks'] as $inner_block ) {
+					lfevents_forms_checkout_inner_blocks( $inner_block );
+				}
+			}
+		}
+
+		return $current_blocks;
+	}
+}
+
+if ( ! function_exists( 'lfevents_forms_get_present_blocks' ) ) {
+	function lfevents_forms_get_present_blocks() { // phpcs:ignore
+		$present_blocks = array();
+		$posts_array    = get_post();
+
+		if ( ! empty( $posts_array ) ) {
+			foreach ( parse_blocks( $posts_array->post_content ) as $block ) {
+				$present_blocks = lfevents_forms_checkout_inner_blocks( $block );
+			}
+		}
+
+		return $present_blocks;
+	}
+}
+
 add_action( 'init', 'lfevents_forms_block_assets' );
 add_filter( 'block_categories', 'lfevents_forms_block_category' );
+add_action( 'wp_enqueue_scripts', 'lfevents_forms_block_add_frontend_assets' );

@@ -54,7 +54,6 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 		</form>
 
 		<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
-		<script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152849"></script>
 	</div>
 
 	<?php
