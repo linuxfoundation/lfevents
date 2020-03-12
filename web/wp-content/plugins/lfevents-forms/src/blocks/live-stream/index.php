@@ -21,11 +21,11 @@ function lfevents_form_live_stream( $attributes ) { // phpcs:disable
 	ob_start();
 
 	$action       = isset( $attributes['action'] ) ? $attributes['action'] : '';
-	$required_url = isset( $attributes['requiredUrl'] ) ? $attributes['requiredUrl'] : '';
+	$redirect_url = isset( $attributes['redirectUrl'] ) ? $attributes['redirectUrl'] : '';
 
 	?>
 	<div class="lfevents-forms form-live-stream">
-		<form id="ls-form" action="<?php echo $action; ?>" method="POST">
+		<form id="ls-form" action="<?php echo $action; ?>" data-redirect="<?php echo esc_url( $redirect_url ); ?>" method="POST">
 			<div class="grid-x grid-margin-x">
 				<label class="cell medium-6" for="FirstName">First name *
 					<input type="text" name="FirstName" placeholder="First name" required="">
@@ -44,54 +44,12 @@ function lfevents_form_live_stream( $attributes ) { // phpcs:disable
 				</label>
 			</div>
 
-			<div data-callback="onSubmitLS" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+			<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
 
 			<input class="button expanded" type="submit" value="SUBMIT" id="submitbtn">
 		</form>
 		<div id="message"></div>
 		<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
-		<script>
-			function onSubmitLS(token) {
-				var f = $( "#ls-form" )
-				$.ajax(
-					{
-						url: f.attr( "action" ),
-						type: 'POST',
-						data: f.serialize(),
-						beforeSend: function() {
-							$( "#ls-form" ).toggle();
-							$( "#message" ).html( "Thank you for your submission.  Your request is being processed..." ).addClass( "callout success" );
-						},
-						success: function(data) {
-							var msg = $( data ).find( "p" ).text();
-							$( "#message" ).html( msg );
-							window.location.href = "<?php echo esc_url( $required_url ); ?>";
-						},
-						error: function(xhr, status, error) {
-							var errorMessage = xhr.status + ': ' + xhr.statusText;
-							$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.<br>(" + errorMessage + ")" ).removeClass( "success" ).addClass( "alert" );
-							alert( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." );
-						}
-					}
-				);
-			}
-
-			$( document ).ready(
-				function() {
-					var f = $( "#ls-form" )
-					f.on(
-						"click",
-						"#submitbtn",
-						function(e) {
-							if (f[0].checkValidity()) {
-								e.preventDefault();
-								grecaptcha.execute();
-							}
-						}
-					);
-				}
-			);
-		</script>
 	</div>
 
 	<?php

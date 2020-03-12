@@ -87,7 +87,7 @@ function lfevents_forms_block_category( $categories ) {
 
 function lfevents_forms_block_add_frontend_assets() { // phpcs:ignore
 	$present_blocks = lfevents_forms_get_present_blocks();
-	$allowed_blocks = array( 'lf/form-newsletter', 'lf/form-visa-request' );
+	$allowed_blocks = array( 'lf/form-newsletter', 'lf/form-visa-request', 'lf/form-live-stream' );
 
 	foreach ( $present_blocks as $block ) {
 		if ( in_array( $block['blockName'], $allowed_blocks ) ) {

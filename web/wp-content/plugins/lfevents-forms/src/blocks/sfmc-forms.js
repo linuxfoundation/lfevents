@@ -10,8 +10,8 @@
  * @param {*} token callback token.
  */
 function onSubmit(token) {
-	console.log('Opa');
-	var f = $("#sfmc-form")
+	var f = $("#sfmc-form");
+	var redirectUrl = f.data('redirect');
 	$.ajax(
 		{
 			url: f.attr("action"),
@@ -24,6 +24,9 @@ function onSubmit(token) {
 			success: function (data) {
 				var msg = $(data).find("p").text();
 				$("#message").html(msg);
+				if (redirectUrl) {
+					window.location.href = redirectUrl;
+				}
 			},
 			error: function (xhr, status, error) {
 				var errorMessage = xhr.status + ': ' + xhr.statusText;
