@@ -1,0 +1,30 @@
+.alert-block  {
+  background-color: #ffffff;
+  color: #212326;
+  margin: 0 auto;
+  height: auto;
+  margin-bottom: 1.5rem;
+  max-width: none;
+  width: 100%;
+
+  .wrp {
+    -webkit-font-smoothing: auto;
+    margin: 0 auto;
+    max-width: 1279px;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    max-width: 1279px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    h1, h2, h3, h4, h5, p {
+      margin: 0 auto;
+    }
+  }
+}
