@@ -22,6 +22,10 @@ function lfevents_form_visa_request( $attributes ) { // phpcs:disable
 
 	$event_id = isset( $attributes['eventId'] ) ? $attributes['eventId'] : '';
 
+	if ( empty( $event_id ) ) {
+		return;
+	}
+
 	?>
 	<div class="lfevents-forms form-visa-request">
 		<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">

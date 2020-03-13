@@ -23,9 +23,13 @@ function lfevents_form_live_stream( $attributes ) { // phpcs:disable
 	$action       = isset( $attributes['action'] ) ? $attributes['action'] : '';
 	$redirect_url = isset( $attributes['redirectUrl'] ) ? $attributes['redirectUrl'] : '';
 
+	if ( empty( $action ) || empty( $redirect_url ) ) {
+		return;
+	}
+
 	?>
 	<div class="lfevents-forms form-live-stream">
-		<form id="ls-form" action="<?php echo $action; ?>" data-redirect="<?php echo esc_url( $redirect_url ); ?>" method="POST">
+		<form id="sfmc-form" action="<?php echo $action; ?>" data-redirect="<?php echo esc_url( $redirect_url ); ?>" method="POST">
 			<div class="grid-x grid-margin-x">
 				<label class="cell medium-6" for="FirstName">First name *
 					<input type="text" name="FirstName" placeholder="First name" required="">

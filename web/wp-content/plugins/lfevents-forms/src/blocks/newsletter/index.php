@@ -22,6 +22,10 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 
 	$action = isset( $attributes['action'] ) ? $attributes['action'] : '';
 
+	if ( empty( $action ) ) {
+		return;
+	}
+
 	?>
 	<div class="lfevents-forms form-newsletter">
 		<div id="message"></div>
