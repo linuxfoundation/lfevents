@@ -56,43 +56,44 @@ function button_with_expiry_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'lf/button-with-expiry',
+		'lf/buttons-with-expiry',
 		array(
 			'editor_script'   => 'button_with_expiry-block-js',
 			'editor_style'    => 'button_with_expiry-block-editor-css',
+		)
+	);
+
+	register_block_type(
+		'lf/button-with-expiry',
+		array(
 			'render_callback' => 'button_with_expiry_callback',
 		)
 	);
 }
 
-function button_with_expiry_callback( $attributes ) { // phpcs:ignore
-	ob_start();
-
-	$text             = isset( $attributes['text'] ) ? $attributes['text'] : false;
-	$background_color = isset( $attributes['backgroundColor'] ) ? $attributes['backgroundColor'] : '';
-	$text_color       = isset( $attributes['textColor'] ) ? $attributes['textColor'] : '#212326';
-	$expire_at        = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
-	$link             = isset( $attributes['link'] ) ? $attributes['link'] : '';
-	$time_left        = $expire_at - time();
-
-	if ( empty( $text ) ) {
-		return;
-	}
+// phpcs:disable
+function button_with_expiry_callback( $attributes, $content ) {
+	$expire_at   = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
+	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
+	$time_left   = $expire_at - time();
 
 	if ( $time_left < 0 ) {
-		return;
+
+		if ( empty( $expire_text ) ) {
+			return;
+		}
+
+		$dom = new DOMDocument();
+		$dom->loadXML( $content );
+		$a = $dom->getElementsByTagName( 'a' )->item( 0 );
+		$classes = $a->getAttribute( 'class' );
+		$a->setAttribute( 'class', $classes . ' disabled' );
+		$a->nodeValue = $expire_text;
+
+		return $dom->saveHTML();
 	}
 
-	$styles = 'background-color: ' . esc_attr( $background_color ) . ';';
-	$styles .= 'color: ' . esc_attr( $text_color ) . ';';
-
-	?>
-	<div class="wp-block-button-with-expiry">
-		<a href="<?php echo esc_url( $link ); ?>" style="<?php echo esc_html( $styles ); ?>"><?php echo esc_html( $text ); ?></a>
-	</div>
-	<?php
-
-	return ob_get_clean();
+	return $content;
 }
 
 add_action( 'init', 'button_with_expiry_block_assets' );

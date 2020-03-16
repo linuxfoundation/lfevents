@@ -1,20 +1,16 @@
-.wp-block-group.buttons {
-  .wp-block-group__inner-container {
-    display: flex;
-    justify-content: center;
+.wp-block-lf-buttons-with-expiry {
+  display: flex;
 
-    .wp-block-button-with-expiry {
-      margin-right: 2rem;
-    }
+  &.aligncenter {
+    justify-content: center;
+  }
+
+  .wp-block-lf-button-with-expiry {
+    margin-right: 2rem;
   }
 }
 
-.wp-block-button-with-expiry {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
+.wp-block-lf-button-with-expiry {
   a {
     border-radius: 4px;
     padding-bottom: .375em;
@@ -24,6 +20,12 @@
 
     &:hover {
       opacity: .85;
+    }
+
+    &.disabled {
+      cursor: default;
+      opacity: .50;
+      pointer-events: none;
     }
   }
 }

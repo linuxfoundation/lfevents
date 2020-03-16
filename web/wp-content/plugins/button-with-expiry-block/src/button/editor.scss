@@ -1,0 +1,96 @@
+$blue-medium-500: #00a0d2;
+$white: #fff;
+$dark-gray-500: #555d66;
+$grid-unit: 8px;
+$grid-unit-20: 2 * $grid-unit; // 16px
+
+.block-editor-block-list__block[data-type="lf/button-with-expiry"] {
+	&[data-align="center"] {
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&[data-align="right"] {
+		/*!rtl:ignore*/
+		text-align: right;
+	}
+}
+
+.wp-block-lf-button-with-expiry {
+	position: relative;
+	margin: 4px;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 10px;
+
+	[contenteditable] {
+		cursor: text;
+	}
+
+	// Make placeholder text white unless custom colors or outline versions are chosen.
+	&:not(.has-text-color):not(.is-style-outline) [data-rich-text-placeholder]::after {
+		color: $white;
+	}
+
+	// Add outline to button on focus to indicate focus-state
+	.block-editor-rich-text__editable {
+		background-color: $blue-medium-500;
+		cursor: pointer;
+		color: white;
+		border: none;
+
+		&:focus {
+			box-shadow: 0 0 0 1px $white, 0 0 0 3px $blue-medium-500;
+
+			// Windows' High Contrast mode will show this outline, but not the box-shadow.
+			outline: 2px solid transparent;
+			outline-offset: -2px;
+		}
+	}
+
+
+	// Increase placeholder opacity to meet contrast ratios.
+	[data-rich-text-placeholder]::after {
+		opacity: 0.8;
+	}
+}
+
+.wp-block-lf-button-with-expiry__inline-link {
+	color: $dark-gray-500;
+	height: 0;
+	overflow: hidden;
+	max-width: 290px;
+
+	&-input__suggestions {
+		max-width: 290px;
+	}
+
+	@media (min-width: 782px) {
+		max-width: 260px;
+
+		&-input__suggestions {
+			max-width: 260px;
+		}
+
+	}
+	@media (min-width: 960px) {
+		max-width: 290px;
+
+		&-input__suggestions {
+			max-width: 290px;
+		}
+
+	}
+
+	.is-selected & {
+		height: auto;
+		overflow: visible;
+		margin-top: $grid-unit-20;
+	}
+}
+
+// Display "table" is used because the button container should only wrap the content and not takes the full width.
+div[data-type="lf/button-with-expiry"] {
+	display: table;
+}
