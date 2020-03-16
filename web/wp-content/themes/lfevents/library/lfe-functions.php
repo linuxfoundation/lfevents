@@ -155,9 +155,9 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 
 	if ( $term[0] ) {
-		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/?_sft_lfevent-category=' . $term[0]->slug . '"><span class="subtext">Past ' . $term[0]->name . '</span></a></li>'; //phpcs:ignore
+		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"><span class="subtext">Past ' . esc_html( $term[0]->name ) . '</span></a></li>';
 	} else {
-		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/"><span class="subtext">All Past Events</span></a></li>'; //phpcs:ignore
+		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/"><span class="subtext">All Past Events</span></a></li>';
 	}
 
 	$extra_link_text = get_post_meta( $parent_id, 'lfes_extra_vae_link_text', true );
@@ -636,10 +636,6 @@ add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_ge
  */
 function my_tsf_custom_image_generation_args( $params = array(), $args = null, $context = 'social' ) {
 
-	if ( isset( $params['cbs']['content'] ) ) {
-		$params['cbs']['content'] = 'my_content_image_generator';
-	}
-
 	// Let's not mess with non-social sharing images.
 	if ( 'social' !== $context ) {
 		return $params;
@@ -702,66 +698,6 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 	);
 }
 
-/**
- * Custom generator function used to skip svgs.  See https://wordpress.org/support/topic/social-image-is-svg/#post-12306230 .
- *
- * @generator
- *
- * @param array|null $args The query arguments. Accepts 'id' and 'taxonomy'.
- *                         Leave null to autodetermine query.
- * @param string     $size The size of the image to get.
- * @yield array : {
- *    string url: The image URL location,
- *    int    id:  The image ID,
- * }
- */
-function my_content_image_generator( $args = null, $size = 'full' ) {
-	$tsf = \the_seo_framework();
-	if ( null === $args ) {
-		if ( $tsf->is_singular() ) {
-			$content = $tsf->get_post_content();
-		}
-	} else {
-		if ( $args['taxonomy'] ) {
-			$content = '';
-		} else {
-			$content = $tsf->get_post_content( $args['id'] );
-		}
-	}
-	$matches = array();
-	// strlen( '<img src=a>' ) === 11; yes, that's a valid self-closing tag with a relative source.
-	if ( strlen( $content ) > 10 && false !== stripos( $content, '<img' ) ) {
-		preg_match_all(
-			'/<img[^>]+src=(\"|\')?([^\"\'>\s]+)\1?.*?>/mi',
-			$content,
-			$matches,
-			PREG_SET_ORDER
-		);
-	}
-	if ( $matches ) {
-		foreach ( $matches as $match ) {
-			// Skip SVG files...
-			if ( false !== strpos( pathinfo( $match[2], PATHINFO_EXTENSION ), 'svg' ) ) {
-				continue;
-			}
-			// Assume every URL to be correct? Yes. WordPress assumes that too.
-			if ( $match[2] ) {
-				$url = $match[2];
-			} else {
-				$url = '';
-			}
-			yield array(
-				'url' => $url,
-				'id'  => 0,
-			);
-		}
-	} else {
-		yield array(
-			'url' => '',
-			'id'  => 0,
-		);
-	}
-}
 
 /**
  * Programmatically flushes the Pantheon site cache when a sponsor CPT is updated.
@@ -804,3 +740,39 @@ foreach ( $regex_json_path_patterns as $regex_json_path_pattern ) {
 		break;
 	}
 }
+
+
+/**
+ * Returns a banner saying the event has passed for past events.
+ *
+ * @param int $parent_id Parent ID.
+ */
+function lfe_passed_event_banner( $parent_id ) {
+	$post_type = get_post_type( $parent_id );
+	echo 'This event has passed. ';
+	if ( 'page' !== $post_type ) {
+		$parent = get_post( $parent_id );
+		$slug = $parent->post_name;
+		$latest_event = get_page_by_path( $slug, OBJECT, 'page' );
+
+		if ( $latest_event ) {
+			$event_has_passed = get_post_meta( $latest_event->ID, 'lfes_event_has_passed', true );
+
+			if ( ! $event_has_passed ) {
+				echo 'Please visit the upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_url( get_permalink( $latest_event->ID ) ) . '">' . esc_html( get_the_title( $latest_event->ID ) ) . '.</a>';
+				return;
+			}
+		}
+	}
+	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
+	if ( $term[0] ) {
+		echo 'View the upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/about/calendar/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"> ' . esc_html( $term[0]->name ) . '.</a>';
+	} else {
+		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/">Linux Foundation events.</a>';
+	}
+}
+
+
+// this causes the RSS Aggregator to delete and re-import all feed items on every import:
+// https://kb.wprssaggregator.com/article/191-keep-feed-in-sync-with-current-state.
+add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );

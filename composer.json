@@ -21,8 +21,8 @@
     "roots/wp-password-bcrypt": "^1.0.0",
     "rvtraveller/qs-composer-installer": "^1.1",
     "vlucas/phpdotenv": "^3.1.0",
-    "wpackagist-plugin/pantheon-advanced-page-cache": "^0.3.0",
-    "wpackagist-plugin/wp-native-php-sessions": "^0.9.0",
+    "wpackagist-plugin/pantheon-advanced-page-cache": "^1.0.0",
+    "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",
     "wpackagist-plugin/wp-mail-smtp":"^1.4.1",
     "wpackagist-plugin/lh-hsts":"^1.24",
     "wpackagist-plugin/safe-svg":"^1.9.3",
@@ -39,7 +39,8 @@
     "wpackagist-plugin/flying-pages":"^2.0.8",
     "wpackagist-plugin/shortpixel-image-optimiser":"^4.15.3",
     "wpackagist-plugin/redirection":"^4.4.2",
-    "wpackagist-plugin/gutenberg":"7.7.1"
+    "wpackagist-plugin/gutenberg":"7.7.1",
+    "wpackagist-plugin/conditional-blocks":"^1.0.3"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2.1",
