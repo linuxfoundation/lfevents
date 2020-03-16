@@ -39,10 +39,10 @@ function countdown_block_assets() { // phpcs:ignore
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'countdown-block-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		'countdown-block-cgb-editor-css', // Handle.
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
 		array(),
-		filemtime( countdown_block_get_plugin_path() . 'dist/blocks.style.build.css' )
+		filemtime( countdown_block_get_plugin_path() . 'dist/blocks.editor.build.css' )
 	);
 
 	/**
@@ -58,6 +58,7 @@ function countdown_block_assets() { // phpcs:ignore
 	register_block_type(
 		'cgb/countdown-block',
 		array(
+			'editor_style'    => 'countdown-block-cgb-editor-css',
 			'editor_script'   => 'countdown-block-cgb-block-js',
 			'render_callback' => 'countdown_block_callback',
 		)

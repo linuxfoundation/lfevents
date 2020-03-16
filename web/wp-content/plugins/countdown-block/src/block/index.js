@@ -7,6 +7,8 @@ import icon, {
 
 import Timer from './components/Timer';
 
+import './styles/editor.scss';
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { Fragment } = wp.element;
