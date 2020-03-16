@@ -6,7 +6,6 @@ import icon, {
 } from './components/Icons';
 
 import Timer from './components/Timer';
-import './styles/style.scss';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;

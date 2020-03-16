@@ -58,7 +58,6 @@ function countdown_block_assets() { // phpcs:ignore
 	register_block_type(
 		'cgb/countdown-block',
 		array(
-			'style'           => 'countdown-block-cgb-style-css',
 			'editor_script'   => 'countdown-block-cgb-block-js',
 			'render_callback' => 'countdown_block_callback',
 		)
