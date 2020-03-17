@@ -39,7 +39,6 @@
     "wpackagist-plugin/flying-pages":"^2.0.8",
     "wpackagist-plugin/shortpixel-image-optimiser":"^4.15.3",
     "wpackagist-plugin/redirection":"^4.4.2",
-    "wpackagist-plugin/gutenberg":"7.7.1",
     "wpackagist-plugin/conditional-blocks":"^1.0.3"
   },
   "require-dev": {
