@@ -1,5 +1,6 @@
 .wp-block-lf-buttons-with-expiry {
   display: flex;
+  flex-wrap: wrap;
 
   &.aligncenter {
     justify-content: center;
@@ -25,5 +26,9 @@
       background-color: #cccccc;
       color: #888888;
     }
+  }
+
+  @media(max-width: 767px) {
+    margin: auto auto 15px;
   }
 }
