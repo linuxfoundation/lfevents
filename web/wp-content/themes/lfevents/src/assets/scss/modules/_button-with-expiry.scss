@@ -35,7 +35,7 @@
     box-shadow: 3px 3px 10px -3px #000;
     position: relative;
     z-index: 1;
-    transition: opacity .3 ease-in-out;
+    transition: opacity .3s ease-in-out;
 
     &.disabled {
       cursor: default;
@@ -45,8 +45,8 @@
     }
 
     &:hover {
-      opacity: .5;
-      transition: opacity .3 ease-in-out;
+      opacity: .8;
+      transition: opacity .3s ease-in-out;
     }
   }
 
