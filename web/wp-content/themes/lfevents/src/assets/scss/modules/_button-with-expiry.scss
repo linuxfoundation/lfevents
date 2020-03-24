@@ -17,15 +17,13 @@
     padding-left: 1.25em;
     padding-right: 1.25em;
     padding-top: .375em;
-
-    &:hover {
-      opacity: .85;
-    }
+    box-shadow:   3px 3px 10px 1px #000;
 
     &.disabled {
       cursor: default;
-      opacity: .50;
       pointer-events: none;
+      background-color: #cccccc;
+      color: #888888;
     }
   }
 }
