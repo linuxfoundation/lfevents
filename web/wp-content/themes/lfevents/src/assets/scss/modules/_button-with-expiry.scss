@@ -23,6 +23,7 @@
     top: 0;
     background: #000;
     border-radius: 4px;
+    z-index: 0;
   }
 
   a {
@@ -32,6 +33,9 @@
     padding-right: 1.25em;
     padding-top: .375em;
     box-shadow: 3px 3px 10px -3px #000;
+    position: relative;
+    z-index: 1;
+    transition: opacity .3 ease-in-out;
 
     &.disabled {
       cursor: default;
@@ -42,6 +46,7 @@
 
     &:hover {
       opacity: .5;
+      transition: opacity .3 ease-in-out;
     }
   }
 
