@@ -1,0 +1,5 @@
+const button = document.querySelector('.wp-block-button__link.has-text-color.has-white-color.has-background')
+const button_wrp = document.querySelector('.wp-block-lf-button-with-expiry')
+const button_style = button.getAttribute('style')
+button_wrp.setAttribute('style', button_style)
+button.setAttribute('style', '')
