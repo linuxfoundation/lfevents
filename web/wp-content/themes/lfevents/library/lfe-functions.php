@@ -776,3 +776,11 @@ function lfe_passed_event_banner( $parent_id ) {
 // this causes the RSS Aggregator to delete and re-import all feed items on every import:
 // https://kb.wprssaggregator.com/article/191-keep-feed-in-sync-with-current-state.
 add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );
+
+/**
+ * Dequeue the conditional-blocks-front-css.
+ */
+function lfe_dequeue_style() {
+	wp_dequeue_style( 'conditional-blocks-front-css' );
+}
+add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );
