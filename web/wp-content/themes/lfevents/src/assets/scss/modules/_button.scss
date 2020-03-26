@@ -2,12 +2,12 @@
     .wp-block-button {
         transition: all .3s ease-in-out;
         position: relative;
-        
+
         .wp-block-button__link {
             font-size: 1rem;
         }
 
-        &:hover {
+        &:active {
           transition: all .3s ease-in-out;
           top: 1px;
         }
