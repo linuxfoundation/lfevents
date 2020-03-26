@@ -33,15 +33,21 @@
   }
 
   a {
-    padding-bottom: .375em;
-    padding-left: 1.25em;
-    padding-right: 1.25em;
-    padding-top: .375em;
+    padding: .85em 1em;
     border-radius: .5rem;
+    font-size: 1rem;
     position: relative;
     z-index: 1;
     transition: opacity .3s ease-in-out;
     background: transparent;
+    color: #fefefe;
+    border: 1px solid transparent;
+    font-family: inherit;
+    -webkit-appearance: none;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
 
     &.disabled {
       cursor: default;
