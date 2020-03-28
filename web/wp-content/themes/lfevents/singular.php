@@ -85,10 +85,10 @@ if ( ! $splash_page ) {
 		$home_img = 'logo_lfasiallc_white.svg';
 	}
 	?>
-	
+
 	<div data-sticky-container>
 		<header class="main-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;">
-			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>	
+			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
 		</header>
 	</div>
 	<?php
@@ -168,6 +168,57 @@ if ( ! $splash_page ) {
 <div class="event-footer"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
+	<div class="new-footer-logo">
+	<?php echo $event_link_content; ?>
+	</div>
+
+	<h3 class="event-social-links-header">Sign up for updates</h3>
+
+	<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events" _lpchecked="1">
+
+<!-- <div class="grid-x grid-margin-x"> -->
+
+<div class="new-footer-newsletter">
+
+  <label class=" medium-6" for="FirstName">
+    <input type="text" name="FirstName" placeholder="First name" required="">
+  </label>
+
+  <label class=" medium-6" for="LastName">
+    <input type="text" name="LastName" placeholder="Last name" required="">
+  </label>
+
+  <label for="EmailAddress">
+    <input type="email" name="EmailAddress" placeholder="Email address" required="">
+  </label>
+
+<input class="button" type="submit" value="SIGN UP!" id="submitbtn">
+
+<!-- </div> -->
+</div>
+</form>
+<p class="new-footer-privacy">The Linux Foundation uses the information you provide to us to contact you about upcoming and future events. You may unsubscribe from these communications at any time. For more information, please see our <a href="#">Privacy Policy</a>.</p>
+
+	<?php
+
+// echo $event_link_content;
+// echo esc_url( get_permalink( $parent_id ) );
+
+$children = lfe_get_event_menu_footer( $parent_id, $post->post_type );
+
+// $children = lfe_get_event_menu( $parent_id, $post->post_type, 'list-style:none; margin-left: 0;' );
+?>
+
+<hr class="new-footer-hr">
+
+<p class="new-event-title"><?php echo the_title() ?></p>
+
+<ul class="new-footer-menu" style="">
+<?php
+echo $children;
+?>
+</ul>
+
 		<?php
 		$wechat = get_post_meta( $parent_id, 'lfes_wechat', true );
 		$linkedin = get_post_meta( $parent_id, 'lfes_linkedin', true );
@@ -221,6 +272,8 @@ if ( ! $splash_page ) {
 			echo '</ul>';
 		}
 		?>
+
+		<p class="new-footer-social-text">Use the hashtag #ossna20</p>
 </div>
 
 <?php

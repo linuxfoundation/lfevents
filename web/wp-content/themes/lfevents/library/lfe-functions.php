@@ -223,7 +223,7 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 			$page = explode( '<ul class=\'children\'>', $page );
 			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
 			if ( count( $page ) == 3 ) {
-				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
+			$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
 			$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
 		}
@@ -231,6 +231,51 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 		$count++;
 	}
 	$pages = implode( '</li>', $pages );
+
+	return $pages; //phpcs:ignore
+}
+
+function lfe_get_event_menu_footer( $parent_id, $post_type ) {
+	global $wpdb, $post;
+
+	// first find which pages we need to exclude.
+	$exclude = $wpdb->get_results( $wpdb->prepare( "select post_id from $wpdb->postmeta left join $wpdb->posts on post_id = id where meta_key = 'lfes_hide_from_menu' and meta_value = 1 and post_type = %s;", $post->post_type ), ARRAY_A );
+	$exclude_ids = '';
+	foreach ( $exclude as $ex ) {
+		$exclude_ids .= $ex['post_id'] . ',';
+	}
+
+	// then get the pages we need.
+	$args = array(
+		'child_of'     => $parent_id,
+		'sort_order'   => 'ASC',
+		'sort_column'  => 'menu_order',
+		'hierarchical' => 1,
+		'title_li'     => '',
+		'exclude'      => $exclude_ids,
+		'post_type'    => $post_type,
+		'post_status'  => 'publish',
+		'echo'         => 0,
+	);
+	$pages = wp_list_pages( $args );
+	$pages = explode( '</li>', $pages );
+	$count = 0;
+
+	// now we remove the hyperlink for elements who have children.
+	foreach ( $pages as $page ) {
+		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
+			$page = explode( '<ul class=\'children\'>', $page );
+			unset($page[0]);
+			// if ( count( $page ) == 3 ) {
+			// 	$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
+			// }
+			$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
+		}
+		$pages[ $count ] = $page;
+		$count++;
+	}
+	$pages = implode( '</li>', $pages );
+	$pages = strip_tags($pages, "<li><a>");
 
 	return $pages; //phpcs:ignore
 }
