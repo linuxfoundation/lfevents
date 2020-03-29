@@ -704,6 +704,17 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => __( 'https://twitter.com/CloudNativeFdn' ),
 								),
+								array(
+									'type'          => 'text', // Required.
+									'id'            => 'instagram',
+									'data_type'     => 'meta',
+									'data_key'      => 'instagram', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Instagram url' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.instagram.com/linux_foundation' ),
+								),
 							),
 						),
 						array(
