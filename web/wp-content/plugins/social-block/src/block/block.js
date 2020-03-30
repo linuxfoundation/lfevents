@@ -37,91 +37,95 @@ const { registerBlockType } = wp.blocks;
 registerBlockType(
 	 'lf/social-block',
 	{
-	title: __( 'Social Block' ),
-	description: __( 'Block which inserts the social media icons for an event. Uses Social and Design settings from the Event parent.' ),
-	icon: 'twitter',
-	category: 'common',
-	keywords: [
-		__( 'social' ),
-		__( 'facebook' ),
-		__( 'twitter' ),
-		__( 'lf' ),
-		__( 'linux' ),
-		__( 'icons' ),
-		__( 'follow' ),
-	],
-	supports: {
-			align: [ 'left', 'right', 'center' ],
-			html: false,
-	},
-	example: {},
-	attributes: {
+		title: __( 'Social Block' ),
+		description: __( 'Block which inserts the social media icons for an event. Uses Social and Design settings from the Event parent.' ),
+		icon: 'twitter',
+		category: 'common',
+		keywords: [
+			__( 'social' ),
+			__( 'facebook' ),
+			__( 'twitter' ),
+			__( 'lf' ),
+			__( 'linux' ),
+			__( 'icons' ),
+			__( 'follow' ),
+		],
+		supports: {
+			align: true,
+		},
+		example: {},
+		attributes: {
 			align: {
 				type: 'string',
 				default: 'full',
 			},
 			iconColor: {
-							type: 'string',
-							default: '#000000',
-				},
-				menu_color_1: {
-										type: 'string',
-										source: 'meta',
-										meta: 'lfes_menu_color',
-										default: '#000000',
-						},
-						menu_color_2: {
-											type: 'string',
-											source: 'meta',
-											meta: 'lfes_menu_color_2',
-											default: '#000000',
-							},
-							menu_color_3: {
-													type: 'string',
-													source: 'meta',
-													meta: 'lfes_menu_color_3',
-													default: '#000000',
-								},
-								wechat_url: {
-																type: 'string',
-																source: 'meta',
-																meta: 'lfes_wechat',
-																default: '',
-										},
-										linkedin_url: {
-																		type: 'string',
-																		source: 'meta',
-																		meta: 'lfes_linkedin',
-										},
-										qq_url: {
-																		type: 'string',
-																		source: 'meta',
-																		meta: 'lfes_qq',
-										},
-										youtube_url: {
-																		type: 'string',
-																		source: 'meta',
-																		meta: 'lfes_youtube',
-										},
-										facebook_url: {
-																		type: 'string',
-																		source: 'meta',
-																		meta: 'lfes_facebook',
-										},
-										twitter_url: {
-																		type: 'string',
-																		source: 'meta',
-																		meta: 'lfes_twitter',
-										},
-										instagram_url: {
-																		type: 'string',
-																		source: 'meta',
-																		meta: 'lfes_instagram',
-										},
-									},
-									edit: Edit,
-									save() {
-																				return null;
-									},
-								}
-							);
+				type: 'string',
+				default: '#000000',
+			},
+			iconSize: {
+				type: 'integer',
+				default: 50,
+			},
+			menu_color_1: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_menu_color',
+				default: '#000000',
+			},
+			menu_color_2: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_menu_color_2',
+				default: '#000000',
+			},
+			menu_color_3: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_menu_color_3',
+				default: '#000000',
+			},
+			wechat_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_wechat',
+				default: '',
+			},
+			linkedin_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_linkedin',
+			},
+			qq_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_qq',
+			},
+			youtube_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_youtube',
+			},
+			facebook_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_facebook',
+			},
+			twitter_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_twitter',
+			},
+			instagram_url: {
+				type: 'string',
+				source: 'meta',
+				meta: 'lfes_instagram',
+			},
+		},
+		html: false,
+		edit: Edit,
+		save() {
+			return null;
+		},
+	}
+);

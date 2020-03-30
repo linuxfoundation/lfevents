@@ -14,13 +14,14 @@
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { InspectorControls } = wp.blockEditor || wp.editor;
-const { PanelBody, SelectControl } = wp.components;
+const { RangeControl, PanelBody, SelectControl } = wp.components;
 
 const WeChat = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
 	<svg xmlns="http://www.w3.org/2000/svg" aria-label="WeChat"
-		role="img" viewBox="0 0 512 512" fill="#fff">
+		role="img" viewBox="0 0 512 512" fill="#fff" preserveAspectRatio width={ width } height={ width }>
 		<rect width="512" height="512" rx="15%"
 			fill={ fill } />
 		<path fill="#FFF"
@@ -32,10 +33,11 @@ const WeChat = ( {
 
 const LinkedIn = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
 	<svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn"
 		role="img" viewBox="0 0 512 512"
-		fill={ fill } >
+		fill={ fill } preserveAspectRatio width={ width } height={ width }>
 		<rect width="512" height="512" rx="15%"
 			fill={ fill } />
 		<circle cx="142" cy="138" r="37" fill="#FFF" />
@@ -48,9 +50,10 @@ const LinkedIn = ( {
 
 const QQ = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
 	<svg xmlns="http://www.w3.org/2000/svg" aria-label="QQ"
-		role="img" viewBox="0 0 512 512">
+		role="img" viewBox="0 0 512 512" preserveAspectRatio width={ width } height={ width }>
 		<rect width="512" height="512" rx="15%"
 			fill={ fill } />
 		<path id="svg_2"
@@ -67,9 +70,10 @@ const QQ = ( {
 
 const YouTube = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
 	<svg fill={ fill } viewBox="0 0 512 512"
-		xmlns="http://www.w3.org/2000/svg">
+		xmlns="http://www.w3.org/2000/svg" preserveAspectRatio width={ width } height={ width }>
 		<rect height="512" rx="15%" width="512" />
 		<path
 			d="m427 169c-4-15-17-27-32-31-34-9-239-10-278 0-15 4-28 16-32 31-9 38-10 135 0 174 4 15 17 27 32 31 36 10 241 10 278 0 15-4 28-16 32-31 9-36 9-137 0-174"
@@ -79,9 +83,10 @@ const YouTube = ( {
 
 const Facebook = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
 	<svg xmlns="http://www.w3.org/2000/svg" aria-label="Facebook"
-		role="img" viewBox="0 0 512 512">
+		role="img" viewBox="0 0 512 512" preserveAspectRatio width={ width } height={ width }>
 		<rect width="512" height="512" rx="15%"
 			fill={ fill } />
 		<path fill="#FFF"
@@ -91,9 +96,10 @@ const Facebook = ( {
 
 const Twitter = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
 	<svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter"
-		role="img" viewBox="0 0 512 512">
+		role="img" viewBox="0 0 512 512" preserveAspectRatio width={ width } height={ width }>
 		<rect width="512" height="512" rx="15%"
 			fill={ fill } />
 		<path fill="#fff"
@@ -103,8 +109,9 @@ const Twitter = ( {
 
 const Instagram = ( {
 	fill = '#000000',
+	width = '30',
 } ) => (
-	<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+	<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio width={ width } height={ width }>
 		<rect height="512" rx="15%" width="512"
 			fill={ fill } />
 		<g fill="none" stroke="#fff" strokeWidth="29">
@@ -119,7 +126,7 @@ const Instagram = ( {
 class SocialBlock extends Component {
 	render() {
 		const { attributes, setAttributes } = this.props;
-		const { iconColor, menu_color_1, menu_color_2, menu_color_3, wechat_url, linkedin_url, qq_url, youtube_url, facebook_url, twitter_url, instagram_url } = attributes;
+		const { iconColor, iconSize, menu_color_1, menu_color_2, menu_color_3, wechat_url, linkedin_url, qq_url, youtube_url, facebook_url, twitter_url, instagram_url } = attributes;
 
 		const inspectorControls = (
 			<InspectorControls key="social-block-panel">
@@ -154,6 +161,15 @@ class SocialBlock extends Component {
 							setAttributes( { iconColor: '' !== value ? value : '' } )
 	  }
 					/>
+
+					<RangeControl
+						label={ __( 'Size of Icons' ) }
+						min={ 20 }
+						max={ 200 }
+						step={ 5 }
+						value={ iconSize }
+						onChange={ value => setAttributes( { iconSize: value } ) }
+					/>
 				</PanelBody>
 			</InspectorControls>
 		);
@@ -164,25 +180,25 @@ class SocialBlock extends Component {
 				<div className={ this.props.className }>
 					<ul className="social-block-icon-wrapper">
 						{ wechat_url ?
-							<WeChat fill={ iconColor } /> : ''
+							<WeChat fill={ iconColor } width={ iconSize } /> : ''
 						}
 						{ linkedin_url &&
-						<LinkedIn fill={ iconColor } />
+						<LinkedIn fill={ iconColor } width={ iconSize } />
 						}
 						{ qq_url &&
-						<QQ fill={ iconColor } />
+						<QQ fill={ iconColor } width={ iconSize } />
 						}
 						{ youtube_url &&
-						<YouTube fill={ iconColor } />
+						<YouTube fill={ iconColor } width={ iconSize } />
 						}
 						{ facebook_url &&
-						<Facebook fill={ iconColor } />
+						<Facebook fill={ iconColor } width={ iconSize } />
 						}
 						{ twitter_url &&
-						<Twitter fill={ iconColor } />
+						<Twitter fill={ iconColor } width={ iconSize } />
 						}
 						{ instagram_url &&
-						<Instagram fill={ iconColor } />
+						<Instagram fill={ iconColor } width={ iconSize } />
 						}
 
 					</ul>

@@ -50,8 +50,11 @@ function social_block_callback( $attributes ) {
 		return;
 	}
 
-	// get the color value.
+	// get the icon color value.
 	$icon_color = isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#000000';
+
+	// get the icon size value.
+	$icon_size = isset( $attributes['iconSize'] ) ? intval($attributes['iconSize'] ): 50;
 
 	// get the classes set from the block if any.
 	$classes = isset( $attributes['className'] ) ? $attributes['className'] : '';
@@ -60,10 +63,20 @@ function social_block_callback( $attributes ) {
 	$align = isset( $attributes['align'] ) ? $attributes['align'] : 'center';
 
 	ob_start();
+
+	if ( $icon_size ) :
+		echo "<style>
+		.wp-block-lf-social-block .social-block-icon-wrapper svg {
+		width: " . $icon_size . "px;
+		}
+		</style>";
+	endif;
 	?>
+
 <section class="wp-block-lf-social-block <?php echo esc_html( $classes ); ?>"
 	data-align="<?php echo esc_html( $align ); ?>">
 	<ul class="social-block-icon-wrapper">
+
 
 		<?php if ( ! empty( $wechat ) ) : ?>
 		<li><a data-toggle="wechat-dropdown" title="WeChat">
@@ -77,7 +90,7 @@ function social_block_callback( $attributes ) {
 						d="m205 105c-73 0-132 50-132 111 0 33 17 63 45 83 3 2 5 5 4 10l-7 24c-1 5 3 7 6 6l30-17c3-2 7-3 11-2 26 8 48 6 51 6-24-84 59-132 123-128-10-52-65-93-131-93m-44 93a18 18 0 1 1 0-35 18 18 0 0 1 0 35m89 0a18 18 0 1 1 0-35 18 18 0 0 1 0 35" />
 				</svg>
 			</a>
-			<div class="dropdown-pane" id="wechat-dropdown" data-dropdown
+			<div class="dropdown-pane social-block-dropdown" id="wechat-dropdown" data-dropdown
 				data-hover="true" data-hover-pane="true" data-hover-delay="0"
 				data-position="top" data-alignment="center">
 				<?php echo wp_get_attachment_image( esc_html( $wechat ) ); ?>

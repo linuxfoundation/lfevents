@@ -13,17 +13,20 @@
     padding-left: 0;
     list-style-type: none;
     // spacing
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
     // layout.
-    display: inline-grid;
-    grid-auto-flow: column;
-    grid-gap: 10px;
-    max-width: 400px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    >*:not(:last-child) {
+        margin-right: 10px;
+        margin-bottom: 1.5em;
+    }
 
     svg {
-        max-width: 100%;
-        height: 35px;
+        width: auto;
 
         &:hover {
             filter: hue-rotate(15deg);

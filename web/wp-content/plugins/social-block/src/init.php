@@ -85,6 +85,9 @@ function social_block_assets() {
 				'iconColor' => array(
 					'type'    => 'string',
 				),
+				'iconSize' => array(
+					'type'    => 'integer',
+				),
 				'wechat_url' => array(
 					'type'    => 'string',
 				),
