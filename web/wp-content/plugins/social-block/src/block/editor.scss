@@ -1,0 +1,32 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.wp-block-lf-social-block {}
+
+.social-block-icon-wrapper {
+    // reset.
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    // spacing
+    margin-top: 2em;
+    margin-bottom: 2em;
+    // layout.
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-gap: 10px;
+    max-width: 400px;
+
+    svg {
+        max-width: 100%;
+        height: 35px;
+
+        &:hover {
+            filter: hue-rotate(15deg);
+        }
+    }
+}
