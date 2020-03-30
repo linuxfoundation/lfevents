@@ -168,15 +168,14 @@ if ( ! $splash_page ) {
 <div class="event-footer"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
-	<div class="new-footer-logo">
-	<?php echo $event_link_content; ?>
-	</div>
-
 	<h3 class="event-social-links-header">Sign up for updates</h3>
 
-	<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events" _lpchecked="1">
+<!-- newsletter section -->
+<section style="background-color: white; color: black; padding-bottom: 30px;">
 
-<!-- <div class="grid-x grid-margin-x"> -->
+	<p style="padding-top: 30px; color: black;">Sign up for the LF Events newsletter to learn more about ONES and other upcoming events!</p>
+
+	<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events" _lpchecked="1">
 
 <div class="new-footer-newsletter">
 
@@ -193,14 +192,21 @@ if ( ! $splash_page ) {
   </label>
 
 <input class="button" type="submit" value="SIGN UP!" id="submitbtn">
-
-<!-- </div> -->
 </div>
 </form>
 <p class="new-footer-privacy">The Linux Foundation uses the information you provide to us to contact you about upcoming and future events. You may unsubscribe from these communications at any time. For more information, please see our <a href="#">Privacy Policy</a>.</p>
 
-	<?php
+</section>
+<!-- end of newsletter section -->
 
+<!-- logo -->
+<div class="new-footer-logo">
+	<?php echo $event_link_content; ?>
+	</div>
+<!-- logo end  -->
+
+<!-- menu start  -->
+<?php
 // echo $event_link_content;
 // echo esc_url( get_permalink( $parent_id ) );
 
@@ -208,16 +214,15 @@ $children = lfe_get_event_menu_footer( $parent_id, $post->post_type );
 
 // $children = lfe_get_event_menu( $parent_id, $post->post_type, 'list-style:none; margin-left: 0;' );
 ?>
-
-<hr class="new-footer-hr">
-
-<p class="new-event-title"><?php echo the_title() ?></p>
-
 <ul class="new-footer-menu" style="">
 <?php
 echo $children;
 ?>
 </ul>
+<!-- menu end  -->
+
+
+<div style="display: flex; justify-content: center;">
 
 		<?php
 		$wechat = get_post_meta( $parent_id, 'lfes_wechat', true );
@@ -228,11 +233,6 @@ echo $children;
 		$twitter = get_post_meta( $parent_id, 'lfes_twitter', true );
 
 		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
-			if ( is_lfeventsci() ) {
-				echo '<h3 class="event-social-links-header">Follow Us</h3>';
-			} else {
-				echo '<h3 class="event-social-links-header">关注我们 Follow Us</h3>';
-			}
 			echo '<ul class="event-social-links">';
 
 			if ( $wechat ) {
@@ -272,8 +272,14 @@ echo $children;
 			echo '</ul>';
 		}
 		?>
+		<div style="align-self: center;">
+		<p class="new-footer-social-text">Use the hashtag<br />
+		#ossna20</p>
+</div>
+</div>
 
-		<p class="new-footer-social-text">Use the hashtag #ossna20</p>
+
+
 </div>
 
 <?php

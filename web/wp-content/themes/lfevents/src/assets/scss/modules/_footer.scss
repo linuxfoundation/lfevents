@@ -127,15 +127,15 @@
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  padding: 50px 0px 0px 0px;
+  padding: 0px;
 
   >*:not(:last-child) {
     margin-right: 10px;
   }
 
   .button {
-    background-color: transparent;
-    border: 1px solid white;
+    // background-color: transparent;
+    // border: 1px solid white;
   }
 }
 
@@ -144,6 +144,7 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+
 }
 
 .new-footer-logo {
@@ -165,13 +166,13 @@
 }
 
 .new-footer-social-text {
-  font-weight: 400;
-  padding-bottom: 50px;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  opacity: 0.75;
 }
 
 .new-footer-menu {
   list-style: none;
-  padding-bottom: 50px;
   max-width: 1000px;
   display: inline-block;
   text-align: center;
