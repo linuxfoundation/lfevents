@@ -1,0 +1,39 @@
+// for the social-block plugin
+
+.wp-block-lf-social-block {
+  &[data-align*="center"] {
+    text-align: center;
+  }
+
+  &[data-align*="left"] {
+    text-align: left;
+  }
+
+  &[data-align*="right"] {
+    text-align: right;
+  }
+}
+
+.social-block-icon-wrapper {
+  // reset.
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
+  // spacing
+  margin-top: 2em;
+  margin-bottom: 2em;
+  // layout.
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  max-width: 400px;
+
+  svg {
+    max-width: 100%;
+    height: 35px;
+
+    &:hover {
+      filter: hue-rotate(15deg);
+    }
+  }
+}
