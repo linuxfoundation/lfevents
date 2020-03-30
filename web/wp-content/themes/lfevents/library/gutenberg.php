@@ -168,6 +168,23 @@ if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
 			)
 		);
 
+		 // GROUP.
+		register_block_style(
+			'core/group',
+			array(
+				'name'  => 'rounded-corners',
+				'label' => 'Rounded Corners',
+			)
+		);
+
+		register_block_style(
+			'core/group',
+			array(
+				'name'  => 'rounded-corners-reduced-width',
+				'label' => 'Rounded Corners with Reduced Width',
+			)
+		);
+
 	}
 
 	add_action( 'after_setup_theme', 'foundationpress_gutenberg_support' );
