@@ -375,6 +375,7 @@ function lfe_insert_favicon() {
 function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ' ) {
 
 	$date_range = '';
+	$date_range_ch = '';
 
 	// If only one date, or dates are the same set to FULL verbose date.
 	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
