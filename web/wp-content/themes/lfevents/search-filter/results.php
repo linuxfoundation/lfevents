@@ -80,7 +80,7 @@ if ( $query->have_posts() ) {
 			if ( 'TBA' === strtoupper( $date_start ) ) {
 				if ( 'TBA' !== $y ) {
 					$y = 'TBA';
-					echo '<h2 class="cell event-calendar-year">Dates TBA</h2>';
+					echo '<h2 class="cell event-calendar-year">TBA</h2>';
 				}
 			} else {
 				if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
