@@ -46,37 +46,52 @@ if ( $query->have_posts() ) {
 
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
-		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
+		if ( 'TBA' === strtoupper( $date_start ) ) {
+			$date_range = 'TBA';
+		} else {
+			$dt_date_start = new DateTime( $date_start );
+			$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+			$date_range = jb_verbose_date_range( $dt_date_start, $dt_date_end );
+
+			$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
+			if ( ! $event_has_passed ) {
+				// check to see if event has passed.
+				$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+				$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
+				$dt_now = new DateTime( 'now' );
+				if ( $dt_date_end_1d_after < $dt_now ) {
+					// event has passed and we should set lfes_event_has_passed.
+					update_post_meta( $post->ID, 'lfes_event_has_passed', true );
+				} else {
+					update_post_meta( $post->ID, 'lfes_event_has_passed', false );
+				}
+			}
+		}
+
 		$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
 		$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
 		$dt_cfp_date_start = new DateTime( $cfp_date_start );
 		$dt_cfp_date_end = new DateTime( $cfp_date_end );
 		$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
-		$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
 
-		if ( ! $event_has_passed ) {
-			// check to see if event has passed.
-			$dt_date_end_1d_after = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-			$dt_date_end_1d_after->add( new DateInterval( 'P1D' ) );
-			$dt_now = new DateTime( 'now' );
-			if ( $dt_date_end_1d_after < $dt_now ) {
-				// event has passed and we should set lfes_event_has_passed.
-				update_post_meta( $post->ID, 'lfes_event_has_passed', true );
-			} else {
-				update_post_meta( $post->ID, 'lfes_event_has_passed', false );
-			}
-		}
 
 		if ( $is_upcoming_events ) {
-			if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
-				$y = (int) $dt_date_start->format( 'Y' );
-				echo '<h2 class="cell event-calendar-year">' . esc_html( $y ) . '</h2>';
-				$month = (int) $dt_date_start->format( 'm' );
-				echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
-			} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
-				$month = (int) $dt_date_start->format( 'm' );
-				echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+			if ( 'TBA' === strtoupper( $date_start ) ) {
+				if ( 'TBA' !== $y ) {
+					$y = 'TBA';
+					echo '<h2 class="cell event-calendar-year">Dates TBA</h2>';
+				}
+			} else {
+				if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
+					$y = (int) $dt_date_start->format( 'Y' );
+					echo '<h2 class="cell event-calendar-year">' . esc_html( $y ) . '</h2>';
+					$month = (int) $dt_date_start->format( 'm' );
+					echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+				} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
+					$month = (int) $dt_date_start->format( 'm' );
+					echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
+				}
 			}
 		} else {
 			if ( ( 0 == $y ) || ( $y > (int) $dt_date_start->format( 'Y' ) ) ) {
@@ -108,7 +123,7 @@ if ( $query->have_posts() ) {
 
 				<span class="date small-margin-right display-inline-block">
 					<?php get_template_part( 'template-parts/svg/calendar' ); ?>
-					<?php echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ); ?>
+					<?php echo esc_html( $date_range ); ?>
 				</span>
 
 				<span class="country display-inline-block">
