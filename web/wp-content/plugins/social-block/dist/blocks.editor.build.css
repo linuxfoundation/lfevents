@@ -1,1 +1,32 @@
-.social-block-icon-wrapper{margin-left:0;padding-left:0;list-style-type:none;margin-top:1.5em;margin-bottom:1.5em;display:-ms-inline-flexbox;display:inline-flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-pack:center;justify-content:center}.social-block-icon-wrapper>*:not(:last-child){margin-right:10px;margin-bottom:1.5em}.social-block-icon-wrapper svg{width:auto}.social-block-icon-wrapper svg:hover{-webkit-filter:hue-rotate(15deg);filter:hue-rotate(15deg)}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.social-block-icon-wrapper {
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center; }
+  .social-block-icon-wrapper > *:not(:last-child) {
+    margin-right: 10px;
+    margin-bottom: 1.5em; }
+  .social-block-icon-wrapper svg {
+    width: auto; }
+    .social-block-icon-wrapper svg:hover {
+      -webkit-filter: hue-rotate(15deg);
+              filter: hue-rotate(15deg); }

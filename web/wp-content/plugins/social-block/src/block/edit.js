@@ -141,10 +141,6 @@ class SocialBlock extends Component {
 								value: '#000000',
 							},
 							{
-								label: __( 'White' ),
-								value: '#FFFFFF',
-							},
-							{
 								label: __( 'Menu Color 1' ),
 								value: menu_color_1,
 							},

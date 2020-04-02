@@ -64,24 +64,16 @@ function social_block_callback( $attributes ) {
 
 	ob_start();
 
-	if ( $icon_size ) :
-		echo '<style>
-		.wp-block-lf-social-block .social-block-icon-wrapper svg {
-		width: ' . esc_html( $icon_size ) . 'px;
-		}
-		</style>';
-	endif;
 	?>
 
 <section class="wp-block-lf-social-block <?php echo esc_html( $classes ); ?>"
 	data-align="<?php echo esc_html( $align ); ?>">
 	<ul class="social-block-icon-wrapper">
 
-
 		<?php if ( ! empty( $wechat ) ) : ?>
 		<li><a data-toggle="wechat-dropdown" title="WeChat">
 				<svg xmlns="http://www.w3.org/2000/svg" aria-label="WeChat"
-					role="img" viewBox="0 0 512 512" fill="#fff">
+					role="img" viewBox="0 0 512 512" fill="#fff" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect width="512" height="512" rx="15%"
 						fill="<?php echo esc_html( $icon_color ); ?>" />
 					<path fill="#FFF"
@@ -106,7 +98,7 @@ function social_block_callback( $attributes ) {
 				rel="noopener noreferrer" title="LinkedIn">
 				<svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn"
 					role="img" viewBox="0 0 512 512"
-					fill="<?php echo esc_html( $icon_color ); ?>">
+					fill="<?php echo esc_html( $icon_color ); ?>" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect width="512" height="512" rx="15%"
 						fill="<?php echo esc_html( $icon_color ); ?>" />
 					<circle cx="142" cy="138" r="37" fill="#FFF" />
@@ -122,7 +114,7 @@ function social_block_callback( $attributes ) {
 		<li><a target="_blank" href="<?php echo esc_html( $qq ); ?>"
 				rel="noopener noreferrer" title="QQ">
 				<svg xmlns="http://www.w3.org/2000/svg" aria-label="QQ"
-					role="img" viewBox="0 0 512 512">
+					role="img" viewBox="0 0 512 512" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect width="512" height="512" rx="15%"
 						fill="<?php echo esc_html( $icon_color ); ?>" />
 					<path id="svg_2"
@@ -142,7 +134,7 @@ function social_block_callback( $attributes ) {
 		<li><a target="_blank" href="<?php echo esc_html( $youtube ); ?>"
 				rel="noopener noreferrer" title="YouTube">
 				<svg fill="<?php echo esc_html( $icon_color ); ?>"
-					viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+					viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect height="512" rx="15%" width="512" />
 					<path
 						d="m427 169c-4-15-17-27-32-31-34-9-239-10-278 0-15 4-28 16-32 31-9 38-10 135 0 174 4 15 17 27 32 31 36 10 241 10 278 0 15-4 28-16 32-31 9-36 9-137 0-174"
@@ -155,7 +147,7 @@ function social_block_callback( $attributes ) {
 		<li><a target="_blank" href="<?php echo esc_html( $facebook ); ?>"
 				rel="noopener noreferrer" title="Facebook">
 				<svg xmlns="http://www.w3.org/2000/svg" aria-label="Facebook"
-					role="img" viewBox="0 0 512 512">
+					role="img" viewBox="0 0 512 512" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect width="512" height="512" rx="15%"
 						fill="<?php echo esc_html( $icon_color ); ?>" />
 					<path fill="#FFF"
@@ -168,7 +160,7 @@ function social_block_callback( $attributes ) {
 		<li><a target="_blank" href="<?php echo esc_html( $twitter ); ?>"
 				rel="noopener noreferrer" title="Twitter">
 				<svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter"
-					role="img" viewBox="0 0 512 512">
+					role="img" viewBox="0 0 512 512" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect width="512" height="512" rx="15%"
 						fill="<?php echo esc_html( $icon_color ); ?>" />
 					<path fill="#fff"
@@ -180,7 +172,7 @@ function social_block_callback( $attributes ) {
 		<?php if ( ! empty( $instagram ) ) : ?>
 		<li><a target="_blank" href="<?php echo esc_html( $instagram ); ?>"
 				rel="noopener noreferrer" title="Instagram">
-				<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+				<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="width: <?php echo esc_html( $icon_size ); ?>px">
 					<rect height="512" rx="15%" width="512"
 						fill="<?php echo esc_html( $icon_color ); ?>" />
 					<g fill="none" stroke="#fff" stroke-width="29">
