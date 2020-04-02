@@ -795,7 +795,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'color',
@@ -807,7 +807,10 @@ class LFEvents_Admin {
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
-									'palette'       => $palette,
+									'palette'       => array(
+										'white' => '#ffffff',
+										'black' => '#000000',
+									),
 								),
 								array(
 									'type'          => 'color',

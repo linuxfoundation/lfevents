@@ -790,3 +790,41 @@ function lfe_dequeue_style() {
 	wp_dequeue_style( 'conditional-blocks-front-css' );
 }
 add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );
+
+/**
+ * Gets HTML for an alert bar inserted at the top of Events when set.
+ *
+ * @param int $parent_id Parent ID.
+ */
+function lfe_event_alert_bar( $parent_id ) {
+	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
+	if ( ! $expiry_date ) {
+		return;
+	}
+	$dt_expiry = new DateTime( $expiry_date );
+	$dt_expiry_1d_after = new DateTime( $expiry_date );
+	$dt_expiry_1d_after->add( new DateInterval( 'P1D' ) );
+	$dt_now = new DateTime( 'now' );
+	if ( $dt_expiry_1d_after < $dt_now ) {
+		// alert has expired.
+		return;
+	}
+
+	$alert_html = get_post_meta( $parent_id, 'lfes_alert_html', true );
+	$alert_text_color = get_post_meta( $parent_id, 'lfes_alert_text_color', true );
+	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true );
+
+	if ( $alert_background_color ) {
+		$background_style = 'background: ' . $alert_background_color . ';';
+	}
+	if ( $alert_text_color ) {
+		$text_style = 'color: ' . $alert_text_color . ';';
+	}
+
+	$out = '<div style="' . esc_html( $background_style . $text_style ) . '">';
+	$out .= $alert_html;
+	$out .= '</div>';
+
+	echo $out; //phpcs:ignore
+
+}

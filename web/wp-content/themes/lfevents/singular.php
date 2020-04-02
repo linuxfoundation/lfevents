@@ -44,6 +44,7 @@ if ( ! $splash_page ) {
 
 	<div data-sticky-container>
 		<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html( $background_style . $text_style ); ?>">
+			<?php lfe_event_alert_bar( $parent_id ); ?>
 
 			<div class="pre-nav">
 				<?php
