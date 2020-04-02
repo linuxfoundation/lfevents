@@ -821,8 +821,9 @@ function lfe_event_alert_bar( $parent_id ) {
 		$text_style = 'color: ' . $alert_text_color . ';';
 	}
 
-	$out = '<div style="' . esc_html( $background_style . $text_style ) . '">';
+	$out = '<div class="event-alert-bar" style="' . esc_html( $background_style . $text_style ) . '">';
 	$out .= $alert_html;
+	$out .= '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline small-margin-left"><path fill="currentColor" d="M363.8 264.5L217 412.5c-4.7 4.7-12.3 4.7-17 0l-19.8-19.8c-4.7-4.7-4.7-12.3 0-17L298.7 256 180.2 136.3c-4.7-4.7-4.7-12.3 0-17L200 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17zm-160-17L57 99.5c-4.7-4.7-12.3-4.7-17 0l-19.8 19.8c-4.7 4.7-4.7 12.3 0 17L138.7 256 20.2 375.7c-4.7 4.7-4.7 12.3 0 17L40 412.5c4.7 4.7 12.3 4.7 17 0l146.8-148c4.7-4.7 4.7-12.3 0-17z" class=""></path></svg>';
 	$out .= '</div>';
 
 	echo $out; //phpcs:ignore
