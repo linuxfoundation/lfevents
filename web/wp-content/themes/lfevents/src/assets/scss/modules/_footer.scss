@@ -134,8 +134,8 @@
   }
 
   .button {
-    // background-color: transparent;
-    // border: 1px solid white;
+    background-color: transparent;
+    border: 1px solid white;
   }
 }
 
@@ -147,11 +147,24 @@
 
 }
 
+.event-footer .event-social-links {
+  padding: 1rem 1rem 0rem;
+
+  opacity: 0.75;
+
+  li {
+    margin: 0 0.5rem 0.5rem;
+    opacity: 0.75;
+  }
+}
+
 .new-footer-logo {
-  max-width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 30px 0px;
+  width: 200px;
+  // margin-left: auto;
+  // margin-right: auto;
+  padding: 0px;
+  padding-right: 30px;
+  border-right: 1px solid white;
 }
 
 .new-event-title {
@@ -168,7 +181,6 @@
 .new-footer-social-text {
   font-weight: 700;
   margin-bottom: 0.5em;
-  opacity: 0.75;
 }
 
 .new-footer-menu {
@@ -176,6 +188,7 @@
   max-width: 1000px;
   display: inline-block;
   text-align: center;
+  padding-bottom: 30px;
 
   li {
     display: inline;

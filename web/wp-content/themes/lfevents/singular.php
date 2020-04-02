@@ -168,12 +168,75 @@ if ( ! $splash_page ) {
 <div class="event-footer"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
+
+	<div style="padding-top: 50px; padding-bottom: 50px; display: flex; justify-content: center;">
+<!-- logo -->
+<div class="new-footer-logo">
+	<?php echo $event_link_content; ?>
+</div>
+<!-- logo end  -->
+<div style="display: flex; flex-direction: column;">
+<?php
+$wechat = get_post_meta( $parent_id, 'lfes_wechat', true );
+$linkedin = get_post_meta( $parent_id, 'lfes_linkedin', true );
+$qq = get_post_meta( $parent_id, 'lfes_qq', true );
+$youtube = get_post_meta( $parent_id, 'lfes_youtube', true );
+$facebook = get_post_meta( $parent_id, 'lfes_facebook', true );
+$twitter = get_post_meta( $parent_id, 'lfes_twitter', true );
+
+if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
+	echo '<ul class="event-social-links new-social-links">';
+
+	if ( $wechat ) {
+		echo '<li>';
+		echo '<a data-toggle="wechat-dropdown">';
+		get_template_part( 'template-parts/svg/wechat' );
+		echo '</a>';
+		echo '<div class="dropdown-pane" id="wechat-dropdown" data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="0" data-position="top" data-alignment="center">' . wp_get_attachment_image( esc_html( $wechat ) ) . '</div>';
+		echo '</li>';
+	}
+	if ( $linkedin ) {
+		echo '<li><a target="_blank" href="' . esc_html( $linkedin ) . '">';
+		get_template_part( 'template-parts/svg/linkedin' );
+		echo '</a></li>';
+	}
+	if ( $qq ) {
+		echo '<li><a target="_blank" href="' . esc_html( $qq ) . '">';
+		get_template_part( 'template-parts/svg/qq' );
+		echo '</a></li>';
+	}
+	if ( $youtube ) {
+		echo '<li><a target="_blank" href="' . esc_html( $youtube ) . '">';
+		get_template_part( 'template-parts/svg/youtube' );
+		echo '</a></li>';
+	}
+	if ( $facebook ) {
+		echo '<li><a target="_blank" href="' . esc_html( $facebook ) . '">';
+		get_template_part( 'template-parts/svg/facebook' );
+		echo '</a></li>';
+	}
+	if ( $twitter ) {
+		echo '<li><a target="_blank" href="' . esc_html( $twitter ) . '">';
+		get_template_part( 'template-parts/svg/twitter' );
+		echo '</a></li>';
+	}
+
+	echo '</ul>';
+}
+?>
+<div style="align-self: center;">
+<p class="new-footer-social-text">Hashtag #ossna20</p>
+</div>
+</div>
+
+</div>
+
 	<h3 class="event-social-links-header">Sign up for updates</h3>
 
 <!-- newsletter section -->
-<section style="background-color: white; color: black; padding-bottom: 30px;">
+<section style=" padding-bottom: 30px; color: white;">
 
-	<p style="padding-top: 30px; color: black;">Sign up for the LF Events newsletter to learn more about ONES and other upcoming events!</p>
+	<p style="padding-top: 30px; ">Sign up for the LF Events newsletter to learn more about ONES and other upcoming events!</p>
 
 	<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events" _lpchecked="1">
 
@@ -199,11 +262,7 @@ if ( ! $splash_page ) {
 </section>
 <!-- end of newsletter section -->
 
-<!-- logo -->
-<div class="new-footer-logo">
-	<?php echo $event_link_content; ?>
-	</div>
-<!-- logo end  -->
+
 
 <!-- menu start  -->
 <?php
@@ -222,65 +281,10 @@ echo $children;
 <!-- menu end  -->
 
 
-<div style="display: flex; justify-content: center;">
-
-		<?php
-		$wechat = get_post_meta( $parent_id, 'lfes_wechat', true );
-		$linkedin = get_post_meta( $parent_id, 'lfes_linkedin', true );
-		$qq = get_post_meta( $parent_id, 'lfes_qq', true );
-		$youtube = get_post_meta( $parent_id, 'lfes_youtube', true );
-		$facebook = get_post_meta( $parent_id, 'lfes_facebook', true );
-		$twitter = get_post_meta( $parent_id, 'lfes_twitter', true );
-
-		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
-			echo '<ul class="event-social-links">';
-
-			if ( $wechat ) {
-				echo '<li>';
-				echo '<a data-toggle="wechat-dropdown">';
-				get_template_part( 'template-parts/svg/wechat' );
-				echo '</a>';
-				echo '<div class="dropdown-pane" id="wechat-dropdown" data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="0" data-position="top" data-alignment="center">' . wp_get_attachment_image( esc_html( $wechat ) ) . '</div>';
-				echo '</li>';
-			}
-			if ( $linkedin ) {
-				echo '<li><a target="_blank" href="' . esc_html( $linkedin ) . '">';
-				get_template_part( 'template-parts/svg/linkedin' );
-				echo '</a></li>';
-			}
-			if ( $qq ) {
-				echo '<li><a target="_blank" href="' . esc_html( $qq ) . '">';
-				get_template_part( 'template-parts/svg/qq' );
-				echo '</a></li>';
-			}
-			if ( $youtube ) {
-				echo '<li><a target="_blank" href="' . esc_html( $youtube ) . '">';
-				get_template_part( 'template-parts/svg/youtube' );
-				echo '</a></li>';
-			}
-			if ( $facebook ) {
-				echo '<li><a target="_blank" href="' . esc_html( $facebook ) . '">';
-				get_template_part( 'template-parts/svg/facebook' );
-				echo '</a></li>';
-			}
-			if ( $twitter ) {
-				echo '<li><a target="_blank" href="' . esc_html( $twitter ) . '">';
-				get_template_part( 'template-parts/svg/twitter' );
-				echo '</a></li>';
-			}
-
-			echo '</ul>';
-		}
-		?>
-		<div style="align-self: center;">
-		<p class="new-footer-social-text">Use the hashtag<br />
-		#ossna20</p>
-</div>
-</div>
 
 
 
-</div>
+</div><!-- end of event footer -->
 
 <?php
 get_footer();
