@@ -797,22 +797,27 @@ add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );
  * @param int $parent_id Parent ID.
  */
 function lfe_event_alert_bar( $parent_id ) {
-	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
-	if ( ! $expiry_date ) {
-		return;
-	}
-	$dt_expiry = new DateTime( $expiry_date );
-	$dt_expiry_1d_after = new DateTime( $expiry_date );
-	$dt_expiry_1d_after->add( new DateInterval( 'P1D' ) );
-	$dt_now = new DateTime( 'now' );
-	if ( $dt_expiry_1d_after < $dt_now ) {
-		// alert has expired.
+	$alert_text = get_post_meta( $parent_id, 'lfes_alert_text', true );
+	if ( ! $alert_text ) {
 		return;
 	}
 
-	$alert_html = get_post_meta( $parent_id, 'lfes_alert_html', true );
+	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
+	if ( $expiry_date ) {
+		$dt_expiry = new DateTime( $expiry_date );
+		$dt_expiry_1d_after = new DateTime( $expiry_date );
+		$dt_expiry_1d_after->add( new DateInterval( 'P1D' ) );
+		$dt_now = new DateTime( 'now' );
+		if ( $dt_expiry_1d_after < $dt_now ) {
+			// alert has expired.
+			return;
+		}
+	}
+
 	$alert_text_color = get_post_meta( $parent_id, 'lfes_alert_text_color', true );
 	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true );
+	$background_style = '';
+	$text_style = '';
 
 	if ( $alert_background_color ) {
 		$background_style = 'background: ' . $alert_background_color . ';';
@@ -822,7 +827,7 @@ function lfe_event_alert_bar( $parent_id ) {
 	}
 
 	$out = '<div class="event-alert-bar" style="' . esc_html( $background_style . $text_style ) . '">';
-	$out .= preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a href="$2">$1</a>', $alert_html );
+	$out .= preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a href="$2">$1</a>', $alert_text );
 	$out .= '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline small-margin-left"><path fill="currentColor" d="M363.8 264.5L217 412.5c-4.7 4.7-12.3 4.7-17 0l-19.8-19.8c-4.7-4.7-4.7-12.3 0-17L298.7 256 180.2 136.3c-4.7-4.7-4.7-12.3 0-17L200 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17zm-160-17L57 99.5c-4.7-4.7-12.3-4.7-17 0l-19.8 19.8c-4.7 4.7-4.7 12.3 0 17L138.7 256 20.2 375.7c-4.7 4.7-4.7 12.3 0 17L40 412.5c4.7 4.7 12.3 4.7 17 0l146.8-148c4.7-4.7 4.7-12.3 0-17z" class=""></path></svg>';
 	$out .= '</div>';
 

@@ -777,11 +777,11 @@ class LFEvents_Admin {
 							'settings' => array(
 								array(
 									'type'          => 'textarea', // Required.
-									'id'            => 'alert_html',
+									'id'            => 'alert_text',
 									'data_type'     => 'meta',
-									'data_key'      => 'alert_html', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'alert_text', // Required if 'data_type' is 'meta'.
 									'label'         => __( 'HTML' ),
-									'help'          => __( 'Links can be written in markdown format [like this](https://google.com).' ),
+									'help'          => __( 'Links should be written in markdown format [like this](https://google.com)' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => '',
@@ -792,6 +792,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'alert_expiry_date',
 									'label'         => __( 'Expiry Date', 'my_plugin' ),
+									'help'          => __( 'Optional' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
