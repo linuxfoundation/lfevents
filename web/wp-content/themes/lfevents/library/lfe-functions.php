@@ -32,47 +32,47 @@ function lfe_get_related_events( $parent_id ) {
 
 	if ( $related_events_override ) {
 		$args = array(
-			'post_type'   => 'page',
-			'post_parent' => 0,
-			'post__in' => explode( ',', $related_events_override ), // ignores current post.
+			'post_type'     => 'page',
+			'post_parent'   => 0,
+			'post__in'      => explode( ',', $related_events_override ), // ignores current post.
 			'no_found_rows' => true,  // used to improve performance.
-			'meta_query' => array(
+			'meta_query'    => array(
 				array(
 					'key'     => 'lfes_event_has_passed',
 					'compare' => '!=',
-					'value' => '1',
+					'value'   => '1',
 				),
 			),
-			'orderby'   => 'meta_value',
-			'meta_key'  => 'lfes_date_start',
-			'order'     => 'ASC',
+			'orderby'       => 'meta_value',
+			'meta_key'      => 'lfes_date_start',
+			'order'         => 'ASC',
 		);
 
 	} else {
 		$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
 
 		$args = array(
-			'post_type'   => 'page',
-			'post_parent' => 0,
-			'no_found_rows' => true,  // used to improve performance.
-			'post__not_in' => array( $parent_id ), // ignores current post.
-			'tax_query'   => array(
+			'post_type'      => 'page',
+			'post_parent'    => 0,
+			'no_found_rows'  => true,  // used to improve performance.
+			'post__not_in'   => array( $parent_id ), // ignores current post.
+			'tax_query'      => array(
 				array(
 					'taxonomy' => 'lfevent-category',
 					'field'    => 'term_id',
 					'terms'    => $term[0],
 				),
 			),
-			'meta_query' => array(
+			'meta_query'     => array(
 				array(
 					'key'     => 'lfes_event_has_passed',
 					'compare' => '!=',
-					'value' => '1',
+					'value'   => '1',
 				),
 			),
-			'orderby'   => 'meta_value',
-			'meta_key'  => 'lfes_date_start',
-			'order'     => 'ASC',
+			'orderby'        => 'meta_value',
+			'meta_key'       => 'lfes_date_start',
+			'order'          => 'ASC',
 			'posts_per_page' => 2,
 		);
 
@@ -161,7 +161,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	}
 
 	$extra_link_text = get_post_meta( $parent_id, 'lfes_extra_vae_link_text', true );
-	$extra_link_url = get_post_meta( $parent_id, 'lfes_extra_vae_link_url', true );
+	$extra_link_url  = get_post_meta( $parent_id, 'lfes_extra_vae_link_url', true );
 	if ( $extra_link_text && $extra_link_url ) {
 		echo '<li class="external-link"><a target="_blank" href="' . esc_attr( $extra_link_url ) . '"><span class="subtext">'; //phpcs:ignore
 		echo esc_html( $extra_link_text ) . ' ';
@@ -195,14 +195,14 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 	global $wpdb, $post;
 
 	// first find which pages we need to exclude.
-	$exclude = $wpdb->get_results( $wpdb->prepare( "select post_id from $wpdb->postmeta left join $wpdb->posts on post_id = id where meta_key = 'lfes_hide_from_menu' and meta_value = 1 and post_type = %s;", $post->post_type ), ARRAY_A );
+	$exclude     = $wpdb->get_results( $wpdb->prepare( "select post_id from $wpdb->postmeta left join $wpdb->posts on post_id = id where meta_key = 'lfes_hide_from_menu' and meta_value = 1 and post_type = %s;", $post->post_type ), ARRAY_A );
 	$exclude_ids = '';
 	foreach ( $exclude as $ex ) {
 		$exclude_ids .= $ex['post_id'] . ',';
 	}
 
 	// then get the pages we need.
-	$args = array(
+	$args  = array(
 		'child_of'     => $parent_id,
 		'sort_order'   => 'ASC',
 		'sort_column'  => 'menu_order',
@@ -220,7 +220,7 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style ) {
 	// now we remove the hyperlink for elements who have children.
 	foreach ( $pages as $page ) {
 		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
-			$page = explode( '<ul class=\'children\'>', $page );
+			$page    = explode( '<ul class=\'children\'>', $page );
 			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
 			if ( count( $page ) == 3 ) {
 				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
@@ -249,10 +249,10 @@ function lfe_get_sponsors( $parent_id ) {
 	$post_types = lfe_get_post_types();
 
 	$args = array(
-		'post_type' => $post_types,
-		'post_parent' => $parent_id,
-		'name' => 'sponsor-list',
-		'no_found_rows' => true,  // used to improve performance.
+		'post_type'              => $post_types,
+		'post_parent'            => $parent_id,
+		'name'                   => 'sponsor-list',
+		'no_found_rows'          => true,  // used to improve performance.
 		'update_post_meta_cache' => false, // used to improve performance.
 		'update_post_term_cache' => false, // used to improve performance.
 	);
@@ -282,7 +282,7 @@ function lfe_get_sponsors( $parent_id ) {
 function lfe_scripts() {
 
 	$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
-	$current_domain = parse_url( home_url(), PHP_URL_HOST );
+	$current_domain  = parse_url( home_url(), PHP_URL_HOST );
 	if ( strpos( $chinese_domains, $current_domain ) ) {
 		// scripts for Chinese-audience sites.
 		wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'china.js' ), array(), '1.2.2', true );
@@ -305,7 +305,7 @@ add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
  * Inserts Google Tag Manager <head> code on live sites.
  */
 function lfe_insert_google_tag_manager_head() {
-	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+	$domains        = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
 <!-- Google Tag Manager -->
@@ -328,7 +328,7 @@ EOD;
  * Inserts Google Tag Manager <body> code on live sites.
  */
 function lfe_insert_google_tag_manager_body() {
-	$domains = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+	$domains        = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
 <!-- Google Tag Manager (noscript) -->
@@ -374,21 +374,21 @@ function lfe_insert_favicon() {
  */
 function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ' ) {
 
-	$date_range = '';
+	$date_range    = '';
 	$date_range_ch = '';
 
 	// If only one date, or dates are the same set to FULL verbose date.
 	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
-		$start_date_pretty = $start_date->format( 'M j, Y' );
-		$end_date_pretty = $end_date->format( 'M j, Y' );
+		$start_date_pretty    = $start_date->format( 'M j, Y' );
+		$end_date_pretty      = $end_date->format( 'M j, Y' );
 		$start_date_pretty_ch = $start_date->format( 'Y年m月j' );
-		$end_date_pretty_ch = $end_date->format( 'm月j日' );
+		$end_date_pretty_ch   = $end_date->format( 'm月j日' );
 	} else {
 		 // Setup basic dates.
-		$start_date_pretty = $start_date->format( 'M j' );
-		$end_date_pretty = $end_date->format( 'j, Y' );
+		$start_date_pretty    = $start_date->format( 'M j' );
+		$end_date_pretty      = $end_date->format( 'j, Y' );
 		$start_date_pretty_ch = $start_date->format( 'Y年m月j' );
-		$end_date_pretty_ch = $end_date->format( 'j日' );
+		$end_date_pretty_ch   = $end_date->format( 'j日' );
 		// If years differ add suffix and year to start_date.
 		if ( $start_date->format( 'Y' ) != $end_date->format( 'Y' ) ) {
 			$start_date_pretty .= $start_date->format( ', Y' );
@@ -396,21 +396,21 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 
 		// If months differ add suffix and year to end_date.
 		if ( $start_date->format( 'M' ) != $end_date->format( 'M' ) ) {
-			$end_date_pretty = $end_date->format( 'M ' ) . $end_date_pretty;
+			$end_date_pretty    = $end_date->format( 'M ' ) . $end_date_pretty;
 			$end_date_pretty_ch = $end_date->format( 'm月' ) . $end_date_pretty_ch;
 		}
 	}
 
 	// build date_range return string.
 	if ( ! empty( $start_date ) ) {
-		  $date_range .= $start_date_pretty;
+		  $date_range    .= $start_date_pretty;
 		  $date_range_ch .= $start_date_pretty_ch;
 	}
 
 	// check if there is an end date and append if not identical.
 	if ( ! empty( $end_date ) ) {
 		if ( $end_date_pretty != $start_date_pretty ) {
-			  $date_range .= '–' . $end_date_pretty;
+			  $date_range    .= '–' . $end_date_pretty;
 			  $date_range_ch .= '–' . $end_date_pretty_ch;
 		} else {
 			$date_range_ch .= '日';
@@ -448,7 +448,7 @@ function lfe_insert_structured_data() {
 	$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
 	if ( 'TBA' !== strtoupper( $date_start ) ) {
 		$dt_date_start = new DateTime( $date_start );
-		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
 	}
 	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 	if ( $country ) {
@@ -528,8 +528,8 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 function lfe_fix_community_post( $post_id, $feed_id ) {
 	if ( 243 == $feed_id ) {
 		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
-		$dt_date_end = get_post_meta( $post_id, 'lfes_community_date_end', true );
-		$countrycode = trim( get_post_meta( $post_id, 'lfes_countrycode', true ) );
+		$dt_date_end   = get_post_meta( $post_id, 'lfes_community_date_end', true );
+		$countrycode   = trim( get_post_meta( $post_id, 'lfes_countrycode', true ) );
 		if ( $dt_date_start ) {
 			$dt_date_start = new DateTime( $dt_date_start );
 			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_start->format( 'Y/m/d' ) );
@@ -545,8 +545,8 @@ function lfe_fix_community_post( $post_id, $feed_id ) {
 			wp_set_post_terms( $post_id, $country_term->term_id, 'lfevent-country' );
 		}
 		$my_post = array(
-			'ID'           => $post_id,
-			'post_title'   => 'Kubernetes Community Day ' . get_the_title( $post_id ),
+			'ID'         => $post_id,
+			'post_title' => 'Kubernetes Community Day ' . get_the_title( $post_id ),
 		);
 		wp_update_post( $my_post );
 	}
@@ -690,8 +690,8 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 
 	$tsf = the_seo_framework();
 	// Obtain the post parent ID...
-	$post_id   = isset( $args['id'] ) ? $args['id'] : $tsf->get_the_real_ID();
-	$parent_id = wp_get_post_parent_id( $post_id );
+	$post_id    = isset( $args['id'] ) ? $args['id'] : $tsf->get_the_real_ID();
+	$parent_id  = wp_get_post_parent_id( $post_id );
 	$parent2_id = wp_get_post_parent_id( $parent_id );
 
 	if ( $parent2_id ) {
@@ -757,8 +757,8 @@ function lfe_passed_event_banner( $parent_id ) {
 	$post_type = get_post_type( $parent_id );
 	echo 'This event has passed. ';
 	if ( 'page' !== $post_type ) {
-		$parent = get_post( $parent_id );
-		$slug = $parent->post_name;
+		$parent       = get_post( $parent_id );
+		$slug         = $parent->post_name;
 		$latest_event = get_page_by_path( $slug, OBJECT, 'page' );
 
 		if ( $latest_event ) {
@@ -797,14 +797,17 @@ add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );
  * @param int $parent_id Parent ID.
  */
 function lfe_event_alert_bar( $parent_id ) {
+
+	// if no alert text is set, return.
 	$alert_text = get_post_meta( $parent_id, 'lfes_alert_text', true );
 	if ( ! $alert_text ) {
 		return;
 	}
 
+	// check for expiry date and expired date.
 	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
 	if ( $expiry_date ) {
-		$dt_expiry = new DateTime( $expiry_date );
+		$dt_expiry          = new DateTime( $expiry_date );
 		$dt_expiry_1d_after = new DateTime( $expiry_date );
 		$dt_expiry_1d_after->add( new DateInterval( 'P1D' ) );
 		$dt_now = new DateTime( 'now' );
@@ -814,23 +817,16 @@ function lfe_event_alert_bar( $parent_id ) {
 		}
 	}
 
-	$alert_text_color = get_post_meta( $parent_id, 'lfes_alert_text_color', true );
-	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true );
-	$background_style = '';
-	$text_style = '';
+	// get alert text color or set default.
+	$alert_text_color       = get_post_meta( $parent_id, 'lfes_alert_text_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_text_color', true ) : '#FFFFFF';
 
-	if ( $alert_background_color ) {
-		$background_style = 'background: ' . $alert_background_color . ';';
-	}
-	if ( $alert_text_color ) {
-		$text_style = 'color: ' . $alert_text_color . ';';
-	}
+	// get alert background color or set default.
+	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_background_color', true ) : '#0082ad';
 
-	$out = '<div class="event-alert-bar" style="' . esc_html( $background_style . $text_style ) . '">';
+	$out  = '<div class="event-alert-bar" style="color: ' . esc_html( $alert_text_color ) . '; background-color: ' . esc_html( $alert_background_color ) . ';">';
 	$out .= preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a href="$2">$1</a>', $alert_text );
 	$out .= '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline small-margin-left"><path fill="currentColor" d="M363.8 264.5L217 412.5c-4.7 4.7-12.3 4.7-17 0l-19.8-19.8c-4.7-4.7-4.7-12.3 0-17L298.7 256 180.2 136.3c-4.7-4.7-4.7-12.3 0-17L200 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17zm-160-17L57 99.5c-4.7-4.7-12.3-4.7-17 0l-19.8 19.8c-4.7 4.7-4.7 12.3 0 17L138.7 256 20.2 375.7c-4.7 4.7-4.7 12.3 0 17L40 412.5c4.7 4.7 12.3 4.7 17 0l146.8-148c4.7-4.7 4.7-12.3 0-17z" class=""></path></svg>';
 	$out .= '</div>';
 
 	echo $out; //phpcs:ignore
-
 }
