@@ -461,9 +461,12 @@ function lfe_insert_structured_data() {
 		return;
 	}
 
-	$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
-	$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-	$country       = wp_get_post_terms( $post->ID, 'lfevent-country' );
+	$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
+	if ( 'TBA' !== strtoupper( $date_start ) ) {
+		$dt_date_start = new DateTime( $date_start );
+		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+	}
+	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 	if ( $country ) {
 		$country = $country[0]->name;
 	}
@@ -480,8 +483,10 @@ function lfe_insert_structured_data() {
 	$out .= '"@context": "http://schema.org/",';
 	$out .= '"@type": "Event",';
 	$out .= '"name": "' . esc_html( $post->post_title ) . '",';
-	$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
-	$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
+	if ( 'TBA' !== strtoupper( $date_start ) ) {
+		$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
+		$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
+	}
 	$out .= '"location": {';
 	$out .= '  "@type": "Place",';
 	$out .= '  "name": "' . esc_html( get_post_meta( $post->ID, 'lfes_venue', true ) ) . '",';
