@@ -1,0 +1,22 @@
+.wp-block-lf-buttons-with-expiry .wp-block.block-editor-block-list__block[data-type="lf/button-with-expiry"] {
+	display: inline-block;
+	width: auto;
+}
+
+.wp-block-lf-button-with-expiry {
+	&[data-align="center"] .block-editor-block-list__layout {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	&[data-align="right"] .block-editor-block-list__layout {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.block-editor-block-list__layout > div:last-child {
+		display: inline-block;
+	}
+}

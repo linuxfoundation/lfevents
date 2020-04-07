@@ -617,6 +617,24 @@
             "homepage": "https://wordpress.org/plugins/gravity-forms-custom-post-types/"
         },
         {
+            "name": "wpackagist-plugin/gutenberg",
+            "version": "7.7.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gutenberg/",
+                "reference": "tags/7.7.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.7.7.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gutenberg/"
+        },
+        {
             "name": "wpackagist-plugin/lh-hsts",
             "version": "1.25",
             "source": {
@@ -2152,7 +2170,6 @@
                 "extension",
                 "wordpress"
             ],
-            "abandoned": true,
             "time": "2019-06-24T19:27:08+00:00"
         },
         {

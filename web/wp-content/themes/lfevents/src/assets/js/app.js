@@ -13,6 +13,9 @@
 // If you want to pick and choose which modules to include, comment out the above and uncomment
 // the line below.
 import './lib/foundation-explicit-pieces';
+
+import './button-with-expiry';
+
 $( document ).foundation();
 
 $( '.page_item_has_children a[href="#"]' ).click(
