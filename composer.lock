@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2f63d7139bc115d2da6b4e9f716254c",
+    "content-hash": "91e2e46d10bea354314fa0c9a3347fb2",
     "packages": [
         {
             "name": "composer/installers",
@@ -617,24 +617,6 @@
             "homepage": "https://wordpress.org/plugins/gravity-forms-custom-post-types/"
         },
         {
-            "name": "wpackagist-plugin/gutenberg",
-            "version": "7.7.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/7.7.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.7.7.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/gutenberg/"
-        },
-        {
             "name": "wpackagist-plugin/lh-hsts",
             "version": "1.25",
             "source": {
@@ -762,15 +744,15 @@
         },
         {
             "name": "wpackagist-plugin/shortpixel-image-optimiser",
-            "version": "4.17.0",
+            "version": "4.17.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/shortpixel-image-optimiser/",
-                "reference": "tags/4.17.0"
+                "reference": "tags/4.17.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.4.17.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.4.17.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -834,15 +816,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
-            "version": "3.1.8",
+            "version": "3.1.9",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
-                "reference": "tags/3.1.8"
+                "reference": "tags/3.1.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.8.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.9.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -2170,6 +2152,7 @@
                 "extension",
                 "wordpress"
             ],
+            "abandoned": true,
             "time": "2019-06-24T19:27:08+00:00"
         },
         {
