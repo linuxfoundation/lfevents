@@ -139,7 +139,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 		echo '<a>查看所有活动<br>View All Events</a>';
 	}
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
-	echo '<li><a href="https://events.linuxfoundation.org/"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_' . $menu_text_color . '.svg' ) . '"><span class="subtext">All Upcoming Events</span></a></li>'; //phpcs:ignore
+	echo '<li><a href="/"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_' . $menu_text_color . '.svg' ) . '"><span class="subtext">All Upcoming Events</span></a></li>'; //phpcs:ignore
 
 	foreach ( $related_events as $p ) {
 		$logo = get_post_meta( $p['ID'], 'lfes_' . $menu_text_color . '_logo', true );
@@ -155,13 +155,14 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 
 	if ( $term[0] ) {
-		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"><span class="subtext">Past ' . esc_html( $term[0]->name ) . '</span></a></li>';
+		echo '<li><a href="' . esc_html( site_url() ) . '/about/calendar/archive/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"><span class="subtext">Past ' . esc_html( $term[0]->name ) . '</span></a></li>';
 	} else {
-		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/"><span class="subtext">All Past Events</span></a></li>';
+		echo '<li><a href="' . esc_html( site_url() ) . '/about/calendar/archive/"><span class="subtext">All Past Events</span></a></li>';
 	}
 
 	$extra_link_text = get_post_meta( $parent_id, 'lfes_extra_vae_link_text', true );
 	$extra_link_url  = get_post_meta( $parent_id, 'lfes_extra_vae_link_url', true );
+
 	if ( $extra_link_text && $extra_link_url ) {
 		echo '<li class="external-link"><a target="_blank" href="' . esc_attr( $extra_link_url ) . '"><span class="subtext">'; //phpcs:ignore
 		echo esc_html( $extra_link_text ) . ' ';
@@ -772,9 +773,9 @@ function lfe_passed_event_banner( $parent_id ) {
 	}
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 	if ( $term[0] ) {
-		echo 'View the upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/about/calendar/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"> ' . esc_html( $term[0]->name ) . '.</a>';
+		echo 'View the upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_html( site_url() ) . '/about/calendar/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"> ' . esc_html( $term[0]->name ) . '.</a>';
 	} else {
-		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/">Linux Foundation events.</a>';
+		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="' . esc_html( site_url() ) . '">Linux Foundation events.</a>';
 	}
 }
 
@@ -818,7 +819,7 @@ function lfe_event_alert_bar( $parent_id ) {
 	}
 
 	// get alert text color or set default.
-	$alert_text_color       = get_post_meta( $parent_id, 'lfes_alert_text_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_text_color', true ) : '#FFFFFF';
+	$alert_text_color = get_post_meta( $parent_id, 'lfes_alert_text_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_text_color', true ) : '#FFFFFF';
 
 	// get alert background color or set default.
 	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_background_color', true ) : '#0082ad';
