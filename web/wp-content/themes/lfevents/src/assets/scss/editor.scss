@@ -298,3 +298,12 @@ body {
 .wp-block-latest-posts.is-grid{
 	list-style: none;
 }
+
+// Fix for Stackable weird behavior with tables.
+figure.wp-block-table tr div.components-dropdown {
+	display: none;
+}
+
+div.ugb-image-box div.ugb-url-input-control__input input {
+	width: 100%;
+}

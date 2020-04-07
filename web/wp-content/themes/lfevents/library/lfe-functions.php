@@ -375,6 +375,7 @@ function lfe_insert_favicon() {
 function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ' ) {
 
 	$date_range = '';
+	$date_range_ch = '';
 
 	// If only one date, or dates are the same set to FULL verbose date.
 	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
@@ -444,8 +445,11 @@ function lfe_insert_structured_data() {
 		return;
 	}
 
-	$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_date_start', true ) );
-	$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+	$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
+	if ( 'TBA' !== strtoupper( $date_start ) ) {
+		$dt_date_start = new DateTime( $date_start );
+		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+	}
 	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 	if ( $country ) {
 		$country = $country[0]->name;
@@ -463,8 +467,10 @@ function lfe_insert_structured_data() {
 	$out .= '"@context": "http://schema.org/",';
 	$out .= '"@type": "Event",';
 	$out .= '"name": "' . esc_html( $post->post_title ) . '",';
-	$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
-	$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
+	if ( 'TBA' !== strtoupper( $date_start ) ) {
+		$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
+		$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
+	}
 	$out .= '"location": {';
 	$out .= '  "@type": "Place",';
 	$out .= '  "name": "' . esc_html( get_post_meta( $post->ID, 'lfes_venue', true ) ) . '",';
@@ -776,3 +782,11 @@ function lfe_passed_event_banner( $parent_id ) {
 // this causes the RSS Aggregator to delete and re-import all feed items on every import:
 // https://kb.wprssaggregator.com/article/191-keep-feed-in-sync-with-current-state.
 add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );
+
+/**
+ * Dequeue the conditional-blocks-front-css.
+ */
+function lfe_dequeue_style() {
+	wp_dequeue_style( 'conditional-blocks-front-css' );
+}
+add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );

@@ -44,7 +44,8 @@
       padding-bottom: 100%;
       background-size: cover;
       background-position: center;
-      mix-blend-mode: luminosity; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
+      mix-blend-mode: normal; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
+      // mix-blend-mode: luminosity; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
       overflow: hidden;
       position: relative;
 
@@ -71,11 +72,11 @@
       }
     }
 
-    &:hover {
-      .headshot {
-        mix-blend-mode: normal; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
-      }
-    }
+    // &:hover {
+    //   .headshot {
+    //     mix-blend-mode: normal; // normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|difference|exclusion|hue|saturation|color|luminosity
+    //   }
+    // }
 
     .text {
       //width: 100%;
@@ -118,29 +119,29 @@
       .social-media-links {
         list-style: none;
         margin: 0.75rem 0 0;
-  
+
         li {
           display: inline-block;
           margin-right: 0.5rem;
-  
+
           a {
             opacity: 0.5;
-  
+
             &:hover {
               opacity: 1;
             }
           }
-  
+
           svg {
             fill: #fff;
             width: rem-calc(30);
             height: rem-calc(30);
-  
+
             @include breakpoint(large) {
               width: rem-calc(24);
               height: rem-calc(24);
             }
-  
+
             @include breakpoint(xxlarge) {
               width: rem-calc(18);
               height: rem-calc(18);
