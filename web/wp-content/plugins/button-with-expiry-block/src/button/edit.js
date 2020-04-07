@@ -251,7 +251,7 @@ function ButtonEdit( {
 					borderRadius={ borderRadius }
 					setAttributes={ setAttributes }
 				/>
-				<PanelBody title={ __( 'Expire Date' ) }>
+				<PanelBody title={ __( 'Expiry date' ) }>
 					<DateTimePicker
 						currentDate={ expireAt * 1000 }
 						onChange={ value => {
@@ -261,7 +261,7 @@ function ButtonEdit( {
 						} }
 					/>
 					<TextControl
-						label={ __( 'Expire Text' ) }
+						label={ __( 'Expiry text (optional)' ) }
 						value={ expireText }
 						onChange={ text => {
 							setAttributes( {
