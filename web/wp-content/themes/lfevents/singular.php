@@ -22,10 +22,10 @@ get_header();
 $splash_page = get_post_meta( $post->ID, 'lfes_splash_page', true );
 if ( ! $splash_page ) {
 	// menu background color.
-	$menu_color = get_post_meta( $parent_id, 'lfes_menu_color', true );
-	$menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
-	$menu_color_3 = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
-	$menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
+	$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
+	$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+	$menu_color_3     = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
+	$menu_text_color  = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
 	$background_style = 'background-color: ' . $menu_color . ';';
 	$event_has_passed = get_post_meta( $parent_id, 'lfes_event_has_passed', true );
 	if ( $menu_color_2 ) {
@@ -44,6 +44,7 @@ if ( ! $splash_page ) {
 
 	<div data-sticky-container>
 		<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;" style="<?php echo esc_html( $background_style . $text_style ); ?>">
+			<?php lfe_event_alert_bar( $parent_id ); ?>
 
 			<div class="pre-nav">
 				<?php
@@ -85,10 +86,10 @@ if ( ! $splash_page ) {
 		$home_img = 'logo_lfasiallc_white.svg';
 	}
 	?>
-	
+
 	<div data-sticky-container>
 		<header class="main-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;">
-			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>	
+			<a class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
 		</header>
 	</div>
 	<?php
@@ -169,12 +170,12 @@ if ( ! $splash_page ) {
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
 		<?php
-		$wechat = get_post_meta( $parent_id, 'lfes_wechat', true );
+		$wechat   = get_post_meta( $parent_id, 'lfes_wechat', true );
 		$linkedin = get_post_meta( $parent_id, 'lfes_linkedin', true );
-		$qq = get_post_meta( $parent_id, 'lfes_qq', true );
-		$youtube = get_post_meta( $parent_id, 'lfes_youtube', true );
+		$qq       = get_post_meta( $parent_id, 'lfes_qq', true );
+		$youtube  = get_post_meta( $parent_id, 'lfes_youtube', true );
 		$facebook = get_post_meta( $parent_id, 'lfes_facebook', true );
-		$twitter = get_post_meta( $parent_id, 'lfes_twitter', true );
+		$twitter  = get_post_meta( $parent_id, 'lfes_twitter', true );
 
 		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
 			if ( is_lfeventsci() ) {

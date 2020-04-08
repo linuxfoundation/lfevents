@@ -772,6 +772,63 @@ class LFEvents_Admin {
 							),
 						),
 						array(
+							'label'    => __( 'Alert Bar' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'textarea', // Required.
+									'id'            => 'alert_text',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_text', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'HTML' ),
+									'help'          => __( 'Links should be written in markdown format [like this](https://google.com)' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'alert_expiry_date',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_expiry_date',
+									'label'         => __( 'Expiry Date', 'my_plugin' ),
+									'help'          => __( 'Optional' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => 'YYYY/MM/DD',
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'alert_text_color',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Text Color' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => array(
+										'white' => '#ffffff',
+										'black' => '#000000',
+									),
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'alert_background_color',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_background_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Background Color' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
+								),
+
+							),
+						),
+						array(
 							'label'    => __( 'Advanced' ),
 							'initial_open' => false,
 							'settings' => array(
@@ -781,7 +838,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'hide_from_listings', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Hide from Homepage and Calendars' ),
-									'help'          => __( 'This will hide the Event form the homepage and calendars.' ),
+									'help'          => __( 'This will hide the Event from the homepage and calendars.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => 'show',

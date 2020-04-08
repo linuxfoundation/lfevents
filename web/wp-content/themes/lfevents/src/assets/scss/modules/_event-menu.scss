@@ -53,6 +53,17 @@
       flex-grow: 0;
     }
   }
+
+  .event-alert-bar {
+    padding: 5px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    
+    a {
+      text-decoration: underline;
+    }
+  }
 }
 
 #popout-header-link {
