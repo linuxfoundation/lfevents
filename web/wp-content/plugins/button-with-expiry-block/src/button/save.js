@@ -33,6 +33,8 @@ export default function save( { attributes } ) {
 		! customGradient &&
 		getColorClassName( 'background-color', backgroundColor );
 
+	const gradientClass = getColorClassName( 'gradient-background', gradient )
+
 	const buttonClasses = classnames( 'wp-block-button__link', {
 		'has-text-color': textColor || customTextColor,
 		[ textClass ]: textClass,
@@ -42,6 +44,7 @@ export default function save( { attributes } ) {
 			customGradient ||
 			gradient,
 		[ backgroundClass ]: backgroundClass,
+		[ gradientClass ]: gradientClass,
 		'no-border-radius': borderRadius === 0,
 	} );
 
