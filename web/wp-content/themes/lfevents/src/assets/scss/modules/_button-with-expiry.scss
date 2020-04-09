@@ -47,11 +47,9 @@
     box-shadow: 0 0.25em 0 0 rgba(0,0,0,.1);
     &:not(.has-background) {
       background-color: #09c;
-      color: #fefefe;
 
       &:hover {
         background-color: #0082ad;
-        color: #fefefe;
       }
     }
     &:not(.has-text-color) {
