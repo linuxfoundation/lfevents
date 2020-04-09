@@ -36,7 +36,7 @@ define( 'DISALLOW_FILE_MODS', true );
 /**
  * Force SSL
  */
-define( 'FORCE_SSL_ADMIN', false );
+define( 'FORCE_SSL_ADMIN', true );
 
 /**
  * Limit post revisions
