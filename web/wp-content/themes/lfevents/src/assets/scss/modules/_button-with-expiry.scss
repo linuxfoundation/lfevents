@@ -14,52 +14,40 @@
 .wp-block-lf-button-with-expiry {
   position: relative;
   border-radius: .5rem;
-  transition: all .3s ease-in-out;
-  box-shadow: 0 0.25em 0 0 rgba(0,0,0,.1);
-  overflow: hidden;
+  // overflow: hidden;
 
-  &:before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: #000;
-    border-radius: 4px;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-  }
+  // &:before {
+  //   content: '';
+  //   width: 100%;
+  //   height: 100%;
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   background: #000;
+  //   border-radius: 4px;
+  //   z-index: 0;
+  //   opacity: 0;
+  //   transition: opacity .3s ease-in-out;
+  // }
 
-  a {
+
+  .wp-block-button__link {
     padding: .85em 1em;
     border-radius: .5rem;
     font-size: 1rem;
     position: relative;
     z-index: 1;
-    transition: opacity .3s ease-in-out;
+    transition: all .3s ease-in-out;
     background: transparent;
     color: #fefefe;
     background-color: #09c;
-    border: 1px solid transparent;
     font-family: inherit;
     -webkit-appearance: none;
     line-height: 1;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
-
-    &.disabled {
-      cursor: default;
-      pointer-events: none;
-      background-color: #cccccc;
-      color: #888888;
-      box-shadow: none;
-    }
-  }
-
-  .wp-block-button__link {
+    box-shadow: 0 0.25em 0 0 rgba(0,0,0,.1);
     &:not(.has-background) {
       background-color: #09c;
       color: #fefefe;
@@ -69,33 +57,104 @@
         color: #fefefe;
       }
     }
-  }
+    &:not(.has-text-color) {
+      color: #fefefe;
 
-  &.disabled {
-    box-shadow: none;
-  }
-
-  &:active {
-    transition: all .3s ease-in-out;
-    top: 1px;
-
+      &:hover {
+        color: #fefefe;
+      }
+    }
     &.disabled {
-      top: 0;
+      cursor: default;
+      pointer-events: none;
+      background-color: #cccccc!important;
+      color: #888888!important;
+      box-shadow: none;
     }
 
-    a {
+    &:hover {
+      transition: all .3s ease-in-out;
 
+      &.has-vivid-cyan-blue-to-vivid-purple-gradient-background {
+        background: linear-gradient(135deg,#015889,#723EA2)
+      }
+      
+      &.has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background {
+          background: linear-gradient(135deg,#03935E,#036BA5)
+      }
+      
+      &.has-light-green-cyan-to-vivid-green-cyan-gradient-background {
+          background: linear-gradient(135deg,#63B392,#03935E)
+      }
+      
+      &.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background {
+          background: linear-gradient(135deg,#D29B03,#C15102)
+      }
+      
+      &.has-luminous-vivid-orange-to-vivid-red-gradient-background {
+          background: linear-gradient(135deg,#C15102,#A62626)
+      }
+      
+      &.has-very-light-gray-to-cyan-bluish-gray-gradient-background {
+          background: linear-gradient(135deg,#D8D7D7,#8D9BA5)
+      }
+      
+      &.has-cool-to-warm-spectrum-gradient-background {
+          background: linear-gradient(135deg,#3ABAAF,#735AA0 20%,#cf2aba 40%,#ee2c82 60%,#fb6962 80%,#fef84c)
+      }
+      
+      &.has-blush-light-purple-gradient-background {
+          background: linear-gradient(135deg,#C19CB2,#7574B9)
+      }
+      
+      &.has-blush-bordeaux-gradient-background {
+          background: linear-gradient(135deg,#C8A385,#CB2727 50%,#6b003e)
+      }
+      
+      &.has-purple-crush-gradient-background {
+          background: linear-gradient(135deg,#2AB9BB,#3117AA 50%,#ab1dfe)
+      }
+      
+      &.has-luminous-dusk-gradient-background {
+          background: linear-gradient(135deg,#CEA357,#A0409A 50%,#4158d0)
+      }
+      
+      &.has-hazy-dawn-gradient-background {
+          background: linear-gradient(135deg,#C68986,#A69FB2)
+      }
+      
+      &.has-pale-ocean-gradient-background {
+          background: linear-gradient(135deg,#FCE897,#8EB2A6 50%,#33a7b5)
+      }
+      
+      &.has-electric-grass-gradient-background {
+          background: linear-gradient(135deg,#A5CA68,#71ce7e)
+      }
+      
+      &.has-subdued-olive-gradient-background {
+          background: linear-gradient(135deg,#FAFAC5,#52845A)
+      }
+      
+      &.has-atomic-cream-gradient-background {
+          background: linear-gradient(135deg,#FEC569,#002A32)
+      }
+      
+      &.has-nightshade-gradient-background {
+          background: linear-gradient(135deg,#16042C,#27A0A2)
+      }
+      
+      &.has-midnight-gradient-background {
+          background: linear-gradient(135deg,#010252,#205FCF)
+      }
+    }
+
+    &:active {
+      transition: all .3s ease-in-out;
+      top: 1px;
+  
       &.disabled {
         top: 0;
       }
-    }
-  }
-
-  &:hover {
-
-    &:before {
-      opacity: .3;
-      transition: opacity .3s ease-in-out;
     }
   }
 
