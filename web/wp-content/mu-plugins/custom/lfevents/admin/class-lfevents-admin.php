@@ -780,7 +780,7 @@ class LFEvents_Admin {
 									'id'            => 'alert_text',
 									'data_type'     => 'meta',
 									'data_key'      => 'alert_text', // Required if 'data_type' is 'meta'.
-									'label'         => __( 'HTML' ),
+									'label'         => __( 'Alert Message' ),
 									'help'          => __( 'Links should be written in markdown format [like this](https://google.com)' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
