@@ -14,8 +14,6 @@
 // the line below.
 import './lib/foundation-explicit-pieces';
 
-import './button-with-expiry';
-
 $( document ).foundation();
 
 $( '.page_item_has_children a[href="#"]' ).click(
