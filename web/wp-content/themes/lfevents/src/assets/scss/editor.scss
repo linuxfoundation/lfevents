@@ -240,6 +240,7 @@ body {
 	.wp-block-button__link {
 		@extend .button;
 		border-radius: 0.5rem;
+		text-transform: uppercase;
 	}
 
 	// add styling for default rounded buttons
