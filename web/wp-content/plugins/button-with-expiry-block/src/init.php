@@ -37,14 +37,6 @@ function button_with_expiry_block_assets() { // phpcs:ignore
 		true
 	);
 
-	// Register block editor styles for backend.
-	wp_register_style(
-		'button_with_expiry-block-editor-css',
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
-		array( 'wp-edit-blocks' ),
-		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
-	);
-
 	/**
 	 * Register Gutenberg block on server-side.
 	 *
