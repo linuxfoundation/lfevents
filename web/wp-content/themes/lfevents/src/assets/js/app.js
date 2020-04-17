@@ -4,20 +4,25 @@
  * @package FoundationPress
  */
 
-// import $ from 'jquery';
-// import whatInput from 'what-input';
-//
-// window.$ = $;
-//
-// import Foundation from 'foundation-sites';
-// If you want to pick and choose which modules to include, comment out the above and uncomment
-// the line below.
 import './lib/foundation-explicit-pieces';
+import cookieBanner from './cookie-banner.js';
 
 $( document ).foundation();
 
+// Prevents menu items being clickable if has children.
 $( '.page_item_has_children a[href="#"]' ).click(
-	function(e) {
+	function ( e ) {
 		e.preventDefault();
 	}
+);
+
+// Init cookie banner on load.
+$( document ).ready(
+	() => { cookieBanner.init(); }
+);
+
+// Add event listener to button in banner.
+document.getElementById( 'cookie-banner-button' ).addEventListener(
+	'click',
+	() => { cookieBanner.acceptCookie(); }
 );
