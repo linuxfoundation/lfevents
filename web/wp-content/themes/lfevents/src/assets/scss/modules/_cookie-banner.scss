@@ -1,17 +1,17 @@
-$banner-background: #596cd5;
+$banner-background: #133c60;
 $banner-text: #FFFFFF;
 $banner-text-link: #FFFFFF;
-$banner-button: #3842c7;
+$banner-button: #3997D0;
 
 #cookie-banner {
-  max-width: 300px;
-  bottom: 10px;
-  right: 10px;
-  border-radius: 5px;
+  max-width: 100%;
+  bottom: 0;
+  right: 0;
+  text-align: center;
   color: $banner-text;
   background: $banner-background;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
-  padding: 20px;
+  box-shadow: rgba(0, 0, 0, .5) 0px 5px 50px;
+  padding: 13px 10px;
   position: fixed;
   width: 100%;
   margin: 0px;
@@ -19,23 +19,13 @@ $banner-button: #3842c7;
   z-index: 1000000;
 
   @media (max-width: 639px) {
-    max-width: 100%;
-    bottom: 0;
-    right: 0;
-    border-radius: 0;
-    text-align: center;
     font-size: 0.9em;
-    padding: 15px;
-  }
-
-  @media (min-width: 1800px) {
-    right: 50%;
-    transform: translate(50%, -50%);
+    padding: 10px;
   }
 
   a {
     display: block;
-    font-size: 0.750em;
+    font-size: 0.825em;
     color: $banner-text;
     text-decoration: underline;
     margin-top: 8px;
@@ -49,6 +39,12 @@ $banner-button: #3842c7;
       margin-left: auto;
       margin-right: auto;
     }
+
+    @media (min-width: 1180px) {
+      display: initial;
+      font-size: inherit;
+      margin-top: 0px;
+    }
   }
 
   button {
@@ -56,13 +52,16 @@ $banner-button: #3842c7;
     background: $banner-button;
     border: 0;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100%;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 500;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 
     &:hover {
       background: darken($banner-button, 10);
@@ -71,12 +70,6 @@ $banner-button: #3842c7;
     &:focus {
       outline-color: white;
       border: 1px white dashed;
-    }
-
-    @media (max-width: 639px) {
-      max-width: 280px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     svg {
