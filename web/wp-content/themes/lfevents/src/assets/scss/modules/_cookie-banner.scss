@@ -44,6 +44,14 @@ $banner-button: #3842c7;
       outline: $banner-text 1px solid;
     }
 
+    &:after {
+      content: url('/wp-content/themes/lfevents/dist/assets/images/external-link-alt-white.svg');
+      display: inline-block;
+      width: .875em;
+      margin-left: .25em;
+      opacity: 0.8;
+    }
+
     @media (max-width: 639px) {
       max-width: 80%;
       margin-left: auto;
