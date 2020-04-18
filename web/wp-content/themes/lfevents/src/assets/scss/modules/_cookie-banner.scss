@@ -1,7 +1,7 @@
 $banner-background: #133c60;
 $banner-text: #FFFFFF;
 $banner-text-link: #FFFFFF;
-$banner-button: #3997D0;
+$banner-button: #0099cc;
 
 #cookie-banner {
   max-width: 100%;
@@ -39,7 +39,7 @@ $banner-button: #3997D0;
       display: inline-block;
       width: 0.875em;
       margin-left: 0.25em;
-      opacity: 0.8;
+      opacity: 0.6;
     }
 
     @media (max-width: 639px) {
@@ -48,7 +48,7 @@ $banner-button: #3997D0;
       margin-right: auto;
     }
 
-    @media (min-width: 1180px) {
+    @media (min-width: 1190px) {
       display: initial;
       font-size: inherit;
       margin-top: 0px;
@@ -56,20 +56,27 @@ $banner-button: #3997D0;
   }
 
   button {
+    padding: 0.85em 1em;
+    border: 1px solid transparent;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    margin-top: 15px;
     color: inherit;
     background: $banner-button;
-    border: 0;
-    padding: 10px;
-    margin-top: 15px;
-    width: 100%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
     max-width: 200px;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    @media (min-width: 1190px) {
+      margin-top: 0px;
+      margin-left: 10px;
+    }
 
     &:hover {
       background: darken($banner-button, 10);
