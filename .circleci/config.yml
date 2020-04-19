@@ -207,7 +207,7 @@ jobs:
 
     wraith_test_lfeventsci:
         docker:
-            - image: liquidweb/wraith
+            - image: lopezs/wraith
 
         steps:
             - checkout
