@@ -106,12 +106,8 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 		return;
 	}
 
-	$tier_name = $attributes['tierName'];
-	$tier_size = $attributes['tierSize'];
-
-	if ( ! $tier_size ) {
-		$tier_size = 'medium';
-	}
+	$tier_name = isset( $attributes['tierName'] ) ? $attributes['tierName'] : '';
+	$tier_size = isset( $attributes['tierSize'] ) ? $attributes['tierSize'] : 'medium';
 
 	$out = '<div class="wp-block-cgb-sponsors-block">';
 	$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
