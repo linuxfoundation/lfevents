@@ -160,7 +160,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 
-	if ( empty( ! $term ) ) {
+	if ( ! empty( $term ) ) {
 		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"><span class="subtext">Past ' . esc_html( $term[0]->name ) . '</span></a></li>';
 	} else {
 		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/"><span class="subtext">All Past Events</span></a></li>';
