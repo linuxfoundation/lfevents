@@ -1,5 +1,8 @@
 .menu-toggler {
-  &, &:hover, &:focus {
+
+  &,
+  &:hover,
+  &:focus {
     background-color: transparent;
     margin: 0;
     outline: 0;
@@ -14,14 +17,15 @@
   max-width: 93%;
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
+  transform: translateX(52px); // accounts for mobile navigation button
 }
 
 .event-header {
   @include clearfix;
   position: relative;
   z-index: 2;
-  background-color: rgba(10,59,97,100);
-  box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2);
+  background-color: rgba(10, 59, 97, 100);
+  box-shadow: 0 0.5rem 0 0 rgba(0, 0, 0, 0.2);
   color: #ffffff;
 
   .admin-bar &.is-stuck {
@@ -59,7 +63,7 @@
     font-size: 1.1rem;
     text-align: center;
     font-weight: 500;
-    
+
     a {
       text-decoration: underline;
     }
@@ -75,16 +79,16 @@
     padding-left: 2rem;
     transform-origin: 0 0;
     transition: transform 0.2s ease-in-out 0s,
-                box-shadow 0.2s ease-in-out 0s,
-                background-color 0.1s ease-in-out 0s,
-                border-bottom-right-radius 0.2s ease-in-out 0s;
+      box-shadow 0.2s ease-in-out 0s,
+      background-color 0.1s ease-in-out 0s,
+      border-bottom-right-radius 0.2s ease-in-out 0s;
 
     .event-header.is-stuck & {
       background-color: transparent !important;
       transition: transform 0.3s ease-in-out 0.3s,
-                  box-shadow 0.3s ease-in-out 0.3s,
-                  background-color 0.3s ease-in-out 0.6s,
-                  border-bottom-right-radius 0.3s ease-in-out 0.3s;
+        box-shadow 0.3s ease-in-out 0.3s,
+        background-color 0.3s ease-in-out 0.6s,
+        border-bottom-right-radius 0.3s ease-in-out 0.3s;
 
       img {
         transition: transform 0.3s ease-in-out 0.3s;
@@ -93,7 +97,7 @@
 
     .event-header:not(.is-stuck) & {
       border-bottom-right-radius: 1rem;
-      box-shadow: -0.125rem 0.25rem 0 0.25rem rgba(0,0,0,0.2);
+      box-shadow: -0.125rem 0.25rem 0 0.25rem rgba(0, 0, 0, 0.2);
       transform: scaleY(1.4);
 
       img {
@@ -112,7 +116,10 @@
   clear: both;
   background-color: inherit;
 
-  ul, li { background-color: inherit; }
+  ul,
+  li {
+    background-color: inherit;
+  }
 
   ul {
     list-style: none;
@@ -127,13 +134,14 @@
       @include button-group-stack('.page_item');
     }
 
-    > li {
+    >li {
 
       @include breakpoint(large) {
-        &.current_page_item > a,
-        &.current_page_ancestor > a {
+
+        &.current_page_item>a,
+        &.current_page_ancestor>a {
           position: relative;
-          background-color: rgba(0,0,0,0.2);
+          background-color: rgba(0, 0, 0, 0.2);
 
           &::before {
             content: '';
@@ -147,7 +155,9 @@
         }
       }
 
-      &:first-child { // HACK: We should add a class w/ a WP walker for this selector
+      &:first-child {
+
+        // HACK: We should add a class w/ a WP walker for this selector
         @include breakpoint(medium down) {
           display: none;
         }
@@ -155,11 +165,11 @@
 
       &.other-events {
         @include breakpoint(medium down) {
-          border-top: 4px solid rgba(255,255,255,0.2);
+          border-top: 4px solid rgba(255, 255, 255, 0.2);
           margin-top: 2em;
         }
 
-        > a {
+        >a {
           @include breakpoint(medium down) {
             display: none;
           }
@@ -170,11 +180,13 @@
           margin: 0.5em;
         }
 
-        .children li:first-child a, .children li:last-child a {
+        .children li:first-child a,
+        .children li:last-child a {
           flex-direction: column;
         }
 
-        .children li:first-child img, .children li:last-child img {
+        .children li:first-child img,
+        .children li:last-child img {
           width: 16rem;
 
           @include breakpoint(large) {
@@ -185,7 +197,7 @@
 
       a {
         @include button();
-        @include button-style(transparent, rgba(0,0,0,0.2), $white);
+        @include button-style(transparent, rgba(0, 0, 0, 0.2), $white);
         font-weight: bold;
         font-size: rem-calc(12);
         margin-bottom: 0;
@@ -202,7 +214,7 @@
         }
       }
 
-      > a {
+      >a {
         @include breakpoint(medium down) {
           justify-content: left;
           font-weight: 900;
@@ -219,7 +231,7 @@
           justify-content: left;
         }
 
-        > a[href="#"] {
+        >a[href="#"] {
           opacity: 0.6;
           padding-bottom: 0;
           cursor: default;
@@ -234,7 +246,7 @@
 
           &::before {
             content: '—';
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             margin-right: 0.75em;
           }
         }
@@ -247,7 +259,7 @@
       }
 
       @include breakpoint(large) {
-        > a {
+        >a {
           @include button-dropdown(0.4em, currentColor, 1rem);
           cursor: default;
 
@@ -258,11 +270,11 @@
           }
         }
 
-        &:hover > a {
-          background-color: rgba(0,0,0,0.2);
+        &:hover>a {
+          background-color: rgba(0, 0, 0, 0.2);
         }
 
-        &:hover > a::after {
+        &:hover>a::after {
           transform: scaleY(-1);
         }
 
@@ -271,7 +283,7 @@
           top: 100%;
           right: 0;
           min-width: 100%;
-          box-shadow: 0 0.25rem 0 0.25rem rgba(0,0,0,0.2);
+          box-shadow: 0 0.25rem 0 0.25rem rgba(0, 0, 0, 0.2);
           visibility: hidden;
           opacity: 0;
           transition: opacity 0.4s;
@@ -281,19 +293,19 @@
           a {
             display: block;
             font-size: rem-calc(12);
-            border-top-color: rgba(255,255,255,0.1);
+            border-top-color: rgba(255, 255, 255, 0.1);
 
             @include breakpoint(large) {
               font-size: rem-calc(14);
             }
           }
 
-          .current_page_item > a {
-            background-color: rgba(0,0,0,0.2);
+          .current_page_item>a {
+            background-color: rgba(0, 0, 0, 0.2);
           }
         }
 
-        &:hover > .children {
+        &:hover>.children {
           visibility: visible;
           opacity: 1;
         }
