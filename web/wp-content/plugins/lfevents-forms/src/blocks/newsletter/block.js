@@ -61,11 +61,11 @@ registerBlockType( 'lf/form-newsletter', {
 					<div id="message"></div>
 
 					<div class="newsletter__form">
-						<label className="cell medium-6" htmlFor="FirstName">
+						<label className="medium-6" htmlFor="FirstName">
 							<input type="text" name="FirstName" placeholder="First name" required="" />
 						</label>
 
-						<label className="cell medium-6" htmlFor="LastName">
+						<label className="medium-6" htmlFor="LastName">
 							<input type="text" name="LastName" placeholder="Last name" required="" />
 						</label>
 						<label htmlFor="EmailAddress">
