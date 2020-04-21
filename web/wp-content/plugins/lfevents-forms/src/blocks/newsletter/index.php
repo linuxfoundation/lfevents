@@ -21,13 +21,15 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 	ob_start();
 
 	$action = isset( $attributes['action'] ) ? $attributes['action'] : '';
+	$style = isset( $attributes['style'] ) ? $attributes['style'] : '';
+
 
 	if ( empty( $action ) ) {
 		return;
 	}
 
 	?>
-	<div class="lfevents-forms form-newsletter">
+	<div class="lfevents-forms form-newsletter <?php echo esc_attr( $style ); ?>">
 		<div id="message"></div>
 
 		<form id="sfmc-form" action="<?php echo esc_url( $action ); ?>">
