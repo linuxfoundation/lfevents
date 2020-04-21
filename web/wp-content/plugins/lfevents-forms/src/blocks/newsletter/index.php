@@ -34,29 +34,29 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 
 		<form id="sfmc-form" action="<?php echo esc_url( $action ); ?>">
 
-		<div class="grid-x grid-margin-x">
-			<label class="cell medium-6" for="FirstName">
-				<input type="text" name="FirstName" placeholder="First name" required="">
-			</label>
+			<div class="grid-x grid-margin-x">
+				<label class="cell medium-6" for="FirstName">
+					<input type="text" name="FirstName" placeholder="First name" required="">
+				</label>
 
-			<label class="cell medium-6" for="LastName">
-				<input type="text" name="LastName" placeholder="Last name" required="">
-			</label>
+				<label class="cell medium-6" for="LastName">
+					<input type="text" name="LastName" placeholder="Last name" required="">
+				</label>
+
+				<label for="EmailAddress">
+					<input type="email" name="EmailAddress" placeholder="Email address" required="">
+				</label>
+
+				<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
+				<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
+				<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+
+				<script>
+					document.getElementById('txtUrl').value = window.location.href;
+				</script>
+
+				<input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
 			</div>
-
-			<label for="EmailAddress">
-				<input type="email" name="EmailAddress" placeholder="Email address" required="">
-			</label>
-
-			<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
-			<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
-			<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
-
-			<script>
-				document.getElementById('txtUrl').value = window.location.href;
-			</script>
-
-			<input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
 		</form>
 
 		<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
