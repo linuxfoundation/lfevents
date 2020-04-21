@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.blockEditor || wp.editor;
-const { PanelBody, TextControl } = wp.components;
+const { PanelBody, TextControl, RadioControl } = wp.components;
 
 registerBlockType( 'lf/form-newsletter', {
 	title: __( 'Newsletter Form' ),
@@ -21,10 +21,13 @@ registerBlockType( 'lf/form-newsletter', {
 		action: {
 			type: 'string',
 		},
+		style: {
+			type: 'string',
+		},
 	},
 	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
-		const { action } = attributes;
+		const { action, style } = attributes;
 		return (
 			<Fragment>
 				<InspectorControls>
@@ -36,9 +39,42 @@ registerBlockType( 'lf/form-newsletter', {
 							} }
 						/>
 					</PanelBody>
+					<PanelBody title={ __( 'Form Style' ) }>
+						<RadioControl
+							label="Style"
+							help="The style of the current newsletter form"
+							selected={ style }
+							options={ [
+								{ label: 'Box', value: 'box' },
+								{ label: 'Full-width', value: 'full-width' },
+							] }
+							onChange={ value => {
+								setAttributes( { style: value } );
+							} }
+						/>
+					</PanelBody>
 				</InspectorControls>
-				<div className={ props.className }>
+				{ /* <div className={ props.className }>
 					<h4>LFEvents: Newsletter Form</h4>
+				</div> */ }
+				<div className={ `lfevents-forms form-newsletter ${ style }` }>
+					<div id="message"></div>
+
+					<div className="grid-x grid-margin-x">
+						<label className="cell medium-6" htmlFor="FirstName">
+							<input type="text" name="FirstName" placeholder="First name" required="" />
+						</label>
+
+						<label className="cell medium-6" htmlFor="LastName">
+							<input type="text" name="LastName" placeholder="Last name" required="" />
+						</label>
+					</div>
+
+					<label htmlFor="EmailAddress">
+						<input type="email" name="EmailAddress" placeholder="Email address" required="" />
+					</label>
+
+					<input className="button expanded" type="submit" value="SIGN UP!" id="submitbtn" />
 				</div>
 			</Fragment>
 		);
