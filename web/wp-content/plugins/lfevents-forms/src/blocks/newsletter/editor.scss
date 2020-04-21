@@ -71,6 +71,10 @@
               width: 100%;
           }
 
+          .button {
+            border-radius: 3px!important;
+          }
+
           @media(min-width: 600px) {
               .medium-6 {
                   max-width: 48%;
@@ -99,9 +103,5 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-  }
-
-  .button {
-    border-radius: 3px!important;
   }
 }
