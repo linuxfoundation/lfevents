@@ -34,18 +34,20 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 
 		<form id="sfmc-form" action="<?php echo esc_url( $action ); ?>">
 
-			<div class="grid-x grid-margin-x">
-				<label class="cell medium-6" for="FirstName">
+			<div class="newsletter__form">
+				<label class="medium-6" for="FirstName">
 					<input type="text" name="FirstName" placeholder="First name" required="">
 				</label>
 
-				<label class="cell medium-6" for="LastName">
+				<label class="medium-6" for="LastName">
 					<input type="text" name="LastName" placeholder="Last name" required="">
 				</label>
 
 				<label for="EmailAddress">
 					<input type="email" name="EmailAddress" placeholder="Email address" required="">
 				</label>
+
+				<input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
 
 				<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
 				<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
@@ -54,8 +56,6 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 				<script>
 					document.getElementById('txtUrl').value = window.location.href;
 				</script>
-
-				<input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
 			</div>
 		</form>
 
