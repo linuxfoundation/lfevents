@@ -10,14 +10,14 @@
 }
 
 .event-home-link img {
-  display: block;
+  display: inline-block;
   width: auto;
   max-height: 4rem;
   min-height: 4rem;
   max-width: 93%;
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
-  transform: translateX(52px); // accounts for mobile navigation button
+  transform: translateX(26px); // accounts for 50% of mobile navigation button.
 }
 
 .event-header {
@@ -49,7 +49,7 @@
       @include button-style(transparent, transparent, $white);
       font-weight: bold;
       font-size: 1rem;
-      margin: 0 1rem 0 0;
+      margin: 0;
       flex-grow: 1;
     }
 
