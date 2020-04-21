@@ -7,10 +7,6 @@
             margin-right: auto;
             display: flex;
         
-            & > :not(:last-child) {
-                margin-right: 10px;
-            }
-        
             .button {
                 border: 1px solid white;
                 color: white;
@@ -22,6 +18,16 @@
             @media(min-width: 660px) {
                 flex-direction: row;
                 justify-content: center;
+        
+                & > :not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+
+            @media(max-width: 599px) {
+                label {
+                    width: 100%;
+                }
             }
         }
     }
@@ -31,18 +37,21 @@
         .newsletter__form {
             display: flex;
             flex-wrap: wrap;
-
-            .medium-6 {
-                width: 50%;
-
-                &:first-child {
-                    margin-right: 10px;
-                }
-            }
+            justify-content: space-between;
 
             label:not(.medium-6),
             .button {
                 width: 100%;
+            }
+
+            .medium-6 {
+                width: 100%;
+            }
+
+            @media(min-width: 600px) {
+                .medium-6 {
+                    max-width: 48%;
+                }
             }
         }
     }
