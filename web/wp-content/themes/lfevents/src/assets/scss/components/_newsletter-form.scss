@@ -1,12 +1,21 @@
 .form-newsletter {
     &.full-width {
+        max-width: none;
+        width: calc(100% + 1.25rem);
+        margin-right: -.625rem;
+        margin-left: -.625rem;
+        padding-right: .625rem;
+        padding-left: .625rem;
+        margin-top: -1.5rem!important;
+        margin-bottom: 1.5rem!important;
+
         .newsletter__form {
             max-width: 90%;
             margin-left: auto;
             margin-right: auto;
             display: flex;
         
-            &:not(:last-child) {
+            & > :not(:last-child) {
                 margin-right: 10px;
             }
         
@@ -14,6 +23,8 @@
                 border: 1px solid white;
                 color: white;
                 background-color: transparent;
+                box-shadow: none;
+                border-radius: 0;
             }
         
             @media(min-width: 660px) {

@@ -47,7 +47,7 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 					<input type="email" name="EmailAddress" placeholder="Email address" required="">
 				</label>
 
-				<input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
+				<input class="button" type="submit" value="SIGN UP!" id="submitbtn">
 
 				<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
 				<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
