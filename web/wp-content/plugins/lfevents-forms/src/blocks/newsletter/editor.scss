@@ -14,3 +14,68 @@
 	padding: 2rem;
 	text-align: center;
 }
+
+.form-newsletter {
+  &.full-width {
+
+      .newsletter__form {
+          margin-left: auto;
+          margin-right: auto;
+          display: flex;
+          width: 100%;
+      
+          .button {
+              border: 1px solid white;
+              color: white;
+              background-color: transparent;
+              box-shadow: none;
+              border-radius: 0;
+          }
+      
+          @media(min-width: 660px) {
+              flex-direction: row;
+              justify-content: center;
+              max-width: 90%;
+      
+              & > :not(:last-child) {
+                  margin-right: 10px;
+              }
+          }
+
+          @media(max-width: 599px) {
+              flex-wrap: wrap;
+              label {
+                  width: 100%;
+              }
+
+              .button {
+                  width: 100%;
+              }
+          }
+      }
+  }
+
+  &.box {
+
+      .newsletter__form {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+
+          label:not(.medium-6),
+          .button {
+              width: 100%;
+          }
+
+          .medium-6 {
+              width: 100%;
+          }
+
+          @media(min-width: 600px) {
+              .medium-6 {
+                  max-width: 48%;
+              }
+          }
+      }
+  }
+}

@@ -60,7 +60,7 @@ registerBlockType( 'lf/form-newsletter', {
 				<div className={ `lfevents-forms form-newsletter ${ style }` }>
 					<div id="message"></div>
 
-					<div className="grid-x grid-margin-x">
+					<div class="newsletter__form">
 						<label className="cell medium-6" htmlFor="FirstName">
 							<input type="text" name="FirstName" placeholder="First name" required="" />
 						</label>
@@ -68,13 +68,13 @@ registerBlockType( 'lf/form-newsletter', {
 						<label className="cell medium-6" htmlFor="LastName">
 							<input type="text" name="LastName" placeholder="Last name" required="" />
 						</label>
+						<label htmlFor="EmailAddress">
+							<input type="email" name="EmailAddress" placeholder="Email address" required="" />
+						</label>
+
+						<input className="button" type="submit" value="SIGN UP!" id="submitbtn" />
 					</div>
 
-					<label htmlFor="EmailAddress">
-						<input type="email" name="EmailAddress" placeholder="Email address" required="" />
-					</label>
-
-					<input className="button expanded" type="submit" value="SIGN UP!" id="submitbtn" />
 				</div>
 			</Fragment>
 		);
