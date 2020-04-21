@@ -30,6 +30,9 @@ registerBlockType( name, {
 		expireText: {
 			type: 'string',
 		},
+		size: {
+			type: 'string',
+		},
 	},
 	supports: {
 		align: true,
