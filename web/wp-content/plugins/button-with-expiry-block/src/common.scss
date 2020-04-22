@@ -11,3 +11,77 @@ $white: #f4f4f4;
 $gray: #dedede;
 $green: #bada55;
 $red: orangered;
+
+.wp-block-button__link {
+    text-transform: uppercase;
+    padding: .85em 1em;
+    border-radius: .5rem;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+    transition: all .3s ease-in-out;
+    font-family: inherit;
+    -webkit-appearance: none;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: 0 0.25em 0 0 rgba(0,0,0,.1);
+    &:not(.has-background) {
+      background-color: #09c;
+
+      &:hover {
+        background-color: #0082ad;
+      }
+    }
+    &:not(.has-text-color) {
+      color: #fefefe;
+
+      &:hover {
+        color: #fefefe;
+      }
+    }
+    &.disabled {
+      cursor: default;
+      pointer-events: none;
+      background: #cccccc!important;
+      color: #888888!important;
+      box-shadow: none;
+    }
+
+    &.button-small {
+      padding-bottom: calc(.375em - var(--s-border, 0px));
+      padding-left: 1.25em;
+      padding-right: 1.25em;
+      padding-top: calc(.375em - var(--s-border, 0px));
+      font-size: .85em;
+      border-radius: 4px;  
+    }
+
+    &.button-medium {
+      padding-bottom: calc(.375em - var(--s-border, 0px));
+      padding-left: 1.25em;
+      padding-right: 1.25em;
+      padding-top: calc(.375em - var(--s-border, 0px));
+      font-size: 1em;
+      border-radius: 4px;  
+    }
+
+    &.button-large {
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      padding-top: calc(.6em - var(--s-border, 0px));
+      padding-bottom: calc(.6em - var(--s-border, 0px));
+      font-size: 1.075em;
+      border-radius: 4px; 
+    }
+
+    &.button-xlarge {
+      padding-left: 1.75em;
+      padding-right: 1.75em;
+      padding-top: calc(.8em - var(--s-border, 0px));
+      padding-bottom: calc(.8em - var(--s-border, 0px));
+      border-radius: 4px;
+      font-size: 1.15em;
+    }
+  }
