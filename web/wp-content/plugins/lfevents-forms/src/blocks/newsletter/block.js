@@ -42,7 +42,6 @@ registerBlockType( 'lf/form-newsletter', {
 					<PanelBody title={ __( 'Form Style' ) }>
 						<RadioControl
 							label="Style"
-							help="The style of the current newsletter form"
 							selected={ style }
 							options={ [
 								{ label: 'Box', value: 'box' },
