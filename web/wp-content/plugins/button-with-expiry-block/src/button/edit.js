@@ -266,6 +266,7 @@ function ButtonEdit( {
 						{ label: 'Small', value: 'button-small' },
 						{ label: 'Medium', value: 'button-medium' },
 						{ label: 'Large', value: 'button-large' },
+						{ label: 'X-Large', value: 'button-xlarge' },
 					] }
 					onChange={ ( value ) => setAttributes( { size: value } ) }
 				/>
