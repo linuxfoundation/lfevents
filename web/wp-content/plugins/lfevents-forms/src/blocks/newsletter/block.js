@@ -42,7 +42,7 @@ registerBlockType( 'lf/form-newsletter', {
 					<PanelBody title={ __( 'Form Style' ) }>
 						<RadioControl
 							label="Style"
-							selected={ style }
+							selected={ style || 'box' }
 							options={ [
 								{ label: 'Box', value: 'box' },
 								{ label: 'Full-width', value: 'full-width' },
@@ -56,10 +56,10 @@ registerBlockType( 'lf/form-newsletter', {
 				{ /* <div className={ props.className }>
 					<h4>LFEvents: Newsletter Form</h4>
 				</div> */ }
-				<div className={ `lfevents-forms form-newsletter ${ style }` }>
+				<div className={ `lfevents-forms form-newsletter ${ style || 'box' }` }>
 					<div id="message"></div>
 
-					<div class="newsletter__form">
+					<div className="newsletter__form">
 						<label className="medium-6" htmlFor="FirstName">
 							<input type="text" name="FirstName" placeholder="First name" required="" />
 						</label>
