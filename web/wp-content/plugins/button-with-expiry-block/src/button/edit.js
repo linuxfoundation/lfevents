@@ -187,7 +187,7 @@ function ButtonEdit( {
 	} = __experimentalUseGradient();
 
 	const buttonSize = [
-		size || 'button-medium',
+		size || 'button-large',
 	];
 
 	return (
@@ -261,7 +261,7 @@ function ButtonEdit( {
 			<PanelBody title={ __( 'Button Size' ) }>
 				<SelectControl
 					label="Size"
-					value={ size || 'button-medium' }
+					value={ size || 'button-large' }
 					options={ [
 						{ label: 'Small', value: 'button-small' },
 						{ label: 'Medium', value: 'button-medium' },

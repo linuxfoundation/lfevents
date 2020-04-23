@@ -36,7 +36,7 @@ export default function save( { attributes } ) {
 
 	const gradientClass = getColorClassName( 'gradient-background', gradient );
 	const buttonSize = [
-		size || 'button-medium',
+		size || 'button-large',
 	];
 
 	const buttonClasses = classnames( 'wp-block-button__link', {
