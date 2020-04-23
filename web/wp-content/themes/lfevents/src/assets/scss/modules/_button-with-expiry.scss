@@ -54,20 +54,20 @@
     }
 
     &.button-small {
-      padding-bottom: calc(.375em - var(--s-border, 0px));
+      padding-bottom: .455em;
       padding-left: 1.25em;
       padding-right: 1.25em;
-      padding-top: calc(.375em - var(--s-border, 0px));
+      padding-top: .455em;
       font-size: .85em;
       border-radius: .5em;
       line-height: 1.5!important;
     }
 
     &.button-medium {
-      padding-bottom: calc(.375em - var(--s-border, 0px));
+      padding-bottom: .385  em;
       padding-left: 1.25em;
       padding-right: 1.25em;
-      padding-top: calc(.375em - var(--s-border, 0px));
+      padding-top: .385 em;
       font-size: 1em;
       border-radius: .5em;
       line-height: 1.5!important;
@@ -76,8 +76,8 @@
     &.button-large {
       padding-left: 1.5em;
       padding-right: 1.5em;
-      padding-top: calc(.6em - var(--s-border, 0px));
-      padding-bottom: calc(.6em - var(--s-border, 0px));
+      padding-top: .585em;
+      padding-bottom: .585em;
       font-size: 1.075em;
       border-radius: .5em; 
       line-height: 1.5!important;
@@ -86,8 +86,8 @@
     &.button-xlarge {
       padding-left: 1.75em;
       padding-right: 1.75em;
-      padding-top: calc(.8em - var(--s-border, 0px));
-      padding-bottom: calc(.8em - var(--s-border, 0px));
+      padding-top: .655em;
+      padding-bottom: .655em;
       border-radius: .5em;
       font-size: 1.15em;
       line-height: 1.5!important;
