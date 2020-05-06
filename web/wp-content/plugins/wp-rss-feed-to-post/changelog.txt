@@ -1,3 +1,11 @@
+3.12 (2020-03-16)
+Added: New setting to choose whether source attribution link is added before or after the post content.
+Added: New setting to choose whether source link, appended and prepended content is shown in the site's RSS feed.
+Added: New setting to control whether edited posts should be deleted by limit settings.
+Changed: OEmbeds and the `[embed]` shortcode are now allowed in the Append and Prepend content options.
+Changed: Renamed the "Posts link to the original article" setting to "Posts redirect to the original article".
+Fixed: A PHP error on the "Edit Feed Source" page when the enclosure option tooltip is not available.
+
 3.11 (2019-12-11)
 Added: A new "tags" shortcode parameter to only show posts with certain tags.
 Added: A new settings option for making posts link to the original article.
