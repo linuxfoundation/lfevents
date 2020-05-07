@@ -14,6 +14,7 @@ import {
 	PanelBody,
 	RangeControl,
 	TextControl,
+	SelectControl,
 	ToggleControl,
 	withFallbackStyles,
 	ToolbarButton,
@@ -152,6 +153,7 @@ function ButtonEdit( {
 		url,
 		expireAt,
 		expireText,
+		size,
 	} = attributes;
 	const onSetLinkRel = useCallback(
 		( value ) => {
@@ -184,6 +186,10 @@ function ButtonEdit( {
 		setGradient,
 	} = __experimentalUseGradient();
 
+	const buttonSize = [
+		size || 'button-large',
+	];
+
 	return (
 		<div className={ className }>
 			<RichText
@@ -199,6 +205,7 @@ function ButtonEdit( {
 					[ textColor.class ]: textColor.class,
 					[ gradientClass ]: gradientClass,
 					'no-border-radius': borderRadius === 0,
+					[ buttonSize ]: true,
 				} ) }
 				style={ {
 					...( ! backgroundColor.color && gradientValue
@@ -251,6 +258,20 @@ function ButtonEdit( {
 					borderRadius={ borderRadius }
 					setAttributes={ setAttributes }
 				/>
+			<PanelBody title={ __( 'Button Size' ) }>
+				<SelectControl
+					label="Size"
+					value={ size || 'button-large' }
+					options={ [
+						{ label: 'Small', value: 'button-small' },
+						{ label: 'Medium', value: 'button-medium' },
+						{ label: 'Large', value: 'button-large' },
+						{ label: 'X-Large', value: 'button-xlarge' },
+					] }
+					onChange={ ( value ) => setAttributes( { size: value } ) }
+				/>
+			</PanelBody>
+
 				<PanelBody title={ __( 'Expiry date' ) }>
 					<DateTimePicker
 						currentDate={ expireAt * 1000 }
