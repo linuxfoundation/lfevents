@@ -112,7 +112,7 @@ Thumbs.db
 ##########
 .sass-cache
 
-# Allowing premium plugins #
+# Allowing premium plugins
 !web/wp-content/plugins/gravityforms
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/wp-rss-feed-to-post

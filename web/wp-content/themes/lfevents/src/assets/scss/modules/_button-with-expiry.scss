@@ -18,19 +18,20 @@
 
   .wp-block-button__link {
     text-transform: uppercase;
-    padding: .85em 1em;
+    padding: .585rem 1.5rem;
     border-radius: .5rem;
-    font-size: 1rem;
+    font-size: 1.075rem;
     position: relative;
     z-index: 1;
     transition: all .3s ease-in-out;
     font-family: inherit;
     -webkit-appearance: none;
-    line-height: 1;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
     box-shadow: 0 0.25em 0 0 rgba(0,0,0,.1);
+    line-height: 1.5!important;
+
     &:not(.has-background) {
       background-color: #09c;
 
@@ -52,46 +53,26 @@
       color: #888888!important;
       box-shadow: none;
     }
-
-    &.button-small {
-      padding-bottom: .38rem;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-      padding-top: .38rem;
-      font-size: .85rem;
-      border-radius: .5rem;
-      line-height: 1.5!important;
-    }
-
-    &.button-medium {
-      padding-bottom: .38rem;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-      padding-top: .38rem;
-      font-size: 1rem;
-      border-radius: .5rem;
-      line-height: 1.5!important;
-    }
-
-    &.button-large {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      padding-top: .585rem;
-      padding-bottom: .585rem;
-      font-size: 1.075rem;
-      border-radius: .5rem; 
-      line-height: 1.5!important;
-    }
-
-    &.button-xlarge {
-      padding-left: 1.75rem;
-      padding-right: 1.75rem;
-      padding-top: .8rem;
-      padding-bottom: .8rem;
-      border-radius: .5rem;
-      font-size: 1.15rem;
-      line-height: 1.5!important;
-    }
+  
+		&.button-small {
+		  padding: .38rem 1.25rem;
+		  font-size: .85rem;
+		}
+	
+		&.button-medium {
+		  padding: .38rem 1.25rem;
+		  font-size: 1rem;
+		}
+	
+		&.button-large {
+		  padding: .585rem 1.5rem;
+		  font-size: 1.075rem;
+		}
+	
+		&.button-xlarge {
+		  padding: .8rem 1.75rem;
+		  font-size: 1.15rem;
+		}
 
     &:hover {
       transition: all .3s ease-in-out;
