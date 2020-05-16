@@ -78,8 +78,12 @@
 
           &:hover {
             background-color: rgba(0,0,0,0.2);
-            box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
-          }
+            box-shadow: 0 .5rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+            @include breakpoint(xxlarge) {
+              font-size: rem-calc(16);
+              box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+            }
+            }
 
           @include breakpoint(large) {
             font-size: rem-calc(12);
