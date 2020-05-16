@@ -11,6 +11,7 @@
  */
 function onSubmit(token) {
 	var f = $( "#sfmc-form" )
+	var message = document.getElementById("message");
 	$.ajax(
 		{
 			url: f.attr( "action" ),
@@ -19,15 +20,17 @@ function onSubmit(token) {
 			beforeSend: function() {
 				$( "#sfmc-form" ).toggle();
 				$( "#message" ).html( "Thank you for your submission.  Your request is being processed..." ).addClass( "callout success" );
+				message.scrollIntoView({ behavior: "smooth", block: 'center' });
 			},
 			success: function(data) {
 				var msg = $( data ).find( "p" ).text();
 				$( "#message" ).html( msg );
+				message.scrollIntoView({ behavior: "smooth", block: 'center' });
 			},
 			error: function(xhr, status, error) {
 				var errorMessage = xhr.status + ': ' + xhr.statusText;
 				$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.<br>(" + errorMessage + ")" ).removeClass( "success" ).addClass( "alert" );
-				alert( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." );
+				message.scrollIntoView({ behavior: "smooth", block: 'center' });
 			}
 		}
 	);
