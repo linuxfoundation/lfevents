@@ -19,21 +19,21 @@ function onSubmit(token) {
 			data: f.serialize(),
 			beforeSend: function() {
 				$( "#sfmc-form" ).toggle();
-				$( "#message" ).html( "Thank you for your submission.  Your request is being processed..." ).addClass( "callout primary" );
+				$( "#message" ).html( "Thank you for your submission.  Your request is being processed..." ).addClass( "callout warning" );
 				message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 			},
 			success: function(data) {
 				var msg = $( data ).find( "p" ).text();
 				if ( msg.includes( "Error" ) ) {
-					$( "#message" ).html( msg ).removeClass( "primary" ).addClass( "alert" );
+					$( "#message" ).html( msg ).removeClass( "warning" ).addClass( "alert" );
 				} else {
-					$( "#message" ).html( msg ).removeClass( "primary" ).addClass( "success" );
+					$( "#message" ).html( msg ).removeClass( "warning" ).addClass( "success" );
 				}
 				message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 			},
 			error: function(xhr, status, error) {
 				var errorMessage = xhr.status + ': ' + xhr.statusText;
-				$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.<br>(" + errorMessage + ")" ).removeClass( "primary" ).addClass( "alert" );
+				$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org.<br>(" + errorMessage + ")" ).removeClass( "warning" ).addClass( "alert" );
 				message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 			}
 		}
