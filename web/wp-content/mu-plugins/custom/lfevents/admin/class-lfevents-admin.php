@@ -1251,30 +1251,27 @@ class LFEvents_Admin {
 	 * @param int $post_id ID of post updated.
 	 */
 	public function reset_cache_check( $post_id ) {
-		$post = get_post( $post_id );
-		if ( 'lfe_sponsor' === $post->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
+		global $post;
+		$post_saved = get_post( $post_id );
+		if ( 'lfe_sponsor' === $post_saved->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
 			// a sponsor CPT has been updated so the whole site needs to be refreshed.
 			pantheon_wp_clear_edge_all();
-		} elseif ( 'sponsor-list' === $post->post_name && in_array( $post->post_type, $this->post_types ) ) {
+		} elseif ( 'sponsor-list' === $post_saved->post_name && in_array( $post_saved->post_type, $this->post_types ) ) {
 			// the sponsor-list page has been updated so all event pages need refreshing.
-			$args  = array(
-				'child_of'     => $post->parent,
-				'post_status'  => 'publish',
-				'no_found_rows'          => true,  // used to improve performance.
-				'update_post_meta_cache' => false, // used to improve performance.
-				'update_post_term_cache' => false, // used to improve performance.
-			);
-			$the_query = new WP_Query( $args );
 
-			$keys_to_clear = array();
-			if ( $the_query->have_posts() ) {
-				while ( $the_query->have_posts() ) {
-					$the_query->the_post();
-					$keys_to_clear[] = 'post-' . $post->ID;
-				}
+			$args  = array(
+				'child_of'    => $post_saved->post_parent,
+				'exclude'     => $post_id,
+				'post_type'   => $post_saved->post_type,
+				'post_status' => 'publish',
+			);
+			$pages = get_pages( $args );
+
+			$keys_to_clear = array( 'post-' . $post_saved->post_parent );
+			foreach ( $pages as $p ){
+				$keys_to_clear[] = 'post-' . $p->ID;
 			}
 
-			wp_reset_postdata(); // Restore original Post Data.
 			pantheon_wp_clear_edge_keys( $keys_to_clear );
 		}
 	}
