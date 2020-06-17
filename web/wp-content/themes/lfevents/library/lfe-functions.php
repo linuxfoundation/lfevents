@@ -711,21 +711,6 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 }
 
 
-/**
- * Programmatically flushes the Pantheon site cache when a sponsor CPT is updated.
- * A sponsor could potentially show up on many pages so that's why we need such a heavy reset of the cache.
- *
- * @param int $post_id ID of post updated.
- */
-function lfe_save_post_hook( $post_id ) {
-	$post = get_post( $post_id );
-	if ( 'lfe_sponsor' === $post->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
-		pantheon_wp_clear_edge_all();
-	}
-}
-add_action( 'save_post', 'lfe_save_post_hook' );
-
-
 // The WP REST API is cached heavily by Pantheon so we need to explicitly exclude certain calls from the cache.
 // From https://pantheon.io/docs/mu-plugin#wp-rest-api-code-classlanguage-textwp-jsoncode-endpoints-cache.
 $regex_json_path_patterns = array(

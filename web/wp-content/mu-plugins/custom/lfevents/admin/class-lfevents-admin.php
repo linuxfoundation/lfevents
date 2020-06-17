@@ -1275,3 +1275,40 @@ function get_kids( $post_id ) {
 
 	return $kid_ids;
 }
+
+/**
+ * Programmatically flushes the Pantheon site cache when a sponsor CPT is updated.
+ * A sponsor could potentially show up on many pages so that's why we need such a heavy reset of the cache.
+ * Also flushes the cache for all pages of an event when the sponsor-list page for that event is edited.
+ * The sponsor-list page gets included on all other pages of that event.
+ *
+ * @param int $post_id ID of post updated.
+ */
+function reset_cache_check( $post_id ) {
+	$post = get_post( $post_id );
+	if ( 'lfe_sponsor' === $post->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
+		// a sponsor CPT has been updated so the whole site needs to be refreshed.
+		pantheon_wp_clear_edge_all();
+	} elseif ( 'sponsor-list' === $post->post_name && in_array( $post->post_type, $this->post_types ) ) {
+		// the sponsor-list page has been updated so all event pages need refreshing.
+		$args  = array(
+			'child_of'     => $post->parent,
+			'post_status'  => 'publish',
+			'no_found_rows'          => true,  // used to improve performance.
+			'update_post_meta_cache' => false, // used to improve performance.
+			'update_post_term_cache' => false, // used to improve performance.
+		);
+		$the_query = new WP_Query( $args );
+
+		$keys_to_clear = array();
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$keys_to_clear[] = 'post-' . $post->ID;
+			}
+		}
+
+		wp_reset_postdata(); // Restore original Post Data.
+		pantheon_wp_clear_edge_keys( $keys_to_clear );
+	}
+}
