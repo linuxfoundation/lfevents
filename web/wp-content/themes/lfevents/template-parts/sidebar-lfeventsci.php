@@ -52,7 +52,7 @@ wp_reset_postdata();
   </script>
 
 <input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
-<p class="text-small">You may unsubscribe at any time. For more information please see our <a target="_blank" href="https://www.linuxfoundation.org/privacy/">Privacy Policy <?php echo esc_html( get_template_part( 'template-parts/svg/external-link' ) ); ?></a>.</p>
+<p class="text-tiny">You may unsubscribe at any time. For more information please see our <a target="_blank" href="https://www.linuxfoundation.org/privacy/">Privacy Policy <?php echo esc_html( get_template_part( 'template-parts/svg/external-link' ) ); ?></a>.</p>
 </form>
 <script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script> <?php //phpcs:ignore ?>
 <script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152844"></script> <?php //phpcs:ignore ?>
