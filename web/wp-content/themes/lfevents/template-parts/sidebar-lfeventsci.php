@@ -27,6 +27,33 @@ if ( $query->have_posts() ) {
 wp_reset_postdata();
 ?>
 <p class="xlarge-margin-bottom"><a href="<?php echo esc_url( home_url( '/about/news' ) ); ?>"><strong>More News&hellip;</strong></a></p>
+<h4 class="medium-margin-bottom">Newsletter Sign-up</h4>
+<p>Sign up for the LF Events newsletter to learn about upcoming events!</p>
+<div id="message"></div>
+<form id="sfmc-form" class="xlarge-margin-bottom" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events">
+  <label for="FirstName">
+	<input type="text" name="FirstName" placeholder="First name" required="">
+  </label>
+  <label for="LastName">
+	<input type="text" name="LastName" placeholder="Last name" required="">
+  </label>
+  <label for="EmailAddress">
+	<input type="email" name="EmailAddress" placeholder="Email address" required="">
+  </label>
+
+  <input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
+  <input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
+  <div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+
+  <script>
+	document.getElementById('txtUrl').value = window.location.href;
+  </script>
+
+<input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
+<p class="text-small">You may unsubscribe at any time. For more information please see our <a target="_blank" href="https://www.linuxfoundation.org/privacy/">Privacy Policy <?php echo esc_html( get_template_part( 'template-parts/svg/external-link' ) ); ?></a>.</p>
+</form>
+<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script> <?php //phpcs:ignore ?>
+<script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152844"></script> <?php //phpcs:ignore ?>
 
 <h4 class="medium-margin-bottom large-margin-top">Community Events</h4>
 <?php
