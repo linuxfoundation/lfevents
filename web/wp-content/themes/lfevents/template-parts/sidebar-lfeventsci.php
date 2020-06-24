@@ -28,7 +28,6 @@ wp_reset_postdata();
 ?>
 <p class="xlarge-margin-bottom"><a href="<?php echo esc_url( home_url( '/about/news' ) ); ?>"><strong>More News&hellip;</strong></a></p>
 
-<hr>
 <h4 class="medium-margin-bottom">Newsletter Sign-up</h4>
 <p>Sign up for the LF Events newsletter to learn about upcoming events!</p>
 <div id="message"></div>
@@ -56,7 +55,6 @@ wp_reset_postdata();
 </form>
 <script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script> <?php //phpcs:ignore ?>
 <script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152844"></script> <?php //phpcs:ignore ?>
-<hr>
 
 <h4 class="medium-margin-bottom large-margin-top">Community Events</h4>
 <?php
