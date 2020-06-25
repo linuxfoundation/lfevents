@@ -89,14 +89,8 @@ form.searchandfilter {
         }
       }
 
-      @include breakpoint(large) {
-        width: 38%;
-      }
-
       &.sf-field-reset {
-        @include breakpoint(medium) {
-          max-width: 24%;
-        }
+          max-width: 50%;
       }
     }
 
@@ -152,6 +146,24 @@ form.searchandfilter {
       box-shadow: none;
     }
   }
+}
+
+body:not(.home) form.searchandfilter {
+  margin-bottom: $global-margin;
+
+  > ul {
+
+    > li {
+      @include breakpoint(large) {
+        width: 38%;
+      }
+
+      &.sf-field-reset {
+        @include breakpoint(medium) {
+          max-width: 24%;
+        }
+      }
+    }
 }
 
 .results-count {
