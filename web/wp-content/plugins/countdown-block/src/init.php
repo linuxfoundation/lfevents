@@ -102,7 +102,7 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 	if ( $time_left > 0 ) {
 		return '<div data-nosnippet ' . ( '' == $block_id ? '' : 'id="ub_countdown_' . $block_id . '"' ) . 'class="ub-countdown' .
 				( isset( $class_name ) ? ' ' . esc_attr( $class_name ) : '' ) .
-				'" data-expirymessage="' . esc_attr( $expiry_message ) . '" data-end_date="' . $end_date . '">
+				'" data-expirymessage="' . esc_attr( $expiry_message ) . '" data-expiryalign="' . esc_attr( $message_align ) . '" data-end_date="' . $end_date . '">
 			' . $selected_format
 			. '</div>';
 	} else {
