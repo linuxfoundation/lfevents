@@ -1,6 +1,6 @@
 # LFEvents Form Code
 
-This page lists the form code needed by site admins when setting up a new Event.  The code should be copied into a Gutenberg HTML block.  In each, the `<form action="..."` should be set to the appropriate SFMC endpoint.  The `<script>` tag pointing at "events.linuxfoundation.org..." should be set to "www.lfasiallc.cn..." for the China site.
+This page lists the form code needed by site admins when setting up a new Event.  The code should be copied into a Gutenberg HTML block.  In each, the `<form action="..."` should be set to the appropriate SFMC endpoint.
 
 ## Table of Contents
 - Newsletter - *now available as Gutenberg block!*
@@ -17,8 +17,8 @@ Parameters to change
 - `<form action=...` attribute to be the url where the form submits for the particular Event
 
 ```html
-<div id="message"></div>
-<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/CNCF-KubeCon-Newsletter-Form-China">
+<div id="sfmc-message1"></div>
+<form id="sfmc-form1" action="https://cloud.email.thelinuxfoundation.org/CNCF-KubeCon-Newsletter-Form-China">
 
   <div class="grid-x grid-margin-x">
     <label class="cell medium-6" for="FirstName">
@@ -40,25 +40,22 @@ Parameters to change
 
   <input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
   <input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
-  <div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
-
+  <div id="recaptcha-form1" style="display:none;"></div>
   <script>
     document.getElementById('txtUrl').value = window.location.href;
   </script>
 
-  <input class="button expanded" type="submit" value="SIGN UP!" id="submitbtn">
+  <input class="button expanded" type="submit" value="SIGN UP!" id="sfmc-submit1">
 </form>
 
-<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
-<script defer="" src="https://www.lfasiallc.cn/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152844"></script>
 ```
 
 
 ## Contact Us
 
 ```html
-<div id="message"></div>
-<form name="sfmc-form" id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission---Contact-Us">
+<div id="sfmc-message1"></div>
+<form id="sfmc-form1" action="https://cloud.email.thelinuxfoundation.org/Submission---Contact-Us">
 
 <div class="grid-x grid-margin-x large-margin-bottom">
   <div class="cell medium-6">
@@ -330,23 +327,21 @@ Parameters to change
 
 
 <input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
-<input class="button large expanded large-margin-top" type="submit" value="Submit" id="submitbtn">
-<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+<input class="button large expanded large-margin-top" type="submit" value="Submit" id="sfmc-submit1">
+<div id="recaptcha-form1" style="display:none;"></div>
 </form>
 
 <script>
 document.getElementById('txtUrl').value = window.location.href;
 </script>
 
-<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
-<script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152849"></script>
 ```
 
 ## Kubecon Sponsor
 
 ```html
-<div id="message"></div>
-<form name="sfmc-form" id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission-Sponsorship-Page">
+<div id="sfmc-message1"></div>
+<form id="sfmc-form1" action="https://cloud.email.thelinuxfoundation.org/Submission-Sponsorship-Page">
 
 <div class="grid-x grid-margin-x large-margin-bottom">
   <div class="cell medium-6">
@@ -714,192 +709,18 @@ document.getElementById('txtUrl').value = window.location.href;
 
 
 <input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
-<input class="button large expanded large-margin-top" type="submit" value="Submit" id="submitbtn">
-<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+<input class="button large expanded large-margin-top" type="submit" value="Submit" id="sfmc-submit1">
+<div id="recaptcha-form1" style="display:none;"></div>
 </form>
 
 <script>
 document.getElementById('txtUrl').value = window.location.href;
 </script>
 
-<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
-<script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152849"></script>
 ```
 
 ## Travel Fund Request
-Parameters to change
-- `<input name="event" value="...` attribute to be the event id
 
 ```html
-<form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
-  <input type="hidden" name="event" id="event" value="a0A2M00000Vc2xa">
-
-  <div class="grid-x grid-margin-x">
-    <div class="cell medium-6">
-      <label>
-        First name *
-        <input type="text" name="firstName" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Last name *
-        <input type="text" name="lastName" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Email *
-        <input type="email" name="emailAddress" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Company or Organization *
-        <input type="text" name="CompanyName" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Can you receive funds from your organization? *
-        <select id="receivedFunds" name="receivedFunds" required>
-          <option value="No">No</option>
-          <option value="Partial">Partial Assistance</option>
-        </select>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Link to your LinkedIn, personal website or GitHub page *
-        <input type="text" name="socialLink" required>
-      </label>
-    </div>
-    <div class="cell large-12" id="orgPayingDiv" style="display:none">
-      <label>
-        If you checked Partial Assistance above, please explain what the company will or will not pay for *
-        <textarea rows="2" type="text" id="orgPaying" name="orgPaying"></textarea>
-      </label>
-    </div>
-    <div class="cell large-12">
-      <label>
-        Briefly describe the ways in which you are involved in technology and/or open source communities, and why you’d like to attend this conference *
-        <textarea rows="4" type="text" name="reasonToAttend" required></textarea>
-      </label>
-    </div>
-    <div class="cell large-12">
-      <label>Do you belong to an underrepresented and/or marginalized group? Please check all that apply:</label>
-      <fieldset class="large-5 cell">
-        <input type="checkbox" name="group" id="groupLGBTQ" value="LGBTQ"><label for="groupLGBTQ">LGBTQ</label>
-        <input type="checkbox" name="group" id="groupWoman" value="Woman"><label for="groupWoman">Woman</label>
-        <input type="checkbox" name="group" id="groupPoC" value="Person of Color"><label for="groupPoC">Person of Color</label>
-        <input type="checkbox" name="group" id="groupPwD" value="Person with Disability"><label for="groupPwD">Person with Disability</label>
-        <input type="checkbox" name="group" id="groupOther" onclick="toggleOtherInput(this)" value="Other"><label for="groupOther">Other</label>
-      </fieldset>
-    </div>
-    <div class="cell medium-6" id="otherDescriptionDiv" style="display:none">
-      <label>
-        <input type="text" placeholder="Please describe your group" name="otherDescription" id="otherDescription">
-      </label>
-    </div>
-  </div>
-  <div class="grid-x grid-margin-x">
-
-    <div class="cell medium-6">
-      <label>
-        Where would you be travelling from? *
-        <input type="text" name="travellingFrom" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        How many nights do you require hotel accommodations? (up to 4 nights only) *
-        <input type="number" name="numOfNights" min="1" max="4" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Estimated travel costs ($USD) for event (include all costs you are requesting, including airfare and hotel accommodations) *
-        <input type="number" name="estimateCost" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Are you attending on behalf of a company?
-        <select name="attendingBehalfofComp" required>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-      Are you willing to write a blog about your experience at the event?
-        <select name="writingBlog" required>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </label>
-    </div>
-
-  </div>
-
-  <hr style="margin-top:1rem;margin-bottom:1.5rem;" />
-
-  <div class="grid-x grid-margin-x">
-    <div class="cell large-12">
-      <h5>Estimated Expenses</h5>
-      <p>Please provide estimates (cost and screenshot) for accommodation and airfare, should you require both.</p>
-      <p>Please note:</p>
-      <ul>
-        <li>Accommodation estimates can be a hotel, hostel, AirBnB, etc. Please make sure you are taking into account the number of nights you require in your estimate total (up to 4 nights only)</li>
-        <li>Airfare estimate should reflect coach airfare only</li>
-      </ul>
-    </div>
-  </div>
-  <div id="lineItemFormList">
-  <div class="grid-x grid-margin-x" id="lineItem0" style="margin: 1.5rem; border-bottom: 1px #ddd dotted;">
-    <div class="cell medium-6">
-      <label>
-        Name (e.g. Hyatt or American Airlines) *
-        <input type="text" class="cloneThis" name="expenses.0.Name" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Type *
-        <select name="expenses.0.Type" class="cloneThis" required>
-          <option value="Hotel">Hotel</option>
-          <option value="Air">Air</option>
-        </select>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Price ($USD) *
-        <input type="number" class="cloneThis" name="expenses.0.Value" required>
-      </label>
-    </div>
-    <div class="cell medium-6">
-      <label>
-        Upload Estimated Expenses *
-        <input type="file" class="cloneThis" name="expenses.0.fileToUpload" required accept="image/jpeg,image/png,application/pdf,image/tiff">
-      </label>
-    </div>
-    <div class="cell medium-3">
-      <input style="display:none"  class="button cloneThis" type="button" data-line-item="0" value="Remove Expense Item" onclick="return confirm('Are you sure you want to delete this line item?') ? removeThis(this): false;"/>
-    </div>
-  </div>
-  </div>
-  <div class="cell medium-3">
-      <input class="button" type="button" value="Add Another Expense Item" onClick="addnewForm();" />
-  </div>
-  <div data-callback="onTFSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
-  <hr style="margin-top:1rem;margin-bottom:1.5rem;" />
-
-
-  <input class="button large expanded" id="submitbtn" type="submit" value="Request Travel Fund">
-</form>
-<div id="message"></div>
-<script type='text/javascript' defer src='https://www.recaptcha.net/recaptcha/api.js?ver=1'></script>
-<script type='text/javascript' defer src='https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/travel-fund-form.js?ver=1581396079'></script>
+TBD
 ```
