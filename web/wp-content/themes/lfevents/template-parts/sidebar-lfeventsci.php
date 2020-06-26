@@ -47,7 +47,7 @@ if ( $query->have_posts() ) {
 		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
 		echo '<h5 class="text-medium no-margin">';
-		echo '<a class="prevent-orphaned-icon" target="_blank" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
+		echo '<a class="prevent-orphaned-icon" target="_blank" rel="noopener noreferrer" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
 		echo esc_html( get_the_title() );
 		echo '&nbsp;';
 		echo esc_html( get_template_part( 'template-parts/svg/external-link' ) );
