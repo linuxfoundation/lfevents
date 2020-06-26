@@ -3,7 +3,7 @@
  * Plugin Name: WP RSS Aggregator - Feed to Post
  * Plugin URI: https://www.wprssaggregator.com/#utm_source=wpadmin&utm_medium=plugin&utm_campaign=wpraplugin
  * Description: Adds feed-to-post conversion functionality to WP RSS Aggregator.
- * Version: 3.11
+ * Version: 3.12
  * Author: RebelCode
  * Author URI: https://www.wprssaggregator.com
  * Text Domain: wprss
@@ -31,11 +31,12 @@
 use Aventura\Wprss\FeedToPost\Addon;
 use Aventura\Wprss\FeedToPost\Factory;
 use Psr\Container\ContainerInterface;
+use RebelCode\Wpra\FeedToPost\Modules\PostProtectorModule;
 use RebelCode\Wpra\FeedToPost\Modules\TemplatesModule;
 
 /* Set the version number of the plugin. */
 if( !defined( 'WPRSS_FTP_VERSION' ) )
-	define( 'WPRSS_FTP_VERSION', '3.11' );
+	define( 'WPRSS_FTP_VERSION', '3.12' );
 
 /* Set the database version number of the plugin. */
 if( !defined( 'WPRSS_FTP_DB_VERSION' ) )
@@ -185,6 +186,7 @@ add_action('plugins_loaded', function() {
     }
 
     wpra_load_module('f2p/templates', new TemplatesModule());
+    wpra_load_module('f2p/post_protector', new PostProtectorModule());
 });
 
 add_action('wpra_after_run', function ($c = null) {

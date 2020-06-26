@@ -20,7 +20,7 @@ function lfe_content_filter( $content ) {
 	}
 
 	$menu  = '<nav data-sticky-container>';
-	$menu .= '<div class="sticky" data-sticky data-margin-top="6" data-anchor="multi-part-page" data-sticky-on="large">';
+	$menu .= '<div class="sticky" data-sticky data-margin-top="8" data-anchor="multi-part-page" data-sticky-on="large">';
 	$menu .= '<h6 class="hide-for-large text-small">Skip to page section</h6>';
 	$menu .= '<ul id="multi-part-page--magellan" data-magellan data-deep-linking="true" data-update-history="false">';
 

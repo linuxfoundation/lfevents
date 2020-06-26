@@ -1,5 +1,5 @@
 {
-  "name": "alert-block-cgb-guten-block",
+  "name": "button-with-expiry-block",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,7 @@
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "cgb-scripts": "1.23.0"
+    "cgb-scripts": "1.23.0",
+    "classnames": "^2.2.6"
   }
 }

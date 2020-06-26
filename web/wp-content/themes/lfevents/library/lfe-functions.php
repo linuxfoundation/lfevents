@@ -51,6 +51,12 @@ function lfe_get_related_events( $parent_id ) {
 	} else {
 		$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
 
+		if ( empty( ! $term ) ) {
+			$term_if_present = $term[0];
+		} else {
+			$term_if_present = '';
+		}
+
 		$args = array(
 			'post_type'      => 'page',
 			'post_parent'    => 0,
@@ -60,7 +66,7 @@ function lfe_get_related_events( $parent_id ) {
 				array(
 					'taxonomy' => 'lfevent-category',
 					'field'    => 'term_id',
-					'terms'    => $term[0],
+					'terms'    => $term_if_present,
 				),
 			),
 			'meta_query'     => array(
@@ -154,7 +160,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
 
-	if ( $term[0] ) {
+	if ( ! empty( $term ) ) {
 		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"><span class="subtext">Past ' . esc_html( $term[0]->name ) . '</span></a></li>';
 	} else {
 		echo '<li><a href="https://events.linuxfoundation.org/about/calendar/archive/"><span class="subtext">All Past Events</span></a></li>';
@@ -187,9 +193,9 @@ add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
 /**
  * Returns markup for child pages for the Event menu.
  *
- * @param int     $parent_id Parent ID for Event.
- * @param string  $post_type Post type for Event.
- * @param string  $background_style sets the background color.
+ * @param int    $parent_id Parent ID for Event.
+ * @param string $post_type Post type for Event.
+ * @param string $background_style sets the background color.
  * @param boolean $footer Outputs footer navigation style.
  */
 function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer = null ) {
@@ -219,6 +225,7 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer 
 	$count = 0;
 
 	if ( $footer ) {
+		// output the menu at one level suitable for the footer.
 		foreach ( $pages as $page ) {
 			if ( strstr( $page, '<ul class=\'children\'>' ) ) {
 				$page = explode( '<ul class=\'children\'>', $page );
@@ -232,21 +239,24 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer 
 		$pages = strip_tags( $pages, '<li><a>' );
 
 	} else {
-		// now we remove the hyperlink for elements who have children.
-		foreach ( $pages as $page ) {
-			if ( strstr( $page, '<ul class=\'children\'>' ) ) {
-				$page    = explode( '<ul class=\'children\'>', $page );
-				$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
-				if ( count( $page ) == 3 ) {
-					$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
-				}
-				$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
+
+	// now we remove the hyperlink for elements who have children.
+	foreach ( $pages as $page ) {
+		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
+			$page    = explode( '<ul class=\'children\'>', $page );
+			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
+			if ( count( $page ) == 3 ) {
+				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
 			}
-			$pages[ $count ] = $page;
-			$count++;
+			$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
 		}
-		$pages = implode( '</li>', $pages );
+		$pages[ $count ] = $page;
+		$count++;
 	}
+	$pages = implode( '</li>', $pages );
+
+}
+
 
 	return $pages; //phpcs:ignore
 }
@@ -721,21 +731,6 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 }
 
 
-/**
- * Programmatically flushes the Pantheon site cache when a sponsor CPT is updated.
- * A sponsor could potentially show up on many pages so that's why we need such a heavy reset of the cache.
- *
- * @param int $post_id ID of post updated.
- */
-function lfe_save_post_hook( $post_id ) {
-	$post = get_post( $post_id );
-	if ( 'lfe_sponsor' === $post->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
-		pantheon_wp_clear_edge_all();
-	}
-}
-add_action( 'save_post', 'lfe_save_post_hook' );
-
-
 // The WP REST API is cached heavily by Pantheon so we need to explicitly exclude certain calls from the cache.
 // From https://pantheon.io/docs/mu-plugin#wp-rest-api-code-classlanguage-textwp-jsoncode-endpoints-cache.
 $regex_json_path_patterns = array(
@@ -806,3 +801,43 @@ function lfe_dequeue_style() {
 	wp_dequeue_style( 'conditional-blocks-front-css' );
 }
 add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );
+
+/**
+ * Gets HTML for an alert bar inserted at the top of Events when set.
+ *
+ * @param int $parent_id Parent ID.
+ */
+function lfe_event_alert_bar( $parent_id ) {
+
+	// if no alert text is set, return.
+	$alert_text = get_post_meta( $parent_id, 'lfes_alert_text', true );
+	if ( ! $alert_text ) {
+		return;
+	}
+
+	// check for expiry date and expired date.
+	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
+	if ( $expiry_date ) {
+		$dt_expiry          = new DateTime( $expiry_date );
+		$dt_expiry_1d_after = new DateTime( $expiry_date );
+		$dt_expiry_1d_after->add( new DateInterval( 'P1D' ) );
+		$dt_now = new DateTime( 'now' );
+		if ( $dt_expiry_1d_after < $dt_now ) {
+			// alert has expired.
+			return;
+		}
+	}
+
+	// get alert text color or set default.
+	$alert_text_color = get_post_meta( $parent_id, 'lfes_alert_text_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_text_color', true ) : '#FFFFFF';
+
+	// get alert background color or set default.
+	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_background_color', true ) : '#0082ad';
+
+	$out  = '<div class="event-alert-bar" style="color: ' . esc_html( $alert_text_color ) . '; background-color: ' . esc_html( $alert_background_color ) . ';">';
+	$out .= preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a href="$2">$1</a>', $alert_text );
+	$out .= '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline small-margin-left"><path fill="currentColor" d="M363.8 264.5L217 412.5c-4.7 4.7-12.3 4.7-17 0l-19.8-19.8c-4.7-4.7-4.7-12.3 0-17L298.7 256 180.2 136.3c-4.7-4.7-4.7-12.3 0-17L200 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17zm-160-17L57 99.5c-4.7-4.7-12.3-4.7-17 0l-19.8 19.8c-4.7 4.7-4.7 12.3 0 17L138.7 256 20.2 375.7c-4.7 4.7-4.7 12.3 0 17L40 412.5c4.7 4.7 12.3 4.7 17 0l146.8-148c4.7-4.7 4.7-12.3 0-17z" class=""></path></svg>';
+	$out .= '</div>';
+
+	echo $out; //phpcs:ignore
+}

@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Alert Block
- * Description: Custom alert Gutenberg block.
+ * Plugin Name: Button With Expiry Block
+ * Description: Gutenberg block which allows for insertion of a button with expiry in a page/post.
  * Author: fuerzastudio
  * Version: 1.0.0
  * License: GPL2+

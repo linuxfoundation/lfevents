@@ -145,7 +145,19 @@ final class WPRSS_FTP_Appender {
 		// Return the append/prepend text with all placeholders replaced with their respective text value
 		$return = WPRSS_FTP_Utils::str_mass_replace( $append, $values );
 		$return = apply_filters( 'wprss_ftp_handled_append_text', $return, $post->ID );
-		return $wpautop === TRUE? wpautop( $return ) : $return;
+		// Automatically add <p> tags if the arg is enabled
+		$return = $wpautop === TRUE? wpautop( $return ) : $return;
+
+        // Retrieve the WP Embed global shortcode class
+        $wpEmbed = $GLOBALS['wp_embed'];
+        // Auto change URLs on their own line into embeds
+        $return = $wpEmbed->autoembed($return);
+        // Handle [embed] shortcodes
+        $return = $wpEmbed->run_shortcode($return);
+        // Apply other shortcodes to the content
+        $return = do_shortcode($return);
+
+        return $return;
 	}
 
 }

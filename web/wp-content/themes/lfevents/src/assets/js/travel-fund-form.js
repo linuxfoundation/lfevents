@@ -13,9 +13,11 @@ window.fileSizeValidation = fileSizeValidation;
 
 let travelFundForm = document.getElementById( "travelFundForm" );
 let formSubmission = 0;
+var message = document.getElementById( "message" );
 function onTFSubmit(token) {
 	travelFundForm.style.display = "none";
-	$( "#message" ).html( "Sending your travel fund request..." ).addClass( "callout success" );
+	$( "#message" ).html( "Sending your travel fund request..." ).addClass( "callout warning" );
+	message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 
 	let fd = new FormData( travelFundForm );
 
@@ -55,13 +57,15 @@ function onTFSubmit(token) {
 			if ( response.status === 0 ) {
 				let msg = response.message;
 				if ( msg.includes( "DUPLICATE_VALUE" ) ) {
-					$( "#message" ).html( "You have already submitted a travel funding request for this event." ).addClass( "callout success" );
+					$( "#message" ).html( "ERROR: You have already submitted a travel funding request for this event. Please contact travelfund@linuxfoundation.org for further assistance." ).removeClass( "warning" ).addClass( "alert" );
+					message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 				}
 			}
 		}
 	}
 	xhttp.onerror = function () {
-		alert( "Some error occurred during travel request creation!" );
+		$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." ).removeClass( "warning" ).addClass( "alert" );
+		message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 	}
 	xhttp.open( 'POST', travelFundForm.getAttribute( "action" ), true );
 	xhttp.send( fd );
@@ -235,7 +239,8 @@ function uploadFiles( lineItems, filesToUpload ) {
 
 function updateMessage(success, fail) {
 	if (fail == 0) {
-		$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).addClass( "callout success" );
+		$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).removeClass( "warning" ).addClass( "success" );
+		message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 	} else {
 		alert( 'There were some errors while uploading file(s)' );
 	}

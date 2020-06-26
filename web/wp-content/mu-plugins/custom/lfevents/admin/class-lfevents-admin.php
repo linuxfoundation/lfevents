@@ -772,6 +772,63 @@ class LFEvents_Admin {
 							),
 						),
 						array(
+							'label'    => __( 'Alert Bar' ),
+							'initial_open' => false,
+							'settings' => array(
+								array(
+									'type'          => 'textarea', // Required.
+									'id'            => 'alert_text',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_text', // Required if 'data_type' is 'meta'.
+									'label'         => __( 'Alert Message' ),
+									'help'          => __( 'Links should be written in markdown format [like this](https://google.com)' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '',
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'alert_expiry_date',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_expiry_date',
+									'label'         => __( 'Expiry Date', 'my_plugin' ),
+									'help'          => __( 'Optional' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => 'YYYY/MM/DD',
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'alert_text_color',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Text Color' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => array(
+										'white' => '#ffffff',
+										'black' => '#000000',
+									),
+								),
+								array(
+									'type'          => 'color',
+									'id'            => 'alert_background_color',
+									'data_type'     => 'meta',
+									'data_key'      => 'alert_background_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'label'         => __( 'Background Color' ),
+									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
+									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
+									'alpha_control' => false, // Include alpha control to set color transparency.
+									'palette'       => $palette,
+								),
+
+							),
+						),
+						array(
 							'label'    => __( 'Advanced' ),
 							'initial_open' => false,
 							'settings' => array(
@@ -781,7 +838,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'hide_from_listings', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Hide from Homepage and Calendars' ),
-									'help'          => __( 'This will hide the Event form the homepage and calendars.' ),
+									'help'          => __( 'This will hide the Event from the homepage and calendars.' ),
 									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
 									'ui_border_top' => true, // Display CSS border-top in the editor control.
 									'default_value' => 'show',
@@ -1182,6 +1239,40 @@ class LFEvents_Admin {
 			update_post_meta( $post_id, '_genesis_noindex', true );
 		} else {
 			delete_post_meta( $post_id, '_genesis_noindex' );
+		}
+	}
+
+	/**
+	 * Programmatically flushes the Pantheon site cache when a sponsor CPT is updated.
+	 * A sponsor could potentially show up on many pages so that's why we need such a heavy reset of the cache.
+	 * Also flushes the cache for all pages of an event when the sponsor-list page for that event is edited.
+	 * The sponsor-list page gets included on all other pages of that event.
+	 *
+	 * @param int $post_id ID of post updated.
+	 */
+	public function reset_cache_check( $post_id ) {
+		global $post;
+		$post_saved = get_post( $post_id );
+		if ( 'lfe_sponsor' === $post_saved->post_type && function_exists( 'pantheon_wp_clear_edge_all' ) ) {
+			// a sponsor CPT has been updated so the whole site needs to be refreshed.
+			pantheon_wp_clear_edge_all();
+		} elseif ( 'sponsor-list' === $post_saved->post_name && in_array( $post_saved->post_type, $this->post_types ) ) {
+			// the sponsor-list page has been updated so all event pages need refreshing.
+
+			$args  = array(
+				'child_of'    => $post_saved->post_parent,
+				'exclude'     => $post_id,
+				'post_type'   => $post_saved->post_type,
+				'post_status' => 'publish',
+			);
+			$pages = get_pages( $args );
+
+			$keys_to_clear = array( 'post-' . $post_saved->post_parent );
+			foreach ( $pages as $p ){
+				$keys_to_clear[] = 'post-' . $p->ID;
+			}
+
+			pantheon_wp_clear_edge_keys( $keys_to_clear );
 		}
 	}
 }

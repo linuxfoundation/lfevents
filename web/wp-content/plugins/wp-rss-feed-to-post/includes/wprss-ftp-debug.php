@@ -21,12 +21,16 @@ final class WPRSS_FTP_Debug {
 	public function __construct() {
 		if ( self::$instance === NULL ) {
 
-			// Add a 'Remove all posts' button to the debugging page
-			add_filter( 'wprss_debug_operations', array( $this, 'debug_operations' ) );
-			add_filter( 'wprss_debug_messages', array( $this, 'debug_messages' ) );
+		    $coreHasToolsPage = version_compare(WPRSS_VERSION, '4.17', '>=');
 
-			// Add an action before posts are deleted
-			add_action( 'before_delete_post', array( $this, 'before_delete_post' ) );
+		    if (!$coreHasToolsPage) {
+                // Add a 'Remove all posts' button to the debugging page
+                add_filter( 'wprss_debug_operations', array( $this, 'debug_operations' ) );
+                add_filter( 'wprss_debug_messages', array( $this, 'debug_messages' ) );
+            }
+
+            // Add an action before posts are deleted
+            add_action( 'before_delete_post', array( $this, 'before_delete_post' ) );
 
 			// Add hooks for cron jobs
 			add_action( 'delete_all_plugin_posts_hook', array( $this, 'delete_all_plugin_posts' ) );
