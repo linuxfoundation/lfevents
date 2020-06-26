@@ -131,12 +131,12 @@ class LFEvents_Admin {
 		register_post_type( 'lfe_about_page', $opts );
 
 		$opts = array(
-			'public'       => true,
-			'has_archive'  => true,
-			'show_in_rest' => true,
-			'hierarchical' => true,
-			'menu_icon'    => 'dashicons-admin-page',
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes', 'author' ),
+			'public'        => true,
+			'has_archive'   => true,
+			'show_in_rest'  => true,
+			'hierarchical'  => true,
+			'menu_icon'     => 'dashicons-admin-page',
+			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes', 'author' ),
 			'menu_position' => 30,
 		);
 
@@ -159,7 +159,7 @@ class LFEvents_Admin {
 				'all_items'     => __( 'All Speakers' ),
 			),
 			'show_in_rest' => true,
-			'public' => true,
+			'public'       => true,
 			'menu_icon'    => 'dashicons-groups',
 			'rewrite'      => array( 'slug' => 'speakers' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
@@ -174,7 +174,7 @@ class LFEvents_Admin {
 				'all_items'     => __( 'All Sponsors' ),
 			),
 			'show_in_rest' => true,
-			'public' => true,
+			'public'       => true,
 			'menu_icon'    => 'dashicons-star-filled',
 			'rewrite'      => array( 'slug' => 'sponsors' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
@@ -183,18 +183,21 @@ class LFEvents_Admin {
 		register_post_type( 'lfe_sponsor', $opts );
 
 		$opts = array(
-			'labels'       => array(
+			'labels'              => array(
 				'name'          => __( 'Community Events' ),
 				'singular_name' => __( 'Community Event' ),
 				'all_items'     => __( 'All Community Events' ),
 			),
-			'public'       => true,
-			'has_archive'  => true,
-			'show_in_rest' => true,
-			'hierarchical' => true,
-			'menu_icon'    => 'dashicons-admin-site',
-			'rewrite'      => array( 'slug' => 'community' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
+			'public'              => true,
+			'has_archive'         => false,
+			'show_in_nav_menus'   => false,
+			'show_in_rest'        => true,
+			'hierarchical'        => true,
+			'exclude_from_search' => true, // to hide the singular pages on FE.
+			'publicly_queryable'  => false, // to hide the singular pages on FE.
+			'menu_icon'           => 'dashicons-admin-site',
+			'rewrite'             => array( 'slug' => 'community' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
 		);
 
 		register_post_type( 'lfe_community_event', $opts );
@@ -254,7 +257,7 @@ class LFEvents_Admin {
 			'menu_name'         => __( 'Event Countries' ),
 		);
 
-		$args   = array(
+		$args = array(
 			'labels'       => $labels,
 			'show_in_rest' => true,
 			'hierarchical' => true,
@@ -271,33 +274,33 @@ class LFEvents_Admin {
 	public function create_sidebar( $sidebars ) {
 		// First we define the sidebar with it's tabs, panels and settings.
 		$palette = array(
-			'dark-fuschia' => '#6e1042',
-			'dark-violet' => '#411E4F',
-			'dark-indigo' => '#1A267D',
-			'dark-blue' => '#17405c',
-			'dark-aqua' => '#0e5953',
-			'dark-green' => '#0b5329',
+			'dark-fuschia'     => '#6e1042',
+			'dark-violet'      => '#411E4F',
+			'dark-indigo'      => '#1A267D',
+			'dark-blue'        => '#17405c',
+			'dark-aqua'        => '#0e5953',
+			'dark-green'       => '#0b5329',
 
-			'light-fuschia' => '#AD1457',
-			'light-violet' => '#6C3483',
-			'light-indigo' => '#4653B0',
-			'light-blue' => '#2874A6',
-			'light-aqua' => '#148f85',
-			'light-green' => '#117a3d',
+			'light-fuschia'    => '#AD1457',
+			'light-violet'     => '#6C3483',
+			'light-indigo'     => '#4653B0',
+			'light-blue'       => '#2874A6',
+			'light-aqua'       => '#148f85',
+			'light-green'      => '#117a3d',
 
-			'dark-chartreuse' => '#3d5e0f',
-			'dark-yellow' => '#878700',
-			'dark-gold' => '#8c7000',
-			'dark-orange' => '#784e12',
-			'dark-umber' => '#6E2C00',
-			'dark-red'   => '#641E16',
+			'dark-chartreuse'  => '#3d5e0f',
+			'dark-yellow'      => '#878700',
+			'dark-gold'        => '#8c7000',
+			'dark-orange'      => '#784e12',
+			'dark-umber'       => '#6E2C00',
+			'dark-red'         => '#641E16',
 
 			'light-chartreuse' => '#699b23',
-			'light-yellow' => '#b0b000',
-			'light-gold' => '#c29b00',
-			'light-orange' => '#c2770e',
-			'light-umber' => '#b8510d',
-			'light-red'   => '#922B21',
+			'light-yellow'     => '#b0b000',
+			'light-gold'       => '#c29b00',
+			'light-orange'     => '#c2770e',
+			'light-umber'      => '#b8510d',
+			'light-red'        => '#922B21',
 		);
 
 		$sidebar = array(
@@ -312,9 +315,9 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General' ),
+							'label'        => __( 'General' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'textarea',
 									'id'            => 'description',
@@ -325,7 +328,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'placeholder'        => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
+									'placeholder'   => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
 								),
 								array(
 									'type'          => 'text',
@@ -337,7 +340,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -349,7 +352,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -372,7 +375,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'List on general visa request form', 'my_plugin' ),
+									'input_label'   => __( 'List on general visa request form', 'my_plugin' ),
 								),
 								array(
 									'type'          => 'checkbox',
@@ -383,7 +386,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'List on general travel fund form', 'my_plugin' ),
+									'input_label'   => __( 'List on general travel fund form', 'my_plugin' ),
 								),
 								array(
 									'type'          => 'text',
@@ -399,26 +402,26 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Design' ),
+							'label'        => __( 'Design' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
-									'type'            => 'image',
-									'id'              => 'white_logo',
-									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'white_logo',
-									'label'           => __( 'White logo', 'my_plugin' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
+									'type'          => 'image',
+									'id'            => 'white_logo',
+									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'      => 'white_logo',
+									'label'         => __( 'White logo', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
 								),
 								array(
-									'type'            => 'image',
-									'id'              => 'black_logo',
-									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'black_logo',
-									'label'           => __( 'Black logo', 'my_plugin' ),
-									'register_meta'   => true,
-									'ui_border_top'   => false,
+									'type'          => 'image',
+									'id'            => 'black_logo',
+									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'      => 'black_logo',
+									'label'         => __( 'Black logo', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
 								),
 								array(
 									'type'          => 'color',
@@ -470,27 +473,27 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => 'white', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
-									'options'         => array(
+									'options'       => array(
 										'white' => __( 'White', 'my_plugin' ),
 										'black' => __( 'Black', 'my_plugin' ),
 									),
 								),
 								array(
-									'type'            => 'image',
-									'id'              => 'favicon',
-									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'favicon',
-									'label'           => __( 'Favicon', 'my_plugin' ),
-									'help'            => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
+									'type'          => 'image',
+									'id'            => 'favicon',
+									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'      => 'favicon',
+									'label'         => __( 'Favicon', 'my_plugin' ),
+									'help'          => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
 								),
 							),
 						),
 						array(
-							'label'    => __( 'Location' ),
+							'label'        => __( 'Location' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'city',
@@ -549,9 +552,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Call for Proposal' ),
+							'label'        => __( 'Call for Proposal' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'checkbox',
 									'id'            => 'cfp_active',
@@ -561,7 +564,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => true,
 									'use_toggle'    => false,
-									'input_label'     => __( 'CFP for Event', 'my_plugin' ),
+									'input_label'   => __( 'CFP for Event', 'my_plugin' ),
 								),
 								array(
 									'type'          => 'text',
@@ -572,7 +575,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -584,22 +587,22 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 							),
 						),
 						array(
-							'label'    => __( 'Social' ),
+							'label'        => __( 'Social' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
-									'type'            => 'image',
-									'id'              => 'wechat',
-									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'wechat',
-									'label'           => __( 'WeChat QR code', 'my_plugin' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
+									'type'          => 'image',
+									'id'            => 'wechat',
+									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_key'      => 'wechat',
+									'label'         => __( 'WeChat QR code', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
 								),
 								array(
 									'type'          => 'text',
@@ -659,9 +662,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Homepage Tile' ),
+							'label'        => __( 'Homepage Tile' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'cta_register_url',
@@ -707,7 +710,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -724,9 +727,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Alert Bar' ),
+							'label'        => __( 'Alert Bar' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'textarea',
 									'id'            => 'alert_text',
@@ -781,9 +784,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Advanced' ),
+							'label'        => __( 'Advanced' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'radio',
 									'id'            => 'hide_from_listings',
@@ -794,7 +797,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => 'show',
-									'options'         => array(
+									'options'       => array(
 										'show' => __( 'Show', 'my_plugin' ),
 										'hide' => __( 'Hide', 'my_plugin' ),
 									),
@@ -809,7 +812,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '0',
-									'options'         => array(
+									'options'       => array(
 										'1' => __( 'True', 'my_plugin' ),
 										'0' => __( 'False', 'my_plugin' ),
 									),
@@ -872,9 +875,9 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General' ),
+							'label'        => __( 'General' ),
 							'initial_open' => true,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'checkbox',
 									'id'            => 'hide_from_menu',
@@ -1005,18 +1008,18 @@ class LFEvents_Admin {
 									'placeholder'   => __( 'https://cloud.google.com/' ),
 								),
 								array(
-									'type'            => 'range',
-									'id'              => 'size',
-									'data_type'       => 'meta',
-									'data_key'        => 'size',
-									'label'           => __( 'Size Adjustment %', 'my_plugin' ),
-									'help'            => __( '100% is a normal sized logo; 80% is smaller; 120% is larger', 'my_plugin' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => 100,
-									'step'            => 1,
-									'min'             => 50,
-									'max'             => 150,
+									'type'          => 'range',
+									'id'            => 'size',
+									'data_type'     => 'meta',
+									'data_key'      => 'size',
+									'label'         => __( 'Size Adjustment %', 'my_plugin' ),
+									'help'          => __( '100% is a normal sized logo; 80% is smaller; 120% is larger', 'my_plugin' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => 100,
+									'step'          => 1,
+									'min'           => 50,
+									'max'           => 150,
 								),
 							),
 						),
@@ -1041,9 +1044,9 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General' ),
+							'label'        => __( 'General' ),
 							'initial_open' => true,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'city',
@@ -1065,7 +1068,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -1077,7 +1080,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -1244,7 +1247,7 @@ function get_kids( $post_id ) {
 
 	foreach ( $kid_posts as $kid ) {
 		$kid_ids[] = $kid->ID;
-		$kid_ids = array_merge( $kid_ids, get_kids( $kid->ID ) );
+		$kid_ids   = array_merge( $kid_ids, get_kids( $kid->ID ) );
 	}
 
 	return $kid_ids;
