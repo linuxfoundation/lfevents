@@ -11,10 +11,11 @@
  */
 jQuery(
 	function( $ ) {
+		
 		var PS = PS || {};
 		let widget_1; let widget_2;
 		let recaptcha_site_key = '6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ';
-
+		
 		if ( typeof PS.RECAPTCHA === 'undefined' ) {
 			( function( a, $ ) {
 				let retryTime = 300;
@@ -78,7 +79,8 @@ jQuery(
 			}( PS, $ ) );
 		}
 
-		$( window ).load(
+		$( window ).on(
+			'load',
 			function() {
 				PS.RECAPTCHA.init();
 			}
@@ -86,6 +88,7 @@ jQuery(
 
 		$( document ).ready(
 			function() {
+
 				let f1 = $( '#sfmc-form1' );
 				f1.on(
 					'click',
@@ -120,12 +123,12 @@ jQuery(
 					data: $( '#sfmc-form' + form ).serialize(),
 					beforeSend() {
 						$( '#sfmc-form' + form ).toggle();
-						$( '#sfmc-message' + form ).html( 'Thank you for your submission. Your request is being processed...' ).addClass( 'is-active' );
+						$( '#sfmc-message' + form ).html( 'Thank you for your submission. Your request is being processed...' ).addClass( 'callout warning' );
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 					},
 					success( response ) {
 						let msg = $( response ).find( 'p' ).text();
-						$( '#sfmc-message' + form ).html( msg ).addClass( 'success' );
+						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( 'success' );
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 						switch ( form ) {
 							case '1' : grecaptcha.reset( widget_1 ); break;
@@ -134,7 +137,7 @@ jQuery(
 					},
 					error( xhr, status, error ) {
 						let errorMessage = xhr.status + ': ' + xhr.statusText;
-						$( '#sfmc-message' + form ).html( 'There was an error processing your submission. Please try again or contact us directly at info@cncf.io<br>Error code: (' + errorMessage + ')' ).addClass( 'error' );
+						$( '#sfmc-message' + form ).html( 'There was an error processing your submission. Please try again or contact us directly at info@cncf.io<br>Error code: (' + errorMessage + ')' ).removeClass( "warning" ).addClass( "alert" );
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 					},
 				}
