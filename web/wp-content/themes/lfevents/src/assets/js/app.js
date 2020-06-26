@@ -26,3 +26,16 @@ document.getElementById( 'cookie-banner-button' ).addEventListener(
 	'click',
 	() => { cookieBanner.acceptCookie(); }
 );
+
+
+// Removes height from container.
+let removeHeaderHeight = function(){
+  if ($(window).width() < 1024) {
+  $('.sticky-container').css('height', 'auto');
+}
+}
+
+// Linked to Foundation Toggler.
+$(document).on('on.zf.toggler', '.event-header', function () {
+  removeHeaderHeight();
+});
