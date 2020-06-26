@@ -241,17 +241,17 @@ class LFEvents_Admin {
 		register_taxonomy( 'lfevent-category', $this->post_types, $args );
 
 		$labels = array(
-			'name'              => _x( 'Event Countries', 'taxonomy general name', 'textdomain' ),
-			'singular_name'     => _x( 'Event Country', 'taxonomy singular name', 'textdomain' ),
-			'search_items'      => __( 'Search Countries', 'textdomain' ),
-			'all_items'         => __( 'All Countries', 'textdomain' ),
-			'parent_item'       => __( 'Parent Continent', 'textdomain' ),
-			'parent_item_colon' => __( 'Parent Continent:', 'textdomain' ),
-			'edit_item'         => __( 'Edit Country', 'textdomain' ),
-			'update_item'       => __( 'Update Country', 'textdomain' ),
-			'add_new_item'      => __( 'Add New Country', 'textdomain' ),
-			'new_item_name'     => __( 'New Country Name', 'textdomain' ),
-			'menu_name'         => __( 'Event Countries', 'textdomain' ),
+			'name'              => _x( 'Event Countries', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Event Country', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Countries' ),
+			'all_items'         => __( 'All Countries' ),
+			'parent_item'       => __( 'Parent Continent' ),
+			'parent_item_colon' => __( 'Parent Continent:' ),
+			'edit_item'         => __( 'Edit Country' ),
+			'update_item'       => __( 'Update Country' ),
+			'add_new_item'      => __( 'Add New Country' ),
+			'new_item_name'     => __( 'New Country Name' ),
+			'menu_name'         => __( 'Event Countries' ),
 		);
 
 		$args   = array(
@@ -316,101 +316,83 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'          => 'textarea', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'textarea',
 									'id'            => 'description',
 									'data_type'     => 'meta',
-									'data_key'      => 'description', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'description',
 									'label'         => __( 'Event description', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
 								),
 								array(
-									'type'          => 'text', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'text',
 									'id'            => 'date_start',
 									'data_type'     => 'meta',
-									'data_key'      => 'date_start', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'date_start',
 									'label'         => __( 'Event start date', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'text', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'text',
 									'id'            => 'date_end',
 									'data_type'     => 'meta',
-									'data_key'      => 'date_end', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'date_end',
 									'label'         => __( 'Event end date', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'external_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'external_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'external_url',
 									'label'         => __( 'URL to External Event site' ),
 									'help'          => __( 'Set this value only when the Event site is located on an external site.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => 'https://www.cloudfoundry.org/event/summit/',
 								),
 								array(
-									'type'          => 'checkbox', // Required.
+									'type'          => 'checkbox',
 									'id'            => 'visa_request',
 									'data_type'     => 'meta',
-									'data_key'      => 'visa_request', // Required if 'data_type' is 'meta'.
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'data_key'      => 'visa_request',
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'List on general visa request form', 'my_plugin' ), // Required.
+									'input_label'     => __( 'List on general visa request form', 'my_plugin' ),
 								),
 								array(
-									'type'          => 'checkbox', // Required.
+									'type'          => 'checkbox',
 									'id'            => 'travel_fund_request',
 									'data_type'     => 'meta',
-									'data_key'      => 'travel_fund_request', // Required if 'data_type' is 'meta'.
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'data_key'      => 'travel_fund_request',
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'List on general travel fund form', 'my_plugin' ), // Required.
+									'input_label'     => __( 'List on general travel fund form', 'my_plugin' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'salesforce_id',
 									'data_type'     => 'meta',
-									'data_key'      => 'salesforce_id', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'salesforce_id',
 									'label'         => __( 'SalesForce ID' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => 'a0A2M00000VcC9HUAV',
 								),
@@ -421,34 +403,22 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'            => 'image', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'            => 'image',
 									'id'              => 'white_logo',
 									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'white_logo', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'        => 'white_logo',
 									'label'           => __( 'White logo', 'my_plugin' ),
-									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+									'register_meta'   => true,
+									'ui_border_top'   => true,
 								),
 								array(
-									'type'            => 'image', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'            => 'image',
 									'id'              => 'black_logo',
 									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'black_logo', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'        => 'black_logo',
 									'label'           => __( 'Black logo', 'my_plugin' ),
-									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top'   => false, // Display CSS border-top in the editor control.
+									'register_meta'   => true,
+									'ui_border_top'   => false,
 								),
 								array(
 									'type'          => 'color',
@@ -457,8 +427,8 @@ class LFEvents_Admin {
 									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Menu Background Color' ),
 									// 'help'          => __( 'Choose a color for the topnav menu' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'palette'       => $palette,
@@ -470,8 +440,8 @@ class LFEvents_Admin {
 									'data_key'      => 'menu_color_2', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Menu Gradient Color' ),
 									// 'help'          => __( 'Choose a second menu color to create a gradient' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'palette'       => $palette,
@@ -483,8 +453,8 @@ class LFEvents_Admin {
 									'data_key'      => 'menu_color_3', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Menu Dropdown Color' ),
 									// 'help'          => __( 'Choose a color for the topnav dropdown' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'palette'       => $palette,
@@ -496,30 +466,24 @@ class LFEvents_Admin {
 									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Menu Text Color' ),
 									// 'help'          => __( 'Choose a color for the menu text' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => 'white', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
-									'options'         => array( // Required.
+									'options'         => array(
 										'white' => __( 'White', 'my_plugin' ),
 										'black' => __( 'Black', 'my_plugin' ),
 									),
 								),
 								array(
-									'type'            => 'image', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'            => 'image',
 									'id'              => 'favicon',
 									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'favicon', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'        => 'favicon',
 									'label'           => __( 'Favicon', 'my_plugin' ),
 									'help'            => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
-									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+									'register_meta'   => true,
+									'ui_border_top'   => true,
 								),
 							),
 						),
@@ -528,57 +492,57 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'city',
 									'data_type'     => 'meta',
-									'data_key'      => 'city', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'city',
 									'label'         => __( 'City' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'Paris' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'venue',
 									'data_type'     => 'meta',
-									'data_key'      => 'venue', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'venue',
 									'label'         => __( 'Venue' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'San Diego Convention Center' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'street_address',
 									'data_type'     => 'meta',
-									'data_key'      => 'street_address', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'street_address',
 									'label'         => __( 'Street Address' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( '2635 Homestead Rd' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'postal_code',
 									'data_type'     => 'meta',
-									'data_key'      => 'postal_code', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'postal_code',
 									'label'         => __( 'Postal Code' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( '95051' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'region',
 									'data_type'     => 'meta',
-									'data_key'      => 'region', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'region',
 									'label'         => __( 'Province/State' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'CA' ),
 								),
@@ -589,15 +553,15 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'          => 'checkbox', // Required.
+									'type'          => 'checkbox',
 									'id'            => 'cfp_active',
 									'data_type'     => 'meta',
-									'data_key'      => 'cfp_active', // Required if 'data_type' is 'meta'.
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'data_key'      => 'cfp_active',
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => true,
 									'use_toggle'    => false,
-									'input_label'     => __( 'CFP for Event', 'my_plugin' ), // Required.
+									'input_label'     => __( 'CFP for Event', 'my_plugin' ),
 								),
 								array(
 									'type'          => 'text',
@@ -611,19 +575,13 @@ class LFEvents_Admin {
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'text', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'text',
 									'id'            => 'cfp_date_end',
 									'data_type'     => 'meta',
-									'data_key'      => 'cfp_date_end', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'cfp_date_end',
 									'label'         => __( 'CFP end date', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'YYYY/MM/DD',
@@ -635,72 +593,66 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'            => 'image', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'            => 'image',
 									'id'              => 'wechat',
 									'data_type'       => 'meta', // Available: 'meta', 'localstorage', 'none'.
-									'data_key'        => 'wechat', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'        => 'wechat',
 									'label'           => __( 'WeChat QR code', 'my_plugin' ),
-									'register_meta'   => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top'   => true, // Display CSS border-top in the editor control.
+									'register_meta'   => true,
+									'ui_border_top'   => true,
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'linkedin',
 									'data_type'     => 'meta',
-									'data_key'      => 'linkedin', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'linkedin',
 									'label'         => __( 'LinkedIn url' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://www.linkedin.com/company/cloud-native-computing-foundation' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'qq',
 									'data_type'     => 'meta',
-									'data_key'      => 'qq', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'qq',
 									'label'         => __( 'QQ url' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'http://v.qq.com/vplus/dbc4895dfc0a6ec609ad9e42a10507e0/videos' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'youtube',
 									'data_type'     => 'meta',
-									'data_key'      => 'youtube', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'youtube',
 									'label'         => __( 'YouTube url' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://www.youtube.com/channel/UCvqbFHwN-nwalWPjPUKpvTA' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'facebook',
 									'data_type'     => 'meta',
-									'data_key'      => 'facebook', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'facebook',
 									'label'         => __( 'Facebook url' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://www.facebook.com/CloudNativeComputingFoundation/' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'twitter',
 									'data_type'     => 'meta',
-									'data_key'      => 'twitter', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'twitter',
 									'label'         => __( 'Twitter url' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://twitter.com/CloudNativeFdn' ),
 								),
@@ -711,38 +663,38 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'cta_register_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'cta_register_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'cta_register_url',
 									'label'         => __( 'CTA Register URL' ),
 									'help'          => __( 'This CTA button will be displayed until the Event end date.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/register/' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'cta_speak_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'cta_speak_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'cta_speak_url',
 									'label'         => __( 'CTA Speak URL' ),
 									'help'          => __( 'This CTA button will be displayed during the Call For Proposal date range.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/cfp/' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'cta_sponsor_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'cta_sponsor_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'cta_sponsor_url',
 									'label'         => __( 'CTA Sponsor URL' ),
 									'help'          => __( 'This CTA button will be displayed whenever a url is provided and until the following end date, if one is provided:' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/sponsors/become-and-sponsor/' ),
 								),
@@ -758,14 +710,14 @@ class LFEvents_Admin {
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'cta_schedule_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'cta_schedule_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'cta_schedule_url',
 									'label'         => __( 'CTA Schedule URL' ),
 									'help'          => __( 'This CTA button will be displayed whenever a url is provided.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/schedule/' ),
 								),
@@ -776,14 +728,14 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings' => array(
 								array(
-									'type'          => 'textarea', // Required.
+									'type'          => 'textarea',
 									'id'            => 'alert_text',
 									'data_type'     => 'meta',
-									'data_key'      => 'alert_text', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'alert_text',
 									'label'         => __( 'Alert Message' ),
 									'help'          => __( 'Links should be written in markdown format [like this](https://google.com)' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 								),
 								array(
@@ -804,8 +756,8 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'alert_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Text Color' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'palette'       => array(
@@ -819,8 +771,8 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'alert_background_color', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Background Color' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
 									'alpha_control' => false, // Include alpha control to set color transparency.
 									'palette'       => $palette,
@@ -839,10 +791,10 @@ class LFEvents_Admin {
 									'data_key'      => 'hide_from_listings', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Hide from Homepage and Calendars' ),
 									'help'          => __( 'This will hide the Event from the homepage and calendars.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => 'show',
-									'options'         => array( // Required.
+									'options'         => array(
 										'show' => __( 'Show', 'my_plugin' ),
 										'hide' => __( 'Hide', 'my_plugin' ),
 									),
@@ -854,46 +806,46 @@ class LFEvents_Admin {
 									'data_key'      => 'event_has_passed', // Required if 'data_type' is 'meta' or 'localstorage'.
 									'label'         => __( 'Event Has Passed' ),
 									'help'          => __( 'This value will update automatically so no need to touch it.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '0',
-									'options'         => array( // Required.
+									'options'         => array(
 										'1' => __( 'True', 'my_plugin' ),
 										'0' => __( 'False', 'my_plugin' ),
 									),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'related_events',
 									'data_type'     => 'meta',
-									'data_key'      => 'related_events', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'related_events',
 									'label'         => __( 'Related Events Override' ),
 									'help'          => __( 'This is a comma-delimited list of Event IDs that, when set, will be listed instead of the normal related Events in the View All Events menu.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( '1365,2122,3112' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'extra_vae_link_text',
 									'data_type'     => 'meta',
-									'data_key'      => 'extra_vae_link_text', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'extra_vae_link_text',
 									'label'         => __( 'Extra View All Events Link' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'CNCF Homepage' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'extra_vae_link_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'extra_vae_link_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'extra_vae_link_url',
 									'label'         => __( 'Link URL' ),
 									'help'          => __( 'This extra link will appear second in the View All Events dropdown.' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'https://www.cncf.io/' ),
 								),
@@ -924,27 +876,27 @@ class LFEvents_Admin {
 							'initial_open' => true,
 							'settings' => array(
 								array(
-									'type'          => 'checkbox', // Required.
+									'type'          => 'checkbox',
 									'id'            => 'hide_from_menu',
 									'data_type'     => 'meta',
-									'data_key'      => 'hide_from_menu', // Required if 'data_type' is 'meta'.
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'data_key'      => 'hide_from_menu',
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'   => __( 'Hide from Event menu', 'my_plugin' ), // Required.
+									'input_label'   => __( 'Hide from Event menu', 'my_plugin' ),
 									'help'          => __( 'This will stop this particular page from showing on the Event top navigation menu.' ),
 								),
 								array(
-									'type'          => 'checkbox', // Required.
+									'type'          => 'checkbox',
 									'id'            => 'splash_page',
 									'data_type'     => 'meta',
-									'data_key'      => 'splash_page', // Required if 'data_type' is 'meta'.
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'data_key'      => 'splash_page',
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'   => __( 'Splash Page', 'my_plugin' ), // Required.
+									'input_label'   => __( 'Splash Page', 'my_plugin' ),
 									'help'          => __( 'This will make the page display a minimal topnav appropriate for an event splash page.' ),
 								),
 							),
@@ -973,46 +925,46 @@ class LFEvents_Admin {
 							'label'    => __( 'Speaker Details' ),
 							'settings' => array(
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'title',
 									'data_type'     => 'meta',
-									'data_key'      => 'title', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'title',
 									'label'         => __( 'Title, Company' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'Title, Company' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'linkedin',
 									'data_type'     => 'meta',
-									'data_key'      => 'linkedin', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'linkedin',
 									'label'         => __( 'LinkedIn URL' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'https://www.linkedin.com/in/username/' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'twitter',
 									'data_type'     => 'meta',
-									'data_key'      => 'twitter', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'twitter',
 									'label'         => __( 'Twitter URL' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'https://twitter.com/username' ),
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'website',
 									'data_type'     => 'meta',
-									'data_key'      => 'website', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'website',
 									'label'         => __( 'Website URL' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'https://cncf.io' ),
 								),
@@ -1042,13 +994,13 @@ class LFEvents_Admin {
 							'label'    => __( 'Sponsor Details' ),
 							'settings' => array(
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'url',
 									'data_type'     => 'meta',
-									'data_key'      => 'url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'url',
 									'label'         => __( 'Forwarding URL' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'https://cloud.google.com/' ),
 								),
@@ -1093,60 +1045,48 @@ class LFEvents_Admin {
 							'initial_open' => true,
 							'settings' => array(
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'city',
 									'data_type'     => 'meta',
-									'data_key'      => 'city', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'city',
 									'label'         => __( 'City' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'Paris' ),
 								),
 								array(
-									'type'          => 'text', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'text',
 									'id'            => 'date_start',
 									'data_type'     => 'meta',
-									'data_key'      => 'date_start', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'date_start',
 									'label'         => __( 'Event start date', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'text', // Required.
-									// Optionally, an id may be specified. It will be used by the plugin to
-									// identify the setting and will be applied to the control html.
-									// The prefix set in the sidebar option 'id_prefix' will be applied.
+									'type'          => 'text',
 									'id'            => 'date_end',
 									'data_type'     => 'meta',
-									'data_key'      => 'date_end', // Required if 'data_type' is 'meta' or 'localstorage'.
-									// Use 'data_key_prefix' to set a custom prefix for this setting 'data_key'.
-									// If 'data_key_prefix' is not assigned, the 'data_key_prefix' from the sidebar
-									// where this setting is nested will be used.
+									'data_key'      => 'date_end',
 									'label'         => __( 'Event end date', 'my_plugin' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => false, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => false,
 									'default_value' => '', // A string with a date that matches 'format'.
 									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
 									'placeholder'        => 'YYYY/MM/DD',
 								),
 								array(
-									'type'          => 'text', // Required.
+									'type'          => 'text',
 									'id'            => 'external_url',
 									'data_type'     => 'meta',
-									'data_key'      => 'external_url', // Required if 'data_type' is 'meta'.
+									'data_key'      => 'external_url',
 									'label'         => __( 'URL to Community Event site' ),
-									'register_meta' => true, // This option is applicable only if 'data_type' is 'meta'.
-									'ui_border_top' => true, // Display CSS border-top in the editor control.
+									'register_meta' => true,
+									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => 'https://www.cloudfoundry.org/event/summit/',
 								),
@@ -1268,7 +1208,7 @@ class LFEvents_Admin {
 			$pages = get_pages( $args );
 
 			$keys_to_clear = array( 'post-' . $post_saved->post_parent );
-			foreach ( $pages as $p ){
+			foreach ( $pages as $p ) {
 				$keys_to_clear[] = 'post-' . $p->ID;
 			}
 
