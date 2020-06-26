@@ -161,23 +161,23 @@ get_template_part( 'template-parts/global-nav' );
 									<p class="homepage--call-to-action">
 										<?php
 										if ( $register_url ) {
-											echo '<a href="' . esc_url( $register_url ) . '" >Register</a>';
+											echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';
 										}
 
 										if ( $speak_url ) {
-											echo '<a href="' . esc_url( $speak_url ) . '">Speak</a>';
+											echo '<a aria-label="Speak at ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $speak_url ) . '">Speak</a>';
 										}
 
 										if ( $sponsor_url ) {
-											echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+											echo '<a aria-label="Sponsor ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
 										}
 
 										if ( $schedule_url ) {
-											echo '<a href="' . esc_url( $schedule_url ) . '">Schedule</a>';
+											echo '<a aria-label="View schedule for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $schedule_url ) . '">Schedule</a>';
 										}
 
 										if ( ! $register_url && ! $speak_url && ! $sponsor_url && ! $schedule_url ) {
-											echo '<a href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
+											echo '<a aria-label="Learn more about ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
 										}
 										?>
 									</p>
