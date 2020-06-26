@@ -16,7 +16,7 @@ if ( is_lfeventsci() ) {
 <div data-sticky-container>
 	<header class="main-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;">
 
-		<button class="menu-toggler button alignright hide-for-large" data-toggle="main-menu">
+		<button class="menu-toggler button alignright hide-for-large" data-toggle="main-menu" aria-label="Mobile Navigation">
 			<span class="hamburger-icon"></span>
 		</button>
 
