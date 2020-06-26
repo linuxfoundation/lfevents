@@ -620,7 +620,7 @@ if ( ! is_admin() ) {
 		if ( false === strpos( $url, '.js' ) ) {
 			return $url;
 		}
-		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
+		if ( strpos( $url, 'jquery-3.4.1.min.js' ) && ! is_front_page() ) {
 			return $url;
 		}
 		return str_replace( ' src', ' defer src', $url );

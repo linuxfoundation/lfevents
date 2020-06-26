@@ -43,3 +43,22 @@ $( document ).on(
 		removeHeaderHeight();
 	}
 );
+
+$( document ).ready( function() {
+
+  var bg_images = document.getElementsByClassName('bg-images');
+  if (bg_images.length === 0) {
+    return;
+  }
+
+  $('.bg-images > .bg-image:gt(0)').hide();
+	setInterval(function() {
+		$('.bg-images > .bg-image:first')
+		.fadeOut(1000)
+		.next()
+		.fadeIn(1000)
+		.end()
+		.appendTo('.bg-images');
+  }, 4000);
+
+});

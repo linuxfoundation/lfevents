@@ -220,20 +220,7 @@ get_template_part( 'template-parts/global-nav' );
 
 </div>
 
-<script>
-$( document ).ready( function() {
-	$('.bg-images > .bg-image:gt(0)').hide();
 
-	setInterval(function() {
-		$('.bg-images > .bg-image:first')
-		.fadeOut(1000)
-		.next()
-		.fadeIn(1000)
-		.end()
-		.appendTo('.bg-images');
-	}, 4000);
-});
-</script>
 
 <?php
 get_footer();
