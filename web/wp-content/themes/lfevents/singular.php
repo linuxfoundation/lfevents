@@ -181,11 +181,15 @@ if ( ! $splash_page ) {
 </div>
 
 <?php // TODO. Add conditional for the three sections. ?>
+<?php // If not a splash screen, continue. ?>
+
+<?php if ( ! $splash_page ) : ?>
 <section class="event-footer"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
-	<!-- newsletter section - TODO: conditional on meta field for Form Action set -->
+	<?php // if form field exists, display form. ?>
 	<div class="event-footer-newsletter xlarge-padding-y">
+		<?php // if newsletter title exists use that. ?>
 		<p class="event-footer-newsletter__title">Join our mailing list to hear
 			all the latest about events, news and more.</p>
 		<form id="sfmc-form"
@@ -209,9 +213,9 @@ if ( ! $splash_page ) {
 					style="border: 1px solid <?php echo esc_html( $menu_text_color ); ?>; color: <?php echo esc_html( $menu_text_color ); ?>">
 			</div>
 		</form>
+		<?php // if newsletter title exists use that. ?>
 		<p class="event-footer-newsletter__privacy">The Linux Foundation uses the
-			information you provide to us to contact you about upcoming and
-			future events. You may unsubscribe from these communications at any
+			information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any
 			time. For more information, please see our <a href="#">Privacy
 				Policy</a>.</p>
 	</div><!-- end of newsletter section -->
@@ -308,9 +312,10 @@ if ( ! $splash_page ) {
 		<?php
 endif;
 	?>
-	<!-- footer navigation end  -->
+	<!-- footer navigation end.  -->
 
-</section><!-- end of event footer -->
+</section><!-- end of event footer. -->
+<?php endif; ?>
 
 <?php
 get_footer();

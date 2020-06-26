@@ -193,9 +193,9 @@ add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
 /**
  * Returns markup for child pages for the Event menu.
  *
- * @param int    $parent_id Parent ID for Event.
- * @param string $post_type Post type for Event.
- * @param string $background_style sets the background color.
+ * @param int     $parent_id Parent ID for Event.
+ * @param string  $post_type Post type for Event.
+ * @param string  $background_style sets the background color.
  * @param boolean $footer Outputs footer navigation style.
  */
 function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer = null ) {
@@ -240,23 +240,22 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer 
 
 	} else {
 
-	// now we remove the hyperlink for elements who have children.
-	foreach ( $pages as $page ) {
-		if ( strstr( $page, '<ul class=\'children\'>' ) ) {
-			$page    = explode( '<ul class=\'children\'>', $page );
-			$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
-			if ( count( $page ) == 3 ) {
-				$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
+		// now we remove the hyperlink for elements who have children.
+		foreach ( $pages as $page ) {
+			if ( strstr( $page, '<ul class=\'children\'>' ) ) {
+				$page    = explode( '<ul class=\'children\'>', $page );
+				$page[0] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[0] );
+				if ( count( $page ) == 3 ) {
+					$page[1] = preg_replace( '/(<[^>]+) href=".*?"/i', '$1 href="#"', $page[1] );
+				}
+				$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
 			}
-			$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
+			$pages[ $count ] = $page;
+			$count++;
 		}
-		$pages[ $count ] = $page;
-		$count++;
+		$pages = implode( '</li>', $pages );
+
 	}
-	$pages = implode( '</li>', $pages );
-
-}
-
 
 	return $pages; //phpcs:ignore
 }
