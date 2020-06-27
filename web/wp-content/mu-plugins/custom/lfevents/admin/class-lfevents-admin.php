@@ -1314,7 +1314,7 @@ class LFEvents_Admin {
 			$pages = get_pages( $args );
 
 			$keys_to_clear = array( 'post-' . $post_saved->post_parent );
-			foreach ( $pages as $p ){
+			foreach ( $pages as $p ) {
 				$keys_to_clear[] = 'post-' . $p->ID;
 			}
 

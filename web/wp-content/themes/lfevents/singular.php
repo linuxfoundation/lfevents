@@ -11,15 +11,15 @@
  */
 
 if ( $post->post_parent ) {
-	$ancestors = get_post_ancestors( $post->ID );
+	$ancestors = get_post_ancestors( get_the_ID() );
 	$parent_id = $ancestors[ count( $ancestors ) - 1 ];
 } else {
-	$parent_id = $post->ID;
+	$parent_id = get_the_ID();
 }
 
 get_header();
 
-$splash_page = get_post_meta( $post->ID, 'lfes_splash_page', true );
+$splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 if ( ! $splash_page ) {
 	// menu background color.
 	$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
@@ -146,7 +146,7 @@ if ( ! $splash_page ) {
 				<figure class="figure-container">
 					<?php
 					if ( has_post_thumbnail() ) {
-						echo wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'fp-xlarge', false, array( 'class' => 'f' ) );
+						echo wp_get_attachment_image( get_post_thumbnail_id( get_the_ID() ), 'fp-xlarge', false, array( 'class' => 'f' ) );
 					} else {
 						echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-xlarge', false, array( 'class' => '' ) );
 					}
@@ -180,63 +180,119 @@ if ( ! $splash_page ) {
 	</div>
 </div>
 
-<?php // TODO. Add conditional for the three sections. ?>
-<?php // If not a splash screen, continue. ?>
+<?php
+// Only show footer if not a splash screen.
+if ( ! $splash_page ) :
+	?>
 
-<?php if ( ! $splash_page ) : ?>
-<section class="event-footer"
+<section class="event-footer xlarge-padding-y"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
-	<?php // if form field exists, display form. ?>
-	<div class="event-footer-newsletter xlarge-padding-y">
-		<?php // if newsletter title exists use that. ?>
-		<p class="event-footer-newsletter__title">Join our mailing list to hear
-			all the latest about events, news and more.</p>
+	<?php
+
+	// check for form action.
+	$form_action = get_post_meta( get_the_ID(), 'lfes_form_action', true );
+
+	// only show form if form action.
+	if ( $form_action ) :
+
+		// setup the form defaults.
+		$form_title      = 'Join our mailing list to hear all the latest about events, news and more.';
+		$form_privacy    = 'The Linux Foundation uses the
+		information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any
+		time. For more information, please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.';
+		$form_first_name = 'First name';
+		$form_last_name  = 'Last name';
+		$form_email      = 'Email address';
+		$form_submit     = 'SIGN UP!';
+
+		if ( get_post_meta( get_the_ID(), 'lfes_form_title', true ) ) {
+			$form_title = get_post_meta( get_the_ID(), 'lfes_form_title', true );
+		}
+
+		if ( get_post_meta( get_the_ID(), 'lfes_form_privacy', true ) ) {
+			$form_privacy = get_post_meta( get_the_ID(), 'lfes_form_privacy', true );
+			$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
+		}
+
+		if ( get_post_meta( get_the_ID(), 'lfes_form_first_name', true ) ) {
+			$form_first_name = get_post_meta( get_the_ID(), 'lfes_form_first_name', true );
+		}
+
+		if ( get_post_meta( get_the_ID(), 'lfes_form_last_name', true ) ) {
+			$form_last_name = get_post_meta( get_the_ID(), 'lfes_form_last_name', true );
+		}
+
+		if ( get_post_meta( get_the_ID(), 'lfes_form_email', true ) ) {
+			$form_email = get_post_meta( get_the_ID(), 'lfes_form_email', true );
+		}
+
+		if ( get_post_meta( get_the_ID(), 'lfes_form_submit', true ) ) {
+			$form_submit = get_post_meta( get_the_ID(), 'lfes_form_submit', true );
+		}
+
+		$allowed_elements = array(
+			'href'   => true,
+			'class'  => true,
+			'alt'    => true,
+			'rel'    => true,
+			'target' => true,
+		);
+		?>
+
+	<div class="event-footer-newsletter">
+		<p class="event-footer-newsletter__title"><?php echo esc_html( $form_title ); ?></p>
 		<form id="sfmc-form"
-			action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events"
+			action="<?php echo esc_url( $form_action ); ?>"
 			_lpchecked="1">
 			<div class="event-footer-newsletter__form">
 				<label class="medium-6" for="FirstName">
-					<input type="text" name="FirstName" placeholder="First name"
+					<input type="text" name="FirstName" placeholder="<?php echo esc_html( $form_first_name ); ?>"
 						required="">
 				</label>
 				<label class="medium-6" for="LastName">
-					<input type="text" name="LastName" placeholder="Last name"
+					<input type="text" name="LastName" placeholder="<?php echo esc_html( $form_last_name ); ?>"
 						required="">
 				</label>
 				<label for="EmailAddress">
 					<input type="email" name="EmailAddress"
-						placeholder="Email address" required="">
+						placeholder="<?php echo esc_html( $form_email ); ?>" required="">
 				</label>
-				<input class="button" type="submit" value="SIGN UP!"
+				<input class="button" type="submit" value="<?php echo esc_html( $form_submit ); ?>"
 					id="submitbtn"
 					style="border: 1px solid <?php echo esc_html( $menu_text_color ); ?>; color: <?php echo esc_html( $menu_text_color ); ?>">
 			</div>
 		</form>
-		<?php // if newsletter title exists use that. ?>
-		<p class="event-footer-newsletter__privacy">The Linux Foundation uses the
-			information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any
-			time. For more information, please see our <a href="#">Privacy
-				Policy</a>.</p>
-	</div><!-- end of newsletter section -->
+		<p class="event-footer-newsletter__privacy">
+		<?php
+		echo wp_kses(
+			$form_privacy,
+			array(
+				'a' => $allowed_elements,
+			)
+		);
+		?>
+		</p>
+	</div>
 
-	<!-- logo and social section  -->
+	<?php endif; ?>
+
 	<?php
-	// Only display this section if there is a logo set.
+		// Only display this section if there is a logo set.
 	if ( $logo ) :
 		?>
-	<div class="event-footer-logo-social xlarge-padding-bottom">
+		<div class="event-footer-alignment">
+
+	<div class="event-footer-logo-social">
 
 		<!-- logo -->
 		<div class="event-footer-logo-social__logo">
-			<?php
-			echo '<a class="" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
-			?>
+		<?php
+		echo '<a href="' . esc_url( get_permalink( $parent_id ) ) . '">' . wp_kses_post( $event_link_content ) . '</a>';
+		?>
 		</div><!-- logo end  -->
 
-		<!-- social start  -->
 		<?php
-
 		// setup social media icons if present.
 		$wechat   = get_post_meta( $parent_id, 'lfes_wechat', true );
 		$linkedin = get_post_meta( $parent_id, 'lfes_linkedin', true );
@@ -244,57 +300,60 @@ if ( ! $splash_page ) {
 		$youtube  = get_post_meta( $parent_id, 'lfes_youtube', true );
 		$facebook = get_post_meta( $parent_id, 'lfes_facebook', true );
 		$twitter  = get_post_meta( $parent_id, 'lfes_twitter', true );
+		$hashtag  = get_post_meta( $parent_id, 'lfes_hashtag', true );
 
-		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) {
+		// as long as one is present, display icons.
+		if ( $wechat || $linkedin || $qq || $youtube || $facebook || $twitter ) :
 			?>
 		<div class="event-footer-logo-social__wrapper <?php echo esc_html( $menu_text_color ); ?>">
-			<?php
-			echo '<ul class="event-footer-logo-social__icons ' . esc_html( $menu_text_color ) . '">';
+				<?php
+				echo '<ul class="event-footer-logo-social__icons ' . esc_html( $menu_text_color ) . '">';
 
-			if ( $wechat ) {
-				echo '<li>';
-				echo '<a data-toggle="wechat-dropdown">';
-				get_template_part( 'template-parts/svg/wechat' );
-				echo '</a>';
-				echo '<div class="dropdown-pane" id="wechat-dropdown" data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="0" data-position="top" data-alignment="center">' . wp_get_attachment_image( esc_html( $wechat ) ) . '</div>';
-				echo '</li>';
-			}
-			if ( $linkedin ) {
-				echo '<li><a target="_blank" href="' . esc_html( $linkedin ) . '">';
-				get_template_part( 'template-parts/svg/linkedin' );
-				echo '</a></li>';
-			}
-			if ( $qq ) {
-				echo '<li><a target="_blank" href="' . esc_html( $qq ) . '">';
-				get_template_part( 'template-parts/svg/qq' );
-				echo '</a></li>';
-			}
-			if ( $youtube ) {
-				echo '<li><a target="_blank" href="' . esc_html( $youtube ) . '">';
-				get_template_part( 'template-parts/svg/youtube' );
-				echo '</a></li>';
-			}
-			if ( $facebook ) {
-				echo '<li><a target="_blank" href="' . esc_html( $facebook ) . '">';
-				get_template_part( 'template-parts/svg/facebook' );
-				echo '</a></li>';
-			}
-			if ( $twitter ) {
-				echo '<li><a target="_blank" href="' . esc_html( $twitter ) . '">';
-				get_template_part( 'template-parts/svg/twitter' );
-				echo '</a></li>';
-			}
+				if ( $wechat ) {
+					echo '<li>';
+					echo '<a data-toggle="wechat-dropdown">';
+					get_template_part( 'template-parts/svg/wechat' );
+					echo '</a>';
+					echo '<div class="dropdown-pane" id="wechat-dropdown" data-dropdown data-hover="true" data-hover-pane="true" data-hover-delay="0" data-position="top" data-alignment="center">' . wp_get_attachment_image( esc_html( $wechat ) ) . '</div>';
+					echo '</li>';
+				}
+				if ( $linkedin ) {
+					echo '<li><a target="_blank" href="' . esc_html( $linkedin ) . '">';
+					get_template_part( 'template-parts/svg/linkedin' );
+					echo '</a></li>';
+				}
+				if ( $qq ) {
+					echo '<li><a target="_blank" href="' . esc_html( $qq ) . '">';
+					get_template_part( 'template-parts/svg/qq' );
+					echo '</a></li>';
+				}
+				if ( $youtube ) {
+					echo '<li><a target="_blank" href="' . esc_html( $youtube ) . '">';
+					get_template_part( 'template-parts/svg/youtube' );
+					echo '</a></li>';
+				}
+				if ( $facebook ) {
+					echo '<li><a target="_blank" href="' . esc_html( $facebook ) . '">';
+					get_template_part( 'template-parts/svg/facebook' );
+					echo '</a></li>';
+				}
+				if ( $twitter ) {
+					echo '<li><a target="_blank" href="' . esc_html( $twitter ) . '">';
+					get_template_part( 'template-parts/svg/twitter' );
+					echo '</a></li>';
+				}
 
-			echo '</ul>';
-			?>
+				echo '</ul>';
+				?>
+
+				<?php if ( $hashtag ) { ?>
 			<div class="event-footer-logo-social__hashtag">
-			<?php // TODO. Add conditional. ?>
-				<p class="event-footer-logo-social__hashtag__text">#ossna20</p>
+			<p><?php echo esc_html( $hashtag ); ?></p>
 			</div>
+			<?php } ?>
+
 		</div><!-- social end  -->
-			<?php
-		}
-		?>
+		<?php endif; ?>
 	</div><!-- end of logo and social section  -->
 	<?php endif; ?>
 
@@ -304,7 +363,7 @@ if ( ! $splash_page ) {
 	if ( $children ) :
 		?>
 	<ul
-		class="event-footer-menu xlarge-padding-bottom <?php echo esc_html( $menu_text_color ); ?>">
+		class="event-footer-menu <?php echo esc_html( $menu_text_color ); ?>">
 		<?php
 		echo $children; //phpcs:ignore
 		?>
@@ -313,7 +372,7 @@ if ( ! $splash_page ) {
 endif;
 	?>
 	<!-- footer navigation end.  -->
-
+	</div>
 </section><!-- end of event footer. -->
 <?php endif; ?>
 
