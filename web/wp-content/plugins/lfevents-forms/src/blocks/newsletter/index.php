@@ -30,9 +30,9 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 
 	?>
 	<div class="lfevents-forms form-newsletter <?php echo esc_attr( $style ); ?>">
-		<div id="message"></div>
+		<div id="sfmc-message1"></div>
 
-		<form id="sfmc-form" action="<?php echo esc_url( $action ); ?>">
+		<form id="sfmc-form1" action="<?php echo esc_url( $action ); ?>">
 
 			<div class="newsletter__form">
 				<label class="medium-6" for="FirstName">
@@ -47,19 +47,17 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 					<input type="email" name="EmailAddress" placeholder="Email address" required="">
 				</label>
 
-				<input class="button" type="submit" value="SIGN UP!" id="submitbtn">
+				<input class="button" type="submit" value="SIGN UP!" id="sfmc-submit1">
 
 				<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
 				<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
-				<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+				<div id="recaptcha-form1" style="display:none;"></div>
 
 				<script>
 					document.getElementById('txtUrl').value = window.location.href;
 				</script>
 			</div>
 		</form>
-
-		<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
 	</div>
 
 	<?php

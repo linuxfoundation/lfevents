@@ -130,6 +130,13 @@ jQuery(
 						let msg = $( response ).find( 'p' ).text();
 						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( 'success' );
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
+
+						var f = $( '#sfmc-form' + form );
+						var redirectUrl = f.data('redirect');
+						if (redirectUrl) {
+							window.location.href = redirectUrl;
+						}
+						
 						switch ( form ) {
 							case '1' : grecaptcha.reset( widget_1 ); break;
 							case '2' : grecaptcha.reset( widget_2 ); break;
