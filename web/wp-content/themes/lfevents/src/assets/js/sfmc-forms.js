@@ -11,11 +11,10 @@
  */
 jQuery(
 	function( $ ) {
-		
 		var PS = PS || {};
 		let widget_1; let widget_2;
 		let recaptcha_site_key = '6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ';
-		
+
 		if ( typeof PS.RECAPTCHA === 'undefined' ) {
 			( function( a, $ ) {
 				let retryTime = 300;
@@ -132,11 +131,11 @@ jQuery(
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 
 						var f = $( '#sfmc-form' + form );
-						var redirectUrl = f.data('redirect');
-						if (redirectUrl) {
+						var redirectUrl = f.data( 'redirect' );
+						if ( redirectUrl ) {
 							window.location.href = redirectUrl;
 						}
-						
+
 						switch ( form ) {
 							case '1' : grecaptcha.reset( widget_1 ); break;
 							case '2' : grecaptcha.reset( widget_2 ); break;
