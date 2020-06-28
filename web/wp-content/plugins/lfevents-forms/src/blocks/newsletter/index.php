@@ -21,7 +21,7 @@ function lfevents_form_newsletter( $attributes ) { // phpcs:disable
 	ob_start();
 
 	$action = isset( $attributes['action'] ) ? $attributes['action'] : '';
-	$style = isset( $attributes['style'] ) ? $attributes['style'] : '';
+	$style = isset( $attributes['style'] ) ? $attributes['style'] : 'box';
 
 
 	if ( empty( $action ) ) {
