@@ -127,7 +127,13 @@ jQuery(
 					},
 					success( response ) {
 						let msg = $( response ).find( 'p' ).text();
-						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( 'success' );
+
+						if ( msg.includes( "Error" ) ) {
+							$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "alert" );
+						} else {
+							$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "success" );
+						}
+
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 
 						var f = $( '#sfmc-form' + form );
