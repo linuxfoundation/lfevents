@@ -45,7 +45,7 @@ get_template_part( 'template-parts/global-nav' );
 							<div class="bg-image" style="background-image: url(
 							<?php
 							// echo esc_html( wp_get_attachment_url( $image->ID ) ); // phpcs:ignore.
-							echo esc_html( wp_get_attachment_image_src( $image->ID, 'fp-small' )[0] );
+							echo esc_html( wp_get_attachment_image_src( $image->ID, 'fp-medium' )[0] );
 							?>
 							);"></div>
 							<?php
