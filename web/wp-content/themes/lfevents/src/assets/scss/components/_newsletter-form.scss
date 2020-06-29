@@ -1,4 +1,12 @@
 .form-newsletter {
+    input[type=text], input[type=email] {
+        color: #212326 !important;
+    }
+
+    .callout {
+        color: #212326 !important;
+    }
+    
     &.full-width {
         margin-bottom: 0 !important;
 
