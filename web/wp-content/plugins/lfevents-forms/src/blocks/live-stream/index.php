@@ -29,7 +29,7 @@ function lfevents_form_live_stream( $attributes ) { // phpcs:disable
 
 	?>
 	<div class="lfevents-forms form-live-stream">
-		<form id="sfmc-form" action="<?php echo $action; ?>" data-redirect="<?php echo esc_url( $redirect_url ); ?>" method="POST">
+		<form id="sfmc-form1" action="<?php echo $action; ?>" data-redirect="<?php echo esc_url( $redirect_url ); ?>" method="POST">
 			<div class="grid-x grid-margin-x">
 				<label class="cell medium-6" for="FirstName">First name *
 					<input type="text" name="FirstName" placeholder="First name" required="">
@@ -48,12 +48,11 @@ function lfevents_form_live_stream( $attributes ) { // phpcs:disable
 				</label>
 			</div>
 
-			<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+			<div id="recaptcha-form1" style="display:none;"></div>
 
-			<input class="button expanded" type="submit" value="SUBMIT" id="submitbtn">
+			<input class="button expanded" type="submit" value="SUBMIT" id="sfmc-submit1">
 		</form>
-		<div id="message"></div>
-		<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
+		<div id="sfmc-message1"></div>
 	</div>
 
 	<?php
