@@ -242,7 +242,8 @@ if ( ! $splash_page ) :
 
 	<div class="event-footer-newsletter">
 		<p class="event-footer-newsletter__title"><?php echo esc_html( $form_title ); ?></p>
-		<form id="sfmc-form"
+		<div id="sfmc-message2"></div>
+		<form id="sfmc-form2"
 			action="<?php echo esc_url( $form_action ); ?>"
 			_lpchecked="1">
 			<div class="event-footer-newsletter__form">
@@ -259,8 +260,14 @@ if ( ! $splash_page ) :
 						placeholder="<?php echo esc_html( $form_email ); ?>" required="">
 				</label>
 				<input class="button" type="submit" value="<?php echo esc_html( $form_submit ); ?>"
-					id="submitbtn"
+					id="sfmc-submit2"
 					style="border: 1px solid <?php echo esc_html( $menu_text_color ); ?>; color: <?php echo esc_html( $menu_text_color ); ?>">
+				<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
+				<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
+				<div id="recaptcha-form2" style="display:none;"></div>
+				<script>
+					document.getElementById('txtUrl').value = window.location.href;
+				</script>
 			</div>
 		</form>
 		<p class="event-footer-newsletter__privacy">
