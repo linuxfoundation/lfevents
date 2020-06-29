@@ -100,8 +100,16 @@
 
   .button {
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid $white;
     padding: 0.5em 1em;
+    box-shadow: none;
+    border-radius: .5rem;
+
+    &:active {
+      position: relative;
+      top: 1px;
+    }
+
   }
 }
 
@@ -214,12 +222,8 @@
   max-width: 1000px;
 
   li {
-    line-height: 2em;
-
-    a {
-      // needed so rows arent broken
-      // white-space: nowrap;
-    }
+    line-height: 1.2;
+    padding-bottom: 1.5rem;
   }
 
   @media (max-width: 499px) {
@@ -229,15 +233,21 @@
       display: inline;
 
       &:after {
+        // default dot - black.
         content: " ";
         letter-spacing: 2em;
         background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=') center center no-repeat;
+      }
+
+      a {
+        // needed so items don't wrap over multiple lines.
+        white-space: nowrap;
       }
     }
 
     &.white {
       li:after {
-        // makes dot between elements white in colour
+        // makes dot between elements white in colour.
         filter: invert(1000%) brightness(1000%) contrast(1000%);
       }
 
@@ -248,10 +258,10 @@
     text-align: left;
     column-count: 2;
     column-gap: 20%;
+    column-rule-style: solid;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    column-rule-style: solid;
 
     &.black {
       column-rule: 1px solid black;
@@ -260,6 +270,10 @@
     &.white {
       column-rule: 1px solid white;
     }
+  }
+
+  li {
+    break-inside: avoid;
   }
 
   @media (min-width: 768px) {
@@ -271,7 +285,6 @@
     width: initial;
     min-width: calc(75% - 200px);
     column-gap: 50px;
-    break-inside: avoid-column;
     margin-left: 75px;
   }
 
