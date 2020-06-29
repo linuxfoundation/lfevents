@@ -7,9 +7,6 @@
  */
 
 get_header();
-wp_enqueue_script( 'lfe_sfmc-forms', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ) ), true );
-wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), 1, true );
-
 get_template_part( 'template-parts/global-nav' );
 ?>
 
@@ -29,7 +26,7 @@ get_template_part( 'template-parts/global-nav' );
 
 						<div class="wp-block-ugb-container alignwide ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-short ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
 
-						<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
+						<form id="sfmc-form1" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
 
 							<div class="grid-x grid-margin-x">
 								<div class="cell large-6">
@@ -704,12 +701,12 @@ get_template_part( 'template-parts/global-nav' );
 							<script>
 								document.getElementById('txtUrl').value = window.location.href;
 							</script>
-							<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+							<div id="recaptcha-form1" style="display:none;"></div>
 
-							<input class="button large expanded" id="submitbtn" type="submit" value="Request Visa Letter">
+							<input class="button large expanded" id="sfmc-submit1" type="submit" value="Request Visa Letter">
 						</form>
 
-						<div id="message"></div>
+						<div id="sfmc-message1"></div>
 
 						</div></div></div>
 

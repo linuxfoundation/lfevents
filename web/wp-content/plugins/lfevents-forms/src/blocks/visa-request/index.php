@@ -28,7 +28,7 @@ function lfevents_form_visa_request( $attributes ) { // phpcs:disable
 
 	?>
 	<div class="lfevents-forms form-visa-request">
-		<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
+		<form id="sfmc-form1" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
 			<input type="hidden" name="event" id="event" value="<?php echo esc_html( $event_id ); ?>">
 
 			<div class="grid-x grid-margin-x">
@@ -661,12 +661,12 @@ function lfevents_form_visa_request( $attributes ) { // phpcs:disable
 			<script>
 				document.getElementById('txtUrl').value = window.location.href;
 			</script>
-			<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+			<div id="recaptcha-form1" style="display:none;"></div>
 
-			<input class="button large expanded" id="submitbtn" type="submit" value="Request Visa Letter">
+			<input class="button large expanded" id="sfmc-submit1" type="submit" value="Request Visa Letter">
 		</form>
 
-		<div id="message"></div>
+		<div id="sfmc-message1"></div>
 
 		<script>
 		$( document ).ready(
@@ -678,7 +678,6 @@ function lfevents_form_visa_request( $attributes ) { // phpcs:disable
 			}
 		);
 		</script>
-		<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script>
 	</div>
 
 	<?php
