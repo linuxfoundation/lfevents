@@ -7,15 +7,6 @@
  */
 
 ?>
-<?php
-if ( is_lfeventsci() ) {
-	?>
-	<h4 class="medium-margin-bottom">Filter Events</h4>
-	<?php
-	echo do_shortcode( '[searchandfilter id="4480"]' );
-}
-?>
-
 
 <h4 class="large-margin-top medium-margin-bottom">Latest News</h4>
 <?php

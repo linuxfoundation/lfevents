@@ -68,38 +68,36 @@ get_template_part( 'template-parts/global-nav' );
 	<div class="grid-container xlarge-padding-bottom">
 		<div class="grid-x grid-margin-x">
 			<div class="cell medium-8 large-9 xlarge-margin-bottom">
-				<h4 class="medium-margin-bottom">Sign up for the our newsletter to learn about upcoming events!</h4>
-					<div class="lfevents-forms form-newsletter">
-					<div id="message"></div>
-					<form id="sfmc-form" class="xlarge-margin-bottom" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events">
-						<div class="newsletter__form">
-								
-						<label class="medium-6" for="FirstName">
-							<input type="text" name="FirstName" placeholder="First name" required="">
-						</label>
-						<label class="medium-6" for="LastName">
-							<input type="text" name="LastName" placeholder="Last name" required="">
-						</label>
-						<label class="medium-6" for="EmailAddress">
-							<input type="email" name="EmailAddress" placeholder="Email address" required="">
-						</label>
+				<div class="xlarge-margin-bottom no-margin-top wp-block-ugb-container ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-short ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
+					<h4 class="medium-margin-bottom has-text-align-center">Sign up for the our newsletter to stay informed about upcoming events!</h4>
+					<div class="lfevents-forms form-newsletter full-width">
+						<div id="message"></div>
+						<form id="sfmc-form" action="https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events">
+							<div class="newsletter__form">									
+								<label class="medium-6" for="FirstName">
+									<input type="text" name="FirstName" placeholder="First name" required="">
+								</label>
+								<label class="medium-6" for="LastName">
+									<input type="text" name="LastName" placeholder="Last name" required="">
+								</label>
+								<label class="medium-6" for="EmailAddress">
+									<input type="email" name="EmailAddress" placeholder="Email address" required="">
+								</label>
 
-						<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
-						<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
-						<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
+								<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
+								<input type="hidden" id="txtUrl" name="txtUrl" value="" readonly="">
+								<div data-callback="onSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
 
-						<script>
-							document.getElementById('txtUrl').value = window.location.href;
-						</script>
+								<script>
+									document.getElementById('txtUrl').value = window.location.href;
+								</script>
 
-						<input class="button" type="submit" value="SIGN UP!" id="submitbtn">
-						</div>
-						<p class="text-tiny">You may unsubscribe at any time. For more information please see our <a target="_blank" href="https://www.linuxfoundation.org/privacy/">Privacy Policy <?php echo esc_html( get_template_part( 'template-parts/svg/external-link' ) ); ?></a>.</p>
-					</form>
-					<script src="https://www.recaptcha.net/recaptcha/api.js" async="" defer=""></script> <?php //phpcs:ignore ?>
-					<script defer="" src="https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/sfmc-forms.js?ver=1578152844"></script> <?php //phpcs:ignore ?>
-				</div>
-
+								<input class="button" type="submit" value="SIGN UP!" id="submitbtn">
+							</div>
+							<p class="text-tiny has-text-align-center no-margin-bottom">You may unsubscribe at any time. For more information please see our <a target="_blank" href="https://www.linuxfoundation.org/privacy/">Privacy Policy <?php echo esc_html( get_template_part( 'template-parts/svg/external-link' ) ); ?></a>.</p>
+						</form>
+					</div>
+				</div></div></div>
 				<?php
 				if ( is_lfeventsci() ) {
 					echo do_shortcode( '[searchandfilter id="4480" show="results"]' );

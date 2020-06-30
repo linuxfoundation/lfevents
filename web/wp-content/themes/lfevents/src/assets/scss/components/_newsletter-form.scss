@@ -8,18 +8,9 @@
             display: flex;
             width: 100%;
         
-            .button {
-                border: 1px solid white;
-                color: white;
-                background-color: transparent;
-                box-shadow: none;
-                border-radius: .5rem;
-            }
-        
             @media(min-width: 660px) {
                 flex-direction: row;
                 justify-content: center;
-                max-width: 90%;
         
                 & > :not(:last-child) {
                     margin-right: 10px;
@@ -64,31 +55,14 @@
     }
 }
 
-body.home .form-newsletter {
+body:not(.home) .form-newsletter {
     .newsletter__form {
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        width: 100%;
-
-        @media(min-width: 660px) {
-            flex-direction: row;
-
-            & > :not(:last-child) {
-                margin-right: 10px;
-            }
-        }
-
-        @media(max-width: 767px) {
-            flex-wrap: wrap;
-            label {
-                width: 100%;
-            }
-
-            .button {
-                width: 100%;
-            }
+        .button {
+            border: 1px solid white;
+            color: white;
+            background-color: transparent;
+            box-shadow: none;
+            border-radius: .5rem;
         }
     }
-
 }
