@@ -16,7 +16,7 @@ get_template_part( 'template-parts/global-nav' );
 	$query = new WP_Query(
 		array(
 			'post_type' => 'lfe_about_page',
-			'name' => 'homepage',
+			'name'      => 'homepage',
 		)
 	);
 	if ( $query->have_posts() ) {
@@ -25,7 +25,7 @@ get_template_part( 'template-parts/global-nav' );
 			?>
 			<div class="home-hero">
 				<?php
-				$args = array(
+				$args   = array(
 					'post_parent'    => $post->ID,
 					'post_type'      => 'attachment',
 					'numberposts'    => -1, // show all.
@@ -35,14 +35,19 @@ get_template_part( 'template-parts/global-nav' );
 					'order'          => 'ASC',
 				);
 				$images = get_posts( $args );
-				$i = 0;
+				$i      = 0;
 				if ( $images ) {
 					?>
 					<div class="bg-images">
 						<?php
 						foreach ( $images as $key => $image ) {
 							?>
-							<div class="bg-image" style="background-image: url(<?php echo esc_html( wp_get_attachment_url( $image->ID ) ); ?>);"></div>
+							<div class="bg-image" style="background-image: url(
+							<?php
+							// echo esc_html( wp_get_attachment_url( $image->ID ) ); // phpcs:ignore.
+							echo esc_html( wp_get_attachment_image_src( $image->ID, 'fp-medium' )[0] );
+							?>
+							);"></div>
 							<?php
 							$i++;
 						}
@@ -79,16 +84,16 @@ get_template_part( 'template-parts/global-nav' );
 						// Upcoming Events.
 						$query = new WP_Query(
 							array(
-								'post_type' => 'page',
-								'post_parent' => 0,
-								'no_found_rows' => true,
-								'meta_key'   => 'lfes_date_start',
-								'orderby'    => array(
+								'post_type'      => 'page',
+								'post_parent'    => 0,
+								'no_found_rows'  => true,
+								'meta_key'       => 'lfes_date_start',
+								'orderby'        => array(
 									'meta_value' => 'ASC',
 									'title'      => 'ASC',
 								),
-								'order'      => 'ASC',
-								'post_status' => array( 'publish' ),
+								'order'          => 'ASC',
+								'post_status'    => array( 'publish' ),
 								'posts_per_page' => 100,
 							)
 						);
@@ -96,7 +101,7 @@ get_template_part( 'template-parts/global-nav' );
 							while ( $query->have_posts() ) {
 								$query->the_post();
 								$hide_from_listings = get_post_meta( $post->ID, 'lfes_hide_from_listings', true );
-								$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
+								$event_has_passed   = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
 								if ( 'hide' === $hide_from_listings || $event_has_passed ) {
 									continue;
 								}
@@ -106,15 +111,15 @@ get_template_part( 'template-parts/global-nav' );
 									$date_range = 'TBA';
 								} else {
 									$dt_date_start = new DateTime( $date_start );
-									$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-									$date_range = jb_verbose_date_range( $dt_date_start, $dt_date_end );
+									$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+									$date_range    = jb_verbose_date_range( $dt_date_start, $dt_date_end );
 								}
 
 								$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
-								$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
-								$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+								$speak_url    = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
+								$sponsor_url  = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 								$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
-								$description = get_post_meta( $post->ID, 'lfes_description', true );
+								$description  = get_post_meta( $post->ID, 'lfes_description', true );
 								?>
 
 								<div id="post-<?php the_ID(); ?>" class="cell medium-6">
@@ -137,7 +142,7 @@ get_template_part( 'template-parts/global-nav' );
 											$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 											if ( $country ) {
 												$country = $country[0]->name;
-												$city = get_post_meta( $post->ID, 'lfes_city', true );
+												$city    = get_post_meta( $post->ID, 'lfes_city', true );
 												if ( $city ) {
 													$city .= ', ';
 												}
@@ -156,23 +161,23 @@ get_template_part( 'template-parts/global-nav' );
 									<p class="homepage--call-to-action">
 										<?php
 										if ( $register_url ) {
-											echo '<a href="' . esc_url( $register_url ) . '" >Register</a>';
+											echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';
 										}
 
 										if ( $speak_url ) {
-											echo '<a href="' . esc_url( $speak_url ) . '">Speak</a>';
+											echo '<a aria-label="Speak at ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $speak_url ) . '">Speak</a>';
 										}
 
 										if ( $sponsor_url ) {
-											echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+											echo '<a aria-label="Sponsor ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
 										}
 
 										if ( $schedule_url ) {
-											echo '<a href="' . esc_url( $schedule_url ) . '">Schedule</a>';
+											echo '<a aria-label="View schedule for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $schedule_url ) . '">Schedule</a>';
 										}
 
 										if ( ! $register_url && ! $speak_url && ! $sponsor_url && ! $schedule_url ) {
-											echo '<a href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
+											echo '<a aria-label="Learn more about ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
 										}
 										?>
 									</p>
@@ -215,20 +220,7 @@ get_template_part( 'template-parts/global-nav' );
 
 </div>
 
-<script>
-$( document ).ready( function() {
-	$('.bg-images > .bg-image:gt(0)').hide();
 
-	setInterval(function() {
-		$('.bg-images > .bg-image:first')
-		.fadeOut(1000)
-		.next()
-		.fadeIn(1000)
-		.end()
-		.appendTo('.bg-images');
-	}, 4000);
-});
-</script>
 
 <?php
 get_footer();
