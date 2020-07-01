@@ -131,12 +131,12 @@ class LFEvents_Admin {
 		register_post_type( 'lfe_about_page', $opts );
 
 		$opts = array(
-			'public'       => true,
-			'has_archive'  => true,
-			'show_in_rest' => true,
-			'hierarchical' => true,
-			'menu_icon'    => 'dashicons-admin-page',
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes', 'author' ),
+			'public'        => true,
+			'has_archive'   => true,
+			'show_in_rest'  => true,
+			'hierarchical'  => true,
+			'menu_icon'     => 'dashicons-admin-page',
+			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'page-attributes', 'author' ),
 			'menu_position' => 30,
 		);
 
@@ -159,7 +159,7 @@ class LFEvents_Admin {
 				'all_items'     => __( 'All Speakers' ),
 			),
 			'show_in_rest' => true,
-			'public' => true,
+			'public'       => true,
 			'menu_icon'    => 'dashicons-groups',
 			'rewrite'      => array( 'slug' => 'speakers' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
@@ -174,7 +174,7 @@ class LFEvents_Admin {
 				'all_items'     => __( 'All Sponsors' ),
 			),
 			'show_in_rest' => true,
-			'public' => true,
+			'public'       => true,
 			'menu_icon'    => 'dashicons-star-filled',
 			'rewrite'      => array( 'slug' => 'sponsors' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
@@ -183,18 +183,21 @@ class LFEvents_Admin {
 		register_post_type( 'lfe_sponsor', $opts );
 
 		$opts = array(
-			'labels'       => array(
+			'labels'              => array(
 				'name'          => __( 'Community Events' ),
 				'singular_name' => __( 'Community Event' ),
 				'all_items'     => __( 'All Community Events' ),
 			),
-			'public'       => true,
-			'has_archive'  => true,
-			'show_in_rest' => true,
-			'hierarchical' => true,
-			'menu_icon'    => 'dashicons-admin-site',
-			'rewrite'      => array( 'slug' => 'community' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
+			'public'              => true,
+			'has_archive'         => false,
+			'show_in_nav_menus'   => false,
+			'show_in_rest'        => true,
+			'hierarchical'        => true,
+			'exclude_from_search' => true, // to hide the singular pages on FE.
+			'publicly_queryable'  => false, // to hide the singular pages on FE.
+			'menu_icon'           => 'dashicons-admin-site',
+			'rewrite'             => array( 'slug' => 'community' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
 		);
 
 		register_post_type( 'lfe_community_event', $opts );
@@ -241,20 +244,20 @@ class LFEvents_Admin {
 		register_taxonomy( 'lfevent-category', $this->post_types, $args );
 
 		$labels = array(
-			'name'              => _x( 'Event Countries', 'taxonomy general name', 'textdomain' ),
-			'singular_name'     => _x( 'Event Country', 'taxonomy singular name', 'textdomain' ),
-			'search_items'      => __( 'Search Countries', 'textdomain' ),
-			'all_items'         => __( 'All Countries', 'textdomain' ),
-			'parent_item'       => __( 'Parent Continent', 'textdomain' ),
-			'parent_item_colon' => __( 'Parent Continent:', 'textdomain' ),
-			'edit_item'         => __( 'Edit Country', 'textdomain' ),
-			'update_item'       => __( 'Update Country', 'textdomain' ),
-			'add_new_item'      => __( 'Add New Country', 'textdomain' ),
-			'new_item_name'     => __( 'New Country Name', 'textdomain' ),
-			'menu_name'         => __( 'Event Countries', 'textdomain' ),
+			'name'              => _x( 'Event Countries', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Event Country', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Countries' ),
+			'all_items'         => __( 'All Countries' ),
+			'parent_item'       => __( 'Parent Continent' ),
+			'parent_item_colon' => __( 'Parent Continent:' ),
+			'edit_item'         => __( 'Edit Country' ),
+			'update_item'       => __( 'Update Country' ),
+			'add_new_item'      => __( 'Add New Country' ),
+			'new_item_name'     => __( 'New Country Name' ),
+			'menu_name'         => __( 'Event Countries' ),
 		);
 
-		$args   = array(
+		$args = array(
 			'labels'       => $labels,
 			'show_in_rest' => true,
 			'hierarchical' => true,
@@ -273,33 +276,33 @@ class LFEvents_Admin {
 	public function create_sidebar( $sidebars ) {
 		// First we define the sidebar with it's tabs, panels and settings.
 		$palette = array(
-			'dark-fuschia' => '#6e1042',
-			'dark-violet' => '#411E4F',
-			'dark-indigo' => '#1A267D',
-			'dark-blue' => '#17405c',
-			'dark-aqua' => '#0e5953',
-			'dark-green' => '#0b5329',
+			'dark-fuschia'     => '#6e1042',
+			'dark-violet'      => '#411E4F',
+			'dark-indigo'      => '#1A267D',
+			'dark-blue'        => '#17405c',
+			'dark-aqua'        => '#0e5953',
+			'dark-green'       => '#0b5329',
 
-			'light-fuschia' => '#AD1457',
-			'light-violet' => '#6C3483',
-			'light-indigo' => '#4653B0',
-			'light-blue' => '#2874A6',
-			'light-aqua' => '#148f85',
-			'light-green' => '#117a3d',
+			'light-fuschia'    => '#AD1457',
+			'light-violet'     => '#6C3483',
+			'light-indigo'     => '#4653B0',
+			'light-blue'       => '#2874A6',
+			'light-aqua'       => '#148f85',
+			'light-green'      => '#117a3d',
 
-			'dark-chartreuse' => '#3d5e0f',
-			'dark-yellow' => '#878700',
-			'dark-gold' => '#8c7000',
-			'dark-orange' => '#784e12',
-			'dark-umber' => '#6E2C00',
-			'dark-red'   => '#641E16',
+			'dark-chartreuse'  => '#3d5e0f',
+			'dark-yellow'      => '#878700',
+			'dark-gold'        => '#8c7000',
+			'dark-orange'      => '#784e12',
+			'dark-umber'       => '#6E2C00',
+			'dark-red'         => '#641E16',
 
 			'light-chartreuse' => '#699b23',
-			'light-yellow' => '#b0b000',
-			'light-gold' => '#c29b00',
-			'light-orange' => '#c2770e',
-			'light-umber' => '#b8510d',
-			'light-red'   => '#922B21',
+			'light-yellow'     => '#b0b000',
+			'light-gold'       => '#c29b00',
+			'light-orange'     => '#c2770e',
+			'light-umber'      => '#b8510d',
+			'light-red'        => '#922B21',
 		);
 
 		$sidebar = array(
@@ -314,9 +317,9 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General' ),
+							'label'        => __( 'General' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'textarea',
 									'id'            => 'description',
@@ -326,7 +329,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
-									'placeholder'        => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
+									'placeholder'   => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
 								),
 								array(
 									'type'          => 'text',
@@ -337,7 +340,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -348,7 +351,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -371,7 +374,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'List on general visa request form' ),
+									'input_label'   => __( 'List on general visa request form' ),
 								),
 								array(
 									'type'          => 'checkbox',
@@ -382,7 +385,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'     => __( 'List on general travel fund form' ),
+									'input_label'   => __( 'List on general travel fund form' ),
 								),
 								array(
 									'type'          => 'text',
@@ -398,26 +401,26 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Design' ),
+							'label'        => __( 'Design' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
-									'type'            => 'image',
-									'id'              => 'white_logo',
-									'data_type'       => 'meta',
-									'data_key'        => 'white_logo',
-									'label'           => __( 'White logo' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
+									'type'          => 'image',
+									'id'            => 'white_logo',
+									'data_type'     => 'meta',
+									'data_key'      => 'white_logo',
+									'label'         => __( 'White logo' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
 								),
 								array(
-									'type'            => 'image',
-									'id'              => 'black_logo',
-									'data_type'       => 'meta',
-									'data_key'        => 'black_logo',
-									'label'           => __( 'Black logo' ),
-									'register_meta'   => true,
-									'ui_border_top'   => false,
+									'type'          => 'image',
+									'id'            => 'black_logo',
+									'data_type'     => 'meta',
+									'data_key'      => 'black_logo',
+									'label'         => __( 'Black logo' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
 								),
 								array(
 									'type'          => 'color',
@@ -465,27 +468,27 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => 'white',
 									'alpha_control' => false,
-									'options'         => array(
+									'options'       => array(
 										'white' => __( 'White' ),
 										'black' => __( 'Black' ),
 									),
 								),
 								array(
-									'type'            => 'image',
-									'id'              => 'favicon',
-									'data_type'       => 'meta',
-									'data_key'        => 'favicon',
-									'label'           => __( 'Favicon' ),
-									'help'            => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
+									'type'          => 'image',
+									'id'            => 'favicon',
+									'data_type'     => 'meta',
+									'data_key'      => 'favicon',
+									'label'         => __( 'Favicon' ),
+									'help'          => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
 								),
 							),
 						),
 						array(
-							'label'    => __( 'Location' ),
+							'label'        => __( 'Location' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'city',
@@ -544,9 +547,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Call for Proposal' ),
+							'label'        => __( 'Call for Proposal' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'checkbox',
 									'id'            => 'cfp_active',
@@ -556,7 +559,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => true,
 									'use_toggle'    => false,
-									'input_label'     => __( 'CFP for Event' ),
+									'input_label'   => __( 'CFP for Event' ),
 								),
 								array(
 									'type'          => 'text',
@@ -567,7 +570,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -578,34 +581,34 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 							),
 						),
 						array(
-							'label'    => __( 'Social' ),
+							'label'        => __( 'Social' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'hashtag',
 									'data_type'     => 'meta',
 									'data_key'      => 'hashtag',
 									'label'         => __( 'Hashtag for event' ),
-									'help'         => __( 'Write hashtag here or other text to be associated with the social media icons.' ),
+									'help'          => __( 'Write hashtag here or other text to be associated with the social media icons.' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( '#KubeCon' ),
 								),
 								array(
-									'type'            => 'image',
-									'id'              => 'wechat',
-									'data_type'       => 'meta',
-									'data_key'        => 'wechat',
-									'label'           => __( 'WeChat QR code' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
+									'type'          => 'image',
+									'id'            => 'wechat',
+									'data_type'     => 'meta',
+									'data_key'      => 'wechat',
+									'label'         => __( 'WeChat QR code' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
 								),
 								array(
 									'type'          => 'text',
@@ -676,9 +679,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Homepage Tile' ),
+							'label'        => __( 'Homepage Tile' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'cta_register_url',
@@ -724,7 +727,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -741,100 +744,100 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Newsletter' ),
+							'label'        => __( 'Newsletter' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'form_action',
 									'data_type'     => 'meta',
 									'data_key'      => 'form_action',
 									'label'         => __( 'Form Action' ),
-									'help'         => __( 'The URL the form should post to. If this is blank, the form will not appear.' ),
+									'help'          => __( 'The URL the form should post to. If this is blank, the form will not appear.' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events' ),
 								),
 								array(
-									'type'            => 'textarea',
-									'id'              => 'form_title',
-									'data_type'       => 'meta',
-									'data_key'        => 'form_title',
-									'label'           => __( 'Form Title text' ),
-									'help'            => __( 'If this is set, this will override default form title.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => '',
-									'placeholder'     => __( 'Join our mailing list to hear all the latest about events, news and more.' ),
+									'type'          => 'textarea',
+									'id'            => 'form_title',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_title',
+									'label'         => __( 'Form Title text' ),
+									'help'          => __( 'If this is set, this will override default form title.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Join our mailing list to hear all the latest about events, news and more.' ),
 								),
 								array(
-									'type'            => 'textarea',
-									'id'              => 'form_privacy',
-									'data_type'       => 'meta',
-									'data_key'        => 'form_privacy',
-									'label'           => __( 'Privacy Notice text' ),
-									'help'            => __( 'If this is set, this will override default privacy link. Use markdown to include privacy policy link.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => '',
-									'placeholder'     => __( 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our [Privacy Policy](https://www.linuxfoundation.org/privacy/).' ),
+									'type'          => 'textarea',
+									'id'            => 'form_privacy',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_privacy',
+									'label'         => __( 'Privacy Notice text' ),
+									'help'          => __( 'If this is set, this will override default privacy link. Use markdown to include privacy policy link.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our [Privacy Policy](https://www.linuxfoundation.org/privacy/).' ),
 								),
 								array(
-									'type'            => 'text',
-									'id'              => 'form_first_name',
-									'data_type'       => 'meta',
-									'data_key'        => 'form_first_name',
-									'label'           => __( 'First Name text' ),
-									'help'            => __( 'If this is set, this will override default form text.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => '',
-									'placeholder'     => __( 'First name' ),
+									'type'          => 'text',
+									'id'            => 'form_first_name',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_first_name',
+									'label'         => __( 'First Name text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'First name' ),
 								),
 								array(
-									'type'            => 'text',
-									'id'              => 'form_last_name',
-									'data_type'       => 'meta',
-									'data_key'        => 'form_last_name',
-									'label'           => __( 'Last Name text' ),
-									'help'            => __( 'If this is set, this will override default form text.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => '',
-									'placeholder'     => __( 'Last name' ),
+									'type'          => 'text',
+									'id'            => 'form_last_name',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_last_name',
+									'label'         => __( 'Last Name text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Last name' ),
 								),
 								array(
-									'type'            => 'text',
-									'id'              => 'form_email',
-									'data_type'       => 'meta',
-									'data_key'        => 'form_email',
-									'label'           => __( 'Email text' ),
-									'help'            => __( 'If this is set, this will override default form text.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => '',
-									'placeholder'     => __( 'Email address' ),
+									'type'          => 'text',
+									'id'            => 'form_email',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_email',
+									'label'         => __( 'Email text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Email address' ),
 								),
 								array(
-									'type'            => 'text',
-									'id'              => 'form_submit',
-									'data_type'       => 'meta',
-									'data_key'        => 'form_submit',
-									'label'           => __( 'Submit button text' ),
-									'help'            => __( 'If this is set, this will override default form text.' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => '',
-									'placeholder'     => __( 'Sign up!' ),
+									'type'          => 'text',
+									'id'            => 'form_submit',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_submit',
+									'label'         => __( 'Submit button text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Sign up!' ),
 								),
 
 							),
 						),
 						array(
-							'label'    => __( 'Alert Bar' ),
+							'label'        => __( 'Alert Bar' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'textarea',
 									'id'            => 'alert_text',
@@ -889,9 +892,9 @@ class LFEvents_Admin {
 							),
 						),
 						array(
-							'label'    => __( 'Advanced' ),
+							'label'        => __( 'Advanced' ),
 							'initial_open' => false,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'radio',
 									'id'            => 'hide_from_listings',
@@ -902,7 +905,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => 'show',
-									'options'         => array(
+									'options'       => array(
 										'show' => __( 'Show' ),
 										'hide' => __( 'Hide' ),
 									),
@@ -917,7 +920,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '0',
-									'options'         => array(
+									'options'       => array(
 										'1' => __( 'True' ),
 										'0' => __( 'False' ),
 									),
@@ -980,9 +983,9 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General' ),
+							'label'        => __( 'General' ),
 							'initial_open' => true,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'checkbox',
 									'id'            => 'hide_from_menu',
@@ -1113,18 +1116,18 @@ class LFEvents_Admin {
 									'placeholder'   => __( 'https://cloud.google.com/' ),
 								),
 								array(
-									'type'            => 'range',
-									'id'              => 'size',
-									'data_type'       => 'meta',
-									'data_key'        => 'size',
-									'label'           => __( 'Size Adjustment %' ),
-									'help'            => __( '100% is a normal sized logo; 80% is smaller; 120% is larger' ),
-									'register_meta'   => true,
-									'ui_border_top'   => true,
-									'default_value'   => 100,
-									'step'            => 1,
-									'min'             => 50,
-									'max'             => 150,
+									'type'          => 'range',
+									'id'            => 'size',
+									'data_type'     => 'meta',
+									'data_key'      => 'size',
+									'label'         => __( 'Size Adjustment %' ),
+									'help'          => __( '100% is a normal sized logo; 80% is smaller; 120% is larger' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => 100,
+									'step'          => 1,
+									'min'           => 50,
+									'max'           => 150,
 								),
 							),
 						),
@@ -1149,9 +1152,9 @@ class LFEvents_Admin {
 					'label'  => __( 'Tab label' ),
 					'panels' => array(
 						array(
-							'label'    => __( 'General' ),
+							'label'        => __( 'General' ),
 							'initial_open' => true,
-							'settings' => array(
+							'settings'     => array(
 								array(
 									'type'          => 'text',
 									'id'            => 'city',
@@ -1172,7 +1175,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -1183,7 +1186,7 @@ class LFEvents_Admin {
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
-									'placeholder'        => 'YYYY/MM/DD',
+									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
 									'type'          => 'text',
@@ -1350,7 +1353,7 @@ function get_kids( $post_id ) {
 
 	foreach ( $kid_posts as $kid ) {
 		$kid_ids[] = $kid->ID;
-		$kid_ids = array_merge( $kid_ids, get_kids( $kid->ID ) );
+		$kid_ids   = array_merge( $kid_ids, get_kids( $kid->ID ) );
 	}
 
 	return $kid_ids;

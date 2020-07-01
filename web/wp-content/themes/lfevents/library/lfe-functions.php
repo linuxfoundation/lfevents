@@ -640,7 +640,7 @@ if ( ! is_admin() ) {
 		if ( false === strpos( $url, '.js' ) ) {
 			return $url;
 		}
-		if ( strpos( $url, 'jquery-3.4.1.min.js' ) ) {
+		if ( strpos( $url, 'jquery-3.4.1.min.js' ) && ! is_front_page() ) {
 			return $url;
 		}
 		return str_replace( ' src', ' defer src', $url );
@@ -841,3 +841,18 @@ function lfe_event_alert_bar( $parent_id ) {
 
 	echo $out; //phpcs:ignore
 }
+
+/**
+ * Dequeue some scripts and style from front page only.
+ */
+function lfe_dequeue_front_page_style() {
+	if ( is_front_page() && ! is_admin() ) {
+		wp_dequeue_style( 'photonic' );
+		wp_dequeue_style( 'ugb-style-css' ); // stackable.
+		wp_dequeue_style( 'ugb-style-css-premium' ); // stackable.
+		wp_dequeue_script( 'ugb-block-frontend-js' ); // stackable.
+		wp_dequeue_script( 'ugb-block-frontend-js-premium' ); // stackable.
+		wp_deregister_script( 'jquery-ui-datepicker' ); // searchandfilter.
+	}
+}
+add_action( 'wp_enqueue_scripts', 'lfe_dequeue_front_page_style', 100 );

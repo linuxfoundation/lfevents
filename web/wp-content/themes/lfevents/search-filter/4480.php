@@ -97,27 +97,27 @@ if ( $query->have_posts() ) {
 				$have_button = false;
 
 				if ( $register_url ) {
-					echo '<a href="' . esc_url( $register_url ) . '" >Register</a>';
+					echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';
 					$have_button = true;
 				}
 
 				if ( $speak_url && strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
-					echo '<a href="' . esc_url( $speak_url ) . '">Speak</a>';
+					echo '<a aria-label="Speak at ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $speak_url ) . '">Speak</a>';
 					$have_button = true;
 				}
 
 				if ( $sponsor_url && ( ! $sponsor_date_end || strtotime( $sponsor_date_end ) > time() ) ) {
-					echo '<a href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+					echo '<a aria-label="Sponsor ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
 					$have_button = true;
 				}
 
 				if ( $schedule_url ) {
-					echo '<a href="' . esc_url( $schedule_url ) . '">Schedule</a>';
+					echo '<a aria-label="View schedule for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $schedule_url ) . '">Schedule</a>';
 					$have_button = true;
 				}
 
 				if ( ! $have_button ) {
-					echo '<a href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
+					echo '<a aria-label="Learn more about ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
 				}
 				?>
 			</p>
