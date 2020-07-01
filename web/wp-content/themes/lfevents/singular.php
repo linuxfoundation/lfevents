@@ -191,42 +191,42 @@ if ( ! $splash_page ) :
 	<?php
 
 	// check for form action.
-	$form_action = get_post_meta( get_the_ID(), 'lfes_form_action', true );
+	$form_action = get_post_meta( $parent_id, 'lfes_form_action', true );
 
 	// only show form if form action.
 	if ( $form_action ) :
 
 		// setup the form defaults.
-		$form_title      = 'Join our mailing list to hear all the latest about events, news and more.';
+		$form_title      = 'Join our mailing list to hear all the latest about events, news and more';
 		$form_privacy    = 'You may unsubscribe at any time. For more information please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.';
 		$form_first_name = 'First name';
 		$form_last_name  = 'Last name';
 		$form_email      = 'Email address';
 		$form_submit     = 'SIGN UP!';
 
-		if ( get_post_meta( get_the_ID(), 'lfes_form_title', true ) ) {
-			$form_title = get_post_meta( get_the_ID(), 'lfes_form_title', true );
+		if ( get_post_meta( $parent_id, 'lfes_form_title', true ) ) {
+			$form_title = get_post_meta( $parent_id, 'lfes_form_title', true );
 		}
 
-		if ( get_post_meta( get_the_ID(), 'lfes_form_privacy', true ) ) {
-			$form_privacy = get_post_meta( get_the_ID(), 'lfes_form_privacy', true );
+		if ( get_post_meta( $parent_id, 'lfes_form_privacy', true ) ) {
+			$form_privacy = get_post_meta( $parent_id, 'lfes_form_privacy', true );
 			$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
 		}
 
-		if ( get_post_meta( get_the_ID(), 'lfes_form_first_name', true ) ) {
-			$form_first_name = get_post_meta( get_the_ID(), 'lfes_form_first_name', true );
+		if ( get_post_meta( $parent_id, 'lfes_form_first_name', true ) ) {
+			$form_first_name = get_post_meta( $parent_id, 'lfes_form_first_name', true );
 		}
 
-		if ( get_post_meta( get_the_ID(), 'lfes_form_last_name', true ) ) {
-			$form_last_name = get_post_meta( get_the_ID(), 'lfes_form_last_name', true );
+		if ( get_post_meta( $parent_id, 'lfes_form_last_name', true ) ) {
+			$form_last_name = get_post_meta( $parent_id, 'lfes_form_last_name', true );
 		}
 
-		if ( get_post_meta( get_the_ID(), 'lfes_form_email', true ) ) {
-			$form_email = get_post_meta( get_the_ID(), 'lfes_form_email', true );
+		if ( get_post_meta( $parent_id, 'lfes_form_email', true ) ) {
+			$form_email = get_post_meta( $parent_id, 'lfes_form_email', true );
 		}
 
-		if ( get_post_meta( get_the_ID(), 'lfes_form_submit', true ) ) {
-			$form_submit = get_post_meta( get_the_ID(), 'lfes_form_submit', true );
+		if ( get_post_meta( $parent_id, 'lfes_form_submit', true ) ) {
+			$form_submit = get_post_meta( $parent_id, 'lfes_form_submit', true );
 		}
 
 		$allowed_elements = array(
