@@ -38,7 +38,7 @@ let removeHeaderHeight = function(){
 // Linked to Foundation Toggler.
 $( document ).on(
 	'on.zf.toggler',
-	'.event-header',
+	'header.sticky',
 	function () {
 		removeHeaderHeight();
 	}
