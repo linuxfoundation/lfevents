@@ -49,7 +49,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		wp_deregister_script( 'jquery' );
 
 		// jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-		wp_enqueue_script( 'jquery', get_stylesheet_directory_uri() . '/src/assets/js/jquery/' . foundationpress_asset_path( 'jquery-3.4.1.min.js' ), array(), '3.4.1', false );
+		wp_enqueue_script( 'jquery', get_stylesheet_directory_uri() . '/src/assets/js/jquery/' . foundationpress_asset_path( 'jquery-3.5.1.min.js' ), array(), '3.5.1', false );
 
 		// Deregister the jquery-migrate version bundled with WordPress.
 		wp_deregister_script( 'jquery-migrate' );
