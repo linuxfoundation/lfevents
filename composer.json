@@ -33,7 +33,6 @@
     "wpackagist-plugin/post-meta-controls": "^1.2.0",
     "wpackagist-plugin/post-type-switcher": "^3.1.0",
     "wpackagist-plugin/redirection": "^4.4.2",
-    "wpackagist-plugin/safe-svg": "^1.9.3",
     "wpackagist-plugin/shortpixel-image-optimiser": "^4.15.3",
     "wpackagist-plugin/svg-autocrop": "^0.1.0",
     "wpackagist-plugin/wp-mail-smtp": "^2.0.1",
