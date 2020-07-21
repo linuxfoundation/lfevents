@@ -17,14 +17,13 @@ browser: "phantomjs"
 
 # (required) The paths to capture. All paths should exist for both of the domains specified above.
 paths:
-  home:     /
-  staff: /about/staff/
-  projects: /join/projects/
-  host: /join/host-your-project/
-  faq: /join/faq/
-  webinars: /community/webinars/
-  search: /?s=test
-  blog: /blog/
+  home: /
+  news: /2019/11/14/new-website-performance/
+  community: /about/community/
+  calendar: /about/calendar/
+  past-events: /about/calendar/archive/
+  kubecon-na: /kubecon-cloudnativecon-north-america/
+  kubecon-cfp: /kubecon-cloudnativecon-north-america/program/cfp/
 
 # (required) Screen widths (and optional height) to resize the browser to before taking the screenshot.
 screen_widths:
