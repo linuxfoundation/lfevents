@@ -1,5 +1,11 @@
 .hamburger-icon {
-  @include hamburger($white, $white, 20px, 16px, 2px, 3);
+  &.white {
+    @include hamburger($white, $white, 20px, 16px, 2px, 3);
+  }
+
+  &.black {
+    @include hamburger($black, $black, 20px, 16px, 2px, 3);
+  }
 }
 
 // About Page nav
@@ -7,7 +13,7 @@
   @include clearfix;
   position: relative;
   z-index: 2;
-  background-color: rgba(10,59,97,100);
+  background-color: rgba(10, 59, 97, 100);
   box-shadow: none;
   color: #ffffff;
   padding: 1rem;
@@ -41,14 +47,17 @@
         width: rem-calc(260);
         height: rem-calc(18.571); // width ÷ 14
       }
+
       @include breakpoint(large) {
         width: rem-calc(260);
         height: rem-calc(18.571); // width ÷ 14
       }
+
       @include breakpoint(xlarge) {
         width: rem-calc(300);
         height: rem-calc(21.428); // width ÷ 14
       }
+
       @include breakpoint(xxlarge) {
         width: rem-calc(380);
         height: rem-calc(27.143); // width ÷ 14
@@ -71,30 +80,33 @@
         @include menu-direction(horizontal);
       }
 
-      > li {
+      >li {
 
         a {
           line-height: inherit;
 
           &:hover {
-            background-color: rgba(0,0,0,0.2);
-            box-shadow: 0 .5rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 .5rem 0 0 rgba(0, 0, 0, 0.2), 0 -1rem 0 0 rgba(0, 0, 0, 0.2);
+
             @include breakpoint(xxlarge) {
               font-size: rem-calc(16);
-              box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+              box-shadow: 0 1rem 0 0 rgba(0, 0, 0, 0.2), 0 -1rem 0 0 rgba(0, 0, 0, 0.2);
             }
-            }
+          }
 
           @include breakpoint(large) {
             font-size: rem-calc(12);
             padding-right: 0.75rem;
             padding-left: 0.75rem;
           }
+
           @include breakpoint(xlarge) {
             font-size: rem-calc(14);
             padding-right: 1rem;
             padding-left: 1rem;
           }
+
           @include breakpoint(xxlarge) {
             font-size: rem-calc(16);
           }
@@ -102,21 +114,23 @@
         }
 
         @include breakpoint(large) {
-          &.current-menu-item > a,
-          &.current-lfe_about_page-ancestor > a {
-            background-color: rgba(0,0,0,0.2);
-            box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+
+          &.current-menu-item>a,
+          &.current-lfe_about_page-ancestor>a {
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0.5rem 0 0 rgba(0, 0, 0, 0.2), 0 -1rem 0 0 rgba(0, 0, 0, 0.2);
           }
         }
 
         @include breakpoint(xxlarge) {
-          &.current-menu-item > a,
-          &.current-lfe_about_page-ancestor > a {
-            box-shadow: 0 1rem 0 0 rgba(0,0,0,0.2), 0 -1rem 0 0 rgba(0,0,0,0.2);
+
+          &.current-menu-item>a,
+          &.current-lfe_about_page-ancestor>a {
+            box-shadow: 0 1rem 0 0 rgba(0, 0, 0, 0.2), 0 -1rem 0 0 rgba(0, 0, 0, 0.2);
           }
         }
 
-        &.external-link > a::after {
+        &.external-link>a::after {
           content: url(/wp-content/themes/lfevents/dist/assets/images/external-link-alt-white.svg);
           display: inline-block;
           width: 0.875em;
@@ -124,7 +138,7 @@
           opacity: 0.6;
         }
 
-        &.external-link:hover > a::after {
+        &.external-link:hover>a::after {
           opacity: 0.8;
         }
       }
@@ -139,7 +153,7 @@
 }
 
 .nav-previous {
-  float:left;
+  float: left;
 
   a::before {
     content: '\2190';
@@ -148,12 +162,12 @@
 }
 
 .nav-next {
-  float:right;
+  float: right;
 
-    a::after {
-      content: '\2192';
-      margin-left: 0.25em;
-    }
+  a::after {
+    content: '\2192';
+    margin-left: 0.25em;
+  }
 }
 
 .nav-previous a,

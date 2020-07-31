@@ -33,13 +33,19 @@ if ( ! $splash_page ) {
 	}
 	$text_style = 'color: ' . $menu_text_color . ';';
 
+	// set hamburger color (via class name).
+	if ( 'white' == $menu_text_color ) {
+		$subpage_header_hamburger_color = 'white';
+	} else {
+		$subpage_header_hamburger_color = 'black';
+	}
+
 	$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
 	if ( $logo ) {
 		$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
 	} else {
 		$event_link_content = get_the_title( $parent_id );
 	}
-
 	?>
 
 	<div data-sticky-container>
@@ -52,7 +58,7 @@ if ( ! $splash_page ) {
 				?>
 
 				<button class="menu-toggler button alignright" data-toggle="event-menu">
-					<span class="hamburger-icon"></span>
+					<span class="hamburger-icon <?php echo esc_html( $subpage_header_hamburger_color ); ?>"></span>
 				</button>
 			</div>
 
@@ -119,9 +125,11 @@ if ( ! $splash_page ) {
 				if ( 'white' == $menu_text_color ) {
 					$subpage_header_text_color       = 'black';
 					$subpage_header_background_color = 'white';
+					$subpage_header_hamburger_color  = 'black';
 				} else {
 					$subpage_header_text_color       = 'white';
 					$subpage_header_background_color = 'black';
+					$subpage_header_hamburger_color  = 'white';
 				}
 				$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
 				?>
