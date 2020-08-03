@@ -33,11 +33,11 @@ if ( ! $splash_page ) {
 	}
 	$text_style = 'color: ' . $menu_text_color . ';';
 
-	// set hamburger color (via class name).
+	// set hamburger and list elements color (via class name).
 	if ( 'white' == $menu_text_color ) {
-		$subpage_header_hamburger_color = 'white';
+		$subpage_header_elements_class = 'is-white';
 	} else {
-		$subpage_header_hamburger_color = 'black';
+		$subpage_header_elements_class = 'is-black';
 	}
 
 	$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
@@ -58,12 +58,12 @@ if ( ! $splash_page ) {
 				?>
 
 				<button class="menu-toggler button alignright" data-toggle="event-menu">
-					<span class="hamburger-icon <?php echo esc_html( $subpage_header_hamburger_color ); ?>"></span>
+					<span class="hamburger-icon <?php echo esc_html( $subpage_header_elements_class ); ?>"></span>
 				</button>
 			</div>
 
 			<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
-				<ul class="event-menu-list">
+				<ul class="event-menu-list <?php echo esc_html( $subpage_header_elements_class ); ?>">
 					<li class="page_item event-home-link" id="popout-header-link"><a href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>" style="background-color:<?php echo $menu_color; ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a></li>
 					<?php
 					if ( $menu_color_3 ) {
@@ -125,11 +125,9 @@ if ( ! $splash_page ) {
 				if ( 'white' == $menu_text_color ) {
 					$subpage_header_text_color       = 'black';
 					$subpage_header_background_color = 'white';
-					$subpage_header_hamburger_color  = 'black';
 				} else {
 					$subpage_header_text_color       = 'white';
 					$subpage_header_background_color = 'black';
-					$subpage_header_hamburger_color  = 'white';
 				}
 				$subpage_header_style = 'color:' . $subpage_header_text_color . '; background-color: ' . $subpage_header_background_color . '; -webkit-text-fill-color: transparent; background: -webkit-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); background: -o-gradient(linear,left top,right bottom,from(' . $menu_color_2 . '),to(' . $menu_color . ')); -webkit-background-clip: text;';
 				?>

@@ -1,11 +1,12 @@
 .hamburger-icon {
-  &.white {
+  &.is-white {
     @include hamburger($white, $white, 20px, 16px, 2px, 3);
   }
 
-  &.black {
+  &.is-black {
     @include hamburger($black, $black, 20px, 16px, 2px, 3);
   }
+
 }
 
 // About Page nav
@@ -131,7 +132,7 @@
         }
 
         &.external-link>a::after {
-          content: url(/wp-content/themes/lfevents/dist/assets/images/external-link-alt-white.svg);
+          content: url('/wp-content/themes/lfevents/dist/assets/images/external-link-alt-white.svg');
           display: inline-block;
           width: 0.875em;
           margin-left: 0.25em;
