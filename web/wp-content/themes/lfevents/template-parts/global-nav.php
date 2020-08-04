@@ -17,7 +17,7 @@ if ( is_lfeventsci() ) {
 	<header class="main-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;">
 
 		<button class="menu-toggler button alignright hide-for-large" data-toggle="main-menu" aria-label="Mobile Navigation">
-			<span class="hamburger-icon"></span>
+			<span class="hamburger-icon is-white"></span>
 		</button>
 
 		<a aria-label="Go to home page" class="home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img alt="<?php bloginfo( 'name' ); ?>" src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
