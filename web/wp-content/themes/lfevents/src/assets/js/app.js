@@ -28,17 +28,26 @@ document.getElementById( 'cookie-banner-button' ).addEventListener(
 );
 
 
-// Removes height from container.
+// Removes height from sticky container.
 let removeHeaderHeight = function(){
 	if ($( window ).width() < 1024) {
 		$( '.sticky-container' ).css( 'height', 'auto' );
 	}
 }
 
-// Linked to Foundation Toggler.
+// Activates on event header.
 $( document ).on(
 	'on.zf.toggler',
 	'.event-header',
+	function () {
+		removeHeaderHeight();
+	}
+);
+
+// Activates on global header.
+$( document ).on(
+	'on.zf.toggler',
+	'.main-header',
 	function () {
 		removeHeaderHeight();
 	}
