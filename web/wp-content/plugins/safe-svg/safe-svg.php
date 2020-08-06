@@ -456,6 +456,9 @@ if ( ! class_exists( 'safe_svg' ) ) {
          *                                 (in that order). Default 'thumbnail'.
          */
         public function fix_direct_image_output( $attr, $attachment, $size = 'thumbnail' ) {
+            if ( ! apply_filters( 'safesvg_try_calculate_image_sizes', '__return_true' ) ) {
+                return $attr;
+            }
 
             // If we're not getting a WP_Post object, bail early.
             // @see https://wordpress.org/support/topic/notice-trying-to-get-property-id/
