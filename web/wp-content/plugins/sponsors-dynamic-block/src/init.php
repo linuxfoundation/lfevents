@@ -130,17 +130,14 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 			$out .= ' target="_blank" rel="noreferrer noopener">';
 		}
 
-		// temporarily deactivate the size calculation for SVGs.
-		apply_filters( 'safesvg_try_calculate_image_sizes', '__return_false' );
 		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo' ) );
-		apply_filters( 'safesvg_try_calculate_image_sizes', '__return_true' );
 
 		if ( $forwarding_url ) {
 			$out .= '</a>';
 		}
 		$out .= '</div>';
 	}
-
+	
 	$out .= '</div></div>';
 
 	/* Restore original Post Data */

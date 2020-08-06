@@ -44,15 +44,11 @@ if ( ! class_exists( 'safe_svg' ) ) {
             add_filter( 'wp_get_attachment_image_src', array( $this, 'one_pixel_fix' ), 10, 4 );
             add_filter( 'admin_post_thumbnail_html', array( $this, 'featured_image_fix' ), 10, 3 );
             add_action( 'admin_enqueue_scripts', array( $this, 'load_custom_admin_style' ) );
-	        if ( add_filter( 'safesvg_try_calculate_image_sizes', '__return_true' ) ) {
-		        add_action( 'get_image_tag', array( $this, 'get_image_tag_override' ), 10, 6 );
-	        }
+            add_action( 'get_image_tag', array( $this, 'get_image_tag_override' ), 10, 6 );
             add_filter( 'wp_generate_attachment_metadata', array( $this, 'skip_svg_regeneration' ), 10, 2 );
             add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_upgrade_link' ) );
             add_filter( 'wp_get_attachment_metadata', array( $this, 'metadata_error_fix' ), 10, 2 );
-            if ( add_filter( 'safesvg_try_calculate_image_sizes', '__return_true' ) ) {
-	            add_filter( 'wp_get_attachment_image_attributes', array( $this, 'fix_direct_image_output' ), 10, 3 );
-            }
+            add_filter( 'wp_get_attachment_image_attributes', array( $this, 'fix_direct_image_output' ), 10, 3 );
         }
 
         /**
