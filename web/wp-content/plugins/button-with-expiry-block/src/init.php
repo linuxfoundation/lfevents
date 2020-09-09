@@ -75,6 +75,9 @@ function button_with_expiry_callback( $attributes, $content ) {
 			return;
 		}
 
+		// strips out mismatched <br> tags that are used with multiple languages
+		$content = str_replace( '<br>', '', $content );
+		
 		$dom = new DOMDocument();
 		$dom->loadXML( $content );
 		$a = $dom->getElementsByTagName( 'a' )->item( 0 );
