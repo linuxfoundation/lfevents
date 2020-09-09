@@ -78,11 +78,13 @@ function button_with_expiry_callback( $attributes, $content ) {
 		$dom = new DOMDocument();
 		$dom->loadXML( $content );
 		$a = $dom->getElementsByTagName( 'a' )->item( 0 );
-		$classes = $a->getAttribute( 'class' );
-		$a->setAttribute( 'class', $classes . ' disabled' );
-		$a->nodeValue = $expire_text;
+		if ( $a ) {
+			$classes = $a->getAttribute( 'class' );
+			$a->setAttribute( 'class', $classes . ' disabled' );
+			$a->nodeValue = $expire_text;
+			return $dom->saveHTML();
+		}
 
-		return $dom->saveHTML();
 	}
 
 	return $content;
