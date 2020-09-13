@@ -199,7 +199,7 @@ jobs:
                 name: Percy tests
                 command: ./.circleci/percy-tests.sh $TERMINUS_SITE
 
-    run_percy_tests_lfeventsci:
+    run_percy_tests_lfasiallcci:
         <<: *defaults
         steps:
             - checkout
@@ -226,6 +226,6 @@ workflows:
       - run_percy_tests_lfeventsci:
             requires:
                 - build_and_deploy_lfeventsci
-      - run_percy_tests_lfeventsci:
+      - run_percy_tests_lfasiallcci:
             requires:
                 - build_and_deploy_lfasiallcci
