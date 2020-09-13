@@ -124,7 +124,6 @@ jobs:
             - slack/status:
                 fail_only: true
 
-
     build_and_deploy_lfeventsci:
         <<: *defaults
         steps:
@@ -191,39 +190,24 @@ jobs:
                 success_message: "$COMMIT_AUTHOR's *$CIRCLE_JOB* job has succeeded \n- $COMMIT_HASH: $COMMIT_MESSAGE"
                 failure_message: "$COMMIT_AUTHOR's *$CIRCLE_JOB* job has failed \n- $COMMIT_HASH: $COMMIT_MESSAGE"
 
-    wraith_test_lfeventsci:
-        docker:
-            - image: lopezs/wraith
-
+    run_percy_tests_lfeventsci:
+        <<: *defaults
         steps:
             - checkout
 
             - run:
-                name: run Wraith tests
-                command: ./.circleci/wraith-test.sh $TERMINUS_SITE 
+                name: Percy tests
+                command: ./.circleci/percy-tests.sh $TERMINUS_SITE
 
-            - store_artifacts:
-                path: ./wraith/shots     
-
-            - slack/status:
-                fail_only: true
-
-    wraith_test_lfasiallcci:
-        docker:
-            - image: lopezs/wraith
-
+    run_percy_tests_lfeventsci:
+        <<: *defaults
         steps:
             - checkout
 
             - run:
-                name: run Wraith tests
-                command: ./.circleci/wraith-test.sh $TERMINUS_SITE2
+                name: Percy tests
+                command: ./.circleci/percy-tests.sh $TERMINUS_SITE2
 
-            - store_artifacts:
-                path: ./wraith/shots     
-
-            - slack/status:
-                fail_only: true
 
 workflows:
   build_and_test:
@@ -239,9 +223,9 @@ workflows:
       - code_sniff_unit_test:
             requires:
                 - build
-      - wraith_test_lfeventsci:
+      - run_percy_tests_lfeventsci:
             requires:
                 - build_and_deploy_lfeventsci
-      - wraith_test_lfasiallcci:
+      - run_percy_tests_lfeventsci:
             requires:
                 - build_and_deploy_lfasiallcci
