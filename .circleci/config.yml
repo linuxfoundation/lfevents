@@ -226,6 +226,6 @@ workflows:
       - run_percy_tests_lfeventsci:
             requires:
                 - build_and_deploy_lfeventsci
-      - run_percy_tests_lfasiallcci:
-            requires:
-                - build_and_deploy_lfasiallcci
+    #   - run_percy_tests_lfasiallcci:
+    #         requires:
+    #             - build_and_deploy_lfasiallcci
