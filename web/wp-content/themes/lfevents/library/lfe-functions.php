@@ -237,7 +237,6 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer 
 		}
 		$pages = implode( '</li>', $pages );
 		$pages = strip_tags( $pages, '<li><a><br>' );
-		$pages = str_replace( ' ', '&nbsp;', $pages );
 		$pages = str_replace( '<br>', ' ', $pages );
 
 	} else {
