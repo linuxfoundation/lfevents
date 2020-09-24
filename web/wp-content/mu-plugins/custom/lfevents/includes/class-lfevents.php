@@ -181,7 +181,6 @@ class LFEvents {
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'redirects' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'deregister_scripts' );
 		$this->loader->add_filter( 'the_content', $plugin_public, 'rewrite_china_domains' );
-		$this->loader->add_filter( 'the_title', $plugin_public, 'strip_tags_title' );
 	}
 
 	/**
