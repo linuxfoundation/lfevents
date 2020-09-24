@@ -147,4 +147,15 @@ class LFEvents_Public {
 		return $content;
 	}
 
+	/**
+	 * Strips tags from the_title except for <br> tags.
+	 * We sometimes add <span> tags in the title to make the footer nowrap but
+	 * don't want these tags showing up in other instance of the title.
+	 *
+	 * @param string $title the title.
+	 */
+	public function strip_tags_title( $title ) {
+		return strip_tags( $title, '<br>' );
+	}
+
 }
