@@ -37,7 +37,10 @@ defaults: &defaults
     # BUILD_TOOLS_VERSION: 2.0.0-beta6
     TERM: dumb
 
-version: 2
+version: 2.1
+orbs:
+  slack: circleci/slack@3.4.2
+
 jobs:
     # @todo: common initialization, maybe
     build:
@@ -70,6 +73,9 @@ jobs:
                 paths:
                     - vendor
 
+            - slack/status:
+                fail_only: true
+
     code_sniff_unit_test:
         <<: *defaults
         # override the default image with drupaldocker/php as this job
@@ -92,9 +98,8 @@ jobs:
                 name: check for WordPress coding standards
                 command: composer -n code-sniff
             
-            # - run:
-            #     name: run unit tests
-            #     command: composer -n unit-test
+            - slack/status:
+                fail_only: true
 
     build_css_js:
         <<: *defaults
@@ -116,6 +121,8 @@ jobs:
                 paths:
                     - dist
 
+            - slack/status:
+                fail_only: true
 
     build_and_deploy_lfeventsci:
         <<: *defaults
@@ -146,6 +153,10 @@ jobs:
                 name: deploy to Pantheon
                 command: ./.circleci/deploy-to-pantheon.sh $TERMINUS_SITE
 
+            - slack/status:
+                success_message: "$COMMIT_AUTHOR's *$CIRCLE_JOB* job has succeeded \n- $COMMIT_HASH: $COMMIT_MESSAGE"
+                failure_message: "$COMMIT_AUTHOR's *$CIRCLE_JOB* job has failed \n- $COMMIT_HASH: $COMMIT_MESSAGE"
+
     build_and_deploy_lfasiallcci:
         <<: *defaults
         steps:
@@ -175,93 +186,46 @@ jobs:
                 name: deploy to Pantheon
                 command: ./.circleci/deploy-to-pantheon.sh $TERMINUS_SITE2
 
-    behat_test_lfeventsci:
+            - slack/status:
+                success_message: "$COMMIT_AUTHOR's *$CIRCLE_JOB* job has succeeded \n- $COMMIT_HASH: $COMMIT_MESSAGE"
+                failure_message: "$COMMIT_AUTHOR's *$CIRCLE_JOB* job has failed \n- $COMMIT_HASH: $COMMIT_MESSAGE"
+
+    run_percy_tests_lfeventsci:
         <<: *defaults
         steps:
             - checkout
 
-            - attach_workspace:
-                # Must be absolute path or relative path from working_directory
-                at: /tmp
-
-            - restore_cache:
-                keys:
-                    - terminus-install
-
             - run:
-                name: copy vendor
-                command: cp -r /tmp/vendor .
-            
-            - run:
-                name: dependencies
-                command: ./.circleci/set-up-globals.sh
+                name: Percy tests
+                command: ./.circleci/percy-tests.sh $TERMINUS_SITE
 
-            - run:
-                name: run Behat tests
-                command: ./.circleci/behat-test.sh
-
-            - run:
-                name: run Behat cleanup
-                command: ./.circleci/behat-test-cleanup.sh
-                when: always
-
-    wraith_test_lfeventsci:
-        docker:
-            - image: lopezs/wraith
-
+    run_percy_tests_lfasiallcci:
+        <<: *defaults
         steps:
             - checkout
 
             - run:
-                name: run Wraith tests
-                command: ./.circleci/wraith-test.sh $TERMINUS_SITE 
+                name: Percy tests
+                command: ./.circleci/percy-tests.sh $TERMINUS_SITE2
 
-            - store_artifacts:
-                path: ./wraith/shots     
-
-    wraith_test_lfasiallcci:
-        docker:
-            - image: lopezs/wraith
-
-        steps:
-            - checkout
-
-            - run:
-                name: run Wraith tests
-                command: ./.circleci/wraith-test.sh $TERMINUS_SITE2
-
-            - store_artifacts:
-                path: ./wraith/shots     
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
-      # Install dev dependencies
       - build
       - build_css_js
-      # Build and deploy
       - build_and_deploy_lfeventsci:
             requires:
                 - build_css_js
       - build_and_deploy_lfasiallcci:
             requires:
                 - build_css_js
-      # Code sniff and unit text first
       - code_sniff_unit_test:
             requires:
                 - build
-      # Run Behat tests after deploy so they can be done on Pantheon
-    # commenting out behat tests until we need them.
-    #   - behat_test_lfeventsci:
-    #         requires:
-    #             - build
-    #             - build_and_deploy_lfeventsci
-      - wraith_test_lfeventsci:
+      - run_percy_tests_lfeventsci:
             requires:
                 - build_and_deploy_lfeventsci
-                # - behat_test_lfeventsci               
-      - wraith_test_lfasiallcci:
-            requires:
-                - build_and_deploy_lfasiallcci
-                # - build_and_deploy_lfasiallcci                
+    #   - run_percy_tests_lfasiallcci:
+    #         requires:
+    #             - build_and_deploy_lfasiallcci

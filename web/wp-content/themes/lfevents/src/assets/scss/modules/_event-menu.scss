@@ -237,7 +237,6 @@
 
           &::before {
             content: '—';
-            color: rgba(255, 255, 255, 0.6);
             margin-right: 0.75em;
           }
         }
@@ -306,5 +305,22 @@
         text-align: left;
       }
     }
+
+    @include breakpoint(medium down) {
+      &.is-black {
+        .page_item_has_children:not(.other-events) .children a::before {
+          content: '—';
+          color: rgba($black, 0.6);
+        }
+      }
+
+      &.is-white {
+        .page_item_has_children:not(.other-events) .children a::before {
+          content: '—';
+          color: rgba($white, 0.6);
+        }
+      }
+    }
+
   }
 }

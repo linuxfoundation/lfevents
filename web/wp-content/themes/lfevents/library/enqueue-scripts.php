@@ -49,7 +49,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		wp_deregister_script( 'jquery' );
 
 		// jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-		wp_enqueue_script( 'jquery', get_stylesheet_directory_uri() . '/src/assets/js/jquery/' . foundationpress_asset_path( 'jquery-3.4.1.min.js' ), array(), '3.4.1', false );
+		wp_enqueue_script( 'jquery', get_stylesheet_directory_uri() . '/src/assets/js/jquery/' . foundationpress_asset_path( 'jquery-3.5.1.min.js' ), array(), '3.5.1', false );
 
 		// Deregister the jquery-migrate version bundled with WordPress.
 		wp_deregister_script( 'jquery-migrate' );
@@ -58,8 +58,8 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ) ), true );
 
 		// Enqueue forms scripts.
-		wp_enqueue_script( 'sfmc-forms', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ) ), true );
 		wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), 1, true );
+		wp_enqueue_script( 'sfmc-forms', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ), array( 'jquery', 'recaptcha' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'sfmc-forms.js' ) ), true );
 
 		// Add the comment-reply library on pages where it is necessary.
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

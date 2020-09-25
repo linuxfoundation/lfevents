@@ -113,6 +113,9 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 	$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
 	$out .= '<div class="sponsors-logos ' . $tier_size . ' ' . get_sponsor_logos_class( $query->found_posts ) . '">';
 
+	// temporarily deactivate the size calculation for SVGs.
+	add_filter( 'safesvg_try_calculate_image_sizes', '__return_false' );
+
 	while ( $query->have_posts() ) {
 		$query->the_post();
 
@@ -129,12 +132,16 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 			}
 			$out .= ' target="_blank" rel="noreferrer noopener">';
 		}
+
 		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo' ) );
+
 		if ( $forwarding_url ) {
 			$out .= '</a>';
 		}
 		$out .= '</div>';
 	}
+	// reactivate size calculations for SVGs.
+	remove_all_filters( 'safesvg_try_calculate_image_sizes' );
 
 	$out .= '</div></div>';
 

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			} else {
 				clearInterval(timer[i]);
-				instance.innerHTML = instance.getAttribute('data-expirymessage');
+				instance.innerHTML = '<div class="callout" style="text-align:' + instance.getAttribute('data-expiryalign') + '">' + instance.getAttribute('data-expirymessage') + '</div>';
 			}
 		}, 1000);
 	});
