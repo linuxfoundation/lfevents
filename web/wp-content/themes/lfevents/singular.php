@@ -161,14 +161,14 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 					style="background-color: <?php echo esc_html( $subpage_header_background_color ); ?>;">
 					<span
 						style="<?php echo esc_html( $subpage_header_style ); ?>">
-						<?php the_title(); ?>
+						<?php echo strip_tags( get_the_title(), '<br>' ); //phpcs:ignore ?>
 					</span>
 				</h1>
 			</header>
 					<?php
 				} else {
 					?>
-			<h1 class="show-for-sr"><?php the_title(); ?></h1>
+			<h1 class="show-for-sr"><?php echo strip_tags( get_the_title(), '<br>' ); //phpcs:ignore ?></h1>
 					<?php
 				}
 
