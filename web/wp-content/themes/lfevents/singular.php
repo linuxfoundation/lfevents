@@ -33,6 +33,13 @@ if ( ! $splash_page ) {
 	}
 	$text_style = 'color: ' . $menu_text_color . ';';
 
+	$overlay_strength = get_post_meta( $parent_id, 'lfes_overlay_strength', true );
+	$overlay_style = '';
+	if ( $overlay_strength || '0' === $overlay_strength ) {
+		$overlay_strength = (int) $overlay_strength * 0.8 * 0.01;
+		$overlay_style = 'opacity: ' . $overlay_strength . ';';
+	}
+
 	// set hamburger and list elements color (via class name).
 	if ( 'white' == $menu_text_color ) {
 		$subpage_header_elements_class = 'is-white';
@@ -134,7 +141,7 @@ if ( ! $splash_page ) {
 	  <header class="event-subpage-header background-image-wrapper"
 			  style="<?php echo esc_html( $text_style ); ?>">
 		<div class="overlay"
-			 style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
+			 style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style . $overlay_style ); ?>">
 		</div>
 		<figure class="figure-container">
 				<?php
