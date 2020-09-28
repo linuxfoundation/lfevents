@@ -39,6 +39,7 @@
     "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",
     "wpackagist-plugin/wp-nested-pages": "^3.0.11",
     "wpackagist-plugin/flying-scripts":"^1.1.7",
+    "wpackagist-plugin/find-my-blocks":"^2.2.1",
     "wpackagist-plugin/wp-rss-aggregator": "^4.15"
   },
   "require-dev": {
