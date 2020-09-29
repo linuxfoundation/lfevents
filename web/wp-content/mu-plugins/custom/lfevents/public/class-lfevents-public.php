@@ -147,4 +147,31 @@ class LFEvents_Public {
 		return $content;
 	}
 
+	/**
+	 * Inserts some css into the head with the event gradient.
+	 */
+	public function insert_event_styles() {
+		global $post;
+		if ( $post->post_parent ) {
+			$ancestors = get_post_ancestors( $post->ID );
+			$parent_id = $ancestors[ count( $ancestors ) - 1 ];
+		} else {
+			$parent_id = $post->ID;
+		}
+
+		if ( in_array( $post->post_type, lfe_get_post_types() ) && $parent_id ) {
+			$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
+			$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+			$menu_text_color  = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
+			$background_style = 'background-color: ' . $menu_color . ';';
+			if ( $menu_color_2 ) {
+				$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+			}
+			$text_style = 'color: ' . $menu_text_color . ';';
+		}
+
+		echo '<style>';
+		echo '.is-style-event-gradient { ' . $background_style . $text_style . '}';
+		echo '</style>';
+	}
 }
