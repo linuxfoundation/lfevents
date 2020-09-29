@@ -171,7 +171,7 @@ class LFEvents_Public {
 		}
 
 		echo '<style>';
-		echo '.is-style-event-gradient { ' . $background_style . $text_style . '}';
+		echo '.is-style-event-gradient { ' . esc_html( $background_style . $text_style ) . '}';
 		echo '</style>';
 	}
 }
