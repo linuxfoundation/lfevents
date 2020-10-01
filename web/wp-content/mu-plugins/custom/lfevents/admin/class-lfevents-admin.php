@@ -906,6 +906,18 @@ class LFEvents_Admin {
 								),
 								array(
 									'type'          => 'checkbox',
+									'id'            => 'hide_header',
+									'data_type'     => 'meta',
+									'data_key'      => 'hide_header',
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => false,
+									'use_toggle'    => false,
+									'input_label'   => __( 'Hide normal subpage heading', 'my_plugin' ),
+									'help'          => __( 'This is useful when creating alternate landing pages for the event.' ),
+								),
+								array(
+									'type'          => 'checkbox',
 									'id'            => 'splash_page',
 									'data_type'     => 'meta',
 									'data_key'      => 'splash_page',
