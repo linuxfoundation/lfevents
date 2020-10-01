@@ -1,0 +1,7 @@
+.wp-block-group {
+    padding: .9em;
+    &.alignwide {
+        border-radius: 5px;
+        box-shadow: 0 5px 5px 0 rgba(18,63,82,.035), 0 0 0 1px rgba(176,181,193,.2);
+    }
+}
