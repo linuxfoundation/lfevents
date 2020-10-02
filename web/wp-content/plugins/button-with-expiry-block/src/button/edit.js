@@ -69,7 +69,7 @@ function BorderPanel( { borderRadius = '', setAttributes } ) {
 		[ setAttributes ]
 	);
 	return (
-		<PanelBody title={ __( 'Border settings' ) }>
+		<PanelBody title={ __( 'Border Settings' ) }>
 			<RangeControl
 				value={ borderRadius }
 				label={ __( 'Border radius' ) }
@@ -151,6 +151,7 @@ function ButtonEdit( {
 		rel,
 		text,
 		url,
+		willExpire,
 		expireAt,
 		expireText,
 		size,
@@ -272,7 +273,12 @@ function ButtonEdit( {
 				/>
 			</PanelBody>
 
-				<PanelBody title={ __( 'Expiry date' ) }>
+				<PanelBody title={ __( 'Expiry' ) }>
+					<ToggleControl
+						label={ __( 'Button will expire' ) }
+						onChange={ ( value ) => setAttributes( { willExpire: value } ) }
+						checked={ willExpire === true }
+					/>
 					<DateTimePicker
 						currentDate={ expireAt * 1000 }
 						onChange={ value => {

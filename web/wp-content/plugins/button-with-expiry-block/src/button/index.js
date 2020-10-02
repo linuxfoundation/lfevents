@@ -23,6 +23,10 @@ registerBlockType( name, {
 	keywords: [ 'button', 'button with expiry', 'linux' ],
 	attributes: {
 		...attributes,
+		willExpire: {
+			type: 'bool',
+			default: false,
+		},
 		expireAt: {
 			type: 'number',
 			default: 60 * ( 1440 + Math.ceil( Date.now() / 60000 ) ), // 24 hours from Date.now

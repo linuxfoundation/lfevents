@@ -67,9 +67,10 @@ function button_with_expiry_block_assets() { // phpcs:ignore
 function button_with_expiry_callback( $attributes, $content ) {
 	$expire_at   = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
 	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
+	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
 	$time_left   = $expire_at - time();
 
-	if ( $time_left < 0 ) {
+	if ( $will_expire && $time_left < 0 ) {
 
 		if ( empty( $expire_text ) ) {
 			return;

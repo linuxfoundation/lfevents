@@ -35,6 +35,13 @@ if ( ! $splash_page ) {
 	}
 	$text_style = 'color: ' . $menu_text_color . ';';
 
+	$overlay_strength = get_post_meta( $parent_id, 'lfes_overlay_strength', true );
+	$overlay_style = '';
+	if ( $overlay_strength || '0' === $overlay_strength ) {
+		$overlay_strength = (int) $overlay_strength * 0.8 * 0.01;
+		$overlay_style = 'opacity: ' . $overlay_strength . ';';
+	}
+
 	// set hamburger and list elements color (via class name).
 	if ( 'white' == $menu_text_color ) {
 		$subpage_header_elements_class = 'is-white';
@@ -182,6 +189,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 
 				if ( is_page_template( 'page-templates/multi-part-page.php' ) ) {
 					get_template_part( 'template-parts/content', 'multi-part-page' );
+
 				} else {
 					get_template_part( 'template-parts/content', 'page' );
 				}
