@@ -269,6 +269,8 @@ class LFEvents_Admin {
 	/**
 	 * Registers the extra sidebar for post types
 	 *
+	 * See meta control docs https://melonpan.io/wordpress-plugins/post-meta-controls/
+	 *
 	 * @param array $sidebars    Existing sidebars in Gutenberg.
 	 */
 	public function create_sidebar( $sidebars ) {
@@ -323,11 +325,10 @@ class LFEvents_Admin {
 									'id'            => 'description',
 									'data_type'     => 'meta',
 									'data_key'      => 'description',
-									'label'         => __( 'Event description', 'my_plugin' ),
+									'label'         => __( 'Event description' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'default_value' => '',
 									'placeholder'   => 'The Cloud Native Computing Foundation’s flagship conference gathers adopters and technologists from leading open source and cloud native communities in San Diego, California from November 18-21, 2019. Join Kubernetes, Prometheus, Envoy, CoreDNS, containerd, Fluentd, OpenTracing, gRPC, rkt, CNI, Jaeger, Notary, TUF, Vitess, NATS, Linkerd, Helm, Rook, Harbor, etcd, Open Policy Agent, and CRI-O as the community gathers for four days to further the education and advancement of cloud native computing.',
 								),
 								array(
@@ -335,11 +336,10 @@ class LFEvents_Admin {
 									'id'            => 'date_start',
 									'data_type'     => 'meta',
 									'data_key'      => 'date_start',
-									'label'         => __( 'Event start date', 'my_plugin' ),
+									'label'         => __( 'Event start date' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'default_value' => '',
 									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
@@ -347,11 +347,10 @@ class LFEvents_Admin {
 									'id'            => 'date_end',
 									'data_type'     => 'meta',
 									'data_key'      => 'date_end',
-									'label'         => __( 'Event end date', 'my_plugin' ),
+									'label'         => __( 'Event end date' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'default_value' => '',
 									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
@@ -375,7 +374,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'   => __( 'List on general visa request form', 'my_plugin' ),
+									'input_label'   => __( 'List on general visa request form' ),
 								),
 								array(
 									'type'          => 'checkbox',
@@ -386,7 +385,7 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'   => __( 'List on general travel fund form', 'my_plugin' ),
+									'input_label'   => __( 'List on general travel fund form' ),
 								),
 								array(
 									'type'          => 'text',
@@ -408,18 +407,18 @@ class LFEvents_Admin {
 								array(
 									'type'          => 'image',
 									'id'            => 'white_logo',
-									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_type'     => 'meta',
 									'data_key'      => 'white_logo',
-									'label'         => __( 'White logo', 'my_plugin' ),
+									'label'         => __( 'White logo' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 								),
 								array(
 									'type'          => 'image',
 									'id'            => 'black_logo',
-									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_type'     => 'meta',
 									'data_key'      => 'black_logo',
-									'label'         => __( 'Black logo', 'my_plugin' ),
+									'label'         => __( 'Black logo' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
 								),
@@ -427,63 +426,59 @@ class LFEvents_Admin {
 									'type'          => 'color',
 									'id'            => 'menu_color',
 									'data_type'     => 'meta',
-									'data_key'      => 'menu_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'menu_color',
 									'label'         => __( 'Menu Background Color' ),
-									// 'help'          => __( 'Choose a color for the topnav menu' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
-									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
+									'default_value' => '#222222',
+									'alpha_control' => false,
 									'palette'       => $palette,
 								),
 								array(
 									'type'          => 'color',
 									'id'            => 'menu_color_2',
 									'data_type'     => 'meta',
-									'data_key'      => 'menu_color_2', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'menu_color_2',
 									'label'         => __( 'Menu Gradient Color' ),
-									// 'help'          => __( 'Choose a second menu color to create a gradient' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
-									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
+									'default_value' => 'transparent',
+									'alpha_control' => false,
 									'palette'       => $palette,
 								),
 								array(
 									'type'          => 'color',
 									'id'            => 'menu_color_3',
 									'data_type'     => 'meta',
-									'data_key'      => 'menu_color_3', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'menu_color_3',
 									'label'         => __( 'Menu Dropdown Color' ),
-									// 'help'          => __( 'Choose a color for the topnav dropdown' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
-									'default_value' => 'transparent', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
+									'default_value' => 'transparent',
+									'alpha_control' => false,
 									'palette'       => $palette,
 								),
 								array(
 									'type'          => 'radio',
 									'id'            => 'menu_text_color',
 									'data_type'     => 'meta',
-									'data_key'      => 'menu_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'menu_text_color',
 									'label'         => __( 'Menu Text Color' ),
-									// 'help'          => __( 'Choose a color for the menu text' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
-									'default_value' => 'white', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
+									'default_value' => 'white',
+									'alpha_control' => false,
 									'options'       => array(
-										'white' => __( 'White', 'my_plugin' ),
-										'black' => __( 'Black', 'my_plugin' ),
+										'white' => __( 'White' ),
+										'black' => __( 'Black' ),
 									),
 								),
 								array(
 									'type'          => 'image',
 									'id'            => 'favicon',
-									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_type'     => 'meta',
 									'data_key'      => 'favicon',
-									'label'         => __( 'Favicon', 'my_plugin' ),
+									'label'         => __( 'Favicon' ),
 									'help'          => __( 'Should be a 32x32 png file. Use realfavicongenerator.net.' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
@@ -578,14 +573,14 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => true,
 									'use_toggle'    => false,
-									'input_label'   => __( 'CFP for Event', 'my_plugin' ),
+									'input_label'   => __( 'CFP for Event' ),
 								),
 								array(
 									'type'          => 'text',
 									'id'            => 'cfp_date_start',
 									'data_type'     => 'meta',
 									'data_key'      => 'cfp_date_start',
-									'label'         => __( 'CFP start date', 'my_plugin' ),
+									'label'         => __( 'CFP start date' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
@@ -596,11 +591,10 @@ class LFEvents_Admin {
 									'id'            => 'cfp_date_end',
 									'data_type'     => 'meta',
 									'data_key'      => 'cfp_date_end',
-									'label'         => __( 'CFP end date', 'my_plugin' ),
+									'label'         => __( 'CFP end date' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'default_value' => '',
 									'placeholder'   => 'YYYY/MM/DD',
 								),
 							),
@@ -610,11 +604,23 @@ class LFEvents_Admin {
 							'initial_open' => false,
 							'settings'     => array(
 								array(
+									'type'          => 'text',
+									'id'            => 'hashtag',
+									'data_type'     => 'meta',
+									'data_key'      => 'hashtag',
+									'label'         => __( 'Hashtag for event' ),
+									'help'          => __( 'Write hashtag here or other text to be associated with the social media icons.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( '#KubeCon' ),
+								),
+								array(
 									'type'          => 'image',
 									'id'            => 'wechat',
-									'data_type'     => 'meta', // Available: 'meta', 'localstorage', 'none'.
+									'data_type'     => 'meta',
 									'data_key'      => 'wechat',
-									'label'         => __( 'WeChat QR code', 'my_plugin' ),
+									'label'         => __( 'WeChat QR code' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 								),
@@ -623,7 +629,7 @@ class LFEvents_Admin {
 									'id'            => 'linkedin',
 									'data_type'     => 'meta',
 									'data_key'      => 'linkedin',
-									'label'         => __( 'LinkedIn url' ),
+									'label'         => __( 'LinkedIn URL' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
@@ -634,7 +640,7 @@ class LFEvents_Admin {
 									'id'            => 'qq',
 									'data_type'     => 'meta',
 									'data_key'      => 'qq',
-									'label'         => __( 'QQ url' ),
+									'label'         => __( 'QQ URL' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
@@ -645,7 +651,7 @@ class LFEvents_Admin {
 									'id'            => 'youtube',
 									'data_type'     => 'meta',
 									'data_key'      => 'youtube',
-									'label'         => __( 'YouTube url' ),
+									'label'         => __( 'YouTube URL' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
@@ -656,7 +662,7 @@ class LFEvents_Admin {
 									'id'            => 'facebook',
 									'data_type'     => 'meta',
 									'data_key'      => 'facebook',
-									'label'         => __( 'Facebook url' ),
+									'label'         => __( 'Facebook URL' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
@@ -667,11 +673,22 @@ class LFEvents_Admin {
 									'id'            => 'twitter',
 									'data_type'     => 'meta',
 									'data_key'      => 'twitter',
-									'label'         => __( 'Twitter url' ),
+									'label'         => __( 'Twitter URL' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'https://twitter.com/CloudNativeFdn' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'Instagram',
+									'data_type'     => 'meta',
+									'data_key'      => 'instagram',
+									'label'         => __( 'Instagram URL' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'https://www.instagram.com/linux_foundation/' ),
 								),
 							),
 						),
@@ -720,7 +737,7 @@ class LFEvents_Admin {
 									'id'            => 'cta_sponsor_date_end',
 									'data_type'     => 'meta',
 									'data_key'      => 'cta_sponsor_date_end',
-									'label'         => __( 'CTA Sponsor end date', 'my_plugin' ),
+									'label'         => __( 'CTA Sponsor end date' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
 									'default_value' => '',
@@ -738,6 +755,97 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/schedule/' ),
 								),
+							),
+						),
+						array(
+							'label'        => __( 'Newsletter' ),
+							'initial_open' => false,
+							'settings'     => array(
+								array(
+									'type'          => 'text',
+									'id'            => 'form_action',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_action',
+									'label'         => __( 'Form Action' ),
+									'help'          => __( 'The URL the form should post to. If this is blank, the form will not appear.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'https://cloud.email.thelinuxfoundation.org/Submission---Dynamic-Newsletter-Form-Events' ),
+								),
+								array(
+									'type'          => 'textarea',
+									'id'            => 'form_title',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_title',
+									'label'         => __( 'Form Title text' ),
+									'help'          => __( 'If this is set, this will override default form title.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Join our mailing list to hear all the latest about events, news and more.' ),
+								),
+								array(
+									'type'          => 'textarea',
+									'id'            => 'form_privacy',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_privacy',
+									'label'         => __( 'Privacy Notice text' ),
+									'help'          => __( 'If this is set, this will override default privacy link. Use markdown to include privacy policy link.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our [Privacy Policy](https://www.linuxfoundation.org/privacy/).' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'form_first_name',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_first_name',
+									'label'         => __( 'First Name text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'First name' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'form_last_name',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_last_name',
+									'label'         => __( 'Last Name text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Last name' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'form_email',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_email',
+									'label'         => __( 'Email text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Email address' ),
+								),
+								array(
+									'type'          => 'text',
+									'id'            => 'form_submit',
+									'data_type'     => 'meta',
+									'data_key'      => 'form_submit',
+									'label'         => __( 'Submit button text' ),
+									'help'          => __( 'If this is set, this will override default form text.' ),
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => '',
+									'placeholder'   => __( 'Sign up!' ),
+								),
+
 							),
 						),
 						array(
@@ -760,7 +868,7 @@ class LFEvents_Admin {
 									'id'            => 'alert_expiry_date',
 									'data_type'     => 'meta',
 									'data_key'      => 'alert_expiry_date',
-									'label'         => __( 'Expiry Date', 'my_plugin' ),
+									'label'         => __( 'Expiry Date' ),
 									'help'          => __( 'Optional' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
@@ -771,12 +879,12 @@ class LFEvents_Admin {
 									'type'          => 'color',
 									'id'            => 'alert_text_color',
 									'data_type'     => 'meta',
-									'data_key'      => 'alert_text_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'alert_text_color',
 									'label'         => __( 'Text Color' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
-									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
+									'default_value' => '#222222',
+									'alpha_control' => false,
 									'palette'       => array(
 										'white' => '#ffffff',
 										'black' => '#000000',
@@ -786,12 +894,12 @@ class LFEvents_Admin {
 									'type'          => 'color',
 									'id'            => 'alert_background_color',
 									'data_type'     => 'meta',
-									'data_key'      => 'alert_background_color', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'alert_background_color',
 									'label'         => __( 'Background Color' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
-									'default_value' => '#222222', // A string with a HEX, rgb or rgba color format.
-									'alpha_control' => false, // Include alpha control to set color transparency.
+									'default_value' => '#222222',
+									'alpha_control' => false,
 									'palette'       => $palette,
 								),
 
@@ -805,30 +913,30 @@ class LFEvents_Admin {
 									'type'          => 'radio',
 									'id'            => 'hide_from_listings',
 									'data_type'     => 'meta',
-									'data_key'      => 'hide_from_listings', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'hide_from_listings',
 									'label'         => __( 'Hide from Homepage and Calendars' ),
 									'help'          => __( 'This will hide the Event from the homepage and calendars.' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => 'show',
 									'options'       => array(
-										'show' => __( 'Show', 'my_plugin' ),
-										'hide' => __( 'Hide', 'my_plugin' ),
+										'show' => __( 'Show' ),
+										'hide' => __( 'Hide' ),
 									),
 								),
 								array(
 									'type'          => 'radio',
 									'id'            => 'event_has_passed',
 									'data_type'     => 'meta',
-									'data_key'      => 'event_has_passed', // Required if 'data_type' is 'meta' or 'localstorage'.
+									'data_key'      => 'event_has_passed',
 									'label'         => __( 'Event Has Passed' ),
 									'help'          => __( 'This value will update automatically so no need to touch it.' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '0',
 									'options'       => array(
-										'1' => __( 'True', 'my_plugin' ),
-										'0' => __( 'False', 'my_plugin' ),
+										'1' => __( 'True' ),
+										'0' => __( 'False' ),
 									),
 								),
 								array(
@@ -901,7 +1009,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'   => __( 'Hide from Event menu', 'my_plugin' ),
+									'input_label'   => __( 'Hide from Event menu' ),
 									'help'          => __( 'This will stop this particular page from showing on the Event top navigation menu.' ),
 								),
 								array(
@@ -925,7 +1033,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => false,
 									'use_toggle'    => false,
-									'input_label'   => __( 'Splash Page', 'my_plugin' ),
+									'input_label'   => __( 'Splash Page' ),
 									'help'          => __( 'This will make the page display a minimal topnav appropriate for an event splash page.' ),
 								),
 							),
@@ -1038,8 +1146,8 @@ class LFEvents_Admin {
 									'id'            => 'size',
 									'data_type'     => 'meta',
 									'data_key'      => 'size',
-									'label'         => __( 'Size Adjustment %', 'my_plugin' ),
-									'help'          => __( '100% is a normal sized logo; 80% is smaller; 120% is larger', 'my_plugin' ),
+									'label'         => __( 'Size Adjustment %' ),
+									'help'          => __( '100% is a normal sized logo; 80% is smaller; 120% is larger' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => 100,
@@ -1089,11 +1197,10 @@ class LFEvents_Admin {
 									'id'            => 'date_start',
 									'data_type'     => 'meta',
 									'data_key'      => 'date_start',
-									'label'         => __( 'Event start date', 'my_plugin' ),
+									'label'         => __( 'Event start date' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'default_value' => '',
 									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
@@ -1101,11 +1208,10 @@ class LFEvents_Admin {
 									'id'            => 'date_end',
 									'data_type'     => 'meta',
 									'data_key'      => 'date_end',
-									'label'         => __( 'Event end date', 'my_plugin' ),
+									'label'         => __( 'Event end date' ),
 									'register_meta' => true,
 									'ui_border_top' => false,
-									'default_value' => '', // A string with a date that matches 'format'.
-									// To see the available formats check: http://momentjs.com/docs/#/parsing/string-format/.
+									'default_value' => '',
 									'placeholder'   => 'YYYY/MM/DD',
 								),
 								array(
