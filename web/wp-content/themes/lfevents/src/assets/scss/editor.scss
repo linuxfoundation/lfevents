@@ -9,6 +9,10 @@
 @import 'settings';
 @import 'foundation';
 
+@import "components/group";
+@import "modules/typography";
+
+
 // @include foundation-typography;
 // Don't include all foundation-typography; it clobbers wp-block styles
 // HACK: Copy specific pieces of foundation typography's _base.scss
