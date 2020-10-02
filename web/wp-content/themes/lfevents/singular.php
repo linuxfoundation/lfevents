@@ -160,7 +160,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 			<header class="event-subpage-header background-image-wrapper"
 				style="<?php echo esc_html( $text_style ); ?>">
 				<div class="overlay"
-					style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
+					style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style . $overlay_style ); ?>">
 				</div>
 				<figure class="figure-container">
 					<?php
