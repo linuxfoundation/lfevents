@@ -20,6 +20,8 @@ if ( $post->post_parent ) {
 get_header();
 
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
+$hide_header = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
+
 if ( ! $splash_page ) {
 	// menu background color.
 	$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
@@ -138,7 +140,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				if ( $post->post_parent ) {
+				if ( $post->post_parent && ! $hide_header ) {
 					if ( 'white' == $menu_text_color ) {
 						$subpage_header_text_color       = 'black';
 						$subpage_header_background_color = 'white';
