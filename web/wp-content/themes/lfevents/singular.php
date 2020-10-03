@@ -226,10 +226,12 @@ if ( ! $splash_page ) :
 
 		if ( get_post_meta( $parent_id, 'lfes_form_title', true ) ) {
 			$form_title = get_post_meta( $parent_id, 'lfes_form_title', true );
+			$form_title = str_replace( "\n", '<br>', $form_title );
 		}
 
 		if ( get_post_meta( $parent_id, 'lfes_form_privacy', true ) ) {
 			$form_privacy = get_post_meta( $parent_id, 'lfes_form_privacy', true );
+			$form_privacy = str_replace( "\n", '<br>', $form_privacy );
 			$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
 		}
 
@@ -260,7 +262,7 @@ if ( ! $splash_page ) :
 
 	<div class="event-footer-newsletter">
 		<p
-			class="event-footer-newsletter__title"><?php echo esc_html( $form_title ); ?></p>
+			class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
 		<div id="sfmc-message2"></div>
 		<form id="sfmc-form2" action="<?php echo esc_url( $form_action ); ?>"
 			_lpchecked="1">
@@ -299,6 +301,7 @@ if ( ! $splash_page ) :
 			$form_privacy,
 			array(
 				'a' => $allowed_elements,
+				'br' => array(),
 			)
 		);
 		?>
