@@ -49,4 +49,10 @@ wp.domReady( () => {
 			label: '33%',
 		}
 	]);
+	wp.blocks.registerBlockStyle( 'core/columns', [ 
+		{
+			name: 'feature-grid',
+			label: 'Feature Grid',
+		}
+	]);
 } );
