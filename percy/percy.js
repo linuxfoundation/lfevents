@@ -15,14 +15,6 @@ PercyScript.run(async (page, percySnapshot) => {
   await page.waitFor(delay);
   await percySnapshot('community');
 
-  await page.goto(rooturl + 'about/calendar/');
-  await page.waitFor(delay);
-  await percySnapshot('calendar');
-
-  await page.goto(rooturl + 'about/calendar/archive/');
-  await page.waitFor(delay);
-  await percySnapshot('archive');
-
   await page.goto(rooturl + 'kubecon-cloudnativecon-north-america/');
   await page.waitFor(delay);
   await percySnapshot('kubecon-na');

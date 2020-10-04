@@ -38,7 +38,7 @@ let removeHeaderHeight = function(){
 // Activates on event header.
 $( document ).on(
 	'on.zf.toggler',
-	'.event-header',
+	'header.sticky',
 	function () {
 		removeHeaderHeight();
 	}
