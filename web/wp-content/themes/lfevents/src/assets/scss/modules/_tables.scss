@@ -3,7 +3,9 @@
 // --------------------------------------------------
 table {
 
-  &, tbody, tr {
+  &,
+  tbody,
+  tr {
     background-color: transparent;
   }
 
@@ -18,7 +20,8 @@ table {
       padding: 2vw 4vw;
     }
 
-    &, * {
+    &,
+    * {
       background-color: transparent !important;
     }
 
@@ -31,6 +34,39 @@ table {
       font-style: normal;
       font-weight: bold;
       font-size: 1.1em;
+    }
+  }
+}
+
+.wp-block-table {
+  &.is-style-compact {
+    td {
+      padding: 0.5vw;
+
+      @include breakpoint(large) {
+        padding: 1vw;
+      }
+
+
+    }
+  }
+
+  &.is-style-schedule {
+    td {
+      font-size: 0.9em;
+      padding: 1vw !important;
+      width: 15%;
+      text-align: center;
+      border: .5px solid #606060;
+
+      @include breakpoint(large) {
+        font-size: 1em;
+      }
+    }
+
+    tbody th {
+      background-color: #eeee;
+      border: 0.5px solid #606060;
     }
   }
 }
