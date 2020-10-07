@@ -1,6 +1,3 @@
-//
-// Tables
-// --------------------------------------------------
 table {
 
   &,
@@ -46,8 +43,6 @@ table {
       @include breakpoint(large) {
         padding: 1vw;
       }
-
-
     }
   }
 
@@ -68,5 +63,12 @@ table {
       background-color: #eeee;
       border: 0.5px solid #606060;
     }
+  }
+}
+
+// if table is inside a block, remove bottom margin.
+.wp-block-group__inner-container .wp-block-table {
+  table {
+    margin-bottom: 0;
   }
 }
