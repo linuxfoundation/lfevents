@@ -1,30 +1,37 @@
 /**
- * Summary. (use period)
+ * JS to load in the WordPress Admin.
  *
- * Description. (use period)
+ * Description.
  *
- * @link   URL
- * @file   This files defines the MyClass class.
- * @author AuthorName.
- * @since  x.x.x
- * @package xxx
+ * @package WordPress
+ * @since 1.0.0
  */
 
-wp.domReady( () => {
+// @phpcs:disable WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+// @phpcs:disable WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore
+// @phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
+// @phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect
+// @phpcs:disable PEAR.Functions.FunctionCallSignature.Indent
 
-	wp.blocks.registerBlockStyle( 'core/group', [
+wp.domReady(
+	 () => {
+	wp.blocks.registerBlockStyle(
+		 'core/group',
+		[
 		{
-			name: 'default',
-			label: 'Default',
-			isDefault: true,
+				name: 'default',
+				label: 'Default',
+				isDefault: true,
 		},
 		{
-			name: 'event-gradient',
-			label: 'Event Gradient',
+				name: 'event-gradient',
+				label: 'Event Gradient',
 		}
-	]);
-
-	wp.blocks.registerBlockStyle( 'core/heading', [
+	]
+		);
+	wp.blocks.registerBlockStyle(
+		 'core/heading',
+		[
 		{
 			name: 'default',
 			label: 'Default',
@@ -34,12 +41,15 @@ wp.domReady( () => {
 			name: 'section-heading',
 			label: 'Section Heading',
 		}
-	]);
+	]
+		);
 	wp.blocks.unregisterBlockStyle(
 		'core/separator',
 		[ 'dots' ]
 	);
-	wp.blocks.registerBlockStyle( 'core/separator', [
+	wp.blocks.registerBlockStyle(
+		 'core/separator',
+		[
 		{
 			name: '50-percent',
 			label: '50%',
@@ -48,15 +58,20 @@ wp.domReady( () => {
 			name: '33-percent',
 			label: '33%',
 		}
-	]);
-	wp.blocks.registerBlockStyle( 'core/columns', [
+	]
+		);
+	wp.blocks.registerBlockStyle(
+		 'core/columns',
+		[
 		{
 			name: 'feature-grid',
 			label: 'Feature Grid',
 		}
-	]);
-
-	wp.blocks.registerBlockStyle( 'core/spacer', [
+	]
+		);
+	wp.blocks.registerBlockStyle(
+		 'core/spacer',
+		[
 		{
 			name: '40-responsive',
 			label: '40px Responsive',
@@ -73,9 +88,11 @@ wp.domReady( () => {
 			name: '100-responsive',
 			label: '100px Responsive',
 		}
-	]);
-
-	wp.blocks.registerBlockStyle( 'core/table', [
+	]
+		);
+	wp.blocks.registerBlockStyle(
+		 'core/table',
+		[
 		{
 			name: 'compact',
 			label: 'Compact',
@@ -84,7 +101,8 @@ wp.domReady( () => {
 			name: 'schedule',
 			label: 'Schedule',
 		}
-	]);
-
+	]
+		);
 	// end.
-} );
+}
+	);
