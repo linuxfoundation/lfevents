@@ -3,7 +3,7 @@ Contributors: melonpan
 Tags: gutenberg, meta, post-meta, settings, controls
 Requires at least: 5.1
 Tested up to: 5.3
-Stable tag: 1.3.1
+Stable tag: 1.3.3
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +59,13 @@ Installation from the WordPress admin.
 
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed bug with case sensitive file name mismatch
+
+= 1.3.2 =
+* Fixed incompatibilities with WordPress 5.5
+* Updated packages
 
 = 1.3.1 =
 * Fixed bug that didn't load correctly small images in the editor.
