@@ -10,7 +10,7 @@ table {
     font-size: calc(#{rem-calc(10)} + 0.5vw);
     box-shadow: inset 0 0 0 9999px $white;
     border: 2px solid transparent;
-    padding: 1vw;
+    padding: 1vw 2vw;
 
     @include breakpoint(large) {
       border: 0.75rem solid transparent;
@@ -38,10 +38,10 @@ table {
 .wp-block-table {
   &.is-style-compact {
     td {
-      padding: 0.5vw;
+      padding: 5px;
 
       @include breakpoint(large) {
-        padding: 1vw;
+        padding: 10px 20px;
       }
     }
   }
@@ -70,5 +70,20 @@ table {
 .wp-block-group__inner-container .wp-block-table {
   table {
     margin-bottom: 0;
+  }
+}
+
+// temp table styles for plugin.
+.wp-block-table.table-responsive {
+  .ml-grid.ml-clearfix:not(:first-child) {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+
+  }
+
+  dd a {
+    display: block;
   }
 }
