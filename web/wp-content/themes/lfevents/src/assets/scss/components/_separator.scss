@@ -1,0 +1,16 @@
+.wp-block-separator {
+    max-width: 100px;
+    &.has-background {
+        border-bottom: none;
+        height: 1px !important;
+    }
+    &.is-style-50-percent {
+        max-width: 50%;
+    }
+    &.is-style-33-percent {
+        max-width: 33%;
+    }
+    &.is-style-wide {
+        max-width: 1200px;
+    }
+}

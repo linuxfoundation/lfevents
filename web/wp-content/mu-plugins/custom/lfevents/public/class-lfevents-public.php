@@ -167,11 +167,10 @@ class LFEvents_Public {
 			if ( $menu_color_2 ) {
 				$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 			}
-			$text_style = 'color: ' . $menu_text_color . ';';
 		}
 
 		echo '<style>';
-		echo '.is-style-event-gradient { ' . esc_html( $background_style . $text_style ) . '}';
+		echo '.is-style-event-gradient { ' . esc_html( $background_style ) . '}';
 		echo '</style>';
 	}
 }

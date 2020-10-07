@@ -35,4 +35,24 @@ wp.domReady( () => {
 			label: 'Section Heading',
 		}
 	]);
+	wp.blocks.unregisterBlockStyle(
+		'core/separator',
+		[ 'dots' ]
+	);
+	wp.blocks.registerBlockStyle( 'core/separator', [ 
+		{
+			name: '50-percent',
+			label: '50%',
+		},
+		{
+			name: '33-percent',
+			label: '33%',
+		}
+	]);
+	wp.blocks.registerBlockStyle( 'core/columns', [ 
+		{
+			name: 'feature-grid',
+			label: 'Feature Grid',
+		}
+	]);
 } );
