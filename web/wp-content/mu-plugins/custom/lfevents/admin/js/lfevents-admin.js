@@ -100,6 +100,10 @@ wp.domReady(
 		{
 			name: 'schedule',
 			label: 'Schedule',
+		},
+		{
+			name: 'compact-frame',
+			label: 'Compact & Smaller Frame',
 		}
 	]
 		);

@@ -42,6 +42,10 @@ table {
 
       @include breakpoint(large) {
         padding: 10px 20px;
+
+        &:first-child {
+          min-width: 230px;
+        }
       }
     }
   }
@@ -62,6 +66,22 @@ table {
     tbody th {
       background-color: #eeee;
       border: 0.5px solid #606060;
+    }
+  }
+
+  &.is-style-compact-frame {
+    td {
+      padding: 5px;
+      border: 2px solid transparent;
+
+      @include breakpoint(large) {
+        border: 5px solid transparent;
+        padding: 10px 20px;
+
+        &:first-child {
+          min-width: 230px;
+        }
+      }
     }
   }
 }
