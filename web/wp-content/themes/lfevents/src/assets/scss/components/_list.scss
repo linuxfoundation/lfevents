@@ -1,0 +1,11 @@
+ul {
+    &.is-style-plus {
+        list-style-image: url('/wp-content/themes/lfevents/dist/assets/images/plus-solid.svg');
+    }
+    &.is-style-arrow {
+        list-style-image: url('/wp-content/themes/lfevents/dist/assets/images/angle-right-solid.svg');
+    }
+    &.is-style-checkmark {
+        list-style-image: url('/wp-content/themes/lfevents/dist/assets/images/check-solid.svg');
+    }
+}

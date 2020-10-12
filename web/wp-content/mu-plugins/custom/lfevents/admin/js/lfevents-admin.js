@@ -14,7 +14,7 @@
 // @phpcs:disable PEAR.Functions.FunctionCallSignature.Indent
 
 wp.domReady(
-	 () => {
+	() => {
 	wp.blocks.registerBlockStyle(
 		 'core/group',
 		[
@@ -27,8 +27,8 @@ wp.domReady(
 				name: 'event-gradient',
 				label: 'Event Gradient',
 		}
-	]
-		);
+		]
+	);
 	wp.blocks.registerBlockStyle(
 		 'core/heading',
 		[
@@ -41,8 +41,8 @@ wp.domReady(
 			name: 'section-heading',
 			label: 'Section Heading',
 		}
-	]
-		);
+		]
+	);
 	wp.blocks.unregisterBlockStyle(
 		'core/separator',
 		[ 'dots' ]
@@ -58,8 +58,8 @@ wp.domReady(
 			name: '33-percent',
 			label: '33%',
 		}
-	]
-		);
+		]
+	);
 	wp.blocks.registerBlockStyle(
 		 'core/columns',
 		[
@@ -67,8 +67,8 @@ wp.domReady(
 			name: 'feature-grid',
 			label: 'Feature Grid',
 		}
-	]
-		);
+		]
+	);
 	wp.blocks.registerBlockStyle(
 		 'core/spacer',
 		[
@@ -88,8 +88,8 @@ wp.domReady(
 			name: '100-responsive',
 			label: '100px Responsive',
 		}
-	]
-		);
+		]
+	);
 	wp.blocks.registerBlockStyle(
 		 'core/table',
 		[
@@ -105,8 +105,24 @@ wp.domReady(
 			name: 'compact-frame',
 			label: 'Compact & Smaller Frame',
 		}
-	]
-		);
-	// end.
-}
+		]
 	);
+	wp.blocks.registerBlockStyle(
+		'core/list',
+	   [
+	   {
+		   name: 'plus',
+		   label: 'Plus',
+	   },
+	   {
+		   name: 'checkmark',
+		   label: 'Checkmark',
+	   },
+	   {
+		   name: 'arrow',
+		   label: 'Arrow',
+	   }
+	   ]
+	);
+	}
+);
