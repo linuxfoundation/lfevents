@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb95774dda8edd935930c3edbdf315eb",
+    "content-hash": "2f8e20bcaada10b10d388187b1b8dd78",
     "packages": [
         {
             "name": "composer/installers",
@@ -620,24 +620,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/conditional-blocks/"
-        },
-        {
-            "name": "wpackagist-plugin/find-my-blocks",
-            "version": "2.2.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/find-my-blocks/",
-                "reference": "tags/2.2.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/find-my-blocks.2.2.1.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/find-my-blocks/"
         },
         {
             "name": "wpackagist-plugin/flying-pages",
