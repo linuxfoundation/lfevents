@@ -1,11 +1,31 @@
 ul {
+    &.is-style-plus, &.is-style-arrow, &.is-style-checkmark {
+        list-style: none;
+        text-indent: -1.4rem;
+        li::before {
+            content: '';
+            display: inline-block;
+            height: .8rem;
+            width: .8rem;
+            margin-right: .6rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    }
+
     &.is-style-plus {
-        list-style-image: url('/wp-content/themes/lfevents/dist/assets/images/plus-solid.svg');
+        li::before {
+            background-image: url('/wp-content/themes/lfevents/dist/assets/images/plus-solid.svg');
+        }
     }
     &.is-style-arrow {
-        list-style-image: url('/wp-content/themes/lfevents/dist/assets/images/angle-right-solid.svg');
+        li::before {
+            background-image: url('/wp-content/themes/lfevents/dist/assets/images/angle-right-solid.svg');
+        }
     }
     &.is-style-checkmark {
-        list-style-image: url('/wp-content/themes/lfevents/dist/assets/images/check-solid.svg');
+        li::before {
+            background-image: url('/wp-content/themes/lfevents/dist/assets/images/check-solid.svg');
+        }
     }
 }
