@@ -1,4 +1,4 @@
-.wp-block-group, .wp-block-pullquote {
+.wp-block-group, .wp-block-pullquote.is-style-solid-color {
   padding: 15px;
 
   @media (min-width: 414px) {
@@ -15,5 +15,28 @@
 
   &.alignfull {
     border-radius: 0;
+  }
+}
+
+.wp-block-pullquote.is-style-solid-color blockquote {
+  @media (max-width: 768px) {
+    max-width: 75%;
+    p {
+      font-size: 28px;
+    }
+  }
+  @media (max-width: 414px) {
+    max-width: 90%;
+  }
+}
+
+.wp-block-pullquote:not(.is-style-solid-color)  {
+  border-top: 4px solid #555d66;
+  border-bottom: 4px solid #555d66;
+  margin-bottom: 28px;
+  color: #40464d;
+
+  blockquote {
+    border-left: none;
   }
 }
