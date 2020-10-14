@@ -5,4 +5,10 @@
         padding: 60px 35px;
         margin: 17.5px;
     }
+    div.wp-block-column {
+        transition: all .3s cubic-bezier(.84,.12,.59,.83);
+    }
+    div.wp-block-column:hover {
+        transform: translateY(-10px);
+    }
 }
