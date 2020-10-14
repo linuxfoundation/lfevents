@@ -233,7 +233,30 @@ blockquote {
     line-height: $paragraph-lineheight;
     color: $blockquote-color;
   }
+
+  &.is-style-large {
+    border-left: 1px solid #d3d5d9;
+  }
 }
+
+// Citations
+.wp-block-quote__citation, .wp-block-quote cite, .wp-block-quote footer {
+  display: block;
+  font-size: $cite-font-size;
+  color: $cite-color;
+  opacity: 0.75;
+
+  &:before {
+    content: $cite-pseudo-content;
+  }
+}
+
+.wp-block-pullquote.is-style-solid-color .wp-block-pullquote__citation {
+  opacity: 0.75;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
 
 // Abbreviations
 abbr,
