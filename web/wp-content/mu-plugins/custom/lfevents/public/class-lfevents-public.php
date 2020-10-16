@@ -152,6 +152,12 @@ class LFEvents_Public {
 	 */
 	public function insert_event_styles() {
 		global $post;
+
+		// only run on Event post type.
+		if ( ! is_singular( 'lfevent' )) {
+			return;
+		}
+
 		if ( $post->post_parent ) {
 			$ancestors = get_post_ancestors( $post->ID );
 			$parent_id = $ancestors[ count( $ancestors ) - 1 ];
