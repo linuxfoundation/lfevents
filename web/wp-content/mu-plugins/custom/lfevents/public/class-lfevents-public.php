@@ -153,8 +153,8 @@ class LFEvents_Public {
 	public function insert_event_styles() {
 		global $post;
 
-		// only run on Event post type.
-		if ( ! is_singular( 'lfevent' ) ) {
+		// only run on Event post types or pages.
+		if ( ! is_singular( lfe_get_post_types() ) ) {
 			return;
 		}
 

@@ -1,7 +1,6 @@
 /**
  * JS to load in the WordPress Block Editor only.
  *
- *
  * @package WordPress
  * @since 1.0.0
  */
