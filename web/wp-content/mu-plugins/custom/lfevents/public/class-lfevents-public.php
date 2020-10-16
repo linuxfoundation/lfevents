@@ -106,7 +106,7 @@ class LFEvents_Public {
 		global $post;
 
 		if ( in_array( $post->post_type, lfe_get_post_types() ) && $post->post_parent ) {
-			$args = array(
+			$args     = array(
 				'post_parent' => $post->ID,
 				'post_type'   => $post->post_type,
 				'numberposts' => 1,
@@ -154,7 +154,7 @@ class LFEvents_Public {
 		global $post;
 
 		// only run on Event post type.
-		if ( ! is_singular( 'lfevent' )) {
+		if ( ! is_singular( 'lfevent' ) ) {
 			return;
 		}
 

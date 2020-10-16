@@ -109,6 +109,15 @@ class LFEvents_Admin {
 	}
 
 	/**
+	 * Register the JavaScript for the Block Editor.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_editor_scripts() {
+		wp_enqueue_script( $this->lfevents, plugin_dir_url( __FILE__ ) . 'js/lfevents-editor-only.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-data', 'jquery' ), $this->version, false );
+	}
+
+	/**
 	 * Registers the custom post types
 	 */
 	public function new_cpts() {

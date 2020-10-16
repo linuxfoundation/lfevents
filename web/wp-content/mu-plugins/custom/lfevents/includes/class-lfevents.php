@@ -156,6 +156,7 @@ class LFEvents {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_editor_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'new_cpts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_event_categories' );
 		$this->loader->add_filter( 'pmc_create_sidebar', $plugin_admin, 'create_sidebar' );
