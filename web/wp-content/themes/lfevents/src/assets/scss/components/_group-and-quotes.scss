@@ -44,3 +44,7 @@
 .wp-block-quote.is-large, .wp-block-quote.is-style-large {
   margin: auto;
 }
+
+cite:before, div.wp-block-quote__citation:before {
+  content: none;
+}
