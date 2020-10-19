@@ -66,6 +66,14 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 			wp_enqueue_script( 'comment-reply' );
 		}
 
+		if ( has_block( 'table' ) ) {
+
+			wp_enqueue_script( 'responsive-table', get_stylesheet_directory_uri() . '/src/assets/js/lib/' . foundationpress_asset_path( 'restable.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/src/assets/js/lib/' . foundationpress_asset_path( 'restable.js' ) ), true );
+
+			wp_enqueue_script( 'responsive-table-code', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ), array( 'jquery', 'responsive-table' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ) ), true );
+
+		}
+
 	}
 
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
