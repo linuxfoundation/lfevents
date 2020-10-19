@@ -148,15 +148,27 @@ class LFEvents_Public {
 	}
 
 	/**
-	 * Inserts some css into the head with the event gradient.
+	 * Inserts css into the head with the event gradient.
 	 */
 	public function insert_event_styles() {
-		global $post;
 
-		// only run on Event post types or pages.
-		if ( ! is_singular( lfe_get_post_types() ) ) {
-			return;
+		global $pagenow;
+		// Run on frontend event post types, or pages.
+		if ( is_singular( lfe_get_post_types() ) ) {
+			self::create_event_styles();
 		}
+
+		if ( is_admin() && 'post.php' == $pagenow ) {
+			self::create_event_styles();
+		}
+	}
+
+	/**
+	 * Creates css into the head with the event gradient
+	 */
+	public function create_event_styles() {
+
+		global $post;
 
 		if ( $post->post_parent ) {
 			$ancestors = get_post_ancestors( $post->ID );
@@ -166,17 +178,19 @@ class LFEvents_Public {
 		}
 
 		if ( in_array( $post->post_type, lfe_get_post_types() ) && $parent_id ) {
+
 			$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
 			$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
-			$menu_text_color  = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
-			$background_style = 'background-color: ' . $menu_color . ';';
+			$background_color = 'background-color: ' . $menu_color . ';';
 			if ( $menu_color_2 ) {
-				$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+				$background_color = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 			}
-		}
+			$background_style = '.is-style-event-gradient { ' . esc_html( $background_color ) . '}';
 
-		echo '<style>';
-		echo '.is-style-event-gradient { ' . esc_html( $background_style ) . '}';
-		echo '</style>';
+			// Enqueue an empty style sheet first?
+			wp_enqueue_style( 'event-gradient-inline-style-james', get_stylesheet_uri() ); // phpcs:ignore
+			// Then add the inline styles to it.
+			wp_add_inline_style( 'event-gradient-inline-style-james', $background_style );
+		}
 	}
 }
