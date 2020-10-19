@@ -39,8 +39,14 @@ registerBlockType( 'cgb/block-speakers-block', {
 	icon: 'groups', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'Speakers' ),
+		__( 'speakers' ),
+		__( 'featured' ),
+		__( 'presenters' ),
+		__( 'committee' ),
 	],
+	supports: {
+		align: [ 'wide', 'full', 'center' ],
+	},
 	attributes: {
 		speakers: {
 			type: 'array',
@@ -58,7 +64,9 @@ registerBlockType( 'cgb/block-speakers-block', {
 	},
 
 	edit: ( props ) => {
-		const { setAttributes, attributes: { speakers, color1, color2, textColor } } = props;
+		const { setAttributes,
+			attributes: { speakers, color1, color2, textColor, align }
+		} = props;
 
 		const onTextColorChange = ( changes ) => {
 			setAttributes( {
@@ -176,7 +184,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 					</div>
 				</PanelRow></PanelBody>
 			</InspectorControls>,
-			<div key="speakers-block-edit" className={ props.className }>
+			<div key="speakers-block-edit" className={ `align${ align } ${ props.className }` }>
 				<p><strong>Featured Speakers:</strong>
 					<DragDropContext onDragEnd={ onDragEnd }>
 						<Droppable direction="horizontal" droppableId="droppable">

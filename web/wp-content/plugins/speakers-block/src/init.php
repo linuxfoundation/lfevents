@@ -106,6 +106,8 @@ function speakers_block_callback( $attributes, $content ) {
 		return;
 	}
 
+	$align = 'align';
+	$align .= $attributes['align'] ?? 'full';
 	$bg_color_1 = $attributes['color1'];
 	$bg_color_2 = $attributes['color2'];
 
@@ -117,7 +119,7 @@ function speakers_block_callback( $attributes, $content ) {
 		$gradient_color = 'rgba(33,35,38,0.15)';
 	}
 
-	$out = '<section class="speakers-section alignfull" style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%); color: ' . $text_color . ';"><ul class="speaker-list grid-x">';
+	$out = '<section class="speakers-section ' . $align . '" style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%); color: ' . $text_color . ';"><ul class="speaker-list grid-x">';
 
 	while ( $query->have_posts() ) {
 		$query->the_post();
