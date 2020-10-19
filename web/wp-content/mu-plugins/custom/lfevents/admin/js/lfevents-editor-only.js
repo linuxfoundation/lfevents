@@ -45,6 +45,10 @@ wp.domReady(
 		'core/separator',
 		[ 'dots' ]
 	);
+	wp.blocks.unregisterBlockStyle(
+		'core/table',
+		[ 'stripes' ]
+	);
 	wp.blocks.registerBlockStyle(
 		 'core/separator',
 		[
@@ -89,23 +93,6 @@ wp.domReady(
 		]
 	);
 	wp.blocks.registerBlockStyle(
-		 'core/table',
-		[
-		{
-			name: 'compact',
-			label: 'Compact',
-		},
-		{
-			name: 'schedule',
-			label: 'Schedule',
-		},
-		{
-			name: 'compact-frame',
-			label: 'Compact & Smaller Frame',
-		}
-		]
-	);
-	wp.blocks.registerBlockStyle(
 		'core/list',
 	   [
 	   {
@@ -122,5 +109,97 @@ wp.domReady(
 	   }
 	   ]
 	);
+	// Responsive Table with Column Headers.
+	wp.blocks.registerBlockVariation(
+		 'core/table',
+		{
+		name: 'table-with-column-headers',
+		title: 'Table with column headers',
+		description: 'A multi column table which will responsively shrink to be easily readable on smaller screens.',
+		attributes: {
+				className: 'is-style-table-with-column-headers',
+				hasFixedLayout: true,
+				head: [
+				{
+					cells: [
+						{
+							content: 'Time',
+							tag: 'th',
+						},
+						{
+							content: 'Day 1',
+							tag: 'th',
+						},
+						{
+							content: 'Day 2',
+							tag: 'th',
+						},
+						{
+							content: 'Day 3',
+							tag: 'th',
+						},
+						{
+							content: 'Day 4',
+							tag: 'th',
+						},
+					]
+					}
+				],
+				body: [
+				{
+					cells: [
+						{
+							content: '14:00-15:00',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 1',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 2',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 3',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 4',
+							tag: 'td',
+						},
+					]
+					},
+				{
+					cells: [
+						{
+							content: '15:00-16:00',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 1',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 2',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 3',
+							tag: 'td',
+						},
+						{
+							content: 'Talk 4',
+							tag: 'td',
+						},
+					],
+					},
+				],
+		},
+		isDefault: false,
+		icon: 'editor-table',
+		scope: [ 'inserter' ],
 	}
+		);
+	} // end of DOMready.
 );
