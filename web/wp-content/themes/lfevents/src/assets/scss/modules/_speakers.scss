@@ -1,6 +1,6 @@
 .speakers-section {
   color: white;
-  background-color: rgba(10, 59, 97, 100);
+  background-color: rgba(10, 59, 97, 100); // why?
   padding-right: 0 !important;
   padding-left: 0 !important;
 
@@ -110,7 +110,7 @@
         display: flex;
 
         @include breakpoint(xlarge) {
-          font-size: rem-calc(18);
+          font-size: rem-calc(14);
         }
 
         &[data-toggle] {

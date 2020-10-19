@@ -47,6 +47,17 @@ registerBlockType( 'cgb/block-speakers-block', {
 	supports: {
 		align: [ 'wide', 'full', 'center' ],
 	},
+	styles: [
+		{
+			name: 'default',
+			label: __( 'Gradient' ),
+			isDefault: true,
+		},
+		{
+			name: 'plain',
+			label: __( 'Plain' ),
+		},
+	],
 	attributes: {
 		speakers: {
 			type: 'array',
@@ -65,7 +76,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 
 	edit: ( props ) => {
 		const { setAttributes,
-			attributes: { speakers, color1, color2, textColor, align }
+			attributes: { speakers, color1, color2, textColor, align },
 		} = props;
 
 		const onTextColorChange = ( changes ) => {
