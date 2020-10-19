@@ -6,15 +6,22 @@ table {
     background-color: transparent;
   }
 
-  td {
+  td,
+  th {
     font-size: calc(#{rem-calc(10)} + 0.5vw);
     box-shadow: inset 0 0 0 9999px $white;
     border: 2px solid transparent;
-    padding: 1vw 2vw;
+    padding: 0.5rem 1rem;
 
     @include breakpoint(large) {
-      border: 0.75rem solid transparent;
-      padding: 2vw 4vw;
+      border: 5px solid transparent;
+      padding: 1rem 2rem;
+      min-width: 250px;
+    }
+
+    thead {
+      background: #f8f8f8;
+      color: $black;
     }
 
     &,
@@ -26,63 +33,74 @@ table {
       text-decoration: underline;
     }
 
-    em {
+    strong>em,
+    em>strong {
       font-family: $font-family-monospace;
       font-style: normal;
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1em; // 1.1
     }
   }
 }
 
-.wp-block-table {
-  &.is-style-compact {
-    td {
-      padding: 5px;
 
-      @include breakpoint(large) {
-        padding: 10px 20px;
 
-        &:first-child {
-          min-width: 230px;
+// Stacked responsive styles except on column header tables.
+.wp-block-table:not(.is-style-table-with-column-headers) {
+
+  @media (max-width: 600px) {
+
+    // align all cells on new line 100%.
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+      width: 100%;
+    }
+
+    // align all to left for consistency.
+    td,
+    th {
+      text-align: left;
+    }
+
+    // for normal tables, remove border (as used in group).
+    table:not([class^="has-"]) {
+
+      td,
+      th {
+        border: 0;
+
+        &:last-child {
+          border-bottom: 2px solid transparent;
         }
       }
     }
-  }
 
-  &.is-style-schedule {
-    td {
-      font-size: 0.9em;
-      padding: 1vw !important;
-      width: 15%;
-      text-align: center;
-      border: .5px solid #606060;
+    table[class^="has-"] {
 
-      @include breakpoint(large) {
-        font-size: 1em;
-      }
-    }
+      td,
+      th {
+        border: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
 
-    tbody th {
-      background-color: #eeee;
-      border: 0.5px solid #606060;
-    }
-  }
-
-  &.is-style-compact-frame {
-    td {
-      padding: 5px;
-      border: 2px solid transparent;
-
-      @include breakpoint(large) {
-        border: 5px solid transparent;
-        padding: 10px 20px;
-
-        &:first-child {
-          min-width: 230px;
+        &:last-of-type {
+          border-bottom: 4px solid transparent;
         }
+
       }
+
+      tr:first-of-type {
+        border-top: 4px solid transparent;
+      }
+
+      tr:last-of-type {}
     }
+
   }
 }
 
@@ -93,17 +111,194 @@ table {
   }
 }
 
-// temp table styles for plugin.
-.wp-block-table.table-responsive {
-  .ml-grid.ml-clearfix:not(:first-child) {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+// Column Header table (uses responsive-table.js).
+.wp-block-table.is-style-table-with-column-headers {
+
+  td,
+  th {
+    font-size: 0.9em;
+    padding: 1vw !important;
+    width: 15%;
+    text-align: center;
+    border: .5px solid $lf-gray;
+
+    @include breakpoint(large) {
+      font-size: 1em;
+    }
+  }
+
+  table thead th {
+    box-shadow: none;
+  }
+
+  tbody th {
+    border: 0.5px solid $lf-gray;
+  }
+
+  // jquery-restable
+  @media (max-width: 999px) {
+    ul.tabletolist {
+      font-size: 14px;
+      margin: 0 0 20px;
+    }
+
+    ul.tabletolist img {
+      max-width: 100%
+    }
+
+    ul.tabletolist.nrh {
+      border-bottom: 2px solid $lf-gray;
+    }
+
+    ul.tabletolist.nrh>li {
+      border-top: 2px solid $lf-gray;
+    }
+
+    ul.tabletolist,
+    ul.tabletolist>li>ul {
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    ul.tabletolist>li>ul {
+      margin: 0 !important;
+    }
+
+    ul.tabletolist>li .titles {
+      background-color: #f8f8f8;
+      display: block;
+      color: $black;
+      padding: 10px;
+      font-weight: 700
+    }
+
+    ul.tabletolist>li {
+      border-top: .5px solid $lf-gray;
+      border-left: .5px solid $lf-gray;
+      border-right: .5px solid $lf-gray;
+
+      &:last-child {
+        border-bottom: .5px solid $lf-gray;
+      }
+    }
+
+    ul.tabletolist>li>ul>li {
+      font-weight: 300;
+      padding: 10px
+    }
+
+    ul.tabletolist>li>ul>li:hover {
+      background-color: #efefef
+    }
+
+    ul.tabletolist>li>ul>li:last-child {
+      border-bottom: none
+    }
+
+    ul.tabletolist ul>li .row_headers {
+      max-width: 40%;
+      float: left;
+      margin-right: 3%
+    }
+
+    ul.tabletolist ul>li .row_data {
+      float: right;
+      font-weight: 800;
+      max-width: 57%;
+      width: 100%;
+      text-align: left;
+    }
+
+    ul.tabletolist>li>ul>li {
+      *zoom: 1
+    }
+
+    ul.tabletolist>li>ul>li:before {
+      content: " ";
+      display: table
+    }
+
+    ul.tabletolist>li>ul>li:after {
+      content: " ";
+      display: table;
+      clear: both
+    }
+
+    ul.tabletolist ul>li .row_data.html {
+      font-weight: 400
+    }
+
+    ul.tabletolist ul>li .row_data.html ul {
+      list-style-type: disc
+    }
+
+    .row_data.html {
+      display: flex;
+      flex-wrap: wrap;
+
+
+      >*:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      br {
+        display: none;
+      }
+
+      p {
+        margin-bottom: 0;
+        display: flex;
+        flex-wrap: wrap;
+
+        >*:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+    }
+
 
   }
 
-  dd a {
-    display: block;
-  }
+
 }
+
+
+
+
+
+
+
+
+// &.is-style-compact {
+//   td {
+//     padding: 5px;
+
+//     @include breakpoint(large) {
+//       padding: 10px 20px;
+
+//       &:first-child {
+//         min-width: 230px;
+//       }
+//     }
+//   }
+// }
+
+// &.is-style-schedule {
+
+// }
+
+// &.is-style-compact-frame {
+//   td {
+//     padding: 5px;
+//     border: 2px solid transparent;
+
+//     @include breakpoint(large) {
+//       border: 5px solid transparent;
+//       padding: 10px 20px;
+
+//       &:first-child {
+//         min-width: 230px;
+//       }
+//     }
+//   }
+// }
