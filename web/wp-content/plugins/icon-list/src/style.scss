@@ -1,6 +1,4 @@
 // Frontend and Backend.
-
-
 .wp-block-lf-icon-list {
 
     ul {
@@ -12,6 +10,7 @@
 
         li {
             margin-bottom: var(--list-gap);
+            break-inside: avoid;
         }
     }
 
