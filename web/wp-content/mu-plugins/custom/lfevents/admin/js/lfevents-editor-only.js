@@ -92,23 +92,6 @@ wp.domReady(
 		}
 		]
 	);
-	wp.blocks.registerBlockStyle(
-		'core/list',
-	   [
-	   {
-		   name: 'plus',
-		   label: 'Plus',
-	   },
-	   {
-		   name: 'checkmark',
-		   label: 'Checkmark',
-	   },
-	   {
-		   name: 'arrow',
-		   label: 'Arrow',
-	   }
-	   ]
-	);
 	// Responsive Table with Column Headers.
 	wp.blocks.registerBlockVariation(
 		 'core/table',
