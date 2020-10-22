@@ -45,7 +45,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 		__( 'committee' ),
 	],
 	supports: {
-		align: [ 'wide', 'full', 'center' ],
+		align: [ 'wide', 'full' ],
 	},
 	styles: [
 		{
