@@ -1,4 +1,4 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
 import './style.scss';
@@ -46,6 +46,29 @@ registerBlockType( 'lf/icon-list', {
 	supports: {
 		align: true,
 	},
+	transforms: {
+    from: [
+      {
+        type: 'block',
+				blocks: ['ugb/icon-list'],
+				transform: function (attributes) {
+          return createBlock("lf/icon-list", {
+						values: attributes.text
+          });
+				},
+			},
+			{
+        type: 'block',
+				blocks: ['core/list'],
+				transform: function (attributes) {
+          return createBlock("lf/icon-list", {
+						values: attributes.values
+          });
+				},
+
+      },
+    ],
+  },
 	edit: Edit,
 	save,
 } );

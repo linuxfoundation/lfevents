@@ -191,7 +191,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_4__);
 
- // import { createBlock } from '@wordpress/blocks';
 
 
 
@@ -359,6 +358,25 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])('lf/
   supports: {
     align: true
   },
+  transforms: {
+    from: [{
+      type: 'block',
+      blocks: ['ugb/icon-list'],
+      transform: function transform(attributes) {
+        return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["createBlock"])("lf/icon-list", {
+          values: attributes.text
+        });
+      }
+    }, {
+      type: 'block',
+      blocks: ['core/list'],
+      transform: function transform(attributes) {
+        return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["createBlock"])("lf/icon-list", {
+          values: attributes.values
+        });
+      }
+    }]
+  },
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
@@ -388,7 +406,8 @@ function save(_ref) {
       selectedIcon = attributes.selectedIcon,
       iconSize = attributes.iconSize,
       columnCount = attributes.columnCount,
-      listGap = attributes.listGap;
+      listGap = attributes.listGap; // declare these as css variables and attach to the div surrounding list.
+
   var style = {
     '--list-gap': listGap ? "".concat(listGap, "px") : '0',
     '--icon-size': iconSize ? "".concat(iconSize, "px") : '20px',

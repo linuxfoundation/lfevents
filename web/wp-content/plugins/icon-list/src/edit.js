@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-// import { createBlock } from '@wordpress/blocks';
+
 import {
 	RichText,
 	InspectorControls,
