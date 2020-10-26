@@ -105,6 +105,10 @@ class LFEvents_Public {
 	public function redirects() {
 		global $post;
 
+		if ( ! is_object( $post ) ) {
+			return;
+		}
+
 		if ( in_array( $post->post_type, lfe_get_post_types() ) && $post->post_parent ) {
 			$args = array(
 				'post_parent' => $post->ID,
