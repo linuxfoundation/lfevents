@@ -22,6 +22,10 @@ wp.domReady(
 				isDefault: true,
 		},
 		{
+				name: 'border',
+				label: 'Border',
+		},
+		{
 				name: 'event-gradient',
 				label: 'Event Gradient',
 		}
