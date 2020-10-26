@@ -47,7 +47,7 @@ if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
-		if ( 'TBA' === strtoupper( $date_start ) ) {
+		if ( ! check_string_is_date( $date_start ) ) {
 			$date_range = 'TBA';
 		} else {
 			$dt_date_start = new DateTime( $date_start );
@@ -77,10 +77,11 @@ if ( $query->have_posts() ) {
 
 
 		if ( $is_upcoming_events ) {
-			if ( 'TBA' === strtoupper( $date_start ) ) {
+
+			if ( ! check_string_is_date( $date_start ) ) {
 				if ( 'TBA' !== $y ) {
 					$y = 'TBA';
-					echo '<h2 class="cell event-calendar-year">TBA</h2>';
+					echo '<h2 class="cell event-calendar-year">To Be Announced</h2>';
 				}
 			} else {
 				if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
