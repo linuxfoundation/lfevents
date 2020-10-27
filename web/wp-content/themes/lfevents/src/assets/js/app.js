@@ -85,10 +85,11 @@ $( 'a[href*="cvent.com"]' ).each(
 		var link = $( this ).attr( 'href' );
 		var complement = '';
 		var cookie = readCookie( "sas_m_awin" );
-		var filling = JSON.parse( cookie );
-
-		if ( filling['clickId'] ) {
-			complement = 'sscid=' + filling['clickId']
+		if ( cookie ) {
+			var filling = JSON.parse( cookie );
+			if ( filling['clickId'] ) {
+				complement = 'sscid=' + filling['clickId']
+			}
 		}
 		if (link && complement) {
 			if (link.indexOf( '?' ) != -1) {
