@@ -97,24 +97,19 @@ function block_callback( $att ) {
 	$dates = $att['dates'];
 	$left_labels = $att['leftLabels'];
 	$prices = $att['prices'];
-	$expire_text = $att['expireText'];
-	if ( ! $expire_text ) {
-		$expire_text = 'Expired';
-	}
-	$color1 = $att['color1'];
-	$color2 = $att['color2'];
-	$color3 = $att['color3'];
-	$color4 = $att['color4'];
+	$expire_text = $att['expireText'] ?? 'Expired';
+	$color1 = $att['color1'] ?? '';
+	$color2 = $att['color2'] ?? '';
+	$color3 = $att['color3'] ?? '';
+	$color4 = $att['color4'] ?? '';
 	$color_text = $att['colorText'];
-	$tz = $att['timeZone'];
-	if ( ! $tz ) {
-		$tz = '-0700';
-	}
+	$tz = $att['timeZone'] ?? '-0700';
 	$yesterday = new DateTime( 'now', new DateTimeZone( $tz ) );
 	$yesterday->sub( new DateInterval( 'P1D' ) );
 
 	$column = 0;
 	$row = 0;
+	$html = '';
 
 	if ( ! $top_labels || ! $dates || ! $left_labels || ! $prices ) {
 		return '';

@@ -393,6 +393,17 @@ function lfe_insert_favicon() {
 }
 
 /**
+ * Checks a string is a date.
+ *
+ * @param string $date suspected date.
+ * @param string $format datetime format, default Y/m/d.
+ */
+function check_string_is_date( $date, $format = 'Y/m/d' ) {
+	$d = DateTime::createFromFormat( $format, $date );
+	return $d && $d->format( $format ) === $date;
+}
+
+/**
  * Makes the date pretty.  Adapted from https://9seeds.com/pretty-php-date-ranges/.
  *
  * @param datetime $start_date The start date.
@@ -468,12 +479,16 @@ add_filter( 'excerpt_more', 'new_excerpt_more' );
 function lfe_insert_structured_data() {
 	global $post;
 
+	if ( ! is_object( $post ) ) {
+		return;
+	}
+
 	if ( $post->post_parent || 'page' != $post->post_type ) {
 		return;
 	}
 
 	$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
-	if ( 'TBA' !== strtoupper( $date_start ) ) {
+	if ( check_string_is_date( $date_start ) ) {
 		$dt_date_start = new DateTime( $date_start );
 		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
 	}
@@ -494,7 +509,7 @@ function lfe_insert_structured_data() {
 	$out .= '"@context": "http://schema.org/",';
 	$out .= '"@type": "Event",';
 	$out .= '"name": "' . esc_html( $post->post_title ) . '",';
-	if ( 'TBA' !== strtoupper( $date_start ) ) {
+	if ( check_string_is_date( $date_start ) ) {
 		$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
 		$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
 	}
@@ -783,7 +798,7 @@ function lfe_passed_event_banner( $parent_id ) {
 		}
 	}
 	$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'all' ) );
-	if ( $term[0] ) {
+	if ( ! empty( $term ) && $term[0] ) {
 		echo 'View the upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/about/calendar/?_sft_lfevent-category=' . urlencode( $term[0]->slug ) . '"> ' . esc_html( $term[0]->name ) . '.</a>';
 	} else {
 		echo 'View upcoming <a style="color:inherit;text-decoration:underline;" href="https://events.linuxfoundation.org/">Linux Foundation events.</a>';
