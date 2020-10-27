@@ -3,7 +3,7 @@
  * Plugin Name: Find My Blocks!
  * Plugin URI: https://find-my-blocks.eddysims.com
  * Description: A plugin to find your gutenberg blocks
- * Version: 2.2.1
+ * Version: 2.3.0
  * Author: Eddy Sims
  * Author URI: https://eddysims.com
  * License: GPLv2

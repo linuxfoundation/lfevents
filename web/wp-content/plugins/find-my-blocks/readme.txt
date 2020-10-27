@@ -41,6 +41,11 @@ Yes, this plugin will work with all blocks registered and used on your site.
 
 == Changelog ==
 
+2.3.0
+
+- Checks for nested blocks.
+- Adds a tag to a card if the block is nested
+
 2.2.0
 
 - Hides the "core-embed" blocks with the "Hide Core Blocks" option.
