@@ -788,7 +788,7 @@ function lfe_passed_event_banner( $parent_id ) {
 		$slug         = $parent->post_name;
 		$latest_event = get_page_by_path( $slug, OBJECT, 'page' );
 
-		if ( $latest_event ) {
+		if ( $latest_event && 'publish' === $latest_event->post_status ) {
 			$event_has_passed = get_post_meta( $latest_event->ID, 'lfes_event_has_passed', true );
 
 			if ( ! $event_has_passed ) {
