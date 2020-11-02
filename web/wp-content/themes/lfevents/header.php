@@ -18,7 +18,7 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'apple-touch-icon.png' ); //phpcs:ignore?>">
 		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'favicon-16x16.png' );  //phpcs:ignore?>">
 		<link rel="manifest" href="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'site.webmanifest' );  //phpcs:ignore?>">
-		<link rel="mask-icon" href="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'safari-pinned-tab.svg' );  //phpcs:ignore?>" color="#5bbad5">
+		<link rel="mask-icon" href="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'safari-pinned-tab.svg' );  //phpcs:ignore?>">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="msapplication-config" content="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'browserconfig.xml' );  //phpcs:ignore?>">
 		<meta name="theme-color" content="#ffffff">
