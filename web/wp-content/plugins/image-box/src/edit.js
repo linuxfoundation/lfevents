@@ -85,6 +85,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					const description = attributes[ `description${ i }` ];
 					const link = attributes[ `link${ i }` ];
 					const newWindow = attributes[ `newWindow${ i }` ];
+					console.log( attributes )
 
 					function selectImage( value ) {
 						setAttributes( {
