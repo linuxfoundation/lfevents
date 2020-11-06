@@ -239,7 +239,9 @@ blockquote {
 }
 
 // Citations
-.wp-block-quote__citation, .wp-block-quote cite, .wp-block-quote footer {
+.wp-block-quote__citation,
+.wp-block-quote cite,
+.wp-block-quote footer {
   display: block;
   font-size: $cite-font-size;
   color: $cite-color;
@@ -441,6 +443,12 @@ div.ugb-image-box div.ugb-url-input-control__input input {
   width: 100%;
 }
 
+// copied from editor-style css.
+body#tinymce {
+  height: auto; // Fix editor style bug
+  max-width: $grid-row-width; // Give the editor a max-width
+  padding: rem-calc(20) !important;
+}
 
 // Add padding to make more easily selectable.
 .wp-block-group,
@@ -448,12 +456,29 @@ div.ugb-image-box div.ugb-url-input-control__input input {
   padding: 1em;
 }
 
-// .wp-block-table:not([class^="has-"]) {
-  //   table {
+// add guide to group to make more visible in editor.
+.wp-block-group {
+  border: 1px solid #F3F4F5;
+  position: relative;
 
-  //     td,
-  //     tr {
-  //       border: 1px solid #D8D8D8;
-  //     }
-  //   }
-  // }
+  &:after {
+    content: 'GROUP BLOCK';
+    color: #D8D8D8;
+    position: absolute;
+    left: 1px;
+    top: 0;
+    line-height: 1;
+    transform: translateY(-100%);
+  }
+}
+
+
+// .wp-block-table:not([class^="has-"]) {
+//   table {
+
+//     td,
+//     tr {
+//       border: 1px solid #D8D8D8;
+//     }
+//   }
+// }
