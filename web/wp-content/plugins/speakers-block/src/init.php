@@ -107,7 +107,7 @@ function speakers_block_callback( $attributes, $content ) {
 	}
 
 	$align      = 'align';
-	$align     .= $attributes['align'] ?? 'full';
+	$align     .= $attributes['align'] ?? 'wide';
 	$classes    = $attributes['className'] ?? '';
 	$bg_color_1 = $attributes['color1'] ?? '';
 	$bg_color_2 = $attributes['color2'] ?? '';
