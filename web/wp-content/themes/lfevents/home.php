@@ -107,7 +107,7 @@ get_template_part( 'template-parts/global-nav' );
 								}
 
 								$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
-								if ( 'TBA' === strtoupper( $date_start ) ) {
+								if ( ! check_string_is_date( $date_start ) ) {
 									$date_range = 'TBA';
 								} else {
 									$dt_date_start = new DateTime( $date_start );

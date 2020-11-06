@@ -26,7 +26,7 @@ echo '<div class="grid-x grid-margin-x">';
 if ( $query->have_posts() ) {
 	if ( 138 == $query->query['search_filter_id'] || 42 == $query->query['search_filter_id'] ) {
 		$is_upcoming_events = true;
-		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value != 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0" );
+		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) INNER JOIN wp_postmeta pm3 ON ( wp_posts.ID = pm3.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value != 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0 AND (pm3.meta_value <> '') AND ( pm3.meta_key = 'lfes_date_start' )" );
 	} else {
 		$is_upcoming_events = false;
 		$post_types = lfe_get_post_types();
@@ -47,7 +47,7 @@ if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
-		if ( 'TBA' === strtoupper( $date_start ) ) {
+		if ( ! check_string_is_date( $date_start ) ) {
 			$date_range = 'TBA';
 		} else {
 			$dt_date_start = new DateTime( $date_start );
@@ -77,7 +77,8 @@ if ( $query->have_posts() ) {
 
 
 		if ( $is_upcoming_events ) {
-			if ( 'TBA' === strtoupper( $date_start ) ) {
+
+			if ( ! check_string_is_date( $date_start ) ) {
 				if ( 'TBA' !== $y ) {
 					$y = 'TBA';
 					echo '<h2 class="cell event-calendar-year">TBA</h2>';

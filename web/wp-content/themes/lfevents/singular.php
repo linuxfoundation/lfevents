@@ -21,6 +21,7 @@ get_header();
 
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 $hide_header = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
+$event_has_passed = false;
 
 if ( ! $splash_page ) {
 	// menu background color.
