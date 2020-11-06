@@ -44,7 +44,7 @@ registerBlockType( 'lf/icon-list', {
 		__( 'tick list' ),
 	],
 	supports: {
-		align: true,
+		align: [ 'wide', 'full' ],
 	},
 	transforms: {
     from: [
