@@ -137,3 +137,7 @@ web/wp-content/plugins/countdown-block/node_modules
 web/wp-content/plugins/button-with-expiry-block/node_modules
 !web/wp-content/plugins/lfevents-forms
 web/wp-content/plugins/lfevents-forms/node_modules
+!web/wp-content/plugins/icon-list
+web/wp-content/plugins/icon-list/node_modules
+!web/wp-content/plugins/image-box
+web/wp-content/plugins/image-box/node_modules

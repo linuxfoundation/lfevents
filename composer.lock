@@ -694,6 +694,24 @@
             "homepage": "https://wordpress.org/plugins/lh-hsts/"
         },
         {
+            "name": "wpackagist-plugin/magic-liquidizer-responsive-table",
+            "version": "2.0.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/magic-liquidizer-responsive-table/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/magic-liquidizer-responsive-table.zip?timestamp=1574098357"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/magic-liquidizer-responsive-table/"
+        },
+        {
             "name": "wpackagist-plugin/pantheon-advanced-page-cache",
             "version": "1.0.0",
             "source": {

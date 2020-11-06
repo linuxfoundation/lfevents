@@ -19,6 +19,12 @@ h6,
   margin-bottom: 0.5em;
 }
 
+.is-style-section-heading {
+  margin: -20px 0;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  word-spacing: .2rem;
+}
 
 //
 // Links
@@ -120,6 +126,10 @@ blockquote {
   cite {
     opacity: 0.75;
   }
+}
+.wp-block-pullquote blockquote cite {
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
 

@@ -1,44 +1,14 @@
 /**
- * Summary. (use period)
+ * JS to load anywhere in the WordPress Admin (not for the Block Editor).
  *
- * Description. (use period)
+ * Description.
  *
- * @link   URL
- * @file   This files defines the MyClass class.
- * @author AuthorName.
- * @since  x.x.x
- * @package xxx
+ * @package WordPress
+ * @since 1.0.0
  */
 
-(function( $ ) {
-	'use strict';
-
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
-
-})( jQuery );
+// @phpcs:disable WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+// @phpcs:disable WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore
+// @phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact
+// @phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect
+// @phpcs:disable PEAR.Functions.FunctionCallSignature.Indent

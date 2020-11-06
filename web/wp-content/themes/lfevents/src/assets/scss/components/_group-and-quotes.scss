@@ -1,0 +1,53 @@
+.wp-block-group.is-style-border, .wp-block-group.is-style-event-gradient, .wp-block-pullquote.is-style-solid-color {
+  padding: 15px;
+
+  @media (min-width: 414px) {
+    padding: 20px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 35px;
+  }
+
+  border-radius: 12px;
+  box-shadow: 0 5px 5px 0 rgba(18, 63, 82, .035),
+  0 0 0 1px rgba(176, 181, 193, .2);
+
+  &.alignfull {
+    border-radius: 0;
+  }
+}
+
+.wp-block-pullquote.is-style-solid-color blockquote {
+  @media (max-width: 768px) {
+    max-width: 75%;
+    p {
+      font-size: 28px;
+    }
+  }
+  @media (max-width: 414px) {
+    max-width: 90%;
+  }
+}
+
+.wp-block-pullquote:not(.is-style-solid-color)  {
+  border-top: 4px solid #555d66;
+  border-bottom: 4px solid #555d66;
+  margin-bottom: 28px;
+  color: #40464d;
+
+  blockquote {
+    border-left: none;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.wp-block-quote.is-large, .wp-block-quote.is-style-large {
+  margin: auto;
+}
+
+cite:before, div.wp-block-quote__citation:before {
+  content: none;
+}

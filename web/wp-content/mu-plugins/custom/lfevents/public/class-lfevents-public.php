@@ -110,7 +110,7 @@ class LFEvents_Public {
 		}
 
 		if ( in_array( $post->post_type, lfe_get_post_types() ) && $post->post_parent ) {
-			$args = array(
+			$args     = array(
 				'post_parent' => $post->ID,
 				'post_type'   => $post->post_type,
 				'numberposts' => 1,
@@ -151,4 +151,50 @@ class LFEvents_Public {
 		return $content;
 	}
 
+	/**
+	 * Inserts css into the head with the event gradient.
+	 */
+	public function insert_event_styles() {
+
+		global $pagenow;
+		// Run on frontend event post types, or pages.
+		if ( is_singular( lfe_get_post_types() ) ) {
+			self::create_event_styles();
+		}
+
+		if ( is_admin() && 'post.php' == $pagenow ) {
+			self::create_event_styles();
+		}
+	}
+
+	/**
+	 * Creates css into the head with the event gradient
+	 */
+	public function create_event_styles() {
+
+		global $post;
+
+		if ( $post->post_parent ) {
+			$ancestors = get_post_ancestors( $post->ID );
+			$parent_id = $ancestors[ count( $ancestors ) - 1 ];
+		} else {
+			$parent_id = $post->ID;
+		}
+
+		if ( in_array( $post->post_type, lfe_get_post_types() ) && $parent_id ) {
+
+			$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
+			$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+			$background_color = 'background-color: ' . $menu_color . ';';
+			if ( $menu_color_2 ) {
+				$background_color = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+			}
+			$background_style = '.is-style-event-gradient { ' . esc_html( $background_color ) . '}';
+
+			// Enqueue an empty style sheet first?
+			wp_enqueue_style( 'event-gradient-inline-style-james', get_stylesheet_uri() ); // phpcs:ignore
+			// Then add the inline styles to it.
+			wp_add_inline_style( 'event-gradient-inline-style-james', $background_style );
+		}
+	}
 }

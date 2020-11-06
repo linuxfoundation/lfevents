@@ -27,7 +27,7 @@ get_template_part( 'template-parts/global-nav' );
 						</header>
 						<?php the_content(); ?>
 
-						<div class="wp-block-ugb-container alignwide ugb-container ugb--background-opacity-5 ugb--has-background ugb-container--height-short ugb-container--align-horizontal-full" style="background-color:#f1f1f1"><div class="ugb-container__wrapper"><div class="ugb-container__content-wrapper">
+						<div class="wp-block-group has-off-white-background-color has-background"><div class="wp-block-group__inner-container">
 
 						<form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
 
@@ -271,7 +271,7 @@ get_template_part( 'template-parts/global-nav' );
 						</form>
 						<div id="message"></div>
 
-						</div></div></div>
+						</div></div>
 
 						<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
 					</div>

@@ -7,7 +7,8 @@
   }
 
   .wp-block-lf-button-with-expiry {
-    margin: 4px;
+    margin-right: 8px;
+    margin-bottom: 8px;
   }
 }
 
@@ -157,9 +158,5 @@
         top: 0;
       }
     }
-  }
-
-  @media(max-width: 767px) {
-    margin: auto auto 15px!important;
   }
 }

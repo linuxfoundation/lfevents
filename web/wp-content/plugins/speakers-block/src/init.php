@@ -61,9 +61,9 @@ function speakers_block_cgb_block_assets() { // phpcs:ignore
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			// 'style'         => 'speakers_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'speakers_block-cgb-block-js',
+			'editor_script'   => 'speakers_block-cgb-block-js',
 			// // Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'speakers_block-cgb-block-editor-css',
+			'editor_style'    => 'speakers_block-cgb-block-editor-css',
 			'render_callback' => 'speakers_block_callback',
 		)
 	);
@@ -106,18 +106,25 @@ function speakers_block_callback( $attributes, $content ) {
 		return;
 	}
 
+	$align      = 'align';
+	$align     .= $attributes['align'] ?? 'full';
+	$classes    = $attributes['className'] ?? '';
 	$bg_color_1 = $attributes['color1'];
 	$bg_color_2 = $attributes['color2'];
 
 	if ( 'white' == $attributes['textColor'] ) {
-		$text_color = 'rgb(255,255,255)';
+		$text_color     = 'rgb(255,255,255)';
 		$gradient_color = 'rgba(255,255,255,0.15)';
 	} else {
-		$text_color = 'rgb(33,35,38)';
+		$text_color     = 'rgb(33,35,38)';
 		$gradient_color = 'rgba(33,35,38,0.15)';
 	}
 
-	$out = '<section class="speakers-section alignfull" style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%); color: ' . $text_color . ';"><ul class="speaker-list grid-x">';
+	if ( 'is-style-plain' === $classes ) {
+		$gradient_color = 'rgba(0,0,0,0)';
+	}
+
+	$out = '<section class="speakers-section ' . $align . ' ' . $classes . '" style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%); color: ' . $text_color . ';"><ul class="speaker-list grid-x">';
 
 	while ( $query->have_posts() ) {
 		$query->the_post();

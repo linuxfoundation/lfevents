@@ -1,0 +1,14 @@
+{
+	"name": "lf/icon-list",
+	"title": "Icon List Block",
+	"category": "common",
+	"icon": "smiley",
+	"description": "Customised unordered list with icons",
+	"textdomain": "icon-list",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
