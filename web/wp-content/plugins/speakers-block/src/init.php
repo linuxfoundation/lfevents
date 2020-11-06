@@ -30,19 +30,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 function speakers_block_cgb_block_assets() { // phpcs:ignore
 	// Register block editor script for backend.
 	wp_register_script(
-		'speakers_block-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
-		true // Enqueue the script in the footer.
+		'speakers_block-cgb-block-js',
+		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		null,
+		true
 	);
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'speakers_block-cgb-block-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+		'speakers_block-cgb-block-editor-css',
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		array( 'wp-edit-blocks' ),
+		null
 	);
 
 	/**
@@ -109,10 +109,11 @@ function speakers_block_callback( $attributes, $content ) {
 	$align      = 'align';
 	$align     .= $attributes['align'] ?? 'full';
 	$classes    = $attributes['className'] ?? '';
-	$bg_color_1 = $attributes['color1'];
-	$bg_color_2 = $attributes['color2'];
+	$bg_color_1 = $attributes['color1'] ?? '';
+	$bg_color_2 = $attributes['color2'] ?? '';
+	$text_value = $attributes['textColor'] ?? 'white';
 
-	if ( 'white' == $attributes['textColor'] ) {
+	if ( 'white' == $text_value ) {
 		$text_color     = 'rgb(255,255,255)';
 		$gradient_color = 'rgba(255,255,255,0.15)';
 	} else {

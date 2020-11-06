@@ -45,6 +45,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 		__( 'committee' ),
 	],
 	supports: {
+		align: true,
 		align: [ 'wide', 'full' ],
 	},
 	styles: [
@@ -196,7 +197,7 @@ registerBlockType( 'cgb/block-speakers-block', {
 				</PanelRow></PanelBody>
 			</InspectorControls>,
 			<div key="speakers-block-edit" className={ `align${ align } ${ props.className }` }>
-				<p><strong>Featured Speakers:</strong>
+				<p><strong>Featured Speakers:</strong></p>
 					<DragDropContext onDragEnd={ onDragEnd }>
 						<Droppable direction="horizontal" droppableId="droppable">
 							{ ( provided ) => (
@@ -217,7 +218,6 @@ registerBlockType( 'cgb/block-speakers-block', {
 							) }
 						</Droppable>
 					</DragDropContext>
-				</p>
 			</div>,
 		];
 	},
