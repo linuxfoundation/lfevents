@@ -14,9 +14,9 @@ import metadata from './block.json';
 import save from './save';
 import './editor.scss';
 
-const { name, layout } = metadata;
+const { layout } = metadata;
 
-registerBlockType( name, {
+registerBlockType( 'lf/buttons-with-expiry', {
 	title: __( 'Buttons With Expiry' ),
 	layout,
 	category: 'layout',

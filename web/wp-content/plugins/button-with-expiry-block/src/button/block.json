@@ -47,7 +47,8 @@
 			"type": "string"
 		},
 		"borderRadius": {
-			"type": "number"
+			"type": "number",
+			"default": 5
 		},
 		"gradient": {
 			"type": "string"

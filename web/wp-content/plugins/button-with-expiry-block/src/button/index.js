@@ -12,9 +12,9 @@ import metadata from './block.json';
 import save from './save';
 import './editor.scss';
 
-const { name, category, attributes } = metadata;
+const { category, attributes } = metadata;
 
-registerBlockType( name, {
+registerBlockType( 'lf/button-with-expiry', {
 	title: __( 'Button With Expiry' ),
 	category,
 	description: __(
@@ -46,4 +46,3 @@ registerBlockType( name, {
 	edit,
 	save,
 } );
-

@@ -4,7 +4,7 @@
  *
  * Enqueue CSS/JS of all the blocks.
  *
- * @since   1.0.0
+ * @since   1.1.0
  * @package CGB
  */
 
@@ -78,7 +78,7 @@ function button_with_expiry_callback( $attributes, $content ) {
 
 		// strips out mismatched <br> tags that are used with multiple languages
 		$content = str_replace( '<br>', '', $content );
-		
+
 		$dom = new DOMDocument();
 		$dom->loadXML( $content );
 		$a = $dom->getElementsByTagName( 'a' )->item( 0 );
