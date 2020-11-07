@@ -188,13 +188,22 @@ class LFEvents_Public {
 			$background_color = 'background-color: ' . $menu_color . ';';
 			if ( $menu_color_2 ) {
 				$background_color = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+
 			}
 			$background_style = '.is-style-event-gradient { ' . esc_html( $background_color ) . '}';
 
-			// Enqueue an empty style sheet first?
-			wp_enqueue_style( 'event-gradient-inline-style-james', get_stylesheet_uri() ); // phpcs:ignore
+			// adding CSS variables, use these for future styles per event.
+			$css_variables_for_events = '
+:root {
+--event-color-1: ' . esc_html( $menu_color ) . ';
+--event-color-2: ' . esc_html( $menu_color_2 ? $menu_color_2 : $menu_color ) . ';
+}';
+
+			// Enqueue an empty style sheet first.
+			wp_enqueue_style( 'event-gradient-inline-style', get_stylesheet_uri() ); // phpcs:ignore
 			// Then add the inline styles to it.
-			wp_add_inline_style( 'event-gradient-inline-style-james', $background_style );
+			wp_add_inline_style( 'event-gradient-inline-style', $background_style );
+			wp_add_inline_style( 'event-gradient-inline-style', $css_variables_for_events );
 		}
 	}
 }
