@@ -197,7 +197,7 @@ function ButtonEdit( {
 				placeholder={ placeholder || __( 'Add text…' ) }
 				value={ text }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
-				// withoutInteractiveFormatting
+				withoutInteractiveFormatting
 				className={ classnames( 'wp-block-button__link', {
 					'has-background': backgroundColor.color,
 					[ backgroundColor.class ]:
@@ -297,7 +297,7 @@ function ButtonEdit( {
 						} }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Link settings' ) }>
+				<PanelBody title={ __( 'Link settings' ) } initialOpen={ false }>
 					<ToggleControl
 						label={ __( 'Open in new tab' ) }
 						onChange={ onToggleOpenInNewTab }

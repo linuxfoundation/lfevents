@@ -1,2 +1,86 @@
-.block-editor-block-list__block[data-type="lf/button-with-expiry"][data-align="center"]{text-align:center;margin-left:auto;margin-right:auto}.block-editor-block-list__block[data-type="lf/button-with-expiry"][data-align="right"]{/*!rtl:ignore*/text-align:right}.wp-block-lf-button-with-expiry{position:relative;margin:4px;display:inline-block;font-size:13px;line-height:10px}.wp-block-lf-button-with-expiry [contenteditable]{cursor:text}.wp-block-lf-button-with-expiry:not(.has-text-color):not(.is-style-outline) [data-rich-text-placeholder]::after{color:#fff}.wp-block-lf-button-with-expiry .block-editor-rich-text__editable{background-color:#00a0d2;cursor:pointer;color:white;border:none}.wp-block-lf-button-with-expiry .block-editor-rich-text__editable:focus{-webkit-box-shadow:0 0 0 1px #fff,0 0 0 3px #00a0d2;box-shadow:0 0 0 1px #fff,0 0 0 3px #00a0d2;outline:2px solid transparent;outline-offset:-2px}.wp-block-lf-button-with-expiry [data-rich-text-placeholder]::after{opacity:0.8}.wp-block-lf-button-with-expiry__inline-link{color:#555d66;height:0;overflow:hidden;max-width:290px}.wp-block-lf-button-with-expiry__inline-link-input__suggestions{max-width:290px}@media (min-width: 782px){.wp-block-lf-button-with-expiry__inline-link{max-width:260px}.wp-block-lf-button-with-expiry__inline-link-input__suggestions{max-width:260px}}@media (min-width: 960px){.wp-block-lf-button-with-expiry__inline-link{max-width:290px}.wp-block-lf-button-with-expiry__inline-link-input__suggestions{max-width:290px}}.is-selected .wp-block-lf-button-with-expiry__inline-link{height:auto;overflow:visible;margin-top:16px}div[data-type="lf/button-with-expiry"]{display:table}
-.wp-block-lf-buttons-with-expiry .wp-block.block-editor-block-list__block[data-type="lf/button-with-expiry"]{display:inline-block;width:auto}.wp-block-lf-buttons-with-expiry .block-list-appender{display:inline-block;margin:0}.wp-block-lf-buttons-with-expiry .block-editor-button-block-appender{background:none;outline:none}.wp-block-lf-button-with-expiry[data-align="center"] .block-editor-block-list__layout{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-pack:center;justify-content:center}.wp-block-lf-button-with-expiry[data-align="right"] .block-editor-block-list__layout{display:-ms-flexbox;display:flex;-ms-flex-pack:end;justify-content:flex-end}.wp-block-lf-button-with-expiry .block-editor-block-list__layout>div:last-child{display:inline-block}
+.block-editor-block-list__block[data-type="lf/button-with-expiry"][data-align="center"] {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; }
+
+.block-editor-block-list__block[data-type="lf/button-with-expiry"][data-align="right"] {
+  /*!rtl:ignore*/
+  text-align: right; }
+
+.wp-block-lf-button-with-expiry {
+  position: relative;
+  margin: 4px;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 10px; }
+  .wp-block-lf-button-with-expiry [contenteditable] {
+    cursor: text; }
+  .wp-block-lf-button-with-expiry:not(.has-text-color):not(.is-style-outline) [data-rich-text-placeholder]::after {
+    color: #fff; }
+  .wp-block-lf-button-with-expiry .block-editor-rich-text__editable {
+    background-color: #00a0d2;
+    cursor: pointer;
+    color: white;
+    border: none; }
+    .wp-block-lf-button-with-expiry .block-editor-rich-text__editable:focus {
+      -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 3px #00a0d2;
+              box-shadow: 0 0 0 1px #fff, 0 0 0 3px #00a0d2;
+      outline: 2px solid transparent;
+      outline-offset: -2px; }
+  .wp-block-lf-button-with-expiry [data-rich-text-placeholder]::after {
+    opacity: 0.8; }
+
+.wp-block-lf-button-with-expiry__inline-link {
+  color: #555d66;
+  height: 0;
+  overflow: hidden;
+  max-width: 290px; }
+  .wp-block-lf-button-with-expiry__inline-link-input__suggestions {
+    max-width: 290px; }
+  @media (min-width: 782px) {
+    .wp-block-lf-button-with-expiry__inline-link {
+      max-width: 260px; }
+      .wp-block-lf-button-with-expiry__inline-link-input__suggestions {
+        max-width: 260px; } }
+  @media (min-width: 960px) {
+    .wp-block-lf-button-with-expiry__inline-link {
+      max-width: 290px; }
+      .wp-block-lf-button-with-expiry__inline-link-input__suggestions {
+        max-width: 290px; } }
+  .is-selected .wp-block-lf-button-with-expiry__inline-link {
+    height: auto;
+    overflow: visible;
+    margin-top: 16px; }
+
+div[data-type="lf/button-with-expiry"] {
+  display: table; }
+.wp-block-lf-buttons-with-expiry .wp-block.block-editor-block-list__block[data-type="lf/button-with-expiry"] {
+  display: inline-block;
+  width: auto; }
+
+.wp-block-lf-buttons-with-expiry .block-list-appender {
+  display: inline-block;
+  margin: 0; }
+
+.wp-block-lf-buttons-with-expiry .block-editor-button-block-appender {
+  background: none;
+  outline: none; }
+
+.wp-block-lf-button-with-expiry[data-align="center"] .block-editor-block-list__layout {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.wp-block-lf-button-with-expiry[data-align="right"] .block-editor-block-list__layout {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: end;
+      justify-content: flex-end; }
+
+.wp-block-lf-button-with-expiry .block-editor-block-list__layout > div:last-child {
+  display: inline-block; }
