@@ -16,7 +16,7 @@ export const schema = {
 	},
 	height: {
 		type: 'number',
-		default: 220,
+		default: 250,
 	},
 	tracks: {
 		type: 'number',

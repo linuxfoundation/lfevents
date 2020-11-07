@@ -10,10 +10,16 @@
         grid-gap: 1rem;
     }
 
-    .track-box {
-        width: initial
+
+    &.columns-4 {
+        .track-box {
+            width: initial
+        }
     }
 
+    .track-box {
+        width: 280px;
+    }
 
     .block-editor-url-input {
         max-width: 100%;
