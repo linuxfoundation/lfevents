@@ -141,3 +141,5 @@ web/wp-content/plugins/lfevents-forms/node_modules
 web/wp-content/plugins/icon-list/node_modules
 !web/wp-content/plugins/image-box
 web/wp-content/plugins/image-box/node_modules
+!web/wp-content/plugins/track-grid
+web/wp-content/plugins/track-grid/node_modules
