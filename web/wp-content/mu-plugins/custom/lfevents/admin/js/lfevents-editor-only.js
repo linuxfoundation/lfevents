@@ -72,6 +72,10 @@ wp.domReady(
 		{
 			name: 'feature-grid',
 			label: 'Feature Grid',
+		},
+		{
+			name: 'feature-grid-with-bounce',
+			label: 'Feature Grid w Bounce',
 		}
 		]
 	);
