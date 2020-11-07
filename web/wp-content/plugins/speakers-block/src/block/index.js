@@ -189,8 +189,8 @@ registerBlockType( 'cgb/block-speakers-block', {
 							selected={ textColor }
 							onChange={ onTextColorChange }
 							options={ [
-								{ label: 'White', value: 'white' },
-								{ label: 'Black', value: 'black' },
+								{ label: 'White', value: '#FFFFFF' },
+								{ label: 'Black', value: '#000000' },
 							] }
 						/>
 					</div>
