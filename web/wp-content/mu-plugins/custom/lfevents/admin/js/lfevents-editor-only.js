@@ -13,6 +13,8 @@
 
 wp.domReady(
 	() => {
+	wp.blocks.unregisterBlockType( 'core/buttons' );
+
 	wp.blocks.registerBlockStyle(
 		 'core/group',
 		[
