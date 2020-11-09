@@ -169,6 +169,7 @@ class LFEvents_Admin {
 			),
 			'show_in_rest' => true,
 			'public'       => true,
+			'publicly_queryable'  => false, // stops 'view page'.
 			'menu_icon'    => 'dashicons-groups',
 			'rewrite'      => array( 'slug' => 'speakers' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
@@ -184,6 +185,7 @@ class LFEvents_Admin {
 			),
 			'show_in_rest' => true,
 			'public'       => true,
+			'publicly_queryable'  => false, // stops 'view page'.
 			'menu_icon'    => 'dashicons-star-filled',
 			'rewrite'      => array( 'slug' => 'sponsors' ),
 			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
@@ -270,6 +272,7 @@ class LFEvents_Admin {
 			'labels'       => $labels,
 			'show_in_rest' => true,
 			'hierarchical' => true,
+			'publicly_queryable'  => false, // stops 'view page'.
 		);
 
 		register_taxonomy( 'lfevent-country', array_merge( $this->post_types, array( 'lfe_community_event' ) ), $args );
