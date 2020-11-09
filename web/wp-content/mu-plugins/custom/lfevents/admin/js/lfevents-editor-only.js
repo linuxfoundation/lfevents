@@ -44,6 +44,10 @@ wp.domReady(
 		{
 			name: 'section-heading',
 			label: 'Section Heading',
+		},
+		{
+			name: 'one-line-section-heading',
+			label: 'One Line Section Heading',
 		}
 		]
 	);

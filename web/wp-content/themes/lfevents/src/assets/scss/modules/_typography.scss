@@ -20,11 +20,19 @@ h6,
 }
 
 .is-style-section-heading {
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  word-spacing: .2rem;
+}
+
+.is-style-one-line-section-heading {
   margin: -20px 0;
   text-transform: uppercase;
   letter-spacing: .2rem;
   word-spacing: .2rem;
 }
+
 
 //
 // Links
