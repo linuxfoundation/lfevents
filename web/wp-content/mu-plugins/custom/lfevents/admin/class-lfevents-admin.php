@@ -162,33 +162,35 @@ class LFEvents_Admin {
 		}
 
 		$opts = array(
-			'labels'       => array(
+			'labels'             => array(
 				'name'          => __( 'Speakers' ),
 				'singular_name' => __( 'Speaker' ),
 				'all_items'     => __( 'All Speakers' ),
 			),
-			'show_in_rest' => true,
-			'public'       => true,
-			'publicly_queryable'  => false, // stops 'view page'.
-			'menu_icon'    => 'dashicons-groups',
-			'rewrite'      => array( 'slug' => 'speakers' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
+			'show_in_rest'       => true,
+			'public'             => false, // not publicly viewable.
+			'publicly_queryable' => false, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
+			'menu_icon'          => 'dashicons-groups',
+			'rewrite'            => array( 'slug' => 'speakers' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
 		);
 
 		register_post_type( 'lfe_speaker', $opts );
 
 		$opts = array(
-			'labels'       => array(
+			'labels'             => array(
 				'name'          => __( 'Sponsors' ),
 				'singular_name' => __( 'Sponsor' ),
 				'all_items'     => __( 'All Sponsors' ),
 			),
-			'show_in_rest' => true,
-			'public'       => true,
-			'publicly_queryable'  => false, // stops 'view page'.
-			'menu_icon'    => 'dashicons-star-filled',
-			'rewrite'      => array( 'slug' => 'sponsors' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
+			'show_in_rest'       => true,
+			'public'             => false, // not publicly viewable.
+			'publicly_queryable' => false, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
+			'menu_icon'          => 'dashicons-star-filled',
+			'rewrite'            => array( 'slug' => 'sponsors' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author', 'revisions' ),
 		);
 
 		register_post_type( 'lfe_sponsor', $opts );
@@ -199,13 +201,13 @@ class LFEvents_Admin {
 				'singular_name' => __( 'Community Event' ),
 				'all_items'     => __( 'All Community Events' ),
 			),
-			'public'              => true,
+			'public'             => false, // not publicly viewable.
+			'publicly_queryable' => false, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
 			'has_archive'         => false,
 			'show_in_nav_menus'   => false,
 			'show_in_rest'        => true,
 			'hierarchical'        => true,
-			'exclude_from_search' => true, // to hide the singular pages on FE.
-			'publicly_queryable'  => false, // to hide the singular pages on FE.
 			'menu_icon'           => 'dashicons-admin-site',
 			'rewrite'             => array( 'slug' => 'community' ),
 			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
@@ -250,6 +252,9 @@ class LFEvents_Admin {
 			'labels'       => $labels,
 			'show_in_rest' => true,
 			'hierarchical' => true,
+			'public'             => false, // not publicly viewable.
+			'publicly_queryable' => false, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
 		);
 
 		register_taxonomy( 'lfevent-category', $this->post_types, $args );
@@ -269,10 +274,12 @@ class LFEvents_Admin {
 		);
 
 		$args = array(
-			'labels'       => $labels,
-			'show_in_rest' => true,
-			'hierarchical' => true,
-			'publicly_queryable'  => false, // stops 'view page'.
+			'labels'             => $labels,
+			'show_in_rest'       => true,
+			'hierarchical'       => true,
+			'public'             => false, // not publicly viewable.
+			'publicly_queryable' => false, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
 		);
 
 		register_taxonomy( 'lfevent-country', array_merge( $this->post_types, array( 'lfe_community_event' ) ), $args );
