@@ -102,6 +102,25 @@ table {
     }
 
   }
+
+  // restricting to 50% of width on desktops.
+  &.aligncenter {
+    display: table;
+    width: 100%;
+
+    table {
+
+      @media (min-width: 1024px) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+      }
+
+      @media (min-width: 1200px) {
+        width: 50%;
+      }
+    }
+  }
 }
 
 // if table is inside a block, remove bottom margin.
@@ -255,50 +274,5 @@ table {
         }
       }
     }
-
-
   }
-
-
 }
-
-
-
-
-
-
-
-
-// &.is-style-compact {
-//   td {
-//     padding: 5px;
-
-//     @include breakpoint(large) {
-//       padding: 10px 20px;
-
-//       &:first-child {
-//         min-width: 230px;
-//       }
-//     }
-//   }
-// }
-
-// &.is-style-schedule {
-
-// }
-
-// &.is-style-compact-frame {
-//   td {
-//     padding: 5px;
-//     border: 2px solid transparent;
-
-//     @include breakpoint(large) {
-//       border: 5px solid transparent;
-//       padding: 10px 20px;
-
-//       &:first-child {
-//         min-width: 230px;
-//       }
-//     }
-//   }
-// }
