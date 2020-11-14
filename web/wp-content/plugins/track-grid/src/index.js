@@ -40,6 +40,20 @@ export const schema = {
 	className: {
 		type: 'string',
 	},
+	showKeynote: {
+		type: 'boolean',
+	},
+	keynoteText: {
+		source: 'html',
+		selector: `.track-keynote h4`,
+		default: 'View our Keynote Speakers',
+	},
+	keynoteLink: {
+		type: 'string',
+		source: 'attribute',
+		selector: `.track-keynote a`,
+		attribute: 'href',
+	},
 };
 
 // now loop over the following to make the full schema.

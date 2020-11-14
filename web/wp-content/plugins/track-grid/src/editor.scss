@@ -1,25 +1,16 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+// The frontend partial is imported in to themes editor.css, use this file for specific overrides.
+
+.editor-styles-wrapper .wp-block-lf-track-grid {
+    ul {
+        margin-left: 0;
+    }
+
+    .track-keynote {
+        flex-direction: column !important;
+    }
+}
 
 .wp-block-lf-track-grid {
-
-    @media (min-width: 580px) {
-        grid-gap: 1rem;
-    }
-
-
-    &.columns-4 {
-        .track-box {
-            width: initial
-        }
-    }
-
-    .track-box {
-        width: 280px;
-    }
 
     .block-editor-url-input {
         max-width: 100%;
@@ -48,6 +39,4 @@
             line-height: normal;
         }
     }
-
-
 }

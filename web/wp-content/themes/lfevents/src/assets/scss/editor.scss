@@ -2,24 +2,23 @@
  * Gutenberg Editor Styles
  */
 
-/** === Includes === */
-
 @charset 'utf-8';
-
-@import 'settings';
-@import 'foundation';
-
-@import "components/group-and-quotes";
-@import "modules/typography";
-@import "components/separator";
-@import "components/columns";
-
-
-
-
 // @include foundation-typography;
 // Don't include all foundation-typography; it clobbers wp-block styles
 // HACK: Copy specific pieces of foundation typography's _base.scss
+// put imported modules and components after _base
+@import 'settings';
+@import 'foundation';
+@import "modules/typography";
+@include foundation-button;
+@include foundation-table;
+
+/** === Base Typography === */
+body {
+  font-size: $global-font-size;
+  font-family: $body-font-family;
+  color: $body-font-color;
+}
 
 // Paragraphs
 p {
@@ -184,12 +183,17 @@ dl {
   margin-bottom: $list-margin-bottom;
   list-style-position: $list-style-position;
   line-height: $list-lineheight;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
 }
 
-// List items
-li {
-  font-size: inherit;
-}
+// // List items
+// li {
+//   font-size: inherit;
+// }
 
 // Unordered lists
 ul {
@@ -258,7 +262,6 @@ blockquote {
   margin-top: 1rem;
 }
 
-
 // Abbreviations
 abbr,
 abbr[title] {
@@ -267,31 +270,22 @@ abbr[title] {
   text-decoration: none;
 }
 
-@include foundation-button;
-@include foundation-table;
+// these need to be after base styles for specificity.
 @import "modules/tables";
 @import "modules/sponsors-logos";
+@import "components/group-and-quotes";
+@import "components/separator";
+@import "components/columns";
+
 @import "modules/spacer";
+@import "modules/track-grid";
+@import "modules/icon-list";
+@import "modules/image-box";
+
 
 /** === Content Width === */
 .wp-block {
   max-width: map-deep-get($breakpoints, xlarge);
-
-  // width: calc(100% - (2 * 10));
-  // @each $breakpoint, $size in $grid-margin-gutters {
-  //
-  // 	@include breakpoint($breakpoint) {
-  // 		width: calc(100% - #{$size});
-  // 	}
-  //
-  // }
-}
-
-/** === Base Typography === */
-body {
-  font-size: $global-font-size;
-  font-family: $body-font-family;
-  color: $body-font-color;
 }
 
 /** === Post Title === */
@@ -424,11 +418,6 @@ body {
   padding: rem-calc(20px 30px);
 }
 
-/** === Table === */
-// .wp-block-table td {
-//   border: none;
-// }
-
 /** === Latest Posts grid view === */
 .wp-block-latest-posts.is-grid {
   list-style: none;
@@ -471,14 +460,3 @@ body#tinymce {
     transform: translateY(-100%);
   }
 }
-
-
-// .wp-block-table:not([class^="has-"]) {
-//   table {
-
-//     td,
-//     tr {
-//       border: 1px solid #D8D8D8;
-//     }
-//   }
-// }

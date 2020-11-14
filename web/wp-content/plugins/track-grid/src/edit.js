@@ -12,6 +12,7 @@ import {
 	SelectControl,
 	Dashicon,
 	RadioControl,
+	ToggleControl,
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
@@ -30,6 +31,9 @@ export default function Edit( { attributes, setAttributes, className } ) {
 		textColor,
 		ctaIcon,
 		align,
+		showKeynote,
+		keynoteText,
+		keynoteLink,
 	} = attributes;
 
 	const inspectorControls = (
@@ -80,6 +84,17 @@ export default function Edit( { attributes, setAttributes, className } ) {
 						setAttributes( { ctaIcon: '' !== value ? value : '' } )
 					}
 				/>
+				<PanelRow>
+				<ToggleControl
+		label="Show Keynote Speaker CTA"
+		checked={ showKeynote }
+		onChange={ () =>
+			setAttributes( {
+				showKeynote: ! showKeynote,
+			} )
+		}
+	/>
+				</PanelRow>
 			</PanelBody>
 			<PanelColorSettings
 				title="Text & Background Colors"
@@ -134,17 +149,18 @@ export default function Edit( { attributes, setAttributes, className } ) {
 			{ inspectorControls }
 			<div
 				style={ mainStyle }
-				className={ `track-wrapper wp-block-lf-track-grid in-editor align${
+				className={ `wp-block-lf-track-grid in-editor align${
 					align ? align : 'wide'
-				} columns-${ columns }` }
+				}` }
 			>
+				<ul className={ `track-wrapper columns-${ columns }`}>
 				{ range( 1, tracks ).map( ( i ) => {
 					const title = attributes[ `title${ i }` ];
 					const link = attributes[ `link${ i }` ];
 
 					return (
 						<li
-							className={ `track-box box-${ i } ${ className }` }
+							className={ `track-box track-style box-${ i } ${ className }` }
 							key={ i }
 						>
 							<RichText
@@ -189,6 +205,41 @@ export default function Edit( { attributes, setAttributes, className } ) {
 						</li>
 					);
 				} ) }
+				</ul>
+			{showKeynote && (
+				<div className="track-keynote track-style" style={ mainStyle }>
+			<RichText
+								tagName="h4"
+								value={ keynoteText || 'View our Keynote Speakers' }
+								onChange={ ( value ) =>
+									setAttributes( { keynoteText: value } )
+								}
+							/>
+							{ ctaIcon && (
+								<h3 className="track-cta is-style-track-double-angle-right">
+									&gt;&gt;
+								</h3>
+							) }
+							<form
+								className="blocks-button__inline-link"
+								onSubmit={ ( event ) => event.preventDefault() }
+							>
+								<Dashicon
+									icon="admin-links"
+									style={ { marginRight: '5px' } }
+								/>
+								<URLInput
+									value={ keynoteLink }
+									className="components-base-control__field"
+									onChange={ ( value ) => {
+										setAttributes( {
+											keynoteLink: value,
+										} );
+									} }
+								/>
+							</form>
+			</div>
+			)}
 			</div>
 		</Fragment>
 	);

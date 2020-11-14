@@ -14,6 +14,9 @@ export default function save( { attributes } ) {
 		ctaIcon,
 		align,
 		className,
+		showKeynote,
+		keynoteText,
+		keynoteLink,
 	} = attributes;
 
 	const mainStyle = {
@@ -24,19 +27,20 @@ export default function save( { attributes } ) {
 	};
 
 	return (
-		<ul
-			style={ mainStyle }
-			className={ `track-wrapper wp-block-lf-track-grid align${
-				align ? align : 'wide'
-			} columns-${ columns }` }
-		>
+		<div
+		style={ mainStyle }
+		className={ `wp-block-lf-track-grid align${
+			align ? align : 'wide'
+		}` }
+	>
+		<ul className={ `track-wrapper columns-${ columns }`}>
 			{ range( 1, tracks ).map( ( i ) => {
 				const title = attributes[ `title${ i }` ];
 				const link = attributes[ `link${ i }` ];
 
 				return (
 					<li
-						className={ `track-box box-${ i } ${ className }` }
+						className={ `track-box track-style box-${ i } ${ className }` }
 						key={ i }
 					>
 						{ link && <a className="box-link" href={ link }></a> }
@@ -57,5 +61,19 @@ export default function save( { attributes } ) {
 				);
 			} ) }
 		</ul>
+					{ showKeynote && (
+							<div className="track-keynote track-style" style={ mainStyle }>
+{ keynoteLink && <a className="box-link" href={ keynoteLink }></a> }
+						{ ! RichText.isEmpty( keynoteText ) && (
+							<RichText.Content tagName="h4" value={ keynoteText } />
+						) }
+						{ ctaIcon && (
+							<h3 className="track-cta is-style-track-double-angle-right">
+								&gt;&gt;
+							</h3>
+						) }
+						</div>
+					)}
+		</div>
 	);
 }
