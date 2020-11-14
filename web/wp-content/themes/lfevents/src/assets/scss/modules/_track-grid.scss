@@ -257,5 +257,9 @@
         transform: scale(1.1);
       }
     }
+
+    &:active {
+      top: 1px;
+    }
   }
 }

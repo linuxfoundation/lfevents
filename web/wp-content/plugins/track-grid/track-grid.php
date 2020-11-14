@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Track Grid
  * Description:     A linkable grid of tracks for an event
- * Version:         0.1.0
+ * Version:         0.1.1
  * Author:          James Hunt
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,7 +55,7 @@ function lf_track_grid_block_init() {
 	register_block_type( 'lf/track-grid', array(
 		'editor_script' => 'lf-track-grid-block-editor',
 		'editor_style'  => 'lf-track-grid-block-editor',
-		'style'         => 'lf-track-grid-block',
+		// 'style'         => 'lf-track-grid-block',
 	) );
 }
 add_action( 'init', 'lf_track_grid_block_init' );
