@@ -1,12 +1,4 @@
-/**
-* The following styles get applied inside the editor only.
-*
-* Replace them with your own styles or remove the file completely.
-*/
-
-// :root {
-//     --image-box-img1: 'url(data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==)'
-// }
+// The frontend partial is imported in to themes editor.css, use this file for specific overrides.
 
 .wp-block-lf-image-box {
     padding: 0.5rem;
@@ -134,8 +126,3 @@
         }
     }
 }
-
-//
-// .image-box-wrapper>*:nth-child(1) h4 {
-//     border: 10px solid black;
-// }

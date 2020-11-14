@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Icon List Block
  * Description:     Customised unordered list with icons
- * Version:         0.1.0
+ * Version:         0.1.1
  * Author:          James Hunt
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,7 +55,7 @@ function lf_icon_list_block_init() {
 		array(
 			'editor_script' => 'lf-icon-list-block-editor',
 			'editor_style'  => 'lf-icon-list-block-editor',
-			'style'         => 'lf-icon-list-block',
+			// 'style'         => 'lf-icon-list-block',
 		)
 	);
 }

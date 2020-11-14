@@ -1,6 +1,1 @@
-// Backend only.
-// Need to wrap it in the below to override !important and other styles.
-
-.editor-styles-wrapper {
-    @import 'style.scss';
-}
+// The frontend partial is imported in to themes editor.css, use this file for specific overrides.

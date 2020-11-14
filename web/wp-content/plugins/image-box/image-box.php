@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Image Box Block
  * Description:     A row of images with hover overlay effect
- * Version:         0.1.0
+ * Version:         0.1.1
  * Author:          James Hunt
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,7 +55,7 @@ function lf_image_box_block_init() {
 	register_block_type( 'lf/image-box', array(
 		'editor_script' => 'lf-image-box-block-editor',
 		'editor_style'  => 'lf-image-box-block-editor',
-		'style'         => 'lf-image-box-block',
+		// 'style'         => 'lf-image-box-block',
 	) );
 }
 add_action( 'init', 'lf_image_box_block_init' );
