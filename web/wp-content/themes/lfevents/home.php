@@ -43,6 +43,7 @@ get_template_part( 'template-parts/global-nav' );
 						foreach ( $images as $key => $image ) {
 							$image_url = wp_get_attachment_image_src( $image->ID, 'fp-medium' )[0];
 							?>
+							<link rel="preload" as="image" href="<?php echo esc_html( $image_url ); ?>">
 							<div class="bg-image" style="background-image: url(
 							<?php echo esc_html( $image_url ); ?>
 							);"><img src="<?php echo esc_html( $image_url ); ?>" alt="" style="display: none;"></div>
