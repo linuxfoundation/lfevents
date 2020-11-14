@@ -1,13 +1,7 @@
 // Track Grid Block
 
 .wp-block-lf-track-grid {
-  padding: 0.5rem;
-  // grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  // grid-gap: 1rem;
-
-  // @media (min-width: 580px) {
-  //     grid-gap: 3rem;
-  // }
+  margin-bottom: 2rem;
 
   .track-wrapper {
     display: flex;
@@ -50,65 +44,52 @@
         >li {
           width: calc(50% - 1rem);
           max-width: 280px;
-        }
-
-        >li:nth-child(odd) {
-          margin-right: 2rem;
+          margin-left: 1rem;
+          margin-right: 1em;
         }
       }
     }
 
     &.columns-3 {
 
-      @media (min-width: 500px) {
+      @media (min-width: 660px) {
         >li {
           width: calc(50% - 1rem);
           max-width: 280px;
-        }
-
-        >li:nth-child(odd) {
-          margin-right: 2rem;
+          margin-left: 1rem;
+          margin-right: 1em;
         }
       }
 
-      @media (min-width: 768px) {
+      @media (min-width: 900px) {
         >li {
-          width: calc(33.3% - 1.3333rem);
-          margin-right: 2rem;
-        }
-
-        >li:nth-child(3n+3) {
-          margin-right: 0;
+          width: calc(33.3% - 2rem);
+          margin-left: 1rem;
+          margin-right: 1em;
         }
       }
     }
 
     &.columns-4 {
 
-      @media (min-width: 500px) {
+      @media (min-width: 660px) {
         >li {
           width: calc(50% - 1rem);
           max-width: 280px;
-        }
-
-        >li:nth-child(odd) {
-          margin-right: 2rem;
+          margin-left: 1rem;
+          margin-right: 1em;
         }
       }
 
-      @media (min-width: 768px) {
+      @media (min-width: 1024px) {
         >li {
-          width: calc(25% - 1.5rem);
-          margin-right: 2rem;
+          width: calc(25% - 2rem);
+          margin-left: 1rem;
+          margin-right: 1em;
           max-width: 280px;
-        }
-
-        >li:nth-child(4n+4) {
-          margin-right: 0;
         }
       }
     }
-
   }
 
   .box-link {
@@ -187,7 +168,7 @@
 
     &.button {
       margin-top: auto !important;
-      width: 60%;
+      min-width: 60%;
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
@@ -208,7 +189,7 @@
     border-radius: 12px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 800px;
+    max-width: 700px;
     padding: 2rem 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
@@ -225,29 +206,29 @@
         margin-left: 1rem;
       }
     }
+  }
 
-    // @media (max-width: 499px) {
-    // h4 font-size: 1.2rem;
-    // }
-
-
+  .track-wrapper.columns-3+.track-keynote {
+    max-width: calc(900px - 2rem);
   }
 
   .track-wrapper.columns-4+.track-keynote {
-    max-width: 1000px;
-
+    max-width: calc(1000px - 2rem);
   }
+
 }
-
-
 
 // Not applied in editor due to not in-editor CSS.
 .wp-block-lf-track-grid:not(.in-editor) {
 
   .track-wrapper {
-    max-width: 800px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+
+    &.columns-3 {
+      max-width: 900px;
+    }
 
     &.columns-4 {
       max-width: 1000px;
