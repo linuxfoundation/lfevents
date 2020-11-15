@@ -52,7 +52,7 @@ if ( ! $splash_page ) {
 
 	$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
 	if ( $logo ) {
-		$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
+		$event_link_content = '<img loading="lazy" src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
 	} else {
 		$event_link_content = get_the_title( $parent_id );
 	}
