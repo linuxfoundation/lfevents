@@ -143,7 +143,7 @@ function speakers_block_callback( $attributes, $content ) {
 		} else {
 			$out .= '			<div class="headshot">';
 		}
-		$out .= get_the_post_thumbnail( $id, 'profile-200' );
+		$out .= get_the_post_thumbnail( $id, 'profile-200', array( 'loading' => 'lazy' ) );
 		$out .= '			</div>';
 		$out .= '		</div>';
 		$out .= '		<div class="text cell large-7">';
