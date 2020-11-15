@@ -20,7 +20,7 @@ export const schema = {
 	},
 	tracks: {
 		type: 'number',
-		default: 12,
+		default: 6,
 	},
 	color1: {
 		type: 'string',

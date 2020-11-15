@@ -28,52 +28,60 @@ export default function save( { attributes } ) {
 
 	return (
 		<div
-		style={ mainStyle }
-		className={ `wp-block-lf-track-grid align${
-			align ? align : 'wide'
-		}` }
-	>
-		<ul className={ `track-wrapper columns-${ columns }`}>
-			{ range( 1, tracks ).map( ( i ) => {
-				const title = attributes[ `title${ i }` ];
-				const link = attributes[ `link${ i }` ];
+			style={ mainStyle }
+			className={ `wp-block-lf-track-grid align${
+				align ? align : 'wide'
+			}` }
+		>
+			<ul className={ `track-wrapper columns-${ columns }` }>
+				{ range( 1, tracks ).map( ( i ) => {
+					const title = attributes[ `title${ i }` ];
+					const link = attributes[ `link${ i }` ];
 
-				return (
-					<li
-						className={ `track-box track-style box-${ i } ${ className }` }
-						key={ i }
-					>
-						{ link && <a className="box-link" href={ link }></a> }
-						{ ! RichText.isEmpty( title ) && (
-							<RichText.Content tagName="h4" value={ title } />
-						) }
-						{ ctaIcon === 'view-track' && (
-							<div className="track-cta button transparent-outline">
-								View Track
-							</div>
-						) }
-						{ ctaIcon === 'is-style-track-double-angle-right' && (
-							<h3 className="track-cta is-style-track-double-angle-right">
-								&gt;&gt;
-							</h3>
-						) }
-					</li>
-				);
-			} ) }
-		</ul>
-					{ showKeynote && (
-							<div className="track-keynote track-style" style={ mainStyle }>
-{ keynoteLink && <a className="box-link" href={ keynoteLink }></a> }
-						{ ! RichText.isEmpty( keynoteText ) && (
-							<RichText.Content tagName="h4" value={ keynoteText } />
-						) }
-						{ ctaIcon && (
-							<h3 className="track-cta is-style-track-double-angle-right">
-								&gt;&gt;
-							</h3>
-						) }
-						</div>
-					)}
+					return (
+						<li
+							className={ `track-box track-style box-${ i } ${ className }` }
+							key={ i }
+						>
+							{ link && (
+								<a className="box-link" href={ link }></a>
+							) }
+							{ ! RichText.isEmpty( title ) && (
+								<RichText.Content
+									tagName="h4"
+									value={ title }
+								/>
+							) }
+							{ ctaIcon === 'view-track' && (
+								<div className="track-cta button transparent-outline">
+									View Track
+								</div>
+							) }
+							{ ctaIcon ===
+								'is-style-track-double-angle-right' && (
+								<h3 className="track-cta is-style-track-double-angle-right">
+									&gt;&gt;
+								</h3>
+							) }
+						</li>
+					);
+				} ) }
+			</ul>
+			{ showKeynote && (
+				<div className={ `track-keynote track-style ${ className }` } style={ mainStyle }>
+					{ keynoteLink && (
+						<a className="box-link" href={ keynoteLink }></a>
+					) }
+					{ ! RichText.isEmpty( keynoteText ) && (
+						<RichText.Content tagName="h4" value={ keynoteText } />
+					) }
+					{ ctaIcon && (
+						<h3 className="track-cta is-style-track-double-angle-right">
+							&gt;&gt;
+						</h3>
+					) }
+				</div>
+			) }
 		</div>
 	);
 }

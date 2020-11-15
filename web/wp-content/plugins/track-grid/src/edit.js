@@ -85,15 +85,15 @@ export default function Edit( { attributes, setAttributes, className } ) {
 					}
 				/>
 				<PanelRow>
-				<ToggleControl
-		label="Show Keynote Speaker CTA"
-		checked={ showKeynote }
-		onChange={ () =>
-			setAttributes( {
-				showKeynote: ! showKeynote,
-			} )
-		}
-	/>
+					<ToggleControl
+						label="Show Keynote Speaker CTA"
+						checked={ showKeynote }
+						onChange={ () =>
+							setAttributes( {
+								showKeynote: ! showKeynote,
+							} )
+						}
+					/>
 				</PanelRow>
 			</PanelBody>
 			<PanelColorSettings
@@ -153,93 +153,98 @@ export default function Edit( { attributes, setAttributes, className } ) {
 					align ? align : 'wide'
 				}` }
 			>
-				<ul className={ `track-wrapper columns-${ columns }`}>
-				{ range( 1, tracks ).map( ( i ) => {
-					const title = attributes[ `title${ i }` ];
-					const link = attributes[ `link${ i }` ];
+				<ul className={ `track-wrapper columns-${ columns }` }>
+					{ range( 1, tracks ).map( ( i ) => {
+						const title = attributes[ `title${ i }` ];
+						const link = attributes[ `link${ i }` ];
 
-					return (
-						<li
-							className={ `track-box track-style box-${ i } ${ className }` }
-							key={ i }
-						>
-							<RichText
-								tagName="h4"
-								value={ title }
-								onChange={ ( title ) =>
-									setAttributes( {
-										[ `title${ i }` ]: title,
-									} )
-								}
-								placeholder={ __( 'Track title' ) }
-							/>
-							<form
-								className="blocks-button__inline-link"
-								onSubmit={ ( event ) => event.preventDefault() }
+						return (
+							<li
+								className={ `track-box track-style box-${ i } ${ className }` }
+								key={ i }
 							>
-								<Dashicon
-									icon="admin-links"
-									style={ { marginRight: '5px' } }
-								/>
-								<URLInput
-									value={ link }
-									className="components-base-control__field"
-									onChange={ ( link ) => {
+								<RichText
+									tagName="h4"
+									value={ title }
+									onChange={ ( title ) =>
 										setAttributes( {
-											[ `link${ i }` ]: link,
-										} );
-									} }
+											[ `title${ i }` ]: title,
+										} )
+									}
+									placeholder={ __( 'Track title' ) }
 								/>
-							</form>
-							{ ctaIcon === 'view-track' && (
-								<div className="track-cta button transparent-outline">
-									View Track
-								</div>
-							) }
-							{ ctaIcon ===
-								'is-style-track-double-angle-right' && (
-								<h3 className="track-cta is-style-track-double-angle-right">
-									&gt;&gt;
-								</h3>
-							) }
-						</li>
-					);
-				} ) }
+								<form
+									className="blocks-button__inline-link"
+									onSubmit={ ( event ) =>
+										event.preventDefault()
+									}
+								>
+									<Dashicon
+										icon="admin-links"
+										style={ { marginRight: '5px' } }
+									/>
+									<URLInput
+										value={ link }
+										className="components-base-control__field"
+										onChange={ ( link ) => {
+											setAttributes( {
+												[ `link${ i }` ]: link,
+											} );
+										} }
+									/>
+								</form>
+								{ ctaIcon === 'view-track' && (
+									<div className="track-cta button transparent-outline">
+										View Track
+									</div>
+								) }
+								{ ctaIcon ===
+									'is-style-track-double-angle-right' && (
+									<h3 className="track-cta is-style-track-double-angle-right">
+										&gt;&gt;
+									</h3>
+								) }
+							</li>
+						);
+					} ) }
 				</ul>
-			{showKeynote && (
-				<div className="track-keynote track-style" style={ mainStyle }>
-			<RichText
-								tagName="h4"
-								value={ keynoteText || 'View our Keynote Speakers' }
-								onChange={ ( value ) =>
-									setAttributes( { keynoteText: value } )
-								}
+				{ showKeynote && (
+					<div
+						className={ `track-keynote track-style ${ className }` }
+						style={ mainStyle }
+					>
+						<RichText
+							tagName="h4"
+							value={ keynoteText || 'View our Keynote Speakers' }
+							onChange={ ( value ) =>
+								setAttributes( { keynoteText: value } )
+							}
+						/>
+						{ ctaIcon && (
+							<h3 className="track-cta is-style-track-double-angle-right">
+								&gt;&gt;
+							</h3>
+						) }
+						<form
+							className="blocks-button__inline-link"
+							onSubmit={ ( event ) => event.preventDefault() }
+						>
+							<Dashicon
+								icon="admin-links"
+								style={ { marginRight: '5px' } }
 							/>
-							{ ctaIcon && (
-								<h3 className="track-cta is-style-track-double-angle-right">
-									&gt;&gt;
-								</h3>
-							) }
-							<form
-								className="blocks-button__inline-link"
-								onSubmit={ ( event ) => event.preventDefault() }
-							>
-								<Dashicon
-									icon="admin-links"
-									style={ { marginRight: '5px' } }
-								/>
-								<URLInput
-									value={ keynoteLink }
-									className="components-base-control__field"
-									onChange={ ( value ) => {
-										setAttributes( {
-											keynoteLink: value,
-										} );
-									} }
-								/>
-							</form>
-			</div>
-			)}
+							<URLInput
+								value={ keynoteLink }
+								className="components-base-control__field"
+								onChange={ ( value ) => {
+									setAttributes( {
+										keynoteLink: value,
+									} );
+								} }
+							/>
+						</form>
+					</div>
+				) }
 			</div>
 		</Fragment>
 	);
