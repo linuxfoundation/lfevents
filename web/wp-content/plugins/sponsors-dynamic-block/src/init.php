@@ -133,7 +133,7 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 			$out .= ' target="_blank" rel="noreferrer noopener">';
 		}
 
-		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo' ) );
+		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo', 'loading' => 'lazy' ) );
 
 		if ( $forwarding_url ) {
 			$out .= '</a>';
