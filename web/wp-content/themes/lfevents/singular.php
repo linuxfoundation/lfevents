@@ -114,7 +114,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 	<header class="main-header sticky" data-sticky data-sticky-on="large"
 		data-options="marginTop:0;">
 		<a class="home-link"
-			href="<?php echo esc_url( home_url( '/' ) ); ?>"><img
+			href="<?php echo esc_url( home_url( '/' ) ); ?>"><img loading="eager"
 				src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
 	</header>
 </div>
@@ -166,9 +166,9 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 				<figure class="figure-container">
 					<?php
 					if ( has_post_thumbnail() ) {
-						echo wp_get_attachment_image( get_post_thumbnail_id( get_the_ID() ), 'fp-xlarge', false, array( 'class' => 'f' ) );
+						echo wp_get_attachment_image( get_post_thumbnail_id( get_the_ID() ), 'fp-xlarge', false, array( 'class' => '', 'loading' => 'eager' ) );
 					} else {
-						echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-xlarge', false, array( 'class' => '' ) );
+						echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-xlarge', false, array( 'class' => '', 'loading' => 'eager' ) );
 					}
 					?>
 				</figure>
