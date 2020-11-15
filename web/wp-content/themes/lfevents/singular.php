@@ -166,9 +166,25 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 				<figure class="figure-container">
 					<?php
 					if ( has_post_thumbnail() ) {
-						echo wp_get_attachment_image( get_post_thumbnail_id( get_the_ID() ), 'fp-xlarge', false, array( 'class' => '', 'loading' => 'eager' ) );
+						echo wp_get_attachment_image(
+							get_post_thumbnail_id( get_the_ID() ),
+							'fp-xlarge',
+							false,
+							array(
+								'class' => '',
+								'loading' => 'eager',
+							)
+						);
 					} else {
-						echo wp_get_attachment_image( get_post_thumbnail_id( $parent_id ), 'fp-xlarge', false, array( 'class' => '', 'loading' => 'eager' ) );
+						echo wp_get_attachment_image(
+							get_post_thumbnail_id( $parent_id ),
+							'fp-xlarge',
+							false,
+							array(
+								'class' => '',
+								'loading' => 'eager',
+							)
+						);
 					}
 					?>
 				</figure>
