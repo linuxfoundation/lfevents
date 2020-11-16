@@ -864,10 +864,6 @@ function lfe_event_alert_bar( $parent_id ) {
 function lfe_dequeue_front_page_style() {
 	if ( is_front_page() && ! is_admin() ) {
 		wp_dequeue_style( 'photonic' );
-		wp_dequeue_style( 'ugb-style-css' ); // stackable.
-		wp_dequeue_style( 'ugb-style-css-premium' ); // stackable.
-		wp_dequeue_script( 'ugb-block-frontend-js' ); // stackable.
-		wp_dequeue_script( 'ugb-block-frontend-js-premium' ); // stackable.
 		wp_deregister_script( 'jquery-ui-datepicker' ); // searchandfilter.
 	}
 }

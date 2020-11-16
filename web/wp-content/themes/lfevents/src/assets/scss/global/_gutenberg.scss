@@ -138,8 +138,3 @@ $code in $foundation-palette {
   margin-right: auto;
   max-width: map-deep-get($breakpoints, xlarge);
 }
-
-.ugb-container__wrapper>.ugb-container__content-wrapper>.ugb-container--height-short {
-  padding-top: 0;
-  padding-bottom: 0;
-}
