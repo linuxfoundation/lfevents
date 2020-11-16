@@ -42,7 +42,6 @@ get_template_part( 'template-parts/global-nav' );
 						<?php
 						foreach ( $images as $key => $image ) {
 							?>
-							<link rel="preload" as="image" href="<?php echo esc_html( $image_url ); ?>">
 							<div class="bg-image" style="background-image: url(
 							<?php
 							// echo esc_html( wp_get_attachment_url( $image->ID ) ); // phpcs:ignore.
