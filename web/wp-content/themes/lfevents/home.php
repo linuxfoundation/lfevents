@@ -45,7 +45,8 @@ get_template_part( 'template-parts/global-nav' );
 							?>
 							<div class="bg-image" style="background-image: url(
 							<?php echo esc_html( $image_url ); ?>
-							);"><img src="<?php echo esc_html( $image_url ); ?>" alt="" style="display: none;"></div>							<?php
+							);"><img src="<?php echo esc_html( $image_url ); ?>" alt="" style="display: none;"></div>							
+							<?php
 							$i++;
 						}
 						?>
