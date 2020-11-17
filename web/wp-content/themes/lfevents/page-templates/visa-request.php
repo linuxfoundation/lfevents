@@ -24,7 +24,7 @@ get_template_part( 'template-parts/global-nav' );
 						</header>
 						<?php the_content(); ?>
 
-						<div class="wp-block-group has-off-white-background-color has-background"><div class="wp-block-group__inner-container">
+						<div class="wp-block-group has-off-white-background-color has-background is-style-border"><div class="wp-block-group__inner-container">
 
 						<form id="sfmc-form1" action="https://cloud.email.thelinuxfoundation.org/Visa-Request-Submission">
 
@@ -709,6 +709,7 @@ get_template_part( 'template-parts/global-nav' );
 						<div id="sfmc-message1"></div>
 
 						</div></div>
+						<div style="height:100px" aria-hidden="true" class="wp-block-spacer is-style-60-responsive"></div>
 
 						<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
 					</div>
