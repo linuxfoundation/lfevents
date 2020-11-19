@@ -1,0 +1,14 @@
+{
+	"name": "lf/google-sheet-embed",
+	"title": "Google Sheet Embed",
+	"category": "common",
+	"icon": "smiley",
+	"description": "Embed a Google Sheet",
+	"textdomain": "google-sheet-embed",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
