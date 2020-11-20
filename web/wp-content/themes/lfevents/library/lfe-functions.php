@@ -145,7 +145,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 		echo '<a>查看所有活动<br>View All Events</a>';
 	}
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
-	echo '<li><a href="https://events.linuxfoundation.org/"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_' . $menu_text_color . '.svg' ) . '"><span class="subtext">All Upcoming Events</span></a></li>'; //phpcs:ignore
+	echo '<li><a href="https://events.linuxfoundation.org/"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo-' . $menu_text_color . '.svg' ) . '"><span class="subtext">All Upcoming Events</span></a></li>'; //phpcs:ignore
 
 	foreach ( $related_events as $p ) {
 		$logo = get_post_meta( $p['ID'], 'lfes_' . $menu_text_color . '_logo', true );
