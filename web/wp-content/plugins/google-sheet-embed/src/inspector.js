@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { PanelBody, TextControl } from '@wordpress/components';
-import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, TextControl, RangeControl } from '@wordpress/components';
+import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
 
 /**
  * Inspector controls
@@ -15,9 +15,8 @@ export default class Inspector extends Component {
 				<PanelBody title={ __( 'Settings' ) }
 					initialOpen="true" >
 					<TextControl
-						label={ __( 'Google Sheet URL' ) }
+						label={ __( 'iFrame source URL' ) }
 						value={ attributes.iframeSrc }
-						placeholder="https://wwww.google.com"
 						onChange={ ( value ) => {
 							setAttributes( { iframeSrc: value } );
 						} }
@@ -46,6 +45,27 @@ export default class Inspector extends Component {
 							setAttributes( { iframeHeight: value } );
 						} }
 					/>
+					<RangeControl
+						label={ __( 'Border Width' ) }
+						min={ 0 }
+						max={ 20 }
+						value={ attributes.borderWidth }
+						onChange={ value => setAttributes( { borderWidth: value } ) }
+					/>
+					<PanelColorSettings
+					title="Border Color"
+					initialOpen={ true }
+					colorSettings={ [
+						{
+							value: attributes.borderColor,
+							onChange: colorValue =>
+								setAttributes( {
+									borderColor: colorValue,
+								} ),
+							label: 'Chosen Color',
+						},
+					] }
+				></PanelColorSettings>
 				</PanelBody>
 			</InspectorControls>
 		);

@@ -16,6 +16,9 @@ registerBlockType(
 	icon: 'welcome-view-site',
 	keywords: [
 		__( 'google' ),
+		__( 'docs' ),
+		__( 'iframe' ),
+		__( 'spreadsheet' ),
 		__( 'embed' ),
 		__( 'sheet' ),
 	],
@@ -29,33 +32,46 @@ registerBlockType(
 		},
 		iframeWidth: {
 			type: 'string',
-			default: '100%',
 		},
 		iframeHeight: {
 			type: 'string',
-			default: '500px',
 		},
 		iframeMaxWidth: {
 			type: 'string',
-			default: '90%',
+		},
+		borderColor: {
+			type: 'string',
+		},
+		borderWidth: {
+			type: 'number',
+			default: 0,
 		},
 		align: {
 			type: 'string',
 			default: 'wide',
 		},
+		className: {
+			type: 'string',
+		},
 	},
 	edit: function( props ) {
-		const { attributes, className } = props;
-		const { align } = attributes;
+
+		const { attributes } = props;
+		const { align, className } = attributes;
 
 		const iframeStyle = {
 			width: attributes.iframeWidth || '100%',
 			height: attributes.iframeHeight || '500px',
 			maxWidth: attributes.iframeMaxWidth || '90%',
+			borderWidth: attributes.borderWidth || '0',
+			borderColor: attributes.borderColor || '#000000',
+			borderStyle: 'solid',
+			padding: '1rem',
 		};
 
+
 		const block = attributes.iframeSrc ?
-			<div className={ `align${ align } ${ className }` }>
+			<div className={ `wp-lf-google-sheet-embed align${ align } ${ className } ` }>
 				<div className="iframe-overlay"></div>
 				<iframe
 					title="iframe"
@@ -65,7 +81,7 @@ registerBlockType(
 					frameBorder="0"></iframe></div> :
 			<Placeholder
 				icon={ 'welcome-view-site' }
-				label={ __( 'Enter the Google Sheey URL to embed in the sidebar. The sheet should be set to viewable by public (view only).' ) }
+				label={ __( 'Enter the Google Sheet URL to embed in the sidebar. The sheet should be set to viewable by public (view only).' ) }
 			/>;
 
 		return (
@@ -77,18 +93,22 @@ registerBlockType(
 	},
 
 	save: function( props ) {
-		const { attributes, className } = props;
-		const { align } = attributes;
+		const { attributes } = props;
+		const { align, className } = attributes;
 
-		const iframeStyle = {
+	const iframeStyle = {
 			width: attributes.iframeWidth || '100%',
 			height: attributes.iframeHeight || '500px',
 			maxWidth: attributes.iframeMaxWidth || '90%',
+			borderWidth: attributes.borderWidth || '0',
+			borderColor: attributes.borderColor || '#000000',
+			borderStyle: 'solid',
+			padding: '1rem',
 		};
 
 		return (
 			<Fragment>
-				<div className={ `align${ align } ${ className } loading-bg` }>
+				<div className={ `wp-lf-google-sheet-embed align${ align } ${ className } loading-bg` }>
 					<iframe
 						title="iframe"
 						id="iframe"

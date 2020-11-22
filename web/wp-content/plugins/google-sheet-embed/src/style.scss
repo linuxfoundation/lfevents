@@ -1,13 +1,17 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
+// .wp-block-lf-google-sheet-embed {
+// }
 
 .loading-bg {
     background-image: url("./images/spin.svg");
     background-position: 50px center;
     background-repeat: no-repeat;
     background-size: auto;
+}
+
+// override inline styles.
+@media (max-width: 1023px) {
+    .wp-lf-google-sheet-embed iframe {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
