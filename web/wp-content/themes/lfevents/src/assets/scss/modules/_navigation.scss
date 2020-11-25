@@ -28,6 +28,14 @@
     padding: 1rem 1.5rem;
   }
 
+  .is-signup-link {
+    background: #0099cc;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 15px;
+    border-color: #ebebeb;
+  }
+
   .admin-bar &.is-stuck {
     top: 32px !important;
   }

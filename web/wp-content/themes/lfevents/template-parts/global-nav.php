@@ -24,10 +24,10 @@ if ( is_lfeventsci() ) {
 
 		<nav id="main-menu" class="main-menu show-for-large" data-toggler="show-for-large" role="navigation">
 			<?php foundationpress_about_pages_nav(); ?>
+			<img class="is-auth0 is-auth0-avatar" />
+			<a class="is-auth0 only-anonymous is-login-link">Sign In</a>
+			<a class="is-auth0 only-anonymous is-signup-link">Create Community Profile</a>
+			<a class="is-auth0 only-authenticated is-logout-link">Logout</a>
 		</nav>
-		<img class="is-auth0 is-auth0-avatar" />
-		<a class="is-auth0 only-anonymous is-login-link">login</a>
-		<a class="is-auth0 only-anonymous is-signup-link">signup</a>
-		<a class="is-auth0 only-authenticated is-logout-link">logout</a>
 	</header>
 </div>
