@@ -73,9 +73,9 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 
 		$splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 		if ( $splash_page || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() ) {
-			wp_enqueue_script( 'auth0-config', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ) ), false );
-			wp_enqueue_script( 'autho0', 'https://cdn.auth0.com/js/auth0-spa-js/1.13.3/auth0-spa-js.production.js', array(), '1', false );
-			wp_enqueue_script( 'lf-autho0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+			wp_enqueue_script( 'auth0', 'https://cdn.auth0.com/js/auth0-spa-js/1.13.3/auth0-spa-js.production.js', array(), '1', false );
+			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+			wp_enqueue_script( 'auth0-config', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ), array( 'lf-auth0', 'auth0' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ) ), false );
 		}
 
 	}
