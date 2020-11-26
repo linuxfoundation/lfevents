@@ -28,6 +28,7 @@
 			)
 		);
 		if ( $query->have_posts() ) {
+			$i = 0;
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				$hide_from_listings = get_post_meta( $post->ID, 'lfes_hide_from_listings', true );
@@ -115,8 +116,10 @@
 				</div>
 
 				<?php
+				$i++;
 			}
 			wp_reset_postdata();
+			echo esc_html( $i );
 		} else {
 			// TODO: We have no posts message?
 			echo "Sorry there aren't any events currently scheduled.";

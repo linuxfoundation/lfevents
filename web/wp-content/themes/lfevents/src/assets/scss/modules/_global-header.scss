@@ -25,9 +25,14 @@
     padding: 0 28px;
   }
 
-  .admin-bar &.is-stuck {
-    top: 32px !important;
-  }
+  // mobile admin bar 46px
+
+  // desktop - above 782px - admin bar 32px
+
+
+  // .admin-bar &.is-stuck {
+  //   top: 32px !important;
+  // }
 
   // setup all links.
   a {
@@ -46,6 +51,33 @@
     list-style: none;
     margin-left: 0;
     margin-bottom: 0;
+  }
+}
+
+// Overrides for WP Admin menu on desktop and mobile.
+.admin-bar {
+  .main-header {
+    top: 32px;
+
+    @media (max-width: 782px) {
+      top: 46px;
+    }
+  }
+
+  .header-menu-back {
+    top: calc(32px + #{$lf-header-height});
+
+    @media (max-width: 782px) {
+      top: calc(46px + #{$lf-header-height});
+    }
+  }
+
+  .main-menu {
+    top: calc(32px + #{$lf-header-height});
+
+    @media (max-width: 782px) {
+      top: calc(46px + #{$lf-header-height});
+    }
   }
 }
 
@@ -196,7 +228,7 @@
         transition: 0.1s;
         transform: translateX(0);
         overflow: auto;
-        padding-bottom: $lf-header-height;
+        padding-bottom: $lf-header-height*2;
       }
     }
   }
@@ -270,6 +302,11 @@
       padding-bottom: 8px;
       display: block;
     }
+  }
+
+  // hide the list item that holds avatar.
+  .is-avatar {
+    display: none;
   }
 
   .is-signup-link {
@@ -446,14 +483,13 @@
       }
 
       // need this to override the  "unset" imported from LFSSO.
-      // TODO: Needed on mobile?
       .is-auth0.only-authenticated.authenticated {
         display: block;
       }
 
       // move this sub-menu under avatar.
       .sub-menu {
-        left: calc(-1rem - 14px - 25px);
+        left: calc(-1rem - 14px - 25px) !important;
       }
     }
   }

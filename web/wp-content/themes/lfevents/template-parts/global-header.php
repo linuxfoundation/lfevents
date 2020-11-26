@@ -42,7 +42,7 @@
 						Community Profile</a></li>
 
 				<!-- for auth  -->
-				<li class="is-auth0 only-authenticated"><img
+				<li class="is-auth0 only-authenticated is-avatar"><img
 						class="is-auth0 is-auth0-avatar" /></li>
 
 				<li
