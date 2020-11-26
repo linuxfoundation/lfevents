@@ -122,10 +122,10 @@
 
 			// if events 0 show message.
 			if ( 0 === $i ) {
-	 get_template_part( 'template-parts/no-events-lfasiallcci' );
+				get_template_part( 'template-parts/no-events-message' );
 			}
 		} else {
-			get_template_part( 'template-parts/no-events-lfasiallcci' );
+			get_template_part( 'template-parts/no-events-message' );
 		}
 		?>
 	</div>

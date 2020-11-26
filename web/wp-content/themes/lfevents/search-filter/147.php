@@ -91,7 +91,7 @@ if ( $query->have_posts() ) {
 		<?php
 	}
 } else {
-	get_template_part( 'template-parts/no-events-lfasiallcci' );
+	get_template_part( 'template-parts/no-events-message' );
 }
 echo '</div>';
 ?>
