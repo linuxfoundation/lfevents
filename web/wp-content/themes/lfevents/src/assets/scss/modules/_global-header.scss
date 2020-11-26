@@ -37,7 +37,7 @@
   // setup all links.
   a {
     color: $header-link-color;
-    transition: all 0.25s ease-out;
+    transition: color 0.25s ease-out;
 
     &:hover {
       color: $lf-primary-400;
@@ -257,7 +257,7 @@
     height: 100%;
     background-color: $white;
     padding: 12px 24px 12px 24px;
-    transition: 0;
+    transition: none;
     transform: translateX(100%);
     font-size: 14px;
 
@@ -305,9 +305,15 @@
   }
 
   // hide the list item that holds avatar.
-  .is-avatar {
+  .is-auth0.only-authenticated.authenticated.is-avatar {
     display: none;
   }
+
+  // overrides the unset.
+  .is-auth0.only-authenticated.authenticated {
+    display: block;
+  }
+
 
   .is-signup-link {
     margin-top: 15px;
