@@ -9,7 +9,7 @@
 if ( is_lfeventsci() ) {
 	$home_img = 'lf-logo.svg';
 } else {
-	$home_img = 'logo_lfasiallc_white.svg';
+	$home_img = 'lf-asia-color.svg';
 }
 ?>
 <div data-sticky-container>
