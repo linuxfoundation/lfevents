@@ -1,3 +1,13 @@
+.event-header .hamburger-icon {
+  &.is-white {
+    @include hamburger($white, $white, 20px, 16px, 2px, 3);
+  }
+
+  &.is-black {
+    @include hamburger($black, $black, 20px, 16px, 2px, 3);
+  }
+}
+
 .menu-toggler {
 
   &,
@@ -167,7 +177,7 @@
         }
 
         img {
-          width: 13rem;
+          // width: 13rem;
           margin: 0.5em;
         }
 
@@ -176,13 +186,52 @@
           flex-direction: column;
         }
 
-        .children li:first-child img,
-        .children li:last-child img {
-          width: 16rem;
+        // .children li:first-child img,
+        // .children li:last-child img {
+        //   width: 16rem;
 
-          @include breakpoint(large) {
-            min-width: 16rem;
+        //   @include breakpoint(large) {
+        //     min-width: 16rem;
+        //   }
+        // }
+
+        .other-logo-wrapper {
+          width: 100%;
+          min-width: 16rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            margin: 0;
           }
+        }
+
+        .other-seperator {
+          display: flex;
+          align-items: center;
+          padding-left: 20px;
+          flex-shrink: 0;
+
+          &::before {
+            content: "";
+            height: 40px;
+            width: 1px;
+            margin-right: 14px;
+          }
+
+          &.white::before {
+            background-color: $white;
+          }
+
+          &.black::before {
+            background-color: #000;
+          }
+        }
+
+        .other-text {
+          margin-top: 1rem;
+          display: block;
         }
       }
 
@@ -324,3 +373,29 @@
 
   }
 }
+
+// old code to control width of LFE logo.
+// img {
+//   width: 63vw;
+//   height: 4.5vw; // width ÷ 14
+
+//   @include breakpoint(medium) {
+//     width: rem-calc(260);
+//     height: rem-calc(18.571); // width ÷ 14
+//   }
+
+//   @include breakpoint(large) {
+//     width: rem-calc(260);
+//     height: rem-calc(18.571); // width ÷ 14
+//   }
+
+//   @include breakpoint(xlarge) {
+//     width: rem-calc(300);
+//     height: rem-calc(21.428); // width ÷ 14
+//   }
+
+//   @include breakpoint(xxlarge) {
+//     width: rem-calc(380);
+//     height: rem-calc(27.143); // width ÷ 14
+//   }
+// }

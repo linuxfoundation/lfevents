@@ -6,3 +6,43 @@
   border-radius: 3px;
   border: none;
 }
+
+.wp-block-buttons {
+  .wp-block-button {
+    transition: all .3s ease-in-out;
+    position: relative;
+
+    .wp-block-button__link {
+      padding: .585rem 1.5rem;
+      font-size: 1.075rem;
+      text-transform: uppercase;
+      line-height: 1.5 !important;
+      box-shadow: none;
+    }
+
+    &:active {
+      transition: all .3s ease-in-out;
+      top: 1px;
+    }
+  }
+}
+
+
+// Homepage call-to-action buttons
+.homepage--call-to-action {
+
+  a {
+    display: inline-block;
+    margin: 0.85em 1em;
+    font-size: rem-calc(12);
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:first-child {
+      @include button();
+      font-size: rem-calc(12);
+      border-radius: rem-calc(8);
+      margin: 0;
+    }
+  }
+}

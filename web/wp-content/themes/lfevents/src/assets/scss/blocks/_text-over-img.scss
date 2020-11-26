@@ -1,6 +1,4 @@
-//
 // Full image + a callout of text
-// --------------------------------------------------
 
 .lfe-image-and-text {
   background-size: cover;
@@ -71,7 +69,7 @@
         right: -0.5rem;
         height: 4rem;
         border-radius: 0.5rem;
-        background: linear-gradient(rgba(0,0,0,0.1), transparent);
+        background: linear-gradient(rgba(0, 0, 0, 0.1), transparent);
         content: '';
       }
     }
@@ -82,30 +80,38 @@
       padding: 2rem;
       margin: 1rem;
     }
-    &.pull-right .text {  margin-left: 50%; }
-    &.pull-left .text {  margin-right: 50%; }
+
+    &.pull-right .text {
+      margin-left: 50%;
+    }
+
+    &.pull-left .text {
+      margin-right: 50%;
+    }
   }
 
-  @media print,screen and (min-width: 64em) {
+  // TODO: Check below works as class is inside class?
+  @media print,
+  screen and (min-width: 64em) {
     .lfe-image-and-text {
-        padding:10vw!important;
+      padding: 10vw !important;
     }
 
     .lfe-image-and-text img {
-        display: none
+      display: none
     }
 
     .lfe-image-and-text .text {
-        padding: 2rem;
-        margin: 1rem;
+      padding: 2rem;
+      margin: 1rem;
     }
 
     .lfe-image-and-text.pull-right .text {
-        margin-left: 50%
+      margin-left: 50%
     }
 
     .lfe-image-and-text.pull-left .text {
-        margin-right: 50%
+      margin-right: 50%
     }
-}
+  }
 }

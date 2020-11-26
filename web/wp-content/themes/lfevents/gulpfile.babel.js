@@ -23,7 +23,7 @@ const PRODUCTION = !!(yargs.argv.production);
 // Check for --development flag unminified with sourcemaps
 const DEV = !!(yargs.argv.dev);
 
-// Load settings from settings.yml
+// Load settings from config-default.yml
 const { BROWSERSYNC, COMPATIBILITY, REVISIONING, PATHS } = loadConfig();
 
 // Check if file exists synchronously

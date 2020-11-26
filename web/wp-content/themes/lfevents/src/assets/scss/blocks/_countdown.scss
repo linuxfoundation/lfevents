@@ -279,3 +279,37 @@
     font-size: 14px !important;
   }
 }
+
+@media (max-width: 374.98px) {
+  .ub_countdown_circular_container div {
+    height: 60px;
+    width: 60px;
+
+    svg {
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  .ub_countdown_circular_container .ub_countdown_circle_label {
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (max-width: 320px) {
+  .ub_countdown_circular_container>div {
+    height: 60px;
+    width: 60px;
+
+    svg {
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  .ub_countdown_circular_container .ub_countdown_circle_label {
+    width: auto;
+    height: auto;
+  }
+}

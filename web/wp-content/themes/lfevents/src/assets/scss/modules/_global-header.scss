@@ -1,0 +1,333 @@
+// Non-Event Header.
+.main-header {
+  @include clearfix;
+  position: relative;
+  z-index: 2;
+  background-color: $white;
+  color: $text-color;
+  border-bottom: 1px solid $lf-grey-200;
+  padding: 1rem;
+  box-shadow: none;
+  font-size: 13px;
+  display: flex;
+  width: 100%;
+
+  @include breakpoint(medium) {
+    padding: 1rem 28px;
+  }
+
+  @include breakpoint(large) {
+    padding: 0 28px;
+  }
+
+  @include breakpoint(large down) {
+    button.button {
+      margin-left: auto;
+    }
+  }
+
+  .admin-bar &.is-stuck {
+    top: 32px !important;
+  }
+
+  // setup all links.
+  a {
+    color: $header-link-color;
+    transition: all 0.25s ease-out;
+
+    &:hover {
+      color: $lf-primary-400;
+    }
+
+  }
+
+  // setup all menus
+  ul,
+  li {
+    list-style: none;
+  }
+}
+
+// Logo and Events shown all widths.
+.header-left-wrapper {
+  display: flex;
+  align-items: center;
+
+  .logo-link {
+    min-width: 109px;
+  }
+
+  .home-link {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+
+    &:hover {
+      a {
+        color: $lf-primary-400;
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      color: $lf-grey-700;
+      padding-left: 20px;
+      flex-shrink: 0;
+
+      &::before {
+        content: "";
+        height: 40px;
+        width: 1px;
+        margin-right: 14px;
+        background-color: $lf-primary-700;
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+
+  // Nav wrapper for all menus.
+  .main-menu {
+    display: flex;
+    width: 100%;
+    letter-spacing: -0.2px;
+
+    // child of menu only.
+    >ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      >li>a {
+        // spacing out first row.
+        display: block;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+      }
+
+      li {
+        white-space: nowrap;
+        position: relative;
+
+        &.menu-item-has-children {
+
+          // activate sub-menu on hover.
+          &:hover>ul,
+          &:focus>ul,
+          &.focus>ul {
+            left: -1em;
+            top: 100%;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.15s linear, transform 0.15s linear, left 0s 0.15s;
+            overflow: visible;
+          }
+
+          >a {
+            padding-right: 1.5em;
+            // so a child does not appear clickable.
+            cursor: default;
+
+            &:hover {
+              color: $lf-primary-400;
+            }
+
+            &::after {
+              // Arrow after link
+              position: absolute;
+              display: block;
+              content: "";
+              width: 8px;
+              height: 8px;
+              margin-top: -2px;
+              top: 50%;
+              left: calc(100% - 1em - 0px);
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid $lf-grey-400;
+            }
+
+            &:hover::after {
+              // change arrow colour
+              border-top-color: $lf-primary-400;
+            }
+          }
+
+          &.is-current {
+            >a::after {
+              transform: rotate(225deg) translateY(-50%);
+              margin-top: 3px;
+              transition-duration: 0.2s;
+            }
+          }
+        }
+
+        a {
+          // line-height: inherit;
+
+          // @include breakpoint(large) {
+          //   // font-size: rem-calc(12);
+          //   padding-right: 0.75rem;
+          //   padding-left: 0.75rem;
+          // }
+
+          // @include breakpoint(xlarge) {
+          //   font-size: rem-calc(14);
+          //   padding-right: 1rem;
+          //   padding-left: 1rem;
+          // }
+
+          // @include breakpoint(xxlarge) {
+          //   font-size: rem-calc(16);
+          // }
+
+        }
+
+        &.current-menu-item>a,
+        &.current-lfe_about_page-ancestor>a {
+          color: $lf-primary-400
+        }
+
+        &.external-link>a::after {
+          content: "";
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%237a7a7a' d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z'/%3E%3C/svg%3E");
+          margin-left: 0.2em; // connects to word.
+          padding-left: 0.8em;
+          background-size: 0.7em 0.8em;
+          background-position: center center;
+          background-repeat: no-repeat;
+        }
+
+        &.external-link:hover>a::after {
+          // primary color - blue.
+          // https://codepen.io/sosuke/pen/Pjoqqp
+          filter: brightness(0) saturate(100%) invert(45%) sepia(92%) saturate(2343%) hue-rotate(164deg) brightness(91%) contrast(101%);
+        }
+      }
+
+      // sub menus
+      .sub-menu {
+        font-size: 13px;
+        z-index: 5;
+        background: $white;
+        opacity: 0;
+        position: absolute;
+        left: -9999px;
+        top: 100%;
+        overflow: hidden;
+        width: 12rem;
+        box-shadow: -5px 6px 9px 0px rgba(0, 0, 0, 0.3);
+        transition: opacity 0.15s linear, transform 0.15s linear, left 0s 0.15s;
+        transform: translateY(0.6em);
+        list-style: none;
+        display: block;
+
+        li {
+          padding-left: 15px;
+          padding-right: 15px;
+          width: 100%;
+
+          // add border to a so it doesn't touch edges
+          a {
+            transition: 0s 0s;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            display: block;
+          }
+
+          // Remove border from last link
+          &:last-child>a {
+            border-bottom: 1px solid transparent;
+          }
+        }
+      }
+    }
+
+    .main-links-menu {
+      margin-left: 40px;
+
+      @media (min-width: 1024px) {
+        li {
+
+          &:last-child,
+          &:nth-last-child(2) {
+            display: none;
+          }
+        }
+      }
+
+      @media (min-width: 1100px) {
+        li {
+          &:nth-last-child(2) {
+            display: block;
+          }
+        }
+      }
+
+      @media (min-width: 1200px) {
+        li {
+          &:last-child {
+            display: block;
+          }
+        }
+      }
+
+    }
+
+    .all-lf-menu {
+      margin-left: auto;
+      margin-right: 14px;
+    }
+
+    .lfx-menu {
+      &::before {
+        content: "";
+        height: 40px;
+        width: 1px;
+        margin-right: 14px;
+        background-color: $lf-primary-700;
+      }
+
+      .is-signup-link {
+        background: $lf-light-blue;
+        color: $white;
+        padding: 5px 20px;
+        border-radius: 15px;
+        border-color: #ebebeb;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        margin-left: 10px;
+
+        &:hover {
+          color: $white;
+          background: #0082ad;
+        }
+      }
+    }
+  }
+
+}
+
+
+
+
+// hide the avatar until it's filled.
+// .is-auth0-avatar {
+//   display: none;
+//   visibility: hidden;
+
+//   &.authenticated {
+//     display: block;
+//     visibility: visible;
+//   }
+// }
