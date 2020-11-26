@@ -107,7 +107,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 
 	<?php
 } else {
-	get_template_part( 'template-parts/header-splash' );
+	get_template_part( 'template-parts/event-splash-header' );
 }
 ?>
 

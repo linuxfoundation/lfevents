@@ -8,7 +8,7 @@
  */
 
 /**
- * Says whether it's the lfeventsci pantheon instance.
+ * Says whether it's the lfeventsci pantheon instance. But does not change body class.
  */
 function is_lfeventsci() {
 	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
@@ -317,7 +317,6 @@ function lfe_scripts() {
 	}
 
 }
-
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
 
 /**
@@ -535,7 +534,6 @@ function lfe_insert_structured_data() {
 
 	echo $out; //phpcs:ignore
 }
-
 
 /**
  * Wraps the logic for redirecting to 3rd-party Event sites.

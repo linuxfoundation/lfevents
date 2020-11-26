@@ -11,31 +11,39 @@
   }
 }
 
-.main-grid {
-  @include xy-grid();
-  // padding-top: 1rem;
+// Updated Grid to match revised header.
+.grid-container {
+  padding-right: 1rem;
+  padding-left: 1rem;
 
   @include breakpoint(medium) {
-    // padding-top: 3rem;
+    padding-right: 28px;
+    padding-left: 28px;
   }
 
-  &.sidebar-left {
-    // Place the sidebar below main content on small screens ...
-    @include breakpoint(small) {
-      .main-content { order: 1; }
-      .sidebar { order: 2; }
-    }
+}
 
-    // ... and to the left on medium-up screens, when using the sidebar-left template
-    @include breakpoint(medium) {
-      .main-content { order: 2; }
-      .sidebar { order: 1; }
-    }
-  }
+.main-grid {
+  @include xy-grid();
 
-  // Full width template
+  // Updated Width to match revised header.
   .main-content-full-width {
     @include xy-cell(12);
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    @include breakpoint(medium) {
+      padding-right: 28px;
+      padding-left: 28px;
+    }
+
+    // @include breakpoint(medium) {
+    //   margin-left: 28px;
+    //   margin-right: 28px;
+    // }
   }
 
   // Default template
@@ -44,8 +52,33 @@
       @include xy-cell(12);
     }
 
+    // @include breakpoint(medium) {
+    // @include xy-cell(8);
+    // }
+  }
+
+  &.sidebar-left {
+
+    // Place the sidebar below main content on small screens ...
+    @include breakpoint(small) {
+      .main-content {
+        order: 1;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+    }
+
+    // ... and to the left on medium-up screens, when using the sidebar-left template
     @include breakpoint(medium) {
-      // @include xy-cell(8);
+      .main-content {
+        order: 2;
+      }
+
+      .sidebar {
+        order: 1;
+      }
     }
   }
 
@@ -63,16 +96,16 @@
 }
 
 .about-page-header {
-  border-bottom: $hr-border;
+  // border-bottom: $hr-border;
   padding-top: $global-margin * 2;
   padding-bottom: $global-margin;
   margin-bottom: $global-margin * 2;
 
-  & > * {
+  &>* {
     margin-bottom: 0;
   }
 
-  & + * {
+  &+* {
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
@@ -84,7 +117,16 @@
 
 .event-subpage-header {
   @include clearfix();
-  margin: 0 -0.625rem $global-margin;
+  margin-top: 0;
+  margin-bottom: $global-margin;
+  margin-right: -1rem;
+  margin-left: -1rem;
+
+  @include breakpoint(medium) {
+    margin-left: -28px;
+    margin-right: -28px;
+  }
+
   padding: $global-margin;
   padding-top: 14vw;
   padding-bottom: 7vw;
@@ -98,8 +140,8 @@
     bottom: 0;
     left: 0;
     height: 100%;
-		width: 100%;
-		z-index: 3;
+    width: 100%;
+    z-index: 3;
     mix-blend-mode: multiply;
     opacity: 0.8;
   }
@@ -138,7 +180,6 @@
   padding: 1rem !important;
 }
 
-
 .event-meta {
   color: $charcoal;
   font-weight: 600;
@@ -147,7 +188,6 @@
     color: $lf-red;
   }
 }
-
 
 // Responsive embeds
 .wp-block-embed.is-type-video .wp-block-embed__wrapper {
@@ -158,63 +198,63 @@
   @include responsive-embed(16 by 9);
 }
 
-
 // Sidebar widgets
 .sidebar-widgets {
-	.widget + .widget {
-		margin-top: rem-calc(40);
-		padding-top: rem-calc(30);
-		border-top: $hr-border;
-	}
+  .widget+.widget {
+    margin-top: rem-calc(40);
+    padding-top: rem-calc(30);
+    border-top: $hr-border;
+  }
 }
 
 // Styles for IE only
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	// countdown clock
-	.ub_countdown_circular_container {
-		display: none;
-	}
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+
+  // countdown clock
+  .ub_countdown_circular_container {
+    display: none;
+  }
 }
 
 // Images in background (re-usable!)
 // apply to container
 .background-image-wrapper {
-	overflow: hidden;
-	position: relative;
+  overflow: hidden;
+  position: relative;
 }
 
 figure {
-	// properly reset for all browsers
-	margin-block-start: 0;
-	margin-block-end: 0;
-	margin-inline-start: 0;
-	margin-inline-end: 0;
+  // properly reset for all browsers
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 // apply to figure
 .figure-container img {
-	width: 100%;
-	// height: 100%;
-	object-fit: cover;
-	position: absolute;
-	z-index: 1;
-	// added below to stop flexbox messing with the height on load.
-	display: block;
-	top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: auto;
-    width: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+  // added below to stop flexbox messing with the height on load.
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  width: 100%;
 }
 
 // apply to content inside
 .content-wrapper {
-	position: relative;
-	z-index: 10;
+  position: relative;
+  z-index: 10;
 }
 
 .prevent-orphaned-icon {
   .icon--inline {
-    margin-right:  -1em;
+    margin-right: -1em;
   }
 }

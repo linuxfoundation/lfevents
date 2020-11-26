@@ -7,7 +7,7 @@
  */
 
 get_header();
-get_template_part( 'template-parts/global-nav' );
+get_template_part( 'template-parts/global-header' );
 ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>

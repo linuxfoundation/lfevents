@@ -60,6 +60,7 @@
 //  54. Tooltip
 //  55. Top Bar
 //  56. Xy Grid
+// 57. LF Style Guide
 
 @import 'util/util';
 @import 'global/colors';
@@ -842,9 +843,17 @@ $topbar-unstack-breakpoint: medium;
 $xy-grid: true;
 $grid-container: $global-width;
 $grid-columns: 12;
-$grid-margin-gutters: (small: 2rem,
-  medium: 56px);
+$grid-margin-gutters: (small: 20px,
+  medium: 30px);
 $grid-padding-gutters: $grid-margin-gutters;
 $grid-container-padding: $grid-padding-gutters;
 $grid-container-max: $global-width;
 $xy-block-grid-max: 8;
+
+// 57. LF Style Guide
+// -----------
+
+$lf-header-height: 80px;
+$lf-hamburger-lines: $lf-grey-400;
+$lf-hamburger-line-height: 2px;
+$lf-hamburger-border-radius: 3px;

@@ -9,8 +9,37 @@ import cookieBanner from './cookie-banner.js';
 
 $( document ).foundation();
 
+// Global.
+( function( global ) {
+	// Generic throttle function.
+	// window.utils.isThrottled() - how to use.
+	function throttle( callback, wait, immediate = false ) {
+		let timeout = null;
+		let initialCall = true;
+		return function() {
+			const callNow = immediate && initialCall;
+			const next = () => {
+				callback.apply( this, arguments );
+				timeout = null;
+			};
+			if ( callNow ) {
+				initialCall = false;
+				next();
+			}
+			if ( ! timeout ) {
+				timeout = setTimeout( next, wait );
+			}
+		};
+	}
+
+	// Global bundle.
+	global.utils = {
+		isThrottled: throttle,
+	};
+}( window ) );
+
 // Prevents menu items being clickable if has children.
-$( '.page_item_has_children a[href="#"]' ).click(
+$( '.event-menu .page_item_has_children a[href="#"]' ).click(
 	function ( e ) {
 		e.preventDefault();
 	}
@@ -53,6 +82,7 @@ $( document ).on(
 	}
 );
 
+// Home page slide show.
 $( document ).ready(
 	function() {
 
@@ -77,6 +107,67 @@ $( document ).ready(
 	}
 );
 
+// Non-Event page menu.
+$( document ).ready(
+	function() {
+
+		// Mobile check.
+		let isMobile = checkMobile();
+		function checkMobile() {
+			return ( ( $( window ).width() <= 1024 ) );
+		}
+
+		// Mobile Menu hamburger (hidden on desktop).
+		$( '.lf-hamburger' ).click(
+			function( e ) {
+				e.preventDefault();
+				if ( ! isMobile ) {
+					return;
+				}
+				$( this ).toggleClass( 'is-active' );
+				$( 'body' ).toggleClass( 'menu-is-active' );
+				$( '.mobile-menu-wrapper' ).toggleClass( 'is-active' );
+			},
+		);
+
+		$( 'li.menu-item-has-children > a' ).click(
+			function( e ) {
+				e.preventDefault();
+				if ( isMobile ) {
+					$( this ).parent().children( '.sub-menu:first' ).slideToggle( 500 );
+				} else {
+					// Stop empty menu parents jumping to top of screen on click.
+					if ( $( this ).attr( 'href' ) === '#' ) {
+						e.preventDefault();
+					}
+				}
+			},
+		);
+
+		// add is-open class to maintain current state in open menus.
+		$( '.menu-item-has-children' ).hover(
+			function() {
+				if ( ! isMobile ) {
+					$( this ).removeClass( 'is-open' );
+					$( this ).addClass( 'is-open' );
+				}
+			},
+			function() {
+				if ( ! isMobile ) {
+					$( this ).removeClass( 'is-open' );
+				}
+			}
+		);
+
+		// Resize check for is mobile.
+		function resizeHandle() {
+			isMobile = checkMobile();
+		}
+
+		// Update on resize.
+		$( window ).on( 'resize', window.utils.isThrottled( resizeHandle, 200, true ) );
+	}
+);
 
 // ShareASale tracking:
 // if sas_m_awin cookie is set then add its value as the sscid querystring param on any links to cvent.

@@ -2,9 +2,13 @@
 // Module: Box Model
 // --------------------------------------------------
 
+body.menu-is-active {
+  overflow: hidden;
+}
+
 .site-container {
   position: relative;
-  overflow: hidden;
+  // overflow: hidden; // breaks things?
   max-width: rem-calc(1800);
   margin-right: auto;
   margin-left: auto;

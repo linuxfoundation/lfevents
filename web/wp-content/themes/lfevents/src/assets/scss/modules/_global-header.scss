@@ -1,16 +1,21 @@
 // Non-Event Header.
+
 .main-header {
   @include clearfix;
-  position: relative;
-  z-index: 2;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 20;
+  border-bottom: 1px solid $lf-grey-200;
   background-color: $white;
   color: $text-color;
-  border-bottom: 1px solid $lf-grey-200;
   padding: 1rem;
-  box-shadow: none;
   font-size: 13px;
   display: flex;
-  width: 100%;
+  align-items: center;
+  height: $lf-header-height;
 
   @include breakpoint(medium) {
     padding: 1rem 28px;
@@ -18,12 +23,6 @@
 
   @include breakpoint(large) {
     padding: 0 28px;
-  }
-
-  @include breakpoint(large down) {
-    button.button {
-      margin-left: auto;
-    }
   }
 
   .admin-bar &.is-stuck {
@@ -45,10 +44,12 @@
   ul,
   li {
     list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
   }
 }
 
-// Logo and Events shown all widths.
+// Logo + Events shown all widths.
 .header-left-wrapper {
   display: flex;
   align-items: center;
@@ -88,10 +89,224 @@
   }
 }
 
+// Apply all widths.
+.lfx-menu .is-signup-link {
+  background: $lf-light-blue;
+  color: $white;
+  padding: 10px 18px;
+  border-radius: 40px;
+  border-color: #ebebeb;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: center;
+
+  &:hover {
+    color: $white;
+    background: #0082ad;
+  }
+}
+
+// Apply all widths.
+.main-menu {
+
+  // menu is open.
+  li.menu-item-has-children.is-open {
+    >a {
+      color: $lf-primary-400;
+
+      &::after {
+        border-top-color: $lf-primary-400;
+      }
+    }
+  }
+
+  >ul li {
+    white-space: nowrap;
+    position: relative;
+
+    &.menu-item-has-children {
+      >a {
+        // so a child does not appear clickable.
+        cursor: default;
+        display: flex;
+
+        &:hover {
+          color: $lf-primary-400;
+        }
+
+        &::after {
+          // Arrow after link
+          position: absolute;
+          display: block;
+          content: "";
+          width: 8px;
+          height: 8px;
+          align-self: center;
+          left: calc(100% - 1em);
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid $lf-grey-400;
+        }
+
+        &:hover::after {
+          // change arrow colour
+          border-top-color: $lf-primary-400;
+        }
+
+      }
+    }
+
+    &.current-menu-item>a,
+    &.current-lfe_about_page-ancestor>a {
+      color: $lf-primary-400
+    }
+
+    &.external-link>a::after {
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%237a7a7a' d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z'/%3E%3C/svg%3E");
+      margin-left: 0.2em; // connects to word.
+      padding-left: 0.8em;
+      background-size: 0.7em 0.8em;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    &.external-link:hover>a::after {
+      // primary color - blue.
+      // https://codepen.io/sosuke/pen/Pjoqqp
+      filter: brightness(0) saturate(100%) invert(45%) sepia(92%) saturate(2343%) hue-rotate(164deg) brightness(91%) contrast(101%);
+    }
+  }
+}
+
+// only show on mobile.
+@include breakpoint(medium down) {
+  .mobile-menu-wrapper {
+
+    // Apply at is-active state.
+    &.is-active {
+      .header-menu-back {
+        position: fixed;
+        visibility: visible;
+        opacity: .5;
+        transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .main-menu {
+        transition: 0.1s;
+        transform: translateX(0);
+        overflow: auto;
+        padding-bottom: $lf-header-height;
+      }
+    }
+  }
+
+  // underlay underlay.
+  .header-menu-back {
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    background: $black;
+    position: fixed;
+    top: $lf-header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .main-menu {
+    z-index: 999;
+    position: fixed;
+    top: $lf-header-height;
+    right: 0;
+    width: 360px;
+    max-width: 80%;
+    height: 100%;
+    background-color: $white;
+    padding: 12px 24px 12px 24px;
+    transition: 0;
+    transform: translateX(100%);
+    font-size: 14px;
+
+    @media (min-width: 414px) {
+      font-size: 18px;
+    }
+
+    >ul>li>a {
+      display: block;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    >ul li.menu-item-has-children {
+      >a::after {
+        // Arrow after link
+        width: 8px;
+        height: 8px;
+        left: calc(100% - 1em);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid $lf-grey-400;
+      }
+
+      >a:hover::after {
+        // change arrow colour
+        border-top-color: $lf-primary-400;
+      }
+    }
+  }
+
+  // sub menus
+  .sub-menu {
+    display: none;
+
+    li {
+      padding-left: 30px;
+    }
+
+    a {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      display: block;
+    }
+  }
+
+  .is-signup-link {
+    margin-top: 15px;
+  }
+}
+
+// only show on desktop.
 @include breakpoint(large) {
+
+  // underlay underlay.
+  .header-menu-back {
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0;
+  }
+
+  .header-left-wrapper {
+    .lfasiallcci & {
+      margin-right: auto;
+    }
+  }
+
+  // setup 100% width on wrapper.
+  .mobile-menu-wrapper {
+    width: 100%;
+
+    .lfasiallcci & {
+      width: initial;
+    }
+  }
 
   // Nav wrapper for all menus.
   .main-menu {
+    // stop desktop>mobile animation.
+    transition: 0;
     display: flex;
     width: 100%;
     letter-spacing: -0.2px;
@@ -116,9 +331,6 @@
       }
 
       li {
-        white-space: nowrap;
-        position: relative;
-
         &.menu-item-has-children {
 
           // activate sub-menu on hover.
@@ -135,83 +347,12 @@
 
           >a {
             padding-right: 1.5em;
-            // so a child does not appear clickable.
-            cursor: default;
-
-            &:hover {
-              color: $lf-primary-400;
-            }
 
             &::after {
               // Arrow after link
-              position: absolute;
-              display: block;
-              content: "";
-              width: 8px;
-              height: 8px;
-              margin-top: -2px;
-              top: 50%;
-              left: calc(100% - 1em - 0px);
-              border-left: 5px solid transparent;
-              border-right: 5px solid transparent;
-              border-top: 5px solid $lf-grey-400;
-            }
-
-            &:hover::after {
-              // change arrow colour
-              border-top-color: $lf-primary-400;
+              margin-top: 2px;
             }
           }
-
-          &.is-current {
-            >a::after {
-              transform: rotate(225deg) translateY(-50%);
-              margin-top: 3px;
-              transition-duration: 0.2s;
-            }
-          }
-        }
-
-        a {
-          // line-height: inherit;
-
-          // @include breakpoint(large) {
-          //   // font-size: rem-calc(12);
-          //   padding-right: 0.75rem;
-          //   padding-left: 0.75rem;
-          // }
-
-          // @include breakpoint(xlarge) {
-          //   font-size: rem-calc(14);
-          //   padding-right: 1rem;
-          //   padding-left: 1rem;
-          // }
-
-          // @include breakpoint(xxlarge) {
-          //   font-size: rem-calc(16);
-          // }
-
-        }
-
-        &.current-menu-item>a,
-        &.current-lfe_about_page-ancestor>a {
-          color: $lf-primary-400
-        }
-
-        &.external-link>a::after {
-          content: "";
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%237a7a7a' d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z'/%3E%3C/svg%3E");
-          margin-left: 0.2em; // connects to word.
-          padding-left: 0.8em;
-          background-size: 0.7em 0.8em;
-          background-position: center center;
-          background-repeat: no-repeat;
-        }
-
-        &.external-link:hover>a::after {
-          // primary color - blue.
-          // https://codepen.io/sosuke/pen/Pjoqqp
-          filter: brightness(0) saturate(100%) invert(45%) sepia(92%) saturate(2343%) hue-rotate(164deg) brightness(91%) contrast(101%);
         }
       }
 
@@ -226,7 +367,7 @@
         top: 100%;
         overflow: hidden;
         width: 12rem;
-        box-shadow: -5px 6px 9px 0px rgba(0, 0, 0, 0.3);
+        box-shadow: -5px 6px 9px 0px rgba(0, 0, 0, 0.1);
         transition: opacity 0.15s linear, transform 0.15s linear, left 0s 0.15s;
         transform: translateY(0.6em);
         list-style: none;
@@ -237,17 +378,10 @@
           padding-right: 15px;
           width: 100%;
 
-          // add border to a so it doesn't touch edges
           a {
-            transition: 0s 0s;
             padding-top: 8px;
             padding-bottom: 8px;
             display: block;
-          }
-
-          // Remove border from last link
-          &:last-child>a {
-            border-bottom: 1px solid transparent;
           }
         }
       }
@@ -256,39 +390,48 @@
     .main-links-menu {
       margin-left: 40px;
 
+      // drop some main nav links if screen too small.
       @media (min-width: 1024px) {
-        li {
+        .lfeventsci & {
+          li {
 
-          &:last-child,
-          &:nth-last-child(2) {
-            display: none;
+            &:last-child,
+            &:nth-last-child(2) {
+              display: none;
+            }
           }
         }
       }
 
       @media (min-width: 1100px) {
-        li {
-          &:nth-last-child(2) {
-            display: block;
+        .lfeventsci & {
+          li {
+            &:nth-last-child(2) {
+              display: block;
+            }
           }
         }
       }
 
       @media (min-width: 1200px) {
-        li {
-          &:last-child {
-            display: block;
+        .lfeventsci & {
+          li {
+            &:last-child {
+              display: block;
+            }
           }
         }
       }
 
     }
 
+    // All LF Menu
     .all-lf-menu {
       margin-left: auto;
       margin-right: 14px;
     }
 
+    // LFX SSO Menu
     .lfx-menu {
       &::before {
         content: "";
@@ -299,35 +442,94 @@
       }
 
       .is-signup-link {
-        background: $lf-light-blue;
-        color: $white;
-        padding: 5px 20px;
-        border-radius: 15px;
-        border-color: #ebebeb;
-        font-weight: 600;
-        letter-spacing: -0.5px;
         margin-left: 10px;
+      }
 
-        &:hover {
-          color: $white;
-          background: #0082ad;
+      // need this to override the  "unset" imported from LFSSO.
+      // TODO: Needed on mobile?
+      .is-auth0.only-authenticated.authenticated {
+        display: block;
+      }
+
+      // move this sub-menu under avatar.
+      .sub-menu {
+        left: calc(-1rem - 14px - 25px);
+      }
+    }
+  }
+}
+
+// Style avatar in LFX SSO
+.is-auth0-avatar.authenticated {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #ebebeb;
+}
+
+// Hamburger.
+@include breakpoint(medium down) {
+
+  .lf-hamburger {
+    margin-left: auto;
+    display: inline-block;
+    height: 50px; // Google tap target min 48px.
+    width: 50px;
+    padding: 20px;
+    position: relative;
+
+    span {
+      border-radius: $lf-hamburger-border-radius;
+      background-color: $lf-hamburger-lines;
+      display: block;
+      height: $lf-hamburger-line-height;
+      margin: 0 auto;
+      position: relative;
+      width: 30px;
+      // animation
+      transition: background 0.2s ease, opacity 0.2s ease;
+
+      &:before,
+      &:after {
+        border-radius: $lf-hamburger-border-radius;
+        background-color: $lf-hamburger-lines;
+        content: '';
+        display: block;
+        height: $lf-hamburger-line-height;
+        position: absolute;
+        width: 30px;
+        // animation
+        transition-delay: 0.2s, 0s;
+        transition: margin 0.2s, transform 0.2s;
+      }
+
+      &:before {
+        margin-top: -8px;
+      }
+
+      &:after {
+        margin-top: 8px;
+      }
+    }
+
+    &.is-active {
+      span {
+        background-color: transparent;
+        transition-delay: 0.1s;
+        transition: background 0.2s ease, opacity 0.2s ease;
+
+        &:before {
+          margin-top: 0;
+          transform: rotate(45deg);
+          transition-delay: 0s, 0.2s;
+        }
+
+        &:after {
+          margin-top: 0;
+          transform: rotate(-45deg);
+          transition-delay: 0s, 0.2s;
         }
       }
     }
   }
-
 }
-
-
-
-
-// hide the avatar until it's filled.
-// .is-auth0-avatar {
-//   display: none;
-//   visibility: hidden;
-
-//   &.authenticated {
-//     display: block;
-//     visibility: visible;
-//   }
-// }

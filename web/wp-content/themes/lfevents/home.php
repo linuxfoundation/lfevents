@@ -6,7 +6,7 @@
  */
 
 get_header();
-get_template_part( 'template-parts/global-nav' );
+get_template_part( 'template-parts/global-header' );
 ?>
 
 <div class="main-container large-padding-bottom">

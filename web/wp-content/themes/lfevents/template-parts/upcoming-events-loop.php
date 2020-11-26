@@ -118,8 +118,8 @@
 			}
 			wp_reset_postdata();
 		} else {
-			echo "Sorry there aren't any events currently scheduled.";
 			// TODO: We have no posts message?
+			echo "Sorry there aren't any events currently scheduled.";
 		}
 		?>
 	</div>
