@@ -119,10 +119,13 @@
 				$i++;
 			}
 			wp_reset_postdata();
-			echo esc_html( $i );
+
+			// if events 0 show message.
+			if ( 0 === $i ) {
+	 get_template_part( 'template-parts/no-events-lfasiallcci' );
+			}
 		} else {
-			// TODO: We have no posts message?
-			echo "Sorry there aren't any events currently scheduled.";
+			get_template_part( 'template-parts/no-events-lfasiallcci' );
 		}
 		?>
 	</div>
