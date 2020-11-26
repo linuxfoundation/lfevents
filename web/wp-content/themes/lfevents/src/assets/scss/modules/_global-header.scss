@@ -310,7 +310,7 @@
   }
 
   // overrides the unset.
-  .is-auth0.only-authenticated.authenticated {
+  .menu-item.is-auth0.only-authenticated.authenticated {
     display: block;
   }
 
@@ -495,7 +495,7 @@
 
       // move this sub-menu under avatar.
       .sub-menu {
-        left: calc(-1rem - 14px - 25px) !important;
+        left: -100% !important;
       }
     }
   }
