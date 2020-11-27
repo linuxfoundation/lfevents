@@ -130,11 +130,14 @@ $( document ).ready(
 			},
 		);
 
-		$( '.menu-item-has-children > a' ).click(
+    // click actions on menus.
+    $( '.menu-item-has-children > a' ).click(
 			function( e ) {
-				e.preventDefault();
-				if ( isMobile ) {
-					$( this ).parent().children( '.sub-menu:first' ).slideToggle( 500 );
+        e.preventDefault();
+        if ( isMobile ) {
+          // add is-open-mobile class to open menus.
+          $( this ).parent().toggleClass( 'is-open-mobile' );
+          $( this ).parent().children( '.sub-menu:first' ).slideToggle( 250 );
 				} else {
 					// Stop empty menu parents jumping to top of screen on click.
 					if ( $( this ).attr( 'href' ) === '#' ) {
@@ -144,20 +147,12 @@ $( document ).ready(
 			},
 		);
 
-		// add is-open-mobile class to open menus.
-		$( '.menu-item-has-children' ).click(
-			function( e ) {
-				e.preventDefault();
-				if ( isMobile ) {
-					$( this ).toggleClass( 'is-open-mobile' );
-				}
-			},
-		);
-
 		// add is-open class to maintain current state in open menus.
 		$( '.menu-item-has-children' ).hover(
 			function() {
 				if ( ! isMobile ) {
+          // make sure no inline style is set from slideToggle.
+          $( this ).children( '.sub-menu' ).removeAttr('style');
 					$( this ).removeClass( 'is-open' );
 					$( this ).addClass( 'is-open' );
 				}
