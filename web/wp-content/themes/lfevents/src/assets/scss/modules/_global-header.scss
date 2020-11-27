@@ -208,6 +208,11 @@
   }
 }
 
+// initially hide the only-authenticated parts.
+.is-auth0.only-authenticated {
+  display: none;
+}
+
 // only show on mobile.
 @include breakpoint(medium down) {
   .mobile-menu-wrapper {
@@ -289,9 +294,11 @@
   // sub menus
   .sub-menu {
     display: none;
+    transform: translate3d(0, 0, 0);
 
     li {
       padding-left: 30px;
+      transform: translate3d(0, 0, 0);
     }
 
     a {
@@ -314,11 +321,16 @@
   .is-signup-link {
     margin-top: 15px;
   }
-}
 
-// initially hide the only-authenticated parts.
-.is-auth0.only-authenticated {
-  display: none;
+  // All LF Menu
+  .all-lf-menu:before {
+    content: '';
+    display: block;
+    background: $lf-grey-200;
+    height: 2px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+  }
 }
 
 // only show on desktop.
