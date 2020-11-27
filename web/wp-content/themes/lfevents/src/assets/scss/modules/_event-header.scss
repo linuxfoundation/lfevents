@@ -177,7 +177,6 @@
         }
 
         img {
-          // width: 13rem;
           margin: 0.5em;
         }
 
@@ -185,15 +184,6 @@
         .children li:last-child a {
           flex-direction: column;
         }
-
-        // .children li:first-child img,
-        // .children li:last-child img {
-        //   width: 16rem;
-
-        //   @include breakpoint(large) {
-        //     min-width: 16rem;
-        //   }
-        // }
 
         .other-logo-wrapper {
           width: 100%;
@@ -373,29 +363,3 @@
 
   }
 }
-
-// old code to control width of LFE logo.
-// img {
-//   width: 63vw;
-//   height: 4.5vw; // width ÷ 14
-
-//   @include breakpoint(medium) {
-//     width: rem-calc(260);
-//     height: rem-calc(18.571); // width ÷ 14
-//   }
-
-//   @include breakpoint(large) {
-//     width: rem-calc(260);
-//     height: rem-calc(18.571); // width ÷ 14
-//   }
-
-//   @include breakpoint(xlarge) {
-//     width: rem-calc(300);
-//     height: rem-calc(21.428); // width ÷ 14
-//   }
-
-//   @include breakpoint(xxlarge) {
-//     width: rem-calc(380);
-//     height: rem-calc(27.143); // width ÷ 14
-//   }
-// }

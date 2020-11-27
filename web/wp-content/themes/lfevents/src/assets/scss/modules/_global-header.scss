@@ -162,7 +162,7 @@
       >a {
         // so a child does not appear clickable.
         cursor: default;
-        display: flex;
+        position: relative;
 
         &:hover {
           color: $lf-primary-400;
@@ -170,16 +170,18 @@
 
         &::after {
           // Arrow after link
-          position: absolute;
-          display: block;
-          content: "";
           width: 8px;
           height: 8px;
-          align-self: center;
-          left: calc(100% - 1em);
           border-left: 5px solid transparent;
           border-right: 5px solid transparent;
           border-top: 5px solid $lf-grey-400;
+          left: calc(100% - 1em);
+
+          position: absolute;
+          display: block;
+          top: 50%;
+          transform: translateY(-50%);
+          content: "";
         }
 
         &:hover::after {
@@ -213,9 +215,17 @@
   }
 }
 
-// initially hide the only-authenticated parts.
+// initially hide the only-authenticated parts in LFX SSO.
 .is-auth0.only-authenticated {
   display: none;
+}
+
+// Style avatar in LFX SSO
+.is-auth0-avatar.authenticated {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #ebebeb;
 }
 
 // only show on mobile.
@@ -281,12 +291,18 @@
     >ul li.menu-item-has-children {
       >a::after {
         // Arrow after link
-        width: 8px;
-        height: 8px;
-        left: calc(100% - 1em);
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         border-top: 8px solid $lf-grey-400;
+        transform: translateY(-50%) rotate(-90deg);
+        transition: all 0.3s ease-out;
+      }
+
+      &.is-open-mobile {
+        >a::after {
+          transform: translateY(-50%) rotate(0deg);
+          transition: all 0.3s ease-out;
+        }
       }
 
       >a:hover::after {
@@ -519,15 +535,7 @@
   }
 }
 
-// Style avatar in LFX SSO
-.is-auth0-avatar.authenticated {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px solid #ebebeb;
-}
-
-// Hamburger.
+// Hamburger. No fries.
 @include breakpoint(medium down) {
 
   .lf-hamburger {

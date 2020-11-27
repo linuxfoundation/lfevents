@@ -130,7 +130,7 @@ $( document ).ready(
 			},
 		);
 
-		$( 'li.menu-item-has-children > a' ).click(
+		$( '.menu-item-has-children > a' ).click(
 			function( e ) {
 				e.preventDefault();
 				if ( isMobile ) {
@@ -142,7 +142,17 @@ $( document ).ready(
 					}
 				}
 			},
-		);
+    );
+
+// add is-open-mobile class to open menus.
+		$( '.menu-item-has-children' ).click(
+			function( e ) {
+				e.preventDefault();
+				if ( isMobile ) {
+          $( this ).toggleClass( 'is-open-mobile' );
+				}
+			},
+    );
 
 		// add is-open class to maintain current state in open menus.
 		$( '.menu-item-has-children' ).hover(
