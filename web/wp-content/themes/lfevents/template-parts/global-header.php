@@ -46,6 +46,7 @@
 						class="is-auth0 is-auth0-avatar" /></li>
 
 				<li
+					style="display:none"
 					class="is-auth0 only-authenticated menu-item-has-children menu-item">
 					<a href="#">My Profile</a>
 
