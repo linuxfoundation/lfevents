@@ -529,7 +529,7 @@
 
       // move this sub-menu under avatar.
       .sub-menu {
-        left: unset;
+        left: unset !important;
         right: 0;
       }
     }
