@@ -314,11 +314,16 @@
     display: block;
   }
 
-
   .is-signup-link {
     margin-top: 15px;
   }
 }
+
+// initially hide the only-authenticated parts.
+.is-auth0.only-authenticated {
+  display: none;
+} 
+
 
 // only show on desktop.
 @include breakpoint(large) {
