@@ -8,7 +8,7 @@
 
 ?>
 
-<div class="cell callout large-margin-bottom">
+<div class="cell callout large-margin-bottom warning">
 <?php if ( ! is_lfeventsci() ) { ?>
 对不起，没有任何即将举行的活动。<br>
 <?php } ?>
