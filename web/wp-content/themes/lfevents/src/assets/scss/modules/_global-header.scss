@@ -126,6 +126,8 @@
   font-weight: 600;
   letter-spacing: -0.5px;
   text-align: center;
+  // animation.
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
   &:hover {
     color: $white;
@@ -317,8 +319,7 @@
 // initially hide the only-authenticated parts.
 .is-auth0.only-authenticated {
   display: none;
-} 
-
+}
 
 // only show on desktop.
 @include breakpoint(large) {
