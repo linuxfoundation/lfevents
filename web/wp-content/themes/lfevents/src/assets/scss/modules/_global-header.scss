@@ -25,15 +25,6 @@
     padding: 0 28px;
   }
 
-  // mobile admin bar 46px
-
-  // desktop - above 782px - admin bar 32px
-
-
-  // .admin-bar &.is-stuck {
-  //   top: 32px !important;
-  // }
-
   // setup all links.
   a {
     color: $header-link-color;
@@ -85,6 +76,10 @@
 .header-left-wrapper {
   display: flex;
   align-items: center;
+
+  .lf-logo {
+    height: fit-content;
+  }
 
   .logo-link {
     min-width: 109px;

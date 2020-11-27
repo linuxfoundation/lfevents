@@ -13,7 +13,7 @@
 <?php if ( is_lfeventsci() ) : ?>
 <a class="logo-link" aria-label="Linux Foundation"
 	title="Linux Foundation" href="https://linuxfoundation.org">
-	<img width="109" height="36" loading="eager"
+	<img width="109" height="36" loading="eager" class="lf-logo"
 		alt="Linux Foundation logo"
 		src="<?php echo esc_html( get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo.svg' ) ); ?>"></a>
 
