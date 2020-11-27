@@ -3,6 +3,11 @@
 .main-header {
   @include clearfix;
   position: sticky;
+
+  @media (max-height: 500px) {
+    position: relative;
+  }
+
   top: 0;
   left: 0;
   right: 0;
