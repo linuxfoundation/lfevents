@@ -45,17 +45,15 @@ $code in $foundation-palette {
     @extend .hollow;
   }
 
-  // set transparent background to block for outline button
-  &.is-style-outline,
-  &.is-style-outline:hover,
-  &.is-style-outline:focus,
-  &.is-style-outline:active {
+  // // set transparent background to block for outline button
+  // &.is-style-outline,
+  // &.is-style-outline:hover,
+  // &.is-style-outline:focus,
+  // &.is-style-outline:active {
 
-    // background: transparent;
-    .wp-block-button__link {
-      // background: transparent;
-    }
-  }
+  //   .wp-block-button__link {
+  //   }
+  // }
 
   @each $name,
   $size in $button-sizes {
@@ -95,11 +93,17 @@ $code in $foundation-palette {
     &.alignfull {
       clear: both;
       max-width: none;
-      width: calc(100% + 1.25rem);
-      margin-right: -0.625rem;
-      margin-left: -0.625rem;
+      width: calc(100% + 2rem);
+      margin-right: -1rem;
+      margin-left: -1rem;
       padding-right: rem-calc(10);
       padding-left: rem-calc(10);
+
+      @include breakpoint(medium) {
+        width: calc(100% + 56px);
+        margin-left: -28px;
+        margin-right: -28px;
+      }
 
       // Flush align all the sections!!!
       & {

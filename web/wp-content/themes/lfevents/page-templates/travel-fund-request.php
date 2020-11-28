@@ -10,7 +10,7 @@ get_header();
 wp_enqueue_script( 'lfe_travel-fund-form', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'travel-fund-form.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'travel-fund-form.js' ) ), true );
 wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), 1, true );
 
-get_template_part( 'template-parts/global-nav' );
+get_template_part( 'template-parts/global-header' );
 ?>
 
 <div class="main-container">
@@ -75,7 +75,7 @@ get_template_part( 'template-parts/global-nav' );
 										</select>
 									</label>
 								</div>
-								
+
 								<div class="cell medium-6 other-event-div" style="display:none">
 									<label>
 										Event Name *

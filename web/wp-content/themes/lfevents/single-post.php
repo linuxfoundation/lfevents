@@ -7,7 +7,7 @@
  */
 
 get_header();
-get_template_part( 'template-parts/global-nav' );
+get_template_part( 'template-parts/global-header' );
 ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>
@@ -22,7 +22,9 @@ get_template_part( 'template-parts/global-nav' );
 					<div class="entry-content">
 						<header class="about-page-header">
 							<h1 class="entry-title"><?php the_title(); ?></h1>
-							<?php foundationpress_entry_meta(); ?>
+							<?php
+							echo '<time class="updated" datetime="' . esc_html( get_the_time( 'c' ) ) . '">' . esc_html( get_the_date() ) . '</time>';
+							?>
 						</header>
 						<div class="">
 							<?php the_content(); ?>

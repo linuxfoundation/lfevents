@@ -8,7 +8,7 @@
  */
 
 /**
- * Says whether it's the lfeventsci pantheon instance.
+ * Says whether it's the lfeventsci pantheon instance. But does not change body class.
  */
 function is_lfeventsci() {
 	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
@@ -145,7 +145,8 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 		echo '<a>查看所有活动<br>View All Events</a>';
 	}
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
-	echo '<li><a href="https://events.linuxfoundation.org/"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_' . $menu_text_color . '.svg' ) . '"><span class="subtext">All Upcoming Events</span></a></li>'; //phpcs:ignore
+	echo '<li><a href="https://events.linuxfoundation.org/"><div class="other-logo-wrapper">
+	<img width="109" height="36" src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo-' . $menu_text_color . '.svg' ) . '"><span class="other-seperator ' . $menu_text_color . '">Events</span></div><span class="other-text">All Upcoming Events</span></a></li>'; //phpcs:ignore
 
 	foreach ( $related_events as $p ) {
 		$logo = get_post_meta( $p['ID'], 'lfes_' . $menu_text_color . '_logo', true );
@@ -316,7 +317,6 @@ function lfe_scripts() {
 	}
 
 }
-
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
 
 /**
@@ -534,7 +534,6 @@ function lfe_insert_structured_data() {
 
 	echo $out; //phpcs:ignore
 }
-
 
 /**
  * Wraps the logic for redirecting to 3rd-party Event sites.

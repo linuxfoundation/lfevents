@@ -1,3 +1,13 @@
+.event-header .hamburger-icon {
+  &.is-white {
+    @include hamburger($white, $white, 20px, 16px, 2px, 3);
+  }
+
+  &.is-black {
+    @include hamburger($black, $black, 20px, 16px, 2px, 3);
+  }
+}
+
 .menu-toggler {
 
   &,
@@ -167,7 +177,6 @@
         }
 
         img {
-          width: 13rem;
           margin: 0.5em;
         }
 
@@ -176,13 +185,43 @@
           flex-direction: column;
         }
 
-        .children li:first-child img,
-        .children li:last-child img {
-          width: 16rem;
+        .other-logo-wrapper {
+          width: 100%;
+          min-width: 16rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-          @include breakpoint(large) {
-            min-width: 16rem;
+          img {
+            margin: 0;
           }
+        }
+
+        .other-seperator {
+          display: flex;
+          align-items: center;
+          padding-left: 20px;
+          flex-shrink: 0;
+
+          &::before {
+            content: "";
+            height: 40px;
+            width: 1px;
+            margin-right: 14px;
+          }
+
+          &.white::before {
+            background-color: $white;
+          }
+
+          &.black::before {
+            background-color: #000;
+          }
+        }
+
+        .other-text {
+          margin-top: 1rem;
+          display: block;
         }
       }
 

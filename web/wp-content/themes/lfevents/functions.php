@@ -21,20 +21,20 @@ require_once 'library/cleanup.php';
 require_once 'library/foundation.php';
 
 /** Format comments */
-require_once 'library/class-foundationpress-comments.php';
+// require_once 'library/class-foundationpress-comments.php'; // comments not in use.
 
 /** Register all navigation menus */
 require_once 'library/navigation.php';
 
 /** Add menu walkers for top-bar and off-canvas */
-require_once 'library/class-foundationpress-top-bar-walker.php';
-require_once 'library/class-foundationpress-mobile-walker.php';
+// require_once 'library/class-foundationpress-top-bar-walker.php'; // Not needed.
+// require_once 'library/class-foundationpress-mobile-walker.php'; // Not needed.
 
 /** Create widget areas in sidebar and footer */
 require_once 'library/widget-areas.php';
 
 /** Return entry meta information for posts */
-require_once 'library/entry-meta.php';
+// require_once 'library/entry-meta.php'; // removed as only used once, moved code in to template.
 
 /** Enqueue scripts */
 require_once 'library/enqueue-scripts.php';
@@ -43,7 +43,7 @@ require_once 'library/enqueue-scripts.php';
 require_once 'library/theme-support.php';
 
 /** Add Nav Options to Customer */
-require_once 'library/custom-nav.php';
+// require_once 'library/custom-nav.php'; // removed as we don't need or use it.
 
 /** Change WP's sticky post class */
 require_once 'library/sticky-posts.php';
