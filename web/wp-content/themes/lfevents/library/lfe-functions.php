@@ -914,7 +914,7 @@ function dns_prefetch_to_preconnect( $urls, $relation_type ) {
 	}
 
 	if ( 'dns-prefetch' === $relation_type ) {
-			$urls = [];
+			$urls = array();
 	}
 
 	if ( 'preconnect' === $relation_type ) {
