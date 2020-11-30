@@ -905,7 +905,7 @@ function dns_prefetch_to_preconnect( $urls, $relation_type ) {
 					$dependency = $dependencies->registered[ $handle ];
 					$parsed     = wp_parse_url( $dependency->src );
 
-				if ( ! empty( $parsed['host'] ) && ! in_array( $parsed['host'], $unique_urls ) && $parsed['host'] !== $server ) {
+				if ( ! empty( $parsed['host'] ) && ! in_array( $parsed['host'], $unique_urls ) && $parsed['host'] !== $domain ) {
 
 						$unique_urls[] = $parsed['scheme'] . '://' . $parsed['host'];
 				}
