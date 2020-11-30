@@ -71,8 +71,12 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 			wp_enqueue_script( 'responsive-table-code', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ), array( 'jquery', 'responsive-table' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ) ), true );
 		}
 
-		$splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
-		if ( $splash_page || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() ) {
+		// Add scripts required for non-event pages.
+		if ( not_an_event() ) {
+			// Add Google font.
+			// wp_enqueue_style( 'google-font', 'https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap', array(), filemtime( get_template_directory() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ) ), 'all' );
+
+			// Add auth SSO/LFX assets.
 			wp_enqueue_script( 'auth0', 'https://cdn.auth0.com/js/auth0-spa-js/1.13.3/auth0-spa-js.production.js', array(), '1', false );
 			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
 			wp_enqueue_script( 'auth0-config', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ), array( 'lf-auth0', 'auth0' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ) ), false );

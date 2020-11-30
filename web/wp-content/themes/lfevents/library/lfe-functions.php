@@ -867,3 +867,60 @@ function lfe_dequeue_front_page_style() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'lfe_dequeue_front_page_style', 100 );
+
+
+/**
+ * A function to test if the page is an event page or a non-event page.
+ */
+function not_an_event() {
+	if ( get_post_meta( get_the_ID(), 'lfes_splash_page', true ) || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * All enqueued styles have dns-prefetch added to them. This changes it to preconnect for extra zip.
+ *
+ * @param string $urls array of urls.
+ * @param string $relation_type returns priority.
+ */
+function dns_prefetch_to_preconnect( $urls, $relation_type ) {
+	global $wp_scripts, $wp_styles;
+
+	$unique_urls = array();
+	$domain = '';
+	if ( isset( $_SERVER['SERVER_NAME'] ) ) {
+		$domain = sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) );
+	}
+
+	foreach ( array( $wp_scripts, $wp_styles ) as $dependencies ) {
+		if ( $dependencies instanceof WP_Dependencies && ! empty( $dependencies->queue ) ) {
+			foreach ( $dependencies->queue as $handle ) {
+				if ( ! isset( $dependencies->registered[ $handle ] ) ) {
+					continue;
+				}
+
+					$dependency = $dependencies->registered[ $handle ];
+					$parsed     = wp_parse_url( $dependency->src );
+
+				if ( ! empty( $parsed['host'] ) && ! in_array( $parsed['host'], $unique_urls ) && $parsed['host'] !== $server ) {
+
+						$unique_urls[] = $parsed['scheme'] . '://' . $parsed['host'];
+				}
+			}
+		}
+	}
+
+	if ( 'dns-prefetch' === $relation_type ) {
+			$urls = [];
+	}
+
+	if ( 'preconnect' === $relation_type ) {
+			$urls = $unique_urls;
+	}
+
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'dns_prefetch_to_preconnect', 0, 2 );

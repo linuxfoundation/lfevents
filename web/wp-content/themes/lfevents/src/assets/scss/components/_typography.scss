@@ -5,12 +5,29 @@
 //
 // Headings
 // --------------------------------------------------
-.header-xxlarge { @extend h1; }
-.header-xlarge {  @extend h2; }
-.header-large {   @extend h3; }
-.header-medium {  @extend h4; }
-.header-small {   @extend h5; }
-.header-tiny {    @extend h6; }
+.header-xxlarge {
+  @extend h1;
+}
+
+.header-xlarge {
+  @extend h2;
+}
+
+.header-large {
+  @extend h3;
+}
+
+.header-medium {
+  @extend h4;
+}
+
+.header-small {
+  @extend h5;
+}
+
+.header-tiny {
+  @extend h6;
+}
 
 h6,
 .header-tiny {
@@ -84,28 +101,36 @@ button {
 //
 // Typography helper classes
 // --------------------------------------------------
-.font-default { font-family: $body-font-family; }
-.font-mono { font-family: $font-family-monospace; }
+// .font-default { font-family: $body-font-family; }
+// .font-mono { font-family: $font-family-monospace; }
 
-.nowrap,
-.no-wrap {
-  white-space: nowrap;
+// .nowrap,
+// .no-wrap {
+//   white-space: nowrap;
+// }
+
+// .text-xxlarge { font-size: rem-calc(34); }
+// .text-xlarge { font-size: rem-calc(25); }
+// .text-large { font-size: rem-calc(20); }
+.text-medium {
+  font-size: 1rem;
 }
 
-.text-xxlarge { font-size: rem-calc(34); }
-.text-xlarge { font-size: rem-calc(25); }
-.text-large { font-size: rem-calc(20); }
-.text-medium { font-size: 1rem; }
-.text-small { font-size: rem-calc(13); }
-.text-tiny { font-size: rem-calc(10); }
+.text-small {
+  font-size: rem-calc(13);
+}
+
+.text-tiny {
+  font-size: rem-calc(10);
+}
 
 .text-weight-normal {
   font-weight: $global-weight-normal;
 }
 
-.text-weight-bold {
-  font-weight: $global-weight-bold;
-}
+// .text-weight-bold {
+//   font-weight: $global-weight-bold;
+// }
 
 .has-large-font-size {
   font-size: rem-calc(19) !important;
@@ -135,6 +160,7 @@ blockquote {
     opacity: 0.75;
   }
 }
+
 .wp-block-pullquote blockquote cite {
   font-size: 1rem;
   margin-top: 1rem;
@@ -144,7 +170,7 @@ blockquote {
 //
 // Lists
 // --------------------------------------------------
-dd + dt {
+dd+dt {
   margin-top: $defnlist-term-margin-bottom;
 }
 
@@ -185,7 +211,7 @@ dd + dt {
 body .photonic-stream {
 
   // fix misalignment caused by img containers' 2px padding
-  > div {
+  >div {
     width: calc(100% + 4px) !important;
     margin-right: -2px;
     margin-left: -2px;
@@ -193,8 +219,7 @@ body .photonic-stream {
 
   // "show more" button
   .photonic-more-button {
-    @include button(
-      $expand: true,
+    @include button($expand: true,
       $background: $white-smoke,
       $background-hover: darken($white-smoke, 10%),
       $color: darken($primary-color, 10%),
@@ -205,7 +230,7 @@ body .photonic-stream {
     font-size: 1rem;
     font-weight: $global-weight-bold;
     border-radius: 0 0 rem-calc(8) rem-calc(8);
-    box-shadow: 0 0.25em 0 0 rgba(0,0,0,0.1);
+    box-shadow: 0 0.25em 0 0 rgba(0, 0, 0, 0.1);
 
     &:hover {
       background: darken($white-smoke, 10%);
