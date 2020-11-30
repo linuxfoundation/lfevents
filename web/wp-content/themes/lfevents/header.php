@@ -16,7 +16,7 @@
 
 	<?php
 		// Add scripts required for non-event pages.
-	if ( not_an_event() ) {
+	if ( is_lfeventsci() && not_an_event() ) {
 		?>
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
