@@ -1,6 +1,6 @@
 // Non-Event Header.
 
-.site-container {
+.main-header {
 
   // This is needed as Foundation is badly made.
   h1,
@@ -113,7 +113,7 @@
   align-items: center;
 
   .lf-logo {
-    height: 100%;
+    height: fit-content;
   }
 
   .logo-link {
