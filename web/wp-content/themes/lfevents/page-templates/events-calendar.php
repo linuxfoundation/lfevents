@@ -10,19 +10,22 @@ get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
 
+<!--
 <div class="main-container">
 	<div class="main-grid">
-		<main class="main-content-full-width">
+		<main class="main-content-full-width"> -->
+
+		<div class="">
+	<div class="">
+		<main class="" style="width: 100%">
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="entry-content">
-						<header id="event-calendar-header" class="about-page-header">
-							<h1 class="entry-title"><?php the_title(); ?></h1>
-						</header>
-						<div class="">
+					<div class="entry-content event-calendar-header">
+						<?php get_template_part( 'template-parts/about-page-header' ); ?>
+						<div>
 							<div class="event-calendar-container">
 								<?php the_content(); ?>
 							</div>

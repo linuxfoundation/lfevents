@@ -13,18 +13,21 @@ wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', ar
 get_template_part( 'template-parts/global-header' );
 ?>
 
+<!--
 <div class="main-container">
 	<div class="main-grid">
-		<main class="main-content-full-width">
+		<main class="main-content-full-width"> -->
+
+		<div class="">
+	<div class="">
+		<main class="" style="width: 100%">
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="entry-content">
-						<header class="about-page-header">
-							<h1 class="entry-title"><?php the_title(); ?></h1>
-						</header>
+					<?php get_template_part( 'template-parts/about-page-header' ); ?>
 						<?php the_content(); ?>
 
 						<div class="wp-block-group has-off-white-background-color has-background"><div class="wp-block-group__inner-container">
