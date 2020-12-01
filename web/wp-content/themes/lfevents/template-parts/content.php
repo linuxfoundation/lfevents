@@ -22,7 +22,7 @@
 	</header>
 	<div class="">
 		<?php the_content(); ?>
-		<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
+	<?php get_template_part( 'template-parts/edit-link' ); ?>
 	</div>
 	<footer>
 		<?php

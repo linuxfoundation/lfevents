@@ -46,17 +46,13 @@
   border-bottom: 1px solid $lf-grey-200;
   background-color: $white;
   color: $text-color;
-  padding: 1rem;
+  padding: 0 1rem;
   font-size: 13px;
   display: flex;
   align-items: center;
   height: $lf-header-height;
 
   @include breakpoint(medium) {
-    padding: 1rem 28px;
-  }
-
-  @include breakpoint(large) {
     padding: 0 28px;
   }
 

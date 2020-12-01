@@ -13,29 +13,19 @@
 get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
-
-<!--
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content-full-width"> -->
-
-		<div class="">
-	<div class="">
-		<main class="" style="width: 100%">
-			<?php
-			while ( have_posts() ) :
-				the_post();
-				?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="entry-content">
-		<?php get_template_part( 'template-parts/about-page-header' ); ?>
-		<?php the_content(); ?>
-		<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
-	</div>
-</article>
-			<?php endwhile; ?>
-		</main>
-	</div>
-</div>
+<main role="main" id="main" class="main-container-body">
+	<?php get_template_part( 'template-parts/non-event-hero' ); ?>
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		?>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="entry-content container wrap">
+			<?php the_content(); ?>
+			<?php get_template_part( 'template-parts/edit-link' ); ?>
+		</div>
+	</article>
+	<?php endwhile; ?>
+</main>
 <?php
 get_footer();

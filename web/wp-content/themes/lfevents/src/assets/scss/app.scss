@@ -30,7 +30,7 @@
 @include foundation-media-object;
 // @include foundation-off-canvas;
 // @include foundation-orbit;
-// @include foundation-pagination;
+@include foundation-pagination;
 // @include foundation-progress-bar;
 // @include foundation-slider;
 @include foundation-sticky;
@@ -80,6 +80,7 @@
 @import "modules/global-header";
 @import "modules/gravityforms";
 @import "modules/home-hero";
+@import "modules/non-event-hero";
 @import "modules/post-navigation";
 @import "modules/sticky";
 

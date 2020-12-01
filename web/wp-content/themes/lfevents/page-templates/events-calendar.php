@@ -10,21 +10,14 @@ get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
 
-<!--
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content-full-width"> -->
-
-		<div class="">
-	<div class="">
-		<main class="" style="width: 100%">
+<main role="main" id="main" class="main-container-body">
+		<?php get_template_part( 'template-parts/non-event-hero' ); ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="entry-content event-calendar-header">
-						<?php get_template_part( 'template-parts/about-page-header' ); ?>
+					<div class="entry-content event-calendar-header wrap container">
 						<div>
 							<div class="event-calendar-container">
 								<?php the_content(); ?>
@@ -34,7 +27,5 @@ get_template_part( 'template-parts/global-header' );
 				</article>
 			<?php endwhile; ?>
 		</main>
-	</div>
-</div>
 <?php
 get_footer();

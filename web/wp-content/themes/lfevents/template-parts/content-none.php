@@ -17,25 +17,16 @@
 <div class="page-content">
 	<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
 
-	<p>
-		<?php
-			/* translators: %1$s: new post url */
-			printf(
-				__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'foundationpress' ), //phpcs:ignore
-				admin_url( 'post-new.php' ) //phpcs:ignore
-			);
-		?>
-	</p>
+		<?php if ( is_search() ) : ?>
 
-	<?php elseif ( is_search() ) : ?>
-
-	<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'foundationpress' ); //phpcs:ignore ?></p>
-		<?php get_search_form(); ?>
+	<p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
+			<?php get_search_form(); ?>
 
 	<?php else : ?>
 
-	<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'foundationpress' ); //phpcs:ignore ?></p>
+	<p>It seems we can't find what you're looking for. Perhaps searching can help.</p>
 		<?php get_search_form(); ?>
 
+	<?php endif; ?>
 	<?php endif; ?>
 </div>

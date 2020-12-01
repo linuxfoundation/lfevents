@@ -18,7 +18,7 @@ get_template_part( 'template-parts/global-header' );
 				the_post();
 				?>
 				<div class="cell">
-					<header class="about-page-header">
+					<header class="non-event-hero">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 					</header>
 				</div>

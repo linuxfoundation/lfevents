@@ -1,4 +1,4 @@
-<?php //phpcs:ignore
+<?php // phpcs:ignoreFile // due to wrong CPT naming.
 /**
  * The template for displaying a specific about page with the slug "news"
  *
@@ -9,28 +9,25 @@
 get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
-<!--
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content-full-width"> -->
-
-<div class="">
-	<div class="">
-		<main class="" style="width: 100%">
+<main role="main" id="main" class="main-container-body">
+<?php get_template_part( 'template-parts/non-event-hero' ); ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				?>
+				// check the content is there before showing this section.
+				if ( strlen( get_the_content() ) > 0 ) :
+					?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="entry-content">
-					<?php get_template_part( 'template-parts/about-page-header' ); ?>
-						<?php the_content(); ?>
-						<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
+					<div class="container wrap">
+					<?php the_content(); ?>
+					<?php get_template_part( 'template-parts/edit-link' ); ?>
 					</div>
 				</article>
-				<?php // comments_template(); ?>
-			<?php endwhile; ?>
-			<div class="entry-content">
+					<?php
+				endif;
+		endwhile;
+			?>
+			<section class="entry-content">
 					<div class="grid-x grid-margin-x medium-up-2 large-up-3">
 						<?php
 						query_posts( 'posts_per_page=60' );
@@ -38,20 +35,20 @@ get_template_part( 'template-parts/global-header' );
 						if ( have_posts() ) :
 							while ( have_posts() ) :
 								the_post();
-								echo '<div class="cell callout large-margin-bottom">';
-								echo '<h4 class="no-margin line-height-tight"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>'; //phpcs:ignore
-								echo '<p class="text-small">' . get_the_date() . '</p>'; //phpcs:ignore
-								echo '<p class="">' . get_the_excerpt() . '</p>'; //phpcs:ignore
-								echo '</div>';
+								?>
+								<article class="cell callout large-margin-bottom">
+								<h4 class="no-margin line-height-tight"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+								<p class="text-small small-margin-top"><?php echo the_date(); ?></p>
+								<p class=""><?php the_excerpt(); ?></p>
+								</article>
+								<?php
 						endwhile;
 						endif;
 						// Reset Query.
 						wp_reset_query();
 						?>
 					</div>
-				</div>
+				</section>
 		</main>
-	</div>
-</div>
 <?php
 get_footer();
