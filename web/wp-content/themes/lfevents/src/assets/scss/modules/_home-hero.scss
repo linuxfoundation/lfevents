@@ -42,6 +42,12 @@
     }
   }
 
+  h1,
+  p {
+    font-family: 'Heebo',
+    #{$body-font-family};
+  }
+
   .figure-container img {
     height: 100%;
   }
