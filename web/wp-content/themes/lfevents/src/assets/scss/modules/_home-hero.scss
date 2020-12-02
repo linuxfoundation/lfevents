@@ -18,25 +18,26 @@
   h1 {
     margin: 0;
     font-weight: 900;
-    font-size: 2.25rem;
     line-height: 1.15;
     max-width: 675px;
+    font-size: 2.25rem;
 
     @include breakpoint(medium) {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
 
     @include breakpoint(large) {
-      font-size: 3.75rem;
+      font-size: 3rem;
     }
   }
 
   p {
     margin: 0;
     margin-top: 25px;
-    max-width: 675px;
+    width: 85%;
+    max-width: 500px;
 
-    @include breakpoint(large) {
+    @include breakpoint(medium) {
       font-size: 1.125rem;
     }
   }
@@ -46,7 +47,8 @@
   }
 
   .figure-container:after {
-    background: linear-gradient(99.71deg, rgb(0, 153, 204) 6.58%, rgb(0, 51, 102) 94.38%);
+    // background: linear-gradient(99.71deg, rgb(0, 153, 204) 6.58%, rgb(0, 51, 102) 94.38%);
+    background-color: $lf-dark-blue;
     content: "";
     display: block;
     position: absolute;
@@ -60,7 +62,7 @@
     transition: opacity 0.25s ease-out;
 
     @include breakpoint(small down) {
-      opacity: 0.8;
+      opacity: 0.7;
     }
   }
 }
