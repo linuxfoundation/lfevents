@@ -70,6 +70,14 @@
     font-weight: 900;
     max-width: 600px;
 
+    &:first-child {
+      font-size: 2.5rem;
+
+      @include breakpoint(large) {
+        font-size: 3rem;
+      }
+    }
+
     &:nth-child(2) {
       margin-top: 3rem;
     }
