@@ -10,24 +10,19 @@ get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
 
-<div class="main-container">
+<main role="main" id="main" class="main-container-body">
+<?php get_template_part( 'template-parts/non-event-hero' ); ?>
+
 	<div class="grid-container">
 		<div class="grid-x grid-margin-x">
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
-				<div class="cell">
-					<header class="non-event-hero">
-						<h1 class="entry-title"><?php the_title(); ?></h1>
-					</header>
-				</div>
 				<div class="cell large-8 xlarge-margin-bottom">
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-						<div class="entry-content">
-							<div class="">
+						<div class="entry-content container wrap">
 								<?php the_content(); ?>
-							</div>
 						</div>
 					</article>
 				</div>
@@ -37,6 +32,6 @@ get_template_part( 'template-parts/global-header' );
 			</div>
 		</div>
 	</div>
-</div>
+</main>
 <?php
 get_footer();

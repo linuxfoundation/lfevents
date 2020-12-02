@@ -63,8 +63,17 @@
       opacity: 0.8;
     }
   }
+}
 
+.lfasiallcci .home-hero {
+  h4 {
+    font-weight: 900;
+    max-width: 600px;
 
+    &:nth-child(2) {
+      margin-top: 3rem;
+    }
+  }
 }
 
 // .home-hero {

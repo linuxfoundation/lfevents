@@ -164,6 +164,11 @@
     color: $white;
     background: #0082ad;
   }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
 }
 
 // Apply all widths.
