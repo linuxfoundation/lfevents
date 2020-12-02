@@ -68,13 +68,13 @@
 .lfasiallcci .home-hero {
   h4 {
     font-weight: 900;
-    max-width: 600px;
+    max-width: 650px;
 
     &:first-child {
-      font-size: 2.5rem;
+      font-size: 2rem;
 
       @include breakpoint(large) {
-        font-size: 3rem;
+        font-size: 2.3rem;
       }
     }
 
