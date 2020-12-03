@@ -8,7 +8,7 @@ body.menu-is-active {
 
 .site-container {
   position: relative;
-  // overflow: hidden; // breaks things?
+  overflow: hidden; // removing this breaks events under 360px.
   max-width: rem-calc(1800);
   margin-right: auto;
   margin-left: auto;
