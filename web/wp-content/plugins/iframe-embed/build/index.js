@@ -390,12 +390,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('lf/google-sheet-embed', {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Google Sheet Embed'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Embed a Google Sheet'),
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('lf/iframe-embed', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('iFrame Embed'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Embed an iFrame (includes settings for Google Sheets)'),
   category: 'common',
   icon: 'welcome-view-site',
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('google'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('docs'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('iframe'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('spreadsheet'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('embed'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('sheet')],
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('iframe'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('google'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('docs'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('spreadsheet'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('embed'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('sheet')],
   supports: {
     align: ['wide', 'full'],
     html: false
@@ -426,6 +426,9 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('lf/
     },
     className: {
       type: 'string'
+    },
+    iframeType: {
+      type: 'string'
     }
   },
   edit: function edit(props) {
@@ -442,7 +445,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('lf/
       padding: '1rem'
     };
     var block = attributes.iframeSrc ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wp-lf-google-sheet-embed align".concat(align, " ").concat(className, " ")
+      className: "wp-lf-iframe-embed align".concat(align, " ").concat(className, " ")
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "iframe-overlay"
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("iframe", {
@@ -453,7 +456,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('lf/
       frameBorder: "0"
     })) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Placeholder"], {
       icon: 'welcome-view-site',
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Enter the Google Sheet URL to embed in the sidebar. The sheet should be set to viewable by public (view only).')
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Enter the iFrame URL you want to embed in the sidebar. ')
     });
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_inspector__WEBPACK_IMPORTED_MODULE_6__["default"], props), block);
   },
@@ -471,7 +474,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('lf/
       padding: '1rem'
     };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wp-lf-google-sheet-embed align".concat(align, " ").concat(className, " loading-bg")
+      className: "wp-lf-iframe-embed align".concat(align, " ").concat(className, " loading-bg")
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("iframe", {
       title: "iframe",
       id: "iframe",
@@ -562,6 +565,22 @@ var Inspector = /*#__PURE__*/function (_Component) {
             iframeSrc: value
           });
         }
+      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Choose Type of iFrame'),
+        help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Select this to set defaults for the type of iFrame you choose'),
+        value: attributes.iframeType,
+        options: [{
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Default'),
+          value: 'default'
+        }, {
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Google Sheet'),
+          value: 'google-sheet'
+        }],
+        onChange: (function (value) {
+          return setAttributes({
+            iframeType: value
+          });
+        }, changeSettings(value))
       }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('iFrame Width'),
         value: attributes.iframeWidth,

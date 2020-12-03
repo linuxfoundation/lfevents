@@ -53,6 +53,9 @@ registerBlockType(
 		className: {
 			type: 'string',
 		},
+		iframeType: {
+			type: 'string',
+		},
 	},
 	edit: function( props ) {
 
@@ -81,7 +84,7 @@ registerBlockType(
 					frameBorder="0"></iframe></div> :
 			<Placeholder
 				icon={ 'welcome-view-site' }
-				label={ __( 'Enter the iFrame URL you want to embed in the sidebar. <br> If' ) }
+				label={ __( 'Enter the iFrame URL you want to embed in the sidebar. ' ) }
 			/>;
 
 		return (

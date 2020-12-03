@@ -3,7 +3,7 @@
  * Plugin Name:     iFrame Embed
  * Description:     Embed an iFrame responsively (including settings for Google Sheets)
  * Version:         0.1.0
- * Author:          The WordPress Contributors
+ * Author:          James Hunt
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:     iframe-embed

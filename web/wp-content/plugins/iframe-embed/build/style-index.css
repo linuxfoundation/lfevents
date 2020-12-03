@@ -5,7 +5,7 @@
   background-size: auto; }
 
 @media (max-width: 1023px) {
-  .wp-lf-google-sheet-embed iframe {
+  .wp-lf-iframe-embed iframe {
     width: 100% !important;
     max-width: 100% !important; } }
 
