@@ -1,8 +1,8 @@
 {
-	"name": "google-sheet-embed",
+	"name": "iframe-embed",
 	"version": "0.1.0",
-	"description": "Embed a Google Sheet",
-	"author": "The WordPress Contributors",
+	"description": "Embed an iFrame",
+	"author": "James Hunt",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {

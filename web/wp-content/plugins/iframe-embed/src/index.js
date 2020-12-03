@@ -9,15 +9,15 @@ import './editor.scss';
 import Inspector from './inspector';
 
 registerBlockType(
-	'lf/google-sheet-embed', {
-	title: __( 'Google Sheet Embed' ),
-	description: __( 'Embed a Google Sheet' ),
+	'lf/iframe-embed', {
+	title: __( 'iFrame Embed' ),
+	description: __( 'Embed an iFrame (includes settings for Google Sheets)' ),
 	category: 'common',
 	icon: 'welcome-view-site',
 	keywords: [
+		__( 'iframe' ),
 		__( 'google' ),
 		__( 'docs' ),
-		__( 'iframe' ),
 		__( 'spreadsheet' ),
 		__( 'embed' ),
 		__( 'sheet' ),
@@ -71,7 +71,7 @@ registerBlockType(
 
 
 		const block = attributes.iframeSrc ?
-			<div className={ `wp-lf-google-sheet-embed align${ align } ${ className } ` }>
+			<div className={ `wp-lf-iframe-embed align${ align } ${ className } ` }>
 				<div className="iframe-overlay"></div>
 				<iframe
 					title="iframe"
@@ -81,7 +81,7 @@ registerBlockType(
 					frameBorder="0"></iframe></div> :
 			<Placeholder
 				icon={ 'welcome-view-site' }
-				label={ __( 'Enter the Google Sheet URL to embed in the sidebar. The sheet should be set to viewable by public (view only).' ) }
+				label={ __( 'Enter the iFrame URL you want to embed in the sidebar. <br> If' ) }
 			/>;
 
 		return (
@@ -108,7 +108,7 @@ registerBlockType(
 
 		return (
 			<Fragment>
-				<div className={ `wp-lf-google-sheet-embed align${ align } ${ className } loading-bg` }>
+				<div className={ `wp-lf-iframe-embed align${ align } ${ className } loading-bg` }>
 					<iframe
 						title="iframe"
 						id="iframe"
