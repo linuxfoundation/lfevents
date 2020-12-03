@@ -8,8 +8,7 @@ import './editor.scss';
 
 import Inspector from './inspector';
 
-registerBlockType(
-	'lf/iframe-embed', {
+registerBlockType( 'lf/iframe-embed', {
 	title: __( 'iFrame Embed' ),
 	description: __( 'Embed an iFrame (includes settings for Google Sheets)' ),
 	category: 'common',
@@ -30,6 +29,13 @@ registerBlockType(
 		iframeSrc: {
 			type: 'string',
 		},
+		iframeType: {
+			type: 'string',
+			default: 'default',
+		},
+		transformedUrl: {
+			type: 'string',
+		},
 		iframeWidth: {
 			type: 'string',
 		},
@@ -42,9 +48,9 @@ registerBlockType(
 		borderColor: {
 			type: 'string',
 		},
-		borderWidth: {
-			type: 'number',
-			default: 0,
+		borderPresent: {
+			type: 'boolean',
+			default: false,
 		},
 		align: {
 			type: 'string',
@@ -53,39 +59,50 @@ registerBlockType(
 		className: {
 			type: 'string',
 		},
-		iframeType: {
-			type: 'string',
-		},
 	},
-	edit: function( props ) {
-
+	edit: function ( props ) {
 		const { attributes } = props;
 		const { align, className } = attributes;
 
 		const iframeStyle = {
 			width: attributes.iframeWidth || '100%',
-			height: attributes.iframeHeight || '500px',
-			maxWidth: attributes.iframeMaxWidth || '90%',
-			borderWidth: attributes.borderWidth || '0',
+			maxWidth: attributes.iframeMaxWidth || '100%',
+			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
-			borderStyle: 'solid',
-			padding: '1rem',
+			...( attributes.borderPresent && {
+				borderWidth: '1px',
+				borderStyle: 'solid',
+				padding: '1rem',
+			} ),
 		};
 
-
-		const block = attributes.iframeSrc ?
-			<div className={ `wp-lf-iframe-embed align${ align } ${ className } ` }>
+		const block = attributes.iframeSrc ? (
+			<div
+				className={ `wp-lf-iframe-embed align${ align } ${
+					className ? className : ''
+				} ` }
+			>
 				<div className="iframe-overlay"></div>
 				<iframe
 					title="iframe"
 					id="iframe"
-					src={ attributes.iframeSrc }
+					src={
+						attributes.transformedUrl
+							? attributes.transformedUrl
+							: attributes.iframeSrc
+					}
 					style={ iframeStyle }
-					frameBorder="0"></iframe></div> :
+					frameBorder="0"
+				></iframe>
+			</div>
+		) : (
 			<Placeholder
 				icon={ 'welcome-view-site' }
-				label={ __( 'Enter the iFrame URL you want to embed in the sidebar. ' ) }
-			/>;
+				label={ __(
+					'Enter the iFrame URL you want to embed in the sidebar. '
+				) }
+			/>
+		);
 
 		return (
 			<Fragment>
@@ -95,27 +112,37 @@ registerBlockType(
 		);
 	},
 
-	save: function( props ) {
+	save: function ( props ) {
 		const { attributes } = props;
 		const { align, className } = attributes;
 
-	const iframeStyle = {
+		const iframeStyle = {
 			width: attributes.iframeWidth || '100%',
-			height: attributes.iframeHeight || '500px',
-			maxWidth: attributes.iframeMaxWidth || '90%',
-			borderWidth: attributes.borderWidth || '0',
+			maxWidth: attributes.iframeMaxWidth + ' !important' || '100%',
+			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
-			borderStyle: 'solid',
-			padding: '1rem',
+			...( attributes.borderPresent && {
+				borderWidth: '1px',
+				borderStyle: 'solid',
+				padding: '1rem',
+			} ),
 		};
 
 		return (
 			<Fragment>
-				<div className={ `wp-lf-iframe-embed align${ align } ${ className } loading-bg` }>
+				<div
+					className={ `wp-lf-iframe-embed align${ align } ${
+						className ? className : ''
+					} loading-bg` }
+				>
 					<iframe
 						title="iframe"
 						id="iframe"
-						src={ attributes.iframeSrc }
+						src={
+							attributes.transformedUrl
+								? attributes.transformedUrl
+								: attributes.iframeSrc
+						}
 						style={ iframeStyle }
 						frameBorder="0"
 						scrolling="yes"
