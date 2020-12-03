@@ -61,6 +61,14 @@
   display: inline-block;
   font-size: 18px;
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  text-align: center;
+  max-width: 100%;
+
+  @media (max-width: 400px) {
+    .lfasiallcci & {
+      padding: 11px 20px;
+    }
+  }
 
   &:hover {
     color: $white;
