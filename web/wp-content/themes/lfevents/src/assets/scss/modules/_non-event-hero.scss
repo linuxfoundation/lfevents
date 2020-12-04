@@ -5,8 +5,9 @@
 
   @include breakpoint(medium) {
     margin-bottom: 2rem;
-    padding-top: 10.1rem;
-    padding-bottom: 10.1rem;
+    padding-top: 162px; // to make 400px as per CCR
+    padding-bottom: 162px; // to make 400px as per CCR
+
   }
 
 
