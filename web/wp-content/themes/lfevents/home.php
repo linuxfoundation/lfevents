@@ -12,7 +12,7 @@ get_template_part( 'template-parts/global-header' );
 <div class="main-container large-padding-bottom">
 
 	<?php
-	get_template_part( 'template-parts/home-banner' );
+	get_template_part( 'template-parts/home-hero' );
 	?>
 
 	<div class="grid-container">

@@ -46,17 +46,13 @@
   border-bottom: 1px solid $lf-grey-200;
   background-color: $white;
   color: $text-color;
-  padding: 1rem;
+  padding: 0 1rem;
   font-size: 13px;
   display: flex;
   align-items: center;
   height: $lf-header-height;
 
   @include breakpoint(medium) {
-    padding: 1rem 28px;
-  }
-
-  @include breakpoint(large) {
     padding: 0 28px;
   }
 
@@ -82,13 +78,13 @@
 
 // Overrides for WP Admin menu on desktop and mobile.
 .admin-bar {
-  .main-header {
-    top: 32px;
+  // .main-header {
+  //   top: 32px;
 
-    @media (max-width: 782px) {
-      top: 46px;
-    }
-  }
+  //   @media (max-width: 782px) {
+  //     top: 46px;
+  //   }
+  // }
 
   .header-menu-back {
     top: calc(32px + #{$lf-header-height});
@@ -167,6 +163,11 @@
   &:hover {
     color: $white;
     background: #0082ad;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
   }
 }
 

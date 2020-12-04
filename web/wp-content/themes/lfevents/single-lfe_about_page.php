@@ -13,19 +13,19 @@
 get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
-
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content-full-width">
-			<?php
-			while ( have_posts() ) :
-				the_post();
-				?>
-				<?php get_template_part( 'template-parts/content', 'about' ); ?>
-				<?php comments_template(); ?>
-			<?php endwhile; ?>
-		</main>
-	</div>
-</div>
+<main role="main" id="main" class="main-container-body">
+	<?php get_template_part( 'template-parts/non-event-hero' ); ?>
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		?>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="entry-content container wrap">
+			<?php the_content(); ?>
+			<?php get_template_part( 'template-parts/edit-link' ); ?>
+		</div>
+	</article>
+	<?php endwhile; ?>
+</main>
 <?php
 get_footer();

@@ -10,39 +10,24 @@ get_header();
 get_template_part( 'template-parts/global-header' );
 ?>
 
-<?php get_template_part( 'template-parts/featured-image' ); ?>
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content-full-width">
+<main role="main" id="main" class="main-container-body">
+<?php get_template_part( 'template-parts/non-event-hero' ); ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="entry-content">
-						<header class="about-page-header">
-							<h1 class="entry-title"><?php the_title(); ?></h1>
-							<?php
-							echo '<time class="updated" datetime="' . esc_html( get_the_time( 'c' ) ) . '">' . esc_html( get_the_date() ) . '</time>';
-							?>
-						</header>
-						<div class="">
-							<?php the_content(); ?>
-							<?php edit_post_link( __( '(Edit)', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
-						</div>
+					<div class="container wrap">
+						<?php the_content(); ?>
+						<?php get_template_part( 'template-parts/edit-link' ); ?>
 					</div>
 				</article>
-				<div class="entry-content large-padding-top large-padding-bottom">
-					<div class="">
+				<section class="container wrap large-padding-top large-padding-bottom">
+					<div>
 						<?php the_post_navigation(); ?>
-						<div class="large-padding-top">
-							<?php comments_template(); ?>
-						</div>
 					</div>
-				</div>
+				</section>
 			<?php endwhile; ?>
 		</main>
-	</div>
-</div>
 <?php
 get_footer();
