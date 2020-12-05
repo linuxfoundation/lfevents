@@ -932,18 +932,3 @@ function lfe_theme_unregister_tags() {
 	unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 }
 add_action( 'init', 'lfe_theme_unregister_tags' );
-
-
-/**
- * Restrict search to parent events.
- *
- *  @param object $query the query.
- */
-function lfe_theme_search_filter( $query ) {
-	if ( $query->is_search && ! is_admin() ) {
-			$query->set( 'post_type', array( lfe_get_post_types() ) );
-			$query->set( 'post_parent', 0 );
-	}
-	return $query;
-}
-add_filter( 'pre_get_posts', 'lfe_theme_search_filter' );
