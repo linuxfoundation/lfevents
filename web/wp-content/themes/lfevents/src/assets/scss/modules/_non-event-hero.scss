@@ -1,15 +1,14 @@
 .non-event-hero {
   margin-bottom: 2rem;
-  padding-top: 68px; // half of CCR value
-  padding-bottom: 68px; // thalf of CCR value
-  transition: padding .3s ease-in-out;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 
   @include breakpoint(medium) {
     margin-bottom: 2rem;
-    padding-top: 162px; // to make 400px as per CCR
-    padding-bottom: 162px; // to make 400px as per CCR
-
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
+
 
   &>* {
     margin-bottom: 0;
