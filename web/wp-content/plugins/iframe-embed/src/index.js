@@ -36,13 +36,10 @@ registerBlockType( 'lf/iframe-embed', {
 		transformedUrl: {
 			type: 'string',
 		},
-		iframeWidth: {
+		iframeMaxWidth: {
 			type: 'string',
 		},
 		iframeHeight: {
-			type: 'string',
-		},
-		iframeMaxWidth: {
 			type: 'string',
 		},
 		borderColor: {
@@ -65,18 +62,17 @@ registerBlockType( 'lf/iframe-embed', {
 		const { align, className } = attributes;
 
 		const iframeStyle = {
-			width: attributes.iframeWidth || '100%',
 			maxWidth: attributes.iframeMaxWidth || '100%',
 			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
 			...( attributes.borderPresent && {
 				borderWidth: '1px',
 				borderStyle: 'solid',
-				padding: '1rem',
+				padding: '1rem 0rem 1rem 1rem',
 			} ),
 		};
 
-		const block = attributes.iframeSrc ? (
+		const block = attributes.transformedUrl ? (
 			<div
 				className={ `wp-lf-iframe-embed align${ align } ${
 					className ? className : ''
@@ -86,11 +82,7 @@ registerBlockType( 'lf/iframe-embed', {
 				<iframe
 					title="iframe"
 					id="iframe"
-					src={
-						attributes.transformedUrl
-							? attributes.transformedUrl
-							: attributes.iframeSrc
-					}
+					src={ attributes.transformedUrl }
 					style={ iframeStyle }
 					frameBorder="0"
 				></iframe>
@@ -117,14 +109,13 @@ registerBlockType( 'lf/iframe-embed', {
 		const { align, className } = attributes;
 
 		const iframeStyle = {
-			width: attributes.iframeWidth || '100%',
 			maxWidth: attributes.iframeMaxWidth + ' !important' || '100%',
 			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
 			...( attributes.borderPresent && {
 				borderWidth: '1px',
 				borderStyle: 'solid',
-				padding: '1rem',
+				padding: '1rem 0rem 1rem 1rem',
 			} ),
 		};
 
@@ -138,11 +129,7 @@ registerBlockType( 'lf/iframe-embed', {
 					<iframe
 						title="iframe"
 						id="iframe"
-						src={
-							attributes.transformedUrl
-								? attributes.transformedUrl
-								: attributes.iframeSrc
-						}
+						src={ attributes.transformedUrl }
 						style={ iframeStyle }
 						frameBorder="0"
 						scrolling="yes"

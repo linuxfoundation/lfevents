@@ -4,13 +4,13 @@
   background-repeat: no-repeat;
   background-size: auto; }
 
-@media (max-width: 1023px) {
-  .wp-lf-iframe-embed iframe {
-    width: 100% !important;
-    max-width: 100% !important; } }
-
 .entry-content .wp-lf-iframe-embed iframe {
-  max-width: initial; }
+  max-width: initial;
+  overflow-y: scroll; }
+  @media (max-width: 1023px) {
+    .entry-content .wp-lf-iframe-embed iframe {
+      width: 100% !important;
+      max-width: 100% !important; } }
 
 
 /*# sourceMappingURL=style-index.css.map*/

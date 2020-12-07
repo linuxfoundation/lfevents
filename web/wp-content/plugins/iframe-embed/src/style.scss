@@ -5,14 +5,12 @@
     background-size: auto;
 }
 
-// override inline styles.
-@media (max-width: 1023px) {
-    .wp-lf-iframe-embed iframe {
+.entry-content .wp-lf-iframe-embed iframe {
+    max-width: initial;
+    overflow-y: scroll;
+
+    @media (max-width: 1023px) {
         width: 100% !important;
         max-width: 100% !important;
     }
-}
-
-.entry-content .wp-lf-iframe-embed iframe {
-    max-width: initial;
 }

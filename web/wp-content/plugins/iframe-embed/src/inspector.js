@@ -6,7 +6,11 @@ import {
 	ToggleControl,
 	SelectControl,
 } from '@wordpress/components';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	PanelColorSettings,
+	RichText,
+} from '@wordpress/block-editor';
 
 /**
  * Inspector controls
@@ -19,36 +23,70 @@ export default class Inspector extends Component {
 		function changeiFrame( type ) {
 			if ( 'default' == type ) {
 				setAttributes( {
-					iframeWidth: '100%',
 					iframeMaxWidth: '100%',
 					iframeHeight: '700px',
 					borderPresent: false,
-					transformedUrl: '',
 				} );
 			}
 			if ( 'google-sheet' == type ) {
 				setAttributes( {
-					iframeWidth: '100%',
 					iframeMaxWidth: '500px',
 					iframeHeight: '500px',
 					borderPresent: true,
 					borderColor: '#000000',
 				} );
-				parseUrl( iframeSrc );
 			}
 		}
 
-		function parseUrl( url ) {
-			let spreadsheetId = new RegExp(
-				'/spreadsheets/d/([a-zA-Z0-9-_]+)'
-			).exec( url )[ 1 ];
-			let displayUrl =
-				'https://docs.google.com/spreadsheets/d/' +
-				spreadsheetId +
-				'/htmlembed?widget=false&chrome=false&gridlines=false';
-			setAttributes( {
-				transformedUrl: displayUrl,
-			} );
+		function isValidWebUrl( url ) {
+			let regEx = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+			return regEx.test( url );
+		}
+
+		function processUrl( url ) {
+			if ( ! url ) {
+				setAttributes( {
+					transformedUrl: '',
+				} );
+				return
+			};
+			if ( ! isValidWebUrl( url ) ) return;
+
+			if ( transformedUrl ) {
+				setAttributes( {
+					transformedUrl: '',
+				} );
+			}
+
+			// setup the regex to check against.
+			let shareSheet = '/spreadsheets/d/([a-zA-Z0-9-_]+)';
+			let publishSheet = '/spreadsheets/d/e/([a-zA-Z0-9-_]+)';
+			let isShareSheet = new RegExp( shareSheet );
+			let isPublishSheet = new RegExp( publishSheet );
+
+			if ( url.match( isPublishSheet ) ) {
+				let publishId = isPublishSheet.exec( url )[ 1 ];
+				let publishUrl =
+					'https://docs.google.com/spreadsheets/d/e/' +
+					publishId +
+					'/pubhtml?widget=false&chrome=false&gridlines=false';
+				setAttributes( {
+					transformedUrl: publishUrl,
+				} );
+			} else if ( url.match( isShareSheet ) ) {
+				let shareId = isShareSheet.exec( url )[ 1 ];
+				let shareUrl =
+					'https://docs.google.com/spreadsheets/d/' +
+					shareId +
+					'/htmlembed?widget=false&chrome=false&gridlines=false';
+				setAttributes( {
+					transformedUrl: shareUrl,
+				} );
+			} else {
+				setAttributes( {
+					transformedUrl: url,
+				} );
+			}
 		}
 
 		return (
@@ -57,54 +95,51 @@ export default class Inspector extends Component {
 					<TextControl
 						label={ __( 'iFrame source URL' ) }
 						value={ iframeSrc }
+						placeholder={ __( 'https://your-embed.com' ) }
 						onChange={ ( value ) => {
 							setAttributes( { iframeSrc: value } ),
-								parseUrl( value );
+								processUrl( value );
 						} }
 					/>
-					{ iframeSrc && (
+					{ iframeSrc && ! isValidWebUrl( iframeSrc ) && (
+						<>
+							<RichText
+								value={ __(
+									"This doesn't look like a valid URL"
+								) }
+								className="url-warning"
+							/>
+						</>
+					) }
+					{ transformedUrl && (
 						<>
 							<SelectControl
-								label={ __( 'Choose Type of iFrame' ) }
+								label={ __( 'iFrame Preset Styles' ) }
 								help={ __(
-									'Select this to set defaults for the type of iFrame you choose'
+									'Pick a preset style for your iFrame'
 								) }
 								value={ attributes.iframeType }
 								options={ [
 									{
-										label: __( 'Default' ),
+										label: __( '100% width, no border' ),
 										value: 'default',
 									},
 									{
-										label: __( 'Google Sheet' ),
+										label: __(
+											'Max 500px with 1px border'
+										),
 										value: 'google-sheet',
 									},
 								] }
 								onChange={ ( value ) => {
 									setAttributes( { iframeType: value } ),
-										changeiFrame( value );
-								} }
-							/>
-							{ attributes.iframeType === 'google-sheet' && (
-								<TextControl
-									label={ __( 'Transformed URL' ) }
-									value={ transformedUrl }
-									help="We transform the Google Sheet URL to display it in the best way for users"
-									disabled
-								/>
-							) }
-							<TextControl
-								label={ __( 'iFrame Width' ) }
-								value={ attributes.iframeWidth || '100%' }
-								help="Width of the iFrame - 100% normally works"
-								onChange={ ( value ) => {
-									setAttributes( { iframeWidth: value } );
+									changeiFrame( value );
 								} }
 							/>
 							<TextControl
 								label={ __( 'iFrame Max Width' ) }
 								value={ attributes.iframeMaxWidth || '100%' }
-								help="Constrain the width of the iFrame - e.g. if you don't want it full width"
+								help="Constrain the width of the iFrame. Accepts px or % values."
 								onChange={ ( value ) => {
 									setAttributes( { iframeMaxWidth: value } );
 								} }
@@ -112,7 +147,7 @@ export default class Inspector extends Component {
 							<TextControl
 								label={ __( 'iFrame Height' ) }
 								value={ attributes.iframeHeight || '700px' }
-								help="Set the fixed height of the iFrame"
+								help="Set the fixed height of the iFrame. Only accepts px values."
 								onChange={ ( value ) => {
 									setAttributes( { iframeHeight: value } );
 								} }

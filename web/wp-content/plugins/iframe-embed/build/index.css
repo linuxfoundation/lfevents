@@ -15,5 +15,12 @@
      object-fit: cover;
   z-index: 99; }
 
+.url-warning {
+  background-color: orange;
+  margin-bottom: 1rem;
+  padding: 0.2rem;
+  margin-top: -1rem;
+  color: black; }
+
 
 /*# sourceMappingURL=index.css.map*/

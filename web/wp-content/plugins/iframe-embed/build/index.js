@@ -445,13 +445,10 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('lf/
     transformedUrl: {
       type: 'string'
     },
-    iframeWidth: {
+    iframeMaxWidth: {
       type: 'string'
     },
     iframeHeight: {
-      type: 'string'
-    },
-    iframeMaxWidth: {
       type: 'string'
     },
     borderColor: {
@@ -475,24 +472,23 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('lf/
         className = attributes.className;
 
     var iframeStyle = _objectSpread({
-      width: attributes.iframeWidth || '100%',
       maxWidth: attributes.iframeMaxWidth || '100%',
       height: attributes.iframeHeight || '700px',
       borderColor: attributes.borderColor || '#000000'
     }, attributes.borderPresent && {
       borderWidth: '1px',
       borderStyle: 'solid',
-      padding: '1rem'
+      padding: '1rem 0rem 1rem 1rem'
     });
 
-    var block = attributes.iframeSrc ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    var block = attributes.transformedUrl ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
       className: "wp-lf-iframe-embed align".concat(align, " ").concat(className ? className : '', " ")
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
       className: "iframe-overlay"
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("iframe", {
       title: "iframe",
       id: "iframe",
-      src: attributes.transformedUrl ? attributes.transformedUrl : attributes.iframeSrc,
+      src: attributes.transformedUrl,
       style: iframeStyle,
       frameBorder: "0"
     })) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Placeholder"], {
@@ -507,14 +503,13 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('lf/
         className = attributes.className;
 
     var iframeStyle = _objectSpread({
-      width: attributes.iframeWidth || '100%',
       maxWidth: attributes.iframeMaxWidth + ' !important' || false,
       height: attributes.iframeHeight || '700px',
       borderColor: attributes.borderColor || '#000000'
     }, attributes.borderPresent && {
       borderWidth: '1px',
       borderStyle: 'solid',
-      padding: '1rem'
+      padding: '1rem 0rem 1rem 1rem'
     });
 
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
@@ -522,7 +517,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('lf/
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("iframe", {
       title: "iframe",
       id: "iframe",
-      src: attributes.transformedUrl ? attributes.transformedUrl : attributes.iframeSrc,
+      src: attributes.transformedUrl,
       style: iframeStyle,
       frameBorder: "0",
       scrolling: "yes"
@@ -603,32 +598,67 @@ var Inspector = /*#__PURE__*/function (_Component) {
       function changeiFrame(type) {
         if ('default' == type) {
           setAttributes({
-            iframeWidth: '100%',
             iframeMaxWidth: '100%',
             iframeHeight: '700px',
-            borderPresent: false,
-            transformedUrl: ''
+            borderPresent: false
           });
         }
 
         if ('google-sheet' == type) {
           setAttributes({
-            iframeWidth: '100%',
             iframeMaxWidth: '500px',
             iframeHeight: '500px',
             borderPresent: true,
             borderColor: '#000000'
           });
-          parseUrl(iframeSrc);
         }
       }
 
-      function parseUrl(url) {
-        var spreadsheetId = new RegExp('/spreadsheets/d/([a-zA-Z0-9-_]+)').exec(url)[1];
-        var displayUrl = 'https://docs.google.com/spreadsheets/d/' + spreadsheetId + '/htmlembed?widget=false&chrome=false&gridlines=false';
-        setAttributes({
-          transformedUrl: displayUrl
-        });
+      function isValidWebUrl(url) {
+        var regEx = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+        return regEx.test(url);
+      }
+
+      function processUrl(url) {
+        if (!url) {
+          setAttributes({
+            transformedUrl: ''
+          });
+          return;
+        }
+
+        ;
+        if (!isValidWebUrl(url)) return;
+
+        if (transformedUrl) {
+          setAttributes({
+            transformedUrl: ''
+          });
+        } // setup the regex to check against.
+
+
+        var shareSheet = '/spreadsheets/d/([a-zA-Z0-9-_]+)';
+        var publishSheet = '/spreadsheets/d/e/([a-zA-Z0-9-_]+)';
+        var isShareSheet = new RegExp(shareSheet);
+        var isPublishSheet = new RegExp(publishSheet);
+
+        if (url.match(isPublishSheet)) {
+          var publishId = isPublishSheet.exec(url)[1];
+          var publishUrl = 'https://docs.google.com/spreadsheets/d/e/' + publishId + '/pubhtml?widget=false&chrome=false&gridlines=false';
+          setAttributes({
+            transformedUrl: publishUrl
+          });
+        } else if (url.match(isShareSheet)) {
+          var shareId = isShareSheet.exec(url)[1];
+          var shareUrl = 'https://docs.google.com/spreadsheets/d/' + shareId + '/htmlembed?widget=false&chrome=false&gridlines=false';
+          setAttributes({
+            transformedUrl: shareUrl
+          });
+        } else {
+          setAttributes({
+            transformedUrl: url
+          });
+        }
       }
 
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__["InspectorControls"], {
@@ -639,20 +669,24 @@ var Inspector = /*#__PURE__*/function (_Component) {
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('iFrame source URL'),
         value: iframeSrc,
+        placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('https://your-embed.com'),
         onChange: function onChange(value) {
           setAttributes({
             iframeSrc: value
-          }), parseUrl(value);
+          }), processUrl(value);
         }
-      }), iframeSrc && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Choose Type of iFrame'),
-        help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Select this to set defaults for the type of iFrame you choose'),
+      }), iframeSrc && !isValidWebUrl(iframeSrc) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__["RichText"], {
+        value: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])("This doesn't look like a valid URL"),
+        className: "url-warning"
+      })), transformedUrl && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["SelectControl"], {
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('iFrame Preset Styles'),
+        help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Pick a preset style for your iFrame'),
         value: attributes.iframeType,
         options: [{
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Default'),
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('100% width, no border'),
           value: 'default'
         }, {
-          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Google Sheet'),
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Max 500px with 1px border'),
           value: 'google-sheet'
         }],
         onChange: function onChange(value) {
@@ -660,24 +694,10 @@ var Inspector = /*#__PURE__*/function (_Component) {
             iframeType: value
           }), changeiFrame(value);
         }
-      }), attributes.iframeType === 'google-sheet' && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Transformed URL'),
-        value: transformedUrl,
-        help: "We transform the Google Sheet URL to display it in the best way for users",
-        disabled: true
-      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('iFrame Width'),
-        value: attributes.iframeWidth || '100%',
-        help: "Width of the iFrame - 100% normally works",
-        onChange: function onChange(value) {
-          setAttributes({
-            iframeWidth: value
-          });
-        }
       }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('iFrame Max Width'),
         value: attributes.iframeMaxWidth || '100%',
-        help: "Constrain the width of the iFrame - e.g. if you don't want it full width",
+        help: "Constrain the width of the iFrame. Accepts px or % values.",
         onChange: function onChange(value) {
           setAttributes({
             iframeMaxWidth: value
@@ -686,7 +706,7 @@ var Inspector = /*#__PURE__*/function (_Component) {
       }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["TextControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('iFrame Height'),
         value: attributes.iframeHeight || '700px',
-        help: "Set the fixed height of the iFrame",
+        help: "Set the fixed height of the iFrame. Only accepts px values.",
         onChange: function onChange(value) {
           setAttributes({
             iframeHeight: value
