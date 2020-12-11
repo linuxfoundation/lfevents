@@ -44,10 +44,14 @@ h6,
 }
 
 .is-style-one-line-section-heading {
-  margin: -20px 0;
   text-transform: uppercase;
   letter-spacing: .2rem;
   word-spacing: .2rem;
+  margin-bottom: 0;
+
+  @media (min-width: 768px) {
+    margin: -20px 0;
+  }
 }
 
 
