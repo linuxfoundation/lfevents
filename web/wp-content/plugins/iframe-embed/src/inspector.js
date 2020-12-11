@@ -36,6 +36,13 @@ export default class Inspector extends Component {
 					borderColor: '#000000',
 				} );
 			}
+			if ( 'newsletter' == type ) {
+				setAttributes( {
+					iframeMaxWidth: '640px',
+					iframeHeight: '700px',
+					borderPresent: false,
+				} );
+			}
 		}
 
 		function isValidWebUrl( url ) {
@@ -129,6 +136,12 @@ export default class Inspector extends Component {
 											'Max 500px with 1px border'
 										),
 										value: 'google-sheet',
+									},
+									{
+										label: __(
+											'Newsletter'
+										),
+										value: 'newsletter',
 									},
 								] }
 								onChange={ ( value ) => {

@@ -61,6 +61,8 @@ registerBlockType( 'lf/iframe-embed', {
 		const { attributes } = props;
 		const { align, className } = attributes;
 
+		console.log(attributes.iframeMaxWidth)
+
 		const iframeStyle = {
 			maxWidth: attributes.iframeMaxWidth || '100%',
 			height: attributes.iframeHeight || '700px',
@@ -109,7 +111,7 @@ registerBlockType( 'lf/iframe-embed', {
 		const { align, className } = attributes;
 
 		const iframeStyle = {
-			maxWidth: attributes.iframeMaxWidth + ' !important' || '100%',
+			maxWidth: attributes.iframeMaxWidth || '100%',
 			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
 			...( attributes.borderPresent && {

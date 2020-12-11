@@ -470,6 +470,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('lf/
     var attributes = props.attributes;
     var align = attributes.align,
         className = attributes.className;
+    console.log(attributes.iframeMaxWidth);
 
     var iframeStyle = _objectSpread({
       maxWidth: attributes.iframeMaxWidth || '100%',
@@ -503,7 +504,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('lf/
         className = attributes.className;
 
     var iframeStyle = _objectSpread({
-      maxWidth: attributes.iframeMaxWidth + ' !important' || false,
+      maxWidth: attributes.iframeMaxWidth || '100%',
       height: attributes.iframeHeight || '700px',
       borderColor: attributes.borderColor || '#000000'
     }, attributes.borderPresent && {
@@ -612,6 +613,14 @@ var Inspector = /*#__PURE__*/function (_Component) {
             borderColor: '#000000'
           });
         }
+
+        if ('newsletter' == type) {
+          setAttributes({
+            iframeMaxWidth: '640px',
+            iframeHeight: '700px',
+            borderPresent: false
+          });
+        }
       }
 
       function isValidWebUrl(url) {
@@ -688,6 +697,9 @@ var Inspector = /*#__PURE__*/function (_Component) {
         }, {
           label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Max 500px with 1px border'),
           value: 'google-sheet'
+        }, {
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Newsletter'),
+          value: 'newsletter'
         }],
         onChange: function onChange(value) {
           setAttributes({

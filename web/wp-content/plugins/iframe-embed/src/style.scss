@@ -8,6 +8,7 @@
 .entry-content .wp-lf-iframe-embed iframe {
     max-width: initial;
     overflow-y: scroll;
+    width: 100%;
 
     @media (max-width: 1023px) {
         width: 100% !important;

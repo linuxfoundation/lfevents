@@ -6,7 +6,8 @@
 
 .entry-content .wp-lf-iframe-embed iframe {
   max-width: initial;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  width: 100%; }
   @media (max-width: 1023px) {
     .entry-content .wp-lf-iframe-embed iframe {
       width: 100% !important;
