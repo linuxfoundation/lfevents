@@ -932,3 +932,6 @@ function lfe_theme_unregister_tags() {
 	unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 }
 add_action( 'init', 'lfe_theme_unregister_tags' );
+
+// Disable core block patterns.
+remove_theme_support( 'core-block-patterns' );
