@@ -277,177 +277,202 @@ abbr[title] {
 @import "blocks/icon-list";
 
 // TODO: why aren't other blocks here?
+// /** === Content Width === */
+// .wp-block {
+//   max-width: map-deep-get($breakpoints, xlarge);
+// }
 
-/** === Content Width === */
+// Fixing alignment for blocks in editor.
 .wp-block {
-  max-width: map-deep-get($breakpoints, xlarge);
+  max-width: 100%;
 }
 
-/** === Post Title === */
-.editor-post-title__block .editor-post-title__input {
-  @extend h1;
+.block-editor-writing-flow {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/** === Button === */
-.wp-block-button,
-.wp-block-lf-button-with-expiry {
-
-  // add general foundation button styling to button in editor
-  .wp-block-button__link {
-    @extend .button;
-    text-transform: uppercase;
-    padding: .585rem 1.5rem;
-    font-size: 1.075rem;
-    border-radius: .5rem;
-    line-height: 1.5 !important;
-
-    &.button-small {
-      padding: .38rem 1.25rem;
-      font-size: .85rem;
-    }
-
-    &.button-medium {
-      padding: .38rem 1.25rem;
-      font-size: 1rem;
-    }
-
-    &.button-large {
-      padding: .585rem 1.5rem;
-      font-size: 1.075rem;
-    }
-
-    &.button-xlarge {
-      padding: .8rem 1.75rem;
-      font-size: 1.15rem;
-    }
-  }
-
-  // add styling for default rounded buttons
-  &.is-style-default .wp-block-button__link {
-    border-radius: rem-calc(8);
-  }
-
-  // add special styling for squared buttons
-  &.is-style-squared .wp-block-button__link {
-    border-radius: 0 !important;
-  }
-
-  // add outline styles
-  &.is-style-outline .wp-block-button__link {
-    @extend .hollow;
-  }
-
-  // set transparent background to block for outline button
-  &.is-style-outline,
-  &.is-style-outline:hover,
-  &.is-style-outline:focus,
-  &.is-style-outline:active {
-    background: transparent;
-  }
-
-  @each $name,
-  $size in $button-sizes {
-    &.#{$name} .wp-block-button__link {
-      font-size: $size;
-    }
-  }
-
-  &.xlarge .wp-block-button__link {
-    font-size: 2rem;
-  }
-
-  &.expanded,
-  &.expanded .wp-block-button__link {
-    width: 100%;
-  }
+.block-editor-block-list__layout .wp-block:not(.wp-block-button) {
+  margin-left: unset;
+  margin-right: unset;
 }
 
-.wp-block-lf-buttons-with-expiry .wp-block.block-editor-block-list__block[data-type="lf/button-with-expiry"] {
-  display: inline-block;
-  width: auto;
-}
-
-.wp-block-lf-buttons-with-expiry {
-  .block-list-appender {
-    display: inline-block;
-    margin: 0;
-  }
-
-  .block-editor-button-block-appender {
-    background: none;
-    outline: none;
-  }
-}
-
-
-.wp-block-lf-button-with-expiry {
-  &[data-align="center"] .block-editor-block-list__layout {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  &[data-align="right"] .block-editor-block-list__layout {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .block-editor-block-list__layout>div:last-child {
-    display: inline-block;
-  }
-
-  margin-right: 8px;
-  margin-bottom: 8px;
-  color: white;
-}
-
-
-/** === File === */
-.wp-block-file__button {
-  @include button();
-}
-
-/** === Pullquote === */
-.wp-block-paragraph.has-background {
-  padding: rem-calc(20px 30px);
-}
-
-/** === Latest Posts grid view === */
-.wp-block-latest-posts.is-grid {
-  list-style: none;
-}
-
-// Fix for Stackable weird behavior with tables.
-figure.wp-block-table tr div.components-dropdown {
-  display: none;
-}
-
-// copied from editor-style css.
-body#tinymce {
-  height: auto; // Fix editor style bug
-  max-width: $grid-row-width; // Give the editor a max-width
-  padding: rem-calc(20) !important;
-}
-
-// Add padding to make more easily selectable.
-.wp-block-group,
-.wp-block-columns {
-  padding: 1em;
-}
-
-// add guide to group to make more visible in editor.
-.wp-block-group {
-  border: 1px solid #F3F4F5;
+// Gutenberg style to break out of page container.
+.alignfull {
   position: relative;
-
-  &:after {
-    content: 'GROUP BLOCK';
-    color: #D8D8D8;
-    position: absolute;
-    left: 1px;
-    top: 0;
-    line-height: 1;
-    transform: translateY(-100%);
-  }
+  right: 50%;
+  left: 50%;
+  margin-right: -50vw;
+  margin-left: -50vw;
+  width: 100vw;
 }
+
+// /** === Post Title === */
+// .editor-post-title__block .editor-post-title__input {
+//   @extend h1;
+// }
+
+// /** === Button === */
+// .wp-block-button,
+// .wp-block-lf-button-with-expiry {
+
+//   // add general foundation button styling to button in editor
+//   .wp-block-button__link {
+//     @extend .button;
+//     text-transform: uppercase;
+//     padding: .585rem 1.5rem;
+//     font-size: 1.075rem;
+//     border-radius: .5rem;
+//     line-height: 1.5 !important;
+
+//     &.button-small {
+//       padding: .38rem 1.25rem;
+//       font-size: .85rem;
+//     }
+
+//     &.button-medium {
+//       padding: .38rem 1.25rem;
+//       font-size: 1rem;
+//     }
+
+//     &.button-large {
+//       padding: .585rem 1.5rem;
+//       font-size: 1.075rem;
+//     }
+
+//     &.button-xlarge {
+//       padding: .8rem 1.75rem;
+//       font-size: 1.15rem;
+//     }
+//   }
+
+//   // add styling for default rounded buttons
+//   &.is-style-default .wp-block-button__link {
+//     border-radius: rem-calc(8);
+//   }
+
+//   // add special styling for squared buttons
+//   &.is-style-squared .wp-block-button__link {
+//     border-radius: 0 !important;
+//   }
+
+//   // add outline styles
+//   &.is-style-outline .wp-block-button__link {
+//     @extend .hollow;
+//   }
+
+//   // set transparent background to block for outline button
+//   &.is-style-outline,
+//   &.is-style-outline:hover,
+//   &.is-style-outline:focus,
+//   &.is-style-outline:active {
+//     background: transparent;
+//   }
+
+//   @each $name,
+//   $size in $button-sizes {
+//     &.#{$name} .wp-block-button__link {
+//       font-size: $size;
+//     }
+//   }
+
+//   &.xlarge .wp-block-button__link {
+//     font-size: 2rem;
+//   }
+
+//   &.expanded,
+//   &.expanded .wp-block-button__link {
+//     width: 100%;
+//   }
+// }
+
+// .wp-block-lf-buttons-with-expiry .wp-block.block-editor-block-list__block[data-type="lf/button-with-expiry"] {
+//   display: inline-block;
+//   width: auto;
+// }
+
+// .wp-block-lf-buttons-with-expiry {
+//   .block-list-appender {
+//     display: inline-block;
+//     margin: 0;
+//   }
+
+//   .block-editor-button-block-appender {
+//     background: none;
+//     outline: none;
+//   }
+// }
+
+
+// .wp-block-lf-button-with-expiry {
+//   &[data-align="center"] .block-editor-block-list__layout {
+//     display: flex;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//   }
+
+//   &[data-align="right"] .block-editor-block-list__layout {
+//     display: flex;
+//     justify-content: flex-end;
+//   }
+
+//   .block-editor-block-list__layout>div:last-child {
+//     display: inline-block;
+//   }
+
+//   margin-right: 8px;
+//   margin-bottom: 8px;
+//   color: white;
+// }
+
+
+// /** === File === */
+// .wp-block-file__button {
+//   @include button();
+// }
+
+// /** === Pullquote === */
+// .wp-block-paragraph.has-background {
+//   padding: rem-calc(20px 30px);
+// }
+
+// /** === Latest Posts grid view === */
+// .wp-block-latest-posts.is-grid {
+//   list-style: none;
+// }
+
+// // Fix for Stackable weird behavior with tables.
+// figure.wp-block-table tr div.components-dropdown {
+//   display: none;
+// }
+
+// // copied from editor-style css.
+// body#tinymce {
+//   height: auto; // Fix editor style bug
+//   max-width: $grid-row-width; // Give the editor a max-width
+//   padding: rem-calc(20) !important;
+// }
+
+// // Add padding to make more easily selectable.
+// .wp-block-group,
+// .wp-block-columns {
+//   padding: 1em;
+// }
+
+// // add guide to group to make more visible in editor.
+// .wp-block-group {
+//   border: 1px solid #F3F4F5;
+//   position: relative;
+
+//   &:after {
+//     content: 'GROUP BLOCK';
+//     color: #D8D8D8;
+//     position: absolute;
+//     left: 1px;
+//     top: 0;
+//     line-height: 1;
+//     transform: translateY(-100%);
+//   }
+// }
