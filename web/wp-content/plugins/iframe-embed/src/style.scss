@@ -10,7 +10,7 @@
     overflow-y: scroll;
     width: 100%;
 
-    @media (max-width: 1023px) {
+    @media (max-width: 767px) {
         width: 100% !important;
         max-width: 100% !important;
     }
