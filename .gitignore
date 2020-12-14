@@ -143,3 +143,5 @@ web/wp-content/plugins/icon-list/node_modules
 web/wp-content/plugins/image-box/node_modules
 !web/wp-content/plugins/track-grid
 web/wp-content/plugins/track-grid/node_modules
+!web/wp-content/plugins/iframe-embed
+web/wp-content/plugins/iframe-embed/node_modules
