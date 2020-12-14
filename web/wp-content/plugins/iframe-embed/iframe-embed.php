@@ -15,6 +15,7 @@
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
  *
+ * @throws Error Message.
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 function lf_iframe_embed_block_init() {
@@ -27,7 +28,7 @@ function lf_iframe_embed_block_init() {
 		);
 	}
 	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
+	$script_asset = require $script_asset_path;
 	wp_register_script(
 		'lf-iframe-embed-block-editor',
 		plugins_url( $index_js, __FILE__ ),
@@ -52,10 +53,13 @@ function lf_iframe_embed_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
-	register_block_type( 'lf/iframe-embed', array(
-		'editor_script' => 'lf-iframe-embed-block-editor',
-		'editor_style'  => 'lf-iframe-embed-block-editor',
-		'style'         => 'lf-iframe-embed-block',
-	) );
+	register_block_type(
+		'lf/iframe-embed',
+		array(
+			'editor_script' => 'lf-iframe-embed-block-editor',
+			'editor_style'  => 'lf-iframe-embed-block-editor',
+			'style'         => 'lf-iframe-embed-block',
+		)
+	);
 }
 add_action( 'init', 'lf_iframe_embed_block_init' );

@@ -49,6 +49,10 @@ registerBlockType( 'lf/iframe-embed', {
 			type: 'boolean',
 			default: false,
 		},
+		rightPadding: {
+			type: 'boolean',
+			default: false,
+		},
 		align: {
 			type: 'string',
 			default: 'wide',
@@ -57,11 +61,9 @@ registerBlockType( 'lf/iframe-embed', {
 			type: 'string',
 		},
 	},
-	edit: function ( props ) {
+	edit: ( props ) => {
 		const { attributes } = props;
 		const { align, className } = attributes;
-
-		console.log(attributes.iframeMaxWidth)
 
 		const iframeStyle = {
 			maxWidth: attributes.iframeMaxWidth || '100%',
@@ -70,7 +72,13 @@ registerBlockType( 'lf/iframe-embed', {
 			...( attributes.borderPresent && {
 				borderWidth: '1px',
 				borderStyle: 'solid',
-				padding: '1rem 0rem 1rem 1rem',
+				paddingTop: '1rem',
+				paddingLeft: '1rem',
+				paddingBottom: '1rem',
+				paddingRight: '1rem',
+			} ),
+			...( attributes.rightPadding && {
+				paddingRight: '0rem',
 			} ),
 		};
 
@@ -106,7 +114,7 @@ registerBlockType( 'lf/iframe-embed', {
 		);
 	},
 
-	save: function ( props ) {
+	save: ( props ) => {
 		const { attributes } = props;
 		const { align, className } = attributes;
 
@@ -117,7 +125,13 @@ registerBlockType( 'lf/iframe-embed', {
 			...( attributes.borderPresent && {
 				borderWidth: '1px',
 				borderStyle: 'solid',
-				padding: '1rem 0rem 1rem 1rem',
+				paddingTop: '1rem',
+				paddingLeft: '1rem',
+				paddingBottom: '1rem',
+				paddingRight: '1rem',
+			} ),
+			...( attributes.rightPadding && {
+				paddingRight: '0rem',
 			} ),
 		};
 
