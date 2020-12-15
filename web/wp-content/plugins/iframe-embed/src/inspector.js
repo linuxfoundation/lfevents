@@ -54,7 +54,7 @@ export default class Inspector extends Component {
 		}
 
 		function isValidWebUrl( url ) {
-			if ( ! url ) return false;
+			if ( ! url ) return;
 			const regEx = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
 			return regEx.test( url );
 		}
@@ -106,7 +106,7 @@ export default class Inspector extends Component {
 		}
 
 		return (
-			<InspectorControls key="inspector">
+			<InspectorControls key="lf-iframe-embed">
 				<PanelBody title={ __( 'iFrame Settings' ) } initialOpen="true">
 					<TextControl
 						label={ __( 'iFrame source URL' ) }

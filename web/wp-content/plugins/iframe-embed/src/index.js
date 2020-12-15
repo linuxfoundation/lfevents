@@ -63,7 +63,7 @@ registerBlockType( 'lf/iframe-embed', {
 	},
 	edit: ( props ) => {
 		const { attributes } = props;
-		const { align, className } = attributes;
+		const { align, className, transformedUrl } = attributes;
 
 		const iframeStyle = {
 			maxWidth: attributes.iframeMaxWidth || '100%',
@@ -82,21 +82,21 @@ registerBlockType( 'lf/iframe-embed', {
 			} ),
 		};
 
-		const block = attributes.transformedUrl ? (
-			<div
+		const blockContent = transformedUrl ? (
+			<article
 				className={ `wp-lf-iframe-embed align${ align } ${
 					className ? className : ''
 				} ` }
 			>
-				<div className="iframe-overlay"></div>
+				<section className="iframe-overlay"></section>
 				<iframe
 					title="iframe"
 					id="iframe"
-					src={ attributes.transformedUrl }
+					src={ transformedUrl }
 					style={ iframeStyle }
 					frameBorder="0"
 				></iframe>
-			</div>
+			</article>
 		) : (
 			<Placeholder
 				icon={ 'welcome-view-site' }
@@ -109,7 +109,7 @@ registerBlockType( 'lf/iframe-embed', {
 		return (
 			<Fragment>
 				<Inspector { ...props } />
-				{ block }
+				{ blockContent }
 			</Fragment>
 		);
 	},
