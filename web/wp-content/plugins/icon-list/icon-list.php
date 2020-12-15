@@ -14,6 +14,8 @@
 /**
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
+ *
+ * @throws Error This.
  */
 function lf_icon_list_block_init() {
 	$dir = dirname( __FILE__ );
@@ -55,7 +57,7 @@ function lf_icon_list_block_init() {
 		array(
 			'editor_script' => 'lf-icon-list-block-editor',
 			'editor_style'  => 'lf-icon-list-block-editor',
-			// 'style'         => 'lf-icon-list-block',
+			'style'         => 'lf-icon-list-block',
 		)
 	);
 }
