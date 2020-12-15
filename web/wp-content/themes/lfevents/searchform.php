@@ -8,15 +8,20 @@
 
 ?>
 
-<form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); //phpcs:ignore ?>">
-	<div class="input-group">
-		<input type="text" class="input-group-field" value="" name="s" id="s" aria-label="Search" placeholder="
-		<?php
-		esc_attr_e( 'Search', 'foundationpress' );
-		?>
-		">
-		<div class="input-group-button">
-			<input type="submit" id="searchsubmit" value="<?php esc_attr_e( 'Search', 'foundationpress' ); ?>" class="button">
-		</div>
-	</div>
-</form>
+<form role="search" method="get" class="error-search-form"
+			action="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<div>
+				<label>
+					<span class="search-text">Search the site</span><br/>
+
+				<input type="search" class=""
+						placeholder="Enter search term"
+						value="<?php echo get_search_query(); ?>" name="s"
+						title="Search for" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+				</label>
+			</div>
+			<div>
+				<input id="searchsubmit" type="submit" class="button"
+					value="Search" />
+			</div>
+		</form>

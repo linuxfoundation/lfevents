@@ -6,3 +6,77 @@
   border-radius: 3px;
   border: none;
 }
+
+.wp-block-buttons {
+  .wp-block-button {
+    transition: all .3s ease-in-out;
+    position: relative;
+
+    .wp-block-button__link {
+      padding: .585rem 1.5rem;
+      font-size: 1.075rem;
+      text-transform: uppercase;
+      line-height: 1.5 !important;
+      box-shadow: none;
+    }
+
+    &:active {
+      transition: all .3s ease-in-out;
+      top: 1px;
+    }
+  }
+}
+
+// Homepage call-to-action buttons
+.homepage--call-to-action {
+
+  a {
+    display: inline-block;
+    margin: 0.85em 1em;
+    font-size: rem-calc(12);
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:first-child {
+      @include button();
+      font-size: rem-calc(12);
+      border-radius: rem-calc(8);
+      margin: 0;
+    }
+  }
+}
+
+.calendar-buttons {
+  &:first-child {
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+}
+
+.lf-button {
+  background-color: $lf-primary-400;
+  color: $white;
+  padding: 11px 50px;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 18px;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  text-align: center;
+  max-width: 100%;
+
+  @media (max-width: 400px) {
+    .lfasiallcci & {
+      padding: 11px 20px;
+    }
+  }
+
+  &:hover {
+    color: $white;
+    background: #0082ad;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}

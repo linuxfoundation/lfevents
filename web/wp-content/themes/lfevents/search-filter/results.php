@@ -176,40 +176,7 @@ if ( $query->have_posts() ) {
 		<?php
 	}
 } else {
-	echo '<div class="cell medium-6 large-4 callout large-margin-bottom">No Results Found</div>';
+	get_template_part( 'template-parts/no-events-message' );
 }
 echo '</div>';
 ?>
-
-<script>
-// this controls the appearence and behavior of the link to navigate between upcoming and past events.
-$( document ).ready( function() {
-
-	<?php
-	if ( is_lfeventsci() ) {
-		echo 'var viewPastEventsText = \'View Past Events\';';
-		echo 'var viewUpcomingEventsText = \'View Upcoming Events\';';
-	} else {
-		echo 'var viewPastEventsText = \'查看往期活动 View Past Events\';';
-		echo 'var viewUpcomingEventsText = \'查看即将举办的活动 View Upcoming Events\';';
-	}
-	?>
-
-	if ( $( '.switch-archive-view' ).length === 0 ) {
-		$( '#event-calendar-header' ).append( '<a class="button switch-archive-view top" href="#"></a>' );
-		$( '.search-filter-results' ).append( '<hr><div class="clearfix"><a class="button switch-archive-view bottom" href="#"></a></div>' );
-	}
-	var currentUrl = $( location ).attr( 'href' )
-	if ( -1 == currentUrl.indexOf( 'calendar/archive' ) ) {
-		//we are on the event-calendar page.
-		newUrl = currentUrl.replace( 'calendar', 'calendar/archive' );
-		$( '.switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
-		$( '.switch-archive-view' ).html( viewPastEventsText );
-	} else {
-		//we are on the event-calendar/archive page.
-		newUrl = currentUrl.replace( 'calendar/archive', 'calendar' );
-		$( '.switch-archive-view' ).attr( "href", newUrl.split("?")[0] );
-		$( '.switch-archive-view' ).html( viewUpcomingEventsText );
-	}
-});
-</script>

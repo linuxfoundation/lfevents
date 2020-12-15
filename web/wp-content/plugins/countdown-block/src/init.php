@@ -106,7 +106,11 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 			' . $selected_format
 			. '</div>';
 	} else {
-		return '<div class="callout" style="text-align:' . $message_align . '">' . $expiry_message . '</div>';
+		if ( isset( $attributes['expiryMessage'] ) ) {
+			return '<div class="callout" style="text-align:' . $message_align . '">' . $expiry_message . '</div>';
+		} else {
+			return '';
+		}
 	}
 }
 

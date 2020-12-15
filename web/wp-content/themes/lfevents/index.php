@@ -13,27 +13,37 @@
  * @since FoundationPress 1.0.0
  */
 
-get_header(); ?>
+get_header();
+get_template_part( 'template-parts/global-header' );
+?>
 
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content">
-		<?php if ( have_posts() ) : ?>
-
-			<?php /* Start the Loop */ ?>
+<main role="main" id="main" class="main-container-body">
+	<?php get_template_part( 'template-parts/non-event-hero' ); ?>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="container wrap">
+		<?php
+		if ( have_posts() ) :
+			;
+			?>
+			<div class="grid-x grid-margin-x medium-up-2 large-up-3">
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
-				<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+<article class="cell callout large-margin-bottom">
+								<h4 class="no-margin line-height-tight"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+								<p class="text-small small-margin-top"><?php echo the_date(); ?></p>
+								<p class=""><?php the_excerpt(); ?></p>
+								</article>
 			<?php endwhile; ?>
+</div>
+			<?php
+			else :
+				get_template_part( 'template-parts/content', 'none' );
+			endif;
+			?>
+		</div>
 
-			<?php else : ?>
-				<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-			<?php endif; // End have_posts() check. ?>
-
-			<?php /* Display navigation to next/previous pages when applicable */ ?>
 			<?php
 			if ( function_exists( 'foundationpress_pagination' ) ) :
 				foundationpress_pagination();
@@ -44,11 +54,6 @@ get_header(); ?>
 					<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
 				</nav>
 			<?php endif; ?>
-
 		</main>
-		<?php get_sidebar(); ?>
-
-	</div>
-</div>
 <?php
 get_footer();

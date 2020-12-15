@@ -1,0 +1,269 @@
+// Track Grid Block
+
+.wp-block-lf-track-grid {
+  margin-bottom: 2rem;
+
+  .track-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 0;
+
+    // to help with flickering.
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+
+    >li {
+      margin-bottom: 1rem;
+      // default mobile alignment for all track columns.
+      width: 100%;
+
+      @media (min-width:1024px) {
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      // default mobile alignment for all track columns.
+      .track-box {
+        width: 100%;
+        min-height: calc(var(--track-height) / 2);
+      }
+    }
+
+    &.columns-1 {
+      .track-box {
+        min-height: calc(var(--track-height) / 2);
+      }
+    }
+
+    @media (min-width: 768px) {
+      &.columns-2 {
+        >li {
+          width: calc(50% - 1rem);
+          max-width: 280px;
+          margin-left: 1rem;
+          margin-right: 1em;
+        }
+      }
+    }
+
+    &.columns-3 {
+
+      @media (min-width: 660px) {
+        >li {
+          width: calc(50% - 1rem);
+          max-width: 280px;
+          margin-left: 1rem;
+          margin-right: 1em;
+        }
+      }
+
+      @media (min-width: 900px) {
+        >li {
+          width: calc(33.3% - 2rem);
+          margin-left: 1rem;
+          margin-right: 1em;
+        }
+      }
+    }
+
+    &.columns-4 {
+
+      @media (min-width: 660px) {
+        >li {
+          width: calc(50% - 1rem);
+          max-width: 280px;
+          margin-left: 1rem;
+          margin-right: 1em;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        >li {
+          width: calc(25% - 2rem);
+          margin-left: 1rem;
+          margin-right: 1em;
+          max-width: 280px;
+        }
+      }
+    }
+  }
+
+  .box-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 5;
+  }
+
+  .track-box {
+    position: relative;
+    border-radius: 12px;
+
+    @media (min-width: 768px) {
+      min-height: calc(var(--track-height) / 2);
+    }
+
+    @media (min-width: 1024px) {
+      min-height: var(--track-height);
+      width: 280px;
+    }
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem 1rem 1rem;
+  }
+
+  .track-style {
+    border: 1px solid lightgray;
+    color: var(--track-text-color);
+    // background.
+    background: linear-gradient(90deg, var(--track-color1) 0%, var(--track-color2) 100%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    // to help with flickering.
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+
+    a,
+    h4,
+    p {
+      color: var(--track-text-color);
+      text-decoration: none;
+    }
+
+    h3,
+    h4 {
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    &.is-style-event-gradient-color {
+      background: linear-gradient(90deg, var(--event-color-1) 0%, var(--event-color-2) 100%);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  }
+
+  .track-cta {
+    margin-top: auto;
+
+    &.is-style-track-double-angle-right {
+      letter-spacing: -1px;
+      font-weight: 600;
+    }
+
+    &.button {
+      margin-top: auto !important;
+      min-width: 60%;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &.transparent-outline {
+      background-color: transparent;
+      border: 1px solid #ecedee;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+
+  .track-keynote {
+    position: relative;
+    text-align: center;
+    border-radius: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+    padding: 2rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0.45rem 0.45rem 0.35rem 0.45rem;
+
+      h4 {
+        margin-bottom: 0.2rem;
+      }
+
+      .track-cta {
+        margin-top: 0;
+        margin-bottom: 0.4rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .track-wrapper.columns-3+.track-keynote {
+    max-width: calc(900px - 2rem);
+  }
+
+  .track-wrapper.columns-4+.track-keynote {
+    max-width: calc(1000px - 2rem);
+  }
+
+}
+
+// Not applied in editor due to not .in-editor CSS.
+.wp-block-lf-track-grid:not(.in-editor) {
+
+  .track-wrapper {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &.columns-3 {
+      max-width: 900px;
+    }
+
+    &.columns-4 {
+      max-width: 1000px;
+    }
+  }
+
+  .track-box,
+  .track-keynote {
+    &:hover {
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #FFFFFF;
+        opacity: 0.1;
+      }
+
+      .button {
+        background-color: rgba(#FFFFFF, 0.2);
+      }
+
+      .is-style-track-double-angle-right {
+        transform: scale(1.1);
+      }
+    }
+
+    &:active {
+      top: 1px;
+    }
+  }
+}

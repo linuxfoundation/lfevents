@@ -29,15 +29,20 @@ if ( ! $splash_page ) {
 	$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
 	$menu_color_3     = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
 	$menu_text_color  = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
+
 	$background_style = 'background-color: ' . $menu_color . ';';
+
 	$event_has_passed = get_post_meta( $parent_id, 'lfes_event_has_passed', true );
+
 	if ( $menu_color_2 ) {
 		$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
 	}
 	$text_style = 'color: ' . $menu_text_color . ';';
 
 	$overlay_strength = get_post_meta( $parent_id, 'lfes_overlay_strength', true );
+
 	$overlay_style = '';
+
 	if ( $overlay_strength || '0' === $overlay_strength ) {
 		$overlay_strength = (int) $overlay_strength * 0.8 * 0.01;
 		$overlay_style = 'opacity: ' . $overlay_strength . ';';
@@ -102,23 +107,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 
 	<?php
 } else {
-
-	if ( is_lfeventsci() ) {
-		$home_img = 'logo_lfevents_white.svg';
-	} else {
-		$home_img = 'logo_lfasiallc_white.svg';
-	}
-	?>
-
-<div data-sticky-container>
-	<header class="main-header sticky" data-sticky data-sticky-on="large"
-		data-options="marginTop:0;">
-		<a class="home-link"
-			href="<?php echo esc_url( home_url( '/' ) ); ?>"><img loading="eager"
-				src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( $home_img ); //phpcs:ignore ?>"></a>
-	</header>
-</div>
-	<?php
+	get_template_part( 'template-parts/event-splash-header' );
 }
 ?>
 

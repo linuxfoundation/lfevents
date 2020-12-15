@@ -1,6 +1,5 @@
 @charset 'utf-8';
 
-
 @import 'settings';
 @import 'foundation';
 @import 'motion-ui';
@@ -8,7 +7,6 @@
 @include foundation-global-styles;
 //@include foundation-grid;
 //@include foundation-flex-grid;
-
 @include foundation-xy-grid-classes;
 @include foundation-typography;
 @include foundation-button;
@@ -32,7 +30,7 @@
 @include foundation-media-object;
 // @include foundation-off-canvas;
 // @include foundation-orbit;
-// @include foundation-pagination;
+@include foundation-pagination;
 // @include foundation-progress-bar;
 // @include foundation-slider;
 @include foundation-sticky;
@@ -47,59 +45,55 @@
 @include foundation-visibility-classes;
 // @include foundation-float-classes;
 @include foundation-flex-classes;
-
 // @include foundation-prototype-classes;
-
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
-/*
-  My custom styles:
-  Add your scss files below to structure your project styles
-*/
-
-// Global
+// Global.
 @import "global/accessibility";
 @import "global/wp-admin";
 @import "global/wp-overrides";
 @import "global/gutenberg";
 @import "global/custom-color-palette";
 
-// Modules
-@import "modules/countdown";
-@import "modules/box-model";
-@import "modules/navigation";
-@import "modules/event-calendar";
-@import "modules/event-menu";
-@import "modules/content";
-@import "modules/footer";
-@import "modules/gravityforms";
-@import "modules/home-hero";
-@import "modules/multi-part-page";
-@import "modules/pricing-grid";
-@import "modules/speakers";
-@import "modules/sponsors-logos";
-@import "modules/text-over-img";
-@import "modules/typography";
-@import "modules/tables";
-@import "modules/sticky";
-@import "modules/button-with-expiry";
-@import "modules/button";
-@import "modules/cookie-banner";
-@import "modules/spacer";
-
-// Components
+// Components.
+// Smallest elements.
+@import "components/box-model";
 @import "components/buttons";
 @import "components/cards";
-@import "components/featured-image";
-@import "components/dividers";
-@import "components/links";
-@import "components/countdown";
-@import "components/newsletter-form";
-@import "components/group-and-quotes";
-@import "components/separator";
 @import "components/columns";
+@import "components/featured-image";
+@import "components/group-and-quotes";
+@import "components/links";
+@import "components/separator";
+@import "components/spacer";
+@import "components/tables";
+@import "components/typography";
 
-@import "modules/track-grid";
-@import "modules/icon-list";
-@import "modules/image-box";
+// Modules.
+// Made up of components/needing their own styling.
+@import "modules/content";
+@import "modules/cookie-banner";
+@import "modules/event-calendar";
+@import "modules/event-header";
+@import "modules/global-footer";
+@import "modules/global-header";
+@import "modules/gravityforms";
+@import "modules/home-hero";
+@import "modules/non-event-hero";
+@import "modules/post-navigation";
+@import "modules/sticky";
+
+// Blocks
+// Imported blocks as plugins.
+@import "blocks/button-with-expiry";
+@import "blocks/countdown";
+@import "blocks/icon-list";
+@import "blocks/image-box";
+@import "blocks/multi-part-page"; // tab container.
+@import "blocks/newsletter-form";
+@import "blocks/pricing-grid";
+@import "blocks/speakers";
+@import "blocks/sponsors";
+@import "blocks/text-over-img";
+@import "blocks/track-grid";
