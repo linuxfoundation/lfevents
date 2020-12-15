@@ -68,6 +68,7 @@ registerBlockType( 'lf/custom-iframe', {
 		const { align, className, transformedUrl } = attributes;
 
 		const iframeStyle = {
+			width: '100%',
 			maxWidth: attributes.iframeMaxWidth || '100%',
 			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
@@ -121,6 +122,7 @@ registerBlockType( 'lf/custom-iframe', {
 		const { align, className } = attributes;
 
 		const iframeStyle = {
+			width: '100%',
 			maxWidth: attributes.iframeMaxWidth || '100%',
 			height: attributes.iframeHeight || '700px',
 			borderColor: attributes.borderColor || '#000000',
