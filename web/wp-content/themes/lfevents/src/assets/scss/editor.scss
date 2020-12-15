@@ -9,7 +9,7 @@
 // put imported modules and components after _base
 @import 'settings';
 @import 'foundation';
-@import "modules/typography";
+@import "components/typography";
 @include foundation-button;
 @include foundation-table;
 
@@ -190,11 +190,6 @@ dl {
   padding-inline-start: 0;
 }
 
-// // List items
-// li {
-//   font-size: inherit;
-// }
-
 // Unordered lists
 ul {
   margin-#{$global-left}: $list-side-margin;
@@ -271,15 +266,17 @@ abbr[title] {
 }
 
 // these need to be after base styles for specificity.
-@import "modules/tables";
-@import "modules/sponsors-logos";
+@import "components/tables";
 @import "components/group-and-quotes";
 @import "components/separator";
 @import "components/columns";
+@import "components/spacer";
 
-@import "modules/spacer";
-@import "modules/track-grid";
-@import "modules/icon-list";
+@import "blocks/sponsors";
+@import "blocks/track-grid";
+@import "blocks/icon-list";
+
+// TODO: why aren't other blocks here?
 
 /** === Content Width === */
 .wp-block {

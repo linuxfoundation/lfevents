@@ -28,10 +28,6 @@ if ( ! function_exists( 'foundationpress_start_cleanup' ) ) :
 	}
 	add_action( 'after_setup_theme', 'foundationpress_start_cleanup' );
 endif;
-/**
- * Clean up head.+
- * ----------------------------------------------------------------------------
- */
 
 if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 

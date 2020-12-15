@@ -1,0 +1,635 @@
+// Non-Event Header.
+
+.main-header {
+
+  // This is needed as Foundation is badly made.
+  h1,
+  .header-xxlarge,
+  .h1,
+  h2,
+  .header-xlarge,
+  .h2,
+  h3,
+  .header-large,
+  .h3,
+  h4,
+  .header-medium,
+  .gform_wrapper .gform_title,
+  .h4,
+  h5,
+  .header-small,
+  .h5,
+  h6,
+  .header-tiny,
+  .h6 {
+    font-family: 'Heebo',
+    #{$body-font-family};
+  }
+
+  font-family: 'Heebo',
+  #{$body-font-family};
+}
+
+.main-header {
+  @include clearfix;
+  position: sticky;
+
+  @media (max-height: 500px) {
+    position: relative;
+  }
+
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 20;
+  border-bottom: 1px solid $lf-grey-200;
+  background-color: $white;
+  color: $text-color;
+  padding: 0 1rem;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  height: $lf-header-height;
+
+  @include breakpoint(medium) {
+    padding: 0 28px;
+  }
+
+  // setup all links.
+  a {
+    color: $header-link-color;
+    transition: color 0.25s ease-out;
+
+    &:hover {
+      color: $lf-primary-400;
+    }
+
+  }
+
+  // setup all menus
+  ul,
+  li {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Overrides for WP Admin menu on desktop and mobile.
+.admin-bar {
+  // .main-header {
+  //   top: 32px;
+
+  //   @media (max-width: 782px) {
+  //     top: 46px;
+  //   }
+  // }
+
+  .header-menu-back {
+    top: calc(32px + #{$lf-header-height});
+
+    @media (max-width: 782px) {
+      top: calc(46px + #{$lf-header-height});
+    }
+  }
+
+  .main-menu {
+    top: calc(32px + #{$lf-header-height});
+
+    @media (max-width: 782px) {
+      top: calc(46px + #{$lf-header-height});
+    }
+  }
+}
+
+// Logo + Events shown all widths.
+.header-left-wrapper {
+  display: flex;
+  align-items: center;
+
+  .lf-logo {
+    height: fit-content;
+  }
+
+  .logo-link {
+    min-width: 109px;
+  }
+
+  .home-link {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+
+    &:hover {
+      a {
+        color: $lf-primary-400;
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      color: $lf-grey-700;
+      padding-left: 20px;
+      flex-shrink: 0;
+
+      &::before {
+        content: "";
+        height: 40px;
+        width: 1px;
+        margin-right: 14px;
+        background-color: $lf-primary-700;
+      }
+    }
+  }
+}
+
+// Apply all widths.
+.lfx-menu .is-signup-link {
+  background: $lf-light-blue;
+  color: $white;
+  padding: 5px 20px;
+  border-radius: 40px;
+  border-color: #ebebeb;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: center;
+  // animation.
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  &:hover {
+    color: $white;
+    background: #0082ad;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}
+
+// Apply all widths.
+.main-menu {
+
+  // menu is open.
+  li.menu-item-has-children.is-open {
+    >a {
+      color: $lf-primary-400;
+
+      &::after {
+        border-top-color: $lf-primary-400;
+      }
+    }
+  }
+
+  >ul li {
+    white-space: nowrap;
+    position: relative;
+
+    &.menu-item-has-children {
+      >a {
+        // so a child does not appear clickable.
+        cursor: default;
+        position: relative;
+
+        &:hover {
+          color: $lf-primary-400;
+        }
+
+        &::after {
+          // Arrow after link
+          width: 8px;
+          height: 8px;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid $lf-grey-400;
+          left: calc(100% - 1em);
+
+          position: absolute;
+          display: block;
+          top: 50%;
+          transform: translateY(-50%);
+          content: "";
+        }
+
+        &:hover::after {
+          // change arrow colour
+          border-top-color: $lf-primary-400;
+        }
+
+      }
+    }
+
+    &.current-menu-item>a,
+    &.current-lfe_about_page-ancestor>a {
+      color: $lf-primary-400
+    }
+
+    &.external-link>a::after {
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%237a7a7a' d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z'/%3E%3C/svg%3E");
+      margin-left: 0.2em; // connects to word.
+      padding-left: 0.8em;
+      background-size: 0.7em 0.8em;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    &.external-link:hover>a::after {
+      // primary color - blue.
+      // https://codepen.io/sosuke/pen/Pjoqqp
+      filter: brightness(0) saturate(100%) invert(45%) sepia(92%) saturate(2343%) hue-rotate(164deg) brightness(91%) contrast(101%);
+    }
+  }
+}
+
+// initially hide the only-authenticated parts in LFX SSO.
+.is-auth0.only-authenticated {
+  display: none;
+}
+
+// Style avatar in LFX SSO
+.is-auth0-avatar.authenticated {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #ebebeb;
+}
+
+// only show on mobile.
+@include breakpoint(medium down) {
+  .mobile-menu-wrapper {
+
+    // Apply at is-active state.
+    &.is-active {
+      .header-menu-back {
+        position: fixed;
+        visibility: visible;
+        opacity: .5;
+        transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .main-menu {
+        transition: 0.1s;
+        transform: translateX(0);
+        overflow: auto;
+        padding-bottom: $lf-header-height*2;
+      }
+    }
+  }
+
+  // underlay underlay.
+  .header-menu-back {
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    background: $black;
+    position: fixed;
+    top: $lf-header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .main-menu {
+    z-index: 999;
+    position: fixed;
+    top: $lf-header-height;
+    right: 0;
+    width: 360px;
+    max-width: 80%;
+    height: 100%;
+    background-color: $white;
+    padding: 12px 24px 12px 24px;
+    transition: none;
+    transform: translateX(100%);
+    font-size: 14px;
+
+    @media (min-width: 414px) {
+      font-size: 18px;
+    }
+
+    >ul>li>a {
+      display: block;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    >ul li.menu-item-has-children {
+      >a::after {
+        // Arrow after link
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid $lf-grey-400;
+        transform: translateY(-50%) rotate(-90deg);
+        transition: all 0.3s ease-out;
+      }
+
+      &.is-open-mobile {
+        >a::after {
+          transform: translateY(-50%) rotate(0deg);
+          transition: all 0.3s ease-out;
+        }
+      }
+
+      >a:hover::after {
+        // change arrow colour
+        border-top-color: $lf-primary-400;
+      }
+    }
+  }
+
+  // sub menus
+  .sub-menu {
+    display: none;
+    transform: translate3d(0, 0, 0);
+
+    li {
+      padding-left: 30px;
+      transform: translate3d(0, 0, 0);
+    }
+
+    a {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      display: block;
+    }
+  }
+
+  // hide the list item that holds avatar.
+  .is-auth0.only-authenticated.authenticated.is-avatar {
+    display: none;
+  }
+
+  // overrides the unset.
+  .menu-item.is-auth0.only-authenticated.authenticated {
+    display: block;
+  }
+
+  .is-signup-link {
+    margin-top: 15px;
+  }
+
+  // All LF Menu
+  .all-lf-menu:before {
+    content: '';
+    display: block;
+    background: $lf-grey-200;
+    height: 2px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+}
+
+// only show on desktop.
+@include breakpoint(large) {
+
+  // underlay underlay.
+  .header-menu-back {
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0;
+  }
+
+  .header-left-wrapper {
+    .lfasiallcci & {
+      margin-right: auto;
+    }
+  }
+
+  // setup 100% width on wrapper.
+  .mobile-menu-wrapper {
+    width: 100%;
+
+    .lfasiallcci & {
+      width: initial;
+    }
+  }
+
+  // Nav wrapper for all menus.
+  .main-menu {
+    // stop desktop>mobile animation.
+    transition: 0;
+    display: flex;
+    width: 100%;
+    letter-spacing: -0.2px;
+
+    // child of menu only.
+    >ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      >li>a {
+        // spacing out first row.
+        display: block;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+
+      li {
+        &.menu-item-has-children {
+
+          // activate sub-menu on hover.
+          &:hover>ul,
+          &:focus>ul,
+          &.focus>ul {
+            left: -1em;
+            top: 100%;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.15s linear, transform 0.15s linear, left 0s 0.15s;
+            overflow: visible;
+          }
+
+          >a {
+            padding-right: 1.5em;
+
+            &::after {
+              // Arrow after link
+              margin-top: 2px;
+            }
+          }
+        }
+      }
+
+      // sub menus
+      .sub-menu {
+        font-size: 13px;
+        z-index: 5;
+        background: $white;
+        opacity: 0;
+        position: absolute;
+        left: -9999px;
+        top: 100%;
+        overflow: hidden;
+        width: 12rem;
+        box-shadow: -5px 6px 9px 0px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.15s linear, transform 0.15s linear, left 0s 0.15s;
+        // transform: translateY(0.6em);
+        list-style: none;
+        display: block;
+
+        li {
+          padding-left: 15px;
+          padding-right: 15px;
+          width: 100%;
+
+          a {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .main-links-menu {
+      margin-left: 40px;
+
+      // drop some main nav links if screen too small.
+      @media (min-width: 1024px) {
+        .lfeventsci & {
+          li {
+
+            &:last-child,
+            &:nth-last-child(2) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      @media (min-width: 1100px) {
+        .lfeventsci & {
+          li {
+            &:nth-last-child(2) {
+              display: block;
+            }
+          }
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .lfeventsci & {
+          li {
+            &:last-child {
+              display: block;
+            }
+          }
+        }
+      }
+
+    }
+
+    // All LF Menu
+    .all-lf-menu {
+      margin-left: auto;
+      margin-right: 14px;
+    }
+
+    // LFX SSO Menu
+    .lfx-menu {
+      &::before {
+        content: "";
+        height: 40px;
+        width: 1px;
+        margin-right: 8px;
+        background-color: $lf-primary-700;
+      }
+
+      .is-signup-link {
+        margin-left: 10px;
+      }
+
+      // need this to override the  "unset" imported from LFSSO.
+      .is-auth0.only-authenticated.authenticated {
+        display: block;
+      }
+
+      // move this sub-menu under avatar.
+      .sub-menu {
+        left: unset !important;
+        right: 0;
+      }
+    }
+  }
+}
+
+// Hamburger. No fries.
+@include breakpoint(medium down) {
+
+  .lf-hamburger {
+    margin-left: auto;
+    display: inline-block;
+    height: 50px; // Google tap target min 48px.
+    width: 50px;
+    padding: 20px;
+    position: relative;
+
+    span {
+      border-radius: $lf-hamburger-border-radius;
+      background-color: $lf-hamburger-lines;
+      display: block;
+      height: $lf-hamburger-line-height;
+      margin: 0 auto;
+      position: relative;
+      width: 30px;
+      // animation
+      transition: background 0.2s ease, opacity 0.2s ease;
+
+      &:before,
+      &:after {
+        border-radius: $lf-hamburger-border-radius;
+        background-color: $lf-hamburger-lines;
+        content: '';
+        display: block;
+        height: $lf-hamburger-line-height;
+        position: absolute;
+        width: 30px;
+        // animation
+        transition-delay: 0.2s, 0s;
+        transition: margin 0.2s, transform 0.2s;
+      }
+
+      &:before {
+        margin-top: -8px;
+      }
+
+      &:after {
+        margin-top: 8px;
+      }
+    }
+
+    &.is-active {
+      span {
+        background-color: transparent;
+        transition-delay: 0.1s;
+        transition: background 0.2s ease, opacity 0.2s ease;
+
+        &:before {
+          margin-top: 0;
+          transform: rotate(45deg);
+          transition-delay: 0s, 0.2s;
+        }
+
+        &:after {
+          margin-top: 0;
+          transform: rotate(-45deg);
+          transition-delay: 0s, 0.2s;
+        }
+      }
+    }
+  }
+}

@@ -1,32 +1,30 @@
+// #event-calendar-header {
+//   @include clearfix();
 
-#event-calendar-header {
-  @include clearfix();
+//   .entry-title {
+//     float: left;
+//   }
+// }
+// .switch-archive-view {
+//   font-weight: $global-weight-bold;
+//   float: right;
 
-  .entry-title {
-    float: left;
-  }
-}
+//   @include breakpoint(small only) {
+//     font-size: rem-calc(12);
+//   }
 
-.switch-archive-view {
-  font-weight: $global-weight-bold;
-  float: right;
+//   &.top {
+//     margin-bottom: 0;
 
-  @include breakpoint(small only) {
-    font-size: rem-calc(12);
-  }
+//     @include breakpoint(medium) {
+//       margin-top: 1rem;
+//     }
+//   }
 
-  &.top {
-    margin-bottom: 0;
-
-    @include breakpoint(medium) {
-      margin-top: 1rem;
-    }
-  }
-
-  &.bottom {
-    margin-bottom: $global-margin * 3;
-  }
-}
+//   &.bottom {
+//     margin-bottom: $global-margin * 3;
+//   }
+// }
 
 .event-calendar-year {
   margin-bottom: $global-margin * 1.5;
@@ -37,7 +35,7 @@
   color: $charcoal;
 }
 
-.callout + .event-calendar-year {
+.callout+.event-calendar-year {
   margin-top: 2rem;
 }
 
@@ -48,7 +46,7 @@
   font-size: rem-calc(25);
 }
 
-.event-calendar-year + .event-calendar-month {
+.event-calendar-year+.event-calendar-month {
   border-top: none;
   margin-top: 0;
   padding-top: 0;
@@ -57,13 +55,13 @@
 form.searchandfilter {
   margin-bottom: $global-margin;
 
-  > ul {
+  >ul {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 
-    > li {
+    >li {
       margin: 0 0 $global-margin;
       padding: 0;
       width: 100%;
@@ -84,7 +82,8 @@ form.searchandfilter {
 
       @include breakpoint(medium) {
         width: rem-calc(350);
-        &:not(:last-child){
+
+        &:not(:last-child) {
           padding-right: $global-margin;
         }
       }
@@ -126,7 +125,7 @@ form.searchandfilter {
         width: calc(1rem + 1px);
 
         b {
-          @include css-triangle( 4px, $gray, down );
+          @include css-triangle(4px, $gray, down);
           background-image: none;
           border-top-width: 6px;
           position: absolute;
@@ -141,12 +140,12 @@ form.searchandfilter {
 
       .chosen-drop {
         border-radius: 0;
-        box-shadow: 0 0.25rem 0 0 rgba(0,0,0,0.2);
+        box-shadow: 0 0.25rem 0 0 rgba(0, 0, 0, 0.2);
       }
     }
 
     .search-filter-reset {
-      @include button($expand:true, $background:$white-smoke, $background-hover:darken($white-smoke,3%), $color:$primary-color, $style:solid);
+      @include button($expand:true, $background:$white-smoke, $background-hover:darken($white-smoke, 3%), $color:$primary-color, $style:solid);
       margin: 0;
       border-radius: rem-calc(8);
       box-shadow: none;

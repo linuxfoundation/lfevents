@@ -8,7 +8,7 @@
  */
 
 /**
- * Says whether it's the lfeventsci pantheon instance.
+ * Says whether it's the lfeventsci pantheon instance. But does not change body class.
  */
 function is_lfeventsci() {
 	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
@@ -145,7 +145,8 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 		echo '<a>查看所有活动<br>View All Events</a>';
 	}
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
-	echo '<li><a href="https://events.linuxfoundation.org/"><img src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfevents_' . $menu_text_color . '.svg' ) . '"><span class="subtext">All Upcoming Events</span></a></li>'; //phpcs:ignore
+	echo '<li><a href="https://events.linuxfoundation.org/"><div class="other-logo-wrapper">
+	<img width="109" height="36" src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo-' . $menu_text_color . '.svg' ) . '"><span class="other-seperator ' . $menu_text_color . '">Events</span></div><span class="other-text">All Upcoming Events</span></a></li>'; //phpcs:ignore
 
 	foreach ( $related_events as $p ) {
 		$logo = get_post_meta( $p['ID'], 'lfes_' . $menu_text_color . '_logo', true );
@@ -316,7 +317,6 @@ function lfe_scripts() {
 	}
 
 }
-
 add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
 
 /**
@@ -534,7 +534,6 @@ function lfe_insert_structured_data() {
 
 	echo $out; //phpcs:ignore
 }
-
 
 /**
  * Wraps the logic for redirecting to 3rd-party Event sites.
@@ -868,3 +867,68 @@ function lfe_dequeue_front_page_style() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'lfe_dequeue_front_page_style', 100 );
+
+
+/**
+ * A function to test if the page is an event page or a non-event page.
+ */
+function not_an_event() {
+	if ( get_post_meta( get_the_ID(), 'lfes_splash_page', true ) || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * All enqueued styles have dns-prefetch added to them. This changes it to preconnect for extra zip.
+ *
+ * @param string $urls array of urls.
+ * @param string $relation_type returns priority.
+ */
+function dns_prefetch_to_preconnect( $urls, $relation_type ) {
+	global $wp_scripts, $wp_styles;
+
+	$unique_urls = array();
+	$domain      = '';
+	if ( isset( $_SERVER['SERVER_NAME'] ) ) {
+		$domain = sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) );
+	}
+
+	foreach ( array( $wp_scripts, $wp_styles ) as $dependencies ) {
+		if ( $dependencies instanceof WP_Dependencies && ! empty( $dependencies->queue ) ) {
+			foreach ( $dependencies->queue as $handle ) {
+				if ( ! isset( $dependencies->registered[ $handle ] ) ) {
+					continue;
+				}
+
+					$dependency = $dependencies->registered[ $handle ];
+					$parsed     = wp_parse_url( $dependency->src );
+
+				if ( ! empty( $parsed['host'] ) && ! in_array( $parsed['host'], $unique_urls ) && $parsed['host'] !== $domain ) {
+
+						$unique_urls[] = $parsed['scheme'] . '://' . $parsed['host'];
+				}
+			}
+		}
+	}
+
+	if ( 'dns-prefetch' === $relation_type ) {
+			$urls = array();
+	}
+
+	if ( 'preconnect' === $relation_type ) {
+			$urls = $unique_urls;
+	}
+
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'dns_prefetch_to_preconnect', 0, 2 );
+
+/**
+ * Remove tags support from posts
+ */
+function lfe_theme_unregister_tags() {
+	unregister_taxonomy_for_object_type( 'post_tag', 'post' );
+}
+add_action( 'init', 'lfe_theme_unregister_tags' );

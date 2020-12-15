@@ -67,13 +67,17 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		}
 
 		if ( has_block( 'table' ) ) {
-
 			wp_enqueue_script( 'responsive-table', get_stylesheet_directory_uri() . '/src/assets/js/lib/' . foundationpress_asset_path( 'restable.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/src/assets/js/lib/' . foundationpress_asset_path( 'restable.js' ) ), true );
-
 			wp_enqueue_script( 'responsive-table-code', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ), array( 'jquery', 'responsive-table' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ) ), true );
-
 		}
 
+		// Add scripts required for non-event pages.
+		if ( not_an_event() ) {
+				// Add auth SSO/LFX assets.
+			wp_enqueue_script( 'auth0', 'https://cdn.auth0.com/js/auth0-spa-js/1.13.3/auth0-spa-js.production.js', array(), '1', false );
+			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+			wp_enqueue_script( 'auth0-config', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ), array( 'lf-auth0', 'auth0' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ) ), false );
+		}
 	}
 
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
