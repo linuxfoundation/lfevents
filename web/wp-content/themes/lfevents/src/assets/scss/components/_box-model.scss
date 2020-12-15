@@ -8,11 +8,14 @@ body.menu-is-active {
 
 .site-container {
   position: relative;
-  overflow: hidden; // removing this breaks events under 360px.
   max-width: rem-calc(1800);
   margin-right: auto;
   margin-left: auto;
   box-shadow: 0 0 rem-calc(400) rem-calc(200) rgba(0, 0, 0, 0.2);
+
+  &.add-overflow {
+    overflow: hidden; // removing this breaks events under 360px.
+  }
 }
 
 .relative {

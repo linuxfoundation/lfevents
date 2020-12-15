@@ -72,7 +72,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		}
 
 		// Add scripts required for non-event pages.
-		if ( not_an_event() ) {
+		if ( show_non_event_menu() ) {
 				// Add auth SSO/LFX assets.
 			wp_enqueue_script( 'auth0', 'https://cdn.auth0.com/js/auth0-spa-js/1.13.3/auth0-spa-js.production.js', array(), '1', false );
 			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );

@@ -16,7 +16,7 @@
 
 	<?php
 		// Add scripts required for non-event pages.
-	if ( is_lfeventsci() && not_an_event() ) {
+	if ( is_lfeventsci() && show_non_event_menu() ) {
 		?>
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -57,4 +57,4 @@
 
 	<body <?php body_class( $_ENV['PANTHEON_SITE_NAME'] ); ?>>
 		<?php lfe_insert_google_tag_manager_body(); ?>
-		<div class="site-container">
+		<div class="site-container <?php echo esc_html( ( ! show_non_event_menu() ) ? 'add-overflow' : '' ); ?>">
