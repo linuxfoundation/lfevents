@@ -12,17 +12,18 @@ registerBlockType( 'lf/icon-list', {
 	icon: 'list-view',
 	attributes: {
 		values: {
-			type: "string",
-			source: "html",
-			selector: "ul",
-			multiline: "li",
-			default: ""
+			type: 'string',
+			source: 'html',
+			selector: 'ul',
+			multiline: 'li',
+			default: '',
 		},
 		type: {
-			type: "string"
+			type: 'string',
+			default: 'ul',
 		},
 		selectedIcon: {
-			type: "string"
+			type: 'string',
 		},
 		iconSize: {
 			type: 'integer',
@@ -46,29 +47,40 @@ registerBlockType( 'lf/icon-list', {
 	supports: {
 		align: [ 'wide', 'full' ],
 	},
+	merge( attributes, attributesToMerge ) {
+		const { values } = attributesToMerge;
+
+		if ( ! values || values === '<li></li>' ) {
+			return attributes;
+		}
+
+		return {
+			...attributes,
+			values: attributes.values + values,
+		};
+	},
 	transforms: {
-    from: [
-      {
-        type: 'block',
-				blocks: ['ugb/icon-list'],
-				transform: function (attributes) {
-          return createBlock("lf/icon-list", {
-						values: attributes.text
-          });
+		from: [
+			{
+				type: 'block',
+				blocks: [ 'ugb/icon-list' ],
+				transform: ( attributes ) => {
+					return createBlock( 'lf/icon-list', {
+						values: attributes.text,
+					} );
 				},
 			},
 			{
-        type: 'block',
-				blocks: ['core/list'],
-				transform: function (attributes) {
-          return createBlock("lf/icon-list", {
-						values: attributes.values
-          });
+				type: 'block',
+				blocks: [ 'core/list' ],
+				transform: ( attributes ) => {
+					return createBlock( 'lf/icon-list', {
+						values: attributes.values,
+					} );
 				},
-
-      },
-    ],
-  },
+			},
+		],
+	},
 	edit: Edit,
 	save,
 } );
