@@ -1,0 +1,14 @@
+{
+	"name": "lf/custom-iframe",
+	"title": "Custom iFrame",
+	"category": "common",
+	"icon": "smiley",
+	"description": "Embed an iframe, Google Sheet or Newsletter with better formatting",
+	"textdomain": "custom-iframe",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
