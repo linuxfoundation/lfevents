@@ -1,35 +1,66 @@
-.wp-block-lf-buttons-with-expiry .wp-block.block-editor-block-list__block[data-type="lf/button-with-expiry"] {
-	display: inline-block;
-	width: auto;
+// editor only styles
+
+.block-editor-block-list__block[data-type="lf/buttons-with-expiry"] {
+    .wp-block {
+        &[data-align="center"] {
+            .block-editor-block-list__layout {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        &[data-align="right"] {
+            display: flex;
+            justify-content: flex-end;
+
+            // centers the button + appender.
+            .block-editor-block-list__layout {
+
+                flex-direction: row-reverse;
+
+            }
+
+        }
+
+        &[data-align="left"] {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .block-editor-block-list__layout {
+            border: 1px solid #F3F4F5;
+            position: relative;
+
+            &:after {
+                content: 'BUTTON GROUP';
+                color: #D8D8D8;
+                position: absolute;
+                left: 1px;
+                top: 0;
+                line-height: 1;
+                transform: translateY(-100%);
+            }
+
+        }
+
+    }
+
+    // pushes out the block to 100%.
+    .block-editor-inner-blocks {
+        width: 100%;
+    }
+
+    // centers the button + appender.
+    .block-editor-block-list__layout {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .wp-block-lf-buttons-with-expiry {
-	.block-list-appender {
-		display: inline-block;
-		margin: 0;
-	}
-
-	.block-editor-button-block-appender {
-		background: none;
-		outline: none;
-	}
-}
-
-
-.wp-block-lf-button-with-expiry {
-	&[data-align="center"] .block-editor-block-list__layout {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-
-	&[data-align="right"] .block-editor-block-list__layout {
-		display: flex;
-		justify-content: flex-end;
-	}
-
-	.block-editor-block-list__layout > div:last-child {
-		display: inline-block;
-	}
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
