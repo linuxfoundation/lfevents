@@ -2,6 +2,8 @@
     max-width: initial;
     overflow-y: scroll;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 
     @media (max-width: 767px) {
         width: 100% !important;

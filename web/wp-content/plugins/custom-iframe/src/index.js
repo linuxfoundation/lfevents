@@ -24,7 +24,6 @@ registerBlockType( 'lf/custom-iframe', {
 		__( 'sheet' ),
 	],
 	supports: {
-		align: [ 'wide', 'full' ],
 		html: false,
 	},
 	attributes: {

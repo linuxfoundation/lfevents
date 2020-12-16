@@ -27,8 +27,8 @@ export default class Inspector extends Component {
 				setAttributes( {
 					iframeMaxWidth: '100%',
 					iframeHeight: '700px',
+					rightPadding: false,
 					borderPresent: false,
-					paddingRight: false,
 				} );
 			}
 			if ( 'google-sheet' === type ) {
@@ -36,7 +36,7 @@ export default class Inspector extends Component {
 					iframeMaxWidth: '500px',
 					iframeHeight: '500px',
 					borderPresent: true,
-					paddingRight: true,
+					rightPadding: true,
 					borderColor: '#000000',
 				} );
 			}
@@ -44,8 +44,8 @@ export default class Inspector extends Component {
 				setAttributes( {
 					iframeMaxWidth: '640px',
 					iframeHeight: '700px',
+					rightPadding: false,
 					borderPresent: false,
-					paddingRight: false,
 				} );
 			}
 		}
