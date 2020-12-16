@@ -16,8 +16,6 @@ body.menu-is-active {
   &.add-overflow {
     overflow: hidden; // removing this breaks events under 360px.
   }
-
-
 }
 
 .relative {
