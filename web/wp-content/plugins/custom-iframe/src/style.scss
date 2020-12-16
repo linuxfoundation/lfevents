@@ -1,3 +1,16 @@
+.wp-lf-custom-iframe iframe {
+    max-width: initial;
+    overflow-y: scroll;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: 767px) {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
 .entry-content .wp-lf-custom-iframe iframe {
     max-width: initial;
     overflow-y: scroll;
@@ -10,6 +23,8 @@
         max-width: 100% !important;
     }
 }
+
+
 
 .loading-bg {
     background-image: url("./images/spin.svg");
