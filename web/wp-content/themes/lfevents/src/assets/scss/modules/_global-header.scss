@@ -78,13 +78,18 @@
 
 // Overrides for WP Admin menu on desktop and mobile.
 .admin-bar {
-  // .main-header {
-  //   top: 32px;
 
-  //   @media (max-width: 782px) {
-  //     top: 46px;
-  //   }
-  // }
+  @media (min-height: 501px) {
+    .site-container:not(.add-overflow) {
+      .main-header {
+        top: 32px;
+
+        @media (max-width: 782px) {
+          top: 46px;
+        }
+      }
+    }
+  }
 
   .header-menu-back {
     top: calc(32px + #{$lf-header-height});

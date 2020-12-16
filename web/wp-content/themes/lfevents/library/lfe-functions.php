@@ -188,7 +188,6 @@ function lfe_setup_theme_supported_features() {
 	add_theme_support( 'align-wide' );
 
 }
-
 add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
 
 /**
@@ -323,7 +322,7 @@ add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
  * Removes unneeded admin menu items.
  */
 function lfe_custom_menu_page_removing() {
-	remove_menu_page( 'ultimate-blocks-settings' );
+	// remove_menu_page( 'ultimate-blocks-settings' ); // don't need this anymore?
 	remove_menu_page( 'edit-comments.php' );
 }
 add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
@@ -804,7 +803,6 @@ function lfe_passed_event_banner( $parent_id ) {
 	}
 }
 
-
 // this causes the RSS Aggregator to delete and re-import all feed items on every import:
 // https://kb.wprssaggregator.com/article/191-keep-feed-in-sync-with-current-state.
 add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );
@@ -870,15 +868,17 @@ add_action( 'wp_enqueue_scripts', 'lfe_dequeue_front_page_style', 100 );
 
 
 /**
- * A function to test if the page is an event page or a non-event page.
+ * A function to test if the page should display non-event menu.
  */
-function not_an_event() {
+function show_non_event_menu() {
 	if ( get_post_meta( get_the_ID(), 'lfes_splash_page', true ) || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() ) {
 		return true;
 	} else {
 		return false;
 	}
 }
+
+
 
 /**
  * All enqueued styles have dns-prefetch added to them. This changes it to preconnect for extra zip.

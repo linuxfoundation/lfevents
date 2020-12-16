@@ -199,8 +199,10 @@ class LFEvents_Public {
 --event-color-2: ' . esc_html( $menu_color_2 ? $menu_color_2 : $menu_color ) . ';
 }';
 
-			// Enqueue an empty style sheet first.
-			wp_enqueue_style( 'event-gradient-inline-style', get_stylesheet_uri() ); // phpcs:ignore
+			// Register and enqueue an empty style sheet first.
+			wp_register_style( 'event-gradient-inline-style', false, array(), true, 'all' );
+			wp_enqueue_style( 'event-gradient-inline-style' );
+
 			// Then add the inline styles to it.
 			wp_add_inline_style( 'event-gradient-inline-style', $background_style );
 			wp_add_inline_style( 'event-gradient-inline-style', $css_variables_for_events );
