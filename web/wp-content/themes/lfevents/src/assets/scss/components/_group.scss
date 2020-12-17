@@ -19,12 +19,10 @@
   }
 }
 
-.entry-content {
-  .wp-block-group {
+.wp-block-group {
 
-    &.is-style-border,
-    &.is-style-event-gradient {
-      @extend .padding-border-shadow-defaults;
-    }
+  &.is-style-border,
+  &.is-style-event-gradient {
+    @extend .padding-border-shadow-defaults;
   }
 }

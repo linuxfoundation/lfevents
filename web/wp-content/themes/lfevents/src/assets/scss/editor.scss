@@ -18,6 +18,7 @@
 @import "components/buttons";
 @import "components/cards";
 @import "components/columns";
+@import "components/cover";
 @import "components/embeds";
 @import "components/file";
 @import "components/forms";
@@ -89,11 +90,11 @@
   }
 }
 
-// Make SVGs fill containers (Safe SVG related).
-img[src$=".svg"] {
-  width: 100%;
-  height: auto;
-}
+// // Make SVGs fill containers (Safe SVG related).
+// img[src$=".svg"] {
+//   width: 100%;
+//   height: auto;
+// }
 
 
 // Make post title look a bit more normal
@@ -104,22 +105,22 @@ img[src$=".svg"] {
 // Add padding to make more easily selectable.
 .wp-block-group,
 .wp-block-columns {
-  padding: 1em;
+  padding: 35px;
 }
 
 // add guide to group to make more visible in editor.
-.wp-block-group {
-  border: 1px solid #F3F4F5;
+// .wp-block-group {
+//   border: 1px solid #F3F4F5;
 
-  &:after {
-    content: 'GROUP BLOCK';
-    color: #D8D8D8;
-    position: absolute;
-    left: 1px;
-    top: 2px;
-    line-height: 1;
-  }
-}
+//   &:after {
+//     content: 'GROUP BLOCK';
+//     color: #D8D8D8;
+//     position: absolute;
+//     left: 1px;
+//     top: 2px;
+//     line-height: 1;
+//   }
+// }
 
 // .block-editor-block-list__layout .block-editor-block-list__block:not([contenteditable]):focus {
 //   outline: 0;
