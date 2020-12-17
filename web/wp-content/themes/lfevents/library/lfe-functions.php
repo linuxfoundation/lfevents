@@ -508,7 +508,7 @@ function lfe_insert_structured_data() {
 	$out .= '"@context": "http://schema.org/",';
 	$out .= '"@type": "Event",';
 	$out .= '"name": "' . esc_html( $post->post_title ) . '",';
-	if ( check_string_is_date( $date_start ) ) {
+	if ( $date_start && check_string_is_date( $date_start ) ) {
 		$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
 		$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
 	}
@@ -517,11 +517,11 @@ function lfe_insert_structured_data() {
 	$out .= '  "name": "' . esc_html( get_post_meta( $post->ID, 'lfes_venue', true ) ) . '",';
 	$out .= '  "address": {';
 	$out .= '	"@type": "PostalAddress",';
-	$out .= '	"streetAddress": "' . esc_html( get_post_meta( $post->ID, 'lfes_street_address', true ) ) . '",';
-	$out .= '	"addressLocality": "' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ) . '",';
-	$out .= '	"postalCode": "' . esc_html( get_post_meta( $post->ID, 'lfes_postal_code', true ) ) . '",';
-	$out .= '	"addressRegion": "' . esc_html( get_post_meta( $post->ID, 'lfes_region', true ) ) . '",';
-	$out .= '	"addressCountry": "' . esc_html( $country ) . '"';
+	$out .= '	"streetAddress": "' . esc_html( get_post_meta( $post->ID, 'lfes_street_address', true ) ? get_post_meta( $post->ID, 'lfes_street_address', true ) : '' ) . '",';
+	$out .= '	"addressLocality": "' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ? get_post_meta( $post->ID, 'lfes_city', true ) : '' ) . '",';
+	$out .= '	"postalCode": "' . esc_html( get_post_meta( $post->ID, 'lfes_postal_code', true ) ? get_post_meta( $post->ID, 'lfes_postal_code', true ) : '' ) . '",';
+	$out .= '	"addressRegion": "' . esc_html( get_post_meta( $post->ID, 'lfes_region', true ) ? get_post_meta( $post->ID, 'lfes_region', true ) : '' ) . '",';
+	$out .= '	"addressCountry": "' . esc_html( $country ? $country : '' ) . '"';
 	$out .= '  }';
 	$out .= '},';
 	$out .= '	"image": [ ';
