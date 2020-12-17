@@ -75,14 +75,26 @@
   max-width: none;
 }
 
-// To try and stop the Kubecon logos image pushing out the screen.
+// To try and stop an oversized inline image pushing out the screen.
 .wp-block-image {
   max-width: 100%;
 
-  img {
+  .components-resizable-box__container {
+    display: contents;
+    max-width: 100%;
+  }
+
+  >.wp-block-image {
     max-width: 100%;
   }
 }
+
+// Make SVGs fill containers (Safe SVG related).
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+}
+
 
 // Make post title look a bit more normal
 .editor-post-title__block .editor-post-title__input {
@@ -98,16 +110,14 @@
 // add guide to group to make more visible in editor.
 .wp-block-group {
   border: 1px solid #F3F4F5;
-  position: relative;
 
   &:after {
     content: 'GROUP BLOCK';
     color: #D8D8D8;
     position: absolute;
     left: 1px;
-    top: 0;
+    top: 2px;
     line-height: 1;
-    transform: translateY(-100%);
   }
 }
 
@@ -134,5 +144,5 @@
 // body#tinymce {
 //   height: auto; // Fix editor style bug
 //   max-width: $grid-row-width; // Give the editor a max-width
-//   padding: rem-calc(20) !important;
+//   padding: rem-calc(20);
 // }
