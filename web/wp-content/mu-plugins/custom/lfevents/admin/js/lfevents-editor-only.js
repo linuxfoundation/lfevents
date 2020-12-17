@@ -15,6 +15,20 @@ wp.domReady(
 	() => {
 	wp.blocks.unregisterBlockType( 'core/buttons' );
 	wp.blocks.registerBlockStyle(
+		'core/cover',
+	 [
+	 {
+			 name: 'default',
+			 label: 'Default',
+			 isDefault: true,
+	 },
+	 {
+			 name: 'border',
+			 label: 'Border',
+	 }
+	 ]
+ );
+	wp.blocks.registerBlockStyle(
 		 'core/group',
 		[
 		{
