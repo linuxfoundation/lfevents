@@ -1,3 +1,38 @@
+button {
+  cursor: pointer;
+}
+
+.main-container .button {
+  box-shadow: none;
+  border-radius: rem-calc(8);
+}
+
+.button.gray {
+  background-color: $white-smoke;
+  color: darken($primary-color, 10%);
+
+  &:hover {
+    background-color: darken($white-smoke, 10%);
+    color: darken($primary-color, 20%);
+  }
+}
+
+.button.blue-dark {
+  background-color: $blue-dark;
+
+  &:hover {
+    background-color: darken($blue-dark, 10%);
+  }
+}
+
+.button.orange {
+  background-color: $orange;
+
+  &:hover {
+    background-color: darken($orange, 10%);
+  }
+}
+
 .sites-button {
   background: $primary-color;
   font-size: 1.25rem;
@@ -8,6 +43,7 @@
 }
 
 .wp-block-buttons {
+
   .wp-block-button {
     transition: all .3s ease-in-out;
     position: relative;
@@ -23,6 +59,32 @@
     &:active {
       transition: all .3s ease-in-out;
       top: 1px;
+    }
+
+    // add special styling for squared buttons
+    &.is-style-squared .wp-block-button__link {
+      border-radius: 0 !important;
+    }
+
+    // add outline styles
+    &.is-style-outline .wp-block-button__link {
+      @extend .hollow;
+    }
+
+    @each $name,
+    $size in $button-sizes {
+      &.#{$name} .wp-block-button__link {
+        font-size: $size;
+      }
+    }
+
+    &.xlarge .wp-block-button__link {
+      font-size: 2rem;
+    }
+
+    &.expanded,
+    &.expanded .wp-block-button__link {
+      width: 100%;
     }
   }
 }
@@ -79,4 +141,25 @@
     position: relative;
     top: 1px;
   }
+}
+
+/** === Button === */
+.wp-block-button {
+  // why repeat these again?
+  // // add general foundation button styling
+  // .wp-block-button__link {
+  //   @extend .button;
+
+  //   @each $color,
+  //   $code in $foundation-palette {
+
+  //     &.has-#{$color}-background-color {
+  //       background-color: $code;
+  //     }
+
+  //     &.has-#{$color}-color {
+  //       color: $code;
+  //     }
+  //   }
+  // }
 }

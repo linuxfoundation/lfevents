@@ -1,0 +1,250 @@
+body.menu-is-active {
+  overflow: hidden;
+}
+
+.site-container {
+  position: relative;
+  max-width: rem-calc(1800);
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 0 rem-calc(400) rem-calc(200) rgba(0, 0, 0, 0.2);
+
+  &.add-overflow {
+    overflow: hidden; // removing this breaks events under 360px.
+  }
+}
+
+.main-container-body {
+  width: 100%;
+  padding-bottom: 6rem;
+}
+
+.main-container {
+  background-color: $white;
+  position: relative;
+  z-index: 1;
+
+  a[href] {
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 100%;
+    text-indent: 0;
+  }
+}
+
+.container {
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wrap {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @include breakpoint(medium) {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+// Updated Grid to match revised header.
+.grid-container {
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  @include breakpoint(medium) {
+    padding-right: 28px;
+    padding-left: 28px;
+  }
+
+}
+
+.main-grid {
+  @include xy-grid();
+
+  // Updated Width to match revised header.
+  .main-content-full-width {
+    @include xy-cell(12);
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    @include breakpoint(medium) {
+      padding-right: 28px;
+      padding-left: 28px;
+    }
+  }
+
+  // Default template
+  .main-content {
+    @include breakpoint(small) {
+      @include xy-cell(12);
+    }
+  }
+
+  &.sidebar-left {
+
+    // Place the sidebar below main content on small screens ...
+    @include breakpoint(small) {
+      .main-content {
+        order: 1;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+    }
+
+    // ... and to the left on medium-up screens, when using the sidebar-left template
+    @include breakpoint(medium) {
+      .main-content {
+        order: 2;
+      }
+
+      .sidebar {
+        order: 1;
+      }
+    }
+  }
+
+  .sidebar {
+    @include breakpoint(small) {
+      @include xy-cell(12);
+    }
+
+    @include breakpoint(medium) {
+      // @include xy-cell(4);
+      padding-top: 1rem;
+    }
+
+  }
+}
+
+// Sidebar widgets
+.sidebar-widgets {
+  .widget+.widget {
+    margin-top: rem-calc(40);
+    padding-top: rem-calc(30);
+    border-top: $hr-border;
+  }
+}
+
+// .alignleft {
+//   float: left;
+//   padding-right: 1rem;
+//   margin: 0;
+// }
+
+// .alignright {
+//   float: right;
+//   padding-left: 1rem;
+//   margin: 0;
+// }
+
+// .aligncenter {
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+
+
+.display-block {
+  display: block;
+}
+
+.display-inline-block {
+  display: inline-block;
+  ;
+}
+
+// Margin for all four sides
+.no-margin {
+  margin: 0;
+}
+
+.small-margin {
+  margin: $global-margin/2;
+}
+
+.medium-margin {
+  margin: $global-margin;
+}
+
+.large-margin {
+  margin: $global-margin*2;
+}
+
+.xlarge-margin {
+  margin: $global-margin*3;
+}
+
+// Margin for individual sides
+$sides: top right bottom left;
+
+@each $side in $sides {
+  $i: index($sides, $side);
+
+  .no-margin-#{$side} {
+    margin-#{$side}: 0;
+  }
+
+  .small-margin-#{$side} {
+    margin-#{$side}: $global-margin/2;
+  }
+
+  .medium-margin-#{$side} {
+    margin-#{$side}: $global-margin;
+  }
+
+  .large-margin-#{$side} {
+    margin-#{$side}: $global-margin*2;
+  }
+
+  .xlarge-margin-#{$side} {
+    margin-#{$side}: $global-margin*3;
+  }
+}
+
+.large-padding {
+  padding: $global-margin*2;
+}
+
+.xlarge-padding {
+  padding: $global-margin*3;
+}
+
+.xlarge-padding-y {
+  padding-top: $global-margin*3;
+  padding-bottom: $global-margin*3;
+}
+
+// Padding for individual sides
+$sides: top right bottom left;
+
+@each $side in $sides {
+  $i: index($sides, $side);
+
+  .no-padding-#{$side} {
+    padding-#{$side}: 0;
+  }
+
+  .small-padding-#{$side} {
+    padding-#{$side}: $global-margin/2;
+  }
+
+  .medium-padding-#{$side} {
+    padding-#{$side}: $global-margin;
+  }
+
+  .large-padding-#{$side} {
+    padding-#{$side}: $global-margin*2;
+  }
+
+  .xlarge-padding-#{$side} {
+    padding-#{$side}: $global-margin*3;
+  }
+}

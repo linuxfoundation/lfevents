@@ -1,0 +1,29 @@
+// setup a class to help not repeat the same styles later.
+.padding-border-shadow-defaults {
+  box-shadow: 0 5px 5px 0 rgba(18, 63, 82, .035),
+    0 0 0 1px rgba(176, 181, 193, .2);
+  border-radius: 12px;
+  padding: 15px;
+
+  @media (min-width: 414px) {
+    padding: 20px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 35px;
+  }
+
+  &.alignfull {
+    border-radius: 0;
+  }
+}
+
+.entry-content {
+  .wp-block-group {
+
+    &.is-style-border,
+    &.is-style-event-gradient {
+      @extend .padding-border-shadow-defaults;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+// embeds
+
+// Responsive embeds
+.wp-block-embed {
+  &.is-type-video .wp-block-embed__wrapper {
+    @include responsive-embed(3 by 4);
+  }
+
+  &.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
+    @include responsive-embed(16 by 9);
+  }
+}

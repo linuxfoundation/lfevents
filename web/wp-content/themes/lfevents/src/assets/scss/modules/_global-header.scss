@@ -4,24 +4,18 @@
 
   // This is needed as Foundation is badly made.
   h1,
-  .header-xxlarge,
   .h1,
   h2,
-  .header-xlarge,
   .h2,
   h3,
-  .header-large,
   .h3,
   h4,
-  .header-medium,
-  .gform_wrapper .gform_title,
   .h4,
   h5,
-  .header-small,
   .h5,
   h6,
-  .header-tiny,
-  .h6 {
+  .h6,
+  .gform_wrapper .gform_title {
     font-family: 'Heebo',
     #{$body-font-family};
   }
@@ -76,6 +70,11 @@
   }
 }
 
+// Fix the issue where the WP admin-bar overlaps the mobile menu
+#wpadminbar {
+  position: fixed !important;
+}
+
 // Overrides for WP Admin menu on desktop and mobile.
 .admin-bar {
 
@@ -104,6 +103,24 @@
 
     @media (max-width: 782px) {
       top: calc(46px + #{$lf-header-height});
+    }
+  }
+
+  // Offset sticky top bar
+  &.f-topbar-fixed {
+    .sticky.fixed {
+      margin-top: rem-calc(32);
+    }
+  }
+
+  // Offset mobile off-canvas menu
+  &.offcanvas {
+    .off-canvas.is-open {
+      top: rem-calc(46);
+
+      @include breakpoint(783) {
+        top: rem-calc(32);
+      }
     }
   }
 }
