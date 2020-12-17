@@ -51,20 +51,22 @@
 
 // Global.
 @import "global/accessibility";
-@import "global/wp-admin";
-@import "global/wp-overrides";
 @import "global/gutenberg";
 @import "global/custom-color-palette";
+@import "global/structure";
 
 // Components.
 // Smallest elements.
-@import "components/box-model";
 @import "components/buttons";
 @import "components/cards";
 @import "components/columns";
-@import "components/featured-image";
-@import "components/group-and-quotes";
+@import "components/embeds";
+@import "components/file";
+@import "components/forms";
+@import "components/images";
+@import "components/group";
 @import "components/links";
+@import "components/quote";
 @import "components/separator";
 @import "components/spacer";
 @import "components/tables";
@@ -72,16 +74,20 @@
 
 // Modules.
 // Made up of components/needing their own styling.
-@import "modules/content";
 @import "modules/cookie-banner";
 @import "modules/event-calendar";
 @import "modules/event-header";
+@import "modules/event-listing";
+@import "modules/event-subpage";
+@import "modules/gallery";
 @import "modules/global-footer";
 @import "modules/global-header";
 @import "modules/gravityforms";
 @import "modules/home-hero";
 @import "modules/non-event-hero";
+@import "modules/photonic";
 @import "modules/post-navigation";
+@import "modules/post-single";
 @import "modules/sticky";
 
 // Blocks

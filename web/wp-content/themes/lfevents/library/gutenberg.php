@@ -7,11 +7,10 @@
 
 if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
 	/**
-	 * Comment.
+	 * Each color should match in _custom-color-palette.scss
 	 */
 	function foundationpress_gutenberg_support() {
 
-		// Add foundation color palette to the editor.
 		add_theme_support(
 			'editor-color-palette',
 			array(
@@ -164,6 +163,26 @@ if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
 					'name'  => __( 'Light Red' ),
 					'slug'  => 'light-red',
 					'color' => '#922B21',
+				),
+				array(
+					'name'  => __( 'LF Light Blue' ),
+					'slug'  => 'lf-primary-400',
+					'color' => '#0099cc',
+				),
+				array(
+					'name'  => __( 'LF Dark Blue' ),
+					'slug'  => 'lf-primary-700',
+					'color' => '#003366',
+				),
+				array(
+					'name'  => __( 'LF Text Color' ),
+					'slug'  => 'lf-grey-700',
+					'color' => '#333333',
+				),
+				array(
+					'name'  => __( 'LF Light Text Color' ),
+					'slug'  => 'lf-grey-400',
+					'color' => '#7a7a7a',
 				),
 			)
 		);

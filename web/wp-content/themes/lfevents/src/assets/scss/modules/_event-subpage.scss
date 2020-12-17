@@ -1,0 +1,56 @@
+.event-subpage-header {
+  @include clearfix();
+  margin-top: 0;
+  margin-bottom: $global-margin;
+  margin-right: -1rem;
+  margin-left: -1rem;
+
+  @include breakpoint(medium) {
+    margin-left: -28px;
+    margin-right: -28px;
+  }
+
+  padding: $global-margin;
+  padding-top: 14vw;
+  padding-bottom: 7vw;
+  position: relative;
+  background-size: cover;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+
+  h1 {
+    position: relative;
+    float: left;
+    margin: 0 0 0 $global-margin*-1;
+    padding: rem-calc(15) $global-margin*1.5 rem-calc(18) $global-margin;
+    font-weight: $global-weight-bold;
+    line-height: 1.2;
+    max-width: calc(100% - #{$global-margin});
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+
+    @include breakpoint(medium down) {
+      font-size: calc(1rem + 1vw);
+    }
+
+    @include breakpoint(large) {
+      max-width: 14em;
+      padding: rem-calc(15) rem-calc(50) rem-calc(18);
+    }
+
+    span {
+      display: inline-block;
+    }
+  }
+}
