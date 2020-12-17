@@ -43,6 +43,18 @@ wp.domReady(
 		{
 				name: 'event-gradient',
 				label: 'Event Gradient',
+		},
+		{
+			name: 'constrained-50',
+			label: 'Restrict content 50%',
+		},
+		{
+			name: 'constrained-70',
+			label: 'Restrict content 70%',
+		},
+		{
+			name: 'constrained-75',
+			label: 'Restrict content 75%',
 		}
 		]
 	);

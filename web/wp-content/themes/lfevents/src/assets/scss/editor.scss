@@ -109,18 +109,18 @@
 }
 
 // add guide to group to make more visible in editor.
-// .wp-block-group {
-//   border: 1px solid #F3F4F5;
+.wp-block-group {
+  border: 1px solid #F3F4F5;
 
-//   &:after {
-//     content: 'GROUP BLOCK';
-//     color: #D8D8D8;
-//     position: absolute;
-//     left: 1px;
-//     top: 2px;
-//     line-height: 1;
-//   }
-// }
+  &:before {
+    content: 'GROUP BLOCK';
+    color: #D8D8D8;
+    position: absolute;
+    left: 1px;
+    top: 2px;
+    line-height: 1;
+  }
+}
 
 // .block-editor-block-list__layout .block-editor-block-list__block:not([contenteditable]):focus {
 //   outline: 0;

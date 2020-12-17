@@ -25,4 +25,40 @@
   &.is-style-event-gradient {
     @extend .padding-border-shadow-defaults;
   }
+
+  &.is-style-constrained-50 {
+    >* {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media (max-width: 768px) {
+        width: 80%;
+      }
+    }
+  }
+
+  &.is-style-constrained-70 {
+    >* {
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media (max-width: 768px) {
+        width: 90%;
+      }
+    }
+  }
+
+  &.is-style-constrained-75 {
+    >* {
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media (max-width: 768px) {
+        width: 90%;
+      }
+    }
+  }
 }
