@@ -21,6 +21,11 @@
 
         &[data-align="left"] {
             display: inline;
+
+            .block-editor-block-list__layout .wp-block {
+                margin-left: unset;
+                margin-right: unset;
+            }
         }
 
         .block-editor-block-list__layout {
