@@ -2,5 +2,9 @@
 
   &.is-style-border {
     @extend .padding-border-shadow-defaults;
+
+    &.has-background-dim:not(.has-background-gradient)::before {
+      border-radius: 12px;
+    }
   }
 }
