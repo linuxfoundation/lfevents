@@ -13,7 +13,8 @@
     padding: 35px;
   }
 
-  &.alignfull {
+  &.alignfull,
+  [data-align="full"] & {
     border-radius: 0;
   }
 }
