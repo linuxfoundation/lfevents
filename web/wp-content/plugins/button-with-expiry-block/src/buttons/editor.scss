@@ -1,5 +1,4 @@
 // editor only styles
-
 .block-editor-block-list__block[data-type="lf/buttons-with-expiry"] {
     .wp-block {
         &[data-align="center"] {
@@ -27,34 +26,11 @@
                 margin-right: unset;
             }
         }
-
-        .block-editor-block-list__layout {
-            border: 1px solid #F3F4F5;
-            position: relative;
-
-            &:after {
-                content: 'BUTTON GROUP';
-                color: #D8D8D8;
-                position: absolute;
-                left: 1px;
-                top: 0;
-                line-height: 1;
-                transform: translateY(-100%);
-            }
-
-        }
-
     }
 
     // pushes out the block to 100%.
     .block-editor-inner-blocks {
         width: 100%;
-    }
-
-    // centers the button + appender.
-    .block-editor-block-list__layout {
-        display: flex;
-        align-items: center;
     }
 
     .wp-block[data-align="left"]>* {
@@ -64,7 +40,24 @@
 }
 
 .wp-block-lf-buttons-with-expiry {
-    // display: flex;
-    // flex-wrap: wrap;
     width: 100%;
+
+    .block-editor-block-list__layout {
+        border: 1px solid #F3F4F5;
+        position: relative;
+        // centers the button + appender.
+        display: flex;
+        align-items: center;
+
+        &:before {
+            content: 'BUTTON GROUP';
+            color: #D8D8D8;
+            position: absolute;
+            left: 1px;
+            top: 0;
+            line-height: 1;
+            transform: translateY(-100%);
+        }
+
+    }
 }
