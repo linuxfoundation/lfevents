@@ -239,7 +239,7 @@ function uploadFiles( lineItems, filesToUpload ) {
 
 function updateMessage(success, fail) {
 	if (fail == 0) {
-		$( "#message" ).html( "Thank you for your submission. We are reviewing at this time." ).removeClass( "warning" ).addClass( "success" );
+		$( "#message" ).html( "Thank you for your submission." ).removeClass( "warning" ).addClass( "success" );
 		message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 	} else {
 		alert( 'There were some errors while uploading file(s)' );
