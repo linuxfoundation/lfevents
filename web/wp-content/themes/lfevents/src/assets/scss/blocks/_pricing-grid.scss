@@ -1,63 +1,19 @@
 .pricing-grid {
   width: auto;
-  margin: 0 auto $global-margin;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $global-margin;
 
-  .attendee-type {
-    margin-bottom: $global-margin/2;
-
-    @include breakpoint(large) {
-      display: inline-flex;
-      align-items: stretch;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-
-      >* {
-        width: 10rem;
-        margin: 0 $global-margin/4;
-
-        &:first-child {
-          text-align: right;
-        }
-      }
-    }
-
-    @include breakpoint(xlarge) {
-      >* {
-        width: 12rem;
-      }
-    }
-
-    @include breakpoint(xxlarge) {
-      >* {
-        width: 14rem;
-      }
-    }
-  }
-
-  .attendee-type--name {
-    font-weight: bold;
-
-    @include breakpoint(large) {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      font-weight: normal;
-      font-size: rem-calc(20);
-      margin-left: 0;
-      padding-right: $global-margin/2;
-      padding-left: $global-margin/2;
-      background-color: rgba(0, 0, 0, 0.05);
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0) 100%);
-      border-radius: 1rem 0 0 1rem;
-      border-width: 1px;
-      border-style: solid;
-      border-right-width: 0;
-    }
-
-    @include breakpoint(xlarge) {
-      width: 16rem;
-    }
+  @include breakpoint(large) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    // account for the price window header.
+    padding-top: 5.25rem;
+    max-width: 100%;
   }
 
   .price-cell {
@@ -144,10 +100,13 @@
   }
 
   @include breakpoint(large) {
-    padding-top: 4.25rem;
 
     .attendee-type:not(:first-child) .price-window {
       display: none;
+    }
+
+    .attendee-type>:first-child {
+      min-width: 12rem;
     }
 
     .price-window {
@@ -158,7 +117,7 @@
       left: 0;
       height: 4.25rem;
       padding: 0.75rem;
-      border-radius: 1rem 1rem 0 0;
+      border-radius: 12px 12px 0 0;
       opacity: 0.75;
       text-align: center;
     }
@@ -182,5 +141,53 @@
         margin-top: rem-calc(4);
       }
     }
+  }
+}
+
+.attendee-type {
+  margin-bottom: $global-margin/2;
+
+  @include breakpoint(large) {
+    display: flex;
+
+    >* {
+      width: 12rem;
+      margin: 0 $global-margin/4;
+
+      &:first-child {
+        text-align: right;
+      }
+    }
+  }
+
+  @include breakpoint(xlarge) {
+    >* {
+      width: 14rem;
+    }
+  }
+}
+
+.attendee-type--name {
+  font-weight: bold;
+
+  @include breakpoint(large) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: normal;
+    font-size: rem-calc(20);
+    margin-left: 0;
+    padding-right: $global-margin/2;
+    padding-left: $global-margin/2;
+    background-color: rgba(0, 0, 0, 0.05);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0) 100%);
+    border-radius: 12px 0 0 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-right-width: 0;
+  }
+
+  @include breakpoint(xlarge) {
+    width: 16rem;
   }
 }
