@@ -1,4 +1,4 @@
-table {
+table:not(.wp-block-cgb-block-pricing-block) {
 
   &,
   tbody,
@@ -42,8 +42,6 @@ table {
     }
   }
 }
-
-
 
 // Stacked responsive styles except on column header tables.
 .wp-block-table:not(.is-style-table-with-column-headers) {

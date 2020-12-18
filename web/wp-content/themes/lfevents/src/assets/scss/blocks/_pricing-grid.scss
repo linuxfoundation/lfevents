@@ -115,19 +115,15 @@
     text-align: right;
 
     @include breakpoint(large) {
-      font-size: 1.5rem;
+      font-size: 1rem;
       line-height: 1;
       text-align: center;
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
 
-    @include breakpoint(xlarge) {
-      font-size: rem-calc(25);
-    }
-
-    @include breakpoint(xxlarge) {
-      font-size: rem-calc(31);
+    @include breakpoint(large) {
+      font-size: 1.25rem;
     }
 
     .expired-label {
@@ -136,7 +132,7 @@
       font-size: rem-calc(14);
       line-height: 1;
 
-      @include breakpoint(large) {
+      @include breakpoint(xlarge) {
         position: absolute;
         top: auto;
         right: 0;
