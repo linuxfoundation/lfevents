@@ -3,7 +3,7 @@
   &.is-style-border {
     @extend .padding-border-shadow-defaults;
 
-    &.has-background-dim:not(.has-background-gradient)::before {
+    .wp-block-cover__gradient-background {
       border-radius: 12px;
     }
   }
