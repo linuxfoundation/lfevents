@@ -24,7 +24,7 @@ wp.domReady(
 	 },
 	 {
 			 name: 'border',
-			 label: 'Border',
+			 label: 'Rounded Border',
 	 }
 	 ]
  );
@@ -38,7 +38,7 @@ wp.domReady(
 		},
 		{
 				name: 'border',
-				label: 'Border',
+				label: 'Rounded Border',
 		},
 		{
 				name: 'event-gradient',
