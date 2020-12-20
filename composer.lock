@@ -677,7 +677,7 @@
         },
         {
             "name": "wpackagist-plugin/leadin",
-            "version": "7.48.46",
+            "version": "7.48.63",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/leadin/",
@@ -685,7 +685,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1607522027"
+                "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1608042176"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -731,15 +731,15 @@
         },
         {
             "name": "wpackagist-plugin/photonic",
-            "version": "2.47",
+            "version": "2.60",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/photonic/",
-                "reference": "tags/2.47"
+                "reference": "tags/2.60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/photonic.2.47.zip"
+                "url": "https://downloads.wordpress.org/plugin/photonic.2.60.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -875,15 +875,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
-            "version": "3.1.12",
+            "version": "3.1.13",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
-                "reference": "tags/3.1.12"
+                "reference": "tags/3.1.13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.12.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.13.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
