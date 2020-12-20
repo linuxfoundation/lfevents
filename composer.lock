@@ -677,7 +677,11 @@
         },
         {
             "name": "wpackagist-plugin/leadin",
+<<<<<<< HEAD
             "version": "7.48.46",
+=======
+            "version": "7.48.63",
+>>>>>>> master
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/leadin/",
@@ -685,7 +689,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1607522027"
+=======
+                "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1608042176"
+>>>>>>> master
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -731,6 +739,7 @@
         },
         {
             "name": "wpackagist-plugin/photonic",
+<<<<<<< HEAD
             "version": "2.47",
             "source": {
                 "type": "svn",
@@ -740,6 +749,17 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/photonic.2.47.zip"
+=======
+            "version": "2.60",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/photonic/",
+                "reference": "tags/2.60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/photonic.2.60.zip"
+>>>>>>> master
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -875,6 +895,7 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
+<<<<<<< HEAD
             "version": "3.1.12",
             "source": {
                 "type": "svn",
@@ -884,6 +905,17 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.12.zip"
+=======
+            "version": "3.1.13",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
+                "reference": "tags/3.1.13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.1.13.zip"
+>>>>>>> master
             },
             "require": {
                 "composer/installers": "~1.0"

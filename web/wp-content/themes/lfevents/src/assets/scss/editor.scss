@@ -28,7 +28,7 @@
 @import "components/quote";
 @import "components/separator";
 @import "components/spacer";
-// @import "components/tables";
+// @import "components/tables"; // don't include this, use custom below.
 @import "components/typography";
 
 // Modules.
@@ -91,13 +91,6 @@
   }
 }
 
-// // Make SVGs fill containers (Safe SVG related).
-// img[src$=".svg"] {
-//   width: 100%;
-//   height: auto;
-// }
-
-
 // Make post title look a bit more normal
 .editor-post-title__block .editor-post-title__input {
   @extend h1;
@@ -122,50 +115,3 @@
     line-height: 1;
   }
 }
-
-// .wp-block-table {
-//   .wp-block-table__cell-content {
-//     border: 1px solid blue;
-//   }
-// }
-
-
-// .wp-block-group,
-// .wp-block-cover {
-
-//   .is-style-event-gradient,
-//   .has-background {
-//     .wp-block-table {
-//       table.has-background {
-//         background-color: inherit;
-
-//       }
-//     }
-//   }
-// }
-
-// .block-editor-block-list__layout .block-editor-block-list__block:not([contenteditable]):focus {
-//   outline: 0;
-// }
-
-// /** === Pullquote === */
-// .wp-block-paragraph.has-background {
-//   padding: rem-calc(20px 30px);
-// }
-
-// /** === Latest Posts grid view === */
-// .wp-block-latest-posts.is-grid {
-//   list-style: none;
-// }
-
-// // Fix for Stackable weird behavior with tables.
-// figure.wp-block-table tr div.components-dropdown {
-//   display: none;
-// }
-
-// // copied from editor-style css.
-// body#tinymce {
-//   height: auto; // Fix editor style bug
-//   max-width: $grid-row-width; // Give the editor a max-width
-//   padding: rem-calc(20);
-// }
