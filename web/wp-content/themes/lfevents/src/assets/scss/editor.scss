@@ -28,7 +28,7 @@
 @import "components/quote";
 @import "components/separator";
 @import "components/spacer";
-@import "components/tables";
+// @import "components/tables";
 @import "components/typography";
 
 // Modules.
@@ -60,6 +60,7 @@
 @import "blocks/text-over-img";
 @import "blocks/track-grid";
 
+@import "admin/tables-admin";
 
 // Block Editor - Main column width.
 .wp-block {
@@ -121,6 +122,27 @@
     line-height: 1;
   }
 }
+
+// .wp-block-table {
+//   .wp-block-table__cell-content {
+//     border: 1px solid blue;
+//   }
+// }
+
+
+// .wp-block-group,
+// .wp-block-cover {
+
+//   .is-style-event-gradient,
+//   .has-background {
+//     .wp-block-table {
+//       table.has-background {
+//         background-color: inherit;
+
+//       }
+//     }
+//   }
+// }
 
 // .block-editor-block-list__layout .block-editor-block-list__block:not([contenteditable]):focus {
 //   outline: 0;
