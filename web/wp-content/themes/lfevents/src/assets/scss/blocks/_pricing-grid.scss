@@ -17,7 +17,13 @@
   }
 
   .price-cell {
+
     padding: 0.75rem 1.25rem;
+
+    @media (max-width: 768px) {
+      padding: 0.75rem 0;
+    }
+
     border-width: 0.5rem;
     line-height: 1.2;
     font-weight: bold;
@@ -67,7 +73,7 @@
   }
 
   .price-amount {
-    font-size: 2rem;
+    font-size: 1.2rem;
     text-align: right;
 
     @include breakpoint(large) {
