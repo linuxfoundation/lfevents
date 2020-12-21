@@ -46,12 +46,18 @@ table:not(.wp-block-cgb-block-pricing-block):not(.has-background) {
 // Sets a grey background for default tables.
 .wp-block-table table:not(.has-background):not(.wp-block-cgb-block-pricing-block) {
 
+
+  border-collapse: initial;
+
   &,
   tbody,
   tr,
+  td,
   thead,
   tfoot {
-    background-color: #D3D3D3;
+    outline-style: dashed;
+    outline-color: #D8D8D8;
+    outline-width: 1px;
   }
 }
 
