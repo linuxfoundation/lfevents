@@ -17,13 +17,7 @@
   }
 
   .price-cell {
-
     padding: 0.75rem 1.25rem;
-
-    @media (max-width: 768px) {
-      padding: 0.75rem 0;
-    }
-
     border-width: 0.5rem;
     line-height: 1.2;
     font-weight: bold;
@@ -77,16 +71,14 @@
     text-align: right;
 
     @include breakpoint(large) {
-      font-size: 1rem;
+      font-size: 1.25rem;
       line-height: 1;
       text-align: center;
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
 
-    @include breakpoint(large) {
-      font-size: 1.25rem;
-    }
+
 
     .expired-label {
       display: block;
