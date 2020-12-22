@@ -43,27 +43,43 @@ table:not(.wp-block-cgb-block-pricing-block) {
   }
 }
 
+.wp-block-table table:not(.has-background):not(.wp-block-cgb-block-pricing-block) {
+
+  thead,
+  tfoot {
+    background: inherit;
+  }
+}
+
 .wp-block-table .has-subtle-light-gray-background-color {
-  thead {
+
+  thead,
+  tfoot {
 
     background-color: #f3f4f5;
   }
 }
 
 .wp-block-table .has-subtle-pale-green-background-color {
-  thead {
+
+  thead,
+  tfoot {
     background-color: #e9fbe5;
   }
 }
 
 .wp-block-table .has-subtle-pale-blue-background-color {
-  thead {
+
+  thead,
+  tfoot {
     background-color: #e7f5fe;
   }
 }
 
 .wp-block-table .has-subtle-pale-pink-background-color {
-  thead {
+
+  thead,
+  tfoot {
     background-color: #fcf0ef;
   }
 }

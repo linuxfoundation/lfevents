@@ -49,12 +49,22 @@ table:not(.wp-block-cgb-block-pricing-block):not(.has-background) {
 
   border-collapse: initial;
 
-  &,
-  tbody,
-  tr,
-  td,
   thead,
   tfoot {
+    background: inherit;
+  }
+
+  // td,
+  // th,
+  // tbody,
+  // thead,
+  // tfoot {
+  //   outline-style: dashed;
+  //   outline-color: #D8D8D8;
+  //   outline-width: 1px;
+  // }
+
+  .wp-block-table__cell-content {
     outline-style: dashed;
     outline-color: #D8D8D8;
     outline-width: 1px;
