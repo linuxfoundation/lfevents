@@ -77,19 +77,19 @@
   max-width: none;
 }
 
-// To try and stop an oversized inline image pushing out the screen.
-.wp-block-image {
-  max-width: 100%;
+// // To try and stop an oversized inline image pushing out the screen.
+// .wp-block-image {
+//   max-width: 100%;
 
-  .components-resizable-box__container {
-    display: contents;
-    max-width: 100%;
-  }
+//   .components-resizable-box__container {
+//     // display: contents; // stops the resizer working!
+//     max-width: 100%;
+//   }
 
-  >.wp-block-image {
-    max-width: 100%;
-  }
-}
+//   >.wp-block-image {
+//     max-width: 100%;
+//   }
+// }
 
 // Make post title look a bit more normal
 .editor-post-title__block .editor-post-title__input {
