@@ -23,4 +23,7 @@ PercyScript.run(async (page, percySnapshot) => {
   await page.waitFor(delay);
   await percySnapshot('kubecon-na-cfp');
 
+  await page.goto(rooturl + 'dpdk-summit-apac/');
+  await page.waitFor(delay);
+  await percySnapshot('dpdk');
 });
