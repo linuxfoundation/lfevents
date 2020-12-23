@@ -1,4 +1,4 @@
-table:not(.wp-block-cgb-block-pricing-block) {
+table:not(.wp-block-cgb-block-pricing-block):not(.has-background) {
 
   &,
   tbody,
@@ -43,17 +43,74 @@ table:not(.wp-block-cgb-block-pricing-block) {
   }
 }
 
+// Sets a grey background for default tables.
 .wp-block-table table:not(.has-background):not(.wp-block-cgb-block-pricing-block) {
+
+
+  border-collapse: initial;
 
   thead,
   tfoot {
     background: inherit;
   }
+
+  // td,
+  // th,
+  // tbody,
+  // thead,
+  // tfoot {
+  //   outline-style: dashed;
+  //   outline-color: #D8D8D8;
+  //   outline-width: 1px;
+  // }
+
+  .wp-block-table__cell-content {
+    outline-style: dashed;
+    outline-color: #D8D8D8;
+    outline-width: 1px;
+  }
 }
 
+table:not(.wp-block-cgb-block-pricing-block) {
+
+  td,
+  th {
+    font-size: calc(#{rem-calc(10)} + 0.5vw);
+    box-shadow: inset 0 0 0 9999px $white;
+    border: 2px solid transparent;
+    padding: 0.5rem 1rem;
+
+    @include breakpoint(large) {
+      border: 5px solid transparent;
+      padding: 1rem 2rem;
+      min-width: 250px;
+    }
+
+    thead {
+      background: #f8f8f8;
+      color: $black;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+    strong>em,
+    em>strong {
+      font-family: $font-family-monospace;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 1em; // 1.1
+    }
+  }
+
+}
+
+// make sure the weird standard colors work.
 .wp-block-table .has-subtle-light-gray-background-color {
 
   thead,
+  tr,
   tfoot {
 
     background-color: #f3f4f5;
@@ -63,6 +120,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
 .wp-block-table .has-subtle-pale-green-background-color {
 
   thead,
+  tr,
   tfoot {
     background-color: #e9fbe5;
   }
@@ -71,6 +129,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
 .wp-block-table .has-subtle-pale-blue-background-color {
 
   thead,
+  tr,
   tfoot {
     background-color: #e7f5fe;
   }
@@ -79,6 +138,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
 .wp-block-table .has-subtle-pale-pink-background-color {
 
   thead,
+  tr,
   tfoot {
     background-color: #fcf0ef;
   }
@@ -242,8 +302,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
 
     ul.tabletolist>li>ul>li {
       font-weight: 300;
-      padding: 10px;
-      background-color: $white;
+      padding: 10px
     }
 
     ul.tabletolist>li>ul>li:hover {

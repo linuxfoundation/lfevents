@@ -67,20 +67,18 @@
   }
 
   .price-amount {
-    font-size: 2rem;
+    font-size: 1.2rem;
     text-align: right;
 
     @include breakpoint(large) {
-      font-size: 1rem;
+      font-size: 1.25rem;
       line-height: 1;
       text-align: center;
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
 
-    @include breakpoint(large) {
-      font-size: 1.25rem;
-    }
+
 
     .expired-label {
       display: block;
