@@ -1,6 +1,7 @@
 <?php
 /**
  * Template Name: Multi-part Page with Menu
+ * Template Post Type: page, lfevent2019, lfevent2020, lfevent2021
  *
  * @package FoundationPress
  */
