@@ -41,10 +41,6 @@
 @import "modules/gravityforms";
 @import "modules/photonic";
 @import "modules/post-single";
-@import "blocks/sponsors";
-@import "blocks/track-grid";
-@import "blocks/icon-list";
-@import "blocks/button-with-expiry";
 
 // Blocks
 // Imported blocks as plugins.
@@ -60,37 +56,39 @@
 @import "blocks/text-over-img";
 @import "blocks/track-grid";
 
+// Admin Only.
 @import "admin/tables-admin";
 
 // Block Editor - Main column width.
 .wp-block {
-  max-width: 1200px;
+  max-width: 100%;
+
+  @media (min-width: 1200px) {
+    max-width: 1000px;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 1200px;
+  }
 }
 
 // Block Editor - Width of "wide" blocks.
 .wp-block[data-align="wide"] {
-  max-width: 1200px;
+  max-width: 100%;
+
+  @media (min-width: 1200px) {
+    max-width: 1000px;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 1200px;
+  }
 }
 
 // Block Editor - Width of "full-wide" blocks.
 .wp-block[data-align="full"] {
   max-width: none;
 }
-
-
-// // To try and stop an oversized inline image pushing out the screen.
-// .wp-block-image {
-//   max-width: 100%;
-
-//   .components-resizable-box__container {
-//     // display: contents; // stops the resizer working!
-//     max-width: 100%;
-//   }
-
-//   >.wp-block-image {
-//     max-width: 100%;
-//   }
-// }
 
 // Make post title look a bit more normal
 .editor-post-title__block .editor-post-title__input {
@@ -100,7 +98,7 @@
 // Add padding to make more easily selectable.
 .wp-block-group,
 .wp-block-columns {
-  padding: 35px;
+  padding: 35px 0;
 }
 
 // add guide to group to make more visible in editor.
@@ -112,7 +110,28 @@
     color: #D8D8D8;
     position: absolute;
     left: 1px;
-    top: 2px;
+    top: 0;
     line-height: 1;
+    transform: translateY(-100%);
   }
+}
+
+// add guide to columns to make more visible in editor.
+.wp-block-columns {
+  border: 1px solid #F3F4F5;
+
+  &:before {
+    content: 'COLUMNS BLOCK';
+    color: #D8D8D8;
+    position: absolute;
+    left: 1px;
+    top: 0;
+    line-height: 1;
+    transform: translateY(-100%);
+  }
+}
+
+// Move list discs in to view.
+.block-editor-block-list__block li {
+  margin-left: 1rem;
 }
