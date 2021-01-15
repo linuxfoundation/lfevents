@@ -1,9 +1,18 @@
+// Button Container.
 .wp-block-lf-buttons-with-expiry {
   display: flex;
   flex-wrap: wrap;
 
+  &.alignleft {
+    justify-content: flex-start;
+  }
+
   &.aligncenter {
     justify-content: center;
+  }
+
+  &.alignright {
+    justify-content: flex-end;
   }
 
   .wp-block-lf-button-with-expiry {
@@ -12,6 +21,7 @@
   }
 }
 
+// Singular Buttons.
 .wp-block-lf-button-with-expiry {
   position: relative;
   border-radius: .5rem;

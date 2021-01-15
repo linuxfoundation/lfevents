@@ -1,53 +1,77 @@
 // editor only styles
-.block-editor-block-list__block[data-type="lf/buttons-with-expiry"] {
-    .wp-block {
-        &[data-align="center"] {
-            .block-editor-block-list__layout {
-                display: flex;
-                justify-content: center;
-            }
+
+// Removes Floats and Weird Heights.
+div[data-type="lf/buttons-with-expiry"] {
+
+    .wp-block[data-align="left"]>* {
+        float: none;
+        margin-left: 0;
+        display: block;
+        height: unset;
+    }
+
+    .wp-block[data-align="right"]>* {
+        float: none;
+        margin-left: 0;
+        display: block;
+        height: unset;
+    }
+
+    .wp-block[data-align="left"],
+    .wp-block[data-align="right"] {
+        height: 100%;
+    }
+}
+
+// Alignment.
+div[data-type="lf/buttons-with-expiry"] {
+
+    // should sync with editor wp-blocks style.
+    &.block-editor-block-list__block {
+        max-width: 100%;
+
+        @media (min-width: 1200px) {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        &[data-align="right"] {
-            display: flex;
-            justify-content: flex-end;
-
-            // centers the button + appender.
-            .block-editor-block-list__layout {
-                flex-direction: row-reverse;
-            }
-        }
-
-        &[data-align="left"] {
-            display: inline;
-
-            .block-editor-block-list__layout .wp-block {
-                margin-left: unset;
-                margin-right: unset;
-            }
+        @media (min-width: 1400px) {
+            max-width: 1200px;
         }
     }
 
-    // pushes out the block to 100%.
+    // puts multiple buttons in one row.
+    [data-type="lf/button-with-expiry"] {
+        display: inline-block;
+    }
+
+    // pushes out the width of the container.
     .block-editor-inner-blocks {
         width: 100%;
     }
 
-    .wp-block[data-align="left"]>* {
-        float: unset;
-        margin-right: 0;
+    .wp-block[data-align="center"] {
+        text-align: center;
     }
+
+    .wp-block[data-align="right"] {
+        text-align: right;
+    }
+
+    // align the appender after last button.
+    .block-list-appender {
+        display: inline-block;
+    }
+
 }
 
+// Adds editor guide.
 .wp-block-lf-buttons-with-expiry {
-    width: 100%;
 
     .block-editor-block-list__layout {
         border: 1px solid #F3F4F5;
         position: relative;
-        // centers the button + appender.
-        display: flex;
-        align-items: center;
 
         &:before {
             content: 'BUTTON GROUP';
