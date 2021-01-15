@@ -918,7 +918,33 @@ function dns_prefetch_to_preconnect( $urls, $relation_type ) {
 	}
 
 	if ( 'preconnect' === $relation_type ) {
-			$urls = $unique_urls;
+
+		$urls = array();
+
+		// add custom urls to preconnect.
+		$add_urls = array(
+			'https://js.hscollectedforms.net',
+			'https://js.hs-banner.com',
+			'https://js.hs-analytics.net',
+			'https://js.hsforms.net',
+			'https://js.hs-scripts.com',
+		);
+
+		// add them to the urls list.
+		foreach ( $add_urls as $add_url ) {
+			array_push( $unique_urls, $add_url );
+		}
+
+		// add crossorigin, remove protocol.
+		foreach ( $unique_urls as $url ) {
+			$url = array(
+				'crossorigin',
+				'href' => str_replace( array( 'http:', 'https:' ), '', $url ),
+			);
+
+			// add to urls array.
+			array_push( $urls, $url );
+		}
 	}
 
 	return $urls;
@@ -935,3 +961,20 @@ add_action( 'init', 'lfe_theme_unregister_tags' );
 
 // Disable core block patterns.
 remove_theme_support( 'core-block-patterns' );
+
+/**
+ * Adds Lazy Load to iFrames after shortcode have loaded.
+ *
+ *  @param string $content it the content.
+ */
+function lf_lazy_load_iframe( $content ) {
+
+	return (string) preg_replace(
+		'/<iframe /',
+		'<iframe loading="lazy" ',
+		$content
+	);
+
+}
+
+add_filter( 'the_content', 'lf_lazy_load_iframe', 100 );
