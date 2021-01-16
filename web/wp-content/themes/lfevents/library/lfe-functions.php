@@ -961,20 +961,3 @@ add_action( 'init', 'lfe_theme_unregister_tags' );
 
 // Disable core block patterns.
 remove_theme_support( 'core-block-patterns' );
-
-/**
- * Adds Lazy Load to iFrames after shortcode have loaded.
- *
- *  @param string $content it the content.
- */
-function lf_lazy_load_iframe( $content ) {
-
-	return (string) preg_replace(
-		'/<iframe /',
-		'<iframe loading="lazy" ',
-		$content
-	);
-
-}
-
-add_filter( 'the_content', 'lf_lazy_load_iframe', 100 );
