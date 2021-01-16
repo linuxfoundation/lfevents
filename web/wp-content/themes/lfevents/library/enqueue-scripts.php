@@ -78,7 +78,35 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
 			wp_enqueue_script( 'auth0-config', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ), array( 'lf-auth0', 'auth0' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'auth0.js' ) ), false );
 		}
-	}
 
+		// Conditionally load china.js.
+		$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+		$current_domain  = parse_url( home_url(), PHP_URL_HOST );
+		if ( strpos( $chinese_domains, $current_domain ) ) {
+			// scripts for Chinese-audience sites.
+			wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'china.js' ), array(), '1.2.2', true );
+		}
+
+		// Dequeue the conditional-blocks-front-css.
+		wp_dequeue_style( 'conditional-blocks-front-css' );
+
+		if ( is_front_page() && ! is_admin() ) {
+			wp_deregister_script( 'jquery-ui-datepicker' ); // searchandfilter.
+			wp_dequeue_style( 'wp-block-library' ); // block library is not used on frontpage.
+		}
+
+	}
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
+
+
 endif;
+
+	/**
+	 * Dequeue front page scripts - later.
+	 */
+function lfe_dequeue_front_page_later() {
+	if ( is_front_page() && ! is_admin() ) {
+		wp_dequeue_style( 'photonic' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'lfe_dequeue_front_page_later', 100 );
