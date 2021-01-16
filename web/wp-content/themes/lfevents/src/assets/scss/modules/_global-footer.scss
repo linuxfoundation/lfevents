@@ -1,6 +1,6 @@
 .site-footer {
-  background-color: $charcoal;
-  color: $light-gray;
+  background-color: $lf-grey-700;
+  color: $lf-gray;
   box-shadow: inset 0 10px 0 0 rgba(0, 0, 0, 0.1);
   font-size: rem-calc(12);
   display: flex;
@@ -15,10 +15,12 @@
 
   a {
     color: $white-smoke;
+    font-weight: 400;
+    text-decoration: underline;
 
     &:hover {
       color: #fff;
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
