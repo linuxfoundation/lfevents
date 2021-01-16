@@ -10,7 +10,7 @@
 
 ?>
 
-<footer class="site-footer" role="footer">
+<footer class="site-footer">
 	<section id="text-2" class="widget widget_text"><div class="textwidget">
 		<?php if ( is_lfeventsci() ) { ?>
 			<p>Copyright &copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/" target="_blank" rel="noopener">Trademark Usage</a> page. Linux is a registered trademark of Linus Torvalds.</p>
