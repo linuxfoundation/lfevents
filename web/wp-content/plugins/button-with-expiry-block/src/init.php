@@ -84,8 +84,10 @@ function button_with_expiry_callback( $attributes, $content ) {
 	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
 	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
 
-	// right here right now - New York EST inline with WordPress site.
-	$now = new DateTime( 'now', new DateTimeZone( 'America/New_York' ) );
+	$wordpress_timezone = get_option( 'timezone_string' );
+
+	// right here right now - Pulls in timezone to set to WordPress site time.
+	$now = new DateTime( 'now', new DateTimeZone( $wordpress_timezone ) );
 	$now = $now->format( 'Y-m-d H:i:s' );
 
 	// the expiry time; don't adjust it as already in EST.

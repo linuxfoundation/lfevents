@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { __experimentalGetSettings as getDateSettings } from '@wordpress/date';
 const { registerBlockType } = wp.blocks;
 
 /**
@@ -13,6 +14,17 @@ import save from './save';
 import './editor.scss';
 
 const { category, attributes } = metadata;
+
+// Timezone object from WordPress Settings.
+const { timezone } = getDateSettings();
+
+const offsetTime = () => {
+	// Time now in WordPress Time.
+	const wpTimeSetting = new Date().toLocaleString( 'en-US', { timeZone: timezone.string } );
+	const wpTime = ( Date.parse( wpTimeSetting ) / 1000 );
+
+	return wpTime;
+};
 
 registerBlockType( 'lf/button-with-expiry', {
 	title: __( 'Button With Expiry' ),
@@ -29,7 +41,7 @@ registerBlockType( 'lf/button-with-expiry', {
 		},
 		expireAt: {
 			type: 'number',
-			default: 60 * ( 1440 + Math.ceil( Date.now() / 60000 ) ), // 24 hours from Date.now
+			default: offsetTime(),
 		},
 		expireText: {
 			type: 'string',
