@@ -180,17 +180,6 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 }
 
 /**
- * Theme support
- */
-function lfe_setup_theme_supported_features() {
-
-	// Add support for Block Styles.
-	add_theme_support( 'align-wide' );
-
-}
-add_action( 'after_setup_theme', 'lfe_setup_theme_supported_features' );
-
-/**
  * Returns markup for child pages for the Event menu.
  *
  * @param int     $parent_id Parent ID for Event.
@@ -302,21 +291,6 @@ function lfe_get_sponsors( $parent_id ) {
 	wp_reset_postdata(); // Restore original Post Data.
 
 }
-
-/**
- * Enqueues scripts for lfe stuff.
- */
-function lfe_scripts() {
-
-	$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
-	$current_domain  = parse_url( home_url(), PHP_URL_HOST );
-	if ( strpos( $chinese_domains, $current_domain ) ) {
-		// scripts for Chinese-audience sites.
-		wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'china.js' ), array(), '1.2.2', true );
-	}
-
-}
-add_action( 'wp_enqueue_scripts', 'lfe_scripts' );
 
 /**
  * Removes unneeded admin menu items.
@@ -808,14 +782,6 @@ function lfe_passed_event_banner( $parent_id ) {
 add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );
 
 /**
- * Dequeue the conditional-blocks-front-css.
- */
-function lfe_dequeue_style() {
-	wp_dequeue_style( 'conditional-blocks-front-css' );
-}
-add_action( 'wp_enqueue_scripts', 'lfe_dequeue_style', 100 );
-
-/**
  * Gets HTML for an alert bar inserted at the top of Events when set.
  *
  * @param int $parent_id Parent ID.
@@ -856,18 +822,6 @@ function lfe_event_alert_bar( $parent_id ) {
 }
 
 /**
- * Dequeue some scripts and style from front page only.
- */
-function lfe_dequeue_front_page_style() {
-	if ( is_front_page() && ! is_admin() ) {
-		wp_dequeue_style( 'photonic' );
-		wp_deregister_script( 'jquery-ui-datepicker' ); // searchandfilter.
-	}
-}
-add_action( 'wp_enqueue_scripts', 'lfe_dequeue_front_page_style', 100 );
-
-
-/**
  * A function to test if the page should display non-event menu.
  */
 function show_non_event_menu() {
@@ -877,8 +831,6 @@ function show_non_event_menu() {
 		return false;
 	}
 }
-
-
 
 /**
  * All enqueued styles have dns-prefetch added to them. This changes it to preconnect for extra zip.
@@ -958,6 +910,3 @@ function lfe_theme_unregister_tags() {
 	unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 }
 add_action( 'init', 'lfe_theme_unregister_tags' );
-
-// Disable core block patterns.
-remove_theme_support( 'core-block-patterns' );

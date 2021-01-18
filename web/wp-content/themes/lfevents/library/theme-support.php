@@ -49,6 +49,12 @@ if ( ! function_exists( 'foundationpress_theme_support' ) ) :
 
 		add_theme_support( 'editor-styles' );
 
+		// Add support for Block Styles.
+		add_theme_support( 'align-wide' );
+
+		// Disable core block patterns.
+		remove_theme_support( 'core-block-patterns' );
+
 		// Add foundation.css as editor style https://codex.wordpress.org/Editor_Style.
 		add_editor_style( 'dist/assets/css/' . foundationpress_asset_path( 'editor.css' ) ); //phpcs:ignore.
 	}

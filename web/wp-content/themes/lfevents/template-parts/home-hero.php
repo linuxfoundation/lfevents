@@ -22,7 +22,16 @@
 			<figure class="figure-container">
 			<?php
 			if ( has_post_thumbnail() ) {
-				echo wp_get_attachment_image( get_post_thumbnail_id(), 'fp-medium', false, array( 'class' => '' ) );
+				echo wp_get_attachment_image(
+					get_post_thumbnail_id(),
+					'fp-medium',
+					false,
+					array(
+						'class'    => '',
+						'loading'  => 'eager',
+						'decoding' => 'async',
+					)
+				);
 			}
 			?>
 			</figure>

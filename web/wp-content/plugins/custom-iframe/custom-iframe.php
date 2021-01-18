@@ -59,7 +59,6 @@ function lf_custom_iframe_block_init() {
 		array(
 			'editor_script' => 'lf-custom-iframe-block-editor',
 			'editor_style'  => 'lf-custom-iframe-block-editor',
-			'style'         => 'lf-custom-iframe-block',
 		)
 	);
 }

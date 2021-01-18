@@ -1,10 +1,4 @@
 // editor only styles
-
-
-// $dark-gray-500: #555d66;
-// $grid-unit: 8px;
-// $grid-unit-20: 2 * $grid-unit; // 16px
-
 .wp-block-lf-button-with-expiry {
     [contenteditable] {
         cursor: text;
@@ -37,42 +31,5 @@
     }
 }
 
-// .wp-block-lf-button-with-expiry__inline-link {
-//     color: $dark-gray-500;
-//     height: 0;
-//     overflow: hidden;
-//     max-width: 290px;
-
-//     &-input__suggestions {
-//         max-width: 290px;
-//     }
-
-//     @media (min-width: 782px) {
-//         max-width: 260px;
-
-//         &-input__suggestions {
-//             max-width: 260px;
-//         }
-
-//     }
-
-//     @media (min-width: 960px) {
-//         max-width: 290px;
-
-//         &-input__suggestions {
-//             max-width: 290px;
-//         }
-
-//     }
-
-//     .is-selected & {
-//         height: auto;
-//         overflow: visible;
-//         margin-top: $grid-unit-20;
-//     }
-// }
-
-// // Display "table" is used because the button container should only wrap the content and not takes the full width.
-// div[data-type="lf/button-with-expiry"] {
-//     display: table;
-// }
+// Perhaps this needs to be synced with the repo at some point
+// https://github.com/WordPress/gutenberg/blob/52f53e049db914fe4264d385ddda061dbe7a758b/packages/block-library/src/button/editor.scss
