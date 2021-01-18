@@ -69,7 +69,7 @@ function BorderPanel( { borderRadius = '', setAttributes } ) {
 		[ setAttributes ]
 	);
 	return (
-		<PanelBody title={ __( 'Border Settings' ) }>
+		<PanelBody title={ __( 'Border Settings' ) } initialOpen={ false } >
 			<RangeControl
 				value={ borderRadius }
 				label={ __( 'Border radius' ) }
@@ -226,7 +226,7 @@ function ButtonEdit( {
 				onToggleOpenInNewTab={ onToggleOpenInNewTab }
 			/>
 			<InspectorControls>
-				<PanelColorGradientSettings
+				<PanelColorGradientSettings initialOpen={ false }
 					title={ __( 'Background & Text Color' ) }
 					settings={ [
 						{
@@ -243,7 +243,7 @@ function ButtonEdit( {
 						},
 					] }
 				>
-					<ContrastChecker
+					<ContrastChecker initialOpen={ false }
 						{ ...{
 							// Text is considered large if font size is greater or equal to 18pt or 24px,
 							// currently that's not the case for button.
@@ -259,7 +259,7 @@ function ButtonEdit( {
 					borderRadius={ borderRadius }
 					setAttributes={ setAttributes }
 				/>
-			<PanelBody title={ __( 'Button Size' ) }>
+			<PanelBody title={ __( 'Button Size' ) } initialOpen={ false }>
 				<SelectControl
 					label="Size"
 					value={ size || 'button-large' }
@@ -273,7 +273,7 @@ function ButtonEdit( {
 				/>
 			</PanelBody>
 
-				<PanelBody title={ __( 'Expiry' ) }>
+				<PanelBody title={ __( 'Expiry' ) } initialOpen={ true }>
 					<ToggleControl
 						label={ __( 'Button will expire' ) }
 						onChange={ ( value ) => setAttributes( { willExpire: value } ) }
@@ -297,7 +297,7 @@ function ButtonEdit( {
 						} }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Link settings' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Link settings' ) } initialOpen={ true }>
 					<ToggleControl
 						label={ __( 'Open in new tab' ) }
 						onChange={ onToggleOpenInNewTab }

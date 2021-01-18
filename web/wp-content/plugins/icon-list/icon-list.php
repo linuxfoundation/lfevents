@@ -57,7 +57,6 @@ function lf_icon_list_block_init() {
 		array(
 			'editor_script' => 'lf-icon-list-block-editor',
 			'editor_style'  => 'lf-icon-list-block-editor',
-			'style'         => 'lf-icon-list-block',
 		)
 	);
 }

@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-function button_with_expiry_block_assets() { // phpcs:ignore
+function button_with_expiry_block_assets() {
 	// Register block editor script for backend.
 	wp_register_script(
 		'button_with_expiry-block-js', // Handle.
@@ -58,8 +58,8 @@ function button_with_expiry_block_assets() { // phpcs:ignore
 	register_block_type(
 		'lf/buttons-with-expiry',
 		array(
-			'editor_script'   => 'button_with_expiry-block-js',
-			'editor_style'    => 'button_with_expiry-block-editor-css',
+			'editor_script' => 'button_with_expiry-block-js',
+			'editor_style'  => 'button_with_expiry-block-editor-css',
 		)
 	);
 
@@ -71,20 +71,36 @@ function button_with_expiry_block_assets() { // phpcs:ignore
 	);
 }
 
-// phpcs:disable
+
+/**
+ * Callback
+ *
+ * @param array  $attributes Post attributes.
+ * @param string $content The content.
+ */
 function button_with_expiry_callback( $attributes, $content ) {
+
 	$expire_at   = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
 	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
 	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
-	$time_left   = $expire_at - time();
 
-	if ( $will_expire && $time_left < 0 ) {
+	$wordpress_timezone = get_option( 'timezone_string' );
+
+	// right here right now - Pulls in timezone to set to WordPress site time.
+	$now = new DateTime( 'now', new DateTimeZone( $wordpress_timezone ) );
+	$now = $now->format( 'Y-m-d H:i:s' );
+
+	// the expiry time; don't adjust it as already in EST.
+	$expiry_time = new DateTime( "@$expire_at", new DateTimeZone( 'UTC' ) );
+	$expiry_time = $expiry_time->format( 'Y-m-d H:i:s' );
+
+	if ( $will_expire && $expiry_time < $now ) {
 
 		if ( empty( $expire_text ) ) {
 			return;
 		}
 
-		// strips out mismatched <br> tags that are used with multiple languages
+		// strips out mismatched <br> tags that are used with multiple languages.
 		$content = str_replace( '<br>', '', $content );
 
 		$dom = new DOMDocument();
@@ -93,12 +109,10 @@ function button_with_expiry_callback( $attributes, $content ) {
 		if ( $a ) {
 			$classes = $a->getAttribute( 'class' );
 			$a->setAttribute( 'class', $classes . ' disabled' );
-			$a->nodeValue = $expire_text;
+			$a->nodeValue = $expire_text; // phpcs:ignore
 			return $dom->saveHTML();
 		}
-
 	}
-
 	return $content;
 }
 
