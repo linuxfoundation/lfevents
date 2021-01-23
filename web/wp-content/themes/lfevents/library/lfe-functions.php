@@ -825,7 +825,7 @@ function lfe_event_alert_bar( $parent_id ) {
  * A function to test if the page should display non-event menu.
  */
 function show_non_event_menu() {
-	if ( get_post_meta( get_the_ID(), 'lfes_splash_page', true ) || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() ) {
+	if ( get_post_meta( get_the_ID(), 'lfes_splash_page', true ) || 'lfe_about_page' == get_post_type() || 'post' == get_post_type() || is_404() ) {
 		return true;
 	} else {
 		return false;
