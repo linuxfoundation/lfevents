@@ -22,7 +22,7 @@ get_template_part( 'template-parts/global-header' );
 					<div class="entry-content container wrap">
 						<?php the_content(); ?>
 
-						<div class="wp-block-group has-off-white-background-color has-background"><div class="wp-block-group__inner-container">
+						<div class="wp-block-group has-off-white-background-color has-background is-style-border"><div class="wp-block-group__inner-container">
 
 						<form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
 
