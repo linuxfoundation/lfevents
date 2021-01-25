@@ -386,17 +386,6 @@ class LFEvents_Admin {
 								),
 								array(
 									'type'          => 'checkbox',
-									'id'            => 'visa_request',
-									'data_type'     => 'meta',
-									'data_key'      => 'visa_request',
-									'register_meta' => true,
-									'ui_border_top' => true,
-									'default_value' => false,
-									'use_toggle'    => false,
-									'input_label'   => __( 'List on general visa request form' ),
-								),
-								array(
-									'type'          => 'checkbox',
 									'id'            => 'travel_fund_request',
 									'data_type'     => 'meta',
 									'data_key'      => 'travel_fund_request',
