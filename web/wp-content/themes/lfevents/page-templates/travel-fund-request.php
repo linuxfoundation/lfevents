@@ -13,13 +13,13 @@ wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', ar
 get_template_part( 'template-parts/global-header' );
 ?>
 		<main role="main" id="main" class="main-container-body">
+			<?php get_template_part( 'template-parts/non-event-hero' ); ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<div class="entry-content">
-					<?php get_template_part( 'template-parts/non-event-hero' ); ?>
+					<div class="entry-content container wrap">
 						<?php the_content(); ?>
 
 						<div class="wp-block-group has-off-white-background-color has-background"><div class="wp-block-group__inner-container">
