@@ -63,7 +63,8 @@
   // TODO: The above star selector for max content width is heavy-handed.
   // Refactor content width styles so the following ul fix isn't needed.
 
-  &>ul {
+  &>ul,
+  &>ol {
     padding-left: 1.375rem;
 
     >li {

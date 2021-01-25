@@ -37,7 +37,11 @@
 		<?php
 	}
 	?>
-	<?php wp_head(); ?>
+		<?php // Experimental: If useful, add to preconnect function once hubspot PR is merged. ?>
+		<link rel="preconnect" href="https://bam-cell.nr-data.net" crossorigin />
+		<link rel="preconnect" href="https://edge.fullstory.com" crossorigin />
+
+		<?php wp_head(); ?>
 	<?php lfe_insert_favicon(); ?>
 	<link rel="apple-touch-icon" sizes="180x180"
 		href="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/favicons/' . foundationpress_asset_path( 'apple-touch-icon.png' ); //phpcs:ignore?>">

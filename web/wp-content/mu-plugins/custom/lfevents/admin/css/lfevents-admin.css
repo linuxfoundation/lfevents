@@ -45,6 +45,6 @@
 	background-color: #999;
 }
 
-div.pmc-sidebar input::placeholder {
-	color: #999;
+body.wp-admin div.pmc-sidebar ::placeholder {
+    color: #c4c4c4;
 }
