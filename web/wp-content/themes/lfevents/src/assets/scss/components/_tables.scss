@@ -154,10 +154,12 @@ table:not(.wp-block-cgb-block-pricing-block) {
         margin-right: auto;
         width: 60%;
       }
+    }
+  }
 
-      @media (min-width: 1200px) {
-        width: 50%;
-      }
+  &.is-style-no-wrap {
+    @media (min-width: 768px) {
+      white-space: nowrap;
     }
   }
 }
