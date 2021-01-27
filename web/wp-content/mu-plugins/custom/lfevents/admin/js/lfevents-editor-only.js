@@ -85,6 +85,15 @@ wp.domReady(
 		[ 'stripes' ]
 	);
 	wp.blocks.registerBlockStyle(
+		'core/table',
+	 [
+	 {
+		name: 'no-wrap',
+		label: 'No Text Wrap',
+	},
+	]
+	);
+	wp.blocks.registerBlockStyle(
 		 'core/separator',
 		[
 		{
