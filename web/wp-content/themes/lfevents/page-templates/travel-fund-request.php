@@ -157,7 +157,7 @@ get_template_part( 'template-parts/global-header' );
 										<input type="checkbox" name="group" id="groupLGBTQ" value="LGBTQ"><label for="groupLGBTQ">LGBTQ</label>
 										<input type="checkbox" name="group" id="groupWoman" value="Woman"><label for="groupWoman">Woman</label>
 										<input type="checkbox" name="group" id="groupPoC" value="Person of Color"><label for="groupPoC">Person of Color</label>
-										<input type="checkbox" name="group" id="groupPwD" value="Person with Disability"><label for="groupPwD">Person with Disability</label>
+										<input type="checkbox" name="group" id="groupPwD" value="Person with Disability"><label for="groupPwD">Person with Dis/ability</label>
 										<input type="checkbox" name="group" id="groupOther" onclick="toggleOtherInput(this)" value="Other"><label for="groupOther">Other</label>
 									</fieldset>
 								</div>
