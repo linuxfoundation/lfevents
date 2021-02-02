@@ -216,105 +216,67 @@ if ( ! $splash_page ) :
 
 	<?php
 
-	// check for form action.
-	$form_action = get_post_meta( $parent_id, 'lfes_form_action', true );
+	// setup the form defaults.
+	$form_title      = 'Join our mailing list to hear all the latest about events, news and more';
+	$form_privacy    = 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.';
+	$form_first_name = 'First name';
+	$form_last_name  = 'Last name';
+	$form_email      = 'Email address';
+	$form_submit     = 'SIGN UP!';
 
-	// only show form if form action.
-	if ( $form_action ) :
+	if ( get_post_meta( $parent_id, 'lfes_form_title', true ) ) {
+		$form_title = get_post_meta( $parent_id, 'lfes_form_title', true );
+		$form_title = str_replace( "\n", '<br>', $form_title );
+	}
 
-		// setup the form defaults.
-		$form_title      = 'Join our mailing list to hear all the latest about events, news and more';
-		$form_privacy    = 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.';
-		$form_first_name = 'First name';
-		$form_last_name  = 'Last name';
-		$form_email      = 'Email address';
-		$form_submit     = 'SIGN UP!';
+	if ( get_post_meta( $parent_id, 'lfes_form_privacy', true ) ) {
+		$form_privacy = get_post_meta( $parent_id, 'lfes_form_privacy', true );
+		$form_privacy = str_replace( "\n", '<br>', $form_privacy );
+		$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
+	}
 
-		if ( get_post_meta( $parent_id, 'lfes_form_title', true ) ) {
-			$form_title = get_post_meta( $parent_id, 'lfes_form_title', true );
-			$form_title = str_replace( "\n", '<br>', $form_title );
-		}
+	if ( get_post_meta( $parent_id, 'lfes_form_first_name', true ) ) {
+		$form_first_name = get_post_meta( $parent_id, 'lfes_form_first_name', true );
+	}
 
-		if ( get_post_meta( $parent_id, 'lfes_form_privacy', true ) ) {
-			$form_privacy = get_post_meta( $parent_id, 'lfes_form_privacy', true );
-			$form_privacy = str_replace( "\n", '<br>', $form_privacy );
-			$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
-		}
+	if ( get_post_meta( $parent_id, 'lfes_form_last_name', true ) ) {
+		$form_last_name = get_post_meta( $parent_id, 'lfes_form_last_name', true );
+	}
 
-		if ( get_post_meta( $parent_id, 'lfes_form_first_name', true ) ) {
-			$form_first_name = get_post_meta( $parent_id, 'lfes_form_first_name', true );
-		}
+	if ( get_post_meta( $parent_id, 'lfes_form_email', true ) ) {
+		$form_email = get_post_meta( $parent_id, 'lfes_form_email', true );
+	}
 
-		if ( get_post_meta( $parent_id, 'lfes_form_last_name', true ) ) {
-			$form_last_name = get_post_meta( $parent_id, 'lfes_form_last_name', true );
-		}
+	if ( get_post_meta( $parent_id, 'lfes_form_submit', true ) ) {
+		$form_submit = get_post_meta( $parent_id, 'lfes_form_submit', true );
+	}
 
-		if ( get_post_meta( $parent_id, 'lfes_form_email', true ) ) {
-			$form_email = get_post_meta( $parent_id, 'lfes_form_email', true );
-		}
+	$allowed_elements = array(
+		'href'   => true,
+		'class'  => true,
+		'alt'    => true,
+		'rel'    => true,
+		'target' => true,
+	);
+	?>
 
-		if ( get_post_meta( $parent_id, 'lfes_form_submit', true ) ) {
-			$form_submit = get_post_meta( $parent_id, 'lfes_form_submit', true );
-		}
-
-		$allowed_elements = array(
-			'href'   => true,
-			'class'  => true,
-			'alt'    => true,
-			'rel'    => true,
-			'target' => true,
-		);
-		?>
-
-	<div class="event-footer-newsletter">
-		<p
-			class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
-		<div id="sfmc-message2"></div>
-		<form id="sfmc-form2" action="<?php echo esc_url( $form_action ); ?>"
-			_lpchecked="1">
-			<div class="event-footer-newsletter__form">
-				<label class="medium-6" for="FirstName">
-					<input type="text" name="FirstName"
-						placeholder="<?php echo esc_html( $form_first_name ); ?>"
-						required="">
-				</label>
-				<label class="medium-6" for="LastName">
-					<input type="text" name="LastName"
-						placeholder="<?php echo esc_html( $form_last_name ); ?>"
-						required="">
-				</label>
-				<label for="EmailAddress">
-					<input type="email" name="EmailAddress"
-						placeholder="<?php echo esc_html( $form_email ); ?>"
-						required="">
-				</label>
-				<input class="button" type="submit"
-					value="<?php echo esc_html( $form_submit ); ?>"
-					id="sfmc-submit2"
-					style="border: 1px solid <?php echo esc_html( $menu_text_color ); ?>; color: <?php echo esc_html( $menu_text_color ); ?>">
-				<input type="hidden" name="ownerid" value="00541000002w50ZAAQ">
-				<input type="hidden" id="txtUrl" name="txtUrl" value=""
-					readonly="">
-				<div id="recaptcha-form2" style="display:none;"></div>
-				<script>
-				document.getElementById('txtUrl').value = window.location.href;
-				</script>
-			</div>
-		</form>
-		<p class="event-footer-newsletter__privacy">
-		<?php
-		echo wp_kses(
-			$form_privacy,
-			array(
-				'a' => $allowed_elements,
-				'br' => array(),
-			)
-		);
-		?>
-</p>
-	</div>
-
-	<?php endif; ?>
+<div class="event-footer-newsletter">
+	<p class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
+	<?php
+		echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
+	?>
+	<p class="event-footer-newsletter__privacy">
+	<?php
+	echo wp_kses(
+		$form_privacy,
+		array(
+			'a' => $allowed_elements,
+			'br' => array(),
+		)
+	);
+	?>
+	</p>
+</div>
 
 	<?php
 	// Only display this section if there is a logo set.
