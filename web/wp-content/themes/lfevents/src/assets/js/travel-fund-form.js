@@ -229,7 +229,7 @@ function uploadFiles( lineItems, filesToUpload ) {
 			xhttp.onerror = function() {
 				fail += 1;
 			}
-			xhttp.open( 'POST', 'https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf/travelfundlineitem/' + lineItemId.Id + '/upload', true );
+			xhttp.open( 'POST', 'https://eol357sn43.execute-api.us-east-2.amazonaws.com/prod/api/v1/sf/travelfundlineitem/' + lineItemId.Id + '/upload', true );
 			xhttp.send( fd );
 		}
 	);
