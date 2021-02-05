@@ -88,6 +88,11 @@ $( document ).ready(
 				}
 			}
 		);
+		var urlParams = new URLSearchParams(window.location.search);
+		var event_id = urlParams.get('event_id')
+		if ( event_id ) {
+			$('[name=event]').val( event_id );
+		}
 	}
 );
 
