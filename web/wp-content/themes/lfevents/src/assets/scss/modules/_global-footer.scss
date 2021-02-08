@@ -62,7 +62,8 @@
   padding-right: 20px;
 
   a,
-  button {
+  button,
+  .hs-button {
     color: inherit !important;
     cursor: pointer;
   }
@@ -87,7 +88,8 @@
   font-weight: 500;
 }
 
-.event-footer-newsletter__form {
+.event-footer-newsletter__form, 
+.event-footer-newsletter .hbspt-form {
   display: flex;
   flex-direction: column;
   max-width: 90%;
@@ -103,19 +105,32 @@
     }
   }
 
-  .button {
+  .button,
+  .hs-button {
     background-color: transparent;
     border: 1px solid $white;
     padding: 0.5em 1em;
     box-shadow: none;
     border-radius: .5rem;
     height: 2.4375rem;
+    color: white;
+    font-size: .9rem;
 
     &:active {
       position: relative;
       top: 1px;
     }
 
+  }
+
+  .hs_error_rollup {
+    display: none;
+  }
+
+  div.hs-form-field,
+  div.hs-submit {
+    display: inline-flex;
+    margin-left: 20px;
   }
 }
 
