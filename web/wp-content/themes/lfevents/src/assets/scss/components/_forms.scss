@@ -1,15 +1,87 @@
+div.hs_recaptcha,
 .grecaptcha-badge {
   display: none;
 }
 
-// .hs-form-iframe {
-//   background-color: white;
-// }
+.hbspt-form .hs-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
 
-// .hbspt-form {
-//   background-image: url('/wp-content/themes/lfevents/dist/assets/images/loading-spinner.svg');
-//   background-position: 50px 20px;
-//   background-repeat: no-repeat;
-//   background-size: auto;
-//   min-height: 130px;
-// }
+  input {
+    margin-top: .4rem;
+    margin-bottom: 0;
+  }
+
+
+  @media (min-width: 660px) {
+    flex-direction: row;
+    justify-content: center;
+
+    >*:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    input {
+      margin-top: 0;
+    }
+  
+  }
+
+  .button,
+  .hs-button {
+    background-color: transparent;
+    border: 1px solid $white;
+    padding: 0.5em 1em;
+    box-shadow: none;
+    border-radius: .5rem;
+    height: 2.4375rem;
+    color: white;
+    font-size: .9rem;
+
+    &:active {
+      position: relative;
+      top: 1px;
+    }
+
+  }
+
+  .hs_error_rollup {
+    display: none;
+  }
+
+  ul.hs-error-msgs {
+    list-style-type: none;
+    margin-bottom: .6rem;
+    margin-left: 0;
+
+    @media (min-width: 660px) {
+      margin-bottom: 0;
+    }
+
+    label.hs-error-msg {
+      color: white;
+      font-style: italic;
+      font-size: 0.725em;
+      display: block;
+      margin-right: 8px;
+    }
+  }
+}
+
+.hbspt-form .submitted-message {
+  padding: 0.8em;
+  max-width: 900px;
+  margin: 1rem auto;
+  text-align: center;
+  font-weight: 600;
+  border: 2px solid white;
+
+  p {
+    margin-bottom: 0;
+    color: white;
+  }  
+}
