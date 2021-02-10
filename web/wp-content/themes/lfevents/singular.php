@@ -231,22 +231,6 @@ if ( ! $splash_page ) :
 		$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
 	}
 
-	if ( get_post_meta( $parent_id, 'lfes_form_first_name', true ) ) {
-		$form_first_name = get_post_meta( $parent_id, 'lfes_form_first_name', true );
-	}
-
-	if ( get_post_meta( $parent_id, 'lfes_form_last_name', true ) ) {
-		$form_last_name = get_post_meta( $parent_id, 'lfes_form_last_name', true );
-	}
-
-	if ( get_post_meta( $parent_id, 'lfes_form_email', true ) ) {
-		$form_email = get_post_meta( $parent_id, 'lfes_form_email', true );
-	}
-
-	if ( get_post_meta( $parent_id, 'lfes_form_submit', true ) ) {
-		$form_submit = get_post_meta( $parent_id, 'lfes_form_submit', true );
-	}
-
 	$allowed_elements = array(
 		'href'   => true,
 		'class'  => true,
