@@ -219,10 +219,6 @@ if ( ! $splash_page ) :
 	// setup the form defaults.
 	$form_title      = 'Join our mailing list to hear all the latest about events, news and more';
 	$form_privacy    = 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.';
-	$form_first_name = 'First name';
-	$form_last_name  = 'Last name';
-	$form_email      = 'Email address';
-	$form_submit     = 'SIGN UP!';
 
 	if ( get_post_meta( $parent_id, 'lfes_form_title', true ) ) {
 		$form_title = get_post_meta( $parent_id, 'lfes_form_title', true );
