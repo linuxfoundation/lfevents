@@ -56,7 +56,7 @@ function onTFSubmit(token) {
 			let response = JSON.parse( this.responseText );
 			if ( response.status === 0 ) {
 				let msg = response.message;
-				if ( msg.includes( "DUPLICATE_VALUE" ) ) {
+				if ( msg.includes( "DUPLICATES_DETECTED" ) ) {
 					$( "#message" ).html( "ERROR: You have already submitted a travel funding request for this event. Please contact travelfund@linuxfoundation.org for further assistance." ).removeClass( "warning" ).addClass( "alert" );
 					message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 				}
