@@ -27,7 +27,6 @@ get_template_part( 'template-parts/global-header' );
 			<?php is_lfeventsci() && get_template_part( 'template-parts/calendar-buttons' ); ?>
 
 		</div>
-		</div>
 	</article>
 	<?php endwhile; ?>
 </main>
