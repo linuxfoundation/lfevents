@@ -11,40 +11,17 @@
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 
 if ( show_non_event_menu() && ! $splash_page ) :
+	// show the homepage hub footer.
+	$menu_text_color = 'white';
 	?>
-
 	<section class="event-footer xlarge-padding-y is-style-lf-blue-gradient" role="footer">
-
-		<?php
-		$menu_text_color = 'white';
-		// setup the form defaults.
-		$form_title      = 'Join our mailing list to hear all the latest about events, news and more';
-		$form_privacy    = 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.';
-
-		$allowed_elements = array(
-			'href'   => true,
-			'class'  => true,
-			'alt'    => true,
-			'rel'    => true,
-			'target' => true,
-		);
-		?>
-
 	<div class="event-footer-newsletter">
-		<p class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
+		<p class="event-footer-newsletter__title">Join our mailing list to hear all the latest about events, news and more</p>
 		<?php
 			echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
 		?>
 		<p class="event-footer-newsletter__privacy">
-		<?php
-		echo wp_kses(
-			$form_privacy,
-			array(
-				'a' => $allowed_elements,
-				'br' => array(),
-			)
-		);
-		?>
+		The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.
 		</p>
 	</div>
 
@@ -100,9 +77,9 @@ if ( show_non_event_menu() && ! $splash_page ) :
 
 		if ( $hashtag ) {
 			?>
-		<div class="event-footer-logo-social__hashtag">
-			<p><?php echo esc_html( $hashtag ); ?></p>
-		</div>
+			<div class="event-footer-logo-social__hashtag">
+				<p><?php echo esc_html( $hashtag ); ?></p>
+			</div>
 		<?php } ?>
 	</div>
 	</section>
