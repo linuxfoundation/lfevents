@@ -8,7 +8,9 @@
  * @since FoundationPress 1.0.0
  */
 
-if ( show_non_event_menu() ) :
+$splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
+
+if ( show_non_event_menu() && ! $splash_page ) :
 	?>
 
 	<section class="event-footer xlarge-padding-y is-style-lf-blue-gradient" role="footer">
