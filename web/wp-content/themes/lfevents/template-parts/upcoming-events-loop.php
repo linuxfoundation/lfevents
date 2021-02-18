@@ -51,12 +51,12 @@
 				$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 				$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
 				$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
-		
+
 				$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 				$sponsor_date_end = get_post_meta( $post->ID, 'lfes_cta_sponsor_date_end', true );
-		
+
 				$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
-		
+
 				$description = get_post_meta( $post->ID, 'lfes_description', true );
 				?>
 
