@@ -81,6 +81,31 @@
 
 .event-footer-newsletter {
   margin-bottom: 3rem;
+
+  &.black {
+    .hs-button {
+    border: 1px solid black;
+  }
+
+  .hs-error-msg {
+    color: black;
+  }
+
+  .submitted-message {
+    border: 2px solid black;
+
+    p {
+      margin-bottom: 0;
+      color: black;
+    }
+  }
+  }
+
+  &.white {
+    .hs-button {
+    border: 1px solid $white;
+    }
+  }
 }
 
 .event-footer-newsletter__title {
@@ -90,9 +115,12 @@
 
 .event-footer-newsletter__privacy {
   font-size: 0.7em;
-  max-width: 800px;
+  max-width: 85%;
   margin-left: auto;
   margin-right: auto;
+  @media (min-width: 768px) {
+    max-width: 800px;
+  }
 
   a {
     font-weight: 600;
