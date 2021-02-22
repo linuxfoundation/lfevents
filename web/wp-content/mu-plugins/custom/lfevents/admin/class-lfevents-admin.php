@@ -196,7 +196,7 @@ class LFEvents_Admin {
 		register_post_type( 'lfe_sponsor', $opts );
 
 		$opts = array(
-			'labels'              => array(
+			'labels'             => array(
 				'name'          => __( 'Community Events' ),
 				'singular_name' => __( 'Community Event' ),
 				'all_items'     => __( 'All Community Events' ),
@@ -204,13 +204,13 @@ class LFEvents_Admin {
 			'public'             => false, // not publicly viewable.
 			'publicly_queryable' => false, // not publicly queryable.
 			'show_ui'            => true, // But still show admin UI.
-			'has_archive'         => false,
-			'show_in_nav_menus'   => false,
-			'show_in_rest'        => true,
-			'hierarchical'        => true,
-			'menu_icon'           => 'dashicons-admin-site',
-			'rewrite'             => array( 'slug' => 'community' ),
-			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
+			'has_archive'        => false,
+			'show_in_nav_menus'  => false,
+			'show_in_rest'       => true,
+			'hierarchical'       => true,
+			'menu_icon'          => 'dashicons-admin-site',
+			'rewrite'            => array( 'slug' => 'community' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
 		);
 
 		register_post_type( 'lfe_community_event', $opts );
@@ -249,9 +249,9 @@ class LFEvents_Admin {
 			'singular_name' => _x( 'Event Category', 'taxonomy singular name' ),
 		);
 		$args   = array(
-			'labels'       => $labels,
-			'show_in_rest' => true,
-			'hierarchical' => true,
+			'labels'             => $labels,
+			'show_in_rest'       => true,
+			'hierarchical'       => true,
 			'public'             => false, // not publicly viewable.
 			'publicly_queryable' => false, // not publicly queryable.
 			'show_ui'            => true, // But still show admin UI.
@@ -792,7 +792,7 @@ class LFEvents_Admin {
 									'ui_border_top' => true,
 									'default_value' => '',
 									'placeholder'   => __( 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our [Privacy Policy](https://www.linuxfoundation.org/privacy/).' ),
-								)
+								),
 							),
 						),
 						array(
