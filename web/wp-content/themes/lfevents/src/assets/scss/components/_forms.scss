@@ -28,7 +28,7 @@ div.hs_recaptcha,
     input {
       margin-top: 0;
     }
-  
+
   }
 
   .button,
@@ -48,6 +48,10 @@ div.hs_recaptcha,
       top: 1px;
     }
 
+    &:hover {
+      background-color: rgba(#000000, 0.1);
+    }
+
     @media (max-width: 700px) {
       width: 100%;
     }
@@ -58,7 +62,7 @@ div.hs_recaptcha,
     display: none;
   }
 
-  ul.hs-error-msgs {
+  .hs-error-msgs {
     list-style-type: none;
     margin-bottom: .6rem;
     margin-left: 0;
@@ -67,15 +71,15 @@ div.hs_recaptcha,
     @media (min-width: 700px) {
       margin-bottom: 0;
     }
+  }
 
-    label.hs-error-msg {
+   .hs-error-msg {
       color: white;
       font-style: italic;
       font-size: 0.725em;
       display: block;
       margin-right: 8px;
     }
-  }
 }
 
 .hbspt-form .submitted-message {
@@ -89,5 +93,5 @@ div.hs_recaptcha,
   p {
     margin-bottom: 0;
     color: white;
-  }  
+  }
 }

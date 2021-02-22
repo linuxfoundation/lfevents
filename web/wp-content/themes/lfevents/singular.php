@@ -240,7 +240,7 @@ if ( ! $splash_page ) :
 	);
 	?>
 
-<div class="event-footer-newsletter">
+<div class="event-footer-newsletter <?php echo esc_html( $menu_text_color ); ?>">
 	<p class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
 	<?php
 		echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
@@ -288,10 +288,10 @@ if ( ! $splash_page ) :
 			// if no custom social links are set, fallback to defaults for LF.
 			if ( ! $wechat && ! $linkedin && ! $qq && ! $youtube && ! $facebook && ! $twitter && ! $instagram ) {
 
+				$twitter   = 'https://twitter.com/linuxfoundation';
 				$linkedin  = 'https://www.linkedin.com/company/the-linux-foundation/';
 				$youtube   = 'https://www.youtube.com/user/TheLinuxFoundation';
 				$facebook  = 'https://www.facebook.com/TheLinuxFoundation/';
-				$twitter   = 'https://twitter.com/linuxfoundation';
 				$instagram = 'https://www.instagram.com/linux_foundation';
 
 			}
