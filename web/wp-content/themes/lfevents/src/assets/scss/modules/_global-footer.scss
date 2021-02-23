@@ -65,7 +65,6 @@
   button,
   .hs-button {
     color: inherit !important;
-    cursor: pointer;
   }
 
   // wechat display.
@@ -84,26 +83,26 @@
 
   &.black {
     .hs-button {
-    border: 1px solid black;
-  }
+      border: 1px solid black;
+    }
 
-  .hs-error-msg {
-    color: black;
-  }
-
-  .submitted-message {
-    border: 2px solid black;
-
-    p {
-      margin-bottom: 0;
+    .hs-error-msg {
       color: black;
     }
-  }
+
+    .submitted-message {
+      border: 2px solid black;
+
+      p {
+        margin-bottom: 0;
+        color: black;
+      }
+    }
   }
 
   &.white {
     .hs-button {
-    border: 1px solid $white;
+      border: 1px solid $white;
     }
   }
 }
@@ -149,7 +148,6 @@
 }
 
 .event-footer-logo-social__logo {
-
   @media (max-width: 767px) {
     width: 200px;
     margin-left: auto;
@@ -197,7 +195,6 @@
     }
   }
 
-
   &.black svg {
     fill: black;
   }
@@ -210,7 +207,6 @@
     width: 2.5rem;
     height: 2.5rem;
     display: block;
-
   }
 }
 
@@ -244,7 +240,8 @@
         // default dot - black.
         content: " ";
         letter-spacing: 2em;
-        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=') center center no-repeat;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=")
+          center center no-repeat;
       }
 
       a {
@@ -258,7 +255,6 @@
         // makes dot between elements white in colour.
         filter: invert(1000%) brightness(1000%) contrast(1000%);
       }
-
     }
   }
 
@@ -299,7 +295,6 @@
   @media (min-width: 1200px) {
     margin-left: 50px;
   }
-
 }
 
 .event-footer-alignment {
