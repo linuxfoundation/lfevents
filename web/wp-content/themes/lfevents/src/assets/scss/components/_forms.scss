@@ -12,23 +12,21 @@ div.hs_recaptcha,
   margin-bottom: 1rem;
 
   input {
-    margin-top: .4rem;
+    margin-top: 0.4rem;
     margin-bottom: 0;
   }
-
 
   @media (min-width: 700px) {
     flex-direction: row;
     justify-content: center;
 
-    >*:not(:last-child) {
+    > *:not(:last-child) {
       margin-right: 10px;
     }
 
     input {
       margin-top: 0;
     }
-
   }
 
   .button,
@@ -37,11 +35,12 @@ div.hs_recaptcha,
     border: 1px solid $white;
     padding: 0.5em 1em;
     box-shadow: none;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     height: 2.4375rem;
     color: white;
-    font-size: .9rem;
+    font-size: 0.9rem;
     white-space: nowrap;
+    cursor: pointer;
 
     &:active {
       position: relative;
@@ -55,7 +54,6 @@ div.hs_recaptcha,
     @media (max-width: 700px) {
       width: 100%;
     }
-
   }
 
   .hs_error_rollup {
@@ -64,7 +62,7 @@ div.hs_recaptcha,
 
   .hs-error-msgs {
     list-style-type: none;
-    margin-bottom: .6rem;
+    margin-bottom: 0.6rem;
     margin-left: 0;
     text-align: left;
 
@@ -73,13 +71,13 @@ div.hs_recaptcha,
     }
   }
 
-   .hs-error-msg {
-      color: white;
-      font-style: italic;
-      font-size: 0.725em;
-      display: block;
-      margin-right: 8px;
-    }
+  .hs-error-msg {
+    color: white;
+    font-style: italic;
+    font-size: 0.725em;
+    display: block;
+    margin-right: 8px;
+  }
 }
 
 .hbspt-form .submitted-message {
