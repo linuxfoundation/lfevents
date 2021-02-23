@@ -10,8 +10,9 @@
 
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 
-if ( show_non_event_menu() && ! $splash_page ) :
+if ( false && show_non_event_menu() && ! $splash_page ) :
 	// show the homepage hub footer.
+	// TODO: Remove false in if statement to show on non-event pages.
 	// TODO: Diverge style from event-footer class structure.
 	?>
 <section class="event-footer xlarge-padding-y is-style-lf-blue-gradient"
