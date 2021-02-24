@@ -24,80 +24,91 @@ get_template_part( 'template-parts/global-header' );
 
 						<div class="wp-block-group has-off-white-background-color has-background is-style-border"><div class="wp-block-group__inner-container">
 
-						<form id="travelFundForm" action="https://ne34cd7nl9.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf">
-
-							<div class="grid-x grid-margin-x">
-								<div class="cell medium-7">
-									<label>
-										Select the event for which you would like to request travel funding:
-										<select name="event" id="event">
-											<?php
-											$args = array(
-												'post_type'   => 'page',
-												'post_parent' => 0,
-												'no_found_rows' => true,  // used to improve performance.
-												'meta_query' => array(
-													'relation' => 'AND',
-													array(
-														'key'     => 'lfes_event_has_passed',
-														'compare' => '!=',
-														'value' => '1',
+						<form id="travelFundForm" action="https://eol357sn43.execute-api.us-east-2.amazonaws.com/prod/api/v1/sf">
+							<?php
+							if ( isset( $_GET['event_id'] ) ) {
+								$event_id = filter_var( wp_unslash( $_GET['event_id'] ), FILTER_SANITIZE_STRING );
+							}
+							if ( $event_id ) {
+								echo '<input type="hidden" name="event" value="' . esc_attr( $event_id ) . '">';
+							} else {
+								?>
+								<div class="grid-x grid-margin-x">
+									<div class="cell medium-7">
+										<label>
+											Select the event for which you would like to request travel funding:
+											<select name="event" id="event">
+												<?php
+												$args = array(
+													'post_type'   => 'page',
+													'post_parent' => 0,
+													'no_found_rows' => true,  // used to improve performance.
+													'meta_query' => array(
+														'relation' => 'AND',
+														array(
+															'key'     => 'lfes_event_has_passed',
+															'compare' => '!=',
+															'value' => '1',
+														),
+														array(
+															'key'     => 'lfes_travel_fund_request',
+															'compare' => '=',
+															'value' => '1',
+														),
 													),
-													array(
-														'key'     => 'lfes_travel_fund_request',
-														'compare' => '=',
-														'value' => '1',
-													),
-												),
-												'orderby'   => 'title',
-												'order'     => 'ASC',
-												'posts_per_page' => 100,
-											);
-											$the_query = new WP_Query( $args );
+													'orderby'   => 'title',
+													'order'     => 'ASC',
+													'posts_per_page' => 100,
+												);
+												$the_query = new WP_Query( $args );
 
-											if ( $the_query->have_posts() ) {
-												while ( $the_query->have_posts() ) {
-													$the_query->the_post();
-													$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
-													if ( $salesforce_id ) {
-														echo '<option value="' . esc_html( $salesforce_id ) . '" >' . esc_html( get_the_title() ) . '</option>';
+												if ( $the_query->have_posts() ) {
+													while ( $the_query->have_posts() ) {
+														$the_query->the_post();
+														$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
+														if ( $salesforce_id ) {
+															echo '<option value="' . esc_html( $salesforce_id ) . '" >' . esc_html( get_the_title() ) . '</option>';
+														}
 													}
 												}
-											}
-											wp_reset_postdata(); // Restore original Post Data.
-											?>
-											<option value="a0A2M00000VHQAMUA5">Other</option>
-										</select>
-									</label>
+												wp_reset_postdata(); // Restore original Post Data.
+												?>
+												<option value="a0A2M00000VHQAMUA5">Other</option>
+											</select>
+										</label>
+									</div>
+
+									<div class="cell medium-6 other-event-div" style="display:none">
+										<label>
+											Event Name *
+											<input class="other-event-input" type="text" name="otherEventName" id="otherEventName">
+										</label>
+									</div>
+									<div class="cell medium-6 other-event-div" style="display:none">
+										<label>
+											Event Location *
+											<input class="other-event-input" type="text" name="otherEventLocation" id="otherEventLocation">
+										</label>
+									</div>
+									<div class="cell medium-6 other-event-div" style="display:none">
+										<label>
+											Event Start Date (MM/DD/YYYY) *
+											<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventStartDate" id="otherEventStartDate">
+										</label>
+									</div>
+									<div class="cell medium-6 other-event-div" style="display:none">
+										<label>
+											Event End Date (MM/DD/YYYY) *
+											<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventEndDate" id="otherEventEndDate">
+										</label>
+									</div>
 								</div>
 
-								<div class="cell medium-6 other-event-div" style="display:none">
-									<label>
-										Event Name *
-										<input class="other-event-input" type="text" name="otherEventName" id="otherEventName">
-									</label>
-								</div>
-								<div class="cell medium-6 other-event-div" style="display:none">
-									<label>
-										Event Location *
-										<input class="other-event-input" type="text" name="otherEventLocation" id="otherEventLocation">
-									</label>
-								</div>
-								<div class="cell medium-6 other-event-div" style="display:none">
-									<label>
-										Event Start Date (MM/DD/YYYY) *
-										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventStartDate" id="otherEventStartDate">
-									</label>
-								</div>
-								<div class="cell medium-6 other-event-div" style="display:none">
-									<label>
-										Event End Date (MM/DD/YYYY) *
-										<input class="other-event-input" type="text" pattern="(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d" placeholder="MM/DD/YYYY" name="otherEventEndDate" id="otherEventEndDate">
-									</label>
-								</div>
-							</div>
+								<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
 
-							<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
+								<?php
+							}
+							?>
 
 							<div class="grid-x grid-margin-x">
 								<div class="cell medium-6">

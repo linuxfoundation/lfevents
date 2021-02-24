@@ -47,10 +47,17 @@
 				}
 
 				$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
-				$speak_url    = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
-				$sponsor_url  = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+
+				$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
+				$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
+				$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
+
+				$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+				$sponsor_date_end = get_post_meta( $post->ID, 'lfes_cta_sponsor_date_end', true );
+
 				$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
-				$description  = get_post_meta( $post->ID, 'lfes_description', true );
+
+				$description = get_post_meta( $post->ID, 'lfes_description', true );
 				?>
 
 				<div id="post-<?php the_ID(); ?>" class="cell medium-6">
@@ -90,27 +97,35 @@
 					</p>
 
 					<p class="homepage--call-to-action">
-						<?php
-						if ( $register_url ) {
-							echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';
-						}
+					<?php
+					$have_button = false;
+					$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
+					$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 
-						if ( $speak_url ) {
-							echo '<a aria-label="Speak at ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $speak_url ) . '">Speak</a>';
-						}
+					if ( $register_url ) {
+						echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';
+						$have_button = true;
+					}
 
-						if ( $sponsor_url ) {
-							echo '<a aria-label="Sponsor ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
-						}
+					if ( $speak_url && strtotime( $cfp_date_end ) >= $time && strtotime( $cfp_date_start ) <= $time ) {
+						echo '<a aria-label="Speak at ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $speak_url ) . '">Speak</a>';
+						$have_button = true;
+					}
 
-						if ( $schedule_url ) {
-							echo '<a aria-label="View schedule for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $schedule_url ) . '">Schedule</a>';
-						}
+					if ( $sponsor_url && ( ! $sponsor_date_end || strtotime( $sponsor_date_end ) >= $time ) ) {
+						echo '<a aria-label="Sponsor ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $sponsor_url ) . '">Sponsor</a>';
+						$have_button = true;
+					}
 
-						if ( ! $register_url && ! $speak_url && ! $sponsor_url && ! $schedule_url ) {
-							echo '<a aria-label="Learn more about ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
-						}
-						?>
+					if ( $schedule_url ) {
+						echo '<a aria-label="View schedule for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $schedule_url ) . '">Schedule</a>';
+						$have_button = true;
+					}
+
+					if ( ! $have_button ) {
+						echo '<a aria-label="Learn more about ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
+					}
+					?>
 					</p>
 
 				</div>
