@@ -225,16 +225,16 @@
         },
         {
             "name": "pantheon-systems/wordpress-composer",
-            "version": "5.6.1",
+            "version": "5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pantheon-systems/wordpress-composer.git",
-                "reference": "cfe328d6443c86269d77da30ab5e1ca8e59b02c0"
+                "reference": "6951d449d666030bb3d038964bf95ffeb2a8d896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/cfe328d6443c86269d77da30ab5e1ca8e59b02c0",
-                "reference": "cfe328d6443c86269d77da30ab5e1ca8e59b02c0",
+                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/6951d449d666030bb3d038964bf95ffeb2a8d896",
+                "reference": "6951d449d666030bb3d038964bf95ffeb2a8d896",
                 "shasum": ""
             },
             "require": {
@@ -252,10 +252,10 @@
             ],
             "description": "WordPress for Pantheon with a composer.json file.",
             "support": {
-                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/5.6.1",
+                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/5.6.2",
                 "issues": "https://github.com/pantheon-systems/wordpress-composer/issues"
             },
-            "time": "2021-02-03T23:10:38+00:00"
+            "time": "2021-02-22T17:10:41+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -419,7 +419,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -658,15 +658,15 @@
         },
         {
             "name": "wpackagist-plugin/flying-scripts",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/flying-scripts/",
-                "reference": "tags/1.2.0"
+                "reference": "tags/1.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/flying-scripts.1.2.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/flying-scripts.1.2.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -694,7 +694,7 @@
         },
         {
             "name": "wpackagist-plugin/leadin",
-            "version": "7.51.0",
+            "version": "7.51.108",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/leadin/",
@@ -702,7 +702,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1612283063"
+                "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1614100027"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -748,15 +748,15 @@
         },
         {
             "name": "wpackagist-plugin/photonic",
-            "version": "2.67",
+            "version": "2.70",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/photonic/",
-                "reference": "tags/2.67"
+                "reference": "tags/2.70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/photonic.2.67.zip"
+                "url": "https://downloads.wordpress.org/plugin/photonic.2.70.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -856,15 +856,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-mail-smtp/",
-                "reference": "tags/2.5.1"
+                "reference": "tags/2.6.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.2.5.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.2.6.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -934,12 +934,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "f7d723a10c7cb36e11430182f5813ecb1b887da0"
+                "reference": "640ff0b5dcacc0958534c8c0255b90697f3eb2a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f7d723a10c7cb36e11430182f5813ecb1b887da0",
-                "reference": "f7d723a10c7cb36e11430182f5813ecb1b887da0",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/640ff0b5dcacc0958534c8c0255b90697f3eb2a8",
+                "reference": "640ff0b5dcacc0958534c8c0255b90697f3eb2a8",
                 "shasum": ""
             },
             "conflict": {
@@ -957,6 +957,7 @@
                 "barrelstrength/sprout-forms": "<3.9",
                 "baserproject/basercms": ">=4,<=4.3.6|>=4.4,<4.4.1",
                 "bolt/bolt": "<3.7.1",
+                "bolt/core": "<4.1.13",
                 "brightlocal/phpwhois": "<=4.2.5",
                 "buddypress/buddypress": "<5.1.2",
                 "bugsnag/bugsnag-laravel": ">=2,<2.0.2",
@@ -1056,7 +1057,7 @@
                 "october/backend": ">=1.0.319,<1.0.470",
                 "october/cms": "= 1.0.469|>=1.0.319,<1.0.469",
                 "october/october": ">=1.0.319,<1.0.466",
-                "october/rain": ">=1.0.319,<1.0.468",
+                "october/rain": "<1.0.472|>=1.1,<1.1.2",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
@@ -1100,7 +1101,7 @@
                 "sensiolabs/connect": "<4.2.3",
                 "serluck/phpwhois": "<=4.2.6",
                 "shopware/core": "<=6.3.4",
-                "shopware/platform": "<=6.3.4",
+                "shopware/platform": "<=6.3.5",
                 "shopware/shopware": "<5.6.9",
                 "silverstripe/admin": ">=1.0.3,<1.0.4|>=1.1,<1.1.1",
                 "silverstripe/assets": ">=1,<1.4.7|>=1.5,<1.5.2",
@@ -1181,6 +1182,7 @@
                 "ua-parser/uap-php": "<3.8",
                 "usmanhalalit/pixie": "<1.0.3|>=2,<2.0.2",
                 "verot/class.upload.php": "<=1.0.3|>=2,<=2.0.4",
+                "vrana/adminer": "<4.7.9",
                 "wallabag/tcpdf": "<6.2.22",
                 "willdurand/js-translation-bundle": "<2.1.1",
                 "yii2mod/yii2-cms": "<1.9.2",
@@ -1247,7 +1249,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-02T10:05:32+00:00"
+            "time": "2021-02-18T21:02:27+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
