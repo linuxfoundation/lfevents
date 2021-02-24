@@ -82,11 +82,8 @@ endif;
 	</section>
 	<?php dynamic_sidebar( 'footer-widgets' ); ?>
 </footer>
-
-<?php get_template_part( 'template-parts/cookie-banner' ); ?>
-
-<?php wp_footer(); ?>
 </div> <!-- end .site-container -->
+<?php get_template_part( 'template-parts/cookie-banner' ); ?>
+<?php wp_footer(); ?>
 </body>
-
 </html>
