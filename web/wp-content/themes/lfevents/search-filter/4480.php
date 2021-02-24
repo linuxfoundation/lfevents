@@ -96,7 +96,7 @@ if ( $query->have_posts() ) {
 				<?php
 
 				$have_button = false;
-				$pacific_tz = new DateTimeZone( '-0800' ); // timezone for Pacific Time.
+				$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
 				$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 
 				if ( $register_url ) {
