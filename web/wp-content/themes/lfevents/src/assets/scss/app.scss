@@ -1,8 +1,8 @@
 @charset 'utf-8';
 
-@import 'settings';
-@import 'foundation';
-@import 'motion-ui';
+@import "settings";
+@import "foundation";
+@import "motion-ui";
 
 @include foundation-global-styles;
 //@include foundation-grid;
@@ -77,6 +77,7 @@
 // Made up of components/needing their own styling.
 @import "modules/cookie-banner";
 @import "modules/event-calendar";
+@import "modules/event-footer";
 @import "modules/event-header";
 @import "modules/event-listing";
 @import "modules/event-subpage";
