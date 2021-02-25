@@ -10,13 +10,21 @@
 
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true ); ?>
 
-<footer
-	class="lf-footer has-lf-primary-700-background-color has-white-color">
+<?php
 
-	<?php
-	// Show newsletter and social on non-event pages.
-	if ( show_non_event_menu() && ! $splash_page ) :
-		?>
+if ( show_non_event_menu() && ! $splash_page ) {
+	$footer_classes = 'lf-footer has-lf-primary-700-background-color has-white-color';
+} else {
+	$footer_classes = 'site-footer';
+}
+?>
+<footer
+	class="<?php echo esc_html( $footer_classes ); ?>">
+
+<?php
+	// Show newsletter on non-event pages.
+if ( show_non_event_menu() && ! $splash_page ) :
+	?>
 	<section class="lf-footer__newsletter container wrap">
 
 		<h4 class="lf-footer__title">Join the Linux Foundation mailing list to
@@ -30,46 +38,7 @@ $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true ); ?>
 		The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. By submitting this form, you acknowledge that your information is subject to The Linux Foundation's <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.
 		</p>
 	</section>
-
-	<section class="lf-footer__social container wrap">
-
-		<?php
-		$twitter   = 'https://twitter.com/linuxfoundation';
-		$linkedin  = 'https://www.linkedin.com/company/the-linux-foundation/';
-		$youtube   = 'https://www.youtube.com/user/TheLinuxFoundation';
-		$facebook  = 'https://www.facebook.com/TheLinuxFoundation/';
-		$instagram = 'https://www.instagram.com/linux_foundation';
-
-		echo '<ul class="lf-footer__icons">';
-		if ( $twitter ) {
-			echo '<li><a rel="noopener" title="Twitter" target="_blank" href="' . esc_html( $twitter ) . '">';
-			get_template_part( 'template-parts/svg/twitter' );
-			echo '</a></li>';
-		}
-		if ( $linkedin ) {
-			echo '<li><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_html( $linkedin ) . '">';
-			get_template_part( 'template-parts/svg/linkedin' );
-			echo '</a></li>';
-		}
-		if ( $youtube ) {
-			echo '<li><a rel="noopener" title="YouTube" target="_blank" href="' . esc_html( $youtube ) . '">';
-			get_template_part( 'template-parts/svg/youtube' );
-			echo '</a></li>';
-		}
-		if ( $facebook ) {
-			echo '<li><a rel="noopener" title="Facebook" target="_blank" href="' . esc_html( $facebook ) . '">';
-			get_template_part( 'template-parts/svg/facebook' );
-			echo '</a></li>';
-		}
-		if ( $instagram ) {
-			echo '<li><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
-			get_template_part( 'template-parts/svg/instagram' );
-			echo '</a></li>';
-		}
-		echo '</ul>';
-		?>
-	</section>
-		<?php endif; ?>
+<?php endif; ?>
 
 	<section class="lf-copyright container wrap">
 
@@ -92,6 +61,50 @@ $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true ); ?>
 		<?php endif; ?>
 		<p>Forms on this site are protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
 	</section>
+
+	<?php
+	// Show social on non-event pages.
+	if ( show_non_event_menu() && ! $splash_page ) :
+		?>
+<section class="lf-footer__social container wrap">
+
+		<?php
+		$twitter   = 'https://twitter.com/linuxfoundation';
+		$linkedin  = 'https://www.linkedin.com/company/the-linux-foundation/';
+		$youtube   = 'https://www.youtube.com/user/TheLinuxFoundation';
+		$facebook  = 'https://www.facebook.com/TheLinuxFoundation/';
+		$instagram = 'https://www.instagram.com/linux_foundation';
+
+		echo '<ul class="lf-footer__icons">';
+		if ( $twitter ) {
+			echo '<li class="s-tw"><a rel="noopener" title="Twitter" target="_blank" href="' . esc_html( $twitter ) . '">';
+			get_template_part( 'template-parts/svg/twitter' );
+			echo '</a></li>';
+		}
+		if ( $linkedin ) {
+			echo '<li class="s-li"><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_html( $linkedin ) . '">';
+			get_template_part( 'template-parts/svg/linkedin' );
+			echo '</a></li>';
+		}
+		if ( $youtube ) {
+			echo '<li class="s-yt"><a rel="noopener" title="YouTube" target="_blank" href="' . esc_html( $youtube ) . '">';
+			get_template_part( 'template-parts/svg/youtube' );
+			echo '</a></li>';
+		}
+		if ( $facebook ) {
+			echo '<li class="s-fb"><a rel="noopener" title="Facebook" target="_blank" href="' . esc_html( $facebook ) . '">';
+			get_template_part( 'template-parts/svg/facebook' );
+			echo '</a></li>';
+		}
+		if ( $instagram ) {
+			echo '<li class="s-in"><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
+			get_template_part( 'template-parts/svg/instagram' );
+			echo '</a></li>';
+		}
+		echo '</ul>';
+		?>
+</section>
+	<?php endif; ?>
 </footer>
 </div> <!-- end .site-container -->
 <?php get_template_part( 'template-parts/cookie-banner' ); ?>
