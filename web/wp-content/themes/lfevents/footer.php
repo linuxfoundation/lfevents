@@ -11,7 +11,7 @@
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true ); ?>
 
 <footer
-	class="lf-footer has-lf-primary-700-background-color has-white-color xlarge-padding-y">
+	class="lf-footer has-lf-primary-700-background-color has-white-color">
 
 	<?php
 	// Show newsletter and social on non-event pages.
