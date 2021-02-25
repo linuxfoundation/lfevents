@@ -13,26 +13,27 @@ $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true ); ?>
 <footer
 	class="lf-footer has-lf-primary-700-background-color has-white-color xlarge-padding-y">
 
-<?php
-// Show newsletter and social on non-event pages.
-if ( show_non_event_menu() && ! $splash_page ) :
-	?>
-<section class="lf-footer__newsletter container wrap">
-
-<h4 class="lf-footer__title">Join the Linux Foundation mailing list to hear about the latest events, news &amp; more</h4>
-
 	<?php
-			echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
-	?>
+	// Show newsletter and social on non-event pages.
+	if ( show_non_event_menu() && ! $splash_page ) :
+		?>
+	<section class="lf-footer__newsletter container wrap">
 
-	<p class="lf-footer__privacy">
+		<h4 class="lf-footer__title">Join the Linux Foundation mailing list to
+			hear about the latest events, news &amp; more</h4>
+
+		<?php
+			echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
+		?>
+
+		<p class="lf-footer__privacy">
 		The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. By submitting this form, you acknowledge that your information is subject to The Linux Foundation's <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.
 		</p>
 	</section>
 
-<section class="lf-footer__social">
+	<section class="lf-footer__social container wrap">
 
-	<?php
+		<?php
 		$twitter   = 'https://twitter.com/linuxfoundation';
 		$linkedin  = 'https://www.linkedin.com/company/the-linux-foundation/';
 		$youtube   = 'https://www.youtube.com/user/TheLinuxFoundation';
@@ -40,40 +41,40 @@ if ( show_non_event_menu() && ! $splash_page ) :
 		$instagram = 'https://www.instagram.com/linux_foundation';
 
 		echo '<ul class="lf-footer__icons">';
-	if ( $twitter ) {
-		echo '<li><a rel="noopener" title="Twitter" target="_blank" href="' . esc_html( $twitter ) . '">';
-		get_template_part( 'template-parts/svg/twitter' );
-		echo '</a></li>';
-	}
-	if ( $linkedin ) {
-		echo '<li><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_html( $linkedin ) . '">';
-		get_template_part( 'template-parts/svg/linkedin' );
-		echo '</a></li>';
-	}
-	if ( $youtube ) {
-		echo '<li><a rel="noopener" title="YouTube" target="_blank" href="' . esc_html( $youtube ) . '">';
-		get_template_part( 'template-parts/svg/youtube' );
-		echo '</a></li>';
-	}
-	if ( $facebook ) {
-		echo '<li><a rel="noopener" title="Facebook" target="_blank" href="' . esc_html( $facebook ) . '">';
-		get_template_part( 'template-parts/svg/facebook' );
-		echo '</a></li>';
-	}
-	if ( $instagram ) {
-		echo '<li><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
-		get_template_part( 'template-parts/svg/instagram' );
-		echo '</a></li>';
-	}
+		if ( $twitter ) {
+			echo '<li><a rel="noopener" title="Twitter" target="_blank" href="' . esc_html( $twitter ) . '">';
+			get_template_part( 'template-parts/svg/twitter' );
+			echo '</a></li>';
+		}
+		if ( $linkedin ) {
+			echo '<li><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_html( $linkedin ) . '">';
+			get_template_part( 'template-parts/svg/linkedin' );
+			echo '</a></li>';
+		}
+		if ( $youtube ) {
+			echo '<li><a rel="noopener" title="YouTube" target="_blank" href="' . esc_html( $youtube ) . '">';
+			get_template_part( 'template-parts/svg/youtube' );
+			echo '</a></li>';
+		}
+		if ( $facebook ) {
+			echo '<li><a rel="noopener" title="Facebook" target="_blank" href="' . esc_html( $facebook ) . '">';
+			get_template_part( 'template-parts/svg/facebook' );
+			echo '</a></li>';
+		}
+		if ( $instagram ) {
+			echo '<li><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
+			get_template_part( 'template-parts/svg/instagram' );
+			echo '</a></li>';
+		}
 		echo '</ul>';
-	?>
-</section>
-<?php endif; ?>
+		?>
+	</section>
+		<?php endif; ?>
 
-<section class="lf-copyright container wrap">
+	<section class="lf-copyright container wrap">
 
-<?php if ( is_lfeventsci() ) : ?>
-	<p>Copyright © <?php echo esc_html( gmdate( 'Y' ) ); ?> The Linux Foundation®. All rights reserved. The
+		<?php if ( is_lfeventsci() ) : ?>
+		<p>Copyright © <?php echo esc_html( gmdate( 'Y' ) ); ?> The Linux Foundation®. All rights reserved. The
 			Linux Foundation has registered trademarks and uses trademarks. For
 			a list of trademarks of The Linux Foundation, please see our <a target="_blank" rel="noopener"
 				href="https://www.linuxfoundation.org/trademark-usage">Trademark Usage</a> page. Linux is a
@@ -86,11 +87,11 @@ if ( show_non_event_menu() && ! $splash_page ) :
 				Policy</a> | <a target="_blank" rel="noopener"
 				href="https://www.linuxfoundation.org/good-standing-policy/">Good
 				Standing Policy</a>.</p>
-				<?php else : ?>
-			<p>Copyright <?php echo esc_html( gmdate( 'Y' ) ); ?> &copy; LF Asia, LLC. | info@lfasiallc.com, icp license, no. <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备17074266号-6</a></p>
-			<?php endif; ?>
-			<p>Forms on this site are protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
-</section>
+		<?php else : ?>
+		<p>Copyright <?php echo esc_html( gmdate( 'Y' ) ); ?> &copy; LF Asia, LLC. | info@lfasiallc.com, icp license, no. <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备17074266号-6</a></p>
+		<?php endif; ?>
+		<p>Forms on this site are protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
+	</section>
 </footer>
 </div> <!-- end .site-container -->
 <?php get_template_part( 'template-parts/cookie-banner' ); ?>
