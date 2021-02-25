@@ -4,10 +4,10 @@
 
 @charset 'utf-8';
 
-@import 'settings';
+@import "settings";
 @import "global/custom-color-palette";
-@import 'foundation'; // ?
-@import 'admin/foundation-typography-admin';
+@import "foundation"; // ?
+@import "admin/foundation-typography-admin";
 @include foundation-button; // ?
 @include foundation-table; // ?
 
@@ -34,6 +34,7 @@
 // Modules.
 // Made up of components/needing their own styling.
 @import "modules/event-calendar";
+@import "modules/event-footer";
 @import "modules/event-header";
 @import "modules/event-listing";
 @import "modules/event-subpage";
@@ -102,11 +103,11 @@
 
 // add guide to group to make more visible in editor.
 .wp-block-group {
-  border: 1px solid #F3F4F5;
+  border: 1px solid #f3f4f5;
 
   &:before {
-    content: 'GROUP BLOCK';
-    color: #D8D8D8;
+    content: "GROUP BLOCK";
+    color: #d8d8d8;
     position: absolute;
     left: 1px;
     top: 0;
@@ -117,11 +118,11 @@
 
 // add guide to columns to make more visible in editor.
 .wp-block-columns {
-  border: 1px solid #F3F4F5;
+  border: 1px solid #f3f4f5;
 
   &:before {
-    content: 'COLUMNS BLOCK';
-    color: #D8D8D8;
+    content: "COLUMNS BLOCK";
+    color: #d8d8d8;
     position: absolute;
     left: 1px;
     top: 0;
