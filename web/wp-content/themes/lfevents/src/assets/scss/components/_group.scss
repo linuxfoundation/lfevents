@@ -1,7 +1,6 @@
 // setup a class to help not repeat the same styles later.
 .padding-border-shadow-defaults {
-  box-shadow: 0 5px 5px 0 rgba(18, 63, 82, .035),
-    0 0 0 1px rgba(176, 181, 193, .2);
+  box-shadow: 0 5px 5px 0 rgba(18, 63, 82, 0.035), 0 0 0 1px rgba(176, 181, 193, 0.2);
   border-radius: 12px;
   padding: 15px;
 
@@ -20,14 +19,13 @@
 }
 
 .wp-block-group {
-
   &.is-style-border,
   &.is-style-event-gradient {
     @extend .padding-border-shadow-defaults;
   }
 
   &.is-style-constrained-50 {
-    >* {
+    > * {
       width: 50%;
       margin-left: auto;
       margin-right: auto;
@@ -39,7 +37,7 @@
   }
 
   &.is-style-constrained-70 {
-    >* {
+    > * {
       width: 70%;
       margin-left: auto;
       margin-right: auto;
@@ -51,7 +49,7 @@
   }
 
   &.is-style-constrained-75 {
-    >* {
+    > * {
       width: 75%;
       margin-left: auto;
       margin-right: auto;
