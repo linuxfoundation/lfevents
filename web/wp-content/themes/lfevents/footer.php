@@ -12,7 +12,7 @@ $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true ); ?>
 
 <?php
 
-if ( show_non_event_menu() && ! $splash_page ) {
+if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) {
 	$footer_classes = 'lf-footer has-lf-primary-700-background-color has-white-color';
 } else {
 	$footer_classes = 'site-footer';
@@ -23,7 +23,7 @@ if ( show_non_event_menu() && ! $splash_page ) {
 
 <?php
 	// Show newsletter on non-event pages.
-if ( show_non_event_menu() && ! $splash_page ) :
+if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 	?>
 	<section class="lf-footer__newsletter container wrap">
 
@@ -64,7 +64,7 @@ if ( show_non_event_menu() && ! $splash_page ) :
 
 	<?php
 	// Show social on non-event pages.
-	if ( show_non_event_menu() && ! $splash_page ) :
+	if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 		?>
 <section class="lf-footer__social container wrap">
 
