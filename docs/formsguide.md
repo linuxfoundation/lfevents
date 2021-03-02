@@ -6,6 +6,8 @@ We have gone to great lengths to write the LFEvents site to be [as fast as possi
 
 We have also added [some preconnect hints](https://github.com/LF-Engineering/lfevents/blob/master/web/wp-content/themes/lfevents/library/lfe-functions.php#L872) to speed up the download of the HubSpot js files.
 
+Most HubSpot forms are embedded using the iframe method, however, all newsletter forms are embedded as raw HTML which allows us to fine-tune the styling of them.
+
 Note that the [travel fund form](https://events.linuxfoundation.org/about/travel-fund-request/) has not been migrated to HubSpot since it has a sophisticated file upload UI.  [Here is the html](https://github.com/LF-Engineering/lfevents/blob/master/docs/travel-fund-form.html) required to embed it into a particular event site (note the `event` parameter needs updating to be the Salesforce ID for the event).
 
 Finally, we use a [Gravity form](https://www.gravityforms.com/) for [the one on the Community Events page](https://events.linuxfoundation.org/about/community/) since we need it to create new Community Event posts within WordPress.
