@@ -74,6 +74,7 @@ if ( $query->have_posts() ) {
 					<?php get_template_part( 'template-parts/svg/map-marker' ); ?>
 					<?php
 					$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+					$virtual = get_post_meta( $post->ID, 'lfes_virtual', true );
 					if ( $country ) {
 						$country = $country[0]->name;
 						$city = get_post_meta( $post->ID, 'lfes_city', true );
@@ -81,6 +82,12 @@ if ( $query->have_posts() ) {
 							$city .= ', ';
 						}
 						echo esc_html( $city ) . esc_html( $country );
+						if ( $virtual ) {
+							echo ' and Virtual';
+						}
+					}
+					if ( $virtual && ! $country ) {
+						echo 'Virtual';
 					}
 					?>
 				</span>
