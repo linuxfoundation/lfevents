@@ -39,7 +39,6 @@
 	?>
 		<?php // Experimental: If useful, add to preconnect function once hubspot PR is merged. ?>
 		<link rel="preconnect" href="https://bam-cell.nr-data.net" crossorigin />
-		<link rel="preconnect" href="https://edge.fullstory.com" crossorigin />
 
 		<?php wp_head(); ?>
 	<?php lfe_insert_favicon(); ?>
