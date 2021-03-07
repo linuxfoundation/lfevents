@@ -85,7 +85,7 @@ if ( $query->have_posts() ) {
 					}
 					echo esc_html( $city ) . esc_html( $country );
 					if ( $virtual ) {
-						echo ' <em>and</em> ';
+						echo ' and ';
 					}
 					?>
 					</span>
