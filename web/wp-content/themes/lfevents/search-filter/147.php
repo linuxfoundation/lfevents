@@ -71,20 +71,41 @@ if ( $query->have_posts() ) {
 					<?php echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) ); ?>
 				</span>
 
-				<span class="country display-inline-block">
-					<?php get_template_part( 'template-parts/svg/map-marker' ); ?>
+				<?php
+				$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+				$virtual = get_post_meta( $post->ID, 'lfes_community_virtual', true );
+				if ( $country ) {
+					?>
+					<span class="country display-inline-block">
 					<?php
-					$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
-					if ( $country ) {
-						$country = $country[0]->name;
-						$city    = get_post_meta( $post->ID, 'lfes_community_city', true );
-						if ( $city ) {
-							$city .= ', ';
-						}
-						echo esc_html( $city ) . esc_html( $country );
+					get_template_part( 'template-parts/svg/map-marker' );
+					$country = $country[0]->name;
+					$city = get_post_meta( $post->ID, 'lfes_community_city', true );
+					if ( $city ) {
+						$city .= ', ';
+					}
+					echo esc_html( $city ) . esc_html( $country );
+					if ( $virtual ) {
+						echo ' and ';
 					}
 					?>
-				</span>
+					</span>
+					<?php
+				}
+				?>
+				<?php
+				if ( $virtual ) {
+					?>
+					<span class="virtual display-inline-block">
+					<?php
+					get_template_part( 'template-parts/svg/virtual-marker' );
+					echo 'Virtual';
+					?>
+					</span>
+					<?php
+				}
+
+				?>
 
 			</p>
 		</article>

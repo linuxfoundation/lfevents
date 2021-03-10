@@ -1140,6 +1140,17 @@ class LFEvents_Admin {
 							'initial_open' => true,
 							'settings'     => array(
 								array(
+									'type'          => 'checkbox',
+									'id'            => 'virtual',
+									'data_type'     => 'meta',
+									'data_key'      => 'virtual',
+									'register_meta' => true,
+									'ui_border_top' => true,
+									'default_value' => true,
+									'use_toggle'    => false,
+									'input_label'   => __( 'Virtual' ),
+								),
+								array(
 									'type'          => 'text',
 									'id'            => 'city',
 									'data_type'     => 'meta',
