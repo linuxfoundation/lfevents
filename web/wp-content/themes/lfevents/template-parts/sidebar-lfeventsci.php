@@ -57,6 +57,7 @@ if ( $query->have_posts() ) {
 		echo '<p class="text-tiny medium-margin-bottom">';
 		echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
 		$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+		$virtual = get_post_meta( $post->ID, 'lfes_community_virtual', true );
 		if ( $country ) {
 			$country = $country[0]->name;
 			$city = get_post_meta( $post->ID, 'lfes_community_city', true );
@@ -64,6 +65,8 @@ if ( $query->have_posts() ) {
 				$city .= ', ';
 			}
 			echo ' | ' . esc_html( $city ) . esc_html( $country );
+		} elseif ( $virtual ) {
+			echo ' | Virtual';
 		}
 		echo '</p>';
 	}
