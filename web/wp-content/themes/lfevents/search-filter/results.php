@@ -121,33 +121,46 @@ if ( $query->have_posts() ) {
 			</h5>
 
 			<p class="event-meta text-small small-margin-bottom">
-
 				<span class="date small-margin-right display-inline-block">
 					<?php get_template_part( 'template-parts/svg/calendar' ); ?>
 					<?php echo esc_html( $date_range ); ?>
 				</span>
 
-				<span class="country display-inline-block">
-					<?php get_template_part( 'template-parts/svg/map-marker' ); ?>
+				<?php
+				$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+				$virtual = get_post_meta( $post->ID, 'lfes_virtual', true );
+				if ( $country ) {
+					?>
+					<span class="country display-inline-block">
 					<?php
-					$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
-					$virtual = get_post_meta( $post->ID, 'lfes_virtual', true );
-					if ( $country ) {
-						$country = $country[0]->name;
-						$city = get_post_meta( $post->ID, 'lfes_city', true );
-						if ( $city ) {
-							$city .= ', ';
-						}
-						echo esc_html( $city ) . esc_html( $country );
-						if ( $virtual ) {
-							echo ' and Virtual';
-						}
+					get_template_part( 'template-parts/svg/map-marker' );
+					$country = $country[0]->name;
+					$city = get_post_meta( $post->ID, 'lfes_city', true );
+					if ( $city ) {
+						$city .= ', ';
 					}
-					if ( $virtual && ! $country ) {
-						echo 'Virtual';
+					echo esc_html( $city ) . esc_html( $country );
+					if ( $virtual ) {
+						echo ' and ';
 					}
 					?>
-				</span>
+					</span>
+					<?php
+				}
+				?>
+				<?php
+				if ( $virtual ) {
+					?>
+					<span class="virtual display-inline-block">
+					<?php
+					get_template_part( 'template-parts/svg/virtual-marker' );
+					echo 'Virtual';
+					?>
+					</span>
+					<?php
+				}
+
+				?>
 			</p>
 
 			<?php
