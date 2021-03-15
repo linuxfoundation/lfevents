@@ -27,8 +27,8 @@
 
   .lf-copyright {
     margin-top: 0;
+    text-align: center;
     @include breakpoint(medium) {
-      text-align: center;
       max-width: 50rem;
       margin-right: auto;
       margin-left: auto;
