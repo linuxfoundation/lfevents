@@ -113,7 +113,6 @@ Thumbs.db
 .sass-cache
 
 # Allowing premium plugins
-!web/wp-content/plugins/gravityforms
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/wp-rss-feed-to-post
 !web/wp-content/plugins/stackable-ultimate-gutenberg-blocks-premium
@@ -135,8 +134,6 @@ web/wp-content/plugins/tab-container-block/node_modules
 web/wp-content/plugins/countdown-block/node_modules
 !web/wp-content/plugins/button-with-expiry-block
 web/wp-content/plugins/button-with-expiry-block/node_modules
-!web/wp-content/plugins/lfevents-forms
-web/wp-content/plugins/lfevents-forms/node_modules
 !web/wp-content/plugins/icon-list
 web/wp-content/plugins/icon-list/node_modules
 !web/wp-content/plugins/image-box
