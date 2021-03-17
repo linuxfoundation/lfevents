@@ -1,0 +1,14 @@
+{
+	"apiVersion": 2,
+	"name": "lf/buttons-with-expiry",
+	"title": "Buttons with Expiry",
+	"category": "design",
+	"icon": "smiley",
+	"description": "Fork of Gutenberg Buttons but with Expiry options",
+	"textdomain": "buttons-with-expiry",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css"
+}
