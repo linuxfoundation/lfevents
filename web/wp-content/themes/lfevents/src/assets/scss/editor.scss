@@ -58,6 +58,7 @@
 
 // Admin Only.
 @import "admin/tables-admin";
+@import "admin/outlines";
 
 // Block Editor - Main column width.
 .wp-block {
@@ -99,36 +100,6 @@
 .wp-block-group,
 .wp-block-columns {
   padding: 35px 0;
-}
-
-// add guide to group to make more visible in editor.
-.wp-block-group {
-  border: 1px solid #f3f4f5;
-
-  &:before {
-    content: "GROUP BLOCK";
-    color: #d8d8d8;
-    position: absolute;
-    left: 1px;
-    top: 0;
-    line-height: 1;
-    transform: translateY(-100%);
-  }
-}
-
-// add guide to columns to make more visible in editor.
-.wp-block-columns {
-  border: 1px solid #f3f4f5;
-
-  &:before {
-    content: "COLUMNS BLOCK";
-    color: #d8d8d8;
-    position: absolute;
-    left: 1px;
-    top: 0;
-    line-height: 1;
-    transform: translateY(-100%);
-  }
 }
 
 // Move list discs in to view.
