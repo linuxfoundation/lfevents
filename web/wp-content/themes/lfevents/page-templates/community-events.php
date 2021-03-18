@@ -27,8 +27,16 @@ get_template_part( 'template-parts/global-header' );
 					</article>
 				</div>
 			<?php endwhile; ?>
-			<div class="cell large-4 sidebar-widgets">
-				<?php dynamic_sidebar( 'community-events-widgets' ); ?>
+			<div class="cell large-4">
+				<h4>Submit Your Event Listing</h4>
+				<p>We are pleased to list events held by open source community organizations and our members. 
+				We do not list events that do not adhere to an Event Code of Conduct.</p>
+				<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
+				<?php
+				echo do_shortcode( '[hubspot type=form portal=8112310 id=b48baa7e-925a-4380-88b8-8eaf7e3d4832]' );
+				?>
+
+
 			</div>
 		</div>
 	</div>
