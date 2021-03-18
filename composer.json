@@ -24,7 +24,7 @@
     "wpackagist-plugin/autodescription": "^4.0.1",
     "wpackagist-plugin/china-video-block": "^0.2.0",
     "wpackagist-plugin/clone-page-tree": "^0.1.0",
-    "wpackagist-plugin/conditional-blocks": "^1.0.3",
+    "wpackagist-plugin/conditional-blocks": "^2.0.1",
     "wpackagist-plugin/flying-pages": "^2.0.8",
     "wpackagist-plugin/lh-hsts": "^1.24",
     "wpackagist-plugin/pantheon-advanced-page-cache": "^1.0.0",
