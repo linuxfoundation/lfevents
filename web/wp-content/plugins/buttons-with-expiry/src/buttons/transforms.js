@@ -13,21 +13,18 @@ const transforms = {
 						count: 1,
 					},
 					objects.map( ( object ) => {
-						return createBlock(
-							'lf/button-with-expiry',
-							{
-								url: object.attributes.url,
-								text: object.attributes.text,
-								title: object.attributes.text,
-								backgroundColor: object.attributes.backgroundColor,
-								textColor: object.attributes.textColor,
-								customBackgroundColor: object.attributes.backgroundColor,
-								customTextColor: object.attributes.textColor,
-								linkTarget: object.attributes.linkTarget,
-							},
-						);
-					}
-					)
+						return createBlock( 'lf/button-with-expiry', {
+							url: object.attributes.url,
+							text: object.attributes.text,
+							title: object.attributes.text,
+							backgroundColor: object.attributes.backgroundColor,
+							textColor: object.attributes.textColor,
+							customBackgroundColor:
+								object.attributes.backgroundColor,
+							customTextColor: object.attributes.textColor,
+							linkTarget: object.attributes.linkTarget,
+						} );
+					} )
 				);
 			},
 		},
@@ -35,8 +32,10 @@ const transforms = {
 			type: 'block',
 			isMultiBlock: true,
 			blocks: [ 'ugb/button' ],
-			transform: function( buttons ) {
-				return createBlock( 'lf/buttons-with-expiry', {},
+			transform: ( buttons ) => {
+				return createBlock(
+					'lf/buttons-with-expiry',
+					{},
 					buttons.map( ( attributes ) => {
 						return createBlock( 'lf/button-with-expiry', {
 							url: attributes.url,
@@ -48,8 +47,7 @@ const transforms = {
 							customTextColor: attributes.textColor2,
 							linkTarget: attributes.newTab,
 						} );
-					}
-					)
+					} )
 				);
 			},
 		},

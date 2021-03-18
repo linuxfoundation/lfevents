@@ -1,6 +1,10 @@
 {
+	"apiVersion": 2,
 	"name": "lf/button-with-expiry",
-	"category": "layout",
+	"category": "design",
+	"parent": [
+		"lf/buttons-with-expiry"
+	],
 	"attributes": {
 		"url": {
 			"type": "string",
@@ -18,18 +22,6 @@
 			"type": "string",
 			"source": "html",
 			"selector": "a"
-		},
-		"backgroundColor": {
-			"type": "string"
-		},
-		"textColor": {
-			"type": "string"
-		},
-		"customBackgroundColor": {
-			"type": "string"
-		},
-		"customTextColor": {
-			"type": "string"
 		},
 		"linkTarget": {
 			"type": "string",
@@ -50,11 +42,32 @@
 			"type": "number",
 			"default": 5
 		},
-		"gradient": {
+		"style": {
+			"type": "object"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"customTextColor": {
 			"type": "string"
 		},
 		"customGradient": {
 			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
 		}
-	}
+	},
+	"supports": {
+		"anchor": true,
+		"align": false
+	},
+	"editorStyle": "wp-block-button-with-expiry-editor",
+	"style": "wp-block-button-with-expiry"
 }

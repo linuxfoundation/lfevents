@@ -2,37 +2,44 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { button as icon } from '@wordpress/icons';
+import { registerBlockType } from '@wordpress/blocks';
+// To get access to WordPress settings.
 import { __experimentalGetSettings as getDateSettings } from '@wordpress/date';
-const { registerBlockType } = wp.blocks;
 
-/**
- * Internal dependencies
- */
-import edit from './edit';
 import metadata from './block.json';
+import Edit from './edit';
 import save from './save';
-import './editor.scss';
 
-const { category, attributes } = metadata;
+const { attributes } = metadata;
 
 // Timezone object from WordPress Settings.
 const { timezone } = getDateSettings();
 
 const offsetTime = () => {
 	// Time now in WordPress Time.
-	const wpTimeSetting = new Date().toLocaleString( 'en-US', { timeZone: timezone.string } );
-	const wpTime = ( Date.parse( wpTimeSetting ) / 1000 );
+	const wpTimeSetting = new Date().toLocaleString( 'en-US', {
+		timeZone: timezone.string,
+	} );
+	const wpTime = Date.parse( wpTimeSetting ) / 1000;
 
 	return wpTime;
 };
 
 registerBlockType( 'lf/button-with-expiry', {
 	title: __( 'Button With Expiry' ),
-	category,
-	description: __(
-		'Prompt visitors to take action with a button-style link.'
-	),
-	keywords: [ 'button', 'button with expiry', 'linux' ],
+	icon,
+	category: 'design',
+	description: __( 'Fork of Gutenberg Buttons but with Expiry options' ),
+	keywords: [
+		'button',
+		'cta',
+		'expiry',
+		'lf',
+		'cncf',
+		'button with expiry',
+		'linux',
+	],
 	attributes: {
 		...attributes,
 		willExpire: {
@@ -51,10 +58,16 @@ registerBlockType( 'lf/button-with-expiry', {
 		},
 	},
 	supports: {
-		align: true,
-		alignWide: false,
+		align: false,
+	},
+	example: {
+		attributes: {
+			className: 'is-style-fill',
+			backgroundColor: 'vivid-green-cyan',
+			text: __( 'Learn More' ),
+		},
 	},
 	parent: [ 'lf/buttons-with-expiry' ],
-	edit,
+	edit: Edit,
 	save,
 } );

@@ -1,0 +1,20 @@
+{
+	"apiVersion": 2,
+	"name": "lf/buttons-with-expiry",
+	"category": "design",
+	"attributes": {
+		"contentJustification": {
+			"type": "string"
+		},
+		"orientation": {
+			"type": "string",
+			"default": "horizontal"
+		}
+	},
+	"supports": {
+		"anchor": true,
+		"align": [ "wide", "full" ]
+	},
+	"editorStyle": "wp-block-buttons-with-expiry-editor",
+	"style": "wp-block-buttons-with-expiry"
+}

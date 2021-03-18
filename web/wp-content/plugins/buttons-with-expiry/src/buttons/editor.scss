@@ -1,0 +1,89 @@
+// editor only styles
+// Perhaps this needs to be synced with the repo at some point
+// https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/buttons/editor.scss
+
+// incorporated button/editor.scss here too
+
+.wp-block-lf-buttons-with-expiry[data-type="lf/buttons-with-expiry"] {
+	// align buttons + inserter
+	display: flex;
+	align-items: center;
+
+	// add editor guide.
+	border: 1px solid #f3f4f5;
+	position: relative;
+
+	// spread out the block
+	width: 100%;
+
+	&:before {
+		content: "BUTTON GROUP";
+		color: #d8d8d8;
+		position: absolute;
+		left: 1px;
+		top: 0;
+		line-height: 1;
+		transform: translateY(-100%);
+	}
+}
+
+.wp-block[data-align="left"],
+.wp-block[data-align="right"] {
+	height: unset;
+}
+
+[data-align="left"],
+[data-align="center"],
+[data-align="right"] {
+	> .wp-block-lf-buttons-with-expiry {
+		float: none;
+		margin-left: unset;
+		margin-right: unset;
+	}
+	[data-type="lf/button-with-expiry"] {
+		margin-left: unset;
+		margin-right: unset;
+	}
+}
+
+.wp-block-lf-buttons-with-expiry {
+	float: none;
+	margin-left: unset;
+	margin-right: unset;
+	[data-type="lf/button-with-expiry"] {
+		margin-left: unset;
+		margin-right: unset;
+	}
+}
+
+.wp-block-lf-button-with-expiry {
+	[contenteditable] {
+		cursor: text;
+	}
+
+	// Make placeholder text white unless custom colors or outline versions are chosen.
+	&:not(.has-text-color):not(.is-style-outline) [data-rich-text-placeholder]::after {
+		color: #ffffff;
+	}
+
+	// Add outline to button on focus to indicate focus-state.
+	.block-editor-rich-text__editable {
+		background-color: #00a0d2;
+		cursor: pointer;
+		color: #d8d8d8;
+		border: none;
+
+		&:focus {
+			box-shadow: 0 0 0 1px #d8d8d8;
+
+			// Windows' High Contrast mode will show this outline, but not the box-shadow.
+			outline: 2px solid transparent;
+			outline-offset: -2px;
+		}
+	}
+
+	// Increase placeholder opacity to meet contrast ratios.
+	[data-rich-text-placeholder]::after {
+		opacity: 0.8;
+	}
+}
