@@ -38,8 +38,7 @@
     "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",
     "wpackagist-plugin/wp-nested-pages": "^3.0.11",
     "wpackagist-plugin/flying-scripts":"^1.1.7",
-    "wpackagist-plugin/leadin":"^7.48.24",
-    "wpackagist-plugin/wp-rss-aggregator": "^4.15"
+    "wpackagist-plugin/leadin":"^7.48.24"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",

@@ -532,40 +532,6 @@ function custom_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
-/**
- * Fixes the meta tags of the Community Event post imported from RSS to get them in the right formats.
- * Also prepends the title with "Kubernetes Community Day "
- *
- * @param int $post_id The ID of the post, which is being processed.
- * @param int $feed_id The ID of the feed source post, which the current item is being imported by.
- */
-function lfe_fix_community_post( $post_id, $feed_id ) {
-	if ( 243 == $feed_id ) {
-		$dt_date_start = get_post_meta( $post_id, 'lfes_community_date_start', true );
-		$dt_date_end   = get_post_meta( $post_id, 'lfes_community_date_end', true );
-		$countrycode   = trim( get_post_meta( $post_id, 'lfes_countrycode', true ) );
-		if ( $dt_date_start ) {
-			$dt_date_start = new DateTime( $dt_date_start );
-			update_post_meta( $post_id, 'lfes_community_date_start', $dt_date_start->format( 'Y/m/d' ) );
-		}
-		if ( $dt_date_end ) {
-			$dt_date_end = new DateTime( $dt_date_end );
-			update_post_meta( $post_id, 'lfes_community_date_end', $dt_date_end->format( 'Y/m/d' ) );
-		} else {
-			update_post_meta( $post_id, 'lfes_community_date_end', $dt_date_start->format( 'Y/m/d' ) );
-		}
-		if ( $countrycode ) {
-			$country_term = get_term_by( 'slug', $countrycode, 'lfevent-country' );
-			wp_set_post_terms( $post_id, $country_term->term_id, 'lfevent-country' );
-		}
-		$my_post = array(
-			'ID'         => $post_id,
-			'post_title' => 'Kubernetes Community Day ' . get_the_title( $post_id ),
-		);
-		wp_update_post( $my_post );
-	}
-}
-add_action( 'wprss_ftp_converter_inserted_post', 'lfe_fix_community_post', 10, 2 );
 
 /**
  * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
@@ -748,9 +714,6 @@ function lfe_passed_event_banner( $parent_id ) {
 	}
 }
 
-// this causes the RSS Aggregator to delete and re-import all feed items on every import:
-// https://kb.wprssaggregator.com/article/191-keep-feed-in-sync-with-current-state.
-add_action( 'wprss_fetch_single_feed_hook', 'wprss_delete_feed_items_of_feed_source', 9 );
 
 /**
  * Gets HTML for an alert bar inserted at the top of Events when set.
