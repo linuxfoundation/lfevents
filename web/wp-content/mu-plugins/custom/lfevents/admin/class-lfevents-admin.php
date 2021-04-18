@@ -1319,8 +1319,14 @@ class LFEvents_Admin {
 			pantheon_wp_clear_edge_keys( $keys_to_clear );
 		}
 	}
-}
 
+	/**
+	 * Sync KCDs from https://community.cncf.io/ to the commmunity events CPT.
+	 */
+	public function sync_kcds() {
+		return;
+	}
+}
 
 /**
  * Returns an array of all descendents of $post_id.
