@@ -171,10 +171,9 @@ class LFEvents {
 		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 			$this->loader->add_action( 'lfevents_sync_kcds', $plugin_admin, 'sync_kcds' );
 			if ( ! wp_next_scheduled( 'lfevents_sync_kcds' ) ) {
-				wp_schedule_event( time(), 'hourly', 'lfevents_sync_kcds' );
+				wp_schedule_event( time(), 'daily', 'lfevents_sync_kcds' );
 			}
 		}
-		$this->loader->add_action( 'init', $plugin_admin, 'sync_kcds' );
 
 	}
 

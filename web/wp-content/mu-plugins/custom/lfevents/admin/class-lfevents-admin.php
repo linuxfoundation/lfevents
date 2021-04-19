@@ -1382,7 +1382,6 @@ class LFEvents_Admin {
 						}
 					}
 				}
-				var_dump($my_post);
 				wp_insert_post( $my_post );
 			}
 		}
