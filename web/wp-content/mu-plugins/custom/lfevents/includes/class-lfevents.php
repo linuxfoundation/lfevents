@@ -174,6 +174,7 @@ class LFEvents {
 				wp_schedule_event( time(), 'hourly', 'lfevents_sync_kcds' );
 			}
 		}
+		$this->loader->add_action( 'init', $plugin_admin, 'sync_kcds' );
 
 	}
 

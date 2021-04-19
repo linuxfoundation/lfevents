@@ -1375,10 +1375,10 @@ class LFEvents_Admin {
 				if ( ! $virtual ) {
 					$matches = array();
 					preg_match( '/\(([^)]+)\)/', $event->chapter_location, $matches );
-
+					var_dump($matches);
 					if ( 1 < count( $matches ) ) {
 						$country_term = get_term_by( 'slug', strtolower( $matches[1] ), 'lfevent-country' );
-
+						var_dump($country_term);
 						if ( $country_term ) {
 							$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
 						}
