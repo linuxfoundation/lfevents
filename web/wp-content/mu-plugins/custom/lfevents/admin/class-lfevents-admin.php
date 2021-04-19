@@ -1330,11 +1330,12 @@ class LFEvents_Admin {
 
 		// delete all existing imported KCD posts.
 		$args = array(
-			'post_type'  => 'lfe_community_event',
-			'meta_key'   => 'lfes_community_bevy_import',
-			'meta_value' => true,
-			'no_found_rows' => true,
+			'post_type'      => 'lfe_community_event',
+			'meta_key'       => 'lfes_community_bevy_import',
+			'meta_value'     => true,
+			'no_found_rows'  => true,
 			'posts_per_page' => 500,
+			'post_status'    => 'any',
 		);
 		$the_query = new WP_Query( $args );
 		while ( $the_query->have_posts() ) {
@@ -1369,9 +1370,6 @@ class LFEvents_Admin {
 						'lfes_community_city'  => $event->venue_city,
 						'lfes_community_virtual'  => $virtual,
 					),
-					'tax_input'    => array(
-						'lfevent-country' => $country_term,
-					),
 				);
 
 				if ( ! $virtual ) {
@@ -1386,7 +1384,6 @@ class LFEvents_Admin {
 						}
 					}
 				}
-
 				wp_insert_post( $my_post );
 			}
 		}
