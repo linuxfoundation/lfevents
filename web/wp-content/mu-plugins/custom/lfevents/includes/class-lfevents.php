@@ -172,6 +172,7 @@ class LFEvents {
 		if ( ! wp_next_scheduled( 'lfevents_sync_kcds' ) ) {
 			wp_schedule_event( time(), 'daily', 'lfevents_sync_kcds' );
 		}
+
 	}
 
 	/**
