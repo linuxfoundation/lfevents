@@ -1333,6 +1333,8 @@ class LFEvents_Admin {
 			'post_type'  => 'lfe_community_event',
 			'meta_key'   => 'lfes_community_bevy_import',
 			'meta_value' => true,
+			'no_found_rows' => true,
+			'posts_per_page' => 500,
 		);
 		$the_query = new WP_Query( $args );
 		while ( $the_query->have_posts() ) {
