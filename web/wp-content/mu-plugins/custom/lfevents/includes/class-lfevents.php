@@ -167,10 +167,12 @@ class LFEvents {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'synchronize_noindex_meta' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'reset_cache_check' );
 
-		// schedule KCD sync.
-		$this->loader->add_action( 'lfevents_sync_kcds', $plugin_admin, 'sync_kcds' );
-		if ( ! wp_next_scheduled( 'lfevents_sync_kcds' ) ) {
-			wp_schedule_event( time(), 'daily', 'lfevents_sync_kcds' );
+		// schedule KCD sync on lfeventsci.
+		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+			$this->loader->add_action( 'lfevents_sync_kcds', $plugin_admin, 'sync_kcds' );
+			if ( ! wp_next_scheduled( 'lfevents_sync_kcds' ) ) {
+				wp_schedule_event( time(), 'hourly', 'lfevents_sync_kcds' );
+			}
 		}
 
 	}
