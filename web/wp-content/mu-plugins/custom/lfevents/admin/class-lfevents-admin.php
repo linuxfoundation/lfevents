@@ -1325,6 +1325,11 @@ class LFEvents_Admin {
 	 */
 	public function sync_kcds() {
 		$data = wp_remote_get( 'https://community.cncf.io/api/search/event?q=kcd' );
+
+		if ( is_wp_error( $data ) || ( wp_remote_retrieve_response_code( $data ) != 200 ) ) {
+			return false;
+		}
+
 		$remote_body = json_decode( wp_remote_retrieve_body( $data ) );
 		$events = $remote_body->results;
 
@@ -1378,7 +1383,7 @@ class LFEvents_Admin {
 					if ( 1 < count( $matches ) ) {
 						$country_term = get_term_by( 'slug', strtolower( $matches[1] ), 'lfevent-country' );
 						if ( $country_term ) {
-							$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
+								$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
 						}
 					}
 				}
