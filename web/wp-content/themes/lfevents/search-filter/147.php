@@ -58,7 +58,7 @@ if ( $query->have_posts() ) {
 		<article id="post-<?php the_ID(); ?>" class="cell medium-6 callout">
 			<h4 class="h5 medium-margin-right small-margin-bottom line-height-tight"><strong>
 			<?php
-			echo '<a target="_blank" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
+			echo '<a target="_blank" rel="noopener" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
 			echo esc_html( get_the_title() );
 			echo '&nbsp;';
 			echo esc_html( get_template_part( 'template-parts/svg/external-link' ) );
