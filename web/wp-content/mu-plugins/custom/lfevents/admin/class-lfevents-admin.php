@@ -1319,8 +1319,80 @@ class LFEvents_Admin {
 			pantheon_wp_clear_edge_keys( $keys_to_clear );
 		}
 	}
-}
 
+	/**
+	 * Sync KCDs from https://community.cncf.io/ to the commmunity events CPT.
+	 */
+	public function sync_kcds() {
+		$data = wp_remote_get( 'https://community.cncf.io/api/search/event?q=kcd' );
+
+		if ( is_wp_error( $data ) || ( wp_remote_retrieve_response_code( $data ) != 200 ) ) {
+			return false;
+		}
+
+		$remote_body = json_decode( wp_remote_retrieve_body( $data ) );
+		$events = $remote_body->results;
+
+		// delete all existing imported KCD posts.
+		$args = array(
+			'post_type'      => 'lfe_community_event',
+			'meta_key'       => 'lfes_community_bevy_import',
+			'meta_value'     => true,
+			'no_found_rows'  => true,
+			'posts_per_page' => 500,
+			'post_status'    => 'any',
+		);
+		$the_query = new WP_Query( $args );
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			wp_delete_post( get_the_ID(), true );
+		}
+
+		// insert events.
+		foreach ( $events as $event ) {
+			// insert if end date hasn't passed.
+			if ( ( time() - ( 60 * 60 * 24 ) ) < strtotime( $event->end_date_iso ) ) {
+				$dt_date_start = new DateTime( $event->start_date_iso );
+				$dt_date_end = new DateTime( $event->end_date_iso );
+
+				$virtual = strpos( strtolower( $event->title ), 'virtual' ) + strpos( strtolower( $event->description_short ), 'virtual' );
+				if ( 0 < $virtual || ! $event->venue_city ) {
+					$virtual = true;
+				} else {
+					$virtual = false;
+				}
+
+				$my_post = array(
+					'post_title'  => str_replace( 'KCD', 'Kubernetes Community Days', $event->title ),
+					'post_status' => 'publish',
+					'post_author' => 1,
+					'post_type'   => 'lfe_community_event',
+					'meta_input'   => array(
+						'lfes_community_external_url' => $event->url,
+						'lfes_community_bevy_import'  => true,
+						'lfes_community_date_start'  => $dt_date_start->format( 'Y/m/d' ),
+						'lfes_community_date_end'  => $dt_date_end->format( 'Y/m/d' ),
+						'lfes_community_city'  => $event->venue_city,
+						'lfes_community_virtual'  => $virtual,
+					),
+				);
+
+				if ( ! $virtual ) {
+					$matches = array();
+					preg_match( '/\(([^)]+)\)/', $event->chapter_location, $matches );
+					if ( 1 < count( $matches ) ) {
+						$country_term = get_term_by( 'slug', strtolower( $matches[1] ), 'lfevent-country' );
+						if ( $country_term ) {
+							$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
+						}
+					}
+				}
+				wp_insert_post( $my_post );
+			}
+		}
+
+	}
+}
 
 /**
  * Returns an array of all descendents of $post_id.
