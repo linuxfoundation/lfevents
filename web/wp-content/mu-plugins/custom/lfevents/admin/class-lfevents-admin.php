@@ -1356,7 +1356,7 @@ class LFEvents_Admin {
 				$dt_date_end = new DateTime( $event->end_date_iso );
 
 				$virtual = strpos( strtolower( $event->title ), 'virtual' ) + strpos( strtolower( $event->description_short ), 'virtual' );
-				if ( 0 < $virtual ) {
+				if ( 0 < $virtual || ! $event->venue_city ) {
 					$virtual = true;
 				} else {
 					$virtual = false;
@@ -1391,7 +1391,6 @@ class LFEvents_Admin {
 			}
 		}
 
-		return;
 	}
 }
 
