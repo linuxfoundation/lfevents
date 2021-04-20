@@ -1383,7 +1383,7 @@ class LFEvents_Admin {
 					if ( 1 < count( $matches ) ) {
 						$country_term = get_term_by( 'slug', strtolower( $matches[1] ), 'lfevent-country' );
 						if ( $country_term ) {
-								$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
+							$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
 						}
 					}
 				}
