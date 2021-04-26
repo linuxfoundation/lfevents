@@ -33,12 +33,13 @@ if ( $query->have_posts() ) {
 		}
 
 		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
+		$date_end   = get_post_meta( $post->ID, 'lfes_date_end', true );
 		// if date is set incorrectly, then return TBA.
-		if ( ! check_string_is_date( $date_start ) ) {
+		if ( ! check_string_is_date( $date_start ) || ! check_string_is_date( $date_end ) ) {
 			$date_range = 'TBA';
 		} else {
 			$dt_date_start = new DateTime( $date_start );
-			$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+			$dt_date_end = new DateTime( $date_end );
 			$date_range = jb_verbose_date_range( $dt_date_start, $dt_date_end );
 		}
 

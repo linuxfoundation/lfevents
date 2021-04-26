@@ -47,11 +47,12 @@ if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
-		if ( ! check_string_is_date( $date_start ) ) {
+		$date_end   = get_post_meta( $post->ID, 'lfes_date_end', true );
+		if ( ! check_string_is_date( $date_start ) || ! check_string_is_date( $date_end ) ) {
 			$date_range = 'TBA';
 		} else {
 			$dt_date_start = new DateTime( $date_start );
-			$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+			$dt_date_end = new DateTime( $date_end );
 			$date_range = jb_verbose_date_range( $dt_date_start, $dt_date_end );
 
 			$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
