@@ -10,14 +10,14 @@
     },
     {
       "type": "vcs",
-      "url": "https://github.com/pantheon-systems/wordpress-composer"
+      "url": "https://github.com/georgetown-university/wordpress-composer"
     }
   ],
   "require": {
     "php": ">=7.2",
     "composer/installers": "^1.3.0",
     "pantheon-systems/quicksilver-pushback": "^2.0.1",
-    "pantheon-systems/wordpress-composer": "^5.4.2",
+    "pantheon-systems/wordpress-composer": "dev-master",
     "roots/wp-password-bcrypt": "^1.0.0",
     "rvtraveller/qs-composer-installer": "^1.1",
     "vlucas/phpdotenv": "^3.1.0",
