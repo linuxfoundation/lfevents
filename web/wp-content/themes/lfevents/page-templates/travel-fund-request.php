@@ -26,6 +26,7 @@ get_template_part( 'template-parts/global-header' );
 
 						<form id="travelFundForm" action="https://eol357sn43.execute-api.us-east-2.amazonaws.com/prod/api/v1/sf">
 							<?php
+							$event_id = '';
 							if ( isset( $_GET['event_id'] ) ) {
 								$event_id = filter_var( wp_unslash( $_GET['event_id'] ), FILTER_SANITIZE_STRING );
 							}
