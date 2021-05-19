@@ -74,7 +74,7 @@ get_template_part( 'template-parts/global-header' );
 												}
 												wp_reset_postdata(); // Restore original Post Data.
 												?>
-												<option value="a0A2M00000VHQAMUA5">Other</option>
+												<option value="a0A2M00000VHQAMUA5">Community Event</option>
 											</select>
 										</label>
 									</div>
