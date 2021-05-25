@@ -21,10 +21,12 @@
 			?>
 		<?php elseif ( is_author() ) : ?>
 		<h1 class="blog-title">All posts by <?php the_author(); ?></h1>
+		<?php elseif ( is_post_type_archive( 'lfe_weekly_snap' ) ) : ?>
+			<h1 class="page-title" itemprop="headline">Weekly Snaps
+		</h1>
+			<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 		<?php elseif ( is_archive() ) : ?>
-		<h1 class="blog-title"><a href="<?php the_permalink(); ?>"
-				rel="bookmark"
-				title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+			<h1 class="page-title" itemprop="headline"><?php the_title(); ?>
 		</h1>
 			<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
 		<?php elseif ( is_search() ) : ?>
