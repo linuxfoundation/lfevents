@@ -8,6 +8,10 @@
 
 ?>
 
+<p>
+	<a class="button large expanded" aria-label="Happening this Week!" href="/about/weekly-snapshot/">Happening this Week</a>			
+</p>
+
 <h4 class="medium-margin-bottom">Latest News</h4>
 <?php
 $query = new WP_Query(

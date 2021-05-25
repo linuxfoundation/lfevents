@@ -214,6 +214,27 @@ class LFEvents_Admin {
 		);
 
 		register_post_type( 'lfe_community_event', $opts );
+
+		$opts = array(
+			'labels'             => array(
+				'name'          => __( 'Weekly Snaps' ),
+				'singular_name' => __( 'Weekly Snap' ),
+				'all_items'     => __( 'All Weekly Snaps' ),
+			),
+			'public'             => true, // not publicly viewable.
+			'publicly_queryable' => true, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
+			'has_archive'        => true,
+			'show_in_nav_menus'  => true,
+			'show_in_rest'       => true,
+			'hierarchical'       => false,
+			'menu_icon'          => 'dashicons-calendar',
+			'rewrite'            => array( 'slug' => 'weekly-snaps' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
+			'menu_position'      => 20,
+		);
+
+		register_post_type( 'lfe_weekly_snap', $opts );
 	}
 
 	/**
