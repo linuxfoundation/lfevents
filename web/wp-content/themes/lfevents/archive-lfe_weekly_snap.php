@@ -12,7 +12,7 @@ get_template_part( 'template-parts/global-header' );
 <main role="main" id="main" class="main-container-body">
 <?php get_template_part( 'template-parts/non-event-hero' ); ?>
 <div class="container wrap">
-This is a description of the Weekly Snaps in general.
+<h5>Weekly Snaps summarize news related to Linux Foundation events.</h5>
 </div>
 	<?php
 	while ( have_posts() ) :
