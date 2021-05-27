@@ -9,7 +9,7 @@
 ?>
 
 <p>
-	<a class="button large expanded" aria-label="Happening this Week!" href="/about/weekly-snaps/">Happening this Week</a>			
+	<a class="button large expanded" aria-label="Happening this Week!" href="/weekly-snaps/">Happening this Week</a>			
 </p>
 
 <h4 class="medium-margin-bottom">Latest News</h4>
