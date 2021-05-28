@@ -232,8 +232,54 @@ class LFEvents_Admin {
 			'rewrite'            => array( 'slug' => 'weekly-snaps' ),
 			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
 			'menu_position'      => 20,
+			'template'          => array(
+				array( 'core/columns', array(), array(
+					array( 'core/column', array(
+						'width'       => 33.33,
+					), array(
+						array( 'core/image', array(
+							'size'       => 'large',
+							'linkDestination'       => '',
+						) ),
+					) ),
+					array( 'core/column', array(
+						'width'       => 66.66,
+					), array(
+						array( 'core/paragraph', array() ),
+					) ),
+				) ),
+				array( 'core/columns', array(), array(
+					array( 'core/column', array(
+						'width'       => 33.33,
+					), array(
+						array( 'core/image', array(
+							'size'       => 'large',
+							'linkDestination'       => '',
+						) ),
+					) ),
+					array( 'core/column', array(
+						'width'       => 66.66,
+					), array(
+						array( 'core/paragraph', array() ),
+					) ),
+				) ),
+				array( 'core/columns', array(), array(
+					array( 'core/column', array(
+						'width'       => 33.33,
+					), array(
+						array( 'core/image', array(
+							'size'       => 'large',
+							'linkDestination'       => '',
+						) ),
+					) ),
+					array( 'core/column', array(
+						'width'       => 66.66,
+					), array(
+						array( 'core/paragraph', array() ),
+					) ),
+				) ),
+			),
 		);
-
 		register_post_type( 'lfe_weekly_snap', $opts );
 	}
 
