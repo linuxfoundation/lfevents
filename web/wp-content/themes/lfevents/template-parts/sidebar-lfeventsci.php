@@ -12,7 +12,11 @@
 	<a class="button large expanded" aria-label="Happening this Week!" href="/weekly-snaps/">Happening this Week</a>			
 </p>
 
-<h4 class="medium-margin-bottom">Latest News</h4>
+<h4 class="medium-margin-bottom large-margin-top">Happening this Week</h4>
+<p>Our Weekly Snaps summarize news related to Linux Foundation events</p>
+<p class="xlarge-margin-bottom"><a aria-label="Weekly Snaps" href="/weekly-snaps/"><strong>View Weekly Snaps&hellip;</strong></a></p>
+
+<h4 class="medium-margin-bottom large-margin-top">Latest News</h4>
 <?php
 $query = new WP_Query(
 	array(
