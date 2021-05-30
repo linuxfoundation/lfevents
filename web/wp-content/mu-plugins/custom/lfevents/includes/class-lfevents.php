@@ -193,6 +193,8 @@ class LFEvents {
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'deregister_scripts' );
 		$this->loader->add_filter( 'the_content', $plugin_public, 'rewrite_china_domains' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'insert_event_styles' );
+		$this->loader->add_filter( 'the_seo_framework_sitemap_supported_post_types', $plugin_public, 'remove_weekly_snaps_from_sitemap' );
+
 	}
 
 	/**

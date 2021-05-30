@@ -221,9 +221,10 @@ class LFEvents_Admin {
 				'singular_name' => __( 'Weekly Snap' ),
 				'all_items'     => __( 'All Weekly Snaps' ),
 			),
-			'public'             => true, // not publicly viewable.
-			'publicly_queryable' => true, // not publicly queryable.
-			'show_ui'            => true, // But still show admin UI.
+			'public'             => true,
+			'publicly_queryable' => true,
+			'query_var'          => false,
+			'show_ui'            => true,
 			'has_archive'        => true,
 			'show_in_nav_menus'  => true,
 			'show_in_rest'       => true,

@@ -168,6 +168,16 @@ class LFEvents_Public {
 	}
 
 	/**
+	 * Remove the Weekly Snaps from the SEO Framework sitemap.
+	 *
+	 * @param array $post_types Query args.
+	 */
+	public function remove_weekly_snaps_from_sitemap( $post_types ) {
+		$to_exclude = array( 'lfe_weekly_snap' );
+		return array_diff( $post_types, $to_exclude );
+	}
+
+	/**
 	 * Creates css into the head with the event gradient
 	 */
 	public function create_event_styles() {
