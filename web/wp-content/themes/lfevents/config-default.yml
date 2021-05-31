@@ -33,6 +33,7 @@ PATHS:
     - "src/assets/js/auth0.js"
     - "src/assets/js/china.js"
     - "src/assets/js/responsive-table.js"
+    - "src/assets/js/visa-request-form.js"
     - "src/assets/js/travel-fund-form.js"
   # Paths for the package task to include/exclude in .zip archive
   package:
