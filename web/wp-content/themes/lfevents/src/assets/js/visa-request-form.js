@@ -9,7 +9,7 @@
  *
  * @param {*} token callback token.
  */
- jQuery(
+jQuery(
 	function( $ ) {
 		var PS = PS || {};
 		let widget_1;
