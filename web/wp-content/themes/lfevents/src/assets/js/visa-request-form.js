@@ -106,12 +106,12 @@ jQuery(
 					error( xhr, status, error ) {
 						let msg = '';
 						if ( xhr.responseText.indexOf( 'Not Registered' ) > 0 ) {
-							msg = 'You do not appear to be registered for this event yet.  Please note it can take up to 2 hours after registration for our systems to sync. Therefore, we ask that you wait to request a visa letter until this time has passed.';
+							msg = 'Error: Your visa request did not go through. Please make sure you are using the same email address you used to register for the event. Should you need assistance, please contact <a href="mailto:visaletters@linuxfoundation.org">visaletters@linuxfoundation.org</a>.';
 						} else if ( xhr.responseText.indexOf( 'Duplicate' ) > 0 ) {
-							msg = 'There was an error processing your submission: you have already applied for a visa request letter for this event.';
+							msg = 'You have already requested a visa letter for this event. Should you require further assistance, please email <a href="mailto:visaletters@linuxfoundation.org">visaletters@linuxfoundation.org</a>.';
 						} else {
 							let errorMessage = xhr.status + ': ' + xhr.statusText;
-							msg = 'There was an error processing your submission. Please try again or contact us directly at events@linuxfoundation.org.<br>Error code: (' + errorMessage + ')';
+							msg = 'There was an error processing your submission. Please try again or contact us directly at <a href="mailto:visaletters@linuxfoundation.org">visaletters@linuxfoundation.org</a>.<br>Error code: (' + errorMessage + ')';
 						}
 						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "alert" );
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
