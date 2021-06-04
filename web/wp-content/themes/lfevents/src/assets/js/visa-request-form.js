@@ -105,7 +105,7 @@ jQuery(
 					},
 					error( xhr, status, error ) {
 						let msg = '';
-						if( xhr.responseText.indexOf( 'Not Registered' ) > 0 ) {
+						if ( xhr.responseText.indexOf( 'Not Registered' ) > 0 ) {
 							msg = 'You do not appear to be registered for this event yet.  Please note it can take up to 2 hours after registration for our systems to sync. Therefore, we ask that you wait to request a visa letter until this time has passed.';
 						} else if ( xhr.responseText.indexOf( 'Duplicate' ) > 0 ) {
 							msg = 'There was an error processing your submission: you have already applied for a visa request letter for this event.';
@@ -113,7 +113,7 @@ jQuery(
 							let errorMessage = xhr.status + ': ' + xhr.statusText;
 							msg = 'There was an error processing your submission. Please try again or contact us directly at events@linuxfoundation.org.<br>Error code: (' + errorMessage + ')';
 						}
-						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "alert" );								
+						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "alert" );
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 					},
 				}
