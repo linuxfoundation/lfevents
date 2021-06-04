@@ -94,29 +94,26 @@ jQuery(
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 					},
 					success( response ) {
-						let msg = $( response ).find( 'p' ).text();
-
-						if ( msg.includes( "Error" ) ) {
-							$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "alert" );
-						} else {
-							$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "success" );
-						}
+						let msg = 'Thank you. We have received your visa letter request. Please allow (3) business days from the date of your submission for processing.  We will email you once it is ready.';
+						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "success" );
 
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
-
-						var f = $( '#sfmc-form' + form );
-						var redirectUrl = f.data( 'redirect' );
-						if ( redirectUrl ) {
-							window.location.href = redirectUrl;
-						}
 
 						switch ( form ) {
 							case '1' : grecaptcha.reset( widget_1 ); break;
 						}
 					},
 					error( xhr, status, error ) {
-						let errorMessage = xhr.status + ': ' + xhr.statusText;
-						$( '#sfmc-message' + form ).html( 'There was an error processing your submission. Please try again or contact us directly at events@linuxfoundation.org.<br>Error code: (' + errorMessage + ')' ).removeClass( "warning" ).addClass( "alert" );
+						let msg = '';
+						if( xhr.responseText.indexOf( 'Not Registered' ) > 0 ) {
+							msg = 'You do not appear to be registered for this event yet.  Please note it can take up to 2 hours after registration for our systems to sync. Therefore, we ask that you wait to request a visa letter until this time has passed.';
+						} else if ( xhr.responseText.indexOf( 'Duplicate' ) > 0 ) {
+							msg = 'There was an error processing your submission: you have already applied for a visa request letter for this event.';
+						} else {
+							let errorMessage = xhr.status + ': ' + xhr.statusText;
+							msg = 'There was an error processing your submission. Please try again or contact us directly at events@linuxfoundation.org.<br>Error code: (' + errorMessage + ')';
+						}
+						$( '#sfmc-message' + form ).html( msg ).removeClass( "warning" ).addClass( "alert" );								
 						message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 					},
 				}
