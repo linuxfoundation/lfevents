@@ -61,3 +61,4 @@ require_once 'library/gutenberg.php';
 require_once 'library/lfe-functions.php';
 
 require_once 'library/shortcode-travel-fund-request-form.php';
+require_once 'library/shortcode-visa-request-form.php';
