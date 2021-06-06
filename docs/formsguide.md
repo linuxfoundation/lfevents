@@ -8,6 +8,4 @@ We have also added [some preconnect hints](https://github.com/LF-Engineering/lfe
 
 Most HubSpot forms are embedded using the iframe method, however, all newsletter forms are embedded as raw HTML which allows us to fine-tune the styling of them.
 
-Note that the [travel fund form](https://events.linuxfoundation.org/about/travel-fund-request/) has not been migrated to HubSpot since it has a sophisticated file upload UI.  It runs using a custom NodeJS app to get all the submitted info in to the right parts of SalesForce.  Editors can use a shortcode `[travel-fund-request event-id="xxx"]` to embed an event-specific form in an event page.
-
-Finally, we use a [Gravity form](https://www.gravityforms.com/) for [the one on the Community Events page](https://events.linuxfoundation.org/about/community/) since we need it to create new Community Event posts within WordPress.
+Note that the [travel fund form](https://events.linuxfoundation.org/about/travel-fund-request/) and [visa request form](https://events.linuxfoundation.org/about/visa-request/) are more sophisticated forms that can't be handled by HubSpot.  They run using custom NodeJS apps to get all the submitted info in to the right parts of SalesForce.  Editors can use shortcodes `[travel-fund-request event-id="xxx"]` and `[visa-request event-id="xxx"]` to embed event-specific forms in an event page.
