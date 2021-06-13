@@ -1,10 +1,7 @@
-// import classnames from 'classnames'
-import { __ } from '@wordpress/i18n';
-import { RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
 	const { columns, height, align, alignAll } = attributes;
-
 	const range = ( start, end ) => {
 		return Array.from( { length: end - start }, ( v, k ) => k + start );
 	};
@@ -16,7 +13,7 @@ export default function save( { attributes } ) {
 	return (
 		<div
 			style={ mainStyle }
-			className={ `image-box-wrapper wp-block-lf-image-box align${ align } columns-${ columns } ${ alignAll }` }
+			className={ `image-box-wrapper wp-block-lf-image-box align${ align ? align : 'none' } columns-${ columns } ${ alignAll }` }
 		>
 			{ range( 1, columns + 1 ).map( ( i ) => {
 				const imageUrl = attributes[ `imageUrl${ i }` ];
@@ -31,8 +28,10 @@ export default function save( { attributes } ) {
 						: undefined,
 				};
 
+				const blockProps = useBlockProps.save();
+
 				return (
-					<div
+					<div { ...blockProps }
 						style={ columnStyles }
 						className={ `column column-${ i }` }
 						key={ i }
@@ -41,11 +40,11 @@ export default function save( { attributes } ) {
 							<a
 								className="box-link"
 								href={ link }
-								target={ newWindow ? '_blank' : '_self' }
-								rel={ newWindow ? 'noopener noreferrer' : '' }
+								{...(newWindow ? {target: '_blank'} : {})}
+								{...(newWindow ? {rel: 'noopener'} : {})}
 							></a>
 						) }
-						<div class="image-box-overlay"></div>
+						<div className="image-box-overlay"></div>
 						<div className="image-box-content">
 							{ ! RichText.isEmpty( title ) && (
 								<RichText.Content
