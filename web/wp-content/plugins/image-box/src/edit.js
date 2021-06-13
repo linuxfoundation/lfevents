@@ -20,7 +20,6 @@ import './editor.scss';
 
 export default function Edit( { attributes, setAttributes, isSelected } ) {
 	const { columns, height, align, alignAll } = attributes;
-
 	const inspectorControls = (
 		<InspectorControls key="lf-image-box">
 			<PanelBody title={ __( 'Settings' ) }>
@@ -85,7 +84,6 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					const description = attributes[ `description${ i }` ];
 					const link = attributes[ `link${ i }` ];
 					const newWindow = attributes[ `newWindow${ i }` ];
-					console.log( attributes )
 
 					function selectImage( value ) {
 						setAttributes( {
