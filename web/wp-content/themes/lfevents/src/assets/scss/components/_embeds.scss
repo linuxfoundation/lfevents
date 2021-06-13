@@ -9,4 +9,8 @@
   &.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
     @include responsive-embed(16 by 9);
   }
+
+  &.is-type-video.wp-embed-aspect-4-3 .wp-block-embed__wrapper {
+    @include responsive-embed(4 by 3);
+  }
 }
