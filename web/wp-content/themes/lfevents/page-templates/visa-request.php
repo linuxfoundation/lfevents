@@ -84,26 +84,17 @@ get_template_part( 'template-parts/global-header' );
 							<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
 
 							<div class="grid-x grid-margin-x">
-								<div class="cell large-5">
+								<div class="cell large-6">
 									<label>
 										First name *
 										<input type="text" name="FirstName" required>
 									</label>
 									<p class="help-text">(must match passport)</p>
 								</div>
-								<div class="cell large-5">
+								<div class="cell large-6">
 									<label>
 										Last name *
 										<input type="text" name="LastName" required>
-									</label>
-								</div>
-								<div class="cell large-2">
-									<label>
-										Gender
-										<select name="gender">
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
-										</select>
 									</label>
 								</div>
 								<div class="cell large-6">
