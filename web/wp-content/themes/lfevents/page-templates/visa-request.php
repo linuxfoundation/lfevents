@@ -413,7 +413,7 @@ get_template_part( 'template-parts/global-header' );
 										Accomodation paid by
 										<select name="accomodationPaidBy" required>
 											<option value="Delegate">Delegate</option>
-											<option value="Delegate Company">Delegate Company</option>
+											<option value="Delegate's Company">Delegate's Company</option>
 											<option value="The Linux Foundation">The Linux Foundation</option>
 										</select>
 									</label>
