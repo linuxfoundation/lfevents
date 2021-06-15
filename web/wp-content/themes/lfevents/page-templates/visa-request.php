@@ -38,7 +38,7 @@ get_template_part( 'template-parts/global-header' );
 									?>
 									<div class="cell large-6">
 										<label>
-											The event you would like a visa form for:
+											The event you would like a visa form for
 												<?php
 												$args = array(
 													'post_type'   => 'page',
@@ -84,7 +84,7 @@ get_template_part( 'template-parts/global-header' );
 									?>
 									<div class="cell large-6">
 										<label>
-											Select the event you would like a visa form for:
+											Select the event you would like a visa form for
 											<select name="event" id="event">
 												<?php
 												$args = array(
