@@ -28,48 +28,59 @@ get_template_part( 'template-parts/global-header' );
 						<form id="sfmc-form1" action="https://x76by5x250.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf/visaRequest">
 
 							<div class="grid-x grid-margin-x">
-								<div class="cell large-6">
-									<label>
-										Select the event you would like a visa form for:
-										<select name="event" id="event">
-											<?php
-											$args = array(
-												'post_type'   => 'page',
-												'post_parent' => 0,
-												'no_found_rows' => true,  // used to improve performance.
-												'meta_query' => array(
-													'relation' => 'AND',
-													array(
-														'key'     => 'lfes_event_has_passed',
-														'compare' => '!=',
-														'value' => '1',
-													),
-													array(
-														'key'     => 'lfes_visa_request',
-														'compare' => '=',
-														'value' => '1',
-													),
-												),
-												'orderby'   => 'title',
-												'order'     => 'ASC',
-												'posts_per_page' => 100,
-											);
-											$the_query = new WP_Query( $args );
 
-											if ( $the_query->have_posts() ) {
-												while ( $the_query->have_posts() ) {
-													$the_query->the_post();
-													$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
-													if ( $salesforce_id ) {
-														echo '<option value="' . esc_html( $salesforce_id ) . '" >' . esc_html( get_the_title() ) . '</option>';
+								<?php
+								$event_id = '';
+								if ( isset( $_GET['event_id'] ) ) {
+									$event_id = filter_var( wp_unslash( $_GET['event_id'] ), FILTER_SANITIZE_STRING );
+								}
+								if ( $event_id ) {
+									echo '<input type="hidden" name="event" value="' . esc_attr( $event_id ) . '">';
+								} else {
+									?>
+									<div class="cell large-6">
+										<label>
+											Select the event you would like a visa form for:
+											<select name="event" id="event">
+												<?php
+												$args = array(
+													'post_type'   => 'page',
+													'post_parent' => 0,
+													'no_found_rows' => true,  // used to improve performance.
+													'meta_query' => array(
+														'relation' => 'AND',
+														array(
+															'key'     => 'lfes_event_has_passed',
+															'compare' => '!=',
+															'value' => '1',
+														),
+														array(
+															'key'     => 'lfes_visa_request',
+															'compare' => '=',
+															'value' => '1',
+														),
+													),
+													'orderby'   => 'title',
+													'order'     => 'ASC',
+													'posts_per_page' => 100,
+												);
+												$the_query = new WP_Query( $args );
+
+												if ( $the_query->have_posts() ) {
+													while ( $the_query->have_posts() ) {
+														$the_query->the_post();
+														$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
+														if ( $salesforce_id ) {
+															echo '<option value="' . esc_html( $salesforce_id ) . '" >' . esc_html( get_the_title() ) . '</option>';
+														}
 													}
 												}
-											}
-											wp_reset_postdata(); // Restore original Post Data.
-											?>
-										</select>
-									</label>
-								</div>
+												wp_reset_postdata(); // Restore original Post Data.
+												?>
+											</select>
+										</label>
+									</div>
+								<?php } ?>
 								<div class="cell large-6">
 									<label>
 										Attendee type
