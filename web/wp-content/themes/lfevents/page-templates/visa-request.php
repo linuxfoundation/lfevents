@@ -35,7 +35,51 @@ get_template_part( 'template-parts/global-header' );
 									$event_id = filter_var( wp_unslash( $_GET['event_id'] ), FILTER_SANITIZE_STRING );
 								}
 								if ( $event_id ) {
-									echo '<input type="hidden" name="event" value="' . esc_attr( $event_id ) . '">';
+									?>
+									<div class="cell large-6">
+										<label>
+											The event you would like a visa form for:
+												<?php
+												$args = array(
+													'post_type'   => 'page',
+													'post_parent' => 0,
+													'no_found_rows' => true,  // used to improve performance.
+													'meta_query' => array(
+														'relation' => 'AND',
+														array(
+															'key'     => 'lfes_event_has_passed',
+															'compare' => '!=',
+															'value' => '1',
+														),
+														array(
+															'key'     => 'lfes_visa_request',
+															'compare' => '=',
+															'value' => '1',
+														),
+													),
+													'orderby'   => 'title',
+													'order'     => 'ASC',
+													'posts_per_page' => 100,
+												);
+												$the_query = new WP_Query( $args );
+
+												if ( $the_query->have_posts() ) {
+													while ( $the_query->have_posts() ) {
+														$the_query->the_post();
+														$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
+														if ( $salesforce_id == $event_id ) {
+															echo '<input type="text" disabled name="event" value="' . esc_attr( get_the_title() ) . '">';
+															break;
+														}
+													}
+												}
+												wp_reset_postdata(); // Restore original Post Data.
+
+
+												?>
+										</label>
+									</div>
+									<?php
 								} else {
 									?>
 									<div class="cell large-6">
