@@ -35,6 +35,7 @@ get_template_part( 'template-parts/global-header' );
 									$event_id = filter_var( wp_unslash( $_GET['event_id'] ), FILTER_SANITIZE_STRING );
 								}
 								if ( $event_id ) {
+									echo '<input type="hidden" name="event" value="' . esc_attr( $event_id ) . '">';
 									?>
 									<div class="cell large-6">
 										<label>
@@ -68,7 +69,7 @@ get_template_part( 'template-parts/global-header' );
 														$the_query->the_post();
 														$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
 														if ( $salesforce_id == $event_id ) {
-															echo '<input type="text" disabled name="event" value="' . esc_attr( get_the_title() ) . '">';
+															echo '<input type="text" disabled value="' . esc_attr( get_the_title() ) . '">';
 															break;
 														}
 													}

@@ -32,12 +32,59 @@ get_template_part( 'template-parts/global-header' );
 							}
 							if ( $event_id ) {
 								echo '<input type="hidden" name="event" value="' . esc_attr( $event_id ) . '">';
+								?>
+								<div class="grid-x grid-margin-x">
+									<div class="cell medium-6">
+										<label>
+											The event for which you would like to request travel funding
+											<?php
+											$args = array(
+												'post_type'   => 'page',
+												'post_parent' => 0,
+												'no_found_rows' => true,  // used to improve performance.
+												'meta_query' => array(
+													'relation' => 'AND',
+													array(
+														'key'     => 'lfes_event_has_passed',
+														'compare' => '!=',
+														'value' => '1',
+													),
+													array(
+														'key'     => 'lfes_travel_fund_request',
+														'compare' => '=',
+														'value' => '1',
+													),
+												),
+												'orderby'   => 'title',
+												'order'     => 'ASC',
+												'posts_per_page' => 100,
+											);
+											$the_query = new WP_Query( $args );
+
+											if ( $the_query->have_posts() ) {
+												while ( $the_query->have_posts() ) {
+													$the_query->the_post();
+													$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
+													if ( $salesforce_id == $event_id ) {
+														echo '<input type="text" disabled value="' . esc_attr( get_the_title() ) . '">';
+														break;
+													}
+												}
+											}
+											wp_reset_postdata(); // Restore original Post Data.
+											?>
+										</label>
+									</div>
+								</div>
+								<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
+
+								<?php
 							} else {
 								?>
 								<div class="grid-x grid-margin-x">
 									<div class="cell medium-7">
 										<label>
-											Select the event for which you would like to request travel funding:
+											Select the event for which you would like to request travel funding
 											<select name="event" id="event">
 												<?php
 												$args = array(
