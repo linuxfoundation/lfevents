@@ -142,14 +142,14 @@ get_template_part( 'template-parts/global-header' );
 								<div class="cell large-6">
 									<label>
 										First name *
-										<input type="text" name="FirstName" required>
+										<input type="text" name="firstName" required>
 									</label>
 									<p class="help-text">(must match passport)</p>
 								</div>
 								<div class="cell large-6">
 									<label>
 										Last name *
-										<input type="text" name="LastName" required>
+										<input type="text" name="lastName" required>
 									</label>
 								</div>
 								<div class="cell large-6">
