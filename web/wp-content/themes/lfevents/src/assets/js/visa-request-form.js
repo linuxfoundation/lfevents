@@ -120,5 +120,17 @@ jQuery(
 			);
 		}
 		window.saveData = saveData;
+
+		$( "#accomodationPaidBy" ).change(
+			function() {
+				if ( this.value == "Delegate's Company" ) {
+					  $( "#orgPayingForTravel-div" ).show();
+					  $( "#orgPayingForTravel" ).prop( "required", true );
+				} else {
+					$( "#orgPayingForTravel-div" ).hide();
+					$( "#orgPayingForTravel" ).prop( "required", false );
+				}
+			}
+		);
 	}
 );

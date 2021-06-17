@@ -458,17 +458,17 @@ get_template_part( 'template-parts/global-header' );
 								<div class="cell large-6">
 									<label>
 										Accomodation paid by
-										<select name="accomodationPaidBy" required>
+										<select name="accomodationPaidBy" id="accomodationPaidBy" required>
 											<option value="Delegate">Delegate</option>
 											<option value="Delegate's Company">Delegate's Company</option>
 											<option value="The Linux Foundation">The Linux Foundation</option>
 										</select>
 									</label>
 								</div>
-								<div class="cell large-6">
+								<div class="cell large-6" id="orgPayingForTravel-div" style="display:none">
 									<label>
-										Organization paying for your travel
-										<input type="text" name="orgPayingForTravel">
+										Organization paying for your travel *
+										<input type="text" name="orgPayingForTravel" id="orgPayingForTravel">
 									</label>
 								</div>
 								<div class="cell large-12">
