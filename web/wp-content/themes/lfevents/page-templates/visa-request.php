@@ -25,7 +25,7 @@ get_template_part( 'template-parts/global-header' );
 
 						<div class="wp-block-group has-off-white-background-color has-background is-style-border"><div class="wp-block-group__inner-container">
 
-						<form id="sfmc-form1" action="https://x76by5x250.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf/visaRequest">
+						<form id="sfmc-form1" action="https://jvqa5uv9oh.execute-api.us-east-2.amazonaws.com/prod/api/v1/sf/visaRequest">
 
 							<div class="grid-x grid-margin-x">
 
