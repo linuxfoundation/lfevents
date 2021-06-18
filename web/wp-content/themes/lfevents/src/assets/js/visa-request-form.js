@@ -121,7 +121,7 @@ jQuery(
 		}
 		window.saveData = saveData;
 
-		$( "#accomodationPaidBy" ).change(
+		$( "#accommodationPaidBy" ).change(
 			function() {
 				if ( this.value == "Delegate's Company" ) {
 					  $( "#orgPayingForTravel-div" ).show();

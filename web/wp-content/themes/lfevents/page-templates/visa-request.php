@@ -457,8 +457,8 @@ get_template_part( 'template-parts/global-header' );
 								</div>
 								<div class="cell large-6">
 									<label>
-										Accomodation paid by
-										<select name="accomodationPaidBy" id="accomodationPaidBy" required>
+										Accommodation paid by
+										<select name="accommodationPaidBy" id="accommodationPaidBy" required>
 											<option value="Delegate">Delegate</option>
 											<option value="Delegate's Company">Delegate's Company</option>
 											<option value="The Linux Foundation">The Linux Foundation</option>
