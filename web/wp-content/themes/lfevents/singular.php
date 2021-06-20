@@ -281,6 +281,8 @@ if ( ! $splash_page ) :
 			$facebook  = get_post_meta( $parent_id, 'lfes_facebook', true );
 			$twitter   = get_post_meta( $parent_id, 'lfes_twitter', true );
 			$instagram = get_post_meta( $parent_id, 'lfes_instagram', true );
+			$twitch    = get_post_meta( $parent_id, 'lfes_twitch', true );
+			$slack     = get_post_meta( $parent_id, 'lfes_slack', true );
 
 			// hashtag.
 			$hashtag = get_post_meta( $parent_id, 'lfes_hashtag', true );
@@ -337,6 +339,16 @@ if ( ! $splash_page ) :
 				if ( $instagram ) {
 					echo '<li><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
 					get_template_part( 'template-parts/svg/instagram' );
+					echo '</a></li>';
+				}
+				if ( $twitch ) {
+					echo '<li><a rel="noopener" title="Twitch" target="_blank" href="' . esc_html( $twitch ) . '">';
+					get_template_part( 'template-parts/svg/twitch' );
+					echo '</a></li>';
+				}
+				if ( $slack ) {
+					echo '<li><a rel="noopener" title="Slack" target="_blank" href="' . esc_html( $slack ) . '">';
+					get_template_part( 'template-parts/svg/slack' );
 					echo '</a></li>';
 				}
 				echo '</ul>';
