@@ -36,7 +36,7 @@ function add_visa_request_shortcode( $atts ) {
 
 	?>
 
-	<form id="sfmc-form1" action="https://x76by5x250.execute-api.us-east-2.amazonaws.com/dev/api/v1/sf/visaRequest">
+	<form id="sfmc-form1" action="https://jvqa5uv9oh.execute-api.us-east-2.amazonaws.com/prod/api/v1/sf/visaRequest">
 	<input type="hidden" name="event" value="<?php echo esc_attr( $event_id ); ?>"></input>
 
 	<div class="grid-x grid-margin-x">
@@ -57,14 +57,14 @@ function add_visa_request_shortcode( $atts ) {
 		<div class="cell large-6">
 			<label>
 				First name *
-				<input type="text" name="FirstName" required>
+				<input type="text" name="firstName" required>
 			</label>
 			<p class="help-text">(must match passport)</p>
 		</div>
 		<div class="cell large-6">
 			<label>
 				Last name *
-				<input type="text" name="LastName" required>
+				<input type="text" name="lastName" required>
 			</label>
 		</div>
 		<div class="cell large-6">
@@ -371,18 +371,18 @@ function add_visa_request_shortcode( $atts ) {
 		</div>
 		<div class="cell large-6">
 			<label>
-				Accomodation paid by
-				<select name="accomodationPaidBy" required>
+				Accommodation paid by
+				<select name="accommodationPaidBy" id="accommodationPaidBy" required>
 					<option value="Delegate">Delegate</option>
 					<option value="Delegate's Company">Delegate's Company</option>
 					<option value="The Linux Foundation">The Linux Foundation</option>
 				</select>
 			</label>
 		</div>
-		<div class="cell large-6">
+		<div class="cell large-6" id="orgPayingForTravel-div" style="display:none">
 			<label>
-				Organization paying for your travel
-				<input type="text" name="orgPayingForTravel">
+				Organization paying for your travel *
+				<input type="text" name="orgPayingForTravel" id="orgPayingForTravel">
 			</label>
 		</div>
 		<div class="cell large-12">

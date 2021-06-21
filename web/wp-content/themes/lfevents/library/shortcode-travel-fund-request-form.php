@@ -196,7 +196,7 @@ function add_travel_fund_shortcode( $atts ) {
 		</div>
 		</div>
 		<div class="cell medium-3">
-				<input class="button" type="button" value="Add Another Expense Item" onclick="addnewForm();" />
+				<input class="button" type="button" value="Add Another Expense Item" onClick="addnewForm();" />
 		</div>
 		<div data-callback="onTFSubmit" data-sitekey="6LdoJscUAAAAAGb5QCtNsaaHwkZBPE3-R0d388KZ" class="g-recaptcha" data-size="invisible"></div>
 		<hr style="margin-top:1rem;margin-bottom:1.5rem;" />
