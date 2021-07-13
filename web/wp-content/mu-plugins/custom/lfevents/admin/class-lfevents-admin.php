@@ -417,6 +417,18 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => 'a0A2M00000VcC9HUAV',
 								),
+								array(
+									'type'          => 'text',
+									'id'            => 'dropdown_title',
+									'data_type'     => 'meta',
+									'data_key'      => 'dropdown_title',
+									'label'         => __( 'Dropdown Title' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'help'          => __( 'Set this value to override the Event title in the form dropdowns.' ),
+									'default_value' => '',
+									'placeholder'   => 'Open Source Summit + Embedded Linux Conference',
+								),
 							),
 						),
 						array(

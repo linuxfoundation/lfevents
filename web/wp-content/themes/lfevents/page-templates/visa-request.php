@@ -116,7 +116,11 @@ get_template_part( 'template-parts/global-header' );
 														$the_query->the_post();
 														$salesforce_id = get_post_meta( $post->ID, 'lfes_salesforce_id', true );
 														if ( $salesforce_id ) {
-															echo '<option value="' . esc_html( $salesforce_id ) . '" >' . esc_html( get_the_title() ) . '</option>';
+															$dropdown_title = get_post_meta( $post->ID, 'lfes_dropdown_title', true );
+															if ( ! $dropdown_title ) {
+																$dropdown_title = get_the_title();
+															}
+															echo '<option value="' . esc_html( $salesforce_id ) . '" >' . esc_html( $dropdown_title ) . '</option>';
 														}
 													}
 												}
