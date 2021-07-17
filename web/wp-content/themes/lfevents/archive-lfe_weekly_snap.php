@@ -21,7 +21,7 @@ get_template_part( 'template-parts/global-header' );
 		<div style="height:40px" aria-hidden="true" class="wp-block-spacer is-style-40-responsive"></div>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<div class="container wrap">
-			<h2 class="large-margin-top"><?php echo get_the_date(); ?></h2>
+			<h3 class="large-margin-top"><?php echo get_the_date(); ?></h3>
 			<?php the_content(); ?>
 			<?php get_template_part( 'template-parts/edit-link' ); ?>
 			</div>
