@@ -166,9 +166,9 @@ export default function Edit( { attributes, setAttributes, className } ) {
 								<RichText
 									tagName="h4"
 									value={ title }
-									onChange={ ( title ) =>
+									onChange={ ( newTitle ) =>
 										setAttributes( {
-											[ `title${ i }` ]: title,
+											[ `title${ i }` ]: newTitle,
 										} )
 									}
 									placeholder={ __( 'Track title' ) }
@@ -186,9 +186,9 @@ export default function Edit( { attributes, setAttributes, className } ) {
 									<URLInput
 										value={ link }
 										className="components-base-control__field"
-										onChange={ ( link ) => {
+										onChange={ ( newLink ) => {
 											setAttributes( {
-												[ `link${ i }` ]: link,
+												[ `link${ i }` ]: newLink,
 											} );
 										} }
 									/>
