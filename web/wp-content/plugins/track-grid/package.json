@@ -14,8 +14,7 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^12.5.0",
+		"@wordpress/scripts": "^17.0.0",
 		"node-html-parser": "^1.4.8"
-	},
-	"dependencies": {}
+	}
 }
