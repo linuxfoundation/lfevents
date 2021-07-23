@@ -3,8 +3,7 @@ import { RichText } from '@wordpress/block-editor';
 // import helper functions.
 import { range } from './utils.js';
 
-export default function( { attributes } ) {
-
+export default function ( { attributes } ) {
 	const {
 		tracks,
 		columns,
@@ -69,7 +68,10 @@ export default function( { attributes } ) {
 				} ) }
 			</ul>
 			{ showKeynote && (
-				<div className={ `track-keynote track-style ${ className }` } style={ mainStyle }>
+				<div
+					className={ `track-keynote track-style ${ className }` }
+					style={ mainStyle }
+				>
 					{ keynoteLink && (
 						<a className="box-link" href={ keynoteLink }></a>
 					) }

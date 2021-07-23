@@ -112,11 +112,18 @@ registerBlockType( 'lf/track-grid', {
 					const transformSchema = {};
 					// count the tracks.
 					const tracks = liChildren.childNodes.length;
+
+					if ( tracks == 0 ) return;
 					// loop over each and setup an object.
 					liChildren.childNodes.forEach( ( item, i ) => {
-
-						const text = item.firstChild.childNodes[ 0 ] ? item.firstChild.childNodes[ 0 ].text : '';
-						const link = item.firstChild.attributes ? item.firstChild.attributes.href : '';
+						const text =
+							item.firstChild && item.firstChild.childNodes[ 0 ]
+								? item.firstChild.childNodes[ 0 ].text
+								: '';
+						const link =
+							item.firstChild && item.firstChild.attributes
+								? item.firstChild.attributes.href
+								: '';
 
 						transformSchema[ `title${ i + 1 }` ] = text;
 						transformSchema[ `link${ i + 1 }` ] = link;
@@ -195,6 +202,6 @@ registerBlockType( 'lf/track-grid', {
 		{
 			attributes: schema,
 			save: deprecated,
-		}
+		},
 	],
 } );
