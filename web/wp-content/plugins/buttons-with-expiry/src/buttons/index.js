@@ -2,7 +2,6 @@ import { registerBlockType } from '@wordpress/blocks';
 import { button as icon } from '@wordpress/icons';
 import { __ } from '@wordpress/i18n';
 
-// import transforms from './transforms';
 import Edit from './edit';
 import save from './save';
 

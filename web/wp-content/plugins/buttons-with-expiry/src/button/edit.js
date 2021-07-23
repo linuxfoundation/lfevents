@@ -20,7 +20,6 @@ import {
 	SelectControl,
 	ToggleControl,
 	DateTimePicker,
-	withFallbackStyles,
 } from '@wordpress/components';
 import {
 	BlockControls,
@@ -36,29 +35,6 @@ import {
 import { rawShortcut, displayShortcut } from '@wordpress/keycodes';
 import { link, linkOff } from '@wordpress/icons';
 import { createBlock } from '@wordpress/blocks';
-
-const { getComputedStyle } = window;
-
-const applyFallbackStyles = withFallbackStyles( ( node, ownProps ) => {
-	const { textColor, backgroundColor } = ownProps;
-	const backgroundColorValue = backgroundColor && backgroundColor.color;
-	const textColorValue = textColor && textColor.color;
-	//avoid the use of querySelector if textColor color is known and verify if node is available.
-	const textNode =
-		! textColorValue && node
-			? node.querySelector( '[contenteditable="true"]' )
-			: null;
-	return {
-		fallbackBackgroundColor:
-			backgroundColorValue || ! node
-				? undefined
-				: getComputedStyle( node ).backgroundColor,
-		fallbackTextColor:
-			textColorValue || ! textNode
-				? undefined
-				: getComputedStyle( textNode ).color,
-	};
-} );
 
 const NEW_TAB_REL = 'noopener';
 const MIN_BORDER_RADIUS_VALUE = 0;
@@ -376,5 +352,4 @@ function ButtonEdit( props ) {
 
 export default compose( [
 	withColors( 'backgroundColor', { textColor: 'color' } ),
-	applyFallbackStyles,
 ] )( ButtonEdit );

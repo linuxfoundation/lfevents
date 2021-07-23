@@ -16,7 +16,7 @@
 	// spread out the block
 	width: 100%;
 
-	&:before {
+	&::before {
 		content: "BUTTON GROUP";
 		color: #d8d8d8;
 		position: absolute;
@@ -30,20 +30,6 @@
 .wp-block[data-align="left"],
 .wp-block[data-align="right"] {
 	height: unset;
-}
-
-[data-align="left"],
-[data-align="center"],
-[data-align="right"] {
-	> .wp-block-lf-buttons-with-expiry {
-		float: none;
-		margin-left: unset;
-		margin-right: unset;
-	}
-	[data-type="lf/button-with-expiry"] {
-		margin-left: unset;
-		margin-right: unset;
-	}
 }
 
 .wp-block-lf-buttons-with-expiry {
@@ -61,9 +47,14 @@
 		cursor: text;
 	}
 
-	// Make placeholder text white unless custom colors or outline versions are chosen.
+	// Increase placeholder opacity to meet contrast ratios.
+	[data-rich-text-placeholder]::after {
+		opacity: 0.8;
+	}
+
+	// Make placeholder white unless custom colors or outline versions chosen.
 	&:not(.has-text-color):not(.is-style-outline) [data-rich-text-placeholder]::after {
-		color: #ffffff;
+		color: #fff;
 	}
 
 	// Add outline to button on focus to indicate focus-state.
@@ -76,14 +67,23 @@
 		&:focus {
 			box-shadow: 0 0 0 1px #d8d8d8;
 
-			// Windows' High Contrast mode will show this outline, but not the box-shadow.
+			// Windows' High Contrast mode,
 			outline: 2px solid transparent;
 			outline-offset: -2px;
 		}
 	}
+}
 
-	// Increase placeholder opacity to meet contrast ratios.
-	[data-rich-text-placeholder]::after {
-		opacity: 0.8;
+[data-align="left"],
+[data-align="center"],
+[data-align="right"] {
+	> .wp-block-lf-buttons-with-expiry {
+		float: none;
+		margin-left: unset;
+		margin-right: unset;
+	}
+	[data-type="lf/button-with-expiry"] {
+		margin-left: unset;
+		margin-right: unset;
 	}
 }
