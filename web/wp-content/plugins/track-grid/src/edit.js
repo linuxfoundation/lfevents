@@ -15,7 +15,6 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
-
 import './editor.scss';
 
 // import helper functions.
