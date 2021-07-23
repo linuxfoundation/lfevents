@@ -7,27 +7,34 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
-		"format:js": "wp-scripts format-js",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:md:js": "wp-scripts lint-md-js",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
 		"start": "wp-scripts start",
-		"packages-update": "wp-scripts packages-update"
-	},
-	"dependencies": {
-		"@typescript-eslint/eslint-plugin": "^4.18.0",
-		"@wordpress/block-editor": "^5.3.0",
-		"@wordpress/blocks": "^8.0.0",
-		"@wordpress/components": "^13.0.0",
-		"@wordpress/compose": "^3.25.0",
-		"@wordpress/date": "^3.14.0",
-		"@wordpress/element": "^2.20.0",
-		"@wordpress/i18n": "^3.19.0",
-		"@wordpress/icons": "^2.10.0",
-		"@wordpress/keycodes": "^2.19.0",
-		"classnames": "^2.2.6"
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^14.0.0",
+		"@typescript-eslint/eslint-plugin": "^4.18.0",
+		"@wordpress/block-editor": "^6.2.0",
+		"@wordpress/blocks": "^10.0.0",
+		"@wordpress/components": "^14.2.0",
+		"@wordpress/compose": "^4.2.0",
+		"@wordpress/date": "^4.2.0",
+		"@wordpress/element": "^3.2.0",
+		"@wordpress/i18n": "^4.2.0",
+		"@wordpress/icons": "^4.1.0",
+		"@wordpress/keycodes": "^3.2.0",
+		"@wordpress/scripts": "^17.0.0",
+		"classnames": "^2.2.6",
+		"postcss": "^8.2.2",
+		"postcss-loader": "^4.3.0",
 		"typescript": "^4.2.3"
 	}
 }

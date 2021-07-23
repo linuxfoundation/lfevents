@@ -7,11 +7,8 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import {
-	// BlockControls,
 	useBlockProps,
-	// __experimentalAlignmentHookSettingsProvider as AlignmentHookSettingsProvider,
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
-	// JustifyToolbar,
 } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = [ 'lf/button-with-expiry' ];
