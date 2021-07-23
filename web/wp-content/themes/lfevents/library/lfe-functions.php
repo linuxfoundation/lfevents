@@ -296,7 +296,6 @@ function lfe_get_sponsors( $parent_id ) {
  * Removes unneeded admin menu items.
  */
 function lfe_custom_menu_page_removing() {
-	// remove_menu_page( 'ultimate-blocks-settings' ); // don't need this anymore?
 	remove_menu_page( 'edit-comments.php' );
 }
 add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
