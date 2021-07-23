@@ -114,8 +114,9 @@ registerBlockType( 'lf/track-grid', {
 					const tracks = liChildren.childNodes.length;
 					// loop over each and setup an object.
 					liChildren.childNodes.forEach( ( item, i ) => {
-						const text = item.firstChild.childNodes[ 0 ].text;
-						const link = item.firstChild.attributes.href;
+
+						const text = item.firstChild.childNodes[ 0 ] ? item.firstChild.childNodes[ 0 ].text : '';
+						const link = item.firstChild.attributes ? item.firstChild.attributes.href : '';
 
 						transformSchema[ `title${ i + 1 }` ] = text;
 						transformSchema[ `link${ i + 1 }` ] = link;
