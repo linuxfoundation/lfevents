@@ -1,9 +1,11 @@
 import { registerBlockType, createBlock } from '@wordpress/blocks';
+import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 import './style.scss';
 import Edit from './edit';
 import save from './save';
+import deprecated from './deprecated';
 
 // import helper functions.
 import { range } from './utils.js';
@@ -85,6 +87,7 @@ registerBlockType( 'lf/track-grid', {
 	supports: {
 		align: [ 'wide', 'full' ],
 	},
+	example: {},
 	attributes: schema,
 	styles: [
 		{
@@ -102,17 +105,17 @@ registerBlockType( 'lf/track-grid', {
 			{
 				type: 'block',
 				blocks: [ 'core/list' ],
-				transform: function ( attributes ) {
+				transform: ( attributes ) => {
 					// parse the list block.
-					let liChildren = parse( attributes.values );
+					const liChildren = parse( attributes.values );
 					// setup empty object.
-					let transformSchema = {};
+					const transformSchema = {};
 					// count the tracks.
-					let tracks = liChildren.childNodes.length;
+					const tracks = liChildren.childNodes.length;
 					// loop over each and setup an object.
 					liChildren.childNodes.forEach( ( item, i ) => {
-						let text = item.firstChild.childNodes[ 0 ].text;
-						let link = item.firstChild.attributes.href;
+						const text = item.firstChild.childNodes[ 0 ].text;
+						const link = item.firstChild.attributes.href;
 
 						transformSchema[ `title${ i + 1 }` ] = text;
 						transformSchema[ `link${ i + 1 }` ] = link;
@@ -187,4 +190,10 @@ registerBlockType( 'lf/track-grid', {
 	},
 	edit: Edit,
 	save,
+	deprecated: [
+		{
+			attributes: schema,
+			save: deprecated,
+		}
+	],
 } );

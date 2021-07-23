@@ -3,7 +3,8 @@ import { RichText } from '@wordpress/block-editor';
 // import helper functions.
 import { range } from './utils.js';
 
-export default function save( { attributes } ) {
+export default function( { attributes } ) {
+
 	const {
 		tracks,
 		columns,
@@ -44,11 +45,7 @@ export default function save( { attributes } ) {
 							key={ i }
 						>
 							{ link && (
-								<a className="box-link" href={ link }>
-									<span className="screen-reader-text">
-										Link
-									</span>
-								</a>
+								<a className="box-link" href={ link }></a>
 							) }
 							{ ! RichText.isEmpty( title ) && (
 								<RichText.Content
@@ -72,16 +69,9 @@ export default function save( { attributes } ) {
 				} ) }
 			</ul>
 			{ showKeynote && (
-				<div
-					className={ `track-keynote track-style ${ className }` }
-					style={ mainStyle }
-				>
+				<div className={ `track-keynote track-style ${ className }` } style={ mainStyle }>
 					{ keynoteLink && (
-						<a className="box-link" href={ keynoteLink }>
-							<span className="screen-reader-text">
-								Keynote Link
-							</span>
-						</a>
+						<a className="box-link" href={ keynoteLink }></a>
 					) }
 					{ ! RichText.isEmpty( keynoteText ) && (
 						<RichText.Content tagName="h4" value={ keynoteText } />
