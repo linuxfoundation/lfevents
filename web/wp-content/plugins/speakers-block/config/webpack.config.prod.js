@@ -119,6 +119,11 @@ module.exports = {
 	plugins: [
 		blocksCSSPlugin,
 		editBlocksCSSPlugin,
+		new webpack.DefinePlugin( {
+			'process.env': {
+				NODE_ENV: JSON.stringify( 'production' ),
+			},
+		} ),
 		// Minify the code.
 		new webpack.optimize.UglifyJsPlugin( {
 			compress: {
@@ -139,7 +144,8 @@ module.exports = {
 				ascii_only: true,
 			},
 			sourceMap: shouldUseSourceMap,
-		} ),
+		},
+		),
 	],
 	stats: 'minimal',
 	// stats: 'errors-only',
