@@ -10,7 +10,7 @@
     font-size: 16px;
   }
 
-  >div {
+  > div {
     margin: 0 auto;
     height: 70px;
     width: 70px;
@@ -24,7 +24,8 @@
 .ub_countdown_circle_path {
   stroke-linecap: round;
   stroke-dashoffset: 0px;
-  transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s;
+  transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s,
+    stroke-width 0.06s ease 0.3s;
   fill-opacity: 0;
 }
 
@@ -52,6 +53,7 @@
 .ub-countdown-odometer-container {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+  height: 95px;
 
   span {
     text-align: center;
@@ -150,7 +152,7 @@
   flex-direction: row;
 }
 
-.ub-countdown>div {
+.ub-countdown > div {
   text-align: initial;
 }
 
@@ -175,7 +177,6 @@
 }
 
 @media (max-width: 991.98px) {
-
   .ub-countdown .ub_countdown_week,
   .ub-countdown .ub_countdown_day,
   .ub-countdown .ub_countdown_hour,
@@ -187,7 +188,6 @@
 }
 
 @media (max-width: 575.98px) {
-
   .ub-countdown .ub_countdown_week,
   .ub-countdown .ub_countdown_day,
   .ub-countdown .ub_countdown_hour,
@@ -199,7 +199,6 @@
 }
 
 @media (max-width: 479.98px) {
-
   .ub-countdown-separator,
   .ub-countdown-odometer {
     font-size: 20px;
@@ -211,12 +210,12 @@
     display: inline-flex;
   }
 
-  .ub_countdown_circular_container>div {
+  .ub_countdown_circular_container > div {
     height: 60px;
     width: 60px;
   }
 
-  .ub_countdown_circular_container>div svg {
+  .ub_countdown_circular_container > div svg {
     width: 60px;
     height: 60px;
   }
@@ -236,7 +235,7 @@
     width: 50px;
   }
 
-  .ub_countdown_circular_container>div svg {
+  .ub_countdown_circular_container > div svg {
     width: 50px;
     height: 50px;
   }
@@ -253,19 +252,18 @@
 }
 
 @media (max-width: 320px) {
-
   .ub-countdown,
   .ub-countdown-separator,
   .ub-countdown-odometer {
     font-size: 10px;
   }
 
-  .ub_countdown_circular_container>div {
+  .ub_countdown_circular_container > div {
     height: 40px;
     width: 40px;
   }
 
-  .ub_countdown_circular_container>div svg {
+  .ub_countdown_circular_container > div svg {
     width: 40px;
     height: 40px;
   }
@@ -298,7 +296,7 @@
 }
 
 @media (max-width: 320px) {
-  .ub_countdown_circular_container>div {
+  .ub_countdown_circular_container > div {
     height: 60px;
     width: 60px;
 
@@ -315,9 +313,7 @@
 }
 
 // Styles for IE only
-@media all and (-ms-high-contrast: none),
-(-ms-high-contrast: active) {
-
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   // countdown clock
   .ub_countdown_circular_container {
     display: none;

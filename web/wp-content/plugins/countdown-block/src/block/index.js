@@ -14,7 +14,7 @@ const { registerBlockType } = wp.blocks;
 const { Fragment } = wp.element;
 const { InspectorControls, RichText, PanelColorSettings, BlockControls } =
 	wp.blockEditor || wp.editor;
-const { DateTimePicker, IconButton, PanelBody, PanelRow, TextControl, Toolbar } = wp.components;
+const { DateTimePicker, Button, PanelBody, PanelRow, TextControl, ToolbarGroup, ToolbarButton } = wp.components;
 const { withSelect } = wp.data;
 
 registerBlockType( 'cgb/countdown-block', {
@@ -95,7 +95,7 @@ registerBlockType( 'cgb/countdown-block', {
 
 		return [
 			isSelected && (
-				<InspectorControls>
+				<InspectorControls key="Countdown">
 					{ style === 'Circular' && (
 						<PanelColorSettings
 							title={ __( 'Circle Color' ) }
@@ -173,46 +173,51 @@ registerBlockType( 'cgb/countdown-block', {
 			),
 			isSelected && (
 				<BlockControls>
-					<Toolbar>
-						<IconButton
+					<ToolbarGroup>
+						<ToolbarButton
+							key="regular"
 							isPrimary={ style === 'Regular' }
 							icon={ RegularCountdownIcon }
 							label={ __( 'Regular' ) }
 							onClick={ () => setAttributes( { style: 'Regular' } ) }
 						/>
-						<IconButton
+						<ToolbarButton
+							key="circular"
 							isPrimary={ style === 'Circular' }
 							icon={ CircularCountdownIcon }
 							label={ __( 'Circular' ) }
 							onClick={ () => setAttributes( { style: 'Circular' } ) }
 						/>
-						<IconButton
+						<ToolbarButton
+							key="odometer"
 							isPrimary={ style === 'Odometer' }
 							icon={ TickingCountdownIcon }
 							label={ __( 'Odometer' ) }
 							onClick={ () => setAttributes( { style: 'Odometer' } ) }
 						/>
-					</Toolbar>
-					<Toolbar>
+					</ToolbarGroup>
+					<ToolbarGroup>
 						{ [ 'left', 'center', 'right', 'justify' ].map( a => (
-							<IconButton
+							<ToolbarButton
+								key={ `control-align-${ a }` }
 								icon={ `editor-${ a === 'justify' ? a : 'align' + a }` }
 								label={ __(
 									( a !== 'justify' ? 'Align ' : '' ) +
 									a[ 0 ].toUpperCase() +
 									a.slice( 1 )
 								) }
-								isActive={ a }
+								isactive={ a }
 								onClick={ () => {
 									setAttributes( { messageAlign: a } );
 								} }
 							/>
 						) ) }
-					</Toolbar>
+					</ToolbarGroup>
 				</BlockControls>
 			),
-			<Fragment>
+			<Fragment key="timer-wrapper">
 				<Timer
+					key="timer-element"
 					labels={ {
 						weeks: labelWeeks,
 						days: labelDays,
@@ -230,7 +235,7 @@ registerBlockType( 'cgb/countdown-block', {
 					style={ { textAlign: messageAlign } }
 					value={ expiryMessage }
 					onChange={ text => setAttributes( { expiryMessage: text } ) }
-					keepPlaceholderOnFocus={ true }
+					keepPlaceholderOnFocus
 				/>
 			</Fragment>,
 		];
