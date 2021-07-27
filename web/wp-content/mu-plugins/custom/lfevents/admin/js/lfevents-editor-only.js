@@ -13,7 +13,16 @@
 
 wp.domReady(
 	() => {
+	// removed as we have our own button.
 	wp.blocks.unregisterBlockType( 'core/buttons' );
+	// following are unsupported.
+	wp.blocks.unregisterBlockType( 'core/nextpage' );
+	wp.blocks.unregisterBlockType( 'core/site-logo' );
+	wp.blocks.unregisterBlockType( 'core/site-tagline' );
+	wp.blocks.unregisterBlockType( 'core/site-title' );
+	wp.blocks.unregisterBlockType( 'core/latest-comments' );
+	wp.blocks.unregisterBlockType( 'core/tag-cloud' );
+	wp.blocks.unregisterBlockType( 'core/loginout' );
 	wp.blocks.registerBlockStyle(
 		'core/cover',
 	 [
@@ -32,17 +41,17 @@ wp.domReady(
 		 'core/group',
 		[
 		{
-				name: 'default',
-				label: 'Default',
-				isDefault: true,
+			name: 'default',
+			label: 'Default',
+			isDefault: true,
 		},
 		{
-				name: 'border',
-				label: 'Rounded Border',
+			name: 'border',
+			label: 'Rounded Border',
 		},
 		{
-				name: 'event-gradient',
-				label: 'Event Gradient',
+			name: 'event-gradient',
+			label: 'Event Gradient',
 		},
 		{
 			name: 'constrained-50',
