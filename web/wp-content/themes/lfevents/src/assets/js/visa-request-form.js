@@ -106,7 +106,7 @@ jQuery(
 					error( xhr, status, error ) {
 						let msg = '';
 						if ( xhr.responseText.indexOf( 'Not Registered' ) > 0 ) {
-							msg = 'Error: Your visa request did not go through. Please make sure you are using the same email address you used to register for the event. Should you need assistance, please contact <a href="mailto:visaletters@linuxfoundation.org">visaletters@linuxfoundation.org</a>.';
+							msg = 'Error: Your visa letter request did not go through. Please make sure you are using the same email address you used to register for the event. Should you need assistance, please contact <a href="mailto:visaletters@linuxfoundation.org">visaletters@linuxfoundation.org</a>.';
 						} else if ( xhr.responseText.indexOf( 'Duplicate' ) > 0 ) {
 							msg = 'You have already requested a visa letter for this event. Should you require further assistance, please email <a href="mailto:visaletters@linuxfoundation.org">visaletters@linuxfoundation.org</a>.';
 						} else {
