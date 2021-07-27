@@ -141,9 +141,9 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 								<RichText
 									tagName="h4"
 									value={ title }
-									onChange={ ( title ) =>
+									onChange={ ( newTitle ) =>
 										setAttributes( {
-											[ `title${ i }` ]: title,
+											[ `title${ i }` ]: newTitle,
 										} )
 									}
 									placeholder={ __( 'Title' ) }
@@ -152,9 +152,9 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 									tagName="p"
 									placeholder={ __( 'Image description' ) }
 									value={ description }
-									onChange={ ( description ) =>
+									onChange={ ( newDescription ) =>
 										setAttributes( {
-											[ `description${ i }` ]: description,
+											[ `description${ i }` ]: newDescription,
 										} )
 									}
 								/>
@@ -170,9 +170,9 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 											<URLInput
 												value={ link }
 												className="components-base-control__field"
-												onChange={ ( link ) => {
+												onChange={ ( newLink ) => {
 													setAttributes( {
-														[ `link${ i }` ]: link,
+														[ `link${ i }` ]: newLink,
 													} );
 												} }
 											/>

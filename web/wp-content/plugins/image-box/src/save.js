@@ -13,7 +13,9 @@ export default function save( { attributes } ) {
 	return (
 		<div
 			style={ mainStyle }
-			className={ `image-box-wrapper wp-block-lf-image-box align${ align ? align : 'none' } columns-${ columns } ${ alignAll }` }
+			className={ `image-box-wrapper wp-block-lf-image-box align${
+				align ? align : 'none'
+			} columns-${ columns } ${ alignAll }` }
 		>
 			{ range( 1, columns + 1 ).map( ( i ) => {
 				const imageUrl = attributes[ `imageUrl${ i }` ];
@@ -31,7 +33,8 @@ export default function save( { attributes } ) {
 				const blockProps = useBlockProps.save();
 
 				return (
-					<div { ...blockProps }
+					<div
+						{ ...blockProps }
 						style={ columnStyles }
 						className={ `column column-${ i }` }
 						key={ i }
@@ -40,8 +43,8 @@ export default function save( { attributes } ) {
 							<a
 								className="box-link"
 								href={ link }
-								{...(newWindow ? {target: '_blank'} : {})}
-								{...(newWindow ? {rel: 'noopener'} : {})}
+								{ ...( newWindow ? { target: '_blank' } : {} ) }
+								{ ...( newWindow ? { rel: 'noopener' } : {} ) }
 							></a>
 						) }
 						<div className="image-box-overlay"></div>

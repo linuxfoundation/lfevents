@@ -1,128 +1,125 @@
 // The frontend partial is imported in to themes editor.css, use this file for specific overrides.
 
 .wp-block-lf-image-box {
-    padding: 0.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	padding: 0.5rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 
-    >div {
-        border: 1px solid lightgray;
-        border-radius: 25px;
-    }
+	> div {
+		border: 1px solid lightgray;
+		border-radius: 25px;
+	}
 
-    >div:not(:last-child) {
-        margin-right: 0.75rem;
-    }
+	> div:not(:last-child) {
+		margin-right: 0.75rem;
+	}
 
-    &.align-center {
+	&.align-center {
+		p,
+		h4 {
+			text-align: center;
+		}
+	}
 
-        p,
-        h4 {
-            text-align: center;
-        }
-    }
+	&.align-left {
+		p,
+		h4 {
+			text-align: left;
+		}
+	}
 
-    &.align-left {
+	&.align-right {
+		p,
+		h4 {
+			text-align: right;
+		}
+	}
 
-        p,
-        h4 {
-            text-align: left;
-        }
-    }
+	&.columns-1 {
+		.column:not(:nth-child(1)) {
+			display: none;
+		}
+	}
 
-    &.align-right {
+	&.columns-2 {
+		.column:nth-child(3),
+		.column:nth-child(4) {
+			display: none;
+		}
+	}
 
-        p,
-        h4 {
-            text-align: right;
-        }
-    }
+	&.columns-3 {
+		.column:nth-child(4) {
+			display: none;
+		}
+	}
 
-    &.columns-1 {
-        .column:not(:nth-child(1)) {
-            display: none;
-        }
-    }
+	.column-image {
+		border-top-left-radius: 25px;
+		border-top-right-radius: 25px;
+		height: var(--image-box-height);
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: rgba(139, 139, 150, 0.1);
+	}
 
-    &.columns-2 {
+	.block-editor-media-placeholder__button {
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
 
-        .column:nth-child(3),
-        .column:nth-child(4) {
-            display: none;
-        }
-    }
+	.column-1 .column-image {
+		background-image: var(--image-box-img1);
+	}
 
-    &.columns-3 {
-        .column:nth-child(4) {
-            display: none;
-        }
-    }
+	.column-2 .column-image {
+		background-image: var(--image-box-img2);
+	}
 
-    .column-image {
-        border-top-left-radius: 25px;
-        border-top-right-radius: 25px;
-        height: var(--image-box-height);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-color: rgba(139, 139, 150, .1);
-    }
+	.column-3 .column-image {
+		background-image: var(--image-box-img3);
+	}
 
-    .block-editor-media-placeholder__button {
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
+	.column-4 .column-image {
+		background-image: var(--image-box-img4);
+	}
 
-    .column-1 .column-image {
-        background-image: var(--image-box-img1);
-    }
+	.block-editor-url-input {
+		max-width: 100%;
 
-    .column-2 .column-image {
-        background-image: var(--image-box-img2);
-    }
+		input {
+			max-width: 100%;
+		}
+	}
 
-    .column-3 .column-image {
-        background-image: var(--image-box-img3);
-    }
+	.column-text {
+		padding: 0.75rem 0.5rem;
+	}
 
-    .column-4 .column-image {
-        background-image: var(--image-box-img4);
-    }
+	.components-placeholder.components-placeholder {
+		background-color: transparent;
+		box-shadow: inset 0 0 0 1px transparent;
+	}
 
-    .block-editor-url-input {
-        max-width: 100%;
+	.blocks-button__inline-link {
+		display: flex;
+		max-width: 100%;
+		align-items: center;
+		min-height: 20px;
 
-        input {
-            max-width: 100%;
-        }
-    }
-
-    .column-text {
-        padding: 0.75rem 0.5rem;
-    }
-
-    .components-placeholder.components-placeholder {
-        background-color: transparent;
-    }
-
-    .blocks-button__inline-link {
-        display: flex;
-        max-width: 100%;
-        align-items: center;
-        min-height: 20px;
-
-        .block-editor-block-list__block .block-editor-url-input input[type=text],
-        .block-editor-url-input input[type=text],
-        .components-popover .block-editor-url-input input[type=text] {
-            width: 100%;
-            border: 1px;
-            padding: 6px 8px;
-            box-shadow: 0 0 0 transparent;
-            transition: box-shadow .1s linear;
-            border-radius: 4px;
-            border: 1px solid #7e8993;
-            line-height: normal;
-        }
-    }
+		.block-editor-block-list__block .block-editor-url-input input[type="text"],
+		.block-editor-url-input input[type="text"],
+		.components-popover .block-editor-url-input input[type="text"] {
+			width: 100%;
+			border: 1px;
+			padding: 6px 8px;
+			box-shadow: 0 0 0 transparent;
+			transition: box-shadow 0.1s linear;
+			border-radius: 4px;
+			border: 1px solid #7e8993;
+			line-height: normal;
+		}
+	}
 }
