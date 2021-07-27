@@ -45,14 +45,16 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// Enqueue the main Stylesheet.
 		wp_enqueue_style( 'main-stylesheet', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ), array(), filemtime( get_template_directory() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ) ), 'all' );
 
-		// Deregister the jquery version bundled with WordPress.
+		// Deregister the jquery version bundled with WordPress, but not in admin.
+		if( ! is_admin() ) {
 		wp_deregister_script( 'jquery' );
 
 		// jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
 		wp_enqueue_script( 'jquery', get_stylesheet_directory_uri() . '/src/assets/js/jquery/' . foundationpress_asset_path( 'jquery-3.5.1.min.js' ), array(), '3.5.1', false );
 
-		// Deregister the jquery-migrate version bundled with WordPress.
-		wp_deregister_script( 'jquery-migrate' );
+			// Deregister the jquery-migrate version bundled with WordPress.
+			wp_deregister_script( 'jquery-migrate' );
+	}
 
 		// Enqueue Foundation scripts.
 		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ) ), true );
