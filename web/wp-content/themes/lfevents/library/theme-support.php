@@ -55,6 +55,9 @@ if ( ! function_exists( 'foundationpress_theme_support' ) ) :
 		// Disable core block patterns.
 		remove_theme_support( 'core-block-patterns' );
 
+		// Disable new widget screen.
+		remove_theme_support( 'widgets-block-editor' );
+
 		// Add foundation.css as editor style https://codex.wordpress.org/Editor_Style.
 		add_editor_style( 'dist/assets/css/' . foundationpress_asset_path( 'editor.css' ) ); //phpcs:ignore.
 	}
