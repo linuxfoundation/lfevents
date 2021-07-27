@@ -27,7 +27,7 @@ registerBlockType( 'cgb/block-text-on-image-block', {
 		},
 		imgUrl: {
 			type: 'string',
-			default: 'https://placehold.it/250?text=Sample+Image',
+			default: 'https://via.placeholder.com/250x250/d9d9d9/000000',
 		},
 		imgId: {
 			type: 'number',
