@@ -6,12 +6,12 @@ import {
 	PanelColorSettings,
 } from '@wordpress/block-editor';
 import {
+	Button,
 	PanelBody,
 	PanelRow,
+	RadioControl,
 	RangeControl,
 	SelectControl,
-	Dashicon,
-	RadioControl,
 	ToggleControl,
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
@@ -20,7 +20,12 @@ import './editor.scss';
 // import helper functions.
 import { range } from './utils.js';
 
-export default function Edit( { attributes, setAttributes, className } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	className,
+	isSelected,
+} ) {
 	const {
 		tracks,
 		columns,
@@ -33,6 +38,7 @@ export default function Edit( { attributes, setAttributes, className } ) {
 		showKeynote,
 		keynoteText,
 		keynoteLink,
+		keynoteNewWindow,
 	} = attributes;
 
 	const inspectorControls = (
@@ -156,10 +162,13 @@ export default function Edit( { attributes, setAttributes, className } ) {
 					{ range( 1, tracks ).map( ( i ) => {
 						const title = attributes[ `title${ i }` ];
 						const link = attributes[ `link${ i }` ];
+						const newWindow = attributes[ `newWindow${ i }` ];
 
 						return (
 							<li
-								className={ `track-box track-style box-${ i } ${ className }` }
+								className={ `track-box track-style box-${ i } ${
+									className ? className : ''
+								}` }
 								key={ i }
 							>
 								<RichText
@@ -172,26 +181,44 @@ export default function Edit( { attributes, setAttributes, className } ) {
 									}
 									placeholder={ __( 'Track title' ) }
 								/>
-								<form
-									className="blocks-button__inline-link"
-									onSubmit={ ( event ) =>
-										event.preventDefault()
-									}
-								>
-									<Dashicon
-										icon="admin-links"
-										style={ { marginRight: '5px' } }
-									/>
-									<URLInput
-										value={ link }
-										className="components-base-control__field"
-										onChange={ ( newLink ) => {
-											setAttributes( {
-												[ `link${ i }` ]: newLink,
-											} );
-										} }
-									/>
-								</form>
+								{ isSelected && (
+									<>
+										<form
+											className="block-editor-media-placeholder__url-input-form"
+											onSubmit={ ( event ) =>
+												event.preventDefault()
+											}
+										>
+											<URLInput
+												value={ link }
+												className="block-editor-media-placeholder__url-input-field"
+												onChange={ ( newLink ) => {
+													setAttributes( {
+														[ `link${ i }` ]: newLink,
+													} );
+												} }
+												placeholder="Add Link"
+											/>
+											<Button
+												icon="editor-break"
+												label={ __( 'Apply' ) }
+												className="block-editor-media-placeholder__url-input-submit-button is-primary"
+												type="submit"
+											/>
+										</form>
+										{ link && (
+											<ToggleControl
+												label="Open in new window"
+												checked={ newWindow }
+												onChange={ () =>
+													setAttributes( {
+														[ `newWindow${ i }` ]: ! newWindow,
+													} )
+												}
+											/>
+										) }
+									</>
+								) }
 								{ ctaIcon === 'view-track' && (
 									<div className="track-cta button transparent-outline">
 										View Track
@@ -214,34 +241,55 @@ export default function Edit( { attributes, setAttributes, className } ) {
 					>
 						<RichText
 							tagName="h4"
-							value={ keynoteText || 'View our Keynote Speakers' }
+							value={ keynoteText }
 							onChange={ ( value ) =>
 								setAttributes( { keynoteText: value } )
 							}
+							placeholder="View our Keynote Speakers"
 						/>
 						{ ctaIcon && (
 							<h3 className="track-cta is-style-track-double-angle-right">
 								&gt;&gt;
 							</h3>
 						) }
-						<form
-							className="blocks-button__inline-link"
-							onSubmit={ ( event ) => event.preventDefault() }
-						>
-							<Dashicon
-								icon="admin-links"
-								style={ { marginRight: '5px' } }
-							/>
-							<URLInput
-								value={ keynoteLink }
-								className="components-base-control__field"
-								onChange={ ( value ) => {
-									setAttributes( {
-										keynoteLink: value,
-									} );
-								} }
-							/>
-						</form>
+						{ isSelected && (
+							<>
+								<form
+									className="block-editor-media-placeholder__url-input-form"
+									onSubmit={ ( event ) =>
+										event.preventDefault()
+									}
+								>
+									<URLInput
+										value={ keynoteLink }
+										className="block-editor-media-placeholder__url-input-field"
+										onChange={ ( value ) => {
+											setAttributes( {
+												keynoteLink: value,
+											} );
+										} }
+										placeholder="Add Link"
+									/>
+									<Button
+										icon="editor-break"
+										label={ __( 'Apply' ) }
+										className="is-primary"
+										type="submit"
+									/>
+								</form>
+								{ keynoteLink && (
+									<ToggleControl
+										label="Open in new window"
+										checked={ keynoteNewWindow }
+										onChange={ ( value ) => {
+											setAttributes( {
+												keynoteNewWindow: value,
+											} );
+										} }
+									/>
+								) }
+							</>
+						) }
 					</div>
 				) }
 			</div>
