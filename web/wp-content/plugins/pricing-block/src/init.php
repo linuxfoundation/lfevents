@@ -93,10 +93,10 @@ add_action( 'init', 'pricing_block_cgb_block_assets' );
  * @return string Rendered HTML.
  */
 function block_callback( $att ) {
-	$top_labels = $att['topLabels'];
-	$dates = $att['dates'];
-	$left_labels = $att['leftLabels'];
-	$prices = $att['prices'];
+	$top_labels = $att['topLabels'] ?? '';
+	$dates = $att['dates'] ?? '';
+	$left_labels = $att['leftLabels'] ?? '';
+	$prices = $att['prices'] ?? '';
 	$expire_text = $att['expireText'] ?? 'Expired';
 	$color1 = $att['color1'] ?? '';
 	$color2 = $att['color2'] ?? '';
@@ -112,7 +112,7 @@ function block_callback( $att ) {
 	$html = '';
 
 	if ( ! $top_labels || ! $dates || ! $left_labels || ! $prices ) {
-		return '';
+		return;
 	}
 
 	$html .= '<div class="pricing-grid alignwide">';

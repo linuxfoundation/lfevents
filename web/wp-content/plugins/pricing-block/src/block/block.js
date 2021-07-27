@@ -28,7 +28,6 @@ const { PanelBody, PanelRow, TextControl, SelectControl } = wp.components;
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'cgb/block-pricing-block', {
-// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Pricing Block' ),
 	icon: 'calendar',
 	category: 'common',
