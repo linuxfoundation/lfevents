@@ -61,9 +61,9 @@ function sponsors_dynamic_block_cgb_block_assets() { // phpcs:ignore
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			// 'style'         => 'sponsors-dynamic_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'sponsors-dynamic_block-cgb-block-js',
+			'editor_script'   => 'sponsors-dynamic_block-cgb-block-js',
 			// // Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'sponsors-dynamic_block-cgb-block-editor-css',
+			'editor_style'    => 'sponsors-dynamic_block-cgb-block-editor-css',
 			'render_callback' => 'sponsors_dynamic_block_callback',
 		)
 	);
@@ -109,7 +109,7 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 	$tier_name = isset( $attributes['tierName'] ) ? $attributes['tierName'] : '';
 	$tier_size = isset( $attributes['tierSize'] ) ? $attributes['tierSize'] : 'medium';
 
-	$out = '<div class="wp-block-cgb-sponsors-block">';
+	$out  = '<div class="wp-block-cgb-sponsors-block">';
 	$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
 	$out .= '<div class="sponsors-logos ' . $tier_size . ' ' . get_sponsor_logos_class( $query->found_posts ) . '">';
 
@@ -119,21 +119,28 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 
-		$id = get_the_ID();
+		$id             = get_the_ID();
 		$forwarding_url = esc_url( get_post_meta( $id, 'lfes_sponsor_url', true ) );
-		$size = get_post_meta( $id, 'lfes_sponsor_size', true );
+		$size           = get_post_meta( $id, 'lfes_sponsor_size', true );
 
 		$out .= '<div class="sponsors-logo-item">';
 		if ( $forwarding_url ) {
 			$out .= '<a href="' . $forwarding_url . '"';
 			if ( is_numeric( $size ) && '100' !== $size ) {
 				$scale = $size / 100;
-				$out .= ' style="-webkit-transform: scale(' . $scale . '); -ms-transform: scale(' . $scale . '); transform: scale(' . $scale . ');"';
+				$out  .= ' style="-webkit-transform: scale(' . $scale . '); -ms-transform: scale(' . $scale . '); transform: scale(' . $scale . ');"';
 			}
-			$out .= ' target="_blank" rel="noreferrer noopener">';
+			$out .= ' target="_blank" rel="noopener">';
 		}
 
-		$out .= get_the_post_thumbnail( $id, 'post-thumbnail', array( 'class' => 'logo', 'loading' => 'lazy' ) );
+		$out .= get_the_post_thumbnail(
+			$id,
+			'post-thumbnail',
+			array(
+				'class'   => 'logo',
+				'loading' => 'lazy',
+			)
+		);
 
 		if ( $forwarding_url ) {
 			$out .= '</a>';

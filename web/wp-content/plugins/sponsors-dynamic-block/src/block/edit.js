@@ -103,6 +103,7 @@ export default class Edit extends Component {
 					defaultOptions
 					loadOptions={ loadOptions }
 					onChange={ ( value ) => setAttributes( { sponsors: this.sortList( value ) } ) }
+					placeholder="Type to search"
 				/>
 				<p><em>Note: Sponsors will appear alphabetical on the site.</em></p>
 			</div>,
