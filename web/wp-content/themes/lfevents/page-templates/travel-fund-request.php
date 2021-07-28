@@ -217,7 +217,7 @@ get_template_part( 'template-parts/global-header' );
 								<div class="cell large-12">
 									<label>Do you belong to an underrepresented and/or marginalized group? Please check all that apply:</label>
 									<fieldset class="large-5 cell">
-										<input type="checkbox" name="group" id="groupLGBTQ" value="LGBTQ"><label for="groupLGBTQ">LGBTQ</label>
+										<input type="checkbox" name="group" id="groupLGBTQIA+" value="LGBTQIA+"><label for="groupLGBTQIA+">LGBTQIA+</label>
 										<input type="checkbox" name="group" id="groupWoman" value="Woman"><label for="groupWoman">Woman</label>
 										<input type="checkbox" name="group" id="groupPoC" value="Person of Color"><label for="groupPoC">Person of Color</label>
 										<input type="checkbox" name="group" id="groupPwD" value="Person with Disability"><label for="groupPwD">Person with Dis/ability</label>
