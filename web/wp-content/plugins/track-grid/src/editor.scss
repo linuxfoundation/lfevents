@@ -1,6 +1,10 @@
 // The frontend partial is imported in to themes editor.css, use this file for specific overrides.
 
 .editor-styles-wrapper .wp-block-lf-track-grid {
+	* {
+		box-sizing: border-box !important;
+	}
+
 	ul {
 		margin-left: 0;
 	}
@@ -10,31 +14,33 @@
 	}
 }
 
-.wp-block-lf-track-grid {
-	.block-editor-url-input {
-		max-width: 100%;
-
-		input {
-			max-width: 100%;
-		}
+@media (min-width: 600px) {
+	.block-editor-block-list__block .block-editor-url-input input[type="text"],
+	.components-popover .block-editor-url-input input[type="text"],
+	.block-editor-url-input input[type="text"] {
+		width: 90%;
+		padding-left: 4px;
+		padding-right: 4px;
+		padding-top: 9px;
+		padding-bottom: 9px;
 	}
+}
 
+.wp-block-lf-track-grid {
 	.blocks-button__inline-link {
 		display: flex;
 		max-width: 100%;
 		align-items: center;
 		min-height: 20px;
+	}
 
-		.block-editor-url-input input[type="text"],
-		.block-editor-block-list__block .block-editor-url-input input[type="text"],
-		.components-popover .block-editor-url-input input[type="text"] {
-			width: 100%;
-			padding: 6px 8px;
-			box-shadow: 0 0 0 transparent;
-			transition: box-shadow 0.1s linear;
-			border-radius: 4px;
-			border: 1px solid #7e8993;
-			line-height: normal;
-		}
+	.block-editor-url-input__input {
+		width: 100%;
+		padding: 6px 8px;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.1s linear;
+		border-radius: 4px;
+		border: 1px solid #7e8993;
+		line-height: normal;
 	}
 }

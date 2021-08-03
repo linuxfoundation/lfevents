@@ -17,6 +17,7 @@ export default function save( { attributes } ) {
 		showKeynote,
 		keynoteText,
 		keynoteLink,
+		keynoteNewWindow,
 	} = attributes;
 
 	const mainStyle = {
@@ -37,14 +38,26 @@ export default function save( { attributes } ) {
 				{ range( 1, tracks ).map( ( i ) => {
 					const title = attributes[ `title${ i }` ];
 					const link = attributes[ `link${ i }` ];
+					const newWindow = attributes[ `newWindow${ i }` ];
 
 					return (
 						<li
-							className={ `track-box track-style box-${ i } ${ className }` }
+							className={ `track-box track-style box-${ i }${
+								className ? ' ' + className : ''
+							}` }
 							key={ i }
 						>
 							{ link && (
-								<a className="box-link" href={ link }>
+								<a
+									className="box-link"
+									href={ link }
+									{ ...( newWindow
+										? { target: '_blank' }
+										: {} ) }
+									{ ...( newWindow
+										? { rel: 'noopener' }
+										: {} ) }
+								>
 									<span className="screen-reader-text">
 										Link
 									</span>
@@ -73,11 +86,22 @@ export default function save( { attributes } ) {
 			</ul>
 			{ showKeynote && (
 				<div
-					className={ `track-keynote track-style ${ className }` }
+					className={ `track-keynote track-style${
+						className ? ' ' + className : ''
+					}` }
 					style={ mainStyle }
 				>
 					{ keynoteLink && (
-						<a className="box-link" href={ keynoteLink }>
+						<a
+							className="box-link"
+							href={ keynoteLink }
+							{ ...( keynoteNewWindow
+								? { target: '_blank' }
+								: {} ) }
+							{ ...( keynoteNewWindow
+								? { rel: 'noopener' }
+								: {} ) }
+						>
 							<span className="screen-reader-text">
 								Keynote Link
 							</span>

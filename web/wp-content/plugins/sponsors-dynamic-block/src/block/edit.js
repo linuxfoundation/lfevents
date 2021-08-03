@@ -95,17 +95,17 @@ export default class Edit extends Component {
 				</PanelBody>
 			</InspectorControls>,
 			<div key="sponsors-dynamic-block-edit" className={ this.props.className }>
-				<p><strong>{ tierName } Sponsors</strong>
-					<AsyncSelect
-						styles={ { menu: ( styles ) => ( { ...styles, zIndex: 99 } ) } }
-						isMulti
-						value={ sponsors }
-						defaultOptions
-						loadOptions={ loadOptions }
-						onChange={ ( value ) => setAttributes( { sponsors: this.sortList( value ) } ) }
-					/>
-					<em>Note: Sponsors will appear alphabetical on the site.</em>
-				</p>
+				<p><strong>{ tierName } Sponsors</strong></p>
+				<AsyncSelect
+					styles={ { menu: ( styles ) => ( { ...styles, zIndex: 99 } ) } }
+					isMulti
+					value={ sponsors }
+					defaultOptions
+					loadOptions={ loadOptions }
+					onChange={ ( value ) => setAttributes( { sponsors: this.sortList( value ) } ) }
+					placeholder="Type to search"
+				/>
+				<p><em>Note: Sponsors will appear alphabetical on the site.</em></p>
 			</div>,
 		];
 	}

@@ -32,7 +32,7 @@ function countdown_block_assets() { // phpcs:ignore
 	wp_register_script(
 		'countdown-block-cgb-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		filemtime( countdown_block_get_plugin_path() . 'dist/blocks.build.js' ),
 		true
 	);

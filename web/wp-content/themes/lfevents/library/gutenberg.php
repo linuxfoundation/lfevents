@@ -1,8 +1,8 @@
 <?php
 /**
- * Comment.
+ * Gutenberg functions.
  *
- * @package Comment.
+ * @package WordPress.
  */
 
 if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :

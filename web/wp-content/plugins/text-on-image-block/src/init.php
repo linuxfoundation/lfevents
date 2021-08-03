@@ -32,7 +32,6 @@ function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	wp_register_style(
 		'text_on_image_block-cgb-style-css',
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
-		array( 'wp-editor' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
@@ -40,7 +39,7 @@ function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	wp_register_script(
 		'text_on_image_block-cgb-block-js',
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
 		true
 	);

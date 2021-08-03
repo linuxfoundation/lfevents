@@ -14,18 +14,17 @@
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
 
-    >li {
+    > li {
       margin-bottom: 1rem;
       // default mobile alignment for all track columns.
       width: 100%;
 
-      @media (min-width:1024px) {
+      @media (min-width: 1024px) {
         margin-bottom: 2rem;
       }
     }
 
     @media (max-width: 768px) {
-
       // default mobile alignment for all track columns.
       .track-box {
         width: 100%;
@@ -41,7 +40,7 @@
 
     @media (min-width: 768px) {
       &.columns-2 {
-        >li {
+        > li {
           width: calc(50% - 1rem);
           max-width: 280px;
           margin-left: 1rem;
@@ -51,9 +50,8 @@
     }
 
     &.columns-3 {
-
       @media (min-width: 660px) {
-        >li {
+        > li {
           width: calc(50% - 1rem);
           max-width: 280px;
           margin-left: 1rem;
@@ -62,7 +60,7 @@
       }
 
       @media (min-width: 900px) {
-        >li {
+        > li {
           width: calc(33.3% - 2rem);
           margin-left: 1rem;
           margin-right: 1em;
@@ -71,9 +69,8 @@
     }
 
     &.columns-4 {
-
       @media (min-width: 660px) {
-        >li {
+        > li {
           width: calc(50% - 1rem);
           max-width: 280px;
           margin-left: 1rem;
@@ -82,7 +79,7 @@
       }
 
       @media (min-width: 1024px) {
-        >li {
+        > li {
           width: calc(25% - 2rem);
           margin-left: 1rem;
           margin-right: 1em;
@@ -160,6 +157,7 @@
 
   .track-cta {
     margin-top: auto;
+    color: var(--track-text-color);
 
     &.is-style-track-double-angle-right {
       letter-spacing: -1px;
@@ -176,7 +174,7 @@
 
     &.transparent-outline {
       background-color: transparent;
-      border: 1px solid #ecedee;
+      border: 1px solid var(--track-text-color);
       border-radius: 0.5rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -212,19 +210,17 @@
     }
   }
 
-  .track-wrapper.columns-3+.track-keynote {
+  .track-wrapper.columns-3 + .track-keynote {
     max-width: calc(900px - 2rem);
   }
 
-  .track-wrapper.columns-4+.track-keynote {
+  .track-wrapper.columns-4 + .track-keynote {
     max-width: calc(1000px - 2rem);
   }
-
 }
 
 // Not applied in editor due to not .in-editor CSS.
 .wp-block-lf-track-grid:not(.in-editor) {
-
   .track-wrapper {
     max-width: 700px;
     margin-left: auto;
@@ -249,12 +245,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         opacity: 0.1;
       }
 
       .button {
-        background-color: rgba(#FFFFFF, 0.2);
+        background-color: rgba(var(--track-text-color), 0.2);
       }
 
       .is-style-track-double-angle-right {

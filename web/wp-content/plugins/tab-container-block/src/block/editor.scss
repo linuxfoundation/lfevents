@@ -5,17 +5,13 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-tab-container-block  {
-  // background: $blue;
-  border: 2px dashed #ddd;
-  // color: $black;
-  // margin: 0 auto;
-  // max-width: 740px;
-  padding: 1rem;
+.wp-block-cgb-block-tab-container-block {
+	border: 2px dashed #ddd;
+	padding: 1rem;
 
-  &::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
+	&::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
 }

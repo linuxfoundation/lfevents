@@ -32,7 +32,7 @@ function speakers_block_cgb_block_assets() { // phpcs:ignore
 	wp_register_script(
 		'speakers_block-cgb-block-js',
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		null,
 		true
 	);

@@ -1,5 +1,4 @@
 import { registerBlockType, createBlock } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 import './style.scss';
@@ -56,6 +55,10 @@ export const schema = {
 		selector: `.track-keynote a`,
 		attribute: 'href',
 	},
+	keynoteNewWindow: {
+		type: 'boolean',
+		default: false,
+	},
 };
 
 // now loop over the following to make the full schema.
@@ -72,6 +75,10 @@ export const schema = {
 			selector: `.track-wrapper > *:nth-child(${ i }) a`,
 			attribute: 'href',
 			default: '',
+		};
+		schema[ `newWindow${ i }` ] = {
+			type: 'boolean',
+			default: true,
 		};
 	} );
 }
@@ -113,7 +120,7 @@ registerBlockType( 'lf/track-grid', {
 					// count the tracks.
 					const tracks = liChildren.childNodes.length;
 
-					if ( tracks == 0 ) return;
+					if ( tracks === 0 ) return;
 					// loop over each and setup an object.
 					liChildren.childNodes.forEach( ( item, i ) => {
 						const text =
