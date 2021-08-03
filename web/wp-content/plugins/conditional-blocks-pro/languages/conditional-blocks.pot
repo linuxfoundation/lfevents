@@ -1,0 +1,601 @@
+# Copyright (C) 2021 Conditional Blocks
+# This file is distributed under the GPL2+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Conditional Blocks Core + Pro 2.4.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/conditional-blocks\n"
+"Last-Translator: Morgan Hvidt <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-07-02T05:50:14+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0-alpha\n"
+"X-Domain: conditional-blocks\n"
+
+#. Plugin Name of the plugin
+msgid "Conditional Blocks Pro"
+msgstr ""
+
+#. Description of the plugin
+msgid "Conditionally show or hide any Gutenberg Block for any reason."
+msgstr ""
+
+#. Author of the plugin
+msgid "Conditional Blocks"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://conditionalblocks.com/"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Need help setting up?"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Go to docs"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Remove"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Are you sure? This cannot be undone."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Yes, delete"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Cancel"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Pro"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "General"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Lockdown (Hide block from everyone)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Responsive (Screens sizes)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "User Logged In"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "User Logged Out"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "User Roles"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Server Request"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Query Strings (URL Variables)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Domain Referrers"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "URL Paths"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "User Agents (Devices & Browsers)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Cookies"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Time"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Date Schedule - Range"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Date Schedule - Recurring"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Advanced"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post Meta (Custom Fields)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post IDs"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "PHP Logic"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "WooCommerce"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Cart Products (Coming)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Cart Total"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Preset Manager"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Presets"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Add your first condition to get started."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Condition Rule:"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "The selected block will only be visible to users who are logged into the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "The selected block will only be visible to users who aren't logged into the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Presets are conditons that can be shared by multiple blocks. You can edit presets from the Preset Manager."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Block Action"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "If this condition is true, then:"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Block should be visible"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Block should be hidden"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the block action when current visitor matches any of the selected devices and browsers."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Selected Cookies"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Display the selected block if the current post meta (Custom Fields) matches the selection."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Select operator"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Each post/page in WordPress has a unique ID. You can use the ID to make sure the block on display on that post."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post IDs (One per line)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the block action based on the below URL paths."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "URL Paths (One per line)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Read more about this condition in the"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "PHP Logic documentation."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Add valid PHP conditional tags. The functions must return TRUE for the selected block to be visible. This is a developer feature, use at your own risk."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "The selected block will automatically hide on screens sizes that aren't selected. You can edit screen widths from the settings tab."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Show on Mobile screens"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Show on Tablet screens"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Show on Desktop screens"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Date conditions use the timezone from your WordPress time settings. The selected block will only be visible after the start date. You can optionally select an end date."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Start Date"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Choose end date?"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "End Date"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Choose the days and time of day that the block will be visible."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Date conditions use the timezone from your WordPress time settings"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Recurring Time"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Recurring Days"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Monday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Tuesday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Wednesday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Thursday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Friday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Saturday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Sunday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the block action when visitors who have been directed to your page from an another domain. This condition requires the third-party server to pass the referring information."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Domain referrers (comma seperate for multiple)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Query Strings"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action if any of the query strings match."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Match Query String Patterns"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "One pattern per line. The block action will trigger if any pattern matches."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Configure Range"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Leave blank for ANY value"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Any value"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "AND"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Add condition"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Current Block"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Condition Builder"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Get the full experience with Conditional Blocks Pro"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Learn more"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Developer Mode"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "All blocks and conditions in Developer Mode are created normally. It's safe to use."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Conditions"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Presets are groups of conditions that can be applied across multiple blocks. Presets allow you to apply frequently used groups of conditions to blocks in one place, rather than having to edit each individual block on the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Create and edit your presets here. Presets can then be applied to the selected block using the Condition Builder under the Current Block tab."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Saving changes.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Changes to presets save instantly to all blocks with that preset enabled."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Remove Preset"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Preset Name"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Give the preset a recognizable name."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "My Preset.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Create Preset"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Get full control with Conditional Blocks Pro"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Settings"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Responsive Blocks"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Change the breakpoints of blocks with the Responsive (Screen sizes) condition to match your theme's breakpoints if needed."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Desktop Minimum (px)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Tablet Maximum (px)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Tablet Minimum (px)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Mobile Maximum (px)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Activate Developer Mode manually or by using a"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid " domain. Developer Mode provides extra information to help development and debugging."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Convert to 2.0 conditions"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Configure visibility conditions"
+msgstr ""
+
+#: conditional-blocks-pro.php:112
+msgid "Thank you for purchasing Conditional Blocks Pro! Activate your license to get started, then you can add conditions inside the block editor."
+msgstr ""
+
+#: conditional-blocks-pro.php:115
+msgid "See documentation"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:97
+msgid "Manage License"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:106
+msgid "Support"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:120
+msgid "Click here to enter your license key for %s to get security updates."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:123
+#: library/puri-sl/class-puri-sl-ui.php:195
+msgid "Enter Your License"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:124
+#: library/puri-sl/class-puri-sl-ui.php:196
+msgid "Activate License"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:147
+msgid "Change License"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:150
+msgid "Beta Opt-out"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:153
+msgid "Beta Opt-in"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:161
+msgid "Check Expiration"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:162
+msgid "Deactivate License"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:193
+msgid "Almost done - Activate license for %s to properly work on your site"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:216
+#: library/puri-sl/class-puri-sl-ui.php:277
+msgid "Something went wrong"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:223
+msgid "You enabled beta updates. Warning beta updates are for testing purposes only. "
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:226
+msgid "You have disabled beta updates."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:230
+#: library/puri-sl/class-puri-sl-ui.php:255
+msgid "License field can not be empty"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:242
+msgid "License successfully activated"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:251
+msgid "License deactivated for this site"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:264
+msgid "License Successfully Changed."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:268
+msgid "You entered the same license, use another one."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:310
+#: library/puri-sl/class-puri-sl-ui.php:392
+#: library/puri-sl/class-puri-sl-ui.php:430
+msgid "An error occurred, please try again."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:325
+msgid "Your license key expired on %s."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:332
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:336
+msgid "Invalid license."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:341
+msgid "Your license is not active for this URL."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:345
+msgid "This appears to be an invalid license key for %s."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:438
+msgid "License expiry: "
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:440
+msgid "License expired on: "
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:442
+msgid "license has been disabled."
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:444
+msgid "Invalid license key"
+msgstr ""
+
+#: library/puri-sl/class-puri-sl-ui.php:452
+msgid "Need help?"
+msgstr ""

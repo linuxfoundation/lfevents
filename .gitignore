@@ -116,6 +116,7 @@ Thumbs.db
 !web/wp-content/plugins/search-filter-pro
 !web/wp-content/plugins/safe-svg
 !web/wp-content/plugins/find-my-blocks
+!web/wp-content/plugins/conditional-blocks-pro
 
 # Allowing custom plugins
 !web/wp-content/plugins/speakers-block

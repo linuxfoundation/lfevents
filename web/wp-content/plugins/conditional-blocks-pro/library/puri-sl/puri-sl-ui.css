@@ -1,0 +1,42 @@
+.conblockpro-puri-sl-license-key {
+	width: 280px;
+}
+
+.conblockpro-puri-sl-notice {
+	padding: 20px
+}
+
+.conblockpro-puri-sl-button {
+	line-height: 20px !important;
+	margin: 0 10px 0 10px !important;
+}
+
+.conblockpro-puri-sl-spin {
+	animation: conblockpro-puri-sl-dashicons-spin 1s infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes conblockpro-puri-sl-dashicons-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+input.conblockpro-puri-sl-license-key {
+	font-family: monospace;
+}
+
+.conblockpro-puri-sl-row {
+	padding-left: 35px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.conblockpro-puri-sl-message {
+	font-size: 14px;
+	margin: 10px 0px 20px 20px;
+}
+

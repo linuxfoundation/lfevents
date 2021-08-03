@@ -1,0 +1,265 @@
+/* Conditional Blocks 2.0+ */
+:root {
+  --cb-yellow: #f4ffb2;
+  --cb-dark: #2f2f2f;
+  --cb-green: #45af82;
+}
+.conditional-blocks-builder-modal .components-modal__content {
+  padding: 0;
+  position: relative; /* Prevent blurry bug on WP 5.8+ */
+}
+.conditional-blocks-builder-modal .CalendarMonthGrid.CalendarMonthGrid_1.CalendarMonthGrid__horizontal.CalendarMonthGrid__horizontal_2 {
+  transform: none !important; /* Prevent blurry bug on WP 5.8+ */
+}
+
+.components-panel__body svg.conditional-blocks-svg {
+  margin-left: 6px;
+  max-height: 16px;
+  width: auto;
+}
+
+.components-modal__icon-container svg.conditional-blocks-svg {
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 701px) {
+  .conditional-blocks-builder-modal {
+    width: 75%;
+    max-width: 550px;
+    height: 90%;
+  }
+}
+
+.conditional-blocks-builder-modal .components-tab-panel__tabs {
+  background: #f9f9f9;
+}
+
+.conditional-blocks-builder-modal .components-tab-panel__tab-content {
+  padding: 10px 40px;
+}
+.conditional-blocks-builder-modal .components-modal__header {
+  margin: 0;
+}
+
+.conditional-blocks-active-tab,
+.conditional-blocks-builder-modal .components-tab-panel__tabs-item:focus {
+  box-shadow: inset 0 0 0 1.5px transparent, inset 0 -4px 0 0 var(--wp-admin-theme-color);
+}
+
+.conditional-blocks-builder-modal__content {
+  padding: 15px 35px;
+}
+.conditional-blocks-builder-modal__developer_section {
+  background: #edfff4;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.conditional-blocks-builder__active_condition_tag {
+  padding: 5px 10px;
+  margin: 2px;
+  max-width: fit-content;
+  border-radius: 4px;
+  /* border: 1px solid gainsboro; */
+  background-color: var(--cb-yellow);
+  color: var(--cb-dark);
+  font-size: 12px;
+  display: inline-block;
+}
+
+/* Hot fix for multiselect - issue with Gutenberg. */
+.conditional-blocks-builder-modal__role_select select[multiple] {
+  height: 100px !important;
+  max-width: 100% !important;
+}
+
+.conditional-blocks-builder-modal__row {
+  margin: 15px 0;
+  display: block;
+}
+
+.conditional-blocks-builder-modal__row pre {
+  background: #272627;
+  color: #16e284;
+  padding: 25px;
+  white-space: pre-wrap;
+  overflow: scroll;
+  max-width: 100%;
+}
+
+.conditional-blocks-builder-modal__condition_builder_wrapper {
+  margin: 20px 0;
+}
+
+.conditional-blocks-builder-modal__single_condition-wrapper {
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+  padding: 20px;
+}
+
+.conditional-blocks-builder-modal__single_condition {
+  max-width: 400px;
+  /* display: block; */
+  margin: 15px auto;
+}
+
+.conditional-blocks-builder-modal__delete_button {
+  /* float: right; */
+  margin-top: 15px;
+}
+
+/* Hot fix to maintain order for components inside a preset. */
+.components-panel__body.conditional-blocks-builder-modal__single_preset .components-panel__row .components-base-control__field {
+  margin-bottom: 8px !important;
+}
+
+.components-panel__body.conditional-blocks-builder-modal__single_preset {
+  border: 2px solid var(--cb-dark);
+  margin-top: 25px;
+}
+
+.conditional-blocks-builder-modal__single_preset button.components-button.components-panel__body-toggle {
+  background: var(--cb-dark);
+  border-radius: initial;
+  color: white;
+}
+
+.components-panel__body.conditional-blocks-builder-modal__single_preset svg.components-panel__arrow {
+  fill: white;
+  color: white !important;
+}
+.conditional-blocks-builder-modal .components-panel__row {
+  display: block;
+}
+
+.conditional-blocks-builder-modal__popover .components-popover__content {
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 230px;
+}
+
+.conditional-blocks-builder-modal__button_group button {
+  margin: 0 10px;
+}
+/* There's a bug where the red color for destruvie buttons doesn't apply. Forcing it for now */
+.conditional-blocks-builder-modal__popover .components-button.is-destructive {
+  color: #cc1818 !important;
+  box-shadow: inset 0 0 0 1px #cc1818 !important;
+}
+
+.conditional-blocks-has-conditions::before {
+  content: 'Conditional';
+  z-index: 10;
+  font-size: 11px;
+  color: var(--cb-dark);
+  background: var(--cb-yellow);
+  border-radius: 2px;
+  padding: 3px 6px;
+  text-align: center;
+  display: block;
+  width: max-content;
+  margin-bottom: 5px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.conditional-blocks-builder__spacer {
+  height: 20px;
+}
+.conditional-blocks-builder-modal h3 {
+  margin-top: 30px;
+}
+
+.conditional-blocks-builder-modal .components-button.has-icon .dashicon {
+  width: 23px;
+  height: 15px;
+  font-size: 16px;
+}
+.conditional-blocks-builder-modal__pro_notice {
+  background: #f9f9f9;
+  padding: 5px 30px;
+  border-left: 6px solid #f5c71f;
+  margin-top: 30px;
+}
+
+.conditional-blocks-builder-modal__pro_notice a.components-external-link {
+  color: var(--cb-green);
+}
+
+.conditional-blocks-builder-modal__no_conditions {
+  text-align: center;
+}
+
+.conditional-blocks-builder-modal__single_condition-wrapper.conditional-blocks-builder-modal__no_conditions {
+  border: 1px dashed #d4d4d4;
+}
+.conditional-blocks-builder-modal .components-button.has-icon .dashicon {
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.conditional-blocks__save-icon {
+  font-size: 24px;
+  color: var(--wp-admin-theme-color);
+  display: inline-block;
+  margin-right: 18px;
+  margin-top: -2px;
+}
+/* Fixes issue with date pickers. */
+.conditonal-blocks-select__menu {
+  z-index: 30 !important;
+}
+/* Time picker */
+.conditonal-blocks-time-picker .react-time-picker__wrapper {
+  display: flex;
+}
+.conditonal-blocks-time-picker input {
+  min-width: 70px !important;
+}
+.conditonal-blocks-time-picker .react-time-picker__inputGroup__leadingZero {
+  display: none !important;
+}
+.conditional-blocks-builder-modal .conditonal-blocks-select__control--is-focused {
+  border-color: var(--wp-admin-theme-color);
+  box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+}
+.conditional-blocks-builder-modal .conditonal-blocks-select__option--is-focused {
+  background-color: #f0f0f0;
+}
+.conditional-blocks-builder-modal .conditonal-blocks-select__option--is-selected {
+  background-color: var(--wp-admin-theme-color);
+}
+.conditonal-blocks-small {
+  font-size: 12px;
+}
+.conditional-block-and-rule-wrapper {
+  position: relative;
+  height: 45px;
+}
+.conditional-block-and-rule-line {
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  bottom: 5px;
+  width: 1px;
+  background: #d4d4d4;
+  z-index: 1;
+}
+.conditional-block-and-rule-word-wrapper {
+  text-align: center;
+  height: 12px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -12px;
+  z-index: 2;
+}
+.conditional-block-and-rule-word {
+  color: #747d86;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px;
+  font-size: 11px;
+  background: #fff;
+}
