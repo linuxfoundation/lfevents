@@ -33,7 +33,7 @@
     "wpackagist-plugin/redirection": "^5",
     "wpackagist-plugin/shortpixel-image-optimiser": "^4.15.3",
     "wpackagist-plugin/svg-autocrop": "^0.1.0",
-    "wpackagist-plugin/wp-mail-smtp": "^2.0.1",
+    "wpackagist-plugin/wp-mail-smtp": "^3.0.1",
     "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",
     "wpackagist-plugin/wp-nested-pages": "^3.0.11",
     "wpackagist-plugin/flying-scripts":"^1.1.7",
