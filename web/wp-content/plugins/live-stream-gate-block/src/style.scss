@@ -1,0 +1,58 @@
+/**
+ * The following styles get applied both on the front of your site and in the editor.
+ *
+ */
+
+.wp-block-lf-live-stream-gate-block-placeholder {
+	width: 100%;
+	min-height: 400px;
+	border: 1px solid #09c;
+	background-color: #fff;
+	color: #000;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+
+.wp-block-lf-live-stream-gate-block-placeholder-inner {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	max-width: 500px;
+	p {
+		margin-top: 1.5rem;
+		font-size: 1.125rem;
+		color: #000;
+	}
+}
+
+.wp-block-lf-live-stream-gate-block-button {
+	padding: 5px 20px;
+	border-radius: 40px;
+	font-weight: 600;
+	letter-spacing: -0.5px;
+	text-align: center;
+	max-width: 180px;
+	display: inline-block;
+	transition: background-color 0.25s ease-out;
+
+	&.is-signin-link {
+		color: #09c;
+		border: 1px solid #09c;
+		background-color: #fff;
+		&:hover {
+			background-color: #f6fdff;
+		}
+	}
+	&.is-signup-link {
+		color: #fefefe;
+		background-color: #09c;
+		&:hover {
+			color: #fefefe;
+			background-color: #0082ad;
+		}
+	}
+}
