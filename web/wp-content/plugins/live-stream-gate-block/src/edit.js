@@ -65,7 +65,8 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 			<div className="components-placeholder__instructions">
 				Paste your embed code below, it will be hidden behind an LF SSO
 				gate unless the user is logged in. The SSO check can be disabled
-				in the block Settings sidebar.
+				in the block Settings sidebar. Any embed codes with an autplay
+				option should be set to FALSE.
 			</div>
 			<BlockControls>
 				<ToolbarGroup>
