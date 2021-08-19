@@ -17,7 +17,6 @@
 define('LIVE_STREAM_GATE_NAME', trim(dirname(plugin_basename(__FILE__)), '/'));
 define('LIVE_STREAM_GATE_URL', plugins_url() . '/' . LIVE_STREAM_GATE_NAME);
 
-
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -81,6 +80,7 @@ function live_stream_gate_callback($block_attributes)
 
 	$classes = isset($block_attributes['className']) ? $block_attributes['className'] : '';
 	$anchor = isset($block_attributes['anchor']) ? $block_attributes['anchor'] : '';
+	$align = isset($block_attributes['align']) ? 'align-' . $block_attributes['align'] : '';
 	$content = isset($block_attributes['content']) ? $block_attributes['content'] : '';
 	$sso_disabled = isset($block_attributes['ssoDisabled']) ? $block_attributes['ssoDisabled'] : '';
 
@@ -89,10 +89,10 @@ function live_stream_gate_callback($block_attributes)
 	}
 	ob_start();
 
-	// check for cookies from LF Auth.
-	if ( $sso_disabled || isset($_COOKIE['auth0.is.authenticated']) || isset($_COOKIE['_legacy_auth0.is.authenticated'])) : ?>
+	// check for cookies from LF Auth or if SSO disabled true.
+	if ( $sso_disabled || isset($_COOKIE['auth0.is.authenticated']) && $_COOKIE['auth0.is.authenticatede']== true || isset($_COOKIE['_legacy_auth0.is.authenticated']) && $_COOKIE['_legacy_auth0.is.authenticated']== true ) : ?>
 
-		<div class="wp-block-lf-live-stream-gate-block <?php echo esc_html($classes); ?>" id="<?php echo esc_html($anchor); ?>">
+		<div class="wp-block-lf-live-stream-gate-block <?php echo esc_html($align); ?> <?php echo esc_html($classes); ?>" id="<?php echo esc_html($anchor); ?>">
 
 			<?php echo $content; // phpcs:ignore. ?>
 
