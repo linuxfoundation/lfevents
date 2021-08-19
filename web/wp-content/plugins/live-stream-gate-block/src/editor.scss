@@ -1,0 +1,31 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-lf-live-stream-gate-block {
+	border: 1px solid #000;
+	padding: 1rem;
+	color: #000;
+
+	textarea {
+		min-height: 150px;
+	}
+
+	pre {
+		padding: 1rem;
+		border: 1px solid #000;
+		min-height: 150px;
+		width: 100%;
+		background-color: #fff;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.dashicons {
+		width: 30px;
+		height: 30px;
+		font-size: 30px;
+	}
+}

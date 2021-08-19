@@ -1,0 +1,32 @@
+{
+	"apiVersion": 2,
+	"name": "lf/live-stream-gate-block",
+	"version": "0.1.0",
+	"title": "Live Stream Gate Block",
+	"category": "common",
+	"icon": "embed-video",
+	"description": "Gates video streams behind LF SSO",
+	"keywords": [ "lf", "sso", "embed" ],
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"align": true,
+		"typography": {
+			"fontSize": false
+		}
+	},
+	"attributes": {
+		"content": {
+			"type": "string",
+			"source": "html"
+		},
+		"ssoDisabled": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"textdomain": "live-stream-gate-block",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
