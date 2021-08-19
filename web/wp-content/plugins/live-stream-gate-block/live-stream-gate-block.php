@@ -89,19 +89,36 @@ function live_stream_gate_callback($block_attributes)
 	}
 	ob_start();
 
-var_dump($_COOKIE);
-echo "<pre>";
-print_r($_COOKIE['auth0.is.authenticated']);
-print_r($_COOKIE['_legacy_auth0.is.authenticatedd']);
-echo "</pre>";
-echo gettype($_COOKIE['_legacy_auth0.is.authenticatedd']);
+	echo 'var dump cookie';
+	var_dump($_COOKIE);
+	echo 'print_r cookie';
+	print_r($_COOKIE);
+
+	if (isset($_COOKIE['auth0.is.authenticated'])) {
+		echo "auth0.is.authenticated is set";
+	} else {
+		echo "auth0.is.authenticated is NOT set";
+	}
+
+	if ($_COOKIE['auth0.is.authenticated'] == 'true') {
+		echo "auth0.is.authenticated == true";
+	} else {
+		echo "auth0.is.authenticated DOES NOT = true";
+	}
+
+	if ($_COOKIE['auth0.is.authenticated'] === true) {
+		echo "auth0.is.authenticated === true";
+	} else {
+		echo "auth0.is.authenticated DOES NOT === true";
+	}
 
 	// check for cookies from LF Auth or if SSO disabled true.
-	if ( $sso_disabled || (isset($_COOKIE['auth0.is.authenticated']) && ($_COOKIE['auth0.is.authenticated'] == 'true')) || (isset($_COOKIE['_legacy_auth0.is.authenticated']) && $_COOKIE['_legacy_auth0.is.authenticated']== 'true') ) : ?>
+	if ($sso_disabled || (isset($_COOKIE['auth0.is.authenticated']) && ($_COOKIE['auth0.is.authenticated'] == 'true')) || (isset($_COOKIE['_legacy_auth0.is.authenticated']) && $_COOKIE['_legacy_auth0.is.authenticated'] == 'true')) : ?>
 
 		<div class="wp-block-lf-live-stream-gate-block <?php echo esc_html($align); ?> <?php echo esc_html($classes); ?>" id="<?php echo esc_html($anchor); ?>">
 
-			<?php echo $content; // phpcs:ignore. ?>
+			<?php echo $content; // phpcs:ignore.
+			?>
 
 		</div>
 
