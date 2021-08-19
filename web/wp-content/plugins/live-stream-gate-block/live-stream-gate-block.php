@@ -89,27 +89,25 @@ function live_stream_gate_callback($block_attributes)
 	}
 	ob_start();
 
-	echo 'var dump cookie';
+	echo 'var dump cookie:<br>';
 	var_dump($_COOKIE);
-	echo 'print_r cookie';
-	print_r($_COOKIE);
 
 	if (isset($_COOKIE['auth0.is.authenticated'])) {
-		echo "auth0.is.authenticated is set";
+		echo "auth0.is.authenticated is set<br>";
 	} else {
-		echo "auth0.is.authenticated is NOT set";
+		echo "auth0.is.authenticated is NOT set<br>";
 	}
 
 	if ($_COOKIE['auth0.is.authenticated'] == 'true') {
-		echo "auth0.is.authenticated == true";
+		echo "auth0.is.authenticated == true<br>";
 	} else {
-		echo "auth0.is.authenticated DOES NOT = true";
+		echo "auth0.is.authenticated DOES NOT = true<br>";
 	}
 
 	if ($_COOKIE['auth0.is.authenticated'] === true) {
-		echo "auth0.is.authenticated === true";
+		echo "auth0.is.authenticated === true<br>";
 	} else {
-		echo "auth0.is.authenticated DOES NOT === true";
+		echo "auth0.is.authenticated DOES NOT === true<br>";
 	}
 
 	// check for cookies from LF Auth or if SSO disabled true.
