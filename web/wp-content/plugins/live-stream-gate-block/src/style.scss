@@ -18,6 +18,11 @@
 	text-align: center;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
+
+	// this is needed to try and override the injected css jank from the JS.
+	&.is-auth0.only-authenticated.authenticated {
+		display: block;
+	}
 }
 
 .wp-block-lf-live-stream-gate-block-placeholder {
