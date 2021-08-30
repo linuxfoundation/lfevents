@@ -464,6 +464,7 @@ function lfe_insert_structured_data() {
 		$dt_date_start = new DateTime( $date_start );
 		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
 	}
+
 	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 	if ( $country ) {
 		$country = $country[0]->name;
@@ -474,37 +475,80 @@ function lfe_insert_structured_data() {
 		$image_url = get_the_post_thumbnail_url();
 	}
 
-	$out = '';
+	$description = get_post_meta( $post->ID, 'lfes_description', true );
+	$virtual = get_post_meta( $post->ID, 'lfes_virtual', true );
+	$city = get_post_meta( $post->ID, 'lfes_city', true );
+	$venue = get_post_meta( $post->ID, 'lfes_venue', true );
+	$street_address = get_post_meta( $post->ID, 'lfes_street_address', true );
+	$postal_code = get_post_meta( $post->ID, 'lfes_postal_code', true );
+	$region = get_post_meta( $post->ID, 'lfes_region', true );
+	$city = get_post_meta( $post->ID, 'lfes_city', true );
 
-	$out .= '<script type="application/ld+json">';
-	$out .= '{';
-	$out .= '"@context": "http://schema.org/",';
-	$out .= '"@type": "Event",';
-	$out .= '"name": "' . esc_html( $post->post_title ) . '",';
-	if ( $date_start && check_string_is_date( $date_start ) ) {
-		$out .= '"startDate": "' . $dt_date_start->format( 'Y-m-d' ) . '",';
-		$out .= '"endDate": "' . $dt_date_end->format( 'Y-m-d' ) . '",';
+	$virtual_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
+	if ( ! $virtual_url ) {
+		$virtual_url = get_permalink();
 	}
-	$out .= '"location": {';
-	$out .= '  "@type": "Place",';
-	$out .= '  "name": "' . esc_html( get_post_meta( $post->ID, 'lfes_venue', true ) ) . '",';
-	$out .= '  "address": {';
-	$out .= '	"@type": "PostalAddress",';
-	$out .= '	"streetAddress": "' . esc_html( get_post_meta( $post->ID, 'lfes_street_address', true ) ? get_post_meta( $post->ID, 'lfes_street_address', true ) : '' ) . '",';
-	$out .= '	"addressLocality": "' . esc_html( get_post_meta( $post->ID, 'lfes_city', true ) ? get_post_meta( $post->ID, 'lfes_city', true ) : '' ) . '",';
-	$out .= '	"postalCode": "' . esc_html( get_post_meta( $post->ID, 'lfes_postal_code', true ) ? get_post_meta( $post->ID, 'lfes_postal_code', true ) : '' ) . '",';
-	$out .= '	"addressRegion": "' . esc_html( get_post_meta( $post->ID, 'lfes_region', true ) ? get_post_meta( $post->ID, 'lfes_region', true ) : '' ) . '",';
-	$out .= '	"addressCountry": "' . esc_html( $country ? $country : '' ) . '"';
-	$out .= '  }';
-	$out .= '},';
-	$out .= '	"image": [ ';
-	$out .= '	  "' . esc_html( $image_url ) . '"';
-	$out .= '	 ],';
-	$out .= '	"description": "' . esc_html( get_post_meta( $post->ID, 'lfes_description', true ) ) . '"';
-	$out .= '}';
-	$out .= '</script>';
 
-	echo $out; //phpcs:ignore
+	if ( $virtual && $city ) {
+		$attendance_mode = 'https://schema.org/MixedEventAttendanceMode';
+		$location = array(
+			array(
+				'@type' => 'Place',
+				'name'  => esc_html( $venue ),
+				'address' => array(
+					'@type' => 'PostalAddress',
+					'streetAddress' => esc_html( $street_address ),
+					'addressLocality' => esc_html( $city ),
+					'postalCode' => esc_html( $postal_code ),
+					'addressRegion' => esc_html( $region ),
+					'addressCountry' => esc_html( $country ),
+				),
+			),
+			array(
+				'@type' => 'VirtualLocation',
+				'url'   => esc_url( $virtual_url ),
+			),
+		);
+	} elseif ( $virtual ) {
+		$attendance_mode = 'https://schema.org/OnlineEventAttendanceMode';
+		$location = array(
+			array(
+				'@type' => 'VirtualLocation',
+				'url'   => esc_url( $virtual_url ),
+			),
+		);
+	} else {
+		$attendance_mode = 'https://schema.org/OfflineEventAttendanceMode';
+		$location = array(
+			array(
+				'@type' => 'Place',
+				'name'  => esc_html( $venue ),
+				'address' => array(
+					'@type' => 'PostalAddress',
+					'streetAddress' => esc_html( $street_address ),
+					'addressLocality' => esc_html( $city ),
+					'postalCode' => esc_html( $postal_code ),
+					'addressRegion' => esc_html( $region ),
+					'addressCountry' => esc_html( $country ),
+				),
+			),
+		);
+	}
+
+	$event = array(
+		'@context'  => 'http://schema.org/',
+		'@type'     => 'Event',
+		'name'      => esc_html( $post->post_title ),
+		'startDate' => $dt_date_start->format( 'Y-m-d' ),
+		'endDate'   => $dt_date_end->format( 'Y-m-d' ),
+		'eventAttendanceMode' => $attendance_mode,
+		'eventStatus' => 'https://schema.org/EventScheduled',
+		'location'  => $location,
+		'image' => array( esc_url( $image_url ) ),
+		'description' => esc_html( $description ),
+	);
+
+	echo '<script type="application/ld+json">' . json_encode( $event, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>'; //phpcs:ignore
 }
 
 /**
