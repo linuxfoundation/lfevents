@@ -463,6 +463,11 @@ function lfe_insert_structured_data() {
 	if ( check_string_is_date( $date_start ) ) {
 		$dt_date_start = new DateTime( $date_start );
 		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+		$date_start = $dt_date_start->format( 'Y-m-d' );
+		$date_end = $dt_date_end->format( 'Y-m-d' );
+	} else {
+		$date_start = '';
+		$date_end = '';
 	}
 
 	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
@@ -539,8 +544,8 @@ function lfe_insert_structured_data() {
 		'@context'  => 'http://schema.org/',
 		'@type'     => 'Event',
 		'name'      => esc_html( $post->post_title ),
-		'startDate' => $dt_date_start->format( 'Y-m-d' ),
-		'endDate'   => $dt_date_end->format( 'Y-m-d' ),
+		'startDate' => $date_start,
+		'endDate'   => $date_end,
 		'eventAttendanceMode' => $attendance_mode,
 		'eventStatus' => 'https://schema.org/EventScheduled',
 		'location'  => $location,
