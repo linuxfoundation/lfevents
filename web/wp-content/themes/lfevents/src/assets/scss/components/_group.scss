@@ -3,6 +3,7 @@
   box-shadow: 0 5px 5px 0 rgba(18, 63, 82, 0.035), 0 0 0 1px rgba(176, 181, 193, 0.2);
   border-radius: 12px;
   padding: 15px;
+  overflow: hidden;
 
   @media (min-width: 414px) {
     padding: 20px;
