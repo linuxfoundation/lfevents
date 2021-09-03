@@ -1,0 +1,137 @@
+# Copyright (C) jeffrey-wp.com
+# This file is distributed under the same license as the Media Library Categories package.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Media Library Categories Premium\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-media-library-"
+"categories\n"
+"POT-Creation-Date: 2021-07-25 11:42+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Jeffrey-WP\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ..\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: index.php:95
+msgid ""
+"Thank you for using the <strong>Media Library Categories Premium</strong> "
+"plugin."
+msgstr ""
+
+#: index.php:96
+#, php-format
+msgid ""
+"By default the WordPress Media Library uses the same categories as "
+"WordPress does (such as in posts &amp; pages).<br />If you want to use "
+"separate categories for the WordPress Media Library you can change this in "
+"the <a href=\"%s\">media settings</a>."
+msgstr ""
+
+#: index.php:323 index.php:338 index.php:863
+msgid "View all categories"
+msgstr ""
+
+#: index.php:324 index.php:339 index.php:864
+msgid "Not in a category"
+msgstr ""
+
+#: index.php:419 index.php:423 index.php:577
+msgid "Categories"
+msgstr ""
+
+#: index.php:427
+msgid "Add"
+msgstr ""
+
+#: index.php:433
+msgid "Remove"
+msgstr ""
+
+#: index.php:438 index.php:439
+msgid "Remove all categories"
+msgstr ""
+
+#: index.php:563
+msgid "Category changes are saved."
+msgstr ""
+
+#: index.php:578
+msgid "Settings"
+msgstr ""
+
+#: index.php:862
+msgid "All Uncategorized"
+msgstr ""
+
+#: index.php:865
+msgid "Reset All Filters"
+msgstr ""
+
+#: index.php:866
+msgid "author"
+msgstr ""
+
+#: index.php:867
+msgid "authors"
+msgstr ""
+
+#: index.php:869
+msgid "Saved."
+msgstr ""
+
+#: index.php:870
+msgid "Something went wrong."
+msgstr ""
+
+#: index.php:871
+msgid "Save Changes"
+msgstr ""
+
+#: index.php:872
+msgid "Select All"
+msgstr ""
+
+#: index.php:970
+msgid "Custom taxonomy slug"
+msgstr ""
+
+#: index.php:978
+msgid "Autocomplete search dropdown"
+msgstr ""
+
+#: index.php:991
+msgid "Media Library Categories"
+msgstr ""
+
+#: index.php:997
+#, php-format
+msgid ""
+"You are already using a custom taxonomy slug called \"<strong>%s</strong>\" "
+"in the code of your (child) theme. It will be ignored if you use the custom "
+"taxonomy slug below."
+msgstr ""
+
+#: index.php:999
+msgid "Dismiss this notice."
+msgstr ""
+
+#: index.php:1005
+#, php-format
+msgid ""
+"Separate the media categories from the default WordPress categories by "
+"entering a custom taxonomy slug below (different than \"<strong>%s</strong>"
+"\")."
+msgstr ""
+
+#: index.php:1042
+msgid "Add autocomplete search to the category dropdown in the Media Library."
+msgstr ""
