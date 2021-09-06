@@ -59,6 +59,9 @@ function onTFSubmit(token) {
 				if ( msg.includes( "DUPLICATES_DETECTED" ) ) {
 					$( "#message" ).html( "ERROR: You have already submitted a travel funding request for this event. Please contact travelfund@linuxfoundation.org for further assistance." ).removeClass( "warning" ).addClass( "alert" );
 					message.scrollIntoView( { behavior: "smooth", block: 'center' } );
+				} else {
+					$( "#message" ).html( "There was an error processing your submission.  Please try again or contact us directly at events@linuxfoundation.org." ).removeClass( "warning" ).addClass( "alert" );
+					message.scrollIntoView( { behavior: "smooth", block: 'center' } );
 				}
 			}
 		}
