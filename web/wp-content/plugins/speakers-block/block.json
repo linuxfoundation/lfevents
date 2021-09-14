@@ -1,0 +1,47 @@
+{
+	"apiVersion": 2,
+	"name": "cgb/block-speakers-block",
+	"version": "0.2.0",
+	"title": "Speakers",
+	"category": "common",
+	"icon": "groups",
+	"description": "Gutenberg block which allows for insertion of a Speakers showcase in a page/post.",
+	"keywords": [
+        "speakers",
+        "featured",
+        "lf",
+        "committee",
+        "presenters"
+    ],
+    "supports": {
+        "anchor": false,
+        "html": false,
+		"align": [
+			"full",
+			"wide"
+		]
+    },
+    "attributes": {
+        "speakers": {
+            "type": "array",
+			"default": []
+        },
+		"colorMode": {
+            "type": "string",
+			"default": "is-style-event-gradient"
+        },
+        "color1": {
+            "type": "string"
+        },
+        "color2": {
+            "type": "string"
+        },
+        "textColor": {
+            "type": "string",
+			"default": "#FFFFFF"
+        }
+    },
+	"textdomain": "block-speakers-block",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css"
+}
