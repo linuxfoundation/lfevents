@@ -72,20 +72,6 @@ wp.domReady(
 		]
 	);
 	wp.blocks.registerBlockStyle(
-		 'cgb/block-speakers-block',
-		[
-		{
-			name: 'default',
-			label: 'Default',
-			isDefault: true,
-		},
-		{
-			name: 'event-gradient',
-			label: 'Event Gradient',
-		}
-		]
-	);
-	wp.blocks.registerBlockStyle(
 		 'core/heading',
 		[
 		{
