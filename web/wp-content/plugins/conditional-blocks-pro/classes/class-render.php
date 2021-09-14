@@ -26,9 +26,14 @@ class Conditional_Blocks_Render_Block {
 		add_filter( 'conditional_blocks_check_userLoggedIn', array( $this, 'userLoggedIn' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_userLoggedOut', array( $this, 'userLoggedOut' ), 10, 2 );
 
+		add_filter( 'conditional_blocks_check_posts', array( $this, 'posts' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_postTaxonomyTerms', array( $this, 'postTaxonomyTerms' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_postType', array( $this, 'postType' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_archive', array( $this, 'archive' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_dateRange', array( $this, 'dateRange' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_dateRecurring', array( $this, 'dateRecurring' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_userRoles', array( $this, 'userRoles' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_userMeta', array( $this, 'userMeta' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_userAgents', array( $this, 'userAgents' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_domainReferrers', array( $this, 'domainReferrers' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_queryStrings', array( $this, 'queryStrings' ), 10, 2 );
@@ -37,7 +42,12 @@ class Conditional_Blocks_Render_Block {
 		add_filter( 'conditional_blocks_check_urlPaths', array( $this, 'urlPaths' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_postIds', array( $this, 'postIds' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_phpLogic', array( $this, 'phpLogic' ), 10, 2 );
+		// WooCommerce.
 		add_filter( 'conditional_blocks_check_wcCartTotal', array( $this, 'wcCartTotal' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_wcCustomerTotalSpent', array( $this, 'wcCustomerTotalSpent' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_wcCartProducts', array( $this, 'wcCartProducts' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_wcCartProductCategories', array( $this, 'wcCartProductCategories' ), 10, 2 );
+		// Presents.
 		add_filter( 'conditional_blocks_check_presets', array( $this, 'presets' ), 10, 2 );
 	}
 
@@ -109,7 +119,9 @@ class Conditional_Blocks_Render_Block {
 
 			$should_render = apply_filters( 'conditional_blocks_check_' . $type, false, $condition );
 
-			if ( $type === 'dateRange' || $type === 'dateRecurring' ) {
+			$grouped_checks = apply_filters( 'conditonal_blocks_grouped_checks', array( 'dateRange', 'dateRecurring' ) );
+
+			if ( in_array( $type, $grouped_checks, true ) ) {
 				$gathered_results['groups'][ $type ][] = $should_render;
 			} else {
 				$gathered_results['single'][] = $should_render;
@@ -225,6 +237,128 @@ class Conditional_Blocks_Render_Block {
 	public function userLoggedOut( $should_render, $condition ) {
 
 		$should_render = ! is_user_logged_in();
+
+		return $should_render;
+	}
+
+	/**
+	 * Check the current post ID.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function posts( $should_render, $condition ) {
+
+		$has_match = false;
+
+		if ( empty( $condition['posts'] ) ) {
+			return $should_render;
+		}
+
+		$current_post_id = get_queried_object_id();
+
+		$selected_posts = array_column( $condition['posts'], 'value' );
+
+		if ( in_array( $current_post_id, $selected_posts, true ) ) {
+			$has_match = true;
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 * Check the current post type.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function postType( $should_render, $condition ) {
+
+		$has_match = false;
+
+		$selected_post_types = array_column( $condition['postTypes'], 'value' );
+
+		if ( is_singular( $selected_post_types ) ) {
+			$has_match = true;
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 * Check the current post taxonomy terms.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function postTaxonomyTerms( $should_render, $condition ) {
+
+		$has_match = false;
+
+		if ( empty( $condition['terms'] ) || empty( $condition['postType']['value'] ) || empty( $condition['taxonomy']['value'] ) ) {
+			return $should_render;
+		}
+
+		$current_post_id = get_queried_object_id();
+
+		$selected_terms = array_column( $condition['terms'], 'value' );
+
+		if ( has_term( $selected_terms, $condition['taxonomy']['value'], $current_post_id ) ) {
+			$has_match = true;
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 * Check the current page is an archive.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function archive( $should_render, $condition ) {
+
+		$has_match = false;
+
+		if ( is_archive() ) {
+			$has_match = true;
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
 
 		return $should_render;
 	}
@@ -467,6 +601,29 @@ class Conditional_Blocks_Render_Block {
 	}
 
 	/**
+	 *  Check User Meta condition.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function userMeta( $should_render, $condition ) {
+
+		$meta_key = ! empty( $condition['metaKey'] ) ? $condition['metaKey'] : false;
+		$meta_operator = ! empty( $condition['metaOperator'] ) ? $condition['metaOperator'] : false;
+		$meta_value = ! empty( $condition['metaValue'] ) ? $condition['metaValue'] : '';
+
+		if ( $meta_key && $meta_operator && $meta_value ) {
+
+			if ( $this->has_required_meta( 'user', $meta_key, $meta_operator, $meta_value ) ) {
+				$should_render = true;
+			}
+		}
+
+		return $should_render;
+	}
+
+	/**
 	 *  Check post meta condition.
 	 *
 	 * @param bool  $should_render if condition passed validation.
@@ -481,7 +638,7 @@ class Conditional_Blocks_Render_Block {
 
 		if ( $meta_key && $meta_operator && $meta_value ) {
 
-			if ( $this->has_required_post_meta( $meta_key, $meta_operator, $meta_value ) ) {
+			if ( $this->has_required_meta( 'post', $meta_key, $meta_operator, $meta_value ) ) {
 				$should_render = true;
 			}
 		}
@@ -702,6 +859,41 @@ class Conditional_Blocks_Render_Block {
 	}
 
 	/**
+	 *  Check WooCommerce total spent by customer.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function wcCustomerTotalSpent( $should_render, $condition ) {
+
+		// Make sure WC is active.
+		if ( ! class_exists( 'WooCommerce' ) || ! function_exists( 'WC' ) ) {
+			return $should_render;
+		}
+
+		$user_id = get_current_user_id();
+
+		if ( empty( $user_id ) ) {
+			return $should_render;
+		}
+
+		$total = (int) wc_get_customer_total_spent( $user_id );
+
+		$more_than_value = ! empty( $condition['moreThanValue'] ) ? (int) $condition['moreThanValue'] : 0;
+		$less_than_value = ! empty( $condition['lessThanValue'] ) ? (int) $condition['lessThanValue'] : 0;
+
+		$is_more_than_required = empty( $more_than_value ) ? true : $total > $more_than_value;
+		$is_less_than_required = empty( $less_than_value ) ? true : $total < $less_than_value;
+
+		if ( $is_more_than_required && $is_less_than_required ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
 	 *  Check WooCommerce Cart Total
 	 *
 	 * @param bool  $should_render if condition passed validation.
@@ -715,22 +907,108 @@ class Conditional_Blocks_Render_Block {
 			return $should_render;
 		}
 
-		$cart_total = is_object( WC()->cart ) ? (int) WC()->cart->get_cart_contents_total() : 0;
-		$has_required_totals = false;
+		$total = is_object( WC()->cart ) ? (int) WC()->cart->get_cart_contents_total() : 0;
 
 		$more_than_value = ! empty( $condition['moreThanValue'] ) ? (int) $condition['moreThanValue'] : 0;
 		$less_than_value = ! empty( $condition['lessThanValue'] ) ? (int) $condition['lessThanValue'] : 0;
 
-		$is_more_than_required = $cart_total > $more_than_value;
-		$is_less_than_required = $cart_total < $less_than_value;
+		$is_more_than_required = empty( $more_than_value ) ? true : $total > $more_than_value;
+		$is_less_than_required = empty( $less_than_value ) ? true : $total < $less_than_value;
 
-		if ( $more_than_value === 0 && $less_than_value === 0 && $cart_total > 0 ) {
-			$should_render = true; // Cart has any value over 0.
-		} elseif ( $is_less_than_required && $is_more_than_required ) {
+		if ( $is_more_than_required && $is_less_than_required ) {
 			$should_render = true;
-		} elseif ( empty( $less_than_value ) && $is_more_than_required ) {
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 *  Check WooCommerce Products in Cart.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function wcCartProducts( $should_render, $condition ) {
+
+		// Make sure WC is active.
+		if ( ! class_exists( 'WooCommerce' ) || ! function_exists( 'WC' ) ) {
+			return $should_render;
+		}
+
+		if ( empty( $condition['products'] ) ) {
+			return $should_render;
+		}
+
+		$cart = is_object( WC()->cart ) ? WC()->cart->get_cart() : array();
+
+		$has_role_match = false;
+
+		$selected_product_ids = array_column( $condition['products'], 'value' );
+
+		$has_match = false;
+
+		foreach ( $cart as $cart_item ) {
+			$product_id = $cart_item['product_id'];
+
+			if ( in_array( $product_id, $selected_product_ids, true ) ) {
+				$has_match = true;
+				break;
+			};
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
-		} elseif ( empty( $more_than_value ) && $is_less_than_required ) {
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 *  Check WooCommerce products categories in cart.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function wcCartProductCategories( $should_render, $condition ) {
+
+		// Make sure WC is active.
+		if ( ! class_exists( 'WooCommerce' ) || ! function_exists( 'WC' ) ) {
+			return $should_render;
+		}
+
+		if ( empty( $condition['categories'] ) ) {
+			return $should_render;
+		}
+
+		$cart = is_object( WC()->cart ) ? WC()->cart->get_cart() : array();
+
+		$has_role_match = false;
+
+		$selected_product_category_ids = array_column( $condition['categories'], 'value' );
+
+		$has_match = false;
+
+		foreach ( $cart as $cart_item ) {
+
+			$product_id = $cart_item['product_id'];
+
+			if ( has_term( $selected_product_category_ids, 'product_cat', $cart_item['product_id'] ) ) {
+				$has_match = true;
+				break;
+			}
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
 			$should_render = true;
 		}
 
@@ -834,7 +1112,7 @@ class Conditional_Blocks_Render_Block {
 	 * @param string $meta_value the whole block object.
 	 * @return bool if current post has the required meta.
 	 */
-	public function has_required_post_meta( $meta_key, $meta_operator, $meta_value ) {
+	public function has_required_meta( $meta_type = 'post', $meta_key, $meta_operator, $meta_value ) {
 
 		$post_id = get_the_ID();
 
@@ -842,7 +1120,11 @@ class Conditional_Blocks_Render_Block {
 			return false;
 		}
 
-		$selected_meta = get_post_meta( $post_id, $meta_key, true );
+		if ( $meta_type === 'post' ) {
+			$selected_meta = get_post_meta( $post_id, $meta_key, true );
+		} elseif ( $meta_type === 'user' ) {
+			$selected_meta = get_user_meta( get_current_user_id(), $meta_key, true );
+		}
 
 		if ( '===' === $meta_operator ) {
 			if ( $selected_meta === $meta_value ) {

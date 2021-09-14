@@ -11,7 +11,6 @@
 .conditional-blocks-builder-modal .CalendarMonthGrid.CalendarMonthGrid_1.CalendarMonthGrid__horizontal.CalendarMonthGrid__horizontal_2 {
   transform: none !important; /* Prevent blurry bug on WP 5.8+ */
 }
-
 .components-panel__body svg.conditional-blocks-svg {
   margin-left: 6px;
   max-height: 16px;
@@ -59,12 +58,11 @@
   padding: 5px 10px;
   margin: 2px;
   max-width: fit-content;
-  border-radius: 4px;
-  /* border: 1px solid gainsboro; */
-  background-color: var(--cb-yellow);
-  color: var(--cb-dark);
+  color: #007cba;
   font-size: 12px;
   display: inline-block;
+  background: #eaeaea;
+  color: #272727;
 }
 
 /* Hot fix for multiselect - issue with Gutenberg. */
@@ -147,20 +145,25 @@
   box-shadow: inset 0 0 0 1px #cc1818 !important;
 }
 
+.conditional-blocks-has-conditions {
+  outline: 1px dashed var(--wp-admin-theme-color);
+}
+
 .conditional-blocks-has-conditions::before {
   content: 'Conditional';
   z-index: 10;
-  font-size: 11px;
-  color: var(--cb-dark);
-  background: var(--cb-yellow);
-  border-radius: 2px;
-  padding: 3px 6px;
+  font-size: 10px;
+  color: white;
+  background: var(--wp-admin-theme-color);
+  padding: 0 5px;
   text-align: center;
   display: block;
   width: max-content;
-  margin-bottom: 5px;
   font-weight: 600;
   line-height: normal;
+  position: absolute;
+  top: -13px;
+  left: -1px;
 }
 
 .conditional-blocks-builder__spacer {

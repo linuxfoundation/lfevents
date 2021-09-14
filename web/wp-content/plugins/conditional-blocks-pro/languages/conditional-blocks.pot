@@ -2,14 +2,14 @@
 # This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Conditional Blocks Core + Pro 2.4.0\n"
+"Project-Id-Version: Conditional Blocks Core + Pro 2.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/conditional-blocks\n"
 "Last-Translator: Morgan Hvidt <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-02T05:50:14+00:00\n"
+"POT-Creation-Date: 2021-08-10T04:36:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0-alpha\n"
 "X-Domain: conditional-blocks\n"
@@ -19,7 +19,7 @@ msgid "Conditional Blocks Pro"
 msgstr ""
 
 #. Description of the plugin
-msgid "Conditionally show or hide any Gutenberg Block for any reason."
+msgid "Conditionally change the visibility of WordPress Blocks for any reason."
 msgstr ""
 
 #. Author of the plugin
@@ -71,6 +71,10 @@ msgid "Responsive (Screens sizes)"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+msgid "User"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
 msgid "User Logged In"
 msgstr ""
 
@@ -80,6 +84,38 @@ msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
 msgid "User Roles"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "User Meta Field"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Posts & CTP"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post Types"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post Taxonomy Terms"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Posts (Includes CPT)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post Meta (Custom Fields)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Post IDs"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Archive"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -123,14 +159,6 @@ msgid "Advanced"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Post Meta (Custom Fields)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post IDs"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
 msgid "PHP Logic"
 msgstr ""
 
@@ -139,11 +167,19 @@ msgid "WooCommerce"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Cart Products (Coming)"
+msgid "Cart Value"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Cart Total"
+msgid "Cart Products"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Cart Product Categories"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Customer Total Spent"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -175,6 +211,10 @@ msgid "Presets are conditons that can be shared by multiple blocks. You can edit
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+msgid "Select one or multiple user roles. The current user must have any of selected roles to trigger the block action."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
 msgid "Block Action"
 msgstr ""
 
@@ -191,6 +231,50 @@ msgid "Block should be hidden"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+msgid "Display the selected block based on the User Metadata (Fields)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Select operator"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action if one of the selected Post Types is being viewed."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Select Post Type"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Search Post Types.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action if the current post matches the selected posts."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Search Posts.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action if the current post has the selected taxonomy and terms."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Search Taxonomies.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Search Terms.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action when the current page is an archive."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
 msgid "Trigger the block action when current visitor matches any of the selected devices and browsers."
 msgstr ""
 
@@ -200,10 +284,6 @@ msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
 msgid "Display the selected block if the current post meta (Custom Fields) matches the selection."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select operator"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -335,6 +415,10 @@ msgid "One pattern per line. The block action will trigger if any pattern matche
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+msgid "Display the selected block based on the total value of the current customer cart within WooCommerce. The cart value has to be within the set range for the block to be visible."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
 msgid "Configure Range"
 msgstr ""
 
@@ -344,6 +428,34 @@ msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
 msgid "Any value"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "The selected block will be visible if the total money spent by the customer is between the set amounts."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action if the selected products are in the customer cart."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Select Products"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Search products.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Trigger the Block Action if products in the cart belong to the selected products categories."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Select Product Categories"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Search categories.."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -463,9 +575,7 @@ msgid "Convert to 2.0 conditions"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Configure visibility conditions"
-msgstr ""
-
+msgid "Configure conditions"
 #: conditional-blocks-pro.php:112
 msgid "Thank you for purchasing Conditional Blocks Pro! Activate your license to get started, then you can add conditions inside the block editor."
 msgstr ""
