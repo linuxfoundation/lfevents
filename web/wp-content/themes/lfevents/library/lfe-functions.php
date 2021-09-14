@@ -473,6 +473,8 @@ function lfe_insert_structured_data() {
 	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 	if ( $country ) {
 		$country = $country[0]->name;
+	} else {
+		$country = '';
 	}
 
 	$image_url = get_post_meta( $post->ID, '_social_image_url', true );
