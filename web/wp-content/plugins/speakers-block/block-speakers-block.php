@@ -67,14 +67,14 @@ function speakers_block_callback( $attributes ) {
 	$align      = 'align';
 	$align     .= $attributes['align'] ?? 'wide';
 	$classes    = $attributes['className'] ?? '';
-
-	$color_mode    = $attributes['colorMode'] ?? 'is-style-event-gradient';
+	$color_mode    = $attributes['colorMode'] ?? '';
 
 	$bg_color_1 = $attributes['color1'] ?? '';
 	$bg_color_2 = $attributes['color2'] ?? '';
 	$text_value = $attributes['textColor'] ?? '#FFFFFF';
 
-	if ( '#FFFFFF' == $text_value ) {
+	// Check for textColor value - "white" was used in previous version.
+	if ( '#FFFFFF' == $text_value || 'white' == $text_value ) {
 		$text_color     = 'has-white-color has-text-color';
 		$gradient_color = 'rgba(255,255,255,0.15)';
 	} else {
@@ -82,10 +82,28 @@ function speakers_block_callback( $attributes ) {
 		$gradient_color = 'rgba(33,35,38,0.15)';
 	}
 
-	if ( 'is-style-event-gradient' != $color_mode ) {
+	// If no color mode is set, it might be an old block, so should have at least custom color set.
+	// Or custom-colors is set.
+	if ( ( ! $color_mode && ( $bg_color_1 || $bg_color_2 ) )
+	|| ( 'is-style-custom-colors' == $color_mode )
+	) {
+
+		// color 1.
+		$bg_color_1 ? $bg_color_1 : 'transparent';
+
+		// color 2, or color1, or if not transparent.
+		$bg_color_2 ? $bg_color_2 : ($bg_color_1 ? $bg_color_1 : 'transparent');
+
 		$inline_styles = 'style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%);"';
-	} else {
+
+	} elseif ( 'is-style-event-gradient' == $color_mode ) {
+
+		// No inline styles, handle with class.
 		$inline_styles = '';
+
+	} else {
+		// generic grey styles if really nothing is set.
+		$inline_styles = 'style="background: linear-gradient(90deg, #f3f4f5 0%, #D5D9D3 100%);"';
 	}
 	ob_start();
 	?>
@@ -102,19 +120,18 @@ function speakers_block_callback( $attributes ) {
 				$twitter  = get_post_meta( $id, 'lfes_speaker_twitter', true );
 				$website  = get_post_meta( $id, 'lfes_speaker_website', true );
 				?>
-				<li id="speaker-
-				<?php
-				echo esc_html(
-					$id
-				);
-				?>
- " class="speaker cell small-6 medium-4 xxlarge-3" data-toggler=".open" style="background: linear-gradient(-45deg, transparent 30%, <?php echo esc_html( $gradient_color ); ?> 100%);">
+				<li id="<?php
+				echo esc_html( 'speaker-'.$id );
+				?>"
+				class="speaker cell small-6 medium-4 xxlarge-3"
+				data-toggler=".open"
+				style="background: linear-gradient(-45deg, transparent 30%, <?php echo esc_html( $gradient_color ); ?> 100%);">
 					<div class="grid-x">
 						<div class="cell large-5">
 							<?php
 							if ( get_the_content() ) {
 								?>
-								<div class="headshot" data-toggle="speaker-<?php echo esc_html( $id ); ?>">
+								<div class="headshot" data-toggle="<?php echo esc_html( 'speaker-'.$id );	?>">
 								<?php
 							} else {
 								?>

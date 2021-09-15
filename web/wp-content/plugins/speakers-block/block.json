@@ -27,8 +27,7 @@
 			"default": []
         },
 		"colorMode": {
-            "type": "string",
-			"default": "is-style-event-gradient"
+            "type": "string"
         },
         "color1": {
             "type": "string"

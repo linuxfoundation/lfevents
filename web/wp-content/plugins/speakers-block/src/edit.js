@@ -114,6 +114,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					value={ colorMode }
 					options={ [
 						{
+							label: "Select option",
+							value: '',
+						},
+						{
 							label: 'Event Gradient',
 							value: 'is-style-event-gradient',
 						},
