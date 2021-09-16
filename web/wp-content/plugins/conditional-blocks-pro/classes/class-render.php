@@ -372,31 +372,40 @@ class Conditional_Blocks_Render_Block {
 	 */
 	public function dateRange( $should_render, $condition ) {
 
-		$range_start_timestamp = is_int( $condition['startTime'] ) ? $condition['startTime'] : get_date_from_gmt( $condition['startTime'], 'U' );
-		$range_end_timestamp = ! empty( $condition['hasEndDate'] ) && $condition['endTime'] ? $condition['endTime'] : false;
+		if ( empty( $condition['startTime'] ) ) {
+			return false;
+		}
+
+		if ( is_numeric( $condition['startTime'] ) ) {
+			$start_timestamp = (int) $condition['startTime'];
+		} else {
+			$start = DateTime::createFromFormat( 'Y-m-d\TH:i:s', $condition['startTime'], wp_timezone() );
+			$start_timestamp = (int) $start->format( 'U' );
+		}
+
+		$end = ! empty( $condition['hasEndDate'] ) && ! empty( $condition['endTime'] ) ? $condition['endTime'] : false;
 
 		$right_now = new DateTime();
-
-		$start_datetime = new DateTime();
-		$start_datetime->setTimestamp( $range_start_timestamp );
+		$right_now = $right_now->getTimestamp();
 
 		// No end time. We are only checking the start.
-		if ( ! $range_end_timestamp ) {
-			if ( $right_now >= $start_datetime ) {
+		if ( ! $end ) {
+			if ( $right_now >= $start_timestamp ) {
 				$should_render = true;
 			}
 
 			return $should_render;
 		}
 
-		$end_datetime = new DateTime();
-
-		$range_end_timestamp = is_int( $range_end_timestamp ) ? $range_end_timestamp : get_date_from_gmt( $range_end_timestamp, 'U' );
-
-		$end_datetime->setTimestamp( $range_end_timestamp );
+		if ( is_numeric( $end ) ) {
+			$end_timestamp = (int) $end;
+		} else {
+			$end_obj = DateTime::createFromFormat( 'Y-m-d\TH:i:s', $end, wp_timezone() );
+			$end_timestamp = (int) $end_obj->format( 'U' );
+		}
 
 		// Check if we are in the range.
-		if ( ( $right_now >= $start_datetime ) && ( $right_now <= $end_datetime ) ) {
+		if ( ( $right_now >= $start_timestamp ) && ( $right_now <= $end_timestamp ) ) {
 			$should_render = true;
 		}
 
