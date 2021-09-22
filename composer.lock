@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bab57826ffdf67827d60bd51dcfb83c4",
+    "content-hash": "429e27e04aef6fb4287a2cb37f0f8dae",
     "packages": [
         {
             "name": "composer/installers",
@@ -648,24 +648,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/clone-page-tree/"
-        },
-        {
-            "name": "wpackagist-plugin/cms-tree-page-view",
-            "version": "1.6.4",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/cms-tree-page-view/",
-                "reference": "tags/1.6.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/cms-tree-page-view.1.6.4.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0 || ~2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/cms-tree-page-view/"
         },
         {
             "name": "wpackagist-plugin/flying-pages",

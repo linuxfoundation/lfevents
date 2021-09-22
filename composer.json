@@ -36,7 +36,6 @@
     "wpackagist-plugin/wp-mail-smtp": "^3.0.1",
     "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",
     "wpackagist-plugin/wp-nested-pages": "^3.0.11",
-    "wpackagist-plugin/cms-tree-page-view":"^1.6.4",
     "wpackagist-plugin/flying-scripts":"^1.1.7",
     "wpackagist-plugin/leadin":"^8"
   },
