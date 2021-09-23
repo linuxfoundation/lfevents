@@ -1314,6 +1314,26 @@ class LFEvents_Admin {
 	}
 
 	/**
+	 * Limits the number of pages listed in the Nested Pages admin views
+	 *
+	 * @param object $query Existing query.
+	 */
+	public function limit_nested_pages_listing( $query ) {
+
+		if ( is_admin() && isset( $_SERVER['REQUEST_URI'] ) && ( '/wp/wp-admin/admin.php?page=nestedpages' === $_SERVER['REQUEST_URI'] ) && isset( $query->query['orderby'] ) ) {
+			$query->set(
+				'date_query',
+				array(
+					array(
+						'column' => 'post_modified_gmt',
+						'after' => '5 months ago',
+					),
+				),
+			);
+		}
+	}
+
+	/**
 	 * If the Event has a external url set then this sets the noindex meta to true and vice versa.
 	 *
 	 * @param int $post_id The post id.
