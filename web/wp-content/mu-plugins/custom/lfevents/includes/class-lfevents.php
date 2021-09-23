@@ -166,6 +166,7 @@ class LFEvents {
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'event_list_filter' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'synchronize_noindex_meta' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'reset_cache_check' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'limit_nested_pages_listing' );
 
 		// schedule KCD sync on lfeventsci.
 		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
