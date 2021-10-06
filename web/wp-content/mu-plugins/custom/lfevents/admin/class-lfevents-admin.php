@@ -1322,13 +1322,18 @@ class LFEvents_Admin {
 
 		if ( is_admin() && isset( $_SERVER['REQUEST_URI'] ) && ( '/wp/wp-admin/admin.php?page=nestedpages' === $_SERVER['REQUEST_URI'] ) && isset( $query->query['orderby'] ) ) {
 			$query->set(
-				'date_query',
+				'meta_query',
 				array(
+					'relation' => 'OR',
 					array(
-						'column' => 'post_modified_gmt',
-						'after' => '5 months ago',
+						'key' => '_nested_pages_status',
+						'compare' => 'NOT EXISTS',
 					),
-				),
+					array(
+						'key' => '_nested_pages_status',
+						'value' => 'show',
+					),
+				)
 			);
 		}
 	}
