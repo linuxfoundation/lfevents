@@ -59,6 +59,7 @@ require_once 'library/gutenberg.php';
 
 /** Add LFEvents functions */
 require_once 'library/lfe-functions.php';
+require_once 'library/lfe-options.php';
 
 require_once 'library/shortcode-travel-fund-request-form.php';
 require_once 'library/shortcode-visa-request-form.php';
