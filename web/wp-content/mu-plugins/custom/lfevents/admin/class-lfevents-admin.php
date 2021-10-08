@@ -1320,11 +1320,8 @@ class LFEvents_Admin {
 	 */
 	public function limit_nested_pages_listing( $query ) {
 		$lfe_faster_np_checkbox = get_option( 'lfe-faster-np-checkbox' );
-		if ( ! $lfe_faster_np_checkbox ) {
-			return;
-		}
 
-		if ( is_admin() && isset( $_SERVER['REQUEST_URI'] ) && ( '/wp/wp-admin/admin.php?page=nestedpages' === $_SERVER['REQUEST_URI'] ) && isset( $query->query['orderby'] ) ) {
+		if ( $lfe_faster_np_checkbox && is_admin() && isset( $_SERVER['REQUEST_URI'] ) && ( '/wp/wp-admin/admin.php?page=nestedpages' === $_SERVER['REQUEST_URI'] ) && isset( $query->query['orderby'] ) ) {
 			$query->set(
 				'meta_query',
 				array(
