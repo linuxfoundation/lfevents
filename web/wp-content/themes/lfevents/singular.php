@@ -10,12 +10,7 @@
  * @since FoundationPress 1.0.0
  */
 
-if ( $post->post_parent ) {
-	$ancestors = get_post_ancestors( get_the_ID() );
-	$parent_id = $ancestors[ count( $ancestors ) - 1 ];
-} else {
-	$parent_id = get_the_ID();
-}
+$parent_id = lfe_get_event_parent_id( $post );
 
 get_header();
 

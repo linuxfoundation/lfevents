@@ -348,7 +348,8 @@ EOD;
  * Inserts Event-specific favicon if set, otherwise falls back to site favicon.
  */
 function lfe_insert_favicon() {
-	global $parent_id;
+	global $post;
+	$parent_id = lfe_get_event_parent_id( $post );
 
 	$out = '<link rel="icon" type="image/png" sizes="32x32" href="';
 
@@ -896,3 +897,18 @@ function lfe_theme_unregister_tags() {
 	unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 }
 add_action( 'init', 'lfe_theme_unregister_tags' );
+
+/**
+ * Gets the top parent ID for the given Event page.
+ *
+ * @param object $post The current Event page.
+ */
+function lfe_get_event_parent_id( $post ) {
+	if ( $post->post_parent ) {
+		$ancestors = get_post_ancestors( $post->ID );
+		$parent_id = $ancestors[ count( $ancestors ) - 1 ];
+	} else {
+		$parent_id = $post->ID;
+	}
+	return $parent_id;
+}
