@@ -429,6 +429,18 @@ class LFEvents_Admin {
 									'default_value' => '',
 									'placeholder'   => 'Open Source Summit + Embedded Linux Conference',
 								),
+								array(
+									'type'          => 'text',
+									'id'            => 'event_email',
+									'data_type'     => 'meta',
+									'data_key'      => 'event_email',
+									'label'         => __( 'Event Email' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'help'          => __( 'Set this value to override the email in the footer legal text.' ),
+									'default_value' => '',
+									'placeholder'   => 'events@cncf.io',
+								),
 							),
 						),
 						array(
