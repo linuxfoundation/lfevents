@@ -84,8 +84,9 @@ get_template_part( 'template-parts/global-header' );
 								<div class="grid-x grid-margin-x">
 									<div class="cell medium-7">
 										<label>
-											Select the event for which you would like to request travel funding
-											<select name="event" id="event">
+											Select the event for which you would like to request travel funding *
+											<select name="event" id="event" required>
+												<option value="" disabled selected>Select event...</option>
 												<?php
 												$args = array(
 													'post_type'   => 'page',
