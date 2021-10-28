@@ -668,17 +668,6 @@ function add_visa_request_shortcode( $atts ) {
 
 	<div id="sfmc-message1"></div>
 
-	<script>
-	$( document ).ready(
-		function() {
-			$( ".date-dropdown" ).change( function () {
-				var date = $("#dob-month").val() + "/" + $("#dob-day").val() + "/" + $("#dob-year").val();
-				$( "#dateOfBirth" ).val( date );
-			});
-		}
-	);
-	</script>
-
 	<?php
 	$block_content = ob_get_clean();
 	return $block_content;

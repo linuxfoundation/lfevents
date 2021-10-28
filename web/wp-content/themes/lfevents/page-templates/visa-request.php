@@ -766,16 +766,6 @@ get_template_part( 'template-parts/global-header' );
 			<?php endwhile; ?>
 		</main>
 
-<script>
-$( document ).ready(
-	function() {
-		$( ".date-dropdown" ).change( function () {
-			var date = $("#dob-month").val() + "/" + $("#dob-day").val() + "/" + $("#dob-year").val();
-			$( "#dateOfBirth" ).val( date );
-		});
-	}
-);
-</script>
 
 <?php
 get_footer();
