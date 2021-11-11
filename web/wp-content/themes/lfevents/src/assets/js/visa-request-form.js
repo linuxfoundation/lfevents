@@ -38,7 +38,7 @@ jQuery(
 								function( e ) {
 									if ( f1[ 0 ].checkValidity() ) {
 										e.preventDefault();
-										var date = $("#dob-month").val() + "/" + $("#dob-day").val() + "/" + $("#dob-year").val();
+										var date = $( "#dob-month" ).val() + "/" + $( "#dob-day" ).val() + "/" + $( "#dob-year" ).val();
 										$( "#dateOfBirth" ).val( date );
 										grecaptcha.execute( widget_1 );
 									}
