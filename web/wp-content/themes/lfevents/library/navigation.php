@@ -29,7 +29,7 @@ if ( ! function_exists( 'foundationpress_about_pages_nav' ) ) {
 				'menu_class'     => 'menu main-links-menu',
 				'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 				'theme_location' => 'about-pages-nav',
-				'depth'          => 1,
+				'depth'          => 2,
 				'fallback_cb'    => false,
 			)
 		);
