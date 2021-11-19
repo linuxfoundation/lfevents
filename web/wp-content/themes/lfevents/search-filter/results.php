@@ -71,11 +71,8 @@ if ( $query->have_posts() ) {
 		}
 
 		$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
-		$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
-		$dt_cfp_date_start = new DateTime( $cfp_date_start );
-		$dt_cfp_date_end = new DateTime( $cfp_date_end );
-		$cfp_active = get_post_meta( $post->ID, 'lfes_cfp_active', true );
-
+		$cfp_date_end   = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
+		$cfp_active     = get_post_meta( $post->ID, 'lfes_cfp_active', true );
 
 		if ( $is_upcoming_events ) {
 
@@ -96,6 +93,9 @@ if ( $query->have_posts() ) {
 				}
 			}
 		} else {
+			if ( ! check_string_is_date( $date_start ) ) {
+				continue;
+			}
 			if ( ( 0 == $y ) || ( $y > (int) $dt_date_start->format( 'Y' ) ) ) {
 				$y = (int) $dt_date_start->format( 'Y' );
 				echo '<h2 class="cell event-calendar-year">' . esc_html( $y ) . '</h2>';
@@ -181,8 +181,10 @@ if ( $query->have_posts() ) {
 							} elseif ( strtotime( $cfp_date_end ) < time() ) {
 								echo 'Closed';
 							} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
+								$dt_cfp_date_end   = new DateTime( $cfp_date_end );
 								echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, M j, Y' ) );
 							} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
+								$dt_cfp_date_start = new DateTime( $cfp_date_start );
 								echo 'Opens ' . esc_html( $dt_cfp_date_start->format( 'l, M j, Y' ) );
 							}
 							?>
