@@ -71,6 +71,11 @@ function lfe_get_related_events( $parent_id ) {
 			),
 			'meta_query'     => array(
 				array(
+					'key'     => 'lfes_hide_from_listings',
+					'compare' => '!=',
+					'value'   => 'hide',
+				),
+				array(
 					'key'     => 'lfes_event_has_passed',
 					'compare' => '!=',
 					'value'   => '1',
