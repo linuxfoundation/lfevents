@@ -180,6 +180,23 @@ class LFEvents_Admin {
 
 		$opts = array(
 			'labels'             => array(
+				'name'          => __( 'Staff' ),
+				'singular_name' => __( 'Staff' ),
+				'all_items'     => __( 'All Staff' ),
+			),
+			'show_in_rest'       => true,
+			'public'             => false, // not publicly viewable.
+			'publicly_queryable' => false, // not publicly queryable.
+			'show_ui'            => true, // But still show admin UI.
+			'menu_icon'          => 'dashicons-buddicons-buddypress-logo',
+			'rewrite'            => array( 'slug' => 'staff' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'author' ),
+		);
+
+		register_post_type( 'lfe_staff', $opts );
+
+		$opts = array(
+			'labels'             => array(
 				'name'          => __( 'Sponsors' ),
 				'singular_name' => __( 'Sponsor' ),
 				'all_items'     => __( 'All Sponsors' ),
@@ -1119,6 +1136,42 @@ class LFEvents_Admin {
 									'ui_border_top' => false,
 									'default_value' => '',
 									'placeholder'   => __( 'https://cncf.io' ),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
+
+		// Push the $sidebar we just assigned to the variable
+		// to the array of $sidebars that comes in the function argument.
+		$sidebars[] = $sidebar;
+
+		$sidebar = array(
+			'id'              => 'lfe-staff-sidebar',
+			'id_prefix'       => 'lfes_staff_',
+			'label'           => __( 'Staff Details' ),
+			'post_type'       => array( 'lfe_staff' ),
+			'data_key_prefix' => 'lfes_staff_',
+			'icon_dashicon'   => 'admin-users',
+			'tabs'            => array(
+				array(
+					'label'  => __( 'Tab label' ),
+					'panels' => array(
+						array(
+							'label'    => __( 'Staff Details' ),
+							'settings' => array(
+								array(
+									'type'          => 'text',
+									'id'            => 'title',
+									'data_type'     => 'meta',
+									'data_key'      => 'title',
+									'label'         => __( 'Title' ),
+									'register_meta' => true,
+									'ui_border_top' => false,
+									'default_value' => '',
+									'placeholder'   => __( 'Title' ),
 								),
 							),
 						),

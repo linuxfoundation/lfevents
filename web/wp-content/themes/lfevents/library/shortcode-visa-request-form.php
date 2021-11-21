@@ -7,11 +7,11 @@
  * @since 1.0.0
  */
 
- /**
-  * Add shortcode.
-  *
-  * @param array $atts Attributes.
-  */
+/**
+ * Add shortcode.
+ *
+ * @param array $atts Attributes.
+ */
 function add_visa_request_shortcode( $atts ) {
 
 		// Attributes.
