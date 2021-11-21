@@ -7,11 +7,11 @@
  * @since 1.0.0
  */
 
- /**
-  * Add shortcode.
-  *
-  * @param array $atts Attributes.
-  */
+/**
+ * Add shortcode.
+ *
+ * @param array $atts Attributes.
+ */
 function add_travel_fund_shortcode( $atts ) {
 
 		// Attributes.
