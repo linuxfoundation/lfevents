@@ -18,11 +18,9 @@ function add_staff_shortcode( $atts ) {
 
 	$query = new WP_Query(
 		array(
-			'no_found_rows'          => true,
-			'update_post_term_cache' => false,
-			'post_type'              => 'lfe_staff',
-			'post_status'            => 'publish',
-			'posts_per_page'         => 500,
+			'post_type'      => 'lfe_staff',
+			'post_status'    => array( 'publish' ),
+			'posts_per_page' => 100,
 
 			'meta_query'     => array(
 				'relation' => 'OR',
@@ -55,20 +53,66 @@ function add_staff_shortcode( $atts ) {
 	}
 
 	ob_start();
+	?>
+	<div class="team-wrapper">
 
-	echo '<div class="wp-block-columns is-style-feature-grid">';
+	<?php
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		$id    = get_the_ID();
-		$title = get_post_meta( $id, 'lfes_staff_title', true );
-		echo '<div class="wp-block-column has-light-gray-background-color has-background">';
-		echo get_the_post_thumbnail( $id, 'profile-200', array( 'loading' => 'lazy' ) );
-		echo '<h3>' . esc_html( get_the_title() ) . '</h3>';
-		echo '<p>' . esc_html( $title ) . '</p>';
-		echo '</div>';
-	}
-	echo '</div>';
 
+		$id                = get_the_ID();
+		$title             = get_post_meta( $id, 'lfes_staff_title', true );
+		$fallback_image_id = get_option( 'lfe-generic-staff-image-id' ) ?? '';
+		?>
+
+		<div class="team-item">
+
+		<?php
+		if ( has_post_thumbnail() ) {
+			echo wp_get_attachment_image(
+				get_post_thumbnail_id(),
+				'profile-200',
+				false,
+				array(
+					'class'   => 'team-photo hvr-push',
+					'loading' => 'lazy',
+				)
+			);
+		} elseif ( $fallback_image_id ) {
+			echo wp_get_attachment_image(
+				$fallback_image_id,
+				'profile-200',
+				false,
+				array(
+					'class'   => 'team-photo hvr-push',
+					'loading' => 'lazy',
+				)
+			);
+		} else {
+			?>
+<svg width="200" height="200" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient id="customGradient" gradientTransform="rotate(100)">
+<stop offset="5%"  stop-color="#0099cc" />
+<stop offset="95%" stop-color="#003366" />
+</linearGradient>
+</defs>
+<circle cx="5" cy="5" r="5" fill="url('#customGradient')" />
+</svg>
+			<?php
+		}
+		?>
+		<!-- echo get_the_post_thumbnail( $id, 'profile-200', array( 'loading' => 'lazy' ) ); -->
+		<h3 class="team-title"><?php echo esc_html( get_the_title() ); ?></h3>
+		<p class="team-description"><?php echo esc_html( $title ); ?></p>
+		</div>
+
+		<?php
+	}
+	?>
+	</div>
+	<?php
 	$block_content = ob_get_clean();
 	return $block_content;
 }
