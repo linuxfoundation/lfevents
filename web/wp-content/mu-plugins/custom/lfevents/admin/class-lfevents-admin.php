@@ -88,24 +88,20 @@ class LFEvents_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @param string $hook Current page.
+	 * @return void
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts( $hook ) {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in LFEvents_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The LFEvents_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		// only load on the named page.
+		if ( 'settings_page_lfe_options' == $hook ) {
 
-		wp_enqueue_script( $this->lfevents, plugin_dir_url( __FILE__ ) . 'js/lfevents-admin.js', array( 'jquery' ), $this->version, false );
+			// media uploader.
+			wp_enqueue_media();
 
+			wp_enqueue_script( $this->lfevents, plugin_dir_url( __FILE__ ) . 'js/lfevents-admin.js', array( 'jquery' ), $this->version, false );
+
+		}
 	}
 
 	/**
@@ -1404,11 +1400,11 @@ class LFEvents_Admin {
 				array(
 					'relation' => 'OR',
 					array(
-						'key' => '_nested_pages_status',
+						'key'     => '_nested_pages_status',
 						'compare' => 'NOT EXISTS',
 					),
 					array(
-						'key' => '_nested_pages_status',
+						'key'   => '_nested_pages_status',
 						'value' => 'show',
 					),
 				)
@@ -1479,10 +1475,10 @@ class LFEvents_Admin {
 		}
 
 		$remote_body = json_decode( wp_remote_retrieve_body( $data ) );
-		$events = $remote_body->results;
+		$events      = $remote_body->results;
 
 		// delete all existing imported KCD posts.
-		$args = array(
+		$args      = array(
 			'post_type'      => 'lfe_community_event',
 			'meta_key'       => 'lfes_community_bevy_import',
 			'meta_value'     => true,
@@ -1501,7 +1497,7 @@ class LFEvents_Admin {
 			// insert if end date hasn't passed.
 			if ( ( time() - ( 60 * 60 * 24 ) ) < strtotime( $event->end_date_iso ) ) {
 				$dt_date_start = new DateTime( $event->start_date_iso );
-				$dt_date_end = new DateTime( $event->end_date_iso );
+				$dt_date_end   = new DateTime( $event->end_date_iso );
 
 				$virtual = strpos( strtolower( $event->title ), 'virtual' ) + strpos( strtolower( $event->description_short ), 'virtual' );
 				if ( 0 < $virtual || ! $event->venue_city ) {
@@ -1515,13 +1511,13 @@ class LFEvents_Admin {
 					'post_status' => 'publish',
 					'post_author' => 1,
 					'post_type'   => 'lfe_community_event',
-					'meta_input'   => array(
+					'meta_input'  => array(
 						'lfes_community_external_url' => $event->url,
 						'lfes_community_bevy_import'  => true,
-						'lfes_community_date_start'  => $dt_date_start->format( 'Y/m/d' ),
-						'lfes_community_date_end'  => $dt_date_end->format( 'Y/m/d' ),
-						'lfes_community_city'  => $event->venue_city,
-						'lfes_community_virtual'  => $virtual,
+						'lfes_community_date_start'   => $dt_date_start->format( 'Y/m/d' ),
+						'lfes_community_date_end'     => $dt_date_end->format( 'Y/m/d' ),
+						'lfes_community_city'         => $event->venue_city,
+						'lfes_community_virtual'      => $virtual,
 					),
 				);
 

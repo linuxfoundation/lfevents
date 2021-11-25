@@ -1,8 +1,8 @@
 @charset 'utf-8';
 
-@import "settings";
-@import "foundation";
-@import "motion-ui";
+@import 'settings';
+@import 'foundation';
+@import 'motion-ui';
 
 @include foundation-global-styles;
 //@include foundation-grid;
@@ -50,58 +50,59 @@
 @include motion-ui-animations;
 
 // Global.
-@import "global/accessibility";
-@import "global/gutenberg";
-@import "global/custom-color-palette";
-@import "global/structure";
+@import 'global/accessibility';
+@import 'global/gutenberg';
+@import 'global/custom-color-palette';
+@import 'global/structure';
 
 // Components.
 // Smallest elements.
-@import "components/buttons";
-@import "components/cards";
-@import "components/columns";
-@import "components/cover";
-@import "components/embeds";
-@import "components/file";
-@import "components/forms";
-@import "components/images";
-@import "components/group";
-@import "components/links";
-@import "components/quote";
-@import "components/separator";
-@import "components/spacer";
-@import "components/tables";
-@import "components/typography";
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/columns';
+@import 'components/cover';
+@import 'components/embeds';
+@import 'components/file';
+@import 'components/forms';
+@import 'components/images';
+@import 'components/group';
+@import 'components/links';
+@import 'components/quote';
+@import 'components/separator';
+@import 'components/spacer';
+@import 'components/tables';
+@import 'components/typography';
 
 // Modules.
 // Made up of components/needing their own styling.
-@import "modules/cookie-banner";
-@import "modules/event-calendar";
-@import "modules/event-footer";
-@import "modules/event-header";
-@import "modules/event-listing";
-@import "modules/event-subpage";
-@import "modules/gallery";
-@import "modules/global-footer";
-@import "modules/global-header";
-@import "modules/home-hero";
-@import "modules/non-event-footer";
-@import "modules/non-event-hero";
-@import "modules/photonic";
-@import "modules/post-navigation";
-@import "modules/post-single";
-@import "modules/sticky";
+@import 'modules/cookie-banner';
+@import 'modules/event-calendar';
+@import 'modules/event-footer';
+@import 'modules/event-header';
+@import 'modules/event-listing';
+@import 'modules/event-subpage';
+@import 'modules/gallery';
+@import 'modules/global-footer';
+@import 'modules/global-header';
+@import 'modules/home-hero';
+@import 'modules/non-event-footer';
+@import 'modules/non-event-hero';
+@import 'modules/photonic';
+@import 'modules/post-navigation';
+@import 'modules/post-single';
+@import 'modules/sticky';
+@import 'modules/team';
 
 // Blocks
 // Imported blocks as plugins.
-@import "blocks/button-with-expiry";
-@import "blocks/countdown";
-@import "blocks/custom-iframe";
-@import "blocks/icon-list";
-@import "blocks/image-box";
-@import "blocks/multi-part-page"; // tab container.
-@import "blocks/pricing-grid";
-@import "blocks/speakers";
-@import "blocks/sponsors";
-@import "blocks/text-over-img";
-@import "blocks/track-grid";
+@import 'blocks/button-with-expiry';
+@import 'blocks/countdown';
+@import 'blocks/custom-iframe';
+@import 'blocks/icon-list';
+@import 'blocks/image-box';
+@import 'blocks/multi-part-page'; // tab container.
+@import 'blocks/pricing-grid';
+@import 'blocks/speakers';
+@import 'blocks/sponsors';
+@import 'blocks/text-over-img';
+@import 'blocks/track-grid';
