@@ -9,7 +9,6 @@
 }
 
 .menu-toggler {
-
   &,
   &:hover,
   &:focus {
@@ -88,17 +87,13 @@
     padding-right: 2rem;
     padding-left: 2rem;
     transform-origin: 0 0;
-    transition: transform 0.2s ease-in-out 0s,
-      box-shadow 0.2s ease-in-out 0s,
-      background-color 0.1s ease-in-out 0s,
+    transition: transform 0.2s ease-in-out 0s, box-shadow 0.2s ease-in-out 0s, background-color 0.1s ease-in-out 0s,
       border-bottom-right-radius 0.2s ease-in-out 0s;
 
     .event-header.is-stuck & {
       background-color: transparent !important;
-      transition: transform 0.3s ease-in-out 0.3s,
-        box-shadow 0.3s ease-in-out 0.3s,
-        background-color 0.3s ease-in-out 0.6s,
-        border-bottom-right-radius 0.3s ease-in-out 0.3s;
+      transition: transform 0.3s ease-in-out 0.3s, box-shadow 0.3s ease-in-out 0.3s,
+        background-color 0.3s ease-in-out 0.6s, border-bottom-right-radius 0.3s ease-in-out 0.3s;
 
       img {
         transition: transform 0.3s ease-in-out 0.3s;
@@ -121,11 +116,10 @@
   }
 }
 
-
 .event-menu {
   clear: both;
   background-color: inherit;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.10), 0 3px 6px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 
   ul,
   li {
@@ -145,19 +139,16 @@
       @include button-group-stack('.page_item');
     }
 
-    >li {
-
+    > li {
       @include breakpoint(large) {
-
-        &.current_page_item>a,
-        &.current_page_ancestor>a {
+        &.current_page_item > a,
+        &.current_page_ancestor > a {
           position: relative;
           background-color: rgba(0, 0, 0, 0.2);
         }
       }
 
       &:first-child {
-
         // HACK: We should add a class w/ a WP walker for this selector
         @include breakpoint(medium down) {
           display: none;
@@ -170,7 +161,7 @@
           margin-top: 2em;
         }
 
-        >a {
+        > a {
           @include breakpoint(medium down) {
             display: none;
           }
@@ -204,7 +195,7 @@
           flex-shrink: 0;
 
           &::before {
-            content: "";
+            content: '';
             height: 40px;
             width: 1px;
             margin-right: 14px;
@@ -244,7 +235,7 @@
         }
       }
 
-      >a {
+      > a {
         @include breakpoint(medium down) {
           justify-content: left;
           font-weight: 900;
@@ -261,7 +252,7 @@
           justify-content: left;
         }
 
-        >a[href="#"] {
+        > a[href='#'] {
           opacity: 0.6;
           padding-bottom: 0;
           cursor: default;
@@ -288,8 +279,9 @@
       }
 
       @include breakpoint(large) {
-        >a {
-          @include button-dropdown(0.4em, currentColor, 1rem);
+        > a {
+          // controls the arrow in menu.
+          @include button-dropdown(5px, currentColor, 1rem);
           cursor: default;
 
           &::after {
@@ -299,11 +291,11 @@
           }
         }
 
-        &:hover>a {
+        &:hover > a {
           background-color: rgba(0, 0, 0, 0.2);
         }
 
-        &:hover>a::after {
+        &:hover > a::after {
           transform: scaleY(-1);
         }
 
@@ -329,12 +321,12 @@
             }
           }
 
-          .current_page_item>a {
+          .current_page_item > a {
             background-color: rgba(0, 0, 0, 0.2);
           }
         }
 
-        &:hover>.children {
+        &:hover > .children {
           visibility: visible;
           opacity: 1;
         }
@@ -360,6 +352,5 @@
         }
       }
     }
-
   }
 }
