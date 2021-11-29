@@ -74,7 +74,7 @@ function add_staff_shortcode( $atts ) {
 				'profile-200',
 				false,
 				array(
-					'class'   => 'team-photo hvr-push',
+					'class'   => 'team-photo',
 					'loading' => 'lazy',
 				)
 			);
@@ -84,7 +84,7 @@ function add_staff_shortcode( $atts ) {
 				'profile-200',
 				false,
 				array(
-					'class'   => 'team-photo hvr-push',
+					'class'   => 'team-photo',
 					'loading' => 'lazy',
 				)
 			);
@@ -103,8 +103,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 			<?php
 		}
 		?>
-		<!-- echo get_the_post_thumbnail( $id, 'profile-200', array( 'loading' => 'lazy' ) ); -->
-		<h3 class="team-title"><?php echo esc_html( get_the_title() ); ?></h3>
+		<h4 class="team-title"><?php echo esc_html( get_the_title() ); ?></h4>
 		<p class="team-description"><?php echo esc_html( $title ); ?></p>
 		</div>
 
