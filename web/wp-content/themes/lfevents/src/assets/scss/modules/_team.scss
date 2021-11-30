@@ -43,6 +43,10 @@
   font-weight: 600;
   position: relative;
   padding-bottom: 5px;
+  @media (max-width: 767px) {
+    padding-bottom: 0;
+    margin-bottom: 2px;
+  }
   &:after {
     background: none repeat scroll 0 0 transparent;
     bottom: 0;
