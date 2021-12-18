@@ -103,7 +103,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 			<?php
 		}
 		?>
-		<h4 class="team-title"><?php echo esc_html( get_the_title() ); ?></h4>
+		<h5 class="team-title"><?php echo esc_html( get_the_title() ); ?></h5>
 		<p class="team-description"><?php echo esc_html( $title ); ?></p>
 		</div>
 
