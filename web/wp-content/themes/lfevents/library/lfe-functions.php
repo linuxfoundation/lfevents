@@ -917,3 +917,38 @@ function lfe_get_event_parent_id( $post ) {
 	}
 	return $parent_id;
 }
+
+/**
+ * Add custom column header to lfe_staff admin display.
+ *
+ * @param array $columns Column headers.
+ */
+function lf_staff_custom_column( $columns ) {
+	// take date column.
+	$date = $columns['date'];
+	// unset it so we can move it.
+	unset( $columns['date'] );
+	// add new column.
+	$columns['featured_image'] = 'Image';
+	// add back in date.
+	$columns['date'] = $date;
+
+	return $columns;
+}
+add_filter( 'manage_lfe_staff_posts_columns', 'lf_staff_custom_column' );
+
+/**
+ * Add custom column data to lfe_staff admin display.
+ *
+ * @param string $column The column.
+ * @param int    $post_id The post.
+ * @return void
+ */
+function lf_staff_custom_column_data( $column, $post_id ) {
+	switch ( $column ) {
+		case 'featured_image':
+			the_post_thumbnail( 'thumbnail' );
+			break;
+	}
+}
+add_action( 'manage_lfe_staff_posts_custom_column', 'lf_staff_custom_column_data', 10, 2 );
