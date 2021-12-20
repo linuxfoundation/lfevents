@@ -917,3 +917,27 @@ function lfe_get_event_parent_id( $post ) {
 	}
 	return $parent_id;
 }
+
+/**
+ * Returns correct HubSpot newsletter form ID based on url.
+ */
+function lfe_get_newsletter_form_id() {
+	global $wp;
+	if ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-europe' ) ) {
+		return 'a6f29fd1-7fb9-4583-8c16-1c6ee13ab414';
+	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-north-america' ) ) {
+		return '1318a968-9197-47e1-ab24-8edcce797af3';
+	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-open-source-summit-china' ) ) {
+		return 'c9f29688-545d-43ca-b919-2d3ede8e25d0';
+	} elseif ( false !== strpos( $wp->request, 'open-mainframe-summit' ) ) {
+		return 'ea4777bb-3ff3-4308-a726-87d8f9c82606';
+	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) ) {
+		return '8475422d-2b22-47ba-bfd8-e5fe55687686';
+	} elseif ( false !== strpos( $wp->request, 'openjs-world' ) ) {
+		return '2cda1b3c-4bb6-4b44-a23e-80610185d7bd';
+	} elseif ( false !== strpos( $wp->request, 'zephyr-developer-summit' ) ) {
+		return '03e2e1ad-f013-4706-b7c8-bc2d40860eeb';
+	} else {
+		return '3fd88e30-9f70-4257-a44d-72643403281d';
+	}
+}
