@@ -36,7 +36,7 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 			hear about the latest events, news &amp; more</h4>
 
 		<?php
-			echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
+			echo do_shortcode( '[hubspot type=form portal=8112310 id=3fd88e30-9f70-4257-a44d-72643403281d]' );
 		?>
 
 		<p class="lf-footer__privacy">

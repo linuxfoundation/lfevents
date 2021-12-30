@@ -238,7 +238,8 @@ if ( ! $splash_page ) :
 <div class="event-footer-newsletter <?php echo esc_html( $menu_text_color ); ?>">
 	<p class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
 	<?php
-		echo do_shortcode( '[hubspot type=form portal=8112310 id=be35e462-1b9f-4499-9437-17f4d5c31ae5]' );
+		$hubspot_form_id = lfe_get_newsletter_form_id();
+		echo do_shortcode( '[hubspot type=form portal=8112310 id=' . $hubspot_form_id . ']' );
 	?>
 	<p class="event-footer-newsletter__privacy">
 	<?php
