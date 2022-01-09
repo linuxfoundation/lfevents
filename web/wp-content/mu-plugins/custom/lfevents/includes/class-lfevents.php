@@ -168,6 +168,9 @@ class LFEvents {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'reset_cache_check' );
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'limit_nested_pages_listing' );
 
+		// Hook to save year in a meta field for events.
+		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
+
 		// schedule KCD sync on lfeventsci.
 		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 			$this->loader->add_action( 'lfevents_sync_kcds', $plugin_admin, 'sync_kcds' );

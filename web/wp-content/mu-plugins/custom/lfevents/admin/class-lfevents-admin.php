@@ -1536,6 +1536,26 @@ class LFEvents_Admin {
 		}
 
 	}
+
+	/**
+	 * Sets an post meta value equal to the year of the event.  Used for search filters.
+	 *
+	 * @param int $post_id The post id.
+	 */
+	public function set_event_year( $post_id ) {
+		if ( ! in_array( get_post_type( $post_id ), $this->post_types ) ) {
+			return;
+		}
+
+		$date_start = get_post_meta( $post_id, 'lfes_date_start', true );
+
+		if ( check_string_is_date( $date_start ) ) {
+			$dt_date_start = new DateTime( $date_start );
+			$year = date_format( $dt_date_start, 'Y' );
+			update_post_meta( $post_id, 'lfes_date_start_year', $year );
+		}
+	}
+
 }
 
 /**
