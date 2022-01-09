@@ -151,6 +151,20 @@ form.searchandfilter {
       box-shadow: none;
     }
   }
+
+  &#search-filter-form-143 {
+    >ul {
+      >li {
+        @include breakpoint(large) {
+          width: 20%;
+          &.sf-field-taxonomy-lfevent-category {
+            width: 38%;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 .results-count {
