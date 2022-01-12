@@ -14,8 +14,9 @@ $parent_id = lfe_get_event_parent_id( $post );
 
 get_header();
 
-$splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
-$hide_header = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
+$splash_page      = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
+$hide_header      = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
+$hide_sponsors    = get_post_meta( get_the_ID(), 'lfes_hide_sponsors', true );
 $event_has_passed = false;
 
 if ( ! $splash_page ) {
@@ -194,7 +195,9 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 				} else {
 					get_template_part( 'template-parts/content', 'page' );
 				}
-				lfe_get_sponsors( $parent_id );
+				if ( ! $hide_sponsors ) {
+					lfe_get_sponsors( $parent_id );
+				}
 endwhile;
 			?>
 		</main>
