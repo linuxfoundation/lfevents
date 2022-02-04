@@ -1,4 +1,12 @@
 <?php
+/**
+ * WP Config
+ *
+ * @package WordPress
+ * @subpackage lf-theme
+ * @since 1.0.0
+ */
+
 /*
  * Don't show deprecations
  */
@@ -7,24 +15,26 @@ error_reporting( E_ALL ^ E_DEPRECATED );
 /**
  * Set root path
  */
-$rootPath = realpath( __DIR__ . '/..' );
+$root_path = realpath( __DIR__ . '/..' );
 
 /**
  * Include the Composer autoload
  */
-require_once( $rootPath . '/vendor/autoload.php' );
+require_once( $root_path . '/vendor/autoload.php' );
 
 /*
- * Fetch .env
+ * Fetch .env if exists.
  */
-if ( ! isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && file_exists( $rootPath . '/.env' ) ) {
-	$dotenv = Dotenv\Dotenv::create($rootPath);
+if ( ! isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && file_exists( $root_path . '/.env' ) ) {
+	$dotenv = Dotenv\Dotenv::create( $root_path );
 	$dotenv->load();
-	$dotenv->required( array(
+	$dotenv->required(
+		array(
 		'DB_NAME',
 		'DB_USER',
 		'DB_HOST',
-	) )->notEmpty();
+		)
+	)->notEmpty();
 }
 
 /**
@@ -44,37 +54,48 @@ define( 'FORCE_SSL_ADMIN', true );
 define( 'WP_POST_REVISIONS', 10 );
 
 /*
- * If NOT on Pantheon
+ * If running on Lando or some other environment.
  */
-if ( ! isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ):
+if ( ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && $_ENV['PANTHEON_ENVIRONMENT'] === 'lando' ) || ( ! isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) ) :
 	/**
-	 * Define site and home URLs
+	 * Get Lando install information if its running.
 	 */
-	// HTTP is still the default scheme for now.
-	$scheme = 'http';
-	// If we have detected that the end use is HTTPS, make sure we pass that
-	// through here, so <img> tags and the like don't generate mixed-mode
-	// content warnings.
-	if ( isset( $_SERVER['HTTP_USER_AGENT_HTTPS'] ) && $_SERVER['HTTP_USER_AGENT_HTTPS'] == 'ON' ) {
-		$scheme = 'https';
+	if ( getenv( 'LANDO_INFO' ) ) {
+
+		/**  Parse the LANDO INFO  */
+		$lando_info = json_decode(getenv('LANDO_INFO'));
+
+		/** Get the database config */
+		$database_config = $lando_info->database;
+		/** The name of the database for WordPress */
+		define('DB_NAME', $database_config->creds->database);
+		/** MySQL database username */
+		define('DB_USER', $database_config->creds->user);
+		/** MySQL database password */
+		define('DB_PASSWORD', $database_config->creds->password);
+		/** MySQL hostname */
+		define('DB_HOST', $database_config->internal_connection->host);
+	} else {
+		/** Name of the database for WordPress */
+		define( 'DB_NAME', 'wordpress' );
+		/** MySQL database username */
+		define( 'DB_USER', 'wordpress' );
+		/** MySQL database password */
+		define( 'DB_PASSWORD', 'wordpress' );
+		/** MySQL hostname */
+		define( 'DB_HOST', 'database' );
 	}
-	$site_url = getenv( 'WP_HOME' ) !== false ? getenv( 'WP_HOME' ) : $scheme . '://' . $_SERVER['HTTP_HOST'] . '/';
-	define( 'WP_HOME', $site_url );
-	define( 'WP_SITEURL', $site_url . 'wp/' );
+	/** Database Charset to use in creating database tables. */
+	define( 'DB_CHARSET', 'utf8' );
 
-	/**
-	 * Set Database Details
-	 */
-	define( 'DB_NAME', getenv( 'DB_NAME' ) );
-	define( 'DB_USER', getenv( 'DB_USER' ) );
-	define( 'DB_PASSWORD', getenv( 'DB_PASSWORD' ) !== false ? getenv( 'DB_PASSWORD' ) : '' );
-	define( 'DB_HOST', getenv( 'DB_HOST' ) );
+	/** The Database Collate type. Don't change this if in doubt. */
+	define( 'DB_COLLATE', '' );
 
-	/**
-	 * Set debug modes
-	 */
-	define( 'WP_DEBUG', getenv( 'WP_DEBUG' ) === 'true' ? true : false );
-	define( 'IS_LOCAL', getenv( 'IS_LOCAL' ) !== false ? true : false );
+	/** URL routing */
+	define( 'WP_HOME','https://lfeventsci.lndo.site' );
+	define( 'WP_SITEURL', 'https://lfeventsci.lndo.site/wp' );
+	define( 'WP_CONTENT_DIR','/app/web/wp-content' );
+	define( 'WP_CONTENT_URL','https://lfeventsci.lndo.site/wp-content' );
 
 	/**#@+
 	 * Authentication Unique Keys and Salts.
@@ -94,12 +115,34 @@ if ( ! isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ):
 	define( 'LOGGED_IN_SALT', 'e+6%u)u@RZn-$}_Q[N;Na<|A-[Am_$#nhD~}ci:%R&B*oiq<sPF$v)d1r<-V-5W|' );
 	define( 'NONCE_SALT', 'r%oyx_`[A-~<LB)]I.,^//}/&]a)H|fzk3IUWrZn[L4qf#Pp#lsB-B}+/ai&u,/|' );
 
+	// If Lando is running, presume you are local and want debug.
+	if (isset( $_ENV['LANDO'] ) && $_ENV['LANDO'] == 'ON' ) {
+
+		define( 'IS_LOCAL', true );
+		define( 'WP_DEBUG', true );
+		define( 'WP_DEBUG_DISPLAY', true ); // false to go to log.
+		define( 'WP_DEBUG_LOG', __DIR__ . '/wp-content/debug.log' ); // Moves log file to writable location.
+		define( 'SCRIPT_DEBUG', true );
+		define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ); // stops admin email sent.
+
+		// fixes small problem with LH-HSTS.
+		if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
+			$_SERVER['HTTP_HOST'] = 'localhost';
+		}
+
+		// fix issue with new relic settings in local dev.
+		if (!isset($_SERVER['REQUEST_URI'])) {
+			$_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'],1 );
+			if (isset($_SERVER['QUERY_STRING'])) { $_SERVER['REQUEST_URI'].='?'.$_SERVER['QUERY_STRING']; }
+		}
+	}
+
 endif;
 
 /*
  * If on Pantheon
  */
-if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ):
+if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && $_ENV['PANTHEON_ENVIRONMENT'] !== 'lando' ) :
 
 	// ** MySQL settings - included in the Pantheon Environment ** //
 	/** The name of the database for WordPress */
@@ -155,36 +198,24 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ):
 		define( 'WP_HOME', $scheme . '://' . $_SERVER['HTTP_HOST'] );
 		define( 'WP_SITEURL', $scheme . '://' . $_SERVER['HTTP_HOST'] . '/wp' );
 
-	}
-	// Don't show deprecations; useful under PHP 5.5
-	error_reporting( E_ALL ^ E_DEPRECATED );
-	// Force the use of a safe temp directory when in a container
-	if ( defined( 'PANTHEON_BINDING' ) ):
+		/*
+		* Define wp-content directory outside of WordPress core directory.
+		*/
+		define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
+		define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
+		}
+
+	// Force the use of a safe temp directory when in a container.
+	if ( defined( 'PANTHEON_BINDING' ) ) :
 		define( 'WP_TEMP_DIR', sprintf( '/srv/bindings/%s/tmp', PANTHEON_BINDING ) );
 	endif;
 
-	// FS writes aren't permitted in test or live, so we should let WordPress know to disable relevant UI
+	// FS writes aren't permitted in test or live, so we should let WordPress know to disable relevant UI.
 	if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array( 'test', 'live' ) ) && ! defined( 'DISALLOW_FILE_MODS' ) ) :
 		define( 'DISALLOW_FILE_MODS', true );
 	endif;
 
-	// if environment is Lando run in debug.
-	if ( 'lando' === $_ENV['PANTHEON_ENVIRONMENT'] ) :
-		define( 'WP_DEBUG', true );
-		define( 'WP_DEBUG_DISPLAY', true ); // false to go to log.
-		define( 'WP_DEBUG_LOG', __DIR__ . '/wp-content/debug.log' ); // Moves log file to writable location.
-		define( 'SCRIPT_DEBUG', true );
-		define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true ); // stops admin email sent.
-
-	endif;
-
 endif;
-
-/*
-* Define wp-content directory outside of WordPress core directory
-*/
-define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
-define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
 
 /**
  * WordPress Database Table prefix.
@@ -194,12 +225,11 @@ define( 'WP_CONTENT_URL', WP_HOME . '/wp-content' );
  */
 $table_prefix = getenv( 'DB_PREFIX' ) !== false ? getenv( 'DB_PREFIX' ) : 'wp_';
 
-/* That's all, stop editing! Happy blogging. */
-
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
+
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
 
@@ -222,7 +252,7 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 	}
 
 	// If you're not using HSTS in the pantheon.yml file, uncomment this next block.
-	if ( !isset( $_SERVER['HTTP_USER_AGENT_HTTPS'] ) || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON' ) {
+	if ( ! isset( $_SERVER['HTTP_USER_AGENT_HTTPS'] ) || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON' ) {
 		$requires_redirect = true;
 	}
 
@@ -231,13 +261,11 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && php_sapi_name() != 'cli' ) {
 		if ( extension_loaded( 'newrelic' ) ) {
 			newrelic_name_transaction( 'redirect' );
 		}
-
 		header( 'HTTP/1.0 301 Moved Permanently' );
 		header( 'Location: https://' . $primary_domain . $_SERVER['REQUEST_URI'] );
 		exit();
 	}
 }
-
 
 // Special LFEvents Redirects for the /events/ subdirectory.
 if ( 0 === strpos( $_SERVER['REQUEST_URI'], '/events/' ) ) {
