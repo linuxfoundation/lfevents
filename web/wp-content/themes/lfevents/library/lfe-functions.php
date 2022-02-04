@@ -909,7 +909,7 @@ add_action( 'init', 'lfe_theme_unregister_tags' );
  * @param object $post The current Event page.
  */
 function lfe_get_event_parent_id( $post ) {
-	if ( $post->post_parent ) {
+	if ( $post && $post->post_parent ) {
 		$ancestors = get_post_ancestors( $post->ID );
 		$parent_id = $ancestors[ count( $ancestors ) - 1 ];
 	} else {
