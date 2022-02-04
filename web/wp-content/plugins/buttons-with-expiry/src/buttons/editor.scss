@@ -4,7 +4,7 @@
 
 // incorporated button/editor.scss here too
 
-.wp-block-lf-buttons-with-expiry[data-type="lf/buttons-with-expiry"] {
+.wp-block-lf-buttons-with-expiry[data-type='lf/buttons-with-expiry'] {
 	// align buttons + inserter
 	display: flex;
 	align-items: center;
@@ -17,7 +17,7 @@
 	width: 100%;
 
 	&::before {
-		content: "BUTTON GROUP";
+		content: 'BUTTON GROUP';
 		color: #d8d8d8;
 		position: absolute;
 		left: 1px;
@@ -27,8 +27,8 @@
 	}
 }
 
-.wp-block[data-align="left"],
-.wp-block[data-align="right"] {
+.wp-block[data-align='left'],
+.wp-block[data-align='right'] {
 	height: unset;
 }
 
@@ -36,7 +36,8 @@
 	float: none;
 	margin-left: unset;
 	margin-right: unset;
-	[data-type="lf/button-with-expiry"] {
+
+	[data-type='lf/button-with-expiry'] {
 		margin-left: unset;
 		margin-right: unset;
 	}
@@ -74,15 +75,16 @@
 	}
 }
 
-[data-align="left"],
-[data-align="center"],
-[data-align="right"] {
+[data-align='left'],
+[data-align='center'],
+[data-align='right'] {
 	> .wp-block-lf-buttons-with-expiry {
 		float: none;
 		margin-left: unset;
 		margin-right: unset;
 	}
-	[data-type="lf/button-with-expiry"] {
+
+	[data-type='lf/button-with-expiry'] {
 		margin-left: unset;
 		margin-right: unset;
 	}
