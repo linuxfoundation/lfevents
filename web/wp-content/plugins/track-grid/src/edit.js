@@ -49,7 +49,9 @@ export default function Edit( {
 					min={ 1 }
 					max={ 30 }
 					value={ tracks }
-					onChange={ ( value ) => setAttributes( { tracks: value } ) }
+					onChange={ ( value ) =>
+						setAttributes( { tracks: Number( value ) } )
+					}
 				/>
 				<RangeControl
 					label={ __( 'No. of columns' ) }
@@ -57,7 +59,7 @@ export default function Edit( {
 					max={ 4 }
 					value={ columns }
 					onChange={ ( value ) =>
-						setAttributes( { columns: value } )
+						setAttributes( { columns: Number( value ) } )
 					}
 				/>
 				<RangeControl
@@ -66,7 +68,9 @@ export default function Edit( {
 					max={ 800 }
 					step={ 10 }
 					value={ height }
-					onChange={ ( value ) => setAttributes( { height: value } ) }
+					onChange={ ( value ) =>
+						setAttributes( { height: Number( value ) } )
+					}
 				/>
 				<SelectControl
 					label={ __( 'CTA icon' ) }
@@ -283,7 +287,9 @@ export default function Edit( {
 										checked={ keynoteNewWindow }
 										onChange={ ( value ) => {
 											setAttributes( {
-												keynoteNewWindow: value,
+												keynoteNewWindow: Boolean(
+													value
+												),
 											} );
 										} }
 									/>
