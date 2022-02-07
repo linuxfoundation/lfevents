@@ -59,7 +59,6 @@
     "js-yaml": "^3.14.0",
     "panini": "^1.7.1",
     "rimraf": "^2.7.1",
-    "sass": "^1.49.7",
     "style-sherpa": "^1.0.1",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.12.0",
