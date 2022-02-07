@@ -1,5 +1,6 @@
+// This deprecated file is not being used right now.
+
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import classnames from 'classnames';
 
 export default function save( { attributes } ) {
 	const { columns, height, align, alignAll } = attributes;
@@ -11,26 +12,13 @@ export default function save( { attributes } ) {
 		'--image-box-height': height ? `${ height }px` : '250px',
 	};
 
-	const columnCount = classnames( {
-		[ `columns-${ columns }` ]: columns,
-	} );
-
-	const wrapperClasses = classnames(
-		'image-box-wrapper',
-		'wp-block-lf-image-box',
-		columnCount,
-		{ [ `align-center` ]: alignAll === 'align-center' },
-		{ [ `align-left` ]: alignAll === 'align-left' },
-		{ [ `align-right` ]: alignAll === 'align-right' },
-		{ alignleft: align === 'left' },
-		{ aligncenter: align === 'center' },
-		{ alignright: align === 'right' },
-		{ alignwide: align === 'wide' },
-		{ alignfull: align === 'full' }
-	);
-
 	return (
-		<div style={ mainStyle } className={ wrapperClasses }>
+		<div
+			style={ mainStyle }
+			className={ `image-box-wrapper wp-block-lf-image-box align${
+				align ? align : 'none'
+			} columns-${ columns } ${ alignAll }` }
+		>
 			{ range( 1, columns + 1 ).map( ( i ) => {
 				const imageUrl = attributes[ `imageUrl${ i }` ];
 				const title = attributes[ `title${ i }` ];
@@ -58,9 +46,7 @@ export default function save( { attributes } ) {
 								className="box-link"
 								href={ link }
 								{ ...( newWindow ? { target: '_blank' } : {} ) }
-								{ ...( newWindow
-									? { rel: 'noopener noreferrer' }
-									: {} ) }
+								{ ...( newWindow ? { rel: 'noopener' } : {} ) }
 							></a>
 						) }
 						<div className="image-box-overlay"></div>
