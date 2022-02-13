@@ -73,18 +73,9 @@ function button_with_expiry_callback( $attributes, $content ) {
 	$expire_at   = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
 	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
 	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
+	$now = time();
 
-	$wordpress_timezone = get_option( 'timezone_string' );
-
-	// right here right now - Pulls in timezone to set to WordPress site time.
-	$now = new DateTime( 'now', new DateTimeZone( $wordpress_timezone ) );
-	$now = $now->format( 'Y-m-d H:i:s' );
-
-	// the expiry time; don't adjust it as already in EST.
-	$expiry_time = new DateTime( "@$expire_at", new DateTimeZone( 'UTC' ) );
-	$expiry_time = $expiry_time->format( 'Y-m-d H:i:s' );
-
-	if ( $will_expire && $expiry_time < $now ) {
+	if ( $will_expire && $expire_at < $now ) {
 
 		if ( empty( $expire_text ) ) {
 			return;
