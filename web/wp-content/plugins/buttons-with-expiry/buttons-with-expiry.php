@@ -70,7 +70,11 @@ add_action( 'init', 'lf_buttons_with_expiry_block_init' );
  */
 function button_with_expiry_callback( $attributes, $content ) {
 
-	$expire_at   = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
+	$expire_at = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
+	$wordpress_timezone = get_option( 'timezone_string' );
+	$expire_at = new DateTime( $expire_at, new DateTimeZone( $wordpress_timezone ) );
+	$expire_at = (int) $expire_at->format( 'U' );
+
 	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
 	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
 	$now = time();
