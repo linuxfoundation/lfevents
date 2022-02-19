@@ -70,16 +70,23 @@ add_action( 'init', 'lf_buttons_with_expiry_block_init' );
  */
 function button_with_expiry_callback( $attributes, $content ) {
 
-	$expire_at = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : time() + 86400;
-	$wordpress_timezone = get_option( 'timezone_string' );
-	$expire_at = new DateTime( $expire_at, new DateTimeZone( $wordpress_timezone ) );
-	$expire_at = (int) $expire_at->format( 'U' );
-
-	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
 	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
-	$now = time();
+	$expire_at = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : false;
+	if ( ! $will_expire || ! $expire_at ) {
+		return $content;
+	}
 
-	if ( $will_expire && $expire_at < $now ) {
+	$wordpress_timezone = get_option( 'timezone_string' );
+	if ( is_int( $expire_at ) ) {
+		// this is needed for backwards compatibility with existing blocks.
+		$expire_at = new DateTime( "@$expire_at", new DateTimeZone( $wordpress_timezone ) );
+	} else {
+		$expire_at = new DateTime( $expire_at, new DateTimeZone( $wordpress_timezone ) );
+	}
+	$expire_at = (int) $expire_at->format( 'U' );
+	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
+
+	if ( $expire_at < time() ) {
 
 		if ( empty( $expire_text ) ) {
 			return;
