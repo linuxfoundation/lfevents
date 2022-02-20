@@ -77,14 +77,11 @@ function button_with_expiry_callback( $attributes, $content ) {
 	}
 
 	$wordpress_timezone = get_option( 'timezone_string' );
-	if ( is_int( $expire_at ) ) {
-		// this is needed for backwards compatibility with existing blocks.
-		$expire_at = new DateTime( "@$expire_at", new DateTimeZone( $wordpress_timezone ) );
-	} else {
-		$expire_at = new DateTime( $expire_at, new DateTimeZone( $wordpress_timezone ) );
-	}
-	$expire_at = (int) $expire_at->format( 'U' );
 	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
+	if ( ! is_int( $expire_at ) ) {
+		$expire_at = new DateTime( $expire_at, new DateTimeZone( $wordpress_timezone ) );
+		$expire_at = (int) $expire_at->format( 'U' );
+	}
 
 	if ( $expire_at < time() ) {
 
