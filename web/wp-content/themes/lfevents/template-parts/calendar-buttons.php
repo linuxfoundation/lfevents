@@ -23,8 +23,5 @@ if ( is_singular( 'lfe_about_page' ) && is_single( 'archive' ) ) {
 ?>
 
 <div class="calendar-buttons">
-
-	<a class="lf-button"
-		href="<?php echo esc_url( $calendar_link ); ?>"><?php echo esc_html( $calendar_text ); ?></a>
-
+	<a href="<?php echo esc_url( $calendar_link ); ?>"><?php echo esc_html( $calendar_text ); ?></a>
 </div>
