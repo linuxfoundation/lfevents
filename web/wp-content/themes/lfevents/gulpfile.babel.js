@@ -16,7 +16,7 @@ import colors from 'ansi-colors';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 const { sass } = gulpSass( dartSass );
-import pngquant from 'imagemin-pngquant';
+import squoosh from "gulp-libsquoosh";
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -161,15 +161,7 @@ gulp.task( 'webpack:watch',webpack.watch );
 // In production, the images are compressed
 function images() {
   return gulp.src( 'src/assets/images/**/*' )
-    .pipe( $.if( PRODUCTION,$.imagemin( [
-      $.imagemin.gifsicle({ interlaced: true, }),
-      pngquant({ optimizationLevel: 5, }),
-      $.imagemin.mozjpeg({ progressive: true, }),
-      $.imagemin.svgo({ plugins: [
-        { cleanupAttrs: true },
-        { removeComments: true },
-      ] })
-    ] ) ) )
+    .pipe( $.if( PRODUCTION, squoosh() ) )
     .pipe( gulp.dest( PATHS.dist + '/assets/images' ) );
 }
 
