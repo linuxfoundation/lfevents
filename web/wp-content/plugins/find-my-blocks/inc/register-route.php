@@ -70,7 +70,11 @@ if ( ! function_exists( 'find_my_blocks_route_callback' ) ) :
 			);
 
 			foreach ( $posts as $post ) {
-				array_push( $post_ids, $post->ID );
+				$parent_id = lfe_get_event_parent_id( $post );
+				$event_has_passed = get_post_meta( $parent_id, 'lfes_event_has_passed', true );
+				if ( ! $event_has_passed ) {
+					array_push( $post_ids, $post->ID );
+				}
 			}
 		}
 
