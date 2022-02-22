@@ -81,7 +81,7 @@ function button_with_expiry_callback( $attributes, $content ) {
 	$now = $now->format( 'Y-m-d H:i:s' );
 
 	// the expiry time; don't adjust it as already in EST.
-	$expiry_time = new DateTime( "@$expire_at", new DateTimeZone( 'UTC' ) );
+	$expiry_time = new DateTime( "@$expire_at", new DateTimeZone( 'EST' ) );
 	$expiry_time = $expiry_time->format( 'Y-m-d H:i:s' );
 
 	if ( $will_expire ) {
