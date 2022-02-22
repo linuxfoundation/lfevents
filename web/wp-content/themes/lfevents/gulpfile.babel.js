@@ -78,23 +78,23 @@ function copy() {
     .pipe( gulp.dest( PATHS.dist + '/assets' ) );
 }
 
-// Compile Sass into CSS
-// In production, the CSS is compressed
 function compileCSS() {
-  return gulp.src( ['src/assets/scss/app.scss','src/assets/scss/editor.scss'] )
-    .pipe( $.sourcemaps.init() )
-    .pipe( $.sass()
-      .pipe( $.autoprefixer( {
-        browsers: COMPATIBILITY
-      } ) )
-      .pipe( $.if( PRODUCTION,$.cleanCss( { compatibility: 'ie9' } ) ) )
-      .pipe( $.if( !PRODUCTION,$.sourcemaps.write() ) )
-      .pipe( $.if( REVISIONING && PRODUCTION || REVISIONING && DEV,$.rev() ) )
-      .pipe( gulp.dest( PATHS.dist + '/assets/css' ) )
-      .pipe( $.if( REVISIONING && PRODUCTION || REVISIONING && DEV,$.rev.manifest() ) )
-      .pipe( gulp.dest( PATHS.dist + '/assets/css' ) )
-      .pipe( browser.reload( { stream: true } ) )
-    ) }
+  return gulp.src(['src/assets/scss/app.scss','src/assets/scss/editor.scss'])
+    .pipe($.sourcemaps.init())
+    .pipe($.sass({
+      includePaths: PATHS.sass
+    }).on('error', $.sass.logError))
+    .pipe($.autoprefixer({
+      browsers: COMPATIBILITY
+    }))
+    .pipe($.if(PRODUCTION, $.cleanCss({ compatibility: 'ie9' })))
+    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+    .pipe($.if(REVISIONING && PRODUCTION || REVISIONING && DEV, $.rev()))
+    .pipe(gulp.dest(PATHS.dist + '/assets/css'))
+    .pipe($.if(REVISIONING && PRODUCTION || REVISIONING && DEV, $.rev.manifest()))
+    .pipe(gulp.dest(PATHS.dist + '/assets/css'))
+    .pipe(browser.reload({ stream: true }));
+}
 
 // Combine JavaScript into one file
 // In production, the file is minified
@@ -180,11 +180,9 @@ function archive() {
 function server( done ) {
   browser.init( {
     proxy: BROWSERSYNC.url,
-
     ui: {
       port: 8080
     },
-
   } );
   done();
 }
@@ -198,23 +196,20 @@ function reload( done ) {
 // Watch for changes to static assets, pages, Sass, and JavaScript
 function watch() {
   gulp.watch( PATHS.assets,copy );
-  gulp.watch( 'src/assets/scss/**/*.scss',compileCSS )
+  gulp.watch( 'src/assets/scss/**/*.scss', compileCSS )
     .on( 'change',path => log( 'File ' + colors.bold( colors.magenta( path ) ) + ' changed.' ) )
     .on( 'unlink',path => log( 'File ' + colors.bold( colors.magenta( path ) ) + ' was removed.' ) );
-  gulp.watch( '**/*.php',reload )
+  gulp.watch( '**/*.php', reload )
     .on( 'change',path => log( 'File ' + colors.bold( colors.magenta( path ) ) + ' changed.' ) )
     .on( 'unlink',path => log( 'File ' + colors.bold( colors.magenta( path ) ) + ' was removed.' ) );
-  gulp.watch( 'src/assets/images/**/*',gulp.series( images,reload ) );
+  gulp.watch( 'src/assets/images/**/*',gulp.series( images, reload ) );
 }
 
 // Build the "dist" folder by running all of the below tasks
-gulp.task( 'build',
-  gulp.series( clean,gulp.parallel( compileCSS,'webpack:build',images,copy ) ) );
+gulp.task( 'build', gulp.series( clean, gulp.parallel( compileCSS, 'webpack:build', images, copy ) ) );
 
 // Build the site, run the server, and watch for file changes
-gulp.task( 'default',
-  gulp.series( 'build',server,gulp.parallel( 'webpack:watch',watch ) ) );
+gulp.task( 'default', gulp.series( 'build', server, gulp.parallel( 'webpack:watch', watch ) ) );
 
 // Package task
-gulp.task( 'package',
-  gulp.series( 'build',archive ) );
+gulp.task( 'package', gulp.series( 'build',archive ) );
