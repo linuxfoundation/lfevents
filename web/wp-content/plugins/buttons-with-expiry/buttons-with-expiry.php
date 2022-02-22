@@ -84,11 +84,7 @@ function button_with_expiry_callback( $attributes, $content ) {
 	$expiry_time = new DateTime( "@$expire_at", new DateTimeZone( 'UTC' ) );
 	$expiry_time = $expiry_time->format( 'Y-m-d H:i:s' );
 
-	if ( $will_expire && $expiry_time < $now ) {
-
-		if ( empty( $expire_text ) ) {
-			return;
-		}
+	if ( $will_expire ) {
 
 		// strips out mismatched <br> tags that are used with multiple languages.
 		$content = str_replace( '<br>', '', $content );
@@ -98,8 +94,10 @@ function button_with_expiry_callback( $attributes, $content ) {
 		$a = $dom->getElementsByTagName( 'a' )->item( 0 );
 		if ( $a ) {
 			$classes = $a->getAttribute( 'class' );
-			$a->setAttribute( 'class', $classes . ' disabled' );
-			$a->nodeValue = $expire_text; // phpcs:ignore
+			if ( $expiry_time < $now ) {
+				$a->setAttribute( 'class', $classes . ' disabled' );
+			}
+			$a->nodeValue = $expiry_time; // phpcs:ignore
 			return $dom->saveHTML();
 		}
 	}
