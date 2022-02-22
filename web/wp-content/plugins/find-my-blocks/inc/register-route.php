@@ -54,6 +54,7 @@ if ( ! function_exists( 'find_my_blocks_route_callback' ) ) :
 		array_push( $post_types, 'wp_block' );
 		unset( $post_types['attachment'] );
 
+		$post_types = array( 'wp_block', 'page', 'lfevent2022' );
 		/**
 		 * Get a list of all posts
 		 */
