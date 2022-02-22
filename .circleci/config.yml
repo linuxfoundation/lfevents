@@ -112,7 +112,7 @@ jobs:
     build_css_js:
         <<: *defaults
         docker:
-            - image: cimg/node:14
+            - image: cimg/node:current
               auth:
                 username: $DOCKERHUB_USERNAME
                 password: $DOCKERHUB_PASSWORD
