@@ -112,7 +112,7 @@ jobs:
     build_css_js:
         <<: *defaults
         docker:
-            - image: circleci/node:9.9-stretch
+            - image: cimg/node:14
               auth:
                 username: $DOCKERHUB_USERNAME
                 password: $DOCKERHUB_PASSWORD
@@ -126,7 +126,7 @@ jobs:
 
             - run:
                 name: compile css/js
-                command: 'cd $HOME/example_wordpress_composer/web/wp-content/themes/lfevents/; npm install; npm run build'
+                command: 'cd $HOME/example_wordpress_composer/web/wp-content/themes/lfevents/; npm ci; npm run build'
 
             - persist_to_workspace:
                 root: web/wp-content/themes/lfevents
