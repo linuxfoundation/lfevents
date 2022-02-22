@@ -37,9 +37,6 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 services:
   node:
     type: 'node:14'
-  database:
-    type: mariadb:10.3
-    portforward: 52357
   appserver:
     run:
       - /app/vendor/bin/phpcs --config-set installed_paths /app/vendor/wp-coding-standards/wpcs
@@ -59,6 +56,19 @@ tooling:
     service: appserver
     cmd: 'touch /app/web/wp-content/debug.log && tail -f /app/web/wp-content/debug.log'
     description: 'Get real-time WP debug log output'
+
+```
+
+If you are running an M1 Mac, you need to specify the database type, inserted after node in services.
+
+```yml
+
+services:
+  node:
+    type: 'node:14'
+  database:
+    type: mariadb:10.3
+    portforward: 52357
 
 ```
 
@@ -85,7 +95,7 @@ tooling:
 
 ### Notes
 
-* You can stop Lando with `lando stop` and start it again with `lando start`
+* You can stop Lando with `lando stop` and start it again with `lando start`. You can turn it off completely with `lando poweroff`
 
 * Composer, Terminus, npm and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json, run `lando composer update` rather than `composer update`.
 
@@ -109,7 +119,7 @@ LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foun
 
 The CircleCI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
 
-phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by composer. phpcs can be run on the command line using `lando phpcs` and phpcbf using `lando phpcbf`. Both commands are setup to use WordPress Coding Standards and to run on the 'wp-content/themes/' directory.
+phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by composer. phpcs can be run on the command line using `lando phpcs` and phpcbf using `lando phpcbf`. Both commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory.
 
 It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).
 
