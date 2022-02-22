@@ -122,7 +122,7 @@ jobs:
 
             - run:
                 name: Check current version of node
-                command: npm -v
+                command: node -v
 
             - run:
                 name: compile css/js
