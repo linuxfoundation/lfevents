@@ -2,7 +2,7 @@
 
 LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
 
-All these tests are run by CircleCI on each commit to the master branch, whenever a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.  
+All these tests are run by CircleCI on each commit to the master branch, whenever a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.
 
 For instructions on how to configure [the resulting site](https://events.linuxfoundation.org) to host events, please see the [Admin Instructions](https://docs.google.com/document/d/1mvIuw-R9k_gbnZn_iV04qNTjG33u_lXwFlN7s-lgJ1Y/edit?usp=sharing).
 
@@ -12,13 +12,11 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 
 ### Requirements
 
-* Install [Lando](https://docs.devwithlando.io/) (a Docker Compose utility / abstraction layer). On a Mac using brew, the command is `brew cask install lando`.
+* Install [Lando](https://github.com/lando/lando/releases) (a Docker Compose utility / abstraction layer). Using Homebrew for installation is not recommended. [Lando Docs](https://docs.devwithlando.io/). Lando includes it's own versions of PHP, Node (14.19.0), NPM.
 
-* Install [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon).  Follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication).  Save the machine token for use in step 2 below.
+* When setting up Lando with the Pantheon recipe it will automatically download [Terminus](https://pantheon.io/docs/terminus/install/) (CLI for interaction with Pantheon).  Follow all the instructions on that page to setup a [machine token](https://pantheon.io/docs/terminus/install/#machine-token) and [SSH Authentication](https://pantheon.io/docs/terminus/install/#ssh-authentication).  Save the machine token for use in step 2 below.
 
 * Get a GitHub [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to use in place of a password for performing Git operations over HTTPS.
-
-* Install [Node](https://nodejs.org/)/[NPM](https://www.npmjs.com/) (for theme development)
 
 ### Lando Setup
 (these steps were derived from [instructions provided by Pantheon](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
@@ -32,31 +30,74 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
   * `Enter a Pantheon machine token` > `[enter the Pantheon token you got above]`
   * `Which site?` > `lfeventsci`
 
-3. Run `lando start` and note the local site URL provided at the end of the process
+3. Open the .lando.yml file and add the following to the file.
 
-4. Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies
+```yml
 
-5. Run `lando pull --code=none` and follow the prompts to download the media files and database from Pantheon:
+services:
+  node:
+    type: 'node:14'
+  appserver:
+    run:
+      - /app/vendor/bin/phpcs --config-set installed_paths /app/vendor/wp-coding-standards/wpcs
+      - /app/vendor/bin/phpcs -i
+tooling:
+  npm:
+    service: node
+  node:
+    service: node
+  phpcs:
+    service: appserver
+    cmd: /app/vendor/bin/phpcs -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+  phpcbf:
+    service: appserver
+    cmd: /app/vendor/bin/phpcbf -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+  debug:
+    service: appserver
+    cmd: 'touch /app/web/wp-content/debug.log && tail -f /app/web/wp-content/debug.log'
+    description: 'Get real-time WP debug log output'
+
+```
+
+If you are running an M1 Mac, you need to specify the database type, inserted after node in services.
+
+```yml
+
+services:
+  node:
+    type: 'node:14'
+  database:
+    type: mariadb:10.3
+    portforward: 52357
+
+```
+
+4. Run `lando start` and note the local site URL provided at the end of the process
+
+5. Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies
+
+6. Run `lando pull --code=none` and follow the prompts to download the media files and database from Pantheon:
   * `Pull database from?` >  `dev`
   * `Pull files from?` >  `dev`
 
-6. You will need to compile the theme css/js before the site will render correctly:
+  (Note: The files could be over 10Gb in size. It may be better to select 'none' and then load the images from the remote server.)
+
+7. You will need to compile the theme css/js before the site will render correctly:
    1. Go to the theme directory: `cd web/wp-content/themes/lfevents`
-   2. Install the Node.js dependencies: `npm update --no-save` 
-   (Note: use `update --no-save` so that you don't overwrite package-lock.json)
-   3. Compile the files: `npm run build`
+   2. Install the Node.js dependencies: `lando npm install`
+   3. Compile the files: `lando npm run build`
 
-7. Visit the local site URL saved from above.  To find it again run `lando info`.
+8. Visit the local site URL saved from above.  To find it again run `lando info`.
 
-8. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
+9. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
 
-9. Get your browser to trust the Lando SSL certificate by following [these instructions](https://docs.lando.dev/config/security.html#trusting-the-ca).  This step isn't essential but will stop you having to keep bypassing the privacy warning in your browser.  On MacOS Catalina, I also had to manually go into Keychain Access and set the *.lndo.site certificate to “Always Trust”. See [screenshot](/docs/ca-screenshot.png).
+10. Get your browser to trust the Lando SSL certificate by following [these instructions](https://docs.lando.dev/config/security.html#trusting-the-ca).  This step isn't essential but will stop you having to keep bypassing the privacy warning in your browser.  On MacOS Catalina, I also had to manually go into Keychain Access and set the *.lndo.site certificate to “Always Trust”. See [screenshot](/docs/ca-screenshot.png).
 
 ### Notes
 
-* You can stop Lando with `lando stop` and start it again with `lando start`
+* You can stop Lando with `lando stop` and start it again with `lando start`. You can turn it off completely with `lando poweroff`
 
-* Composer, Terminus and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json, run `lando composer update` rather than `composer update`.
+* Composer, Terminus, npm and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json, run `lando composer update` rather than `composer update`.
 
 * Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from the live instance on Pantheon
 
@@ -64,7 +105,7 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 
 ## Theme Development
 
-LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified with `npm run build` through CircleCI.
+LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified with through the build process on CircleCI.
 
 -----
 
@@ -78,33 +119,21 @@ LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foun
 
 The CircleCI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
 
-phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the repo and are installed in the vendor directory by composer.  phpcs can be run on the command line like this:
+phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by composer. phpcs can be run on the command line using `lando phpcs` and phpcbf using `lando phpcbf`. Both commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory.
 
-```
-./vendor/bin/phpcs --standard=WordPress ./web/wp-content
-```
-For convenience on local instances, use this command to ignore particular files and ignore warnings:
-```
-./vendor/bin/phpcs -n -s --ignore=*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*pantheon* -d memory_limit=1024M --standard=WordPress ./web/wp-content
-```
+It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).
 
-It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).  
-
-Since the lfeventsci repo includes phpcs via composer, it will use that version of the binary even though you may have phpcs installed system-wide.  So in the root of the repo you'll need to run the following so that it can find the WordPress standards from within your code editor:
-
-```
-./vendor/bin/phpcs --config-set installed_paths ~/Sites/lfeventsci/vendor/wp-coding-standards/wpcs
-```
+Since the lfeventsci repo includes phpcs via composer, your text editor should use that version of the binary even though you may have phpcs installed system-wide.
 
 -----
 
 ## Upgrading WordPress core, themes and plugins
 
-Dependencies of this project are managed by [Composer](https://getcomposer.org/). All dependencies of the project are set in [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) and are pulled in at deploy time according to what is set in [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock).  
+Dependencies of this project are managed by [Composer](https://getcomposer.org/). All dependencies of the project are set in [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) and are pulled in at deploy time according to what is set in [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock).
 
-composer.lock is generated from composer.json only when explicitly calling the `composer update` function. Any additional themes or plugins can be added first to composer.json and then `composer update` is run to update composer.lock and pull in the new files.  Dependencies are pegged to a version according to the composer [versioning rules](https://getcomposer.org/doc/articles/versions.md).
+composer.lock is generated from composer.json only when explicitly calling the `lando composer update` function. Any additional themes or plugins can be added first to composer.json and then `lando composer update` is run to update composer.lock and pull in the new files.  Dependencies are pegged to a version according to the composer [versioning rules](https://getcomposer.org/doc/articles/versions.md).
 
-It's good practice to keep WordPress and all plugins set at their latest releases to inherit any security patches and upgraded functionality.  Upgrading to a new version, however, sometimes has unintended consequences so it's critical to run all tests before deploying live.  
+It's good practice to keep WordPress and all plugins set at their latest releases to inherit any security patches and upgraded functionality.  Upgrading to a new version, however, sometimes has unintended consequences so it's critical to run all tests before deploying live.
 
 To upgrade the version of a dependency, follow these steps:
 

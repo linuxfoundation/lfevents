@@ -937,6 +937,8 @@ function lfe_get_newsletter_form_id() {
 		return '2cda1b3c-4bb6-4b44-a23e-80610185d7bd';
 	} elseif ( false !== strpos( $wp->request, 'zephyr-developer-summit' ) ) {
 		return '03e2e1ad-f013-4706-b7c8-bc2d40860eeb';
+	} elseif ( false !== strpos( $wp->request, 'open-networking-and-edge-exec-forum' ) ) {
+		return 'feb80021-7ce2-462e-9642-fd394dc5a286';
 	} else {
 		return '3fd88e30-9f70-4257-a44d-72643403281d';
 	}
