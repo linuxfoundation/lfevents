@@ -1533,17 +1533,18 @@ class LFEvents_Admin {
 					),
 				);
 
-				if ( ! $virtual ) {
+				$newid = wp_insert_post( $my_post );
+
+				if ( ! $virtual && $newid ) {
 					$matches = array();
 					preg_match( '/\(([^)]+)\)/', $event->chapter_location, $matches );
 					if ( 1 < count( $matches ) ) {
 						$country_term = get_term_by( 'slug', strtolower( $matches[1] ), 'lfevent-country' );
 						if ( $country_term ) {
-							$my_post['tax_input'] = array( 'lfevent-country' => $country_term->term_id );
+							wp_set_object_terms( $newid, $country_term->term_id, 'lfevent-country', false );
 						}
 					}
 				}
-				wp_insert_post( $my_post );
 			}
 		}
 
