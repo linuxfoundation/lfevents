@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Track Grid
  * Description:     A linkable grid of tracks for an event
- * Version:         0.1.1
+ * Version:         0.1.2
  * Author:          James Hunt
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html

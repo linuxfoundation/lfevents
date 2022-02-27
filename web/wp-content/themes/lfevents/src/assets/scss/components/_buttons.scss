@@ -109,9 +109,11 @@ button {
 }
 
 .calendar-buttons {
-  &:first-child {
-    text-align: right;
-    margin-bottom: 1rem;
+  text-align: right;
+  margin-bottom: 2rem;
+  a::after {
+    content: '\2192';
+    margin-left: 0.25em;
   }
 }
 

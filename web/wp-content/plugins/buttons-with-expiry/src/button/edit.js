@@ -315,14 +315,11 @@ function ButtonEdit( props ) {
 						checked={ willExpire === true }
 					/>
 					<DateTimePicker
-						currentDate={ expireAt * 1000 }
-						onChange={ ( value ) => {
-							setAttributes( {
-								expireAt: Math.floor(
-									Date.parse( value ) / 1000
-								),
-							} );
+						currentDate={ expireAt }
+						onChange={ ( newDate ) => {
+							setAttributes( { expireAt: newDate } );
 						} }
+						is12Hour={ true }
 					/>
 					<TextControl
 						label={ __( 'Expiry text (optional)' ) }

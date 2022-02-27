@@ -6,10 +6,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import {
-	useBlockProps,
-	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
-} from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = [ 'lf/button-with-expiry' ];
 const BUTTONS_TEMPLATE = [ [ 'lf/button-with-expiry' ] ];

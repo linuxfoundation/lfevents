@@ -1,30 +1,39 @@
 {
-	"name": "track-grid",
-	"version": "0.1.0",
-	"description": "A linkable grid of tracks for an event",
-	"author": "James Hunt",
-	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
-	"scripts": {
-		"build": "wp-scripts build",
-		"check-engines": "wp-scripts check-engines",
-		"check-licenses": "wp-scripts check-licenses",
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"lint:md:docs": "wp-scripts lint-md-docs",
-		"lint:md:js": "wp-scripts lint-md-js",
-		"lint:pkg-json": "wp-scripts lint-pkg-json",
-		"packages-update": "wp-scripts packages-update",
-		"start": "wp-scripts start",
-		"test:e2e": "wp-scripts test-e2e",
-		"test:unit": "wp-scripts test-unit-js"
-	},
-	"devDependencies": {
-		"@wordpress/scripts": "^17.0.0",
-		"node-html-parser": "^1.4.8"
-	},
-	"dependencies": {
-		"@wordpress/element": "^3.2.0"
-	}
+    "name": "track-grid",
+    "version": "0.1.0",
+    "description": "A linkable grid of tracks for an event",
+    "author": "James Hunt",
+    "license": "GPL-2.0-or-later",
+    "main": "build/index.js",
+    "scripts": {
+        "build": "wp-scripts build",
+        "check-engines": "wp-scripts check-engines",
+        "check-licenses": "wp-scripts check-licenses",
+        "format": "wp-scripts format",
+        "lint:css": "wp-scripts lint-style",
+        "lint:js": "wp-scripts lint-js || true",
+        "lint:md:docs": "wp-scripts lint-md-docs",
+        "lint:md:js": "wp-scripts lint-md-js",
+        "lint:pkg-json": "wp-scripts lint-pkg-json",
+        "packages-update": "wp-scripts packages-update",
+        "start": "wp-scripts start",
+        "test:e2e": "wp-scripts test-e2e",
+        "test:unit": "wp-scripts test-unit-js"
+    },
+    "devDependencies": {
+        "node-html-parser": "^1.4.8",
+        "autoprefixer": "^10.4.2",
+        "@wordpress/block-editor": "^8.1.0",
+        "@wordpress/blocks": "^11.2.0",
+        "@wordpress/components": "^19.3.0",
+        "@wordpress/data": "^6.2.0",
+        "@wordpress/element": "^4.1.0",
+        "@wordpress/i18n": "^4.3.0",
+        "@wordpress/rich-text": "^5.1.0",
+        "@wordpress/scripts": "^20.0.2",
+        "classnames": "^2.3.1"
+    },
+    "repository": {
+        "type": "git"
+    }
 }

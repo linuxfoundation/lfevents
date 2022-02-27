@@ -171,6 +171,9 @@ class LFEvents {
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
 
+		// Example of how to run a sync locally on demand.
+		// $this->loader->add_action( 'init', $plugin_admin, 'sync_kcds' ); //phpcs:ignore.
+
 		// schedule KCD sync on lfeventsci.
 		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 			$this->loader->add_action( 'lfevents_sync_kcds', $plugin_admin, 'sync_kcds' );

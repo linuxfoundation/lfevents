@@ -4,6 +4,7 @@ import {
 	InspectorControls,
 	URLInput,
 	MediaUpload,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	Button,
@@ -14,12 +15,15 @@ import {
 	Placeholder,
 	ToggleControl,
 } from '@wordpress/components';
+import classnames from 'classnames';
+
 import { Fragment } from '@wordpress/element';
 
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes, isSelected } ) {
 	const { columns, height, align, alignAll } = attributes;
+
 	const inspectorControls = (
 		<InspectorControls key="lf-image-box">
 			<PanelBody title={ __( 'Settings' ) }>
@@ -69,13 +73,34 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 		'--image-box-height': height ? `${ height }px` : '250px',
 	};
 
+	const columnCount = classnames( {
+		[ `columns-${ columns }` ]: columns,
+	} );
+
+	const wrapperClasses = classnames(
+		'image-box-wrapper',
+		'wp-block-lf-image-box',
+		'editor-only',
+		columnCount,
+		{ [ `align-center` ]: alignAll === 'align-center' },
+		{ [ `align-left` ]: alignAll === 'align-left' },
+		{ [ `align-right` ]: alignAll === 'align-right' },
+		{ alignleft: align === 'left' },
+		{ aligncenter: align === 'center' },
+		{ alignright: align === 'right' },
+		{ alignwide: align === 'wide' },
+		{ alignfull: align === 'full' }
+	);
+
+	const blockProps = useBlockProps( {
+		style: mainStyle,
+		className: wrapperClasses,
+	} );
+
 	return (
 		<Fragment>
 			{ inspectorControls }
-			<div
-				style={ mainStyle }
-				className={ `image-box-wrapper wp-block-lf-image-box editor-only align${ align } columns-${ columns } ${ alignAll }` }
-			>
+			<div { ...blockProps }>
 				{ /* start of columns */ }
 				{ [ 1, 2, 3, 4 ].map( ( i ) => {
 					const imageUrl = attributes[ `imageUrl${ i }` ];
