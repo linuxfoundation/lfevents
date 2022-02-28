@@ -65,7 +65,7 @@ if ( ! function_exists( 'find_my_blocks_route_callback' ) ) :
 				array(
 					'posts_per_page' => -1,
 					'post_type'      => $post_type,
-					'post_status'    => array( 'publish' ),
+					'post_status'    => array( 'draft' ),
 				)
 			);
 
