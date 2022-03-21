@@ -208,4 +208,20 @@ class LFEvents_Public {
 			wp_add_inline_style( 'event-gradient-inline-style', $css_variables_for_events );
 		}
 	}
+
+	/**
+	 * Adds a year on the end of archived event titles to help distinguish them in Google results.
+	 *
+	 * @param string $title Generated title.
+	 */
+	public function add_year_to_archive_titles( $title ) {
+		global $post;
+
+		if ( 0 === strpos( $post->post_type, 'lfevent' ) ) {
+			$title = $title . ' ' . substr( $post->post_type, 7 );
+		}
+
+		return $title;
+	}
+
 }
