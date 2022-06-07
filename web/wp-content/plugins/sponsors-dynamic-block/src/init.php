@@ -110,7 +110,9 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 	$tier_size = isset( $attributes['tierSize'] ) ? $attributes['tierSize'] : 'medium';
 
 	$out  = '<div class="wp-block-cgb-sponsors-block">';
-	$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
+	if ( $tier_name ) {
+		$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
+	}
 	$out .= '<div class="sponsors-logos ' . $tier_size . ' ' . get_sponsor_logos_class( $query->found_posts ) . '">';
 
 	// temporarily deactivate the size calculation for SVGs.
