@@ -6,7 +6,6 @@
 }
 .conditional-blocks-builder-modal .components-modal__content {
   padding: 0;
-  position: relative; /* Prevent blurry bug on WP 5.8+ */
 }
 .conditional-blocks-builder-modal .CalendarMonthGrid.CalendarMonthGrid_1.CalendarMonthGrid__horizontal.CalendarMonthGrid__horizontal_2 {
   transform: none !important; /* Prevent blurry bug on WP 5.8+ */
@@ -265,4 +264,19 @@
   padding: 3px;
   font-size: 11px;
   background: #fff;
+}
+
+/* Compact */
+ .conditional-blocks-builder-modal .components-modal__content::before {
+  margin-bottom: 0px;
+}
+
+.conditional-blocks-grid {
+  margin-bottom: 20px;
+}
+
+.conditional-blocks-grid code {
+display: inline-block;
+margin: 5px;
+font-size: 11px;
 }

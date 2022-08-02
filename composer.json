@@ -31,7 +31,7 @@
     "wpackagist-plugin/post-meta-controls": "^1.2.0",
     "wpackagist-plugin/post-type-switcher": "^3.1.0",
     "wpackagist-plugin/redirection": "^5",
-    "wpackagist-plugin/shortpixel-image-optimiser": "^4.15.3",
+    "wpackagist-plugin/shortpixel-image-optimiser": "*",
     "wpackagist-plugin/svg-autocrop": "^0.1.0",
     "wpackagist-plugin/wp-mail-smtp": "^3.0.1",
     "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",

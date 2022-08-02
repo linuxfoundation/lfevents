@@ -74,6 +74,7 @@ class Conditional_Blocks_Enqueue {
 			$localized_data['presets'] = $this->get_presets();
 			$localized_data['roles'] = $this->get_user_roles();
 			$localized_data['wcExists'] = class_exists( 'WooCommerce' );
+			$localized_data['phpLogicFunctions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
 
 			wp_localize_script( 'conditional-blocks-editor-js', 'cbLocalized', $localized_data );
 

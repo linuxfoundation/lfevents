@@ -1,10 +1,10 @@
-=== Conditional Blocks - Visibility control for any Gutenberg block ===
+=== Conditional Blocks - Visibility control for Full Site Editing ===
 Contributors: morganhvidt
 Donate link: https://www.paypal.me/morganhvidt/
 Tags: conditional blocks, Gutenberg, conditions, woocommerce, restrict blocks, hide content, restrict content, mobile blocks, restrict, block controls, block visibility, widgets, hide blocks
 Requires at least: 5.4
-Tested up to: 5.8
-Stable tag: 2.5.0
+Tested up to: 6.0
+Stable tag: 2.5.4
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ Be creative, build templates with dynamic content - you can change blocks to be 
 
 ## What can conditional blocks do?
 
-Conditional Blocks makes it easy to change visibility of any block.
+Conditional Blocks makes it easy to change visibility of any block with a few clicks. 
 
 Included condition types in the free version:
 
@@ -31,7 +31,7 @@ Included condition types in the free version:
 * Show or hide block on desktop screens.
 * Modify the screen sizes to fit the devices using the CSS breakpoints of your theme.
 
-You can create conditional widgets in sidebars using any of the built-in visibility logic. Fully compatible with WordPress 5.8 block widgets.
+You can create conditional widgets in sidebars using any of the built-in visibility logic. Fully compatible with WordPress block widgets and Full Site Editing themes.
 
 [Learn more about the features](https://conditionalblocks.com/?cb=wporg)
 
@@ -44,8 +44,9 @@ You can create conditional widgets in sidebars using any of the built-in visibil
 * Show block based on post meta fields, including custom meta fields and data.
 * Show block based on URL query strings (URL variables), You display custom confirmation content for form plugins like Gravity Forms.
 * Show block based on post ID or hide block on post IDs and URL Paths.
-* Show blocks based on Posts, Custom Post Types, Taxonomies and terms.
+* Show blocks based on Posts, Custom Post Types, Taxonomies and terms. Automatically detects custom taxonomies and terms.
 * Show blocks for custom fields, user meta, post meta.
+* Toggle blocks based on Archives.
 * Create and manage presets of conditions to apply to multiple blocks across your whole site.
 * Show block based on PHP Logic and custom functions. The possibilities are unlimited.
 * WooCommerce - change the visibility of blocks based on total cart value of the current customer. Perfect for upselling.
@@ -53,7 +54,7 @@ You can create conditional widgets in sidebars using any of the built-in visibil
 * WooCommerce Products in cart, total cart value, total customer spent in store.
 * Support development of new features.
 
-Conditional Blocks Pro gives you even more control over Full Site Editing and widget options.
+Conditional Blocks Pro gives you even more control over block visibility - Ready for Full Site Editing, widget options and general content blocks.
 
 [See all features & benefits of Conditional Blocks Pro](https://conditionalblocks.com/?cb=wporg)
 
@@ -69,13 +70,13 @@ Great for creating content that's visible to members only on your site.
 
 ### Control Mobile Blocks
 
-You can select specific screen sizes to display your blocks on, and exclude them from others! Pick and choose if the block should be shown on mobile, tablet or desktop. The block content will automatically be displayed or hidden for each different screen sizes.
+You can select specific screen sizes to display your blocks on, and exclude them from others! Pick and choose where responsive blocks should be shown mobile, tablet or desktop. The block content will automatically be displayed or hidden for each different screen sizes.
 
 ### Compatibility
 
 Conditional Blocks works with any theme that uses the WordPress Block Editor (Gutenberg Block Editor).
 
-We've tested Conditional Blocks with the follow plugins:
+We've tested Conditional Blocks with the follow plugins and themes:
 
 * Stackable Blocks
 * Atomic Blocks
@@ -88,6 +89,8 @@ We've tested Conditional Blocks with the follow plugins:
 * GenerateBlocks
 * Kadence Blocks
 * Genesis Blocks
+* Twenty Twenty Two theme
+* Wabi theme
 
 Please reach out for support if you are experiencing issues with another plugin.
 
@@ -133,6 +136,14 @@ We are happy to hear about your ideas! Reach out to us via [support](https://con
 5. Frontend showing different blocks for different screensizes using responsive blocks.
 
 == Changelog ==
+
+= 2.5.4 =
+
+* Tested and ready for WordPress 6.0 & Full Site Editing.
+
+= 2.5.3 =
+
+* Tested and ready for WordPress 5.9
 
 = 2.5.0 =
 

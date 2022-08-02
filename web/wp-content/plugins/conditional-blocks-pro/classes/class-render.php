@@ -347,9 +347,14 @@ class Conditional_Blocks_Render_Block {
 	public function archive( $should_render, $condition ) {
 
 		$has_match = false;
+		$archive_type = ! empty( $condition['archiveType'] ) ? $condition['archiveType'] : 'all';
 
 		if ( is_archive() ) {
-			$has_match = true;
+			if ( $archive_type === 'all' ) {
+				$has_match = true;
+			} else if ( $archive_type === 'postTypes' ) {
+				$has_match = $this->maybe_check_terms_archive( $condition );
+			}
 		}
 
 		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
@@ -360,7 +365,7 @@ class Conditional_Blocks_Render_Block {
 			$should_render = true;
 		}
 
-		return $should_render;
+			return $should_render;
 	}
 
 	/**
@@ -412,7 +417,6 @@ class Conditional_Blocks_Render_Block {
 		return $should_render;
 	}
 
-
 	/**
 	 * Check if current date compared recurring dates.
 	 *
@@ -422,7 +426,11 @@ class Conditional_Blocks_Render_Block {
 	 */
 	public function dateRecurring( $should_render, $condition ) {
 
-		$recurring_days = ! empty( $condition['recurringDays'] ) ? $condition['recurringDays'] : array();
+		$recurring_days = ! empty( $condition['recurringDays'] ) ? $condition['recurringDays'] : false;
+
+		if ( empty( $recurring_days ) ) {
+			return $should_render;
+		}
 
 		$today_number = (int) wp_date( 'N' ); // e.g 1,2,3 for mon,tues,wed.
 
@@ -645,7 +653,7 @@ class Conditional_Blocks_Render_Block {
 		$meta_operator = ! empty( $condition['metaOperator'] ) ? $condition['metaOperator'] : false;
 		$meta_value = ! empty( $condition['metaValue'] ) ? $condition['metaValue'] : '';
 
-		if ( $meta_key && $meta_operator && $meta_value ) {
+		if ( $meta_key && $meta_operator ) {
 
 			if ( $this->has_required_meta( 'post', $meta_key, $meta_operator, $meta_value ) ) {
 				$should_render = true;
@@ -1043,7 +1051,7 @@ class Conditional_Blocks_Render_Block {
 				return $should_render;
 			}
 
-			$passes_all_preset_conditions = true;
+			$presets_met = 0;
 
 			foreach ( $preset_ids as $preset_id ) {
 
@@ -1053,27 +1061,28 @@ class Conditional_Blocks_Render_Block {
 				$preset_key = array_search( $preset_id, array_column( $presets, 'id' ), true );
 
 				if ( $preset_key === false ) {
-					$passes_all_preset_conditions = false;
-					break;
+					continue;
 				}
 
 				$conditions_to_test = isset( $presets[ $preset_key ]['conditions'] ) && ! empty( $presets[ $preset_key ]['conditions'] ) ? $presets[ $preset_key ]['conditions'] : false;
 
 				if ( $conditions_to_test === false ) {
-					$passes_all_preset_conditions = false;
-					break;
+					continue;
 				}
 
 				// Preset conditons cannot have "presets" therefore this shouldn't cause an inf loop.
 				$should_render_preset_condition = $this->run_conditions_and_maybe_render_block( 'placeholder block content', $conditions_to_test );
 
-				if ( empty( $should_render_preset_condition ) ) {
-					$passes_all_preset_conditions = false;
-					break;
+				if ( ! empty( $should_render_preset_condition ) ) {
+					$presets_met++;
 				}
 			}
-			// Make sure all preset conditions have passed.
-			if ( $passes_all_preset_conditions ) {
+
+			$requirement  = ! empty( $condition['requirement'] ) ? $condition['requirement'] : 'all';
+
+			if ( $requirement === 'all' && count( $preset_ids ) === $presets_met ) {
+				$should_render = true;
+			} elseif ( $requirement === 'any' && $presets_met > 0 ) {
 				$should_render = true;
 			}
 		}
@@ -1121,7 +1130,7 @@ class Conditional_Blocks_Render_Block {
 	 * @param string $meta_value the whole block object.
 	 * @return bool if current post has the required meta.
 	 */
-	public function has_required_meta( $meta_type = 'post', $meta_key, $meta_operator, $meta_value ) {
+	public function has_required_meta( $meta_type, $meta_key, $meta_operator, $meta_value ) {
 
 		$post_id = get_the_ID();
 
@@ -1183,6 +1192,85 @@ class Conditional_Blocks_Render_Block {
 			}
 		}
 
+		return false;
+	}
+
+
+	/**
+	 * Check term archive. Used in the Archive condition.
+	 *
+	 * @param [type] $condition
+	 * @return void
+	 */
+	private function maybe_check_terms_archive( $condition ) {
+
+		$required_post_type = ! empty( $condition['postType']['value'] ) ? $condition['postType']['value'] : false;
+		$required_term_ids = ! empty( $condition['terms'] ) ? array_column( $condition['terms'], 'value' ) : false;
+		$required_tax = ! empty( $condition['taxonomy']['value'] ) ? $condition['taxonomy']['value'] : false;
+		$required_include_child_terms = ! empty( $condition['includeChildTerms'] ) ? $condition['includeChildTerms'] : false;
+
+		// At minimum we need to the posttype check.
+		if ( ! $required_post_type ) {
+			return true; // Allow render.
+		}
+
+		// Hanlde post type archive pages only.
+		if ( ! $required_term_ids && ! $required_tax ) {
+			// Check the post type - Multiple post type can have the same taxonomy.
+			if ( $required_post_type && is_post_type_archive( $required_post_type ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// Check the built-in taxonomies and custom taxomonies with is_tax.
+		if ( $required_tax === 'category' ) {
+			if ( ! is_category() ) {
+				return false;
+			}
+		} else if ( $required_tax === 'post_tag' ) {
+			if ( ! is_tag() ) {
+				return false;
+			}
+		} else if ( $required_tax && ! is_tax( $required_tax ) ) {
+			return false;
+		}
+
+		$current_object = get_queried_object();
+		$current_term_id = ! empty( $current_object->term_id ) ? $current_object->term_id : false;
+
+		if ( $current_term_id && $required_term_ids && $this->terms_matches_term( $required_term_ids, $current_term_id, $required_tax, $required_include_child_terms ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if the multiple terms match a single term. Allows checking of all subterms as well.
+	 *
+	 * @param [type] $required_term_ids
+	 * @param [type] $current_term_id
+	 * @param [type] $match_sub_all_children
+	 * @return void
+	 */
+	public function terms_matches_term( $required_term_ids, $current_term_id, $current_tax, $match_sub_all_children ) {
+
+		// Match the single term.
+		if ( in_array( $current_term_id, $required_term_ids, true ) ) {
+			return true;
+		} elseif ( $match_sub_all_children ) {
+			// Check if the current term is a child of our required term.
+			foreach ( $required_term_ids as $required_term_id ) {
+				$children = get_term_children( $required_term_id, $current_tax ); // We've already checked the tax.
+
+				if ( ! empty( $children ) && in_array( $current_term_id, $children, true ) ) {
+					return true;
+					break;
+				}
+			}
+		}
 		return false;
 	}
 
