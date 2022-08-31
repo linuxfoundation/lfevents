@@ -939,6 +939,8 @@ function lfe_get_newsletter_form_id() {
 		return '03e2e1ad-f013-4706-b7c8-bc2d40860eeb';
 	} elseif ( false !== strpos( $wp->request, 'open-networking-and-edge-exec-forum' ) ) {
 		return 'feb80021-7ce2-462e-9642-fd394dc5a286';
+	} elseif ( false !== strpos( $wp->request, 'continuous-delivery-summit' ) ) {
+		return '6a26b1f2-c6e2-412f-b1a1-2d75863c72f7';
 	} else {
 		return '3fd88e30-9f70-4257-a44d-72643403281d';
 	}
