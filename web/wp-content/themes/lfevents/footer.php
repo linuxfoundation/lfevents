@@ -20,7 +20,7 @@ if ( ! $event_email ) {
 if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) {
 	$footer_classes = 'lf-footer has-lf-primary-700-background-color has-white-color';
 } else {
-	$footer_classes = 'site-footer';
+	$footer_classes = 'event-footer--legal';
 }
 ?>
 <footer

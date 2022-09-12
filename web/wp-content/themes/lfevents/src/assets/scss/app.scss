@@ -50,6 +50,7 @@
 @include motion-ui-animations;
 
 // Global.
+@import 'global/fonts';
 @import 'global/accessibility';
 @import 'global/gutenberg';
 @import 'global/custom-color-palette';
@@ -78,12 +79,14 @@
 @import 'modules/cookie-banner';
 @import 'modules/event-calendar';
 @import 'modules/event-footer';
+@import 'modules/event-footer--legal';
 @import 'modules/event-header';
 @import 'modules/event-listing';
 @import 'modules/event-subpage';
 @import 'modules/gallery';
-@import 'modules/global-footer';
-@import 'modules/global-header';
+@import 'modules/header-global';
+@import 'modules/header--lf-bar';
+@import 'modules/header--logo';
 @import 'modules/home-hero';
 @import 'modules/non-event-footer';
 @import 'modules/non-event-hero';

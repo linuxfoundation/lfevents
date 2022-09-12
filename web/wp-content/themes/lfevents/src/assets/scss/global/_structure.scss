@@ -57,7 +57,6 @@ body.menu-is-active {
     padding-right: 28px;
     padding-left: 28px;
   }
-
 }
 
 .main-grid {
@@ -86,7 +85,6 @@ body.menu-is-active {
   }
 
   &.sidebar-left {
-
     // Place the sidebar below main content on small screens ...
     @include breakpoint(small) {
       .main-content {
@@ -119,38 +117,17 @@ body.menu-is-active {
       // @include xy-cell(4);
       padding-top: 1rem;
     }
-
   }
 }
 
 // Sidebar widgets
 .sidebar-widgets {
-  .widget+.widget {
+  .widget + .widget {
     margin-top: rem-calc(40);
     padding-top: rem-calc(30);
     border-top: $hr-border;
   }
 }
-
-// .alignleft {
-//   float: left;
-//   padding-right: 1rem;
-//   margin: 0;
-// }
-
-// .alignright {
-//   float: right;
-//   padding-left: 1rem;
-//   margin: 0;
-// }
-
-// .aligncenter {
-//   display: block;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-
-
 
 .display-block {
   display: block;
@@ -158,7 +135,6 @@ body.menu-is-active {
 
 .display-inline-block {
   display: inline-block;
-  ;
 }
 
 // Margin for all four sides
@@ -175,11 +151,11 @@ body.menu-is-active {
 }
 
 .large-margin {
-  margin: $global-margin*2;
+  margin: $global-margin * 2;
 }
 
 .xlarge-margin {
-  margin: $global-margin*3;
+  margin: $global-margin * 3;
 }
 
 // Margin for individual sides
@@ -201,25 +177,25 @@ $sides: top right bottom left;
   }
 
   .large-margin-#{$side} {
-    margin-#{$side}: $global-margin*2;
+    margin-#{$side}: $global-margin * 2;
   }
 
   .xlarge-margin-#{$side} {
-    margin-#{$side}: $global-margin*3;
+    margin-#{$side}: $global-margin * 3;
   }
 }
 
 .large-padding {
-  padding: $global-margin*2;
+  padding: $global-margin * 2;
 }
 
 .xlarge-padding {
-  padding: $global-margin*3;
+  padding: $global-margin * 3;
 }
 
 .xlarge-padding-y {
-  padding-top: $global-margin*3;
-  padding-bottom: $global-margin*3;
+  padding-top: $global-margin * 3;
+  padding-bottom: $global-margin * 3;
 }
 
 // Padding for individual sides
@@ -241,10 +217,10 @@ $sides: top right bottom left;
   }
 
   .large-padding-#{$side} {
-    padding-#{$side}: $global-margin*2;
+    padding-#{$side}: $global-margin * 2;
   }
 
   .xlarge-padding-#{$side} {
-    padding-#{$side}: $global-margin*3;
+    padding-#{$side}: $global-margin * 3;
   }
 }

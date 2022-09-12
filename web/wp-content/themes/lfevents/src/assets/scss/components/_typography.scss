@@ -7,14 +7,14 @@ h6 {
 .is-style-section-heading {
   margin-bottom: 10px;
   text-transform: uppercase;
-  letter-spacing: .2rem;
-  word-spacing: .2rem;
+  letter-spacing: 0.2rem;
+  word-spacing: 0.2rem;
 }
 
 .is-style-one-line-section-heading {
   text-transform: uppercase;
-  letter-spacing: .2rem;
-  word-spacing: .2rem;
+  letter-spacing: 0.2rem;
+  word-spacing: 0.2rem;
   margin-bottom: 0;
 
   @media (min-width: 768px) {
@@ -43,14 +43,6 @@ h6 {
   font-weight: $global-weight-normal;
 }
 
-// .has-large-font-size {
-//   font-size: rem-calc(19) !important;
-
-//   @include breakpoint(medium) {
-//     font-size: rem-calc(31) !important;
-//   }
-// }
-
 .uppercase {
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -61,7 +53,7 @@ h6 {
   line-height: 1.1;
 }
 
-dd+dt {
+dd + dt {
   margin-top: $defnlist-term-margin-bottom;
 }
 
@@ -84,7 +76,6 @@ dd+dt {
   .prevent-orphaned-icon & {
     margin-right: -1em;
   }
-
 }
 
 ::-ms-clear {

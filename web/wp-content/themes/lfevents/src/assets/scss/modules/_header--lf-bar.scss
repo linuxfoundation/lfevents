@@ -1,0 +1,85 @@
+.header--lf-bar {
+  background-color: #0077cc;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    @media (min-width: 1024px) {
+      padding-top: 17px;
+      padding-bottom: 17px;
+    }
+  }
+
+  &__logo-link {
+    margin-right: auto;
+    display: block;
+  }
+
+  &__lfx {
+    display: none;
+    @media (min-width: 1024px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__link {
+    color: $pure-white;
+    font-weight: 700;
+    font-size: 0.813rem;
+    line-height: 1.25;
+    margin-left: 30px;
+    &:hover,
+    &:active,
+    &:visited {
+      color: $lf-grey-200;
+    }
+  }
+
+  &__avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid $lf-grey-100;
+  }
+
+  // Create Community Profile button.
+  &__create-profile {
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $lf-light-blue;
+    background-color: $pure-white;
+    padding: 10px 23px;
+    border-radius: 30px;
+    display: inline-block;
+    transition: background-color 0.25s ease-out;
+    margin-left: 30px;
+
+    &:hover,
+    &:active,
+    &:visited {
+      color: $lf-light-blue;
+    }
+
+    &:hover {
+      background-color: $lf-grey-200;
+    }
+  }
+
+  // initially hide the only-authenticated parts in LFX SSO.
+  .is-auth0.only-authenticated {
+    display: none;
+  }
+
+  // overrides the unset applied by LFSSO.
+  // Still need this TBC?
+  .is-auth0.only-authenticated.authenticated {
+    display: block;
+  }
+}

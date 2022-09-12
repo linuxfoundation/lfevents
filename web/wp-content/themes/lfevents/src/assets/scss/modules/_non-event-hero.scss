@@ -9,12 +9,11 @@
     padding-bottom: 4rem;
   }
 
-
-  &>* {
+  & > * {
     margin-bottom: 0;
   }
 
-  &+* {
+  & + * {
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
@@ -22,13 +21,11 @@
 
 .non-event-hero {
   &.is-style-lf-blue-gradient {
-    color: $white;
+    color: $pure-white;
 
     h1,
     h2 {
       font-weight: 500;
     }
-
   }
-
 }

@@ -14,7 +14,7 @@
  */
 
 get_header();
-get_template_part( 'template-parts/global-header' );
+get_template_part( 'template-parts/header-global' );
 ?>
 
 <main role="main" id="main" class="main-container-body">
