@@ -24,7 +24,7 @@
 		href="<?php echo esc_url( home_url( '/' ) ); ?>">
 		<img width="200" height="25" loading="eager" class="header--logo__image"
 			alt="<?php bloginfo( 'name' ); ?>"
-			src="<?php echo esc_html( get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-asia-color.svg' ) ); ?>">
+			src="<?php echo esc_html( get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'logo_lfasiallc_white.svg' ) ); ?>">
 	</a>
 	<?php endif; ?>
 </div>
