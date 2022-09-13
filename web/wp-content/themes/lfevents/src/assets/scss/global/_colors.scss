@@ -1,42 +1,36 @@
 // Imported in to _settings.scss
 
-// Grayscale colors
-$gray-hue: hue(#6b717b);
-$gray-saturation: saturation(#6b717b);
-$black: hsl($gray-hue, $gray-saturation, 14%);
-$charcoal: hsl($gray-hue, $gray-saturation, 24%);
-$dark-gray: hsl($gray-hue, $gray-saturation, 39%);
-$gray: hsl($gray-hue, $gray-saturation, 54%);
-$light-gray: hsl($gray-hue, $gray-saturation, 69%);
-$silver: hsl($gray-hue, $gray-saturation, 84%);
-$white-smoke: hsl($gray-hue, $gray-saturation, 93%);
+// 2019 Grayscale colors
+$black: #212326;
+$charcoal: #393c41;
+$dark-gray: #5d626a;
+$gray: #828892;
+$silver: #d3d5d9;
+$white-smoke: #ecedee;
 $off-white: #fafafa;
 $white: #fefefe;
+$pure-white: #fff;
 
-// LF Brand colors
-$lf-dark-blue: #003366;
-$lf-light-blue: #0099cc;
-$lf-light-blue-hatch: #0077bb;
+// Additional colors (origin unknown)
+$dark-nav-color: #2c3840;
+$orange: #e2750f;
+$blue-dark: #004e7a;
+
+// 2019 LF Brand colors
+$lf-blue: #0077cc; // new
+$lf-dark-blue: #000f1a; // old value #003366;
+$lf-light-blue: #0094ff; // old value #0099cc;
 $lf-gray: #a1a1a4;
-$lf-gray-hatch: #807f83;
 $lf-yellow: #ffc557;
 $lf-green: #a1d683;
 $lf-red: #ff595a;
 
 // Style Guide 2020
-$lf-primary-400: $lf-light-blue;
 $lf-primary-700: $lf-dark-blue;
+$lf-primary-400: $lf-light-blue;
 $lf-grey-100: #fbfbfb; // background fill
 $lf-grey-200: #e9e9e9; // outline / divider
 $lf-grey-300: #c4c4c4; // grey line
 $lf-grey-400: #7a7a7a; //  text lighter
 $lf-grey-700: #333333; // text
 $text-color: $lf-grey-700;
-$header-link-color: $lf-grey-700;
-
-// Additional colors (origin unknown)
-$dark-nav-color: #2c3840;
-$green-dark: #007a00;
-$orange: #e2750f;
-$blue-dark: #004e7a;
-// top nav blue - rgba(10, 59, 97, 100)

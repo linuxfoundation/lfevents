@@ -43,13 +43,12 @@ button {
 }
 
 .wp-block-buttons {
-
   .wp-block-button {
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     position: relative;
 
     .wp-block-button__link {
-      padding: .585rem 1.5rem;
+      padding: 0.585rem 1.5rem;
       font-size: 1.075rem;
       text-transform: uppercase;
       line-height: 1.5 !important;
@@ -57,7 +56,7 @@ button {
     }
 
     &:active {
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       top: 1px;
     }
 
@@ -71,8 +70,7 @@ button {
       @extend .hollow;
     }
 
-    @each $name,
-    $size in $button-sizes {
+    @each $name, $size in $button-sizes {
       &.#{$name} .wp-block-button__link {
         font-size: $size;
       }
@@ -91,7 +89,6 @@ button {
 
 // Homepage call-to-action buttons
 .homepage--call-to-action {
-
   a {
     display: inline-block;
     margin: 0.85em 1em;
@@ -149,23 +146,24 @@ button {
   }
 }
 
-/** === Button === */
-.wp-block-button {
-  // why repeat these again?
-  // // add general foundation button styling
-  // .wp-block-button__link {
-  //   @extend .button;
-
-  //   @each $color,
-  //   $code in $foundation-palette {
-
-  //     &.has-#{$color}-background-color {
-  //       background-color: $code;
-  //     }
-
-  //     &.has-#{$color}-color {
-  //       color: $code;
-  //     }
-  //   }
-  // }
+// makes button plain like so its suitable as link.
+.button-reset {
+  border: none;
+  background: none;
+  box-sizing: border-box;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  margin: inherit;
+  margin-top: inherit;
+  margin-bottom: inherit;
+  margin-left: inherit;
+  margin-right: inherit;
+  width: unset;
+  color: inherit;
+  &:hover,
+  &:active,
+  &:visited {
+    color: inherit;
+  }
 }

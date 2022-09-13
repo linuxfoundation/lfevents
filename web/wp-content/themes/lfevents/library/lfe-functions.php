@@ -599,8 +599,12 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 
 	if ( 'preconnect' === $relation_type ) {
 		$hints[] = array(
-			'crossorigin' => '',
 			'href'        => '//www.googletagmanager.com',
+			'crossorigin' => '',
+		);
+		$hints[] = array(
+			'href'        => '//bam-cell.nr-data.net',
+			'crossorigin' => '',
 		);
 	}
 	return $hints;

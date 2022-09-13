@@ -76,7 +76,7 @@ $( document ).on(
 // Activates on global header.
 $( document ).on(
 	'on.zf.toggler',
-	'.main-header',
+	'.header-global',
 	function () {
 		removeHeaderHeight();
 	}
@@ -93,7 +93,7 @@ $( document ).ready(
 		}
 
 		// Mobile Menu hamburger (hidden on desktop).
-		$( '.lf-hamburger' ).click(
+		$( '.header-global__hamburger' ).click(
 			function( e ) {
 				e.preventDefault();
 				if ( ! isMobile ) {
@@ -101,7 +101,7 @@ $( document ).ready(
 				}
 				$( this ).toggleClass( 'is-active' );
 				$( 'body' ).toggleClass( 'menu-is-active' );
-				$( '.mobile-menu-wrapper' ).toggleClass( 'is-active' );
+				$( '.header-global__mobile-menu-container' ).toggleClass( 'is-active' );
 			},
 		);
 
@@ -142,6 +142,10 @@ $( document ).ready(
 		// Resize check for is mobile.
 		function resizeHandle() {
 			isMobile = checkMobile();
+			$( '.header-global__hamburger' ).removeClass( 'is-active' );
+			$( 'body' ).removeClass( 'menu-is-active' );
+			$( '.header-global__mobile-menu-container' ).removeClass( 'is-active' );
+
 		}
 
 		// Update on resize.

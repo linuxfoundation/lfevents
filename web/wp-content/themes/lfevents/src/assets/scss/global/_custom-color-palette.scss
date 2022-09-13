@@ -1,39 +1,39 @@
 /* === Custom colors === */
 $custom-colors: (
-  "black": #212326,
-  "charcoal": #393c41,
-  "dark-gray": #5d626a,
-  "light-gray": #d3d5d9,
-  "off-white": #ecedee,
-  "white": #fefefe,
-  "dark-fuschia": #6e1042,
-  "dark-violet": #411e4f,
-  "dark-indigo": #1a267d,
-  "dark-blue": #17405c,
-  "dark-aqua": #0e5953,
-  "dark-green": #0b5329,
-  "light-fuschia": #ad1457,
-  "light-violet": #6c3483,
-  "light-indigo": #4653b0,
-  "light-blue": #2874a6,
-  "light-aqua": #148f85,
-  "light-green": #117a3d,
-  "dark-chartreuse": #3d5e0f,
-  "dark-yellow": #878700,
-  "dark-gold": #8c7000,
-  "dark-orange": #784e12,
-  "dark-umber": #6e2c00,
-  "dark-red": #641e16,
-  "light-chartreuse": #699b23,
-  "light-yellow": #b0b000,
-  "light-gold": #c29b00,
-  "light-orange": #c2770e,
-  "light-umber": #b8510d,
-  "light-red": #922b21,
-  "lf-primary-400": #0099cc,
-  "lf-primary-700": #003366,
-  "lf-grey-700": #333333,
-  "lf-grey-400": #7a7a7a,
+  'black': #212326,
+  'charcoal': #393c41,
+  'dark-gray': #5d626a,
+  'light-gray': #d3d5d9,
+  'off-white': #ecedee,
+  'white': #fefefe,
+  'dark-fuschia': #6e1042,
+  'dark-violet': #411e4f,
+  'dark-indigo': #1a267d,
+  'dark-blue': #17405c,
+  'dark-aqua': #0e5953,
+  'dark-green': #0b5329,
+  'light-fuschia': #ad1457,
+  'light-violet': #6c3483,
+  'light-indigo': #4653b0,
+  'light-blue': #2874a6,
+  'light-aqua': #148f85,
+  'light-green': #117a3d,
+  'dark-chartreuse': #3d5e0f,
+  'dark-yellow': #878700,
+  'dark-gold': #8c7000,
+  'dark-orange': #784e12,
+  'dark-umber': #6e2c00,
+  'dark-red': #641e16,
+  'light-chartreuse': #699b23,
+  'light-yellow': #b0b000,
+  'light-gold': #c29b00,
+  'light-orange': #c2770e,
+  'light-umber': #b8510d,
+  'light-red': #922b21,
+  'lf-primary-400': #0077cc,
+  'lf-primary-700': #000f1a,
+  'lf-grey-700': #333333,
+  'lf-grey-400': #7a7a7a,
 );
 
 :root {
@@ -55,7 +55,9 @@ $custom-colors: (
 }
 
 .is-style-lf-blue-gradient {
-  background-image: linear-gradient(99.71deg, #0099cc 6.58%, #003366 94.38%);
+  // background: linear-gradient(180deg, #5296c7 5%, #000f1a 110%);
+  // background: radial-gradient(circle at center, #0b77cc, #004a80);
+  background: radial-gradient(circle at 20%, #0b77cc, #004a80);
 }
 
 .is-style-lf-red-gradient {

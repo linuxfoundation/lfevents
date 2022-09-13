@@ -35,7 +35,7 @@
   color: $charcoal;
 }
 
-.callout+.event-calendar-year {
+.callout + .event-calendar-year {
   margin-top: 2rem;
 }
 
@@ -46,7 +46,7 @@
   font-size: rem-calc(25);
 }
 
-.event-calendar-year+.event-calendar-month {
+.event-calendar-year + .event-calendar-month {
   border-top: none;
   margin-top: 0;
   padding-top: 0;
@@ -55,19 +55,19 @@
 form.searchandfilter {
   margin-bottom: $global-margin;
 
-  >ul {
+  > ul {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 
-    >li {
+    > li {
       margin: 0 0 $global-margin;
       padding: 0;
       width: 100%;
       max-width: 100%;
 
-      &[data-sf-field-name="search"] {
+      &[data-sf-field-name='search'] {
         width: 100% !important;
         padding-right: 0 !important;
 
@@ -117,7 +117,8 @@ form.searchandfilter {
         border: $input-border;
         padding: $input-padding;
         box-shadow: none;
-        height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1) !important;
+        height: ($input-font-size * unitless-calc($input-line-height)) +
+          (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1) !important;
         color: $input-color !important;
       }
 
@@ -145,7 +146,13 @@ form.searchandfilter {
     }
 
     .search-filter-reset {
-      @include button($expand:true, $background:$white-smoke, $background-hover:darken($white-smoke, 3%), $color:$primary-color, $style:solid);
+      @include button(
+        $expand: true,
+        $background: $white-smoke,
+        $background-hover: darken($white-smoke, 3%),
+        $color: $primary-color,
+        $style: solid
+      );
       margin: 0;
       border-radius: rem-calc(8);
       box-shadow: none;
@@ -153,8 +160,8 @@ form.searchandfilter {
   }
 
   &#search-filter-form-143 {
-    >ul {
-      >li {
+    > ul {
+      > li {
         @include breakpoint(large) {
           width: 20%;
           &.sf-field-taxonomy-lfevent-category {
@@ -164,7 +171,6 @@ form.searchandfilter {
       }
     }
   }
-
 }
 
 .results-count {
