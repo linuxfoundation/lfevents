@@ -166,7 +166,7 @@
         left: -2999px;
         top: 100%;
         overflow: hidden;
-        width: 12rem;
+        width: 11rem;
         box-shadow: -5px 6px 9px 0px rgba(0, 0, 0, 0.1);
         transition: opacity 0.15s linear, transform 0.15s linear, left 0s 0.15s;
         display: block;
@@ -176,7 +176,7 @@
           a {
             padding-top: 12px;
             padding-bottom: 12px;
-            padding-left: 15px;
+            padding-left: 30px;
             padding-right: 15px;
             display: block;
             &:hover {
@@ -456,7 +456,7 @@
       }
 
       &:hover {
-        background-color: $lf-light-blue;
+        background-color: $lf-blue;
       }
     }
   }
