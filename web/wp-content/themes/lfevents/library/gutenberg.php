@@ -184,6 +184,11 @@ if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
 					'slug'  => 'lf-grey-400',
 					'color' => '#7a7a7a',
 				),
+				array(
+					'name'  => __( 'LF Blue' ),
+					'slug'  => 'lf-blue',
+					'color' => '#0077cc',
+				),
 			)
 		);
 

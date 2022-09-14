@@ -10,8 +10,6 @@
 
 <header class="non-event-hero is-style-lf-blue-gradient">
 	<div class="container wrap">
-
-
 		<?php
 		if ( function_exists( 'is_tag' ) && is_tag() || is_category() || is_tax() ) :
 			?>
@@ -31,7 +29,7 @@
 		<h2 class="page-title"><span>Search results for: </span>
 			<?php echo esc_attr( get_search_query() ); ?></h2>
 		<?php elseif ( ! ( is_404() ) && ( is_page() ) ) : ?>
-		<h1 class="page-title" itemprop="headline"><?php the_title(); ?>
+		<h1 class="page-title"><?php the_title(); ?>
 		</h1>
 		<?php elseif ( ! ( is_404() ) && ( is_single() ) ) : ?>
 			<?php
@@ -41,16 +39,16 @@
 				<?php
 			}
 			?>
-		<h1 class="post-title" itemprop="headline"><?php the_title(); ?>
+		<h1 class="post-title"><?php the_title(); ?>
 		</h1>
 
 		<?php elseif ( is_404() ) : ?>
-		<h2 class="post-title" itemprop="headline">Sorry that page wasn't
+		<h2 class="post-title">Sorry that page wasn't
 			found</h2>
 		<?php elseif ( is_home() ) : ?>
 		<h2 class="blog-title"><?php single_post_title(); ?></h2>
 		<?php else : ?>
-		<h1 class="page-title" itemprop="headline"><?php the_title(); ?>
+		<h1 class="page-title"><?php the_title(); ?>
 		</h1>
 		<?php endif; ?>
 	</div>

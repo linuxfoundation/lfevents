@@ -32,9 +32,11 @@
     line-height: 1.25;
     margin-left: 15px;
     &:hover,
-    &:active,
-    &:visited {
+    &:active {
       color: $lf-grey-200;
+    }
+    &:visited {
+      color: $pure-white;
     }
   }
 

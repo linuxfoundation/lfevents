@@ -33,7 +33,7 @@
 				Community Profile</button>
 
 				<!-- for auth  -->
-				<img
+				<img alt="Profile Image" src="" width="25" height="25" decoding="async"
 					class="is-auth0 is-auth0-avatar only-authenticated header--lf-bar__avatar" />
 
 				<a class="is-auth0 only-authenticated header--lf-bar__link"
@@ -41,7 +41,5 @@
 					Profile</a>
 		</div>
 		<?php endif; ?>
-
-
 	</div>
 </div>

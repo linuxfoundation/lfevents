@@ -39,27 +39,32 @@
       }
 
       // underline input style.
-      input[type="text"],
-      input[type="email"] {
+      input[type='text'],
+      input[type='email'] {
         height: 40px;
         padding: 0.5em 0 calc(0.5em + 1px) 0;
         width: 100%;
         border: none;
         background: transparent;
         color: $white;
-        border-bottom: 1px solid $lf-primary-400;
+        border-bottom: 1px solid $lf-blue;
         transition: all 0.25s ease;
 
         &::placeholder {
-          color: $lf-grey-300;
+          color: $pure-white;
           letter-spacing: 0px;
         }
 
         &:focus {
+          color: $pure-white;
           outline: 0;
           padding-left: 0.5em;
           padding-bottom: calc(0.5em);
           border-bottom: 2px solid $white;
+        }
+
+        &:focus::placeholder {
+          color: rgba($pure-white, 0.5);
         }
       }
 
@@ -109,9 +114,10 @@
 .lf-footer__privacy {
   font-size: 0.7rem;
   max-width: 790px;
+  color: $lf-grey-300;
   a {
     font-weight: 600;
-    color: $white;
+    color: $lf-grey-300;
   }
 }
 
@@ -119,30 +125,6 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
-
-// .lf-footer__icons {
-//   list-style: none;
-//   margin-left: 0;
-
-//   li {
-//     display: inline-block;
-//     border-radius: 50%;
-//     transition: all 0.2s ease-in-out;
-//     margin-right: 1.5rem;
-//     &:hover {
-//       svg {
-//         fill: $lf-primary-400;
-//       }
-//     }
-
-//     svg {
-//       fill: white;
-//       width: 25px;
-//       height: 25px;
-//       display: block;
-//     }
-//   }
-// }
 
 .lf-footer__icons {
   list-style: none;

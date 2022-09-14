@@ -22,7 +22,7 @@
 
 			<div class="header-global__mobile-menu-container">
 				<div class="header-global__mobile-menu-underlay"></div>
-				<nav class="header-global__main-menu" role="navigation">
+				<nav class="header-global__main-menu">
 					<?php foundationpress_about_pages_nav(); ?>
 
 					<?php if ( is_lfeventsci() ) : ?>

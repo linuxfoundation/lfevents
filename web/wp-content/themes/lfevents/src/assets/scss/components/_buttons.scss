@@ -115,8 +115,8 @@ button {
 }
 
 .lf-button {
-  background-color: $lf-primary-400;
-  color: $white;
+  background-color: $lf-blue;
+  color: $pure-white;
   padding: 11px 50px;
   border-radius: 5px;
   display: inline-block;
@@ -133,7 +133,7 @@ button {
 
   &:hover {
     color: $white;
-    background: #0082ad;
+    background: #000f1a;
   }
 
   &:active {
