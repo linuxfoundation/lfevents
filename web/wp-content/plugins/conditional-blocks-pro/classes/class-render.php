@@ -45,8 +45,11 @@ class Conditional_Blocks_Render_Block {
 		// WooCommerce.
 		add_filter( 'conditional_blocks_check_wcCartTotal', array( $this, 'wcCartTotal' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_wcCustomerTotalSpent', array( $this, 'wcCustomerTotalSpent' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_wcCustomerRecentOrder', array( $this, 'wcCustomerRecentOrder' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_wcCartProducts', array( $this, 'wcCartProducts' ), 10, 2 );
 		add_filter( 'conditional_blocks_check_wcCartProductCategories', array( $this, 'wcCartProductCategories' ), 10, 2 );
+		add_filter( 'conditional_blocks_check_wcGeoLocation', array( $this, 'wcGeoLocation' ), 10, 2 );
+
 		// Presents.
 		add_filter( 'conditional_blocks_check_presets', array( $this, 'presets' ), 10, 2 );
 	}
@@ -711,6 +714,56 @@ class Conditional_Blocks_Render_Block {
 	}
 
 	/**
+	 *  Check Geo Location condition.
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function wcGeoLocation( $should_render, $condition ) {
+
+		$selected_countries = ! empty( $condition['countries'] ) ? $condition['countries'] : false;
+
+		if ( ! class_exists( 'WC_Geolocation' ) ) {
+			return $should_render;
+		}
+
+		/**
+		 * Check if IP comes from the countries.
+		 */
+		if ( ! empty( $selected_countries ) ) {
+
+			if ( ! is_array( $selected_countries ) ) {
+				return false;
+			}
+
+			$has_match = false;
+
+			$geo      = new WC_Geolocation();
+			$user_ip  = $geo->get_ip_address();
+			$user_geo = $geo->geolocate_ip( $user_ip ); // Get geolocated user data.
+			$country_code  = $user_geo['country']; // Get the country code.
+
+			foreach ( $selected_countries as $selected_country ) {
+				if ( $country_code === $selected_country['value'] ) {
+					$has_match = true;
+					break;
+				}
+			}
+
+			$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+			if ( $has_match && $block_action === 'showBlock' ) {
+				$should_render = true;
+			} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+				$should_render = true;
+			}
+		}
+
+		return $should_render;
+	}
+
+	/**
 	 *  Check the URL paths conditions.
 	 *
 	 * @param bool  $should_render if condition passed validation.
@@ -911,6 +964,68 @@ class Conditional_Blocks_Render_Block {
 	}
 
 	/**
+	 *  Check WooCommerce Customer Recent Order
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function wcCustomerRecentOrder( $should_render, $condition ) {
+
+		// Make sure WC is active.
+		if ( ! class_exists( 'WooCommerce' ) || ! function_exists( 'WC' ) ) {
+			return $should_render;
+		}
+
+		$user_id = get_current_user_id();
+
+		// No user ID if guest customer.
+		if ( empty( $user_id ) ) {
+			return $should_render;
+		}
+
+		$time_amount = ! empty( $condition['timeAmount'] ) ? (int) $condition['timeAmount'] : 7;
+		$time_format = ! empty( $condition['timeFormat'] ) ? $condition['timeFormat'] : 'days';
+
+		if ( $time_format === 'days' ) {
+			$max_seconds_since_order = DAY_IN_SECONDS * $time_amount;
+
+		} else if ( $time_format === 'hours' ) {
+			$max_seconds_since_order = HOUR_IN_SECONDS * $time_amount;
+
+		} else if ( $time_format === 'minutes' ) {
+			$max_seconds_since_order = MINUTE_IN_SECONDS * $time_amount;
+		}
+
+		$last_order_max_timestamp = time() - $max_seconds_since_order;
+
+		// Get an order since our max timestamp.
+		$orders = wc_get_orders(
+			array(
+				'customer_id' => $user_id,
+				'date_created' => '>' . ( $last_order_max_timestamp ),
+				'limit' => 1,
+			)
+		);
+
+		$has_match = false;
+
+		if ( ! empty( $orders ) ) {
+			$has_match = true;
+		}
+
+		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
 	 *  Check WooCommerce Cart Total
 	 *
 	 * @param bool  $should_render if condition passed validation.
@@ -958,8 +1073,6 @@ class Conditional_Blocks_Render_Block {
 		}
 
 		$cart = is_object( WC()->cart ) ? WC()->cart->get_cart() : array();
-
-		$has_role_match = false;
 
 		$selected_product_ids = array_column( $condition['products'], 'value' );
 

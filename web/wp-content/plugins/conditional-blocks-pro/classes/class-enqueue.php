@@ -74,6 +74,21 @@ class Conditional_Blocks_Enqueue {
 			$localized_data['presets'] = $this->get_presets();
 			$localized_data['roles'] = $this->get_user_roles();
 			$localized_data['wcExists'] = class_exists( 'WooCommerce' );
+			if ( class_exists( 'WC_Countries' ) && class_exists( 'WC_Geolocation' ) ) {
+				$wc_countries = new WC_Countries();
+				$wc_countries->get_countries();
+				$localized_data['wcCountries'] = $wc_countries->countries;
+
+				$geo      = new WC_Geolocation(); // Get WC_Geolocation instance object.
+				$localized_data['WcGeoIp'] = $geo->get_ip_address(); // Get user IP.
+				$localized_data['wcGeoIpLocation'] = $geo->geolocate_ip( $geo->get_ip_address() );
+
+			} else {
+				$localized_data['wcCountries'] = false;
+				$localized_data['wcGeoIpLocation'] = false;
+				$localized_data['WcGeoIp'] = false;
+
+			}
 			$localized_data['phpLogicFunctions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
 
 			wp_localize_script( 'conditional-blocks-editor-js', 'cbLocalized', $localized_data );
@@ -187,5 +202,3 @@ class Conditional_Blocks_Enqueue {
 
 }
 new Conditional_Blocks_Enqueue();
-
-

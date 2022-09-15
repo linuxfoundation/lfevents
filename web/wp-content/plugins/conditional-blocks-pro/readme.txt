@@ -1,16 +1,16 @@
-=== Conditional Blocks - Visibility control for Full Site Editing ===
+=== Conditional Blocks - Content Visibility Control for Full Site Editing ===
 Contributors: morganhvidt
 Donate link: https://www.paypal.me/morganhvidt/
 Tags: conditional blocks, Gutenberg, conditions, woocommerce, restrict blocks, hide content, restrict content, mobile blocks, restrict, block controls, block visibility, widgets, hide blocks
 Requires at least: 5.4
 Tested up to: 6.0
-Stable tag: 2.5.4
+Stable tag: 2.6.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://conditionalblocks.com/
 
-Conditionally show or hide ANY WordPress blocks! Change the visibility of block and widgets with no-code. Great for restricting content for membership sites.
+Conditionally show or hide ANY WordPress blocks! Change the visibility of content block and widgets with no-code. Great for restricting content for membership sites.
 
 == Description ==
 
@@ -20,7 +20,7 @@ Be creative, build templates with dynamic content - you can change blocks to be 
 
 ## What can conditional blocks do?
 
-Conditional Blocks makes it easy to change visibility of any block with a few clicks. 
+Conditional Blocks makes it easy to change visibility of any block with a few clicks. See the below features to get ideas for conditional content in WordPress.
 
 Included condition types in the free version:
 
@@ -37,6 +37,8 @@ You can create conditional widgets in sidebars using any of the built-in visibil
 
 ## Do more with Conditional Blocks Pro
 
+We've designed Conditional Blocks Pro to be flexible and allow you to toggle blocks for a wide range of visibility conditions. Exclusively includes the ability to set WooCommerce conditional content.
+
 * Show block depending on user roles (WooCommerce Customer, admin, editor, subscriber, custom roles, etc).
 * Show block content for between date ranges, times, days of the week.
 * Show block for any device and browser (HTTP UserAgent) (iPhone, Android, macOS, linux and Windows).
@@ -48,10 +50,12 @@ You can create conditional widgets in sidebars using any of the built-in visibil
 * Show blocks for custom fields, user meta, post meta.
 * Toggle blocks based on Archives.
 * Create and manage presets of conditions to apply to multiple blocks across your whole site.
-* Show block based on PHP Logic and custom functions. The possibilities are unlimited.
+* Show block based on PHP Logic and custom functions. The possibilities are unlimited with custom conditions.
 * WooCommerce - change the visibility of blocks based on total cart value of the current customer. Perfect for upselling.
 * WooCommerce - We have even more WooCommerce conditions for blocks coming, each condition will help you create dynamic upsells for smart marketing. 
 * WooCommerce Products in cart, total cart value, total customer spent in store.
+* WooCommerce Geo Location - toggle any WordPress Blocks based on the customers country using their IP Address.
+* WooCommerce Customer Recent Order - Check the current customer has place and order within a set amount of time (days, hours, or minutes).
 * Support development of new features.
 
 Conditional Blocks Pro gives you even more control over block visibility - Ready for Full Site Editing, widget options and general content blocks.
@@ -91,6 +95,8 @@ We've tested Conditional Blocks with the follow plugins and themes:
 * Genesis Blocks
 * Twenty Twenty Two theme
 * Wabi theme
+* Poe theme
+* WooCommerce Storefront
 
 Please reach out for support if you are experiencing issues with another plugin.
 
@@ -119,6 +125,10 @@ Yes, you can conditionally hide any Gutenberg block using any of the condition t
 
 Yes, you can use Conditional Blocks with Widget areas and sidebars using the new Widget Editor in WordPress 5.8+.
 
+= Can I toggle the visibility of nested blocks inside a Group Block? =
+
+Yes, you can apply conditional visibility rules to the WordPress Group Block. Each nested block will follow the same rules, you can also apply additional rules to each nested block.
+
 = Can I add custom conditions for my content? =
 
 You can use Conditional Blocks Pro and the [PHP logic condition](https://conditionalblocks.com/docs/conditions/php-logic/) to create custom visibility conditions for blocks.
@@ -136,6 +146,14 @@ We are happy to hear about your ideas! Reach out to us via [support](https://con
 5. Frontend showing different blocks for different screensizes using responsive blocks.
 
 == Changelog ==
+
+= 2.6.0 =
+
+* New: WooCommerce Customer Geo Location Condition (Pro)
+* New: WooCommerce Customer Recent Order Condition (Pro)
+* Improved: PHP Logic now shows all registered custom function within the Condition Builder. (Pro)
+* Improved: Increased the height and width of the Condition Builder for easier navigation.
+* Fixed: Typos.
 
 = 2.5.4 =
 

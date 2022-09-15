@@ -23,8 +23,9 @@
 @media only screen and (min-width: 701px) {
   .conditional-blocks-builder-modal {
     width: 75%;
-    max-width: 550px;
-    height: 90%;
+    max-width: 600px;
+    max-height: 95%;
+    height: 95%;
   }
 }
 
