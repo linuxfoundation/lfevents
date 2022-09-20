@@ -93,6 +93,9 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 			wp_dequeue_style( 'wp-block-library' ); // block library is not used on frontpage.
 		}
 
+		// Cookie script.
+		wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', true );
+
 	}
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
 
