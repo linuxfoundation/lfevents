@@ -115,7 +115,6 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 	<?php endif; ?>
 </footer>
 </div> <!-- end .site-container -->
-<?php get_template_part( 'template-parts/cookie-banner' ); ?>
 <?php wp_footer(); ?>
 </body>
 

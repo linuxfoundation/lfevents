@@ -876,6 +876,7 @@ function dns_prefetch_to_preconnect( $urls, $relation_type ) {
 			'https://js.hs-analytics.net',
 			'https://js.hsforms.net',
 			'https://js.hs-scripts.com',
+			'https://cmp.osano.com',
 		);
 
 		// add them to the urls list.

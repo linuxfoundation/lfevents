@@ -5,7 +5,6 @@
  */
 
 import './lib/foundation-explicit-pieces';
-import cookieBanner from './cookie-banner.js';
 
 $( document ).foundation();
 
@@ -44,18 +43,6 @@ $( '.event-menu .page_item_has_children a[href="#"]' ).click(
 		e.preventDefault();
 	}
 );
-
-// Init cookie banner on load.
-$( document ).ready(
-	() => { cookieBanner.init(); }
-);
-
-// Add event listener to button in banner.
-document.getElementById( 'cookie-banner-button' ).addEventListener(
-	'click',
-	() => { cookieBanner.acceptCookie(); }
-);
-
 
 // Removes height from sticky container.
 let removeHeaderHeight = function(){
