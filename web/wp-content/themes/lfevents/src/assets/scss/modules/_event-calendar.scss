@@ -150,7 +150,7 @@ form.searchandfilter {
         $expand: true,
         $background: $white-smoke,
         $background-hover: darken($white-smoke, 3%),
-        $color: $primary-color,
+        $color: darken($primary-color, 10%),
         $style: solid
       );
       margin: 0;
