@@ -126,6 +126,7 @@ if ( $query->have_posts() ) {
 						'br' => array(),
 						'ul' => array(),
 						'li' => array(),
+						'p' => array(),
 						'strong' => array(),
 					)
 				);
