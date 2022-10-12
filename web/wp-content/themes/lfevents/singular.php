@@ -224,9 +224,10 @@ if ( ! $splash_page ) :
 	}
 
 	if ( get_post_meta( $parent_id, 'lfes_form_privacy', true ) ) {
+		$parsedown = new Parsedown();
 		$form_privacy = get_post_meta( $parent_id, 'lfes_form_privacy', true );
+		$form_privacy = $parsedown->text( $form_privacy );
 		$form_privacy = str_replace( "\n", '<br>', $form_privacy );
-		$form_privacy = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a target="_blank" rel="noopener" href="$2">$1</a>', $form_privacy );
 	}
 
 	$allowed_elements = array(
