@@ -358,6 +358,7 @@ class LFEvents_Admin {
 									'data_type'     => 'meta',
 									'data_key'      => 'description',
 									'label'         => __( 'Event description' ),
+									'help'          => __( 'Use markdown for links and bullets' ),
 									'register_meta' => true,
 									'ui_border_top' => true,
 									'default_value' => '',
