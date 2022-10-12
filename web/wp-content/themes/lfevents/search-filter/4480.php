@@ -55,6 +55,8 @@ if ( $query->have_posts() ) {
 		$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
 
 		$description = get_post_meta( $post->ID, 'lfes_description', true );
+		$parsedown = new Parsedown();
+		$description = $parsedown->text( $description );
 		?>
 
 		<div id="post-<?php the_ID(); ?>" class="cell medium-6">
@@ -108,11 +110,27 @@ if ( $query->have_posts() ) {
 				</span>
 			</p>
 
-			<p class="text-small small-margin-bottom">
+			<div class="text-small small-margin-bottom">
 				<?php
-				echo esc_html( $description );
+				$allowed_elements = array(
+					'href'   => true,
+					'class'  => true,
+					'alt'    => true,
+					'rel'    => true,
+					'target' => true,
+				);
+				echo wp_kses(
+					$description,
+					array(
+						'a' => $allowed_elements,
+						'br' => array(),
+						'ul' => array(),
+						'li' => array(),
+						'strong' => array(),
+					)
+				);
 				?>
-			</p>
+			</div>
 
 			<p class="homepage--call-to-action">
 				<?php
