@@ -935,7 +935,7 @@ function lfe_get_newsletter_form_id() {
 		return 'c9f29688-545d-43ca-b919-2d3ede8e25d0';
 	} elseif ( false !== strpos( $wp->request, 'open-mainframe-summit' ) ) {
 		return 'ea4777bb-3ff3-4308-a726-87d8f9c82606';
-	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) ) {
+	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) || false !== strpos( $wp->request, 'riscv-at-embedded-world' ) ) {
 		return '8475422d-2b22-47ba-bfd8-e5fe55687686';
 	} elseif ( false !== strpos( $wp->request, 'openjs-world' ) ) {
 		return '2cda1b3c-4bb6-4b44-a23e-80610185d7bd';
