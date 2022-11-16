@@ -13,15 +13,13 @@
   }
 }
 
-// properly reset for all browsers
-figure {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
+// This is needed to override Foundation jank.
+figure.wp-block-image,
+div.wp-block-image figure {
+  margin: 0 0 1em;
 }
 
-.wp-caption>figcaption {
+.wp-caption > figcaption {
   max-width: 100%;
   font-size: 0.8rem;
   color: #999;
@@ -35,7 +33,7 @@ p.wp-caption-text {
 }
 
 // TODO: What is this doing?
-body.page-parent .entry-content>div:first-of-type img:first-of-type {
+body.page-parent .entry-content > div:first-of-type img:first-of-type {
   min-height: 204px;
 }
 
@@ -46,18 +44,24 @@ body.page-parent .entry-content>div:first-of-type img:first-of-type {
 }
 
 // apply to figure
-.figure-container img {
-  width: 100%;
-  object-fit: cover;
-  position: absolute;
-  z-index: 1;
-  // added below to stop flexbox messing with the height on load.
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: auto;
-  width: 100%;
+.figure-container {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  img {
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+    // added below to stop flexbox messing with the height on load.
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: 100%;
+  }
 }
 
 // apply to content inside

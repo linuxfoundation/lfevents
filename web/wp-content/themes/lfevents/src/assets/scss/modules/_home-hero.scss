@@ -47,8 +47,10 @@
     font-family: 'Open Sans', #{$body-font-family};
   }
 
-  .figure-container img {
-    height: 100%;
+  .figure-container {
+    img {
+      height: 100%;
+    }
   }
 
   .figure-container:after {

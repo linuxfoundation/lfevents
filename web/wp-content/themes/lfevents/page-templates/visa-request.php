@@ -7,7 +7,9 @@
  */
 
 get_header();
+
 wp_enqueue_script( 'lfe_visa-request-form', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'visa-request-form.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'visa-request-form.js' ) ), true );
+
 wp_enqueue_script( 'recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), 1, true );
 
 get_template_part( 'template-parts/header-global' );
