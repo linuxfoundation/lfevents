@@ -146,3 +146,5 @@ web/wp-content/plugins/track-grid/node_modules
 web/wp-content/plugins/custom-iframe/node_modules
 !web/wp-content/plugins/live-stream-gate-block
 web/wp-content/plugins/live-stream-gate-block/node_modules
+!web/wp-content/plugins/core-block-customisations
+web/wp-content/plugins/core-block-customisations/node_modules

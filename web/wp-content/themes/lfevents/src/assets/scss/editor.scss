@@ -4,10 +4,10 @@
 
 @charset 'utf-8';
 
-@import "settings";
-@import "global/custom-color-palette";
-@import "foundation"; // ?
-@import "admin/foundation-typography-admin";
+@import 'settings';
+@import 'global/custom-color-palette';
+@import 'foundation'; // ?
+@import 'admin/foundation-typography-admin';
 @include foundation-button; // ?
 @include foundation-table; // ?
 
@@ -15,49 +15,50 @@
 
 // Components.
 // Smallest elements.
-@import "components/buttons";
-@import "components/cards";
-@import "components/columns";
-@import "components/cover";
-@import "components/embeds";
-@import "components/file";
-@import "components/forms";
-@import "components/images";
-@import "components/group";
-@import "components/links";
-@import "components/quote";
-@import "components/separator";
-@import "components/spacer";
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/columns';
+@import 'components/cover';
+@import 'components/embeds';
+@import 'components/file';
+@import 'components/forms';
+@import 'components/images';
+@import 'components/group';
+@import 'components/links';
+@import 'components/quote';
+@import 'components/separator';
+@import 'components/spacer';
 // @import "components/tables"; // don't include this, use custom below.
-@import "components/typography";
+@import 'components/typography';
 
 // Modules.
 // Made up of components/needing their own styling.
-@import "modules/event-calendar";
-@import "modules/event-footer";
-@import "modules/event-header";
-@import "modules/event-listing";
-@import "modules/event-subpage";
-@import "modules/gallery";
-@import "modules/photonic";
-@import "modules/post-single";
+@import 'modules/event-calendar';
+@import 'modules/event-footer';
+@import 'modules/event-header';
+@import 'modules/event-listing';
+@import 'modules/event-subpage';
+@import 'modules/gallery';
+@import 'modules/photonic';
+@import 'modules/post-single';
 
 // Blocks
 // Imported blocks as plugins.
-@import "blocks/button-with-expiry";
-@import "blocks/countdown";
-@import "blocks/icon-list";
-@import "blocks/image-box";
-@import "blocks/multi-part-page"; // tab container.
-@import "blocks/pricing-grid";
-@import "blocks/speakers";
-@import "blocks/sponsors";
-@import "blocks/text-over-img";
-@import "blocks/track-grid";
+@import 'blocks/button-with-expiry';
+@import 'blocks/countdown';
+@import 'blocks/icon-list';
+@import 'blocks/image-box';
+@import 'blocks/list';
+@import 'blocks/multi-part-page'; // tab container.
+@import 'blocks/pricing-grid';
+@import 'blocks/speakers';
+@import 'blocks/sponsors';
+@import 'blocks/text-over-img';
+@import 'blocks/track-grid';
 
 // Admin Only.
-@import "admin/tables-admin";
-@import "admin/outlines";
+@import 'admin/tables-admin';
+@import 'admin/outlines';
 
 // Block Editor - Main column width.
 .wp-block {
@@ -73,7 +74,7 @@
 }
 
 // Block Editor - Width of "wide" blocks.
-.wp-block[data-align="wide"] {
+.wp-block[data-align='wide'] {
   max-width: 100%;
 
   @media (min-width: 1200px) {
@@ -86,7 +87,7 @@
 }
 
 // Block Editor - Width of "full-wide" blocks.
-.wp-block[data-align="full"] {
+.wp-block[data-align='full'] {
   max-width: none;
 }
 
