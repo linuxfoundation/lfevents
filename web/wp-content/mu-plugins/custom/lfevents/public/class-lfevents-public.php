@@ -217,7 +217,7 @@ class LFEvents_Public {
 	public function add_year_to_archive_titles( $title ) {
 		global $post;
 
-		if ( ! $post->post_parent && 0 === strpos( $post->post_type, 'lfevent' ) ) {
+		if ( is_object( $post ) && ! $post->post_parent && 0 === strpos( $post->post_type, 'lfevent' ) ) {
 			$title = $title . ' ' . substr( $post->post_type, 7 );
 		}
 
