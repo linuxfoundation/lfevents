@@ -1,6 +1,6 @@
 // Icon List plugin
 .wp-block-lf-icon-list {
-  >ul {
+  > ul {
     column-count: var(--column-count);
 
     @media (max-width: 416px) {
@@ -14,8 +14,8 @@
     break-inside: avoid;
   }
 
-  &[class*="is-style-list-"] {
-    >ul {
+  &[class*='is-style-list-'] {
+    > ul {
       margin: 0 0 1.5em !important;
       padding: 0 !important;
       list-style: none;
@@ -29,11 +29,11 @@
 
     li {
       list-style: none;
-      text-indent: calc(var(--icon-size)*-1 - 1em);
+      text-indent: calc(var(--icon-size) * -1 - 1em);
       padding-left: calc(var(--icon-size) + 1em);
 
       &:before {
-        content: "";
+        content: '';
         display: inline-block;
         vertical-align: middle;
         height: var(--icon-size);
@@ -54,7 +54,7 @@
 
   &.is-style-list-check {
     ul li:before {
-      background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTkwIDE5MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTczLjggMjguNEw2MC40IDE0MS44IDE1LjcgOTcuMiA1LjEgMTA3LjggNjAuNCAxNjNsMTI0LTEyNC0xMC42LTEwLjZ6Ij48L3BhdGg+PC9zdmc+");
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTkwIDE5MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTczLjggMjguNEw2MC40IDE0MS44IDE1LjcgOTcuMiA1LjEgMTA3LjggNjAuNCAxNjNsMTI0LTEyNC0xMC42LTEwLjZ6Ij48L3BhdGg+PC9zdmc+');
     }
   }
 

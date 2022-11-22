@@ -355,7 +355,7 @@ EOD;
 function lfe_insert_favicon() {
 	global $post;
 	$parent_id = lfe_get_event_parent_id( $post );
-	$favicon = get_post_meta( $parent_id, 'lfes_favicon', true );
+	$favicon   = get_post_meta( $parent_id, 'lfes_favicon', true );
 
 	if ( $favicon ) {
 		$out = '<link rel="icon" type="image/png" sizes="32x32" href="' . wp_get_attachment_url( $favicon ) . '">' . "\n";
@@ -468,11 +468,11 @@ function lfe_insert_structured_data() {
 	if ( check_string_is_date( $date_start ) ) {
 		$dt_date_start = new DateTime( $date_start );
 		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
-		$date_start = $dt_date_start->format( 'Y-m-d' );
-		$date_end = $dt_date_end->format( 'Y-m-d' );
+		$date_start    = $dt_date_start->format( 'Y-m-d' );
+		$date_end      = $dt_date_end->format( 'Y-m-d' );
 	} else {
 		$date_start = '';
-		$date_end = '';
+		$date_end   = '';
 	}
 
 	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
@@ -487,14 +487,14 @@ function lfe_insert_structured_data() {
 		$image_url = get_the_post_thumbnail_url();
 	}
 
-	$description = get_post_meta( $post->ID, 'lfes_description', true );
-	$virtual = get_post_meta( $post->ID, 'lfes_virtual', true );
-	$city = get_post_meta( $post->ID, 'lfes_city', true );
-	$venue = get_post_meta( $post->ID, 'lfes_venue', true );
+	$description    = get_post_meta( $post->ID, 'lfes_description', true );
+	$virtual        = get_post_meta( $post->ID, 'lfes_virtual', true );
+	$city           = get_post_meta( $post->ID, 'lfes_city', true );
+	$venue          = get_post_meta( $post->ID, 'lfes_venue', true );
 	$street_address = get_post_meta( $post->ID, 'lfes_street_address', true );
-	$postal_code = get_post_meta( $post->ID, 'lfes_postal_code', true );
-	$region = get_post_meta( $post->ID, 'lfes_region', true );
-	$city = get_post_meta( $post->ID, 'lfes_city', true );
+	$postal_code    = get_post_meta( $post->ID, 'lfes_postal_code', true );
+	$region         = get_post_meta( $post->ID, 'lfes_region', true );
+	$city           = get_post_meta( $post->ID, 'lfes_city', true );
 
 	$virtual_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
 	if ( ! $virtual_url ) {
@@ -503,17 +503,17 @@ function lfe_insert_structured_data() {
 
 	if ( $virtual && $city ) {
 		$attendance_mode = 'https://schema.org/MixedEventAttendanceMode';
-		$location = array(
+		$location        = array(
 			array(
-				'@type' => 'Place',
-				'name'  => esc_html( $venue ),
+				'@type'   => 'Place',
+				'name'    => esc_html( $venue ),
 				'address' => array(
-					'@type' => 'PostalAddress',
-					'streetAddress' => esc_html( $street_address ),
+					'@type'           => 'PostalAddress',
+					'streetAddress'   => esc_html( $street_address ),
 					'addressLocality' => esc_html( $city ),
-					'postalCode' => esc_html( $postal_code ),
-					'addressRegion' => esc_html( $region ),
-					'addressCountry' => esc_html( $country ),
+					'postalCode'      => esc_html( $postal_code ),
+					'addressRegion'   => esc_html( $region ),
+					'addressCountry'  => esc_html( $country ),
 				),
 			),
 			array(
@@ -523,7 +523,7 @@ function lfe_insert_structured_data() {
 		);
 	} elseif ( $virtual ) {
 		$attendance_mode = 'https://schema.org/OnlineEventAttendanceMode';
-		$location = array(
+		$location        = array(
 			array(
 				'@type' => 'VirtualLocation',
 				'url'   => esc_url( $virtual_url ),
@@ -531,33 +531,33 @@ function lfe_insert_structured_data() {
 		);
 	} else {
 		$attendance_mode = 'https://schema.org/OfflineEventAttendanceMode';
-		$location = array(
+		$location        = array(
 			array(
-				'@type' => 'Place',
-				'name'  => esc_html( $venue ),
+				'@type'   => 'Place',
+				'name'    => esc_html( $venue ),
 				'address' => array(
-					'@type' => 'PostalAddress',
-					'streetAddress' => esc_html( $street_address ),
+					'@type'           => 'PostalAddress',
+					'streetAddress'   => esc_html( $street_address ),
 					'addressLocality' => esc_html( $city ),
-					'postalCode' => esc_html( $postal_code ),
-					'addressRegion' => esc_html( $region ),
-					'addressCountry' => esc_html( $country ),
+					'postalCode'      => esc_html( $postal_code ),
+					'addressRegion'   => esc_html( $region ),
+					'addressCountry'  => esc_html( $country ),
 				),
 			),
 		);
 	}
 
 	$event = array(
-		'@context'  => 'http://schema.org/',
-		'@type'     => 'Event',
-		'name'      => esc_html( $post->post_title ),
-		'startDate' => $date_start,
-		'endDate'   => $date_end,
+		'@context'            => 'http://schema.org/',
+		'@type'               => 'Event',
+		'name'                => esc_html( $post->post_title ),
+		'startDate'           => $date_start,
+		'endDate'             => $date_end,
 		'eventAttendanceMode' => $attendance_mode,
-		'eventStatus' => 'https://schema.org/EventScheduled',
-		'location'  => $location,
-		'image' => array( esc_url( $image_url ) ),
-		'description' => esc_html( $description ),
+		'eventStatus'         => 'https://schema.org/EventScheduled',
+		'location'            => $location,
+		'image'               => array( esc_url( $image_url ) ),
+		'description'         => esc_html( $description ),
 	);
 
 	echo '<script type="application/ld+json">' . json_encode( $event, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>'; //phpcs:ignore
@@ -913,6 +913,9 @@ add_action( 'init', 'lfe_theme_unregister_tags' );
  * @param object $post The current Event page.
  */
 function lfe_get_event_parent_id( $post ) {
+	if ( ! is_object( $post ) ) {
+		return;
+	}
 	if ( $post->post_parent ) {
 		$ancestors = get_post_ancestors( $post->ID );
 		$parent_id = $ancestors[ count( $ancestors ) - 1 ];
@@ -935,7 +938,7 @@ function lfe_get_newsletter_form_id() {
 		return 'c9f29688-545d-43ca-b919-2d3ede8e25d0';
 	} elseif ( false !== strpos( $wp->request, 'open-mainframe-summit' ) ) {
 		return 'ea4777bb-3ff3-4308-a726-87d8f9c82606';
-	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) ) {
+	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) || false !== strpos( $wp->request, 'riscv-at-embedded-world' ) ) {
 		return '8475422d-2b22-47ba-bfd8-e5fe55687686';
 	} elseif ( false !== strpos( $wp->request, 'openjs-world' ) ) {
 		return '2cda1b3c-4bb6-4b44-a23e-80610185d7bd';
