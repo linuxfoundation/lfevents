@@ -59,7 +59,7 @@ if ( $query->have_posts() ) {
 		$description = $parsedown->text( $description );
 		?>
 
-		<div id="post-<?php the_ID(); ?>" class="cell medium-6">
+		<div id="post-<?php the_ID(); ?>" class="cell medium-6 event callout">
 
 			<h4 class="medium-margin-right small-margin-bottom line-height-tight">
 				<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
@@ -110,7 +110,7 @@ if ( $query->have_posts() ) {
 				</span>
 			</p>
 
-			<div class="text-small small-margin-bottom">
+			<div class="text-small small-margin-bottom event-description">
 				<?php
 				$allowed_elements = array(
 					'href'   => true,
@@ -127,6 +127,8 @@ if ( $query->have_posts() ) {
 						'ul' => array(),
 						'li' => array(),
 						'p' => array(),
+						'h4' => array(),
+						'h5' => array(),
 						'strong' => array(),
 					)
 				);
