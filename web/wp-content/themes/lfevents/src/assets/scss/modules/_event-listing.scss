@@ -14,3 +14,30 @@
     vertical-align: -0.2em;
   }
 }
+
+// homepage listing
+body.home {
+  div.event {
+    div.event-description {
+      padding-left: 0.2rem;
+
+      h5 {
+        color: $charcoal;
+        margin-bottom: .3rem;
+        font-size: 1.15em;
+        font-weight: bold;
+      }
+
+      p {
+        margin-bottom: .6rem;
+      }
+
+      ul {
+        list-style-type: none;
+        margin-left: 0;
+        line-height: 2;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
