@@ -6,9 +6,10 @@
  */
 
 /**
- * Applies masonry layout.
+ * Resizes grid item.
+ *
+ * @param item grid item.
  */
-
 function resizeGridItem(item){
 	var grid = document.getElementsByClassName( "grid" )[0];
 	var rowHeight = parseInt( window.getComputedStyle( grid ).getPropertyValue( 'grid-auto-rows' ) );
