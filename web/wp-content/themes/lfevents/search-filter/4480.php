@@ -21,7 +21,9 @@
 
 global $post, $wpdb;
 
-echo '<div class="grid-x grid-margin-x grid-margin-y medium-margin-bottom">';
+wp_enqueue_script( 'masonry' );
+
+echo '<div data-masonry=\'{ "itemSelector": ".event", "percentPosition": "true" }\' class="grid-x grid-margin-x grid-margin-y medium-margin-bottom">';
 
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
@@ -59,7 +61,7 @@ if ( $query->have_posts() ) {
 		$description = $parsedown->text( $description );
 		?>
 
-		<div id="post-<?php the_ID(); ?>" class="cell medium-6 event callout">
+		<div id="post-<?php the_ID(); ?>" class="cell event callout">
 
 			<h4 class="medium-margin-right small-margin-bottom line-height-tight">
 				<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
