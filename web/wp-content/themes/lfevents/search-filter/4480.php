@@ -21,9 +21,9 @@
 
 global $post, $wpdb;
 
-wp_enqueue_script( 'masonry' );
+wp_enqueue_script( 'lf-masonry', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'lf-masonry.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'lf-masonry.js' ) ), true );
 
-echo '<div data-masonry=\'{ "itemSelector": ".event", "percentPosition": "true" }\' class="grid-x grid-margin-x grid-margin-y medium-margin-bottom">';
+echo '<div class="grid">';
 
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
@@ -61,8 +61,8 @@ if ( $query->have_posts() ) {
 		$description = $parsedown->text( $description );
 		?>
 
-		<div id="post-<?php the_ID(); ?>" class="cell event callout">
-
+		<div id="post-<?php the_ID(); ?>" class="item event callout">
+			<div class="content">
 			<h4 class="medium-margin-right small-margin-bottom line-height-tight">
 				<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
 					<strong><?php echo esc_html( get_the_title( $post->ID ) ); ?></strong>
@@ -169,7 +169,7 @@ if ( $query->have_posts() ) {
 				}
 				?>
 			</p>
-
+			</div>
 		</div>
 
 		<?php

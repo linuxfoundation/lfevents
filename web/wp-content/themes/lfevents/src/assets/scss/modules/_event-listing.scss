@@ -17,6 +17,15 @@
 
 // homepage listing
 body.home {
+
+  .grid {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    grid-auto-rows: 20px;
+    margin-bottom: 50px;
+  }
+
   div.event {
     div.event-description {
       padding-left: 0.2rem;
@@ -40,7 +49,9 @@ body.home {
       }
     }
   }
-
+  .callout {
+    margin: 0;
+  }
 }
 
 .callout {
