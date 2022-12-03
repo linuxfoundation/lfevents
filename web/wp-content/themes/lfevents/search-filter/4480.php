@@ -21,7 +21,7 @@
 
 global $post, $wpdb;
 
-wp_enqueue_script( 'lf-masonry', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'lf-masonry.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'lf-masonry.js' ) ), true );
+wp_enqueue_script( 'lf-masonry', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'lf-masonry.js' ), array(), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'lf-masonry.js' ) ), true );
 
 echo '<div class="grid">';
 
