@@ -35,7 +35,6 @@
     "wpackagist-plugin/post-meta-controls": "^1.2.0",
     "wpackagist-plugin/post-type-switcher": "^3.1.0",
     "wpackagist-plugin/redirection": "^5",
-    "wpackagist-plugin/aryo-activity-log":"2.8.5",
     "wpackagist-plugin/simple-history":"3.3.1",
     "wpackagist-plugin/shortpixel-image-optimiser": "*",
     "wpackagist-plugin/svg-autocrop": "^0.1.0",
