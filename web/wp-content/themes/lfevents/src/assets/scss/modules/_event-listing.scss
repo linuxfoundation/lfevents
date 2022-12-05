@@ -20,7 +20,7 @@ body.home {
 
   .grid {
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 30px;
     grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
     grid-auto-rows: 20px;
     margin-bottom: 50px;
