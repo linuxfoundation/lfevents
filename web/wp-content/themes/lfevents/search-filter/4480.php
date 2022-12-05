@@ -59,7 +59,7 @@ if ( $query->have_posts() ) {
 		$description = $parsedown->text( $description );
 		?>
 
-		<div id="post-<?php the_ID(); ?>" class="cell medium-6 event callout">
+		<div id="post-<?php the_ID(); ?>" class="cell medium-12 large-6 event callout">
 
 			<h4 class="medium-margin-right small-margin-bottom line-height-tight">
 				<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
