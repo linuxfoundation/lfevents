@@ -441,6 +441,134 @@ registerBlockType( 'cgb/block-pricing-block', {
 								/>
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<PlainText
+									value={ leftLabels[ 4 ] }
+									onChange={ value => updateLeftLabels( value, 4 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 0 ][ 4 ] }
+									onChange={ value => updatePrices( value, 0, 4 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 1 ][ 4 ] }
+									onChange={ value => updatePrices( value, 1, 4 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 2 ][ 4 ] }
+									onChange={ value => updatePrices( value, 2, 4 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 3 ][ 4 ] }
+									onChange={ value => updatePrices( value, 3, 4 ) }
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<PlainText
+									value={ leftLabels[ 5 ] }
+									onChange={ value => updateLeftLabels( value, 5 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 0 ][ 5 ] }
+									onChange={ value => updatePrices( value, 0, 5 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 1 ][ 5 ] }
+									onChange={ value => updatePrices( value, 1, 5 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 2 ][ 5 ] }
+									onChange={ value => updatePrices( value, 2, 5 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 3 ][ 5 ] }
+									onChange={ value => updatePrices( value, 3, 5 ) }
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<PlainText
+									value={ leftLabels[ 6 ] }
+									onChange={ value => updateLeftLabels( value, 6 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 0 ][ 6 ] }
+									onChange={ value => updatePrices( value, 0, 6 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 1 ][ 6 ] }
+									onChange={ value => updatePrices( value, 1, 6 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 2 ][ 6 ] }
+									onChange={ value => updatePrices( value, 2, 6 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 3 ][ 6 ] }
+									onChange={ value => updatePrices( value, 3, 6 ) }
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<PlainText
+									value={ leftLabels[ 7 ] }
+									onChange={ value => updateLeftLabels( value, 7 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 0 ][ 7 ] }
+									onChange={ value => updatePrices( value, 0, 7 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 1 ][ 7 ] }
+									onChange={ value => updatePrices( value, 1, 7 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 2 ][ 7 ] }
+									onChange={ value => updatePrices( value, 2, 7 ) }
+								/>
+							</td>
+							<td>
+								<PlainText
+									value={ prices[ 3 ][ 7 ] }
+									onChange={ value => updatePrices( value, 3, 7 ) }
+								/>
+							</td>
+						</tr>						
 					</tbody>
 				</table>
 			</div>,
