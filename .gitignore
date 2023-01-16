@@ -41,6 +41,7 @@ behat-local.yml
 wraith/configs/capture.yaml
 wraith/shots
 web/wp-content/themes/twentynineteen/node_modules
+*.code-workspace
 
 # :::::::::::::::::::::: cut ::::::::::::::::::::::
 
