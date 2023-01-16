@@ -24,7 +24,7 @@
     display: flex;
     position: relative;
 
-    >* {
+    > * {
       flex-grow: 1;
     }
 
@@ -54,7 +54,7 @@
     @include breakpoint(large) {
       font-weight: bold;
       font-size: rem-calc(10);
-      white-space: nowrap;
+      // white-space: nowrap;
     }
 
     @include breakpoint(xlarge) {
@@ -78,8 +78,6 @@
       margin-bottom: 1rem;
     }
 
-
-
     .expired-label {
       display: block;
       font-weight: normal;
@@ -98,12 +96,11 @@
   }
 
   @include breakpoint(large) {
-
     .attendee-type:not(:first-child) .price-window {
       display: none;
     }
 
-    .attendee-type>:first-child {
+    .attendee-type > :first-child {
       min-width: 12rem;
     }
 
@@ -123,7 +120,6 @@
 
   // overrides for the LFAsia
   .lfasiallcci & {
-
     @include breakpoint(large) {
       padding-top: 7rem;
 
@@ -143,12 +139,13 @@
 }
 
 .attendee-type {
+  max-width: 100%;
   margin-bottom: $global-margin/2;
 
   @include breakpoint(large) {
     display: flex;
 
-    >* {
+    > * {
       width: 12rem;
       margin: 0 $global-margin/4;
 
@@ -159,7 +156,7 @@
   }
 
   @include breakpoint(xlarge) {
-    >* {
+    > * {
       width: 14rem;
     }
   }
