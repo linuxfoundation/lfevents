@@ -94,7 +94,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		}
 
 		// Cookie script.
-		wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', true );
+		wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', false );
 
 	}
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
