@@ -100,7 +100,6 @@ function lfe_get_related_events( $parent_id ) {
 	wp_reset_postdata(); // Restore original Post Data.
 
 	return $related_events;
-
 }
 
 /**
@@ -294,7 +293,6 @@ function lfe_get_sponsors( $parent_id ) {
 		}
 	}
 	wp_reset_postdata(); // Restore original Post Data.
-
 }
 
 /**
@@ -347,7 +345,6 @@ EOD;
 		echo $analytics_code; //phpcs:ignore
 	}
 }
-
 
 /**
  * Inserts Event-specific favicon if set, otherwise falls back to site favicon.
@@ -610,29 +607,39 @@ function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 }
 add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
 
-add_filter( 'emoji_svg_url', '__return_false' );
-
-
-/* Will only run on front end of site */
-if ( ! is_admin() ) {
-	/**
-	 * Make all JS defer onload (in conjunction with moving jQuery to footer).
-	 *
-	 * @param string $url the URL.
-	 */
-	function defer_parsing_of_js( $url ) {
-		if ( false === strpos( $url, '.js' ) ) {
-			return $url;
-		}
-		if ( strpos( $url, 'jquery-3.5.1.min.js' ) && ! is_front_page() ) {
-			return $url;
-		}
-		return str_replace( ' src', ' defer src', $url );
+/**
+ * Make all JS defer onload apart from files specified.
+ *
+ * Use strpos to exclude specific files.
+ *
+ * @param string $url the URL.
+ */
+function lf_defer_parsing_of_js( $url ) {
+	// Stop if admin.
+	if ( is_admin() ) {
+		return $url;
 	}
-	add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
-}
+	// Stop if not JS.
+	if ( false === strpos( $url, '.js' ) ) {
+		return $url;
+	}
+	// List of scripts that should not be deferred.
+	$do_not_defer_scripts = array( 'jquery-3.5.1.min.js', 'osano.js' );
 
+	if ( count( $do_not_defer_scripts ) > 0 ) {
+		foreach ( $do_not_defer_scripts as $script ) {
+			if ( strpos( $url, $script ) ) {
+				return $url;
+			}
+		}
+	}
+	return str_replace( ' src', ' defer src', $url );
+}
+add_filter( 'script_loader_tag', 'lf_defer_parsing_of_js', 10, 3 );
+
+add_filter( 'emoji_svg_url', '__return_false' );
 add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_generation_args', 10, 3 );
+
 /**
  * Adjusts image generation parameters for snackables.  It will get the snackable from the parent page.
  *
@@ -743,7 +750,6 @@ foreach ( $regex_json_path_patterns as $regex_json_path_pattern ) {
 		break;
 	}
 }
-
 
 /**
  * Returns a banner saying the event has passed for past events.
