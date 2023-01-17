@@ -1,3 +1,5 @@
+$price-cell: 5.25rem;
+
 .pricing-grid {
   width: auto;
   margin-top: 0;
@@ -11,9 +13,9 @@
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
-    // account for the price window header.
-    padding-top: 5.25rem;
     max-width: 100%;
+    // account for the price window header.
+    padding-top: calc(#{$price-cell} + 1.5rem);
   }
 
   .price-cell {
@@ -44,6 +46,9 @@
   .price-window--name {
     margin: 0;
     font-weight: bold;
+    @media (min-width: 1024px) and (max-width: 1200px) {
+      font-size: 1rem;
+    }
   }
 
   .price-window--date-range {
@@ -110,21 +115,25 @@
       right: 0;
       bottom: calc(100% + #{$global-margin/2});
       left: 0;
-      height: 4.25rem;
+      height: $price-cell;
       padding: 0.75rem;
       border-radius: 12px 12px 0 0;
       opacity: 0.75;
       text-align: center;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
     }
   }
 
-  // overrides for the LFAsia
+  // overrides for the LFAsia.
   .lfasiallcci & {
     @include breakpoint(large) {
-      padding-top: 7rem;
+      padding-top: calc(#{$price-cell} + 1.5rem + 2rem);
 
       .price-window {
-        height: 7rem;
+        height: calc(#{$price-cell} + 1.75rem);
       }
 
       .price-window--name {
