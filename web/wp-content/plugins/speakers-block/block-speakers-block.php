@@ -105,6 +105,11 @@ function speakers_block_callback( $attributes ) {
 		// generic grey styles if really nothing is set.
 		$inline_styles = 'style="background: linear-gradient(90deg, #f3f4f5 0%, #D5D9D3 100%);"';
 	}
+
+	// get a random int to preface speaker ids throughout the block.
+	// this almost eliminates chances of a namespace conflict between 2 speaker blocks on the same page.
+	$id_preface = rand() . 'speaker-';
+
 	ob_start();
 	?>
 
@@ -121,7 +126,7 @@ function speakers_block_callback( $attributes ) {
 				$website  = get_post_meta( $id, 'lfes_speaker_website', true );
 				?>
 				<li id="<?php
-				echo esc_html( 'speaker-'.$id );
+				echo esc_html( $id_preface . $id );
 				?>"
 				class="speaker cell small-6 medium-4 xxlarge-3"
 				data-toggler=".open"
@@ -131,7 +136,7 @@ function speakers_block_callback( $attributes ) {
 							<?php
 							if ( get_the_content() ) {
 								?>
-								<div class="headshot" data-toggle="<?php echo esc_html( 'speaker-'.$id );	?>">
+								<div class="headshot" data-toggle="<?php echo esc_html( $id_preface . $id );	?>">
 								<?php
 							} else {
 								?>
@@ -146,8 +151,8 @@ function speakers_block_callback( $attributes ) {
 									<?php
 									if ( get_the_content() ) {
 										?>
-										<a class="name" data-toggle="speaker-<?php echo esc_html( $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
-										<a class="title" data-toggle="speaker-<?php echo esc_html( $id ); ?>"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></a>
+										<a class="name" data-toggle="<?php echo esc_html(  $id_preface . $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
+										<a class="title" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></a>
 										<?php
 									} else {
 										?>
