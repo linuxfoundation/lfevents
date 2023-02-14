@@ -194,7 +194,8 @@ get_template_part( 'template-parts/header-global' );
 								<div class="cell large-6">
 									<label>
 										Country of birth *
-										<select id="countryOfBirth" name="countryOfBirth">
+										<select id="countryOfBirth" name="countryOfBirth" required>
+												<option value="" disabled selected>Select Country</option>
 												<option value="United States">United States</option>
 												<option value="Afghanistan">Afghanistan</option>
 												<option value="Åland Islands">Åland Islands</option>
@@ -494,7 +495,8 @@ get_template_part( 'template-parts/header-global' );
 											<input placeholder="Zip / Postal code" type="text" name="zip">
 										</div>
 										<div class="cell large-6">
-											<select id="country" name="country">
+											<select id="country" name="country" required>
+												<option value="" disabled selected>Select Country</option>
 												<option value="United States">United States</option>
 												<option value="Afghanistan">Afghanistan</option>
 												<option value="Åland Islands">Åland Islands</option>
