@@ -955,7 +955,7 @@ function lfe_get_newsletter_form_id() {
 	} elseif ( false !== strpos( $wp->request, 'continuous-delivery-summit' ) ) {
 		return '6a26b1f2-c6e2-412f-b1a1-2d75863c72f7';
 	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-north-america' ) ) {
-		return 'feb80021-7ce2-462e-9642-fd394dc5a286';
+		return 'c9f575f0-111b-4619-b402-862a21b0632f';
 	} elseif ( false !== strpos( $wp->request, 'cloud-foundry-day' ) ) {
 		return 'ff159943-6c4f-4aea-80b1-6a320b30e169';
 	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
