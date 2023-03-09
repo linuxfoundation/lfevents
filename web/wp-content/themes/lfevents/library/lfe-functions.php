@@ -152,7 +152,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	$lfes_hide_all_upcoming_link = get_post_meta( $parent_id, 'lfes_hide_all_upcoming_link', true );
 	if ( ! $lfes_hide_all_upcoming_link ) {
 		echo '<li><a href="https://events.linuxfoundation.org/"><div class="other-logo-wrapper">
-		<img width="109" height="36" src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo-' . $menu_text_color . '.svg' ) . '"><span class="other-seperator ' . $menu_text_color . '">Events</span></div><span class="other-text">All Upcoming Events</span></a></li>'; //phpcs:ignore
+		<img width="109" height="36" alt="The Linux Foundation logo" src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo-' . $menu_text_color . '.svg' ) . '"><span class="other-seperator ' . $menu_text_color . '">Events</span></div><span class="other-text">All Upcoming Events</span></a></li>'; //phpcs:ignore
 	}
 
 	foreach ( $related_events as $p ) {
