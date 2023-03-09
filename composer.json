@@ -27,6 +27,7 @@
     "wpackagist-plugin/clone-page-tree": "^0.1.0",
     "wpackagist-plugin/find-my-blocks": "^3",
     "wpackagist-plugin/flying-pages": "^2.0.8",
+    "wpackagist-plugin/publishpress-checklists":"^2.5.3",
     "wpackagist-plugin/flying-scripts": "^1.1.7",
     "wpackagist-plugin/leadin": "*",
     "wpackagist-plugin/lh-hsts": "^1.24",
