@@ -48,10 +48,20 @@ tooling:
     service: node
   phpcs:
     service: appserver
-    cmd: /app/vendor/bin/phpcs -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+    cmd: /app/vendor/bin/phpcs
+    description: 'Run PHPCS commands'
   phpcbf:
     service: appserver
+    cmd: /app/vendor/bin/phpcbf
+    description: 'Run PHPCBF commands'
+  sniff:
+    service: appserver
+    cmd: /app/vendor/bin/phpcs -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+    description: 'Run the recommended code sniffs'
+  fix:
+    service: appserver
     cmd: /app/vendor/bin/phpcbf -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+    description: 'Run the recommended code sniffs and fix'
   debug:
     service: appserver
     cmd: 'touch /app/web/wp-content/debug.log && tail -f /app/web/wp-content/debug.log'
