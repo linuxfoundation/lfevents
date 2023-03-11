@@ -168,6 +168,9 @@ class LFEvents {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'reset_cache_check' );
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'limit_nested_pages_listing' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'custom_menu_page_removing' );
+		$this->loader->add_action( 'init', $plugin_admin, 'theme_unregister_tags' );
+		$this->loader->add_filter( 'manage_lfe_staff_posts_columns', $plugin_admin, 'staff_custom_column' );
+		$this->loader->add_action( 'manage_lfe_staff_posts_custom_column', $plugin_admin, 'staff_custom_column_data', 10, 2 );
 
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
@@ -209,6 +212,7 @@ class LFEvents {
 		$this->loader->add_filter( 'the_seo_framework_image_generation_params', $plugin_public, 'my_tsf_custom_image_generation_args', 10, 3 );
 		$this->loader->add_filter( 'tiny_mce_plugins', $plugin_public, 'disable_emojicons_tinymce' );
 		$this->loader->add_action( 'pre_ping', $plugin_public, 'disable_pingback' );
+		$this->loader->add_filter( 'wp_resource_hints', $plugin_public, 'dns_prefetch_to_preconnect', 0, 2 );
 	}
 
 	/**

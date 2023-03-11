@@ -1501,6 +1501,46 @@ class LFEvents_Admin {
 	}
 
 	/**
+	 * Add custom column data to lfe_staff admin display.
+	 *
+	 * @param string $column The column.
+	 * @param int    $post_id The post.
+	 * @return void
+	 */
+	function staff_custom_column_data( $column, $post_id ) {
+		switch ( $column ) {
+			case 'featured_image':
+				the_post_thumbnail( 'thumbnail' );
+				break;
+		}
+	}
+
+	/**
+	 * Add custom column header to lfe_staff admin display.
+	 *
+	 * @param array $columns Column headers.
+	 */
+	function staff_custom_column( $columns ) {
+		// take date column.
+		$date = $columns['date'];
+		// unset it so we can move it.
+		unset( $columns['date'] );
+		// add new column.
+		$columns['featured_image'] = 'Image';
+		// add back in date.
+		$columns['date'] = $date;
+
+		return $columns;
+	}
+
+	/**
+	 * Remove tags support from posts
+	 */
+	function theme_unregister_tags() {
+		unregister_taxonomy_for_object_type( 'post_tag', 'post' );
+	}
+
+	/**
 	 * Removes unneeded admin menu items.
 	 */
 	function custom_menu_page_removing() {
