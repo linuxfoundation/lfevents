@@ -313,6 +313,77 @@ class LFEvents_Public {
 	}
 
 	/**
+	 * All enqueued styles have dns-prefetch added to them. This changes it to preconnect for extra zip.
+	 *
+	 * @param string $urls array of urls.
+	 * @param string $relation_type returns priority.
+	 */
+	function dns_prefetch_to_preconnect( $urls, $relation_type ) {
+		global $wp_scripts, $wp_styles;
+
+		$unique_urls = array();
+		$domain      = '';
+		if ( isset( $_SERVER['SERVER_NAME'] ) ) {
+			$domain = sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) );
+		}
+
+		foreach ( array( $wp_scripts, $wp_styles ) as $dependencies ) {
+			if ( $dependencies instanceof WP_Dependencies && ! empty( $dependencies->queue ) ) {
+				foreach ( $dependencies->queue as $handle ) {
+					if ( ! isset( $dependencies->registered[ $handle ] ) ) {
+						continue;
+					}
+
+						$dependency = $dependencies->registered[ $handle ];
+						$parsed     = wp_parse_url( $dependency->src );
+
+					if ( ! empty( $parsed['host'] ) && ! in_array( $parsed['host'], $unique_urls ) && $parsed['host'] !== $domain ) {
+
+							$unique_urls[] = $parsed['scheme'] . '://' . $parsed['host'];
+					}
+				}
+			}
+		}
+
+		if ( 'dns-prefetch' === $relation_type ) {
+				$urls = array();
+		}
+
+		if ( 'preconnect' === $relation_type ) {
+
+			$urls = array();
+
+			// add custom urls to preconnect.
+			$add_urls = array(
+				'https://js.hscollectedforms.net',
+				'https://js.hs-banner.com',
+				'https://js.hs-analytics.net',
+				'https://js.hsforms.net',
+				'https://js.hs-scripts.com',
+				'https://cmp.osano.com',
+			);
+
+			// add them to the urls list.
+			foreach ( $add_urls as $add_url ) {
+				array_push( $unique_urls, $add_url );
+			}
+
+			// add crossorigin, remove protocol.
+			foreach ( $unique_urls as $url ) {
+				$url = array(
+					'crossorigin',
+					'href' => str_replace( array( 'http:', 'https:' ), '', $url ),
+				);
+
+				// add to urls array.
+				array_push( $urls, $url );
+			}
+		}
+
+		return $urls;
+	}
+
+	/**
 	 * Creates css into the head with the event gradient
 	 */
 	public function create_event_styles() {
