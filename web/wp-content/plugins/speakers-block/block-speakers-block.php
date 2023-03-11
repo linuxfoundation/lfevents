@@ -136,7 +136,7 @@ function speakers_block_callback( $attributes ) {
 							<?php
 							if ( get_the_content() ) {
 								?>
-								<div class="headshot" data-toggle="<?php echo esc_html( $id_preface . $id );	?>">
+								<div class="headshot" role="link" data-toggle="<?php echo esc_html( $id_preface . $id );	?>">
 								<?php
 							} else {
 								?>
@@ -154,8 +154,8 @@ function speakers_block_callback( $attributes ) {
 									<?php
 									if ( get_the_content() ) {
 										?>
-										<a class="name" data-toggle="<?php echo esc_html(  $id_preface . $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
-										<a class="title" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></a>
+										<a class="name" role="link" data-toggle="<?php echo esc_html(  $id_preface . $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
+										<a class="title" role="link" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></a>
 										<?php
 									} else {
 										?>
