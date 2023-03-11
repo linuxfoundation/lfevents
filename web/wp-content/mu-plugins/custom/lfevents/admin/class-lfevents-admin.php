@@ -1501,6 +1501,13 @@ class LFEvents_Admin {
 	}
 
 	/**
+	 * Removes unneeded admin menu items.
+	 */
+	function custom_menu_page_removing() {
+		remove_menu_page( 'edit-comments.php' );
+	}
+	
+	/**
 	 * Sync KCDs from https://community.cncf.io/ to the commmunity events CPT.
 	 */
 	public function sync_kcds() {
