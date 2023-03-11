@@ -2,9 +2,9 @@
 Contributors: morganhvidt
 Donate link: https://www.paypal.me/morganhvidt/
 Tags: conditional blocks, Gutenberg, conditions, woocommerce, restrict blocks, hide content, restrict content, mobile blocks, restrict, block controls, block visibility, widgets, hide blocks
-Requires at least: 5.4
-Tested up to: 6.0
-Stable tag: 2.6.0
+Requires at least: 5.5
+Tested up to: 6.1
+Stable tag: 3.0.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Conditionally show or hide ANY WordPress blocks! Change the visibility of conten
 
 Conditional Blocks allows you to create unique content for your visitors and customers. Visibility control with WordPress blocks is now easy within the WordPress Block Editor.
 
-Be creative, build templates with dynamic content - you can change blocks to be visble or hidden, grouped blocks and each nested block even reusable blocks! We plan on having Conditional Blocks ready for Full Site Editing (FSE) themes, if you have any ideas - let us know.
+Be creative, build templates with dynamic content - you can change blocks to be visible or hidden, grouped blocks and each nested block even reusable blocks! We plan on having Conditional Blocks ready for Full Site Editing (FSE) themes, if you have any ideas - let us know.
 
 ## What can conditional blocks do?
 
@@ -24,6 +24,7 @@ Conditional Blocks makes it easy to change visibility of any block with a few cl
 
 Included condition types in the free version:
 
+* Create [Custom Visibility Conditions](https://conditionalblocks.com/docs/developer/custom-conditions/?utm_source=wporg&utm_medium=referral&utm_campaign=readme) for WordPress Blocks.
 * Hide blocks from everyone using the "Lockdown" condition. Great for when you are preparing new content.
 * Show or Hide block based user state (logged in users or logged out users). Great for creating membership content for signed in users.
 * Show or hide block on mobile screens.
@@ -33,7 +34,7 @@ Included condition types in the free version:
 
 You can create conditional widgets in sidebars using any of the built-in visibility logic. Fully compatible with WordPress block widgets and Full Site Editing themes.
 
-[Learn more about the features](https://conditionalblocks.com/?cb=wporg)
+[Learn more about the features](https://conditionalblocks.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)
 
 ## Do more with Conditional Blocks Pro
 
@@ -60,7 +61,7 @@ We've designed Conditional Blocks Pro to be flexible and allow you to toggle blo
 
 Conditional Blocks Pro gives you even more control over block visibility - Ready for Full Site Editing, widget options and general content blocks.
 
-[See all features & benefits of Conditional Blocks Pro](https://conditionalblocks.com/?cb=wporg)
+[See all features & benefits of Conditional Blocks Pro](https://conditionalblocks.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)
 
 ### Create content while your page is live.
 
@@ -102,9 +103,9 @@ Please reach out for support if you are experiencing issues with another plugin.
 
 ## LEARN MORE
 
-* [Documentation](https://conditionalblocks.com/docs?cb=wporg): Learn how to set up and use our features.
-* [Blog](https://conditionalblocks.com/blog?cb=wporg): Read our guides and tutorials.
-* [Website](https://conditionalblocks.com/?cb=wporg): Find out more about us and the pro version.
+* [Documentation](https://conditionalblocks.com/docs/?utm_source=wporg&utm_medium=referral&utm_campaign=readme): Learn how to set up and use our features.
+* [Blog](https://conditionalblocks.com/blog?utm_source=wporg&utm_medium=referral&utm_campaign=readme): Read our guides and tutorials.
+* [Website](https://conditionalblocks.com/?utm_source=wporg&utm_medium=referral&utm_campaign=readme): Find out more about us and the pro version.
 * [Twitter](https://twitter.com/ConditionalBloc): Follow us on Twitter.
 
 == Installation ==
@@ -139,13 +140,30 @@ We are happy to hear about your ideas! Reach out to us via [support](https://con
 
 == Screenshots ==
 
-1. How to customize WordPress visibility with Conditional Blocks.
-2. Conditional Blocks 2.0+ - logged out/in user content block.
-3. Frontend showing the logged out user block.
-4. Editor options for conditionally showing block on screen sizes.
-5. Frontend showing different blocks for different screensizes using responsive blocks.
+1. Conditional Blocks - Create Custom Visibility Conditions for WordPress Blocks.
+2. Condition Builder with AND, OR Logic.
+3. How to customize WordPress visibility with Conditional Blocks.
+4. Conditional Blocks 2.0+ - logged out/in user content block.
+5. Frontend showing the logged out user block.
+6. Editor options for conditionally showing block on screen sizes.
+7. Frontend showing different blocks for different screensizes using responsive blocks.
 
 == Changelog ==
+
+= 3.0.1 =
+
+- Ready and tested for WordPress 6.1
+- Fixed: Consistenty for labels and help text for conditions fields with the [Conditions API](https://conditionalblocks.com/docs/developer/custom-conditions/).
+
+= 3.0.0 =
+
+See all the details: [Release post for Conditional Blocks v3](https://conditionalblocks.com/conditional-blocks-v3/)
+
+- New: OR logic is now possible by creating multiple Condition Sets per block.
+- New: Integration API to register custom conditions. Custom Conditions are added directly to the Condition Builder. See our [Developer Integration Guide](https://conditionalblocks.com/docs/developer/custom-conditions/).
+- Improved: UI has been refined.
+- Improved: Automatically a default condition to reduce clicks when opening the Condition Builder.
+- Tested: WooCommerce 7.0 Ready
 
 = 2.6.0 =
 
