@@ -167,6 +167,7 @@ class LFEvents {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'synchronize_noindex_meta' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'reset_cache_check' );
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'limit_nested_pages_listing' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'custom_menu_page_removing' );
 
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
@@ -201,6 +202,13 @@ class LFEvents {
 		$this->loader->add_filter( 'the_content', $plugin_public, 'rewrite_china_domains' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_filter( 'the_seo_framework_title_from_generation', $plugin_public, 'add_year_to_archive_titles' );
+		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'new_excerpt_more' );
+		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'custom_excerpt_length', 999 );
+		$this->loader->add_filter( 'wp_resource_hints', $plugin_public, 'change_to_preconnect_resource_hints', 10, 2 );
+		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'defer_parsing_of_js', 10, 3 );
+		$this->loader->add_filter( 'the_seo_framework_image_generation_params', $plugin_public, 'my_tsf_custom_image_generation_args', 10, 3 );
+		$this->loader->add_filter( 'tiny_mce_plugins', $plugin_public, 'disable_emojicons_tinymce' );
+		$this->loader->add_action( 'pre_ping', $plugin_public, 'disable_pingback' );
 	}
 
 	/**

@@ -299,14 +299,6 @@ function lfe_get_sponsors( $parent_id ) {
 }
 
 /**
- * Removes unneeded admin menu items.
- */
-function lfe_custom_menu_page_removing() {
-	remove_menu_page( 'edit-comments.php' );
-}
-add_action( 'admin_menu', 'lfe_custom_menu_page_removing' );
-
-/**
  * Inserts Google Tag Manager <head> code on live sites.
  */
 function lfe_insert_google_tag_manager_head() {
@@ -438,17 +430,6 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 	}
 }
 
-
-/**
- * Changes the ellipses after the excerpt.
- *
- * @param string $more more text.
- */
-function new_excerpt_more( $more ) {
-	return '<span class="excerpt-ellipses">&hellip;</span>';
-}
-add_filter( 'excerpt_more', 'new_excerpt_more' );
-
 /**
  * Inserts structured data into Event head according to https://developers.google.com/search/docs/data-types/event.
  * Only does this for the topmost Event page.
@@ -575,122 +556,6 @@ function lfe_get_event_url( $post_id ) {
 	} else {
 		return get_permalink( $post_id );
 	}
-}
-
-/**
- * Sets the except length.
- *
- * @param int $length Number of words.
- */
-function custom_excerpt_length( $length ) {
-	return 18;
-}
-add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-
-
-/**
- * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
- *
- * @param string $hints returns hints.
- * @param string $relation_type returns priority.
- */
-function change_to_preconnect_resource_hints( $hints, $relation_type ) {
-
-	if ( 'preconnect' === $relation_type ) {
-		$hints[] = array(
-			'href'        => '//www.googletagmanager.com',
-			'crossorigin' => '',
-		);
-		$hints[] = array(
-			'href'        => '//bam-cell.nr-data.net',
-			'crossorigin' => '',
-		);
-	}
-	return $hints;
-}
-add_filter( 'wp_resource_hints', 'change_to_preconnect_resource_hints', 10, 2 );
-
-/**
- * Make all JS defer onload apart from files specified.
- *
- * Use strpos to exclude specific files.
- *
- * @param string $url the URL.
- */
-function lf_defer_parsing_of_js( $url ) {
-	// Stop if admin.
-	if ( is_admin() ) {
-		return $url;
-	}
-	// Stop if not JS.
-	if ( false === strpos( $url, '.js' ) ) {
-		return $url;
-	}
-	// List of scripts that should not be deferred.
-	$do_not_defer_scripts = array( 'jquery-3.5.1.min.js', 'osano.js' );
-
-	if ( count( $do_not_defer_scripts ) > 0 ) {
-		foreach ( $do_not_defer_scripts as $script ) {
-			if ( strpos( $url, $script ) ) {
-				return $url;
-			}
-		}
-	}
-	return str_replace( ' src', ' defer src', $url );
-}
-add_filter( 'script_loader_tag', 'lf_defer_parsing_of_js', 10, 3 );
-
-add_filter( 'emoji_svg_url', '__return_false' );
-add_filter( 'the_seo_framework_image_generation_params', 'my_tsf_custom_image_generation_args', 10, 3 );
-
-/**
- * Adjusts image generation parameters for snackables.  It will get the snackable from the parent page.
- *
- * @link https://theseoframework.com/docs/api/filters/#append-image-generators-for-social-images
- *
- * @param array      $params  : [
- *    string  size:     The image size to use.
- *    boolean multi:    Whether to allow multiple images to be returned.
- *    array   cbs:      The callbacks to parse. Ideally be generators, so we can halt remotely.
- *    array   fallback: The callbacks to parse. Ideally be generators, so we can halt remotely.
- * ].
- * @param array|null $args    The query arguments. Contains 'id' and 'taxonomy'.
- *                            Is null when query is autodetermined.
- * @param string     $context The filter context. Default 'social'.
- *                            May be (for example) 'breadcrumb' or 'article' for structured data.
- * @return array $params
- */
-function my_tsf_custom_image_generation_args( $params = array(), $args = null, $context = 'social' ) {
-
-	// Let's not mess with non-social sharing images.
-	if ( 'social' !== $context ) {
-		return $params;
-	}
-
-	$has_parent = false;
-
-	if ( null === $args ) {
-		// In the loop.
-		if ( is_singular() ) {
-			// We don't trust WP in giving the right ID in the loop.
-			$has_parent = wp_get_post_parent_id( the_seo_framework()->get_the_real_ID() );
-		}
-	} else {
-		// Out the loop. Use $args to evaluate the query...
-		if ( ! $args['taxonomy'] ) {
-			// Singular.
-			$has_parent = wp_get_post_parent_id( $args['id'] );
-		}
-	}
-
-	if ( $has_parent ) {
-		$params['cbs'] = array_merge(
-			array( '_parent' => 'my_tsf_get_parent_social_meta_image' ),
-			$params['cbs']
-		);
-	}
-
-	return $params;
 }
 
 /**

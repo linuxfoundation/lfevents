@@ -74,6 +74,14 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 
 		// Emoji styles.
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+
+		add_filter( 'emoji_svg_url', '__return_false' );
+
+		// stop xmlrpc.
+		add_filter( 'xmlrpc_enabled', '__return_false' );
+
+		// remove application passwords.
+		add_filter( 'wp_is_application_passwords_available', '__return_false' );
 	}
 endif;
 
