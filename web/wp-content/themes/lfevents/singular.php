@@ -209,7 +209,7 @@ endwhile;
 if ( ! $splash_page ) :
 	?>
 
-<section class="event-footer xlarge-padding-y" role="footer"
+<section class="event-footer xlarge-padding-y"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
 	<?php
