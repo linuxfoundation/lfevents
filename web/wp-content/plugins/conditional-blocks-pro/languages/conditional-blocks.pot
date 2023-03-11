@@ -2,14 +2,14 @@
 # This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Conditional Blocks Core + Pro 2.6.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/conditional-blocks\n"
+"Project-Id-Version: Conditional Blocks Core + Pro 3.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/conditional-blocks-pro\n"
 "Last-Translator: Morgan Hvidt <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-19T08:13:25+00:00\n"
+"POT-Creation-Date: 2022-10-21T16:19:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: conditional-blocks\n"
@@ -30,11 +30,11 @@ msgstr ""
 msgid "https://conditionalblocks.com/"
 msgstr ""
 
-#: conditional-blocks-pro.php:112
+#: conditional-blocks-pro.php:111
 msgid "Thank you for purchasing Conditional Blocks Pro! Activate your license to get started, then you can add conditions inside the block editor."
 msgstr ""
 
-#: conditional-blocks-pro.php:115
+#: conditional-blocks-pro.php:114
 msgid "See documentation"
 msgstr ""
 
@@ -165,14 +165,6 @@ msgid "Need help?"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Need help setting up?"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Go to docs"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
 msgid "Remove"
 msgstr ""
 
@@ -186,6 +178,14 @@ msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
 msgid "Cancel"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Need help setting up?"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Go to docs"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -333,43 +333,15 @@ msgid "Presets"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Add your first condition to get started."
+msgid "Condition:"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Condition Rule:"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The selected block will only be visible to users who are logged into the site."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The selected block will only be visible to users who aren't logged into the site."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Presets are conditons that can be shared by multiple blocks. You can edit presets from the Preset Manager."
+msgid "Choose a condition"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
 msgid "Block Action"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Requirement"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "All presets must be met"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Any preset must be met"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select one or multiple user roles. The current user must have any of selected roles to trigger the block action."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -382,6 +354,34 @@ msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
 msgid "Block should be hidden"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "The selected block will only be visible to users who are logged into the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "The selected block will only be visible to users who aren't logged into the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Presets are conditions that can be shared by multiple blocks. You can edit presets from the Preset Manager."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Requirement for the block to be visible."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "All presets must be sucessful - (AND Logic)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Atleast one preset must be sucessful - (OR logic)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Select one or multiple user roles. The current user must have any of selected roles to trigger the block action."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -661,7 +661,7 @@ msgid "AND"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Add condition"
+msgid "Add Condition"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -673,11 +673,15 @@ msgid "Condition Builder"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Get the full experience with Conditional Blocks Pro"
+msgid "Remove Set"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Learn more"
+msgid "OR"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "New Condition Set"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -685,11 +689,7 @@ msgid "Developer Mode"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "All blocks and conditions in Developer Mode are created normally. It's safe to use."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Conditions"
+msgid "Developer mode can be toggled from the settings. All blocks and conditions in Developer Mode are created normally. It's safe to use."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
@@ -733,6 +733,14 @@ msgid "Get full control with Conditional Blocks Pro"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+msgid "Learn more"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "All blocks and conditions in Developer Mode are created normally. It's safe to use."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
 msgid "Settings"
 msgstr ""
 
@@ -769,9 +777,17 @@ msgid " domain. Developer Mode provides extra information to help development an
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+msgid "Configure different visibility conditions to control how the block appears to viewers."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+msgid "Active Conditions:"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
 msgid "Convert to 2.0 conditions"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Configure conditions"
+msgid "Configure Conditions"
 msgstr ""
