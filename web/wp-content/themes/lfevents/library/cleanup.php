@@ -18,12 +18,6 @@ if ( ! function_exists( 'foundationpress_start_cleanup' ) ) :
 		// Remove WP version from RSS.
 		add_filter( 'the_generator', 'foundationpress_remove_rss_version' );
 
-		// Remove pesky injected css for recent comments widget.
-		add_filter( 'wp_head', 'foundationpress_remove_wp_widget_recent_comments_style', 1 );
-
-		// Clean up comment styles in the head.
-		add_action( 'wp_head', 'foundationpress_remove_recent_comments_style', 1 );
-
 		// Remove version from stylesheet.
 		add_action( 'wp_default_styles', 'lf_update_styles_with_filemtime' );
 
