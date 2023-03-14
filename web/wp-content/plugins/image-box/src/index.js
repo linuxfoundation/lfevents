@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import './style.scss';
 import Edit from './edit';
 import save from './save';
+import deprecated from './deprecated';
 
 export const schema = {
 	columns: {
@@ -64,4 +65,10 @@ registerBlockType( 'lf/image-box', {
 	attributes: schema,
 	edit: Edit,
 	save,
+	deprecated: [
+		{
+			attributes: schema,
+			save: deprecated,
+		},
+	],
 } );
