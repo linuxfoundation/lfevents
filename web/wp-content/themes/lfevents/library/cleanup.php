@@ -75,13 +75,27 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Emoji styles.
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
+		// Remove emojis.
 		add_filter( 'emoji_svg_url', '__return_false' );
-
-		// stop xmlrpc.
-		add_filter( 'xmlrpc_enabled', '__return_false' );
 
 		// remove application passwords.
 		add_filter( 'wp_is_application_passwords_available', '__return_false' );
+
+		// controls whether XML-RPC methods requiring authentication are enabled.
+		add_filter( 'xmlrpc_enabled', '__return_false' );
+
+		// Unregister the whole XML-RPC method space.
+		add_filter( 'xmlrpc_methods', fn( $methods ) => array() );
+
+		// deactivate x-pingback HTTP header.
+		add_filter(
+			'wp_headers',
+			function( $headers ) {
+				unset( $headers['X-Pingback'] );
+				return $headers;
+			}
+		);
+
 	}
 endif;
 
