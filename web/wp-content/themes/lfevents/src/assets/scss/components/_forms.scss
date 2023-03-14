@@ -93,3 +93,11 @@ div.hs_recaptcha,
     color: white;
   }
 }
+
+.hbspt-form .hs-form-field > label {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
