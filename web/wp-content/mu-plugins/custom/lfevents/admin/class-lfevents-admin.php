@@ -371,6 +371,96 @@ class LFEvents_Admin {
 	}
 
 	/**
+	 * Add custom column data to lfe_speaker admin display.
+	 *
+	 * @param string $column The column.
+	 * @param int    $post_id The post.
+	 * @return void
+	 */
+	public function speaker_custom_column_data( $column, $post_id ) {
+		switch ( $column ) {
+			case 'title_company':
+				echo get_post_meta( $post_id, 'lfes_speaker_title', true ) ? get_post_meta( $post_id, 'lfes_speaker_title', true ) : "-";
+				break;
+			case 'linkedin_url':
+				echo get_post_meta( $post_id, 'lfes_speaker_linkedin', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
+			case 'twitter_url':
+				echo get_post_meta( $post_id, 'lfes_speaker_twitter', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
+			case 'website_url':
+				echo get_post_meta( $post_id, 'lfes_speaker_website', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
+		}
+	}
+
+	/**
+	 * Add custom column header to lfe_speaker admin display.
+	 *
+	 * @param array $columns Column headers.
+	 */
+	public function speaker_custom_column( $columns ) {
+		// take default columns.
+		$date = $columns['date'];
+		$author = $columns['author'];
+		// unset so we can move it.
+		unset( $columns['date'] );
+		unset( $columns['author'] );
+		// add new columns.
+		$columns['title_company'] = 'Title, Company';
+		$columns['linkedin_url'] = 'Linkedin URL';
+		$columns['twitter_url'] = 'Twitter URL';
+		$columns['website_url'] = 'Websiter URL';
+		// add back in old columns.
+		$columns['author'] = $author;
+		$columns['date'] = $date;
+		return $columns;
+	}
+
+	/**
+	 * Add custom column data to lfe_sponsor admin display.
+	 *
+	 * @param string $column The column.
+	 * @param int    $post_id The post.
+	 * @return void
+	 */
+	public function sponsor_custom_column_data( $column, $post_id ) {
+		switch ( $column ) {
+			case 'sponsor_logo':
+				echo has_post_thumbnail($post_id) ? '<span class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
+			case 'forwarding_url':
+				echo get_post_meta( $post_id, 'lfe_sponsor_url', true ) ? get_post_meta( $post_id, 'lfe_sponsor_url', true ) : "-";
+				break;
+			case 'alt_text':
+				echo get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) ? get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) : "-";
+				break;
+		}
+	}
+
+	/**
+	 * Add custom column header to lfe_sponsor admin display.
+	 *
+	 * @param array $columns Column headers.
+	 */
+	public function sponsor_custom_column( $columns ) {
+		// take default columns.
+		$date = $columns['date'];
+		$author = $columns['author'];
+		// unset so we can move it.
+		unset( $columns['date'] );
+		unset( $columns['author'] );
+		// add new columns.
+		$columns['sponsor_logo'] = 'Sponsor Logo';
+		$columns['forwarding_url'] = 'Forwarding URL';
+		$columns['alt_text'] = 'Alt text';
+		// add back in old columns.
+		$columns['author'] = $author;
+		$columns['date'] = $date;
+		return $columns;
+	}
+
+	/**
 	 * Remove tags support from posts
 	 */
 	public function theme_unregister_tags() {

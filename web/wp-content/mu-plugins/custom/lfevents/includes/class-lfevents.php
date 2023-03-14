@@ -160,8 +160,8 @@ class LFEvents {
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_editor_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'new_cpts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_event_categories' );
-		$this->loader->add_filter( 'pmc_create_sidebar', $plugin_admin, 'create_sidebar' );
 		$this->loader->add_action( 'init', $plugin_admin, 'change_page_label' );
+		$this->loader->add_filter( 'pmc_create_sidebar', $plugin_admin, 'create_sidebar' );
 		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'event_filters' );
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'event_list_filter' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'synchronize_noindex_meta' );
@@ -171,6 +171,10 @@ class LFEvents {
 		$this->loader->add_action( 'init', $plugin_admin, 'theme_unregister_tags' );
 		$this->loader->add_filter( 'manage_lfe_staff_posts_columns', $plugin_admin, 'staff_custom_column' );
 		$this->loader->add_action( 'manage_lfe_staff_posts_custom_column', $plugin_admin, 'staff_custom_column_data', 10, 2 );
+		$this->loader->add_filter( 'manage_lfe_speaker_posts_columns', $plugin_admin, 'speaker_custom_column' );
+		$this->loader->add_action( 'manage_lfe_speaker_posts_custom_column', $plugin_admin, 'speaker_custom_column_data', 10, 2 );
+		$this->loader->add_filter( 'manage_lfe_sponsor_posts_columns', $plugin_admin, 'sponsor_custom_column' );
+		$this->loader->add_action( 'manage_lfe_sponsor_posts_custom_column', $plugin_admin, 'sponsor_custom_column_data', 10, 2 );
 
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
