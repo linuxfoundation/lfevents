@@ -174,7 +174,7 @@ class LFEvents_Public {
 	 *
 	 * @param string $url the URL.
 	 */
-	function defer_parsing_of_js( $url ) {
+	public function defer_parsing_of_js( $url ) {
 		// Stop if admin.
 		if ( is_admin() ) {
 			return $url;
@@ -202,7 +202,7 @@ class LFEvents_Public {
 	 * @param string $hints returns hints.
 	 * @param string $relation_type returns priority.
 	 */
-	function change_to_preconnect_resource_hints( $hints, $relation_type ) {
+	public function change_to_preconnect_resource_hints( $hints, $relation_type ) {
 
 		if ( 'preconnect' === $relation_type ) {
 			$hints[] = array(
@@ -222,7 +222,7 @@ class LFEvents_Public {
 	 *
 	 * @param string $more more text.
 	 */
-	function new_excerpt_more( $more ) {
+	public function new_excerpt_more( $more ) {
 		return '<span class="excerpt-ellipses">&hellip;</span>';
 	}
 
@@ -231,7 +231,7 @@ class LFEvents_Public {
 	 *
 	 * @param int $length Number of words.
 	 */
-	function custom_excerpt_length( $length ) {
+	public function custom_excerpt_length( $length ) {
 		return 18;
 	}
 
@@ -252,7 +252,7 @@ class LFEvents_Public {
 	 *                            May be (for example) 'breadcrumb' or 'article' for structured data.
 	 * @return array $params
 	 */
-	function my_tsf_custom_image_generation_args( $params = array(), $args = null, $context = 'social' ) {
+	public function my_tsf_custom_image_generation_args( $params = array(), $args = null, $context = 'social' ) {
 
 		// Let's not mess with non-social sharing images.
 		if ( 'social' !== $context ) {
@@ -318,7 +318,7 @@ class LFEvents_Public {
 	 * @param string $urls array of urls.
 	 * @param string $relation_type returns priority.
 	 */
-	function dns_prefetch_to_preconnect( $urls, $relation_type ) {
+	public function dns_prefetch_to_preconnect( $urls, $relation_type ) {
 		global $wp_scripts, $wp_styles;
 
 		$unique_urls = array();
@@ -439,5 +439,4 @@ class LFEvents_Public {
 
 		return $title;
 	}
-
 }

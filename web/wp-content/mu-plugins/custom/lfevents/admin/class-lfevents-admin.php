@@ -344,7 +344,7 @@ class LFEvents_Admin {
 	 * @param int    $post_id The post.
 	 * @return void
 	 */
-	function staff_custom_column_data( $column, $post_id ) {
+	public function staff_custom_column_data( $column, $post_id ) {
 		switch ( $column ) {
 			case 'featured_image':
 				the_post_thumbnail( 'thumbnail' );
@@ -357,7 +357,7 @@ class LFEvents_Admin {
 	 *
 	 * @param array $columns Column headers.
 	 */
-	function staff_custom_column( $columns ) {
+	public function staff_custom_column( $columns ) {
 		// take date column.
 		$date = $columns['date'];
 		// unset it so we can move it.
@@ -373,17 +373,17 @@ class LFEvents_Admin {
 	/**
 	 * Remove tags support from posts
 	 */
-	function theme_unregister_tags() {
+	public function theme_unregister_tags() {
 		unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 	}
 
 	/**
 	 * Removes unneeded admin menu items.
 	 */
-	function custom_menu_page_removing() {
+	public function custom_menu_page_removing() {
 		remove_menu_page( 'edit-comments.php' );
 	}
-	
+
 	/**
 	 * Sync KCDs from https://community.cncf.io/ to the commmunity events CPT.
 	 */
@@ -477,36 +477,36 @@ class LFEvents_Admin {
 		}
 	}
 
-}
+	/**
+	 * Returns an array of all descendents of $post_id.
+	 * Recursive function.
+	 *
+	 * @param int $post_id parent post.
+	 */
+	private function get_kids( $post_id ) {
+		global $wpdb;
 
-/**
- * Returns an array of all descendents of $post_id.
- * Recursive function.
- *
- * @param int $post_id parent post.
- */
-function get_kids( $post_id ) {
-	global $wpdb;
+		$kid_ids = array();
 
-	$kid_ids = array();
-
-	$kid_posts = $wpdb->get_results(
-		$wpdb->prepare(
-			"SELECT * FROM $wpdb->posts
+		$kid_posts = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM $wpdb->posts
 			WHERE post_parent = %d
 			AND post_status <> 'trash'",
-			$post_id
-		)
-	);
+				$post_id
+			)
+		);
 
-	if ( ! $kid_posts ) {
-		return array();
+		if ( ! $kid_posts ) {
+			return array();
+		}
+
+		foreach ( $kid_posts as $kid ) {
+			$kid_ids[] = $kid->ID;
+			$kid_ids   = array_merge( $kid_ids, get_kids( $kid->ID ) );
+		}
+
+		return $kid_ids;
 	}
 
-	foreach ( $kid_posts as $kid ) {
-		$kid_ids[] = $kid->ID;
-		$kid_ids   = array_merge( $kid_ids, get_kids( $kid->ID ) );
-	}
-
-	return $kid_ids;
 }
