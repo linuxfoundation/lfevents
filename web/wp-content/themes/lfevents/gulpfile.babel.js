@@ -16,7 +16,6 @@ import colors from 'ansi-colors';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 const { sass } = gulpSass( dartSass );
-import squoosh from "gulp-libsquoosh";
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -157,11 +156,9 @@ const webpack = {
 gulp.task( 'webpack:build',webpack.build );
 gulp.task( 'webpack:watch',webpack.watch );
 
-// Copy images to the "dist" folder
-// In production, the images are compressed
+// Copy images to the "dist" folder.
 function images() {
   return gulp.src( 'src/assets/images/**/*' )
-    .pipe( $.if( PRODUCTION, squoosh() ) )
     .pipe( gulp.dest( PATHS.dist + '/assets/images' ) );
 }
 
