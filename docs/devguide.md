@@ -34,6 +34,11 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 
 ```yml
 
+keys:
+  - pantheon_rsa
+excludes:
+  - vendor
+  - /app/web/wp-content/themes/lfevents/node_modules
 services:
   node:
     type: 'node:14'
@@ -46,39 +51,28 @@ tooling:
     service: node
   node:
     service: node
+  npx:
+    service: node
   phpcs:
     service: appserver
-    cmd: /app/vendor/bin/phpcs
+    cmd: /app/vendor/bin/phpcs --standard="WordPress"
     description: 'Run PHPCS commands'
   phpcbf:
     service: appserver
-    cmd: /app/vendor/bin/phpcbf
+    cmd: /app/vendor/bin/phpcbf --standard="WordPress"
     description: 'Run PHPCBF commands'
   sniff:
     service: appserver
-    cmd: /app/vendor/bin/phpcs -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+    cmd: /app/vendor/bin/phpcs -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*.css" -d memory_limit=1024M --standard="WordPress" /app/web/wp-content/themes/lfevents/ /app/web/wp-content/mu-plugins/custom/
     description: 'Run the recommended code sniffs'
   fix:
     service: appserver
-    cmd: /app/vendor/bin/phpcbf -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*twentytwenty*" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/
+    cmd: /app/vendor/bin/phpcbf -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*.css" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/lfevents/ /app/web/wp-content/mu-plugins/custom/
     description: 'Run the recommended code sniffs and fix'
   debug:
     service: appserver
     cmd: 'touch /app/web/wp-content/debug.log && tail -f /app/web/wp-content/debug.log'
     description: 'Get real-time WP debug log output'
-
-```
-
-If you are running an M1 Mac, you need to specify the database type, inserted after node in services.
-
-```yml
-
-services:
-  node:
-    type: 'node:14'
-  database:
-    type: mariadb:10.3
-    portforward: 52357
 
 ```
 
@@ -116,12 +110,6 @@ services:
 ## Theme Development
 
 LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified with through the build process on CircleCI.
-
------
-
-## Percy Tests
-
-[Percy](https://percy.io/) performs visual regression tests on each push to the repo.  It is a great way to spot unintended render issues across the site.  If a particular build diverges from the baseline snapshots, the changes need to be fixed or "Approved" to be incorporated into a new baseline.
 
 -----
 
