@@ -380,7 +380,7 @@ class LFEvents_Admin {
 	public function speaker_custom_column_data( $column, $post_id ) {
 		switch ( $column ) {
 			case 'title_company':
-				echo get_post_meta( $post_id, 'lfes_speaker_title', true ) ? get_post_meta( $post_id, 'lfes_speaker_title', true ) : "-";
+				echo esc_html( get_post_meta( $post_id, 'lfes_speaker_title', true ) ? get_post_meta( $post_id, 'lfes_speaker_title', true ) : '-' );
 				break;
 			case 'linkedin_url':
 				echo get_post_meta( $post_id, 'lfes_speaker_linkedin', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
@@ -427,13 +427,13 @@ class LFEvents_Admin {
 	public function sponsor_custom_column_data( $column, $post_id ) {
 		switch ( $column ) {
 			case 'sponsor_logo':
-				echo has_post_thumbnail($post_id) ? '<span class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				echo has_post_thumbnail( $post_id ) ? '<span class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
 			case 'forwarding_url':
-				echo get_post_meta( $post_id, 'lfe_sponsor_url', true ) ? get_post_meta( $post_id, 'lfe_sponsor_url', true ) : "-";
+				echo esc_html( get_post_meta( $post_id, 'lfe_sponsor_url', true ) ? get_post_meta( $post_id, 'lfe_sponsor_url', true ) : '-' );
 				break;
 			case 'alt_text':
-				echo get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) ? get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) : "-";
+				echo esc_html( get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) ? get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) : '-' );
 				break;
 		}
 	}

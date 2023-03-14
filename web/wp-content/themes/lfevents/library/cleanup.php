@@ -86,7 +86,12 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		add_filter( 'xmlrpc_enabled', '__return_false' );
 
 		// Unregister the whole XML-RPC method space.
-		add_filter( 'xmlrpc_methods', fn( $methods ) => array() );
+		add_filter(
+			'xmlrpc_methods',
+			function( $methods ) {
+				return array();
+			}
+		);
 
 		// Deactivate x-pingback HTTP header.
 		add_filter(
@@ -112,13 +117,13 @@ endif;
 
 // Remove injected CSS from recent comments widget.
 if ( ! function_exists( 'lf_update_styles_with_filemtime' ) ) :
-/**
- * Replace WordPress version appended to styles with filemtime.
- *
- * @param array $styles Styles.
- * @return void
- */
-function lf_update_styles_with_filemtime( $styles ) {
-	$styles->default_version = filemtime( get_template_directory() . '/style.css' );
-}
+	/**
+	 * Replace WordPress version appended to styles with filemtime.
+	 *
+	 * @param array $styles Styles.
+	 * @return void
+	 */
+	function lf_update_styles_with_filemtime( $styles ) {
+		$styles->default_version = filemtime( get_template_directory() . '/style.css' );
+	}
 endif;
