@@ -649,7 +649,6 @@ function lfe_passed_event_banner( $parent_id ) {
 	}
 }
 
-
 /**
  * Gets HTML for an alert bar inserted at the top of Events when set.
  *

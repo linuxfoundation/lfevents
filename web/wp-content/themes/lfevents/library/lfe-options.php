@@ -60,21 +60,17 @@ Check this box to speed up the Nested Pages tool.  When checked, the hidden Even
  * Generic Staff Image Upload callback.
  */
 function lfe_generic_staff_image_display() {
-
 	$generic_staff_image_id = get_option( 'lfe-generic-staff-image-id' ) ? absint( get_option( 'lfe-generic-staff-image-id' ) ) : '';
-
 	?>
-
 	<style>
-.image-preview-wrapper img {
-	max-height: 200px;
-	max-width: 200px;
-}
+	.image-preview-wrapper img {
+		max-height: 200px;
+		max-width: 200px;
+	}
 
-.image-preview-wrapper {
-	margin-bottom: 10px;
-}
-
+	.image-preview-wrapper {
+		margin-bottom: 10px;
+	}
 	</style>
 
 <div class="image-preview-wrapper">
@@ -105,7 +101,6 @@ function lfe_options_page() {
 	?>
 <div class='wrap'>
 	<h1>LF Events Options</h1>
-
 	<form method='post' action='options.php'>
 		<?php
 		settings_fields( 'lfe_options_section' );
