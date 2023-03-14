@@ -10,3 +10,4 @@ packaged/
 wpcs/
 vendor/
 dist
+*.code-workspace
