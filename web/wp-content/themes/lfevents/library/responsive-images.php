@@ -39,36 +39,6 @@ function foundationpress_custom_sizes( $sizes ) {
 add_filter( 'image_size_names_choose', 'foundationpress_custom_sizes' );
 
 /**
- * Add custom image sizes attribute to enhance responsive image functionality for content images.
- *
- * @param array $sizes Comment.
- * @param array $size Comment.
- */
-function foundationpress_adjust_image_sizes_attr( $sizes, $size ) {
-
-	// Actual width of image.
-	$width = $size[0];
-
-	// Full width page template.
-	if ( is_page_template( 'page-templates/page-full-width.php' ) ) {
-		if ( 1200 < $width ) {
-			$sizes = '(max-width: 1199px) 98vw, 1200px';
-		} else {
-			$sizes = '(max-width: 1199px) 98vw, ' . $width . 'px';
-		}
-	} else { // Default 3/4 column post/page layout.
-		if ( 770 < $width ) {
-			$sizes = '(max-width: 639px) 98vw, (max-width: 1199px) 64vw, 770px';
-		} else {
-			$sizes = '(max-width: 639px) 98vw, (max-width: 1199px) 64vw, ' . $width . 'px';
-		}
-	}
-
-	return $sizes;
-}
-// add_filter( 'wp_calculate_image_sizes', 'foundationpress_adjust_image_sizes_attr', 10, 2 ); // .
-
-/**
  * Remove inline width and height attributes for post thumbnails.
  *
  * @param string $html Comment.

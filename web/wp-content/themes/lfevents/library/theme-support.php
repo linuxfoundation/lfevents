@@ -55,6 +55,9 @@ if ( ! function_exists( 'foundationpress_theme_support' ) ) :
 		// Disable core block patterns.
 		remove_theme_support( 'core-block-patterns' );
 
+		// Remove duotone SVG filter injection.
+		remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+
 		// Disable new widget screen.
 		remove_theme_support( 'widgets-block-editor' );
 

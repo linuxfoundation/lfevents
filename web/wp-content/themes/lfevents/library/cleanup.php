@@ -7,9 +7,8 @@
  */
 
 if ( ! function_exists( 'foundationpress_start_cleanup' ) ) :
-
 	/**
-	 * Comment.
+	 * Start cleanup
 	 */
 	function foundationpress_start_cleanup() {
 
@@ -25,14 +24,16 @@ if ( ! function_exists( 'foundationpress_start_cleanup' ) ) :
 		// Clean up comment styles in the head.
 		add_action( 'wp_head', 'foundationpress_remove_recent_comments_style', 1 );
 
+		// Remove version from stylesheet.
+		add_action( 'wp_default_styles', 'lf_update_styles_with_filemtime' );
+
 	}
 	add_action( 'after_setup_theme', 'foundationpress_start_cleanup' );
 endif;
 
 if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
-
 	/**
-	 * Comment.
+	 * Head Cleanup.
 	 */
 	function foundationpress_cleanup_head() {
 
@@ -78,16 +79,16 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Remove emojis.
 		add_filter( 'emoji_svg_url', '__return_false' );
 
-		// remove application passwords.
+		// Remove application passwords.
 		add_filter( 'wp_is_application_passwords_available', '__return_false' );
 
-		// controls whether XML-RPC methods requiring authentication are enabled.
+		// Controls whether XML-RPC methods requiring authentication are enabled.
 		add_filter( 'xmlrpc_enabled', '__return_false' );
 
 		// Unregister the whole XML-RPC method space.
 		add_filter( 'xmlrpc_methods', fn( $methods ) => array() );
 
-		// deactivate x-pingback HTTP header.
+		// Deactivate x-pingback HTTP header.
 		add_filter(
 			'wp_headers',
 			function( $headers ) {
@@ -102,34 +103,22 @@ endif;
 // Remove WP version from RSS.
 if ( ! function_exists( 'foundationpress_remove_rss_version' ) ) :
 	/**
-	 * Comment.
+	 * Remove RSS versions from feed.
 	 */
 	function foundationpress_remove_rss_version() {
 		return '';
 	}
 endif;
 
-// Remove injected CSS for recent comments widget.
-if ( ! function_exists( 'foundationpress_remove_wp_widget_recent_comments_style' ) ) :
-	/**
-	 * Comment.
-	 */
-	function foundationpress_remove_wp_widget_recent_comments_style() {
-		if ( has_filter( 'wp_head', 'wp_widget_recent_comments_style' ) ) {
-			remove_filter( 'wp_head', 'wp_widget_recent_comments_style' );
-		}
-	}
-endif;
-
 // Remove injected CSS from recent comments widget.
-if ( ! function_exists( 'foundationpress_remove_recent_comments_style' ) ) :
-	/**
-	 * Comment.
-	 */
-	function foundationpress_remove_recent_comments_style() {
-		global $wp_widget_factory;
-		if ( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
-			remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
-		}
-	}
+if ( ! function_exists( 'lf_update_styles_with_filemtime' ) ) :
+/**
+ * Replace WordPress version appended to styles with filemtime.
+ *
+ * @param array $styles Styles.
+ * @return void
+ */
+function lf_update_styles_with_filemtime( $styles ) {
+	$styles->default_version = filemtime( get_template_directory() . '/style.css' );
+}
 endif;

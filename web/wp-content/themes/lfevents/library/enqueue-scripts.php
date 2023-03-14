@@ -59,11 +59,6 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// Enqueue Foundation scripts.
 		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ) ), true );
 
-		// Add the comment-reply library on pages where it is necessary.
-		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
-		}
-
 		if ( has_block( 'table' ) ) {
 			wp_enqueue_script( 'responsive-table', get_stylesheet_directory_uri() . '/src/assets/js/lib/' . foundationpress_asset_path( 'restable.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/src/assets/js/lib/' . foundationpress_asset_path( 'restable.js' ) ), true );
 			wp_enqueue_script( 'responsive-table-code', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ), array( 'jquery', 'responsive-table' ), filemtime( get_template_directory() . '/dist/assets/js/' . foundationpress_asset_path( 'responsive-table.js' ) ), true );
