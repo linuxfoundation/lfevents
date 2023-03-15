@@ -1,5 +1,4 @@
 table:not(.wp-block-cgb-block-pricing-block) {
-
   &,
   tbody,
   tr {
@@ -33,8 +32,8 @@ table:not(.wp-block-cgb-block-pricing-block) {
       text-decoration: underline;
     }
 
-    strong>em,
-    em>strong {
+    strong > em,
+    em > strong {
       font-family: $font-family-monospace;
       font-style: normal;
       font-weight: bold;
@@ -44,7 +43,6 @@ table:not(.wp-block-cgb-block-pricing-block) {
 }
 
 .wp-block-table table:not(.has-background):not(.wp-block-cgb-block-pricing-block) {
-
   thead,
   tfoot {
     background: inherit;
@@ -52,16 +50,13 @@ table:not(.wp-block-cgb-block-pricing-block) {
 }
 
 .wp-block-table .has-subtle-light-gray-background-color {
-
   thead,
   tfoot {
-
     background-color: #f3f4f5;
   }
 }
 
 .wp-block-table .has-subtle-pale-green-background-color {
-
   thead,
   tfoot {
     background-color: #e9fbe5;
@@ -69,7 +64,6 @@ table:not(.wp-block-cgb-block-pricing-block) {
 }
 
 .wp-block-table .has-subtle-pale-blue-background-color {
-
   thead,
   tfoot {
     background-color: #e7f5fe;
@@ -77,18 +71,21 @@ table:not(.wp-block-cgb-block-pricing-block) {
 }
 
 .wp-block-table .has-subtle-pale-pink-background-color {
-
   thead,
   tfoot {
     background-color: #fcf0ef;
   }
 }
 
+.wp-block-table:not(.is-style-table-with-column-headers) {
+  figcaption {
+    @extend .screen-reader-text;
+  }
+}
+
 // Stacked responsive styles except on column header tables.
 .wp-block-table:not(.is-style-table-with-column-headers) {
-
   @media (max-width: 600px) {
-
     // align all cells on new line 100%.
     table,
     thead,
@@ -107,8 +104,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
     }
 
     // for normal tables, remove border (as used in group).
-    table:not([class^="has-"]) {
-
+    table:not([class^='has-']) {
       td,
       th {
         border: 0;
@@ -119,8 +115,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
       }
     }
 
-    table[class^="has-"] {
-
+    table[class^='has-'] {
       td,
       th {
         border: 0;
@@ -130,16 +125,15 @@ table:not(.wp-block-cgb-block-pricing-block) {
         &:last-of-type {
           border-bottom: 4px solid transparent;
         }
-
       }
 
       tr:first-of-type {
         border-top: 4px solid transparent;
       }
 
-      tr:last-of-type {}
+      tr:last-of-type {
+      }
     }
-
   }
 
   // restricting to 50% of width on desktops.
@@ -148,7 +142,6 @@ table:not(.wp-block-cgb-block-pricing-block) {
     width: 100%;
 
     table {
-
       @media (min-width: 1024px) {
         margin-left: auto;
         margin-right: auto;
@@ -173,14 +166,13 @@ table:not(.wp-block-cgb-block-pricing-block) {
 
 // Column Header table (uses responsive-table.js).
 .wp-block-table.is-style-table-with-column-headers {
-
   td,
   th {
     font-size: 0.9em;
     padding: 1vw !important;
     width: 15%;
     text-align: center;
-    border: .5px solid $lf-gray;
+    border: 0.5px solid $lf-gray;
 
     @include breakpoint(large) {
       font-size: 1em;
@@ -203,66 +195,66 @@ table:not(.wp-block-cgb-block-pricing-block) {
     }
 
     ul.tabletolist img {
-      max-width: 100%
+      max-width: 100%;
     }
 
     ul.tabletolist.nrh {
       border-bottom: 2px solid $lf-gray;
     }
 
-    ul.tabletolist.nrh>li {
+    ul.tabletolist.nrh > li {
       border-top: 2px solid $lf-gray;
     }
 
     ul.tabletolist,
-    ul.tabletolist>li>ul {
+    ul.tabletolist > li > ul {
       padding: 0 !important;
       list-style: none !important;
     }
 
-    ul.tabletolist>li>ul {
+    ul.tabletolist > li > ul {
       margin: 0 !important;
     }
 
-    ul.tabletolist>li .titles {
+    ul.tabletolist > li .titles {
       background-color: #f8f8f8;
       display: block;
       color: $black;
       padding: 10px;
-      font-weight: 700
+      font-weight: 700;
     }
 
-    ul.tabletolist>li {
-      border-top: .5px solid $lf-gray;
-      border-left: .5px solid $lf-gray;
-      border-right: .5px solid $lf-gray;
+    ul.tabletolist > li {
+      border-top: 0.5px solid $lf-gray;
+      border-left: 0.5px solid $lf-gray;
+      border-right: 0.5px solid $lf-gray;
 
       &:last-child {
-        border-bottom: .5px solid $lf-gray;
+        border-bottom: 0.5px solid $lf-gray;
       }
     }
 
-    ul.tabletolist>li>ul>li {
+    ul.tabletolist > li > ul > li {
       font-weight: 300;
       padding: 10px;
       background-color: $white;
     }
 
-    ul.tabletolist>li>ul>li:hover {
-      background-color: #efefef
+    ul.tabletolist > li > ul > li:hover {
+      background-color: #efefef;
     }
 
-    ul.tabletolist>li>ul>li:last-child {
-      border-bottom: none
+    ul.tabletolist > li > ul > li:last-child {
+      border-bottom: none;
     }
 
-    ul.tabletolist ul>li .row_headers {
+    ul.tabletolist ul > li .row_headers {
       max-width: 40%;
       float: left;
-      margin-right: 3%
+      margin-right: 3%;
     }
 
-    ul.tabletolist ul>li .row_data {
+    ul.tabletolist ul > li .row_data {
       float: right;
       font-weight: 800;
       max-width: 57%;
@@ -270,35 +262,34 @@ table:not(.wp-block-cgb-block-pricing-block) {
       text-align: left;
     }
 
-    ul.tabletolist>li>ul>li {
-      *zoom: 1
+    ul.tabletolist > li > ul > li {
+      *zoom: 1;
     }
 
-    ul.tabletolist>li>ul>li:before {
-      content: " ";
-      display: table
-    }
-
-    ul.tabletolist>li>ul>li:after {
-      content: " ";
+    ul.tabletolist > li > ul > li:before {
+      content: ' ';
       display: table;
-      clear: both
     }
 
-    ul.tabletolist ul>li .row_data.html {
-      font-weight: 400
+    ul.tabletolist > li > ul > li:after {
+      content: ' ';
+      display: table;
+      clear: both;
     }
 
-    ul.tabletolist ul>li .row_data.html ul {
-      list-style-type: disc
+    ul.tabletolist ul > li .row_data.html {
+      font-weight: 400;
+    }
+
+    ul.tabletolist ul > li .row_data.html ul {
+      list-style-type: disc;
     }
 
     .row_data.html {
       display: flex;
       flex-wrap: wrap;
 
-
-      >*:not(:last-child) {
+      > *:not(:last-child) {
         margin-right: 10px;
       }
 
@@ -311,7 +302,7 @@ table:not(.wp-block-cgb-block-pricing-block) {
         display: flex;
         flex-wrap: wrap;
 
-        >*:not(:last-child) {
+        > *:not(:last-child) {
           margin-right: 10px;
         }
       }
