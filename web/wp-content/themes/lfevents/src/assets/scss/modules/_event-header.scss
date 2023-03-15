@@ -182,10 +182,6 @@
           display: flex;
           align-items: center;
           justify-content: center;
-
-          // img {
-          //   margin: 0;
-          // }
         }
 
         .other-seperator {
@@ -326,7 +322,9 @@
           }
         }
 
-        &:hover > .children {
+        &:hover > .children,
+        &:focus > .children,
+        &:focus-within > .children {
           visibility: visible;
           opacity: 1;
         }

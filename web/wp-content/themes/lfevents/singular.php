@@ -70,7 +70,7 @@ if ( ! $splash_page ) {
 echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 			?>
 
-			<button class="menu-toggler button alignright" type="button" aria-label="Toggle Menu" 
+			<button class="menu-toggler button alignright" type="button" aria-label="Toggle Menu"
 				data-toggle="event-menu">
 				<span class="hamburger-icon <?php echo esc_html( $subpage_header_elements_class ); ?>"></span>
 			</button>
@@ -107,7 +107,7 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 }
 ?>
 
-<div class="main-container">
+<div class="main-container" id="main">
 	<div class="main-grid">
 		<main class="main-content-full-width">
 
