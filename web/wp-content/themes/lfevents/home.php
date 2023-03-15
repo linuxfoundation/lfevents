@@ -9,7 +9,7 @@ get_header();
 get_template_part( 'template-parts/header-global' );
 ?>
 
-<div class="main-container large-padding-bottom" role="main">
+<div class="main-container large-padding-bottom" role="main" id="main">
 
 	<?php
 	get_template_part( 'template-parts/home-hero' );

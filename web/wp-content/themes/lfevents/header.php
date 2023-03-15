@@ -20,5 +20,10 @@
 	</head>
 
 	<body <?php body_class( $_ENV['PANTHEON_SITE_NAME'] ); ?>>
+		<?php wp_body_open(); ?>
+		<?php
+		// Skip Link.
+		?>
+		<a class="skip-link" href="#main">Skip to content</a>
 		<?php lfe_insert_google_tag_manager_body(); ?>
 		<div class="site-container <?php echo esc_html( ( ! show_non_event_menu() ) ? 'add-overflow' : '' ); ?>">
