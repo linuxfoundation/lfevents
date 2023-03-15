@@ -38,6 +38,9 @@
     &:visited {
       color: $pure-white;
     }
+    &:focus {
+      text-decoration: underline;
+    }
   }
 
   &__avatar {
@@ -71,6 +74,10 @@
 
     &:hover {
       background-color: $lf-grey-200;
+    }
+
+    &:focus {
+      text-decoration: underline;
     }
   }
 
