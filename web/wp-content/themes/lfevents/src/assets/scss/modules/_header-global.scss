@@ -50,6 +50,9 @@
 // Desktop.
 @media (min-width: 1024px) {
   .header-global {
+    &__hamburger {
+      display: none;
+    }
     &__logo-nav {
       font-weight: 600;
       font-size: 15px;
@@ -125,9 +128,9 @@
               border-top: 5px solid $lf-grey-200;
             }
           }
-          &:hover > ul,
-          &:focus > ul,
-          &.focus > ul {
+          &.is-open > .sub-menu,
+          &:focus > .sub-menu,
+          &:focus-within > .sub-menu {
             left: -1em;
             top: 100%;
             opacity: 1;
