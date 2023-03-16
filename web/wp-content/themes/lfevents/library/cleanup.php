@@ -114,9 +114,9 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 	/**
 	 * Replace WordPress version with filemtime (for security).
 	 *
-	 * @param string $src
-	 * @param string $handle
-	 * @return void
+	 * @param string $src Src.
+	 * @param string $handle Handle.
+	 * @return void|string
 	 */
 	function lf_update_default_version_to_be_filemtime( $src, $handle ) {
 		$query_string = parse_url( $src, PHP_URL_QUERY );
@@ -129,7 +129,7 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 
 		$new_query_args = array();
 		foreach ( $query_args as $key => $value ) {
-			if ( $key !== 'ver' || is_numeric( $value ) && strlen( $value ) == 10 ) {
+			if ( 'ver' !== $key || is_numeric( $value ) && 10 == strlen( $value ) ) {
 				$new_query_args[ $key ] = $value;
 			}
 		}
