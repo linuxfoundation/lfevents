@@ -46,7 +46,7 @@ export default function save( { attributes } ) {
 
 				const blockProps = useBlockProps.save();
 
-				let altText = typeof title === 'string' ? title.replace(/(<([^>]+)>)/gi, '') : 'Find out more';
+				let ariaText = typeof title === 'string' ? title.replace(/(<([^>]+)>)/gi, '') : 'Find out more';
 
 				return (
 					<div
@@ -57,7 +57,7 @@ export default function save( { attributes } ) {
 					>
 						{ link && (
 							<a
-								alt={ altText }
+								aria-label={ ariaText }
 								className="box-link"
 								href={ link }
 								{ ...( newWindow ? { target: '_blank' } : {} ) }
