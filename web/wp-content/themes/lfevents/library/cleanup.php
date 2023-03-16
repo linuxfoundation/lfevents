@@ -18,9 +18,9 @@ if ( ! function_exists( 'foundationpress_start_cleanup' ) ) :
 		// Remove WP version from RSS.
 		add_filter( 'the_generator', 'foundationpress_remove_rss_version' );
 
-		// Remove version from stylesheet.
-		add_action( 'wp_default_styles', 'lf_update_styles_with_filemtime' );
-
+		// Remove version from stylesheet and scripts.
+		add_filter( 'style_loader_src', 'lf_update_default_version_to_be_filemtime', 10, 2 );
+		add_filter( 'script_loader_src', 'lf_update_default_version_to_be_filemtime', 10, 2 );
 	}
 	add_action( 'after_setup_theme', 'foundationpress_start_cleanup' );
 endif;
@@ -110,14 +110,39 @@ if ( ! function_exists( 'foundationpress_remove_rss_version' ) ) :
 endif;
 
 // Remove injected CSS from recent comments widget.
-if ( ! function_exists( 'lf_update_styles_with_filemtime' ) ) :
+if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 	/**
-	 * Replace WordPress version appended to styles with filemtime.
+	 * Replace WordPress version with filemtime (for security).
 	 *
-	 * @param array $styles Styles.
+	 * @param string $src
+	 * @param string $handle
 	 * @return void
 	 */
-	function lf_update_styles_with_filemtime( $styles ) {
-		$styles->default_version = filemtime( get_template_directory() . '/style.css' );
+	function lf_update_default_version_to_be_filemtime( $src, $handle ) {
+		$query_string = parse_url( $src, PHP_URL_QUERY );
+		parse_str( $query_string, $query_args );
+
+		// If there are no ver arguments, return the original URL.
+		if ( ! isset( $query_args['ver'] ) ) {
+			return $src;
+		}
+
+		$new_query_args = array();
+		foreach ( $query_args as $key => $value ) {
+			if ( $key !== 'ver' || is_numeric( $value ) && strlen( $value ) == 10 ) {
+				$new_query_args[ $key ] = $value;
+			}
+		}
+
+		$new_query_args['ver'] = filemtime( get_template_directory() . '/style.css' );
+		$new_query_string = http_build_query( $new_query_args );
+
+		// If the original URL had a query string, add it back.
+		if ( $query_string ) {
+			$src = str_replace( $query_string, $new_query_string, $src );
+		} else {
+			$src = add_query_arg( $new_query_string, '', $src );
+		}
+		return $src;
 	}
 endif;
