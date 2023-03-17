@@ -78,6 +78,10 @@ form.searchandfilter {
         input {
           margin: 0 !important;
         }
+
+        ::placeholder {
+          color: #757575;
+        }
       }
 
       @include breakpoint(medium) {
