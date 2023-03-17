@@ -78,6 +78,10 @@ div.hs_recaptcha,
     display: block;
     margin-right: 8px;
   }
+
+  ::placeholder {
+    color: #757575;
+  }
 }
 
 .hbspt-form .submitted-message {
