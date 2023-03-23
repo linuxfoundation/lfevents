@@ -961,6 +961,8 @@ function lfe_get_newsletter_form_id() {
 		return 'c9f575f0-111b-4619-b402-862a21b0632f';
 	} elseif ( false !== strpos( $wp->request, 'cloud-foundry-day' ) ) {
 		return 'ff159943-6c4f-4aea-80b1-6a320b30e169';
+	} elseif ( false !== strpos( $wp->request, 'kubeday-israel' ) ) {
+		return '50d9a617-4a06-4434-9efc-b02739a0b0ef';
 	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
 		return '97beb070-4a17-45bf-92db-1345eaf2f6b4';
 	} else {
