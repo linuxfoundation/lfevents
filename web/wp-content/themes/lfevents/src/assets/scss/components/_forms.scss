@@ -105,3 +105,13 @@ div.hs_recaptcha,
   width: 1px;
   overflow: hidden;
 }
+
+.searchandfilter .sf-input-text {
+  &:focus,
+  &:focus-within {
+    &::placeholder {
+      color: #e4e5e7;
+      transition: color 0.5s;
+    }
+  }
+}
