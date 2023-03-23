@@ -106,12 +106,12 @@ div.hs_recaptcha,
   overflow: hidden;
 }
 
-.searchandfilter .sf-input-text {
+.searchandfilter .sf-input-text, .hbspt-form .hs-form .hs-input {
   &:focus,
   &:focus-within {
     &::placeholder {
       color: #e4e5e7;
-      transition: color 0.5s;
+      transition: color 0.25s;
     }
   }
 }
