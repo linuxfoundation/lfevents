@@ -1,5 +1,8 @@
+/* Conditional Blocks 2.0+ */
 :root {
-  --cb-gray: #f9f9f9;
+  --cb-yellow: #f4ffb2;
+  --cb-dark: #2f2f2f;
+  --cb-green: #45af82;
 }
 .conditional-blocks-builder-modal .components-modal__content {
   padding: 0;
@@ -12,30 +15,36 @@
   max-height: 16px;
   width: auto;
 }
+
 .components-modal__icon-container svg.conditional-blocks-svg {
   margin-right: 10px;
 }
+
 @media only screen and (min-width: 701px) {
   .conditional-blocks-builder-modal {
     width: 75%;
-    max-width: 650px;
+    max-width: 600px;
     max-height: 95%;
     height: 95%;
   }
 }
+
 .conditional-blocks-builder-modal .components-tab-panel__tabs {
-  background: var(--cb-gray);
+  background: #f9f9f9;
 }
+
 .conditional-blocks-builder-modal .components-tab-panel__tab-content {
   padding: 10px 40px;
 }
 .conditional-blocks-builder-modal .components-modal__header {
   margin: 0;
 }
+
 .conditional-blocks-active-tab,
 .conditional-blocks-builder-modal .components-tab-panel__tabs-item:focus {
   box-shadow: inset 0 0 0 1.5px transparent, inset 0 -4px 0 0 var(--wp-admin-theme-color);
 }
+
 .conditional-blocks-builder-modal__content {
   padding: 15px 35px;
 }
@@ -44,32 +53,30 @@
   padding: 20px;
   margin-top: 30px;
 }
+
 .conditional-blocks-builder__active_condition_tag {
-  padding: 5px 8px;
+  padding: 5px 10px;
   margin: 2px;
   max-width: fit-content;
   color: #007cba;
-  font-size: 11px;
+  font-size: 12px;
   display: inline-block;
   background: #eaeaea;
   color: #272727;
 }
-.conditional-blocks-builder__active_set {
-  padding: 8px 0;
-  border-top: 0.5px solid rgb(221, 221, 221);
-  max-width: 90%;
-}
+
 /* Hot fix for multiselect - issue with Gutenberg. */
 .conditional-blocks-builder-modal__role_select select[multiple] {
   height: 100px !important;
   max-width: 100% !important;
 }
+
 .conditional-blocks-builder-modal__row {
   margin: 15px 0;
   display: block;
 }
+
 .conditional-blocks-builder-modal__row pre {
-  font-size: 11px;
   background: #272627;
   color: #16e284;
   padding: 25px;
@@ -77,50 +84,58 @@
   overflow: scroll;
   max-width: 100%;
 }
+
 .conditional-blocks-builder-modal__condition_builder_wrapper {
   margin: 20px 0;
 }
+
 .conditional-blocks-builder-modal__single_condition-wrapper {
   background: #ffffff;
   border: 1px solid #d4d4d4;
   padding: 20px;
 }
+
 .conditional-blocks-builder-modal__single_condition {
-  max-width: 90%;
+  max-width: 400px;
   /* display: block; */
   margin: 15px auto;
 }
-.conditional-blocks-builder-modal__add_condition, .conditional-blocks-builder-modal__add_set{
-  padding: 15px !important;
-  
-}
-.conditional-blocks-builder-modal__delete_button  {
-  background: white;
-  padding: 0 7px;
-}
-.conditional-blocks-builder-modal__single_condition-wrapper  .conditional-blocks-builder-modal__delete_button  {
+
+.conditional-blocks-builder-modal__delete_button {
+  /* float: right; */
   margin-top: 15px;
 }
-.conditional-blocks-builder-modal__delete_button .dashicon {
-  font-size: 15px;
-  height: 15px;
-  margin-left: 0 !important;
-  margin-right: 2px !important;
+
+/* Hot fix to maintain order for components inside a preset. */
+.components-panel__body.conditional-blocks-builder-modal__single_preset .components-panel__row .components-base-control__field {
+  margin-bottom: 8px !important;
 }
-.conditional-blocks-builder-modal  .components-panel__body-toggle.components-button {
-  font-size: 12px;
+
+.components-panel__body.conditional-blocks-builder-modal__single_preset {
+  border: 2px solid var(--cb-dark);
+  margin-top: 25px;
 }
-.components-panel__body.conditional-blocks-builder-modal__single_set {
-  border: 1px solid #d4d4d4;
+
+.conditional-blocks-builder-modal__single_preset button.components-button.components-panel__body-toggle {
+  background: var(--cb-dark);
+  border-radius: initial;
+  color: white;
+}
+
+.components-panel__body.conditional-blocks-builder-modal__single_preset svg.components-panel__arrow {
+  fill: white;
+  color: white !important;
 }
 .conditional-blocks-builder-modal .components-panel__row {
   display: block;
 }
+
 .conditional-blocks-builder-modal__popover .components-popover__content {
   padding: 10px 20px;
   text-align: center;
   min-width: 230px;
 }
+
 .conditional-blocks-builder-modal__button_group button {
   margin: 0 10px;
 }
@@ -129,9 +144,11 @@
   color: #cc1818 !important;
   box-shadow: inset 0 0 0 1px #cc1818 !important;
 }
+
 .conditional-blocks-has-conditions {
   outline: 1px dashed var(--wp-admin-theme-color);
 }
+
 .conditional-blocks-has-conditions::before {
   content: 'Conditional';
   z-index: 10;
@@ -148,17 +165,48 @@
   top: -13px;
   left: -1px;
 }
+
 .conditional-blocks-builder__spacer {
   height: 20px;
 }
 .conditional-blocks-builder-modal h3 {
   margin-top: 30px;
 }
+
+.conditional-blocks-builder-modal .components-button.has-icon .dashicon {
+  width: 23px;
+  height: 15px;
+  font-size: 16px;
+}
+.conditional-blocks-builder-modal__pro_notice {
+  background: #f9f9f9;
+  padding: 5px 30px;
+  border-left: 6px solid #f5c71f;
+  margin-top: 30px;
+}
+
+.conditional-blocks-builder-modal__pro_notice a.components-external-link {
+  color: var(--cb-green);
+}
+
 .conditional-blocks-builder-modal__no_conditions {
   text-align: center;
 }
+
 .conditional-blocks-builder-modal__single_condition-wrapper.conditional-blocks-builder-modal__no_conditions {
   border: 1px dashed #d4d4d4;
+}
+.conditional-blocks-builder-modal .components-button.has-icon .dashicon {
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.conditional-blocks__save-icon {
+  font-size: 24px;
+  color: var(--wp-admin-theme-color);
+  display: inline-block;
+  margin-right: 18px;
+  margin-top: -2px;
 }
 /* Fixes issue with date pickers. */
 .conditonal-blocks-select__menu {
@@ -187,11 +235,11 @@
 .conditonal-blocks-small {
   font-size: 12px;
 }
-.conditional-block-separator-wrapper {
+.conditional-block-and-rule-wrapper {
   position: relative;
   height: 45px;
 }
-.conditional-block-separator-line {
+.conditional-block-and-rule-line {
   position: absolute;
   left: 50%;
   top: 5px;
@@ -200,7 +248,7 @@
   background: #d4d4d4;
   z-index: 1;
 }
-.conditional-block-separator-word-wrapper {
+.conditional-block-and-rule-word-wrapper {
   text-align: center;
   height: 12px;
   position: absolute;
@@ -210,43 +258,26 @@
   margin-top: -12px;
   z-index: 2;
 }
-.conditional-block-separator-word {
+.conditional-block-and-rule-word {
   color: #747d86;
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 3px;
   font-size: 11px;
+  background: #fff;
 }
+
 /* Compact */
  .conditional-blocks-builder-modal .components-modal__content::before {
   margin-bottom: 0px;
 }
+
 .conditional-blocks-grid {
   margin-bottom: 20px;
 }
+
 .conditional-blocks-grid code {
-  display: inline-block;
-  margin: 5px;
-  font-size: 11px;
-}
-.components-panel__body.conditional-blocks-builder-modal__single_set {
-  border: 1px solid var(--cb-gray);
-  background: var(--cb-gray);
-}
-.conditional-blocks-builder-modal__single_condition-wrapper {
-  background: #ffffff;
-  border: 1px solid #d4d4d469;
-  padding: 8px;
-  border-radius: 5px;
-}
-.conditional-blocks-builder-modal__single_preset {
-  border: 1px solid #007cbb33;
-  background: #f8f8f8;
-  margin-bottom: 20px;
-}
-.conditional-block-separator-word.conditional-block-separator-condition {
-  background:  var(--cb-gray);
-}
-.conditional-block-separator-word.conditional-block-separator-set {
-  background: #ffffff;
+display: inline-block;
+margin: 5px;
+font-size: 11px;
 }
