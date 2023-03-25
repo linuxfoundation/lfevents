@@ -145,7 +145,7 @@ function speakers_block_callback( $attributes ) {
 							}
 								echo get_the_post_thumbnail( $id, 'profile-200', array(
 									'loading' => 'lazy',
-									'alt'     => esc_html( get_the_title() ),
+									'alt'     => esc_html( get_the_title() . ' headshot'),
 									) );
 							?>
 									</div><!-- end of headshot? -->
