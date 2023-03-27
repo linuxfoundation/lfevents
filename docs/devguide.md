@@ -33,7 +33,6 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 3. Open the .lando.yml file and add the following to the file.
 
 ```yml
-
 keys:
   - pantheon_rsa
 excludes:
