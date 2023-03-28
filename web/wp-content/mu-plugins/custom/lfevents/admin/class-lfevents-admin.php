@@ -82,7 +82,6 @@ class LFEvents_Admin {
 		 */
 
 		wp_enqueue_style( $this->lfevents, plugin_dir_url( __FILE__ ) . 'css/lfevents-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -252,7 +251,7 @@ class LFEvents_Admin {
 		}
 
 		$posts_ids = array( $post_id );
-		$posts_ids = array_merge( $posts_ids, get_kids( $post_id ) );
+		$posts_ids = array_merge( $posts_ids, $this->get_kids( $post_id ) );
 
 		$query->set( 'post__in', $posts_ids );
 		$query->set( 'order', 'ASC' );
@@ -593,7 +592,7 @@ class LFEvents_Admin {
 
 		foreach ( $kid_posts as $kid ) {
 			$kid_ids[] = $kid->ID;
-			$kid_ids   = array_merge( $kid_ids, get_kids( $kid->ID ) );
+			$kid_ids   = array_merge( $kid_ids, $this->get_kids( $kid->ID ) );
 		}
 
 		return $kid_ids;
