@@ -68,9 +68,13 @@ class Conditional_Blocks_Enqueue {
 			// Locaize data, we are on the block editor.
 			$localized_data = array(
 				'screensizes' => $this->responsive_screensizes(),
+				'registeredCategories' => apply_filters( 'conditional_blocks_register_condition_categories', array() ),
+				'registeredTypes' => apply_filters( 'conditional_blocks_register_condition_types', array() ),
 			);
 
+			$localized_data['isActive']  = ! empty( get_site_option( 'conditional-blocks-pro_license_key', false ) ) ? true : false;
 			$localized_data['isPro'] = true;
+			$localized_data['pluginsPage'] = admin_url( 'plugins.php' );
 			$localized_data['presets'] = $this->get_presets();
 			$localized_data['roles'] = $this->get_user_roles();
 			$localized_data['wcExists'] = class_exists( 'WooCommerce' );
@@ -91,7 +95,7 @@ class Conditional_Blocks_Enqueue {
 			}
 			$localized_data['phpLogicFunctions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
 
-			wp_localize_script( 'conditional-blocks-editor-js', 'cbLocalized', $localized_data );
+			wp_localize_script( 'conditional-blocks-editor-js', 'conditionalblocks', $localized_data );
 
 			wp_set_script_translations(
 				'conditional-blocks-editor-js',
