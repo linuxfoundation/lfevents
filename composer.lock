@@ -354,16 +354,16 @@
         },
         {
             "name": "pantheon-systems/wordpress-composer",
-            "version": "6.1.1",
+            "version": "6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pantheon-systems/wordpress-composer.git",
-                "reference": "b1bf72c6b4732ea3aed9654669f29e2a82ca19ef"
+                "reference": "b5803892e878e06359f61bc313527c08f6b68152"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/b1bf72c6b4732ea3aed9654669f29e2a82ca19ef",
-                "reference": "b1bf72c6b4732ea3aed9654669f29e2a82ca19ef",
+                "url": "https://api.github.com/repos/pantheon-systems/wordpress-composer/zipball/b5803892e878e06359f61bc313527c08f6b68152",
+                "reference": "b5803892e878e06359f61bc313527c08f6b68152",
                 "shasum": ""
             },
             "require": {
@@ -381,10 +381,10 @@
             ],
             "description": "WordPress for Pantheon with a composer.json file.",
             "support": {
-                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/6.1.1",
+                "source": "https://github.com/pantheon-systems/wordpress-composer/tree/6.2",
                 "issues": "https://github.com/pantheon-systems/wordpress-composer/issues"
             },
-            "time": "2022-11-15T21:09:14+00:00"
+            "time": "2023-03-29T21:11:20+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1020,15 +1020,15 @@
         },
         {
             "name": "wpackagist-plugin/leadin",
-            "version": "10.0.25",
+            "version": "10.1.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/leadin/",
-                "reference": "trunk"
+                "reference": "tags/10.1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/leadin.zip?timestamp=1678277916"
+                "url": "https://downloads.wordpress.org/plugin/leadin.10.1.6.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1074,15 +1074,15 @@
         },
         {
             "name": "wpackagist-plugin/photonic",
-            "version": "2.83",
+            "version": "2.84",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/photonic/",
-                "reference": "tags/2.83"
+                "reference": "tags/2.84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/photonic.2.83.zip"
+                "url": "https://downloads.wordpress.org/plugin/photonic.2.84.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1182,15 +1182,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/3.4.0"
+                "reference": "tags/3.5.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.3.4.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.3.5.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1278,12 +1278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ad434708152844968e15adf8eb3f4a2d7066242e"
+                "reference": "4b0e5298866d2c0719e1b207492ce5a553f08d92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ad434708152844968e15adf8eb3f4a2d7066242e",
-                "reference": "ad434708152844968e15adf8eb3f4a2d7066242e",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4b0e5298866d2c0719e1b207492ce5a553f08d92",
+                "reference": "4b0e5298866d2c0719e1b207492ce5a553f08d92",
                 "shasum": ""
             },
             "conflict": {
@@ -1317,7 +1317,7 @@
                 "barrelstrength/sprout-forms": "<3.9",
                 "barryvdh/laravel-translation-manager": "<0.6.2",
                 "barzahlen/barzahlen-php": "<2.0.1",
-                "baserproject/basercms": "<4.7.2",
+                "baserproject/basercms": "<4.7.5",
                 "bassjobsen/bootstrap-3-typeahead": ">4.0.2",
                 "billz/raspap-webgui": "<=2.6.6",
                 "bk2k/bootstrap-package": ">=7.1,<7.1.2|>=8,<8.0.8|>=9,<9.0.4|>=9.1,<9.1.3|>=10,<10.0.10|>=11,<11.0.3",
@@ -1542,7 +1542,7 @@
                 "modx/revolution": "<= 2.8.3-pl|<2.8",
                 "mojo42/jirafeau": "<4.4",
                 "monolog/monolog": ">=1.8,<1.12",
-                "moodle/moodle": "<4.0.6|= 3.11|>=4.1-beta,<4.1.1",
+                "moodle/moodle": "<4.0.7|>=4.1-beta,<4.1.2|= 3.11",
                 "mustache/mustache": ">=2,<2.14.1",
                 "namshi/jose": "<2.2",
                 "neoan3-apps/template": "<1.1.1",
@@ -1669,8 +1669,9 @@
                 "simplesamlphp/simplesamlphp-module-openid": "<1",
                 "simplesamlphp/simplesamlphp-module-openidprovider": "<0.9",
                 "simplito/elliptic-php": "<1.0.6",
+                "sitegeist/fluid-components": "<3.5",
                 "slim/slim": "<2.6",
-                "smarty/smarty": "<3.1.47|>=4,<4.2.1",
+                "smarty/smarty": "<3.1.48|>=4,<4.3.1",
                 "snipe/snipe-it": "<=6.0.14|>= 6.0.0-RC-1, <= 6.0.0-RC-5",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
@@ -1863,7 +1864,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-17T19:03:58+00:00"
+            "time": "2023-03-29T19:04:03+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -1993,15 +1994,15 @@
         },
         {
             "name": "wpackagist-plugin/query-monitor",
-            "version": "3.12.0",
+            "version": "3.12.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/query-monitor/",
-                "reference": "tags/3.12.0"
+                "reference": "tags/3.12.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.12.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.12.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
