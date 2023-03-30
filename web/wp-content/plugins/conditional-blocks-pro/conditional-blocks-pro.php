@@ -4,10 +4,13 @@
  * Author URI: https://conditionalblocks.com/
  * Description: Conditionally change the visibility of WordPress Blocks for any reason.
  * Author: Conditional Blocks
- * Version: 2.6.0
+ * Version: 3.0.2
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: conditional-blocks
+ *
+ * Requires at least:   5.5
+ * Requires PHP:        7.0
  *
  * @package conditional_blocks
  */
@@ -17,13 +20,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Define the plugin path.
+/**
+ * This constant name is the same the free & pro version, as only one can be active at a time.
+ */
 if ( ! defined( 'CONDITIONAL_BLOCKS_PATH' ) ) {
 	define( 'CONDITIONAL_BLOCKS_PATH', __FILE__ );
 }
 
 /**
+ * This constant name is the same the free & pro version, as only one can be active at a time.
+ *
+ * Note version could be a string such as x.x.x-beta2.
+ */
+if ( ! defined( 'CONDITIONAL_BLOCKS_VERSION' ) ) {
+	define( 'CONDITIONAL_BLOCKS_VERSION', '3.0.2' );
+}
+
+/**
  * CONBLOCKPRO_Init int the plugin.
+ *
+ * @DEVS: Don't rely on these for intrgrations as they may change, use the constants instead or refer to docs.
  */
 class CONBLOCKPRO_Init {
 	/**
@@ -47,7 +63,7 @@ class CONBLOCKPRO_Init {
 
 		$this->constants = array(
 			'name'           => 'Conditional Blocks Pro',
-			'version'        => '2.6.0',
+			'version'        => '3.0.2',
 			'slug'           => plugin_basename( __FILE__, ' . php' ),
 			'base'           => plugin_basename( __FILE__ ),
 			'name_sanitized' => basename( __FILE__, '. php' ),
@@ -104,15 +120,14 @@ class CONBLOCKPRO_Init {
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class-rest.php';
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class-render.php';
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class-enqueue.php';
-
 	}
 
 	public function activation() {
 
 		$text = __(
-			'Thank you for purchasing Conditional Blocks Pro! Activate your license to get started, then you can add conditions inside the block editor.',
+			'Thank you for purchasing Conditional Blocks Pro! Activate your license to get started, then add conditions inside the block editor.',
 			'conditional-blocks'
-		) . '<a class="button button-secondary" target="_blank" href="' . esc_url( 'https://conditionalblocks.com/docs/?cb=activated-pro' ) . '">' . __( 'See documentation', 'conditional-blocks' ) . '</a>';
+		) . ' <a class="button button-secondary" target="_blank" href="' . esc_url( 'https://conditionalblocks.com/docs/?utm_source=conditional-blocks-pro&utm_medium=referral&utm_campaign=activation-notice' ) . '">' . __( 'See documentation', 'conditional-blocks' ) . '</a>';
 
 		$this->notices->add_notice(
 			'success',
@@ -139,7 +154,7 @@ function conblockpro_run_sl() {
 		'name'        => 'Conditional Blocks Pro',
 		'item_id'     => '708',
 		'store_url'   => 'https://conditionalblocks.com/',
-		'version'     => '2.6.0',
+		'version'     => '3.0.2',
 		'author'      => 'Conditional Blocks',
 		'license_option_name' => 'conditional-blocks-pro_license_key',
 		'license' => get_site_option( 'conditional-blocks-pro_license_key', false ),
@@ -151,7 +166,7 @@ function conblockpro_run_sl() {
 
 	$plugin_ui_config = array(
 		'support_url' => 'https://conditionalblocks.com/support/',
-		'docs_url' => 'https://conditionalblocks.com/documentation/',
+		'docs_url' => 'https://conditionalblocks.com/docs/?utm_source=conditional-blocks-pro&utm_medium=referral&utm_campaign=plugin-links',
 		'beta_toggle' => true,
 	);
 

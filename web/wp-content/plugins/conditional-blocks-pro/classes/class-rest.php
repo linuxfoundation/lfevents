@@ -84,7 +84,7 @@ class Conditional_Blocks_REST_V1 {
 		}
 
 		$class = new Conditional_Blocks_Render_Block();
-		$converted = $class->legacy_converted_conditions( $parameters['legacyConditions'] );
+		$converted = $class->convert_v1_to_v2_conditions( $parameters['legacyConditions'] );
 
 		return new WP_REST_Response( $converted, 200 );
 	}
