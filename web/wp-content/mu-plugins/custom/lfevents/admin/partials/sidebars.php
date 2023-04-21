@@ -262,6 +262,17 @@ $sidebar = array(
 							'min'           => 0,
 							'max'           => 150,
 						),
+						array(
+							'type'          => 'checkbox',
+							'id'            => 'cncf_font',
+							'data_type'     => 'meta',
+							'data_key'      => 'cncf_font',
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => false,
+							'use_toggle'    => false,
+							'input_label'   => __( 'Use CNCF font' ),
+						),
 					),
 				),
 				array(
