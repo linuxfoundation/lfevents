@@ -11,3 +11,4 @@ wpcs/
 vendor/
 dist
 *.code-workspace
+.vscode/
