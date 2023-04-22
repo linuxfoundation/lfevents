@@ -14,6 +14,7 @@ import named from 'vinyl-named';
 import log from 'fancy-log';
 import colors from 'ansi-colors';
 import dartSass from 'sass';
+import rename from 'gulp-rename';
 import gulpSass from 'gulp-sass';
 const { sass } = gulpSass( dartSass );
 
@@ -78,7 +79,7 @@ function copy() {
 }
 
 function compileCSS() {
-  return gulp.src(['src/assets/scss/app.scss','src/assets/scss/editor.scss'])
+  return gulp.src('src/assets/scss/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass
@@ -86,11 +87,9 @@ function compileCSS() {
     .pipe($.autoprefixer({
       browsers: COMPATIBILITY
     }))
-    .pipe($.if(PRODUCTION, $.cleanCss({ compatibility: 'ie9' })))
-    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe($.if(REVISIONING && PRODUCTION || REVISIONING && DEV, $.rev()))
     .pipe(gulp.dest(PATHS.dist + '/assets/css'))
-    .pipe($.if(REVISIONING && PRODUCTION || REVISIONING && DEV, $.rev.manifest()))
+    .pipe($.cleanCss({ compatibility: 'ie9' }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(PATHS.dist + '/assets/css'))
     .pipe(browser.reload({ stream: true }));
 }

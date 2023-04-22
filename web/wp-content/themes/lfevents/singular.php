@@ -17,7 +17,18 @@ get_header();
 $splash_page      = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 $hide_header      = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
 $hide_sponsors    = get_post_meta( get_the_ID(), 'lfes_hide_sponsors', true );
+$use_cncf_font    = get_post_meta( $parent_id, 'lfes_cncf_font', true );
 $event_has_passed = false;
+
+if ( $use_cncf_font ) {
+			// Enqueue CNCF font stylesheet.
+	if ( WP_DEBUG === true ) {
+		// Use un-minified versions.
+		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.css' ), array(), filemtime( get_template_directory() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.css' ) ), 'all' );
+	} else {
+		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.min.css' ), array(), filemtime( get_template_directory() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.min.css' ) ), 'all' );
+	}
+}
 
 if ( ! $splash_page ) {
 	// menu background color.
@@ -59,26 +70,26 @@ if ( ! $splash_page ) {
 	}
 	?>
 
-<div data-sticky-container>
-	<header class="event-header sticky" data-sticky data-sticky-on="large"
-		data-options="marginTop:0;"
+<div data-sticky-container class="use-cncf-font">
+	<header class="event-header sticky" data-sticky data-sticky-on="large" data-options="marginTop:0;"
 		style="<?php echo esc_html( $background_style . $text_style ); ?>">
+
 		<?php lfe_event_alert_bar( $parent_id ); ?>
 
 		<div class="pre-nav">
 			<?php
-echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
+				echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 			?>
-
-			<button class="menu-toggler button alignright" type="button" aria-label="Toggle Menu"
-				data-toggle="event-menu">
-				<span class="hamburger-icon <?php echo esc_html( $subpage_header_elements_class ); ?>"></span>
+			<button class="menu-toggler button alignright" type="button"
+				aria-label="Toggle Menu" data-toggle="event-menu">
+				<span
+					class="hamburger-icon <?php echo esc_html( $subpage_header_elements_class ); ?>"></span>
 			</button>
 		</div>
 
-		<nav id="event-menu" class="event-menu show-for-large"
-			data-toggler="show-for-large">
-			<ul class="event-menu-list <?php echo esc_html( $subpage_header_elements_class ); ?>">
+		<nav id="event-menu" class="event-menu show-for-large" data-toggler="show-for-large">
+			<ul
+				class="event-menu-list <?php echo esc_html( $subpage_header_elements_class ); ?>">
 				<li class="page_item event-home-link" id="popout-header-link"><a
 						href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"
 						style="background-color:<?php echo $menu_color; ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a>
@@ -185,7 +196,9 @@ echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . 
 					<?php
 				} else {
 					?>
-			<h1 class="show-for-sr"><?php echo strip_tags( get_the_title(), '<br>' ); //phpcs:ignore ?></h1>
+			<h1 class="show-for-sr">
+				<?php echo strip_tags( get_the_title(), '<br>' ); //phpcs:ignore ?>
+			</h1>
 					<?php
 				}
 
@@ -239,13 +252,15 @@ if ( ! $splash_page ) :
 	);
 	?>
 
-<div class="event-footer-newsletter <?php echo esc_html( $menu_text_color ); ?>">
-	<p class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
-	<?php
+	<div
+		class="event-footer-newsletter <?php echo esc_html( $menu_text_color ); ?>">
+		<p
+			class="event-footer-newsletter__title"><?php echo wp_kses( $form_title, array( 'br' => array() ) ); ?></p>
+		<?php
 		$hubspot_form_id = lfe_get_newsletter_form_id();
 		echo do_shortcode( '[hubspot type=form portal=8112310 id=' . $hubspot_form_id . ']' );
-	?>
-	<p class="event-footer-newsletter__privacy">
+		?>
+		<p class="event-footer-newsletter__privacy">
 	<?php
 	echo wp_kses(
 		$form_privacy,
@@ -256,7 +271,7 @@ if ( ! $splash_page ) :
 	);
 	?>
 	</p>
-</div>
+	</div>
 
 	<?php
 	// Only display this section if there is a logo set.
