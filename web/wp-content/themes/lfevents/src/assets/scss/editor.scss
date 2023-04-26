@@ -106,3 +106,7 @@
 .block-editor-block-list__block li {
   margin-left: 1rem;
 }
+
+.conditional-blocks-has-conditions::before {
+  content: 'CONDITIONAL' !important;
+}

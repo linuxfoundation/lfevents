@@ -9,7 +9,6 @@
   }
 }
 
-
 .is-style-80-responsive {
   height: 40px !important;
 
@@ -17,7 +16,6 @@
     height: 80px !important;
   }
 }
-
 
 .is-style-60-responsive {
   height: 30px !important;
@@ -27,7 +25,6 @@
   }
 }
 
-
 .is-style-40-responsive {
   height: 20px !important;
 
@@ -35,7 +32,6 @@
     height: 40px !important;
   }
 }
-
 
 .is-style-100-responsive {
   .block-library-spacer__resize-container {
@@ -78,13 +74,13 @@
 }
 
 // Style the spacer block (for Editor)
-.block-library-spacer__resize-container {
-  border: 1px solid #F3F4F5;
-  color: #D8D8D8;
+.block-library-spacer__resize-container > div {
+  border: 1px solid #f3f4f5;
+  color: #d8d8d8;
 
   &:after {
     content: 'SPACER BLOCK';
-    color: #D8D8D8;
+    color: #d8d8d8;
     position: absolute;
     left: 50%;
     top: 50%;
