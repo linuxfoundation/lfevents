@@ -429,16 +429,24 @@ class Conditional_Blocks_Render_Block {
 
 		$has_match = false;
 
-		if ( empty( $condition['terms'] ) || empty( $condition['postType']['value'] ) || empty( $condition['taxonomy']['value'] ) ) {
+		if ( empty( $condition['postType']['value'] ) || empty( $condition['taxonomy']['value'] ) ) {
 			return $should_render;
 		}
 
 		$current_post_id = get_queried_object_id();
 
-		$selected_terms = array_column( $condition['terms'], 'value' );
+		// We are checking terms, otherwise we are checking for 'any'.
+		if ( ! empty( $condition['terms'] ) ) {
 
-		if ( has_term( $selected_terms, $condition['taxonomy']['value'], $current_post_id ) ) {
-			$has_match = true;
+			$selected_terms = array_column( $condition['terms'], 'value' );
+
+			if ( has_term( $selected_terms, $condition['taxonomy']['value'], $current_post_id ) ) {
+				$has_match = true;
+			}
+		} else {
+			if ( has_term( '', $condition['taxonomy']['value'], $current_post_id ) ) {
+				$has_match = true;
+			}
 		}
 
 		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
