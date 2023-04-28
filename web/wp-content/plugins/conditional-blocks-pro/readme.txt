@@ -166,11 +166,16 @@ We're always eager to hear your ideas! Reach out to us via [support](https://con
 
 == Changelog ==
 
+= 3.0.3 =
+
+- Improved: Post Taxonomy & Terms condition now allow terms to be optionally choosen. This allows displaying blocks on content with specific taxonomies, and ANY terms.
+
+
 = 3.0.2 =
 
 - Ready and tested for WordPress 6.2.
 - Ready for WordPress Site Editor.
-- Change: Requires minium of PHP 7.
+- Change: Requires minimum of PHP 7.
 - New: Allow the WooCommerce Cart Products condition to require 'all' or 'any' of the selected products [PRO].
 - New: Allow the Query String condition to trigger when a patterns are 'Not Present' [PRO].
 - Improvement: Conditionally remove the Conditional Blocks attributes on REST API requests where not needed.
