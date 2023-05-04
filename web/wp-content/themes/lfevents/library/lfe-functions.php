@@ -747,6 +747,8 @@ function lfe_get_newsletter_form_id() {
 		return 'ff159943-6c4f-4aea-80b1-6a320b30e169';
 	} elseif ( false !== strpos( $wp->request, 'open-source-days' ) ) {
 		return '4beaa5ac-9bc7-4997-8b33-9e611ae014a4';
+	} elseif ( false !== strpos( $wp->request, 'one-summit-north-america' ) ) {
+		return 'b17aedde-8553-47fd-b31c-767327f942ea';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-israel' ) ) {
 		return '50d9a617-4a06-4434-9efc-b02739a0b0ef';
 	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
