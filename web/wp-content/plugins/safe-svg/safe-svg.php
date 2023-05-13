@@ -346,6 +346,10 @@ if ( ! class_exists( 'safe_svg' ) ) {
 		 * @return array
 		 */
 		public function one_pixel_fix( $image, $attachment_id, $size, $icon ) {
+			if ( ! apply_filters( 'safesvg_try_calculate_image_sizes', '__return_true' ) ) {
+				return $image;
+			}
+
 			if ( get_post_mime_type( $attachment_id ) === 'image/svg+xml' ) {
 				$dimensions = $this->svg_dimensions( get_attached_file( $attachment_id ) );
 
