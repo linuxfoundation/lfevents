@@ -388,14 +388,14 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 	if ( empty( $start_date ) || empty( $end_date ) || ( $start_date->format( 'MjY' ) == $end_date->format( 'MjY' ) ) ) { // FjY == accounts for same day, different time.
 		$start_date_pretty    = $start_date->format( 'M j, Y' );
 		$end_date_pretty      = $end_date->format( 'M j, Y' );
-		$start_date_pretty_ch = $start_date->format( 'Y年m月j' );
-		$end_date_pretty_ch   = $end_date->format( 'm月j日' );
+		$start_date_pretty_ch = $start_date->format( 'Y年n月j日' );
+		$end_date_pretty_ch   = $end_date->format( 'n月j日' );
 	} else {
 		 // Setup basic dates.
 		$start_date_pretty    = $start_date->format( 'M j' );
 		$end_date_pretty      = $end_date->format( 'j, Y' );
-		$start_date_pretty_ch = $start_date->format( 'Y年m月j' );
-		$end_date_pretty_ch   = $end_date->format( 'j日' );
+		$start_date_pretty_ch = $start_date->format( 'Y年n月j日' );
+		$end_date_pretty_ch   = $end_date->format( 'n月j日' );
 		// If years differ add suffix and year to start_date.
 		if ( $start_date->format( 'Y' ) != $end_date->format( 'Y' ) ) {
 			$start_date_pretty .= $start_date->format( ', Y' );
@@ -404,7 +404,6 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 		// If months differ add suffix and year to end_date.
 		if ( $start_date->format( 'M' ) != $end_date->format( 'M' ) ) {
 			$end_date_pretty    = $end_date->format( 'M ' ) . $end_date_pretty;
-			$end_date_pretty_ch = $end_date->format( 'm月' ) . $end_date_pretty_ch;
 		}
 	}
 
