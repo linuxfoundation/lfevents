@@ -374,12 +374,15 @@ function check_string_is_date( $date, $format = 'Y/m/d' ) {
 
 /**
  * Makes the date pretty.  Adapted from https://9seeds.com/pretty-php-date-ranges/.
+ * Checks to see if the site is the Chinese site, in which case output both languages by default.
+ * Allows a language override to specify dates in Chinese, English or both.
  *
  * @param datetime $start_date The start date.
  * @param datetime $end_date The end date.
  * @param string   $ch_separator The separator to use between english and chinese dates.
+ * @param string   $language Force the function to output the date range in one language or both. 
  */
-function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ' ) {
+function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ', $language = NULL ) {
 
 	$date_range    = '';
 	$date_range_ch = '';
@@ -422,6 +425,18 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 			$date_range_ch .= '日';
 		}
 	}
+
+	if ( ! is_null( $language ) ) {
+		if ( 'ENG' === $language ) {
+			return $date_range;
+		} elseif ( 'CHI' === $language ) {
+			return $date_range_ch;
+		} elseif ( 'BOTH' === $language ) {
+			return $date_range_ch . $ch_separator . $date_range;
+		}
+	}
+
+	// Default behavior if "language" isn't specified.
 	if ( is_lfeventsci() ) {
 		return $date_range;
 	} else {

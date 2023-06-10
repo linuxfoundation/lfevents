@@ -77,9 +77,13 @@ registerBlockType( 'cgb/block-pricing-block', {
 			type: 'string',
 			default: '-0700',
 		},
+		language: {
+			type: 'string',
+			default: 'ENG',
+		},
 	},
 	edit: ( function( props ) {
-		const { setAttributes, attributes: { topLabels, dates, leftLabels, color1, color2, color3, color4, colorText, prices, expireText, timeZone } } = props;
+		const { setAttributes, attributes: { topLabels, dates, leftLabels, color1, color2, color3, color4, colorText, prices, expireText, timeZone, language } } = props;
 
 		function updateTopLabels( value, index ) {
 			const newTopLabels = [ ...topLabels ];
@@ -218,6 +222,16 @@ registerBlockType( 'cgb/block-pricing-block', {
 								{ label: 'UTC+13', value: '+1300' },
 								{ label: 'UTC+13:45', value: '+1345' },
 								{ label: 'UTC+14', value: '+1400' },
+							] }
+						/>
+						<SelectControl
+							label="Language for the pricing dates:"
+							value={ language }
+							onChange={ value => setAttributes( { language: value } ) }
+							options={ [
+								{ label: 'English', value: 'ENG' },
+								{ label: 'Chinese', value: 'CHI' },
+								{ label: 'Both', value: 'BOTH' },
 							] }
 						/>
 					</div>

@@ -103,6 +103,7 @@ function block_callback( $att ) {
 	$color4 = $att['color4'] ?? '';
 	$color_text = $att['colorText'] ?? 'inherit';
 	$tz = $att['timeZone'] ?? '-0700';
+	$language = $att['language'] ?? NULL;
 	$yesterday = new DateTime( 'now', new DateTimeZone( $tz ) );
 	$yesterday->sub( new DateInterval( 'P1D' ) );
 
@@ -149,7 +150,7 @@ function block_callback( $att ) {
 
 					$html .= '<div class="price-window" style="background-color:' . $color . '">';
 					$html .= '<h5 class="price-window--name">' . $top_labels[ $i ];
-					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end, '<br>' ) . '</small>';
+					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end, '<br>', $language ) . '</small>';
 					$html .= '</h5>';
 					$html .= '</div>';
 					$html .= '<div class="price-amount">';
