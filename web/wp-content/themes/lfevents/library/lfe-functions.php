@@ -380,9 +380,9 @@ function check_string_is_date( $date, $format = 'Y/m/d' ) {
  * @param datetime $start_date The start date.
  * @param datetime $end_date The end date.
  * @param string   $ch_separator The separator to use between english and chinese dates.
- * @param string   $language Force the function to output the date range in one language or both. 
+ * @param string   $language Force the function to output the date range in one language or both.
  */
-function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ', $language = NULL ) {
+function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator = ' ', $language = null ) {
 
 	$date_range    = '';
 	$date_range_ch = '';
