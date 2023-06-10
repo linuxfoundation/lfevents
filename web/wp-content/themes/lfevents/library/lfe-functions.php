@@ -421,8 +421,6 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 		if ( $end_date_pretty != $start_date_pretty ) {
 			  $date_range    .= '–' . $end_date_pretty;
 			  $date_range_ch .= '–' . $end_date_pretty_ch;
-		} else {
-			$date_range_ch .= '日';
 		}
 	}
 
