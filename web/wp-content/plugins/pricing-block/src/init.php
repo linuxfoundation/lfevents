@@ -103,7 +103,7 @@ function block_callback( $att ) {
 	$color4 = $att['color4'] ?? '';
 	$color_text = $att['colorText'] ?? 'inherit';
 	$tz = $att['timeZone'] ?? '-0700';
-	$language = $att['language'] ?? NULL;
+	$language = $att['language'] ?? 'ENG';
 	$yesterday = new DateTime( 'now', new DateTimeZone( $tz ) );
 	$yesterday->sub( new DateInterval( 'P1D' ) );
 
