@@ -217,6 +217,7 @@ class LFEvents {
 		$this->loader->add_filter( 'tiny_mce_plugins', $plugin_public, 'disable_emojicons_tinymce' );
 		$this->loader->add_action( 'pre_ping', $plugin_public, 'disable_pingback' );
 		$this->loader->add_filter( 'wp_resource_hints', $plugin_public, 'dns_prefetch_to_preconnect', 0, 2 );
+		$this->loader->add_action( 'send_headers', $plugin_public, 'add_header_cache', 15 );
 	}
 
 	/**
