@@ -384,6 +384,15 @@ class LFEvents_Public {
 	}
 
 	/**
+	 * Overrides the default cache headers.
+	 */
+	public function add_header_cache() {
+		if ( ! is_admin() && ! is_user_logged_in() ) {
+			header( 'Cache-Control: public, max-age=60, s-maxage=43200, stale-while-revalidate=86400, stale-if-error=604800' );
+		}
+	}
+
+	/**
 	 * Creates css into the head with the event gradient
 	 */
 	public function create_event_styles() {
