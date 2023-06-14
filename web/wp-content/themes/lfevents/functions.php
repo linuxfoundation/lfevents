@@ -23,9 +23,6 @@ require_once 'library/foundation.php';
 /** Register all navigation menus */
 require_once 'library/navigation.php';
 
-/** Create widget areas in sidebar and footer */
-require_once 'library/widget-areas.php';
-
 /** Enqueue scripts */
 require_once 'library/enqueue-scripts.php';
 
