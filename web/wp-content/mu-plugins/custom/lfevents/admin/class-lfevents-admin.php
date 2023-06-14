@@ -429,10 +429,10 @@ class LFEvents_Admin {
 				echo has_post_thumbnail( $post_id ) ? '<span class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
 			case 'forwarding_url':
-				echo esc_html( get_post_meta( $post_id, 'lfe_sponsor_url', true ) ? get_post_meta( $post_id, 'lfe_sponsor_url', true ) : '-' );
+				echo esc_html( get_post_meta( $post_id, 'lfes_sponsor_url', true ) ? get_post_meta( $post_id, 'lfes_sponsor_url', true ) : '-' );
 				break;
 			case 'alt_text':
-				echo esc_html( get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) ? get_post_meta( $post_id, 'lfe_sponsor_alt_text', true ) : '-' );
+				echo esc_html( get_post_meta( $post_id, 'lfes_sponsor_alt_text', true ) ? get_post_meta( $post_id, 'lfes_sponsor_alt_text', true ) : '-' );
 				break;
 		}
 	}
