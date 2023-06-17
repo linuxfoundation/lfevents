@@ -120,17 +120,6 @@ $sidebar = array(
 						),
 						array(
 							'type'          => 'text',
-							'id'            => 'salesforce_id',
-							'data_type'     => 'meta',
-							'data_key'      => 'salesforce_id',
-							'label'         => __( 'SalesForce ID' ),
-							'register_meta' => true,
-							'ui_border_top' => false,
-							'default_value' => '',
-							'placeholder'   => 'a0A2M00000VcC9HUAV',
-						),
-						array(
-							'type'          => 'text',
 							'id'            => 'dropdown_title',
 							'data_type'     => 'meta',
 							'data_key'      => 'dropdown_title',
