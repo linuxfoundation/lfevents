@@ -515,8 +515,13 @@ class LFEvents_Admin {
 					$virtual = false;
 				}
 
+				$event_title = $event->title;
+				$event_title = str_replace( 'Kubernetes Community Days', 'KCD', $event_title );
+				$event_title = str_replace( 'Kubernetes Community Day', 'KCD', $event_title );
+				$event_title = str_replace( 'KCDs', 'KCD', $event_title );
+		
 				$my_post = array(
-					'post_title'  => str_replace( 'KCD', 'Kubernetes Community Days', $event->title ),
+					'post_title'  => $event_title,
 					'post_status' => 'publish',
 					'post_author' => 1,
 					'post_type'   => 'lfe_community_event',
