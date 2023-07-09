@@ -70,6 +70,8 @@ class Conditional_Blocks_Enqueue {
 				'screensizes' => $this->responsive_screensizes(),
 				'registeredCategories' => apply_filters( 'conditional_blocks_register_condition_categories', array() ),
 				'registeredTypes' => apply_filters( 'conditional_blocks_register_condition_types', array() ),
+				'excludedBlockTypes' => apply_filters( 'conditional_blocks_excluded_block_types', array() ), // Exclude specific blocks.
+				'visibleInEditor' => apply_filters( 'conditional_blocks_visible_in_editor', true ), // Change if conditional blocks is visable in the editor.
 			);
 
 			$localized_data['isActive']  = ! empty( get_site_option( 'conditional-blocks-pro_license_key', false ) ) ? true : false;

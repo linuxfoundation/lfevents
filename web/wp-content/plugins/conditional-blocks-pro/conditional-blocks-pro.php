@@ -4,7 +4,7 @@
  * Author URI: https://conditionalblocks.com/
  * Description: Conditionally change the visibility of WordPress Blocks for any reason.
  * Author: Conditional Blocks
- * Version: 3.0.3
+ * Version: 3.0.4
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: conditional-blocks
@@ -33,13 +33,13 @@ if ( ! defined( 'CONDITIONAL_BLOCKS_PATH' ) ) {
  * Note version could be a string such as x.x.x-beta2.
  */
 if ( ! defined( 'CONDITIONAL_BLOCKS_VERSION' ) ) {
-	define( 'CONDITIONAL_BLOCKS_VERSION', '3.0.3' );
+	define( 'CONDITIONAL_BLOCKS_VERSION', '3.0.4' );
 }
 
 /**
  * CONBLOCKPRO_Init int the plugin.
  *
- * @DEVS: Don't rely on these for intrgrations as they may change, use the constants instead or refer to docs.
+ * @DEVS: Don't rely on these for integrations as they may change, use the constants instead or refer to docs.
  */
 class CONBLOCKPRO_Init {
 	/**
@@ -63,7 +63,7 @@ class CONBLOCKPRO_Init {
 
 		$this->constants = array(
 			'name'           => 'Conditional Blocks Pro',
-			'version'        => '3.0.3',
+			'version'        => '3.0.4',
 			'slug'           => plugin_basename( __FILE__, ' . php' ),
 			'base'           => plugin_basename( __FILE__ ),
 			'name_sanitized' => basename( __FILE__, '. php' ),
@@ -154,7 +154,7 @@ function conblockpro_run_sl() {
 		'name'        => 'Conditional Blocks Pro',
 		'item_id'     => '708',
 		'store_url'   => 'https://conditionalblocks.com/',
-		'version'     => '3.0.3',
+		'version'     => '3.0.4',
 		'author'      => 'Conditional Blocks',
 		'license_option_name' => 'conditional-blocks-pro_license_key',
 		'license' => get_site_option( 'conditional-blocks-pro_license_key', false ),
