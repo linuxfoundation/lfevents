@@ -452,7 +452,7 @@ class LFEvents_Admin {
 		// add new columns.
 		$columns['sponsor_logo'] = 'Sponsor Logo';
 		$columns['forwarding_url'] = 'Forwarding URL';
-		$columns['alt_text'] = 'Alt text';
+		$columns['alt_text'] = 'Alternative Display Name';
 		// add back in old columns.
 		$columns['author'] = $author;
 		$columns['date'] = $date;
@@ -519,7 +519,7 @@ class LFEvents_Admin {
 				$event_title = str_replace( 'Kubernetes Community Days', 'KCD', $event_title );
 				$event_title = str_replace( 'Kubernetes Community Day', 'KCD', $event_title );
 				$event_title = str_replace( 'KCDs', 'KCD', $event_title );
-		
+
 				$my_post = array(
 					'post_title'  => $event_title,
 					'post_status' => 'publish',
