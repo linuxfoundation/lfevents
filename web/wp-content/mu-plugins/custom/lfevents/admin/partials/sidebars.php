@@ -950,7 +950,7 @@ $sidebar = array(
 							'register_meta' => true,
 							'ui_border_top' => true,
 							'default_value' => '',
-							'help'          => __( 'Field only need to be filled in if the title of the post is not acceptable. The Alternative Dispay Name should only describe the sponsor. Do not add any extraneous text. This field is public and stops the post title from being used.' ),
+							'help'          => __( 'This field only needs to be filled in if the title of the post is not acceptable for public display. The Alternative Dispay Name should only describe the sponsors name. Do not add any extraneous text. This field is public and stops the post title from being used.' ),
 							'placeholder'   => __( 'Google' ),
 						),
 					),
