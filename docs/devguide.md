@@ -41,6 +41,8 @@ excludes:
 services:
   node:
     type: 'node:14'
+    ssl: true
+    scanner: false
   appserver:
     run:
       - /app/vendor/bin/phpcs --config-set installed_paths /app/vendor/wp-coding-standards/wpcs
@@ -79,22 +81,25 @@ tooling:
 
 5. Run `lando composer install --no-ansi --no-interaction --optimize-autoloader --no-progress` to download dependencies
 
-6. Run `lando pull --code=none` and follow the prompts to download the media files and database from Pantheon:
+6. Run `lando pull --code=none --files=none` and follow the prompts to download the media files and database from Pantheon:
   * `Pull database from?` >  `dev`
-  * `Pull files from?` >  `dev`
 
-  (Note: The files could be over 10Gb in size. It may be better to select 'none' and then load the images from the remote server.)
+7. run this script to activate a dev plugin used to load media files from the production server instead of hosting them locally, in addition to other dev plugins, and deactivates some production plugins:
 
-7. You will need to compile the theme css/js before the site will render correctly:
+```
+lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && lando wp plugin deactivate shortpixel-image-optimiser && lando wp plugin deactivate pantheon-advanced-page-cache && lando wp plugin activate load-media-from-production
+```
+
+8. You will need to compile the theme css/js before the site will render correctly:
    1. Go to the theme directory: `cd web/wp-content/themes/lfevents`
    2. Install the Node.js dependencies: `lando npm install`
    3. Compile the files: `lando npm run build`
 
-8. Visit the local site URL saved from above.  To find it again run `lando info`.
+9. Visit the local site URL saved from above.  To find it again run `lando info`.
 
-9. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
+10. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
 
-10. Get your browser to trust the Lando SSL certificate by following [these instructions](https://docs.lando.dev/config/security.html#trusting-the-ca).  This step isn't essential but will stop you having to keep bypassing the privacy warning in your browser.  On MacOS Catalina, I also had to manually go into Keychain Access and set the *.lndo.site certificate to “Always Trust”. See [screenshot](/docs/ca-screenshot.png).
+11. Get your browser to trust the Lando SSL certificate by following [these instructions](https://docs.lando.dev/config/security.html#trusting-the-ca).  This step isn't essential but will stop you having to keep bypassing the privacy warning in your browser.
 
 ### Notes
 
@@ -102,7 +107,7 @@ tooling:
 
 * Composer, Terminus, npm and wp-cli commands should be run in Lando rather than on the host machine. This is done by prefixing the desired command with `lando`. For example, after a change to composer.json, run `lando composer update` rather than `composer update`.
 
-* Run `lando pull --code=none` at any time to pull down a fresh copy of the database and files from the live instance on Pantheon
+* Repeat steps 6 and 7 above to download a fresh copy of the database.
 
 -----
 
