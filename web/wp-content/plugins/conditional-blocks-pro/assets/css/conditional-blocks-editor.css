@@ -1,6 +1,28 @@
 :root {
   --cb-gray: #f9f9f9;
 }
+/* Editor Content Style */
+.editor-styles-wrapper .conditional-blocks-has-conditions, .conditional-blocks-has-conditions {
+  outline: 1px dashed var(--wp-admin-theme-color);
+}
+.editor-styles-wrapper .conditional-blocks-has-conditions::before, .conditional-blocks-has-conditions::before {
+  content: 'Conditional';
+  z-index: 10;
+  font-size: 10px;
+  color: white;
+  background: var(--wp-admin-theme-color);
+  padding: 0 5px;
+  text-align: center;
+  display: block;
+  width: max-content;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
+  top: -13px;
+  left: -1px;
+}
+
+/* Sidebar & modal Content Style */
 .conditional-blocks-builder-modal .components-modal__content {
   padding: 0;
 }
@@ -124,29 +146,10 @@
 .conditional-blocks-builder-modal__button_group button {
   margin: 0 10px;
 }
-/* There's a bug where the red color for destruvie buttons doesn't apply. Forcing it for now */
+/* There's a bug where the red color for destructive buttons doesn't apply. Forcing it for now */
 .conditional-blocks-builder-modal__popover .components-button.is-destructive {
   color: #cc1818 !important;
   box-shadow: inset 0 0 0 1px #cc1818 !important;
-}
-.conditional-blocks-has-conditions {
-  outline: 1px dashed var(--wp-admin-theme-color);
-}
-.conditional-blocks-has-conditions::before {
-  content: 'Conditional';
-  z-index: 10;
-  font-size: 10px;
-  color: white;
-  background: var(--wp-admin-theme-color);
-  padding: 0 5px;
-  text-align: center;
-  display: block;
-  width: max-content;
-  font-weight: 600;
-  line-height: normal;
-  position: absolute;
-  top: -13px;
-  left: -1px;
 }
 .conditional-blocks-builder__spacer {
   height: 20px;
@@ -161,30 +164,30 @@
   border: 1px dashed #d4d4d4;
 }
 /* Fixes issue with date pickers. */
-.conditonal-blocks-select__menu {
+.conditional-blocks-select__menu {
   z-index: 30 !important;
 }
 /* Time picker */
-.conditonal-blocks-time-picker .react-time-picker__wrapper {
+.conditional-blocks-time-picker .react-time-picker__wrapper {
   display: flex;
 }
-.conditonal-blocks-time-picker input {
+.conditional-blocks-time-picker input {
   min-width: 70px !important;
 }
-.conditonal-blocks-time-picker .react-time-picker__inputGroup__leadingZero {
+.conditional-blocks-time-picker .react-time-picker__inputGroup__leadingZero {
   display: none !important;
 }
-.conditional-blocks-builder-modal .conditonal-blocks-select__control--is-focused {
+.conditional-blocks-builder-modal .conditional-blocks-select__control--is-focused {
   border-color: var(--wp-admin-theme-color);
   box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
 }
-.conditional-blocks-builder-modal .conditonal-blocks-select__option--is-focused {
+.conditional-blocks-builder-modal .conditional-blocks-select__option--is-focused {
   background-color: #f0f0f0;
 }
-.conditional-blocks-builder-modal .conditonal-blocks-select__option--is-selected {
+.conditional-blocks-builder-modal .conditional-blocks-select__option--is-selected {
   background-color: var(--wp-admin-theme-color);
 }
-.conditonal-blocks-small {
+.conditional-blocks-small {
   font-size: 12px;
 }
 .conditional-block-separator-wrapper {

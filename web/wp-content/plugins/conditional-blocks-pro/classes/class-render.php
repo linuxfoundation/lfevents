@@ -4,7 +4,7 @@
  *
  * @package conditional-blocks-pro
  */
- // phpcs:disable  WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+// phpcs:disable  WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -146,7 +146,7 @@ class Conditional_Blocks_Render_Block {
 
 		$has_valid_set = false;
 
-		foreach ( $condition_sets  as $index => $set ) {
+		foreach ( $condition_sets as $index => $set ) {
 
 			$conditions = $set['conditions'];
 
@@ -191,10 +191,10 @@ class Conditional_Blocks_Render_Block {
 
 			// responsiveScreenSizes will modify the existing html. Handle this early.
 			if ( $type === 'responsiveScreenSizes' && is_array( $condition['showOn'] ) ) {
-				 $this->current_block_content = $this->apply_responsive_screensizes( $this->current_block_content, $condition['showOn'] );
+				$this->current_block_content = $this->apply_responsive_screensizes( $this->current_block_content, $condition['showOn'] );
 
-				 // Early for modifed markup.
-				 $results['single'][] = true;
+				// Early for modified markup.
+				$results['single'][] = true;
 				continue;
 			}
 
@@ -209,9 +209,9 @@ class Conditional_Blocks_Render_Block {
 			 * Stacked Types will make specific condition types act as 'OR" logic.
 			 *
 			 * Depreciated: We'll treat this function as depreciated since we have built-in OR support.
-			 * Keeping for now for backward campatability when blocks multiple date related conditions.
+			 * Keeping for now for backward compatibility when blocks multiple date related conditions.
 			 */
-			$stacked_checks = apply_filters( 'conditonal_blocks_register_stacked_types', array( 'dateRange', 'dateRecurring' ) );
+			$stacked_checks = apply_filters( 'conditional_blocks_register_stacked_types', array( 'dateRange', 'dateRecurring' ) );
 
 			$is_stackable = in_array( $type, $stacked_checks, true );
 
@@ -227,7 +227,7 @@ class Conditional_Blocks_Render_Block {
 			);
 		}
 
-		$should_render = $this->verify_conditions_are_met( $results );// The outcome for all conditions.
+		$should_render = $this->verify_conditions_are_met( $results ); // The outcome for all conditions.
 		$results['should_render'] = $should_render;
 
 		// Got it.
@@ -249,7 +249,7 @@ class Conditional_Blocks_Render_Block {
 			return false;
 		}
 
-		// A stacked condition type requires ATLEAST one to be TRUE otherwise the block content will be hidden.
+		// A stacked condition type requires AT LEAST one to be TRUE otherwise the block content will be hidden.
 		if ( ! empty( $results['stacked'] ) ) {
 			foreach ( $results['stacked'] as $stack_index => $results_array ) {
 				if ( ! empty( $results_array ) && ! in_array( true, $results_array, true ) ) {
@@ -290,11 +290,11 @@ class Conditional_Blocks_Render_Block {
 
 		if ( ! empty( $html_classes ) ) {
 
-			// Replace the first occurance of class=" without classes.
+			// Replace the first occurrence of class=" without classes.
 			// We need the classes to be added directly to the blocks. Wrapping classes can sometimes block full width content.
 			$needle = 'class="';
 
-			// Find the first occurance.
+			// Find the first occurrence.
 			$find_class_tag = strpos( $block_content, $needle );
 
 			if ( $find_class_tag !== false ) {
@@ -303,7 +303,7 @@ class Conditional_Blocks_Render_Block {
 				// Replace it.
 				$new_block = substr_replace( $block_content, $replacement, $find_class_tag, strlen( $needle ) );
 			} else {
-				// Fallback to wrapping classes when block has no exsisting classes.
+				// Fallback to wrapping classes when block has no existing classes.
 				$new_block = '<div class="' . $html_classes . '">' . $block_content . '</div>';
 			}
 
@@ -379,7 +379,7 @@ class Conditional_Blocks_Render_Block {
 			$has_match = true;
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -407,7 +407,7 @@ class Conditional_Blocks_Render_Block {
 			$has_match = true;
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -449,7 +449,7 @@ class Conditional_Blocks_Render_Block {
 			}
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -480,7 +480,7 @@ class Conditional_Blocks_Render_Block {
 			}
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -488,7 +488,7 @@ class Conditional_Blocks_Render_Block {
 			$should_render = true;
 		}
 
-			return $should_render;
+		return $should_render;
 	}
 
 	/**
@@ -599,7 +599,7 @@ class Conditional_Blocks_Render_Block {
 			return $should_render;
 		}
 
-		$user          = wp_get_current_user();
+		$user = wp_get_current_user();
 		$current_roles = (array) $user->roles;
 
 		$has_role_match = false;
@@ -614,7 +614,7 @@ class Conditional_Blocks_Render_Block {
 			}
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_role_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -649,23 +649,23 @@ class Conditional_Blocks_Render_Block {
 		$u_platform = strtolower( $current_agent['platform'] );
 		$u_browser = strtolower( $current_agent['browser'] );
 
-		$matched_agent  = false;
+		$matched_agent = false;
 
 		foreach ( $allowed_agents as $allowed_agent ) {
 			$allowed_agent = is_array( $allowed_agent ) ? $allowed_agent['value'] : $allowed_agent;
 
 			if ( $u_platform === $allowed_agent || $u_browser === $allowed_agent ) {
-				$matched_agent  = true;
+				$matched_agent = true;
 				break;
 			}
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $matched_agent && $block_action === 'showBlock' ) {
 			$should_render = true;
 		} elseif ( ! $matched_agent && $block_action === 'hideBlock' ) {
-			$should_render  = true;
+			$should_render = true;
 		}
 
 		return $should_render;
@@ -687,10 +687,10 @@ class Conditional_Blocks_Render_Block {
 			$matches_referer = false;
 
 			if ( $this->is_allowed_referer( $allowed_referers ) ) {
-				$matches_referer  = true;
+				$matches_referer = true;
 			}
 
-			$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+			$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 			if ( $matches_referer && $block_action === 'showBlock' ) {
 				$should_render = true;
@@ -830,7 +830,7 @@ class Conditional_Blocks_Render_Block {
 			foreach ( $selected_cookies as $selected_cookie ) {
 				if ( isset( $_COOKIE[ $selected_cookie ] ) ) {
 					// Cookie match.
-					$has_cookie_match  = true;
+					$has_cookie_match = true;
 					break;
 				}
 			}
@@ -872,10 +872,10 @@ class Conditional_Blocks_Render_Block {
 
 			$has_match = false;
 
-			$geo      = new WC_Geolocation();
-			$user_ip  = $geo->get_ip_address();
+			$geo = new WC_Geolocation();
+			$user_ip = $geo->get_ip_address();
 			$user_geo = $geo->geolocate_ip( $user_ip ); // Get geolocated user data.
-			$country_code  = $user_geo['country']; // Get the country code.
+			$country_code = $user_geo['country']; // Get the country code.
 
 			foreach ( $selected_countries as $selected_country ) {
 				if ( $country_code === $selected_country['value'] ) {
@@ -884,7 +884,7 @@ class Conditional_Blocks_Render_Block {
 				}
 			}
 
-			$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+			$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 			if ( $has_match && $block_action === 'showBlock' ) {
 				$should_render = true;
@@ -922,13 +922,13 @@ class Conditional_Blocks_Render_Block {
 				if ( $should_contain ) {
 					if ( strpos( $request_uri, trim( $selected_path ) ) !== false ) {
 						// Path found.
-						$meets_requirements   = true;
+						$meets_requirements = true;
 						break;
 					}
 				} else {
 					if ( strpos( $request_uri, trim( $selected_path ) ) === false ) {
 						// Path not found.
-						$meets_requirements   = true;
+						$meets_requirements = true;
 						break;
 					}
 				}
@@ -1022,7 +1022,7 @@ class Conditional_Blocks_Render_Block {
 				}
 
 				$function_name = strtok( $whole_function, '(' );
-				$function_name  = ltrim( $function_name, '!' );
+				$function_name = ltrim( $function_name, '!' );
 
 				if ( ! in_array( $function_name, $allowed_functions, true ) || ! is_callable( $function_name ) ) {
 					continue;
@@ -1036,7 +1036,7 @@ class Conditional_Blocks_Render_Block {
 				$params_to_use = explode( ',', $params_to_use );
 
 				$params_to_use = array_map(
-					function( $param ) {
+					function ($param) {
 						return trim( $param, ' \'"' );
 					},
 					$params_to_use
@@ -1147,7 +1147,7 @@ class Conditional_Blocks_Render_Block {
 			$has_match = true;
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -1216,7 +1216,8 @@ class Conditional_Blocks_Render_Block {
 
 			if ( in_array( $product_id, $selected_product_ids, true ) ) {
 				$matched_product_ids[] = $product_id;
-			};
+			}
+			;
 		}
 
 		// All products need to be in cart, otherwise any of the products.
@@ -1231,7 +1232,7 @@ class Conditional_Blocks_Render_Block {
 			$has_match = count( $matched_product_ids ) >= 1; // Atleast one of the selected products ids was found.
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -1278,7 +1279,7 @@ class Conditional_Blocks_Render_Block {
 			}
 		}
 
-		$block_action  = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
 			$should_render = true;
@@ -1335,7 +1336,7 @@ class Conditional_Blocks_Render_Block {
 				}
 			}
 
-			$requirement  = ! empty( $condition['requirement'] ) ? $condition['requirement'] : 'all';
+			$requirement = ! empty( $condition['requirement'] ) ? $condition['requirement'] : 'all';
 
 			if ( $requirement === 'all' && count( $preset_ids ) === $presets_met ) {
 				$should_render = true;
@@ -1542,17 +1543,17 @@ class Conditional_Blocks_Render_Block {
 	 */
 	public function parse_user_agent( $u_agent = null ) {
 
-		 $platform_key        = 'platform';
-		 $browser_key         = 'browser';
-		 $browser_version_key = 'version';
+		$platform_key = 'platform';
+		$browser_key = 'browser';
+		$browser_version_key = 'version';
 
 		if ( $u_agent === null && isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 			$u_agent = (string) $_SERVER['HTTP_USER_AGENT'];
 		}
 
 		$platform = null;
-		$browser  = null;
-		$version  = null;
+		$browser = null;
+		$version = null;
 
 		$empty = array(
 			$platform_key => $platform,
@@ -1635,14 +1636,14 @@ REGEX
 
 		$lowerBrowser = array_map( 'strtolower', $result[ $browser_key ] );
 
-		$find = function ( $search, &$key = null, &$value = null ) use ( $lowerBrowser ) {
+		$find = function ($search, &$key = null, &$value = null) use ($lowerBrowser) {
 			$search = (array) $search;
 
 			foreach ( $search as $val ) {
 				$xkey = array_search( strtolower( $val ), $lowerBrowser );
 				if ( $xkey !== false ) {
 					$value = $val;
-					$key   = $xkey;
+					$key = $xkey;
 
 					return true;
 				}
@@ -1651,7 +1652,7 @@ REGEX
 			return false;
 		};
 
-		$findT = function ( array $search, &$key = null, &$value = null ) use ( $find ) {
+		$findT = function (array $search, &$key = null, &$value = null) use ($find) {
 			$value2 = null;
 			if ( $find( array_keys( $search ), $key, $value2 ) ) {
 				$value = $search[ $value2 ];
@@ -1680,12 +1681,12 @@ REGEX
 			$version = $result[ $browser_version_key ][ $key ];
 		} elseif ( $find( 'Playstation Vita', $key, $platform ) ) {
 			$platform = 'PlayStation Vita';
-			$browser  = 'Browser';
+			$browser = 'Browser';
 		} elseif ( $find( array( 'Kindle Fire', 'Silk' ), $key, $val ) ) {
-			$browser  = $val == 'Silk' ? 'Silk' : 'Kindle';
+			$browser = $val == 'Silk' ? 'Silk' : 'Kindle';
 			$platform = 'Kindle Fire';
 			if ( ! ( $version = $result[ $browser_version_key ][ $key ] ) || ! is_numeric( $version[0] ) ) {
-						$version = $result[ $browser_version_key ][ array_search( 'Version', $result[ $browser_key ] ) ];
+				$version = $result[ $browser_version_key ][ array_search( 'Version', $result[ $browser_key ] ) ];
 			}
 		} elseif ( $find( 'NintendoBrowser', $key ) || $platform == 'Nintendo 3DS' ) {
 			$browser = 'NintendoBrowser';
@@ -1701,19 +1702,19 @@ REGEX
 			if ( strlen( $version ) > 3 ) {
 				$part = substr( $version, -2 );
 				if ( ctype_upper( $part ) ) {
-						$version = substr( $version, 0, -2 );
+					$version = substr( $version, 0, -2 );
 
-						$flags = array(
-							'IP' => 'iPhone',
-							'IT' => 'iPad',
-							'AP' => 'Android',
-							'AT' => 'Android',
-							'WP' => 'Windows Phone',
-							'WT' => 'Windows',
-						);
-						if ( isset( $flags[ $part ] ) ) {
-							$platform = $flags[ $part ];
-						}
+					$flags = array(
+						'IP' => 'iPhone',
+						'IT' => 'iPad',
+						'AP' => 'Android',
+						'AT' => 'Android',
+						'WP' => 'Windows Phone',
+						'WT' => 'Windows',
+					);
+					if ( isset( $flags[ $part ] ) ) {
+						$platform = $flags[ $part ];
+					}
 				}
 			}
 		} elseif ( $find( array( 'Applebot', 'IEMobile', 'Edge', 'Midori', 'Vivaldi', 'OculusBrowser', 'SamsungBrowser', 'Valve Steam Tenfoot', 'Chrome', 'HeadlessChrome' ), $key, $browser ) ) {
@@ -1725,7 +1726,7 @@ REGEX
 			if ( $platform == 'Android' ) {
 				$browser = 'Android Browser';
 			} elseif ( strpos( $platform, 'BB' ) === 0 ) {
-				$browser  = 'BlackBerry Browser';
+				$browser = 'BlackBerry Browser';
 				$platform = 'BlackBerry';
 			} elseif ( $platform == 'BlackBerry' || $platform == 'PlayBook' ) {
 				$browser = 'BlackBerry Browser';
@@ -1739,7 +1740,7 @@ REGEX
 			$pKey = reset( $pKey );
 
 			$platform = 'PlayStation ' . preg_replace( '/\D/', '', $pKey );
-			$browser  = 'NetFront';
+			$browser = 'NetFront';
 		}
 
 		return array(
