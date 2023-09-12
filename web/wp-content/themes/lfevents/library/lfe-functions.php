@@ -769,6 +769,10 @@ function lfe_get_newsletter_form_id() {
 		return 'e093d939-d379-49be-893b-339d6386b199';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-india' ) ) {
 		return '2c40ebc4-a16c-4b95-9237-3e6146528a2b';
+	} elseif ( false !== strpos( $wp->request, 'kubeday-australia' ) ) {
+		return '4a0a303a-783f-4a9b-86ed-dbc09f741450';
+	} elseif ( false !== strpos( $wp->request, 'kubeday-colombia' ) ) {
+		return '283496a4-83bb-4872-931d-2e9fabdf0f64';
 	} elseif ( false !== strpos( $wp->request, 'grpc' ) ) {
 		return 'abebb497-45f9-4eba-95da-13ebddabea87';
 	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
