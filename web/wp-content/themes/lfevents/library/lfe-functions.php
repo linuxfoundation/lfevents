@@ -755,6 +755,8 @@ function lfe_get_newsletter_form_id() {
 		return '6a26b1f2-c6e2-412f-b1a1-2d75863c72f7';
 	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-north-america' ) ) {
 		return 'c9f575f0-111b-4619-b402-862a21b0632f';
+	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-israel' ) ) {
+		return '46b14cd0-c994-4fd5-a6f7-575794881e41';
 	} elseif ( false !== strpos( $wp->request, 'cloud-foundry-day' ) ) {
 		return 'ff159943-6c4f-4aea-80b1-6a320b30e169';
 	} elseif ( false !== strpos( $wp->request, 'open-source-days' ) ) {
