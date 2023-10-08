@@ -35,7 +35,7 @@
 		"@wordpress/scripts": "^20.0.2",
 		"classnames": "^2.2.6",
 		"eslint-plugin-jest": "^26.0.0",
-		"postcss": "^8.2.2",
+		"postcss": "^8.4.31",
 		"postcss-loader": "^4.3.0",
 		"typescript": "^4.2.3"
 	}
