@@ -21,7 +21,7 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^17.0.0"
+		"@wordpress/scripts": "^26.14.0"
 	},
 	"dependencies": {
 		"@wordpress/element": "^3.2.0"
