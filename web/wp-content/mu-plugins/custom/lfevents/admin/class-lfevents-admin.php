@@ -409,7 +409,7 @@ class LFEvents_Admin {
 		$columns['title_company'] = 'Title, Company';
 		$columns['linkedin_url'] = 'Linkedin URL';
 		$columns['twitter_url'] = 'Twitter/X URL';
-		$columns['website_url'] = 'Websiter URL';
+		$columns['website_url'] = 'Website URL';
 		// add back in old columns.
 		$columns['author'] = $author;
 		$columns['date'] = $date;
