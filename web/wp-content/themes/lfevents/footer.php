@@ -85,7 +85,7 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 
 		echo '<ul class="lf-footer__icons">';
 		if ( $twitter ) {
-			echo '<li class="s-tw"><a rel="noopener" title="Twitter" target="_blank" href="' . esc_html( $twitter ) . '">';
+			echo '<li class="s-tw"><a rel="noopener" title="X" target="_blank" href="' . esc_html( $twitter ) . '">';
 			get_template_part( 'template-parts/svg/twitter' );
 			echo '</a></li>';
 		}
