@@ -295,6 +295,7 @@ if ( ! $splash_page ) :
 			$youtube   = get_post_meta( $parent_id, 'lfes_youtube', true );
 			$facebook  = get_post_meta( $parent_id, 'lfes_facebook', true );
 			$twitter   = get_post_meta( $parent_id, 'lfes_twitter', true );
+			$github    = get_post_meta( $parent_id, 'lfes_github', true );
 			$instagram = get_post_meta( $parent_id, 'lfes_instagram', true );
 			$twitch    = get_post_meta( $parent_id, 'lfes_twitch', true );
 			$slack     = get_post_meta( $parent_id, 'lfes_slack', true );
@@ -329,6 +330,11 @@ if ( ! $splash_page ) :
 				if ( $twitter ) {
 					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_html( $twitter ) . '">';
 					get_template_part( 'template-parts/svg/twitter' );
+					echo '</a></li>';
+				}
+				if ( $github ) {
+					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_html( $github ) . '">';
+					get_template_part( 'template-parts/svg/github' );
 					echo '</a></li>';
 				}
 				if ( $linkedin ) {

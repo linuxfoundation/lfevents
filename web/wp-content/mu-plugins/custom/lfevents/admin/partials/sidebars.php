@@ -435,6 +435,17 @@ $sidebar = array(
 						),
 						array(
 							'type'          => 'text',
+							'id'            => 'github',
+							'data_type'     => 'meta',
+							'data_key'      => 'github',
+							'label'         => __( 'GitHub URL' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => __( 'https://github.com/LF-Engineering/' ),
+						),
+						array(
+							'type'          => 'text',
 							'id'            => 'instagram',
 							'data_type'     => 'meta',
 							'data_key'      => 'instagram',
