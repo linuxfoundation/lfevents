@@ -834,6 +834,17 @@ $sidebar = array(
 						),
 						array(
 							'type'          => 'text',
+							'id'            => 'github',
+							'data_type'     => 'meta',
+							'data_key'      => 'github',
+							'label'         => __( 'GitHub URL' ),
+							'register_meta' => true,
+							'ui_border_top' => false,
+							'default_value' => '',
+							'placeholder'   => __( 'https://github.com/username' ),
+						),
+						array(
+							'type'          => 'text',
 							'id'            => 'website',
 							'data_type'     => 'meta',
 							'data_key'      => 'website',
