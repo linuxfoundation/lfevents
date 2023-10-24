@@ -81,16 +81,14 @@ if ( $query->have_posts() ) {
 					$y = 'TBA';
 					echo '<h2 class="cell event-calendar-year">TBA</h2>';
 				}
-			} else {
-				if ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
+			} elseif ( ( 0 == $y ) || ( $y < (int) $dt_date_start->format( 'Y' ) ) ) {
 					$y = (int) $dt_date_start->format( 'Y' );
 					echo '<h2 class="cell event-calendar-year">' . esc_html( $y ) . '</h2>';
 					$month = (int) $dt_date_start->format( 'm' );
 					echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
-				} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
-					$month = (int) $dt_date_start->format( 'm' );
-					echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
-				}
+			} elseif ( ( 0 == $month ) || ( $month < (int) $dt_date_start->format( 'm' ) ) ) {
+				$month = (int) $dt_date_start->format( 'm' );
+				echo '<h3 class="cell event-calendar-month">' . esc_html( $dt_date_start->format( 'F' ) ) . '</h3>';
 			}
 		} else {
 			if ( ! check_string_is_date( $date_start ) ) {

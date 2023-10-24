@@ -82,7 +82,7 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Unregister the whole XML-RPC method space.
 		add_filter(
 			'xmlrpc_methods',
-			function( $methods ) {
+			function ( $methods ) {
 				return array();
 			}
 		);
@@ -90,12 +90,11 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Deactivate x-pingback HTTP header.
 		add_filter(
 			'wp_headers',
-			function( $headers ) {
+			function ( $headers ) {
 				unset( $headers['X-Pingback'] );
 				return $headers;
 			}
 		);
-
 	}
 endif;
 

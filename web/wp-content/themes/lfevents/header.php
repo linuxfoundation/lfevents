@@ -8,17 +8,17 @@
  * @since FoundationPress 1.0.0
  */
 
- $event_menu = ( show_non_event_menu() ) ? '' : 'add-overflow';
+$event_menu = ( show_non_event_menu() ) ? '' : 'add-overflow';
 
- $cncf_font = get_post_meta( lfe_get_event_parent_id( $post ), 'lfes_cncf_font', true ) ? 'use-cncf-font' : '';
+$cncf_font = get_post_meta( lfe_get_event_parent_id( $post ), 'lfes_cncf_font', true ) ? 'use-cncf-font' : '';
 
- $all_classes = array(
-	 'site-container',
-	 $event_menu,
-	 $cncf_font,
- );
- $classes = implode( ' ', $all_classes );
-	?>
+$all_classes = array(
+	'site-container',
+	$event_menu,
+	$cncf_font,
+);
+$classes     = implode( ' ', $all_classes );
+?>
 
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
@@ -30,7 +30,7 @@
 	<?php lfe_insert_google_tag_manager_head(); ?>
 	</head>
 
-	<body <?php body_class( $_ENV['PANTHEON_SITE_NAME'] ); ?>>
+	<body <?php body_class( esc_attr( sanitize_text_field( $_ENV['PANTHEON_SITE_NAME'] ?? null ) ) ); ?>>
 		<?php wp_body_open(); ?>
 		<a class="skip-link" href="#main">Skip to content</a>
 		<?php lfe_insert_google_tag_manager_body(); ?>

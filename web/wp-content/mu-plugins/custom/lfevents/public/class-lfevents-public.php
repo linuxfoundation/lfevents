@@ -50,7 +50,6 @@ class LFEvents_Public {
 
 		$this->lfevents = $lfevents;
 		$this->version  = $version;
-
 	}
 
 	/**
@@ -73,7 +72,6 @@ class LFEvents_Public {
 		 */
 
 		wp_enqueue_style( $this->lfevents, plugin_dir_url( __FILE__ ) . 'css/lfevents-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -96,7 +94,6 @@ class LFEvents_Public {
 		 */
 
 		wp_enqueue_script( $this->lfevents, plugin_dir_url( __FILE__ ) . 'js/lfevents-public.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 	/**
@@ -267,12 +264,10 @@ class LFEvents_Public {
 				// We don't trust WP in giving the right ID in the loop.
 				$has_parent = wp_get_post_parent_id( the_seo_framework()->get_the_real_ID() );
 			}
-		} else {
 			// Out the loop. Use $args to evaluate the query...
-			if ( ! $args['taxonomy'] ) {
-				// Singular.
-				$has_parent = wp_get_post_parent_id( $args['id'] );
-			}
+		} elseif ( ! $args['taxonomy'] ) {
+			// Singular.
+			$has_parent = wp_get_post_parent_id( $args['id'] );
 		}
 
 		if ( $has_parent ) {

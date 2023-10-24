@@ -11,7 +11,7 @@
  * Says whether it's the lfeventsci pantheon instance. But does not change body class.
  */
 function is_lfeventsci() {
-	if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+	if ( isset( $_ENV['PANTHEON_SITE_NAME'] ) && 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 		return true;
 	} else {
 		return false;

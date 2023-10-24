@@ -140,7 +140,6 @@ class LFEvents_Admin {
 		$labels->attributes         = 'Event Attributes';
 		$labels->menu_name          = 'Events';
 		$labels->name_admin_bar     = 'Event';
-
 	}
 
 	/**
@@ -549,7 +548,6 @@ class LFEvents_Admin {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -602,5 +600,4 @@ class LFEvents_Admin {
 
 		return $kid_ids;
 	}
-
 }

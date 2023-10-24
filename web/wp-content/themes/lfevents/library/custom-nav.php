@@ -59,7 +59,6 @@ if ( ! function_exists( 'wpt_register_theme_customizer' ) ) :
 				)
 			)
 		);
-
 	}
 
 	add_action( 'customize_register', 'wpt_register_theme_customizer' );
