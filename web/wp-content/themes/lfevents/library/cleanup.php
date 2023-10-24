@@ -119,7 +119,7 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 	 * @return void|string
 	 */
 	function lf_update_default_version_to_be_filemtime( $src, $handle ) {
-		$query_string = parse_url( $src, PHP_URL_QUERY );
+		$query_string = wp_parse_url( $src, PHP_URL_QUERY );
 		parse_str( $query_string, $query_args );
 
 		// If there are no ver arguments, return the original URL.
@@ -135,7 +135,7 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 		}
 
 		$new_query_args['ver'] = filemtime( get_template_directory() . '/style.css' );
-		$new_query_string = http_build_query( $new_query_args );
+		$new_query_string      = http_build_query( $new_query_args );
 
 		// If the original URL had a query string, add it back.
 		if ( $query_string ) {
