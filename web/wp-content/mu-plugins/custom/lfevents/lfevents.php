@@ -73,7 +73,6 @@ function run_lfevents() {
 
 	$plugin = new LFEvents();
 	$plugin->run();
-
 }
 run_lfevents();
 

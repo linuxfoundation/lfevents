@@ -191,7 +191,6 @@ if ( ! function_exists( 'foundationpress_gutenberg_support' ) ) :
 				),
 			)
 		);
-
 	}
 
 	add_action( 'after_setup_theme', 'foundationpress_gutenberg_support' );

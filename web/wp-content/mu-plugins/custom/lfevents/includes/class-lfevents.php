@@ -77,7 +77,6 @@ class LFEvents {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -102,27 +101,26 @@ class LFEvents {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lfevents-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lfevents-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-lfevents-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-lfevents-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-lfevents-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-lfevents-public.php';
 
 		$this->loader = new LFEvents_Loader();
-
 	}
 
 	/**
@@ -139,7 +137,6 @@ class LFEvents {
 		$plugin_i18n = new LFEvents_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -183,13 +180,12 @@ class LFEvents {
 		// $this->loader->add_action( 'init', $plugin_admin, 'sync_kcds' ); //phpcs:ignore.
 
 		// schedule KCD sync on lfeventsci.
-		if ( 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
+		if ( isset( $_ENV['PANTHEON_SITE_NAME'] ) && 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
 			$this->loader->add_action( 'lfevents_sync_kcds', $plugin_admin, 'sync_kcds' );
 			if ( ! wp_next_scheduled( 'lfevents_sync_kcds' ) ) {
 				wp_schedule_event( time(), 'daily', 'lfevents_sync_kcds' );
 			}
 		}
-
 	}
 
 	/**
@@ -259,5 +255,4 @@ class LFEvents {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

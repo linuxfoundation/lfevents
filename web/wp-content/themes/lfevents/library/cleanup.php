@@ -82,7 +82,7 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Unregister the whole XML-RPC method space.
 		add_filter(
 			'xmlrpc_methods',
-			function( $methods ) {
+			function ( $methods ) {
 				return array();
 			}
 		);
@@ -90,12 +90,11 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Deactivate x-pingback HTTP header.
 		add_filter(
 			'wp_headers',
-			function( $headers ) {
+			function ( $headers ) {
 				unset( $headers['X-Pingback'] );
 				return $headers;
 			}
 		);
-
 	}
 endif;
 
@@ -115,12 +114,11 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 	 * Replace WordPress version with filemtime (for security).
 	 *
 	 * @param string $src Src.
-	 * @param string $handle Handle.
 	 * @return void|string
 	 */
-	function lf_update_default_version_to_be_filemtime( $src, $handle ) {
-		$query_string = parse_url( $src, PHP_URL_QUERY );
-		parse_str( $query_string, $query_args );
+	function lf_update_default_version_to_be_filemtime( $src ) {
+		$query_string = wp_parse_url( $src, PHP_URL_QUERY );
+		parse_str( $query_string ?? '', $query_args );
 
 		// If there are no ver arguments, return the original URL.
 		if ( ! isset( $query_args['ver'] ) ) {
@@ -129,13 +127,13 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 
 		$new_query_args = array();
 		foreach ( $query_args as $key => $value ) {
-			if ( 'ver' !== $key || is_numeric( $value ) && 10 == strlen( $value ) ) {
+			if ( 'ver' !== $key || is_numeric( $value ) && 10 === strlen( $value ) ) {
 				$new_query_args[ $key ] = $value;
 			}
 		}
 
 		$new_query_args['ver'] = filemtime( get_template_directory() . '/style.css' );
-		$new_query_string = http_build_query( $new_query_args );
+		$new_query_string      = http_build_query( $new_query_args );
 
 		// If the original URL had a query string, add it back.
 		if ( $query_string ) {

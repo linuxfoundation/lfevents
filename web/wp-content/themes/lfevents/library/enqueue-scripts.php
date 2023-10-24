@@ -20,7 +20,7 @@ if ( ! function_exists( 'foundationpress_asset_path' ) ) :
 	function foundationpress_asset_path( $filename ) {
 		$filename_split = explode( '.', $filename );
 		$dir            = end( $filename_split );
-		$manifest_path  = dirname( dirname( __FILE__ ) ) . '/dist/assets/' . $dir . '/rev-manifest.json';
+		$manifest_path  = dirname( __DIR__ ) . '/dist/assets/' . $dir . '/rev-manifest.json';
 
 		if ( file_exists( $manifest_path ) ) {
 			$manifest = json_decode( file_get_contents( $manifest_path ), true );
@@ -96,7 +96,6 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 
 		// Cookie script.
 		wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', false );
-
 	}
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
 
