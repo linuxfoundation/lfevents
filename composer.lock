@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11cc041c508d37d9f9ceef60888a3d5f",
+    "content-hash": "d9b57a292c29d7fb62f3cde743338f1f",
     "packages": [
         {
             "name": "composer/installers",
@@ -1254,15 +1254,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
-            "version": "3.2.5",
+            "version": "3.2.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
-                "reference": "tags/3.2.5"
+                "reference": "tags/3.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.2.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.2.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
