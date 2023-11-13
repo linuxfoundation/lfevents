@@ -40,7 +40,7 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 		?>
 
 		<p class="lf-footer__privacy">
-		The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. By submitting this form, you acknowledge that your information is subject to The Linux Foundation's <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.
+		By submitting this form you are consenting to receive marketing emails about news, events, and training from The Linux Foundation. You can unsubscribe at any time by following the "Subscription Center" link included within such communications. For information on our privacy practices and commitment to protecting your privacy, please review our <a target="_blank" rel="noopener" href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>. We do not sell your contact information to third parties.
 		</p>
 	</section>
 <?php endif; ?>
