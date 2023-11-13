@@ -570,7 +570,7 @@ $sidebar = array(
 							'register_meta' => true,
 							'ui_border_top' => true,
 							'default_value' => '',
-							'placeholder'   => __( 'The Linux Foundation uses the information you provide to us to contact you about upcoming events. You may unsubscribe from these communications at any time. For more information, please see our [Privacy Policy](https://www.linuxfoundation.org/privacy/).' ),
+							'placeholder'   => __( 'By submitting this form you are consenting to receive marketing emails about news, events, and training from The Linux Foundation. You can unsubscribe at any time by following the "Subscription Center" link included within such communications. For information on our privacy practices and commitment to protecting your privacy, please review our [Privacy Policy](https://www.linuxfoundation.org/privacy/). We do not sell your contact information to third parties.' ),
 						),
 					),
 				),
