@@ -66,7 +66,6 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 		<?php endif; ?>
 		<p>
 		We never sell attendee lists or contact information, nor do we authorize others to do so. If you receive an email claiming to sell an attendee list for a Linux Foundation event, please forward it to <a target="_blank" rel="noopener" href="mailto:<?php echo esc_attr( $event_email ); ?>"><?php echo esc_attr( $event_email ); ?></a>.
-		Forms on this site are protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.
 		</p>
 	</section>
 
