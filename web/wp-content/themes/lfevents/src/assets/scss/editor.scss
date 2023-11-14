@@ -110,3 +110,7 @@
 .conditional-blocks-has-conditions::before {
   content: 'CONDITIONAL' !important;
 }
+
+.editor-styles-wrapper p {
+  margin: revert;
+}
