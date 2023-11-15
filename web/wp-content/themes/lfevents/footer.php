@@ -11,11 +11,6 @@
 $parent_id = lfe_get_event_parent_id( $post );
 
 $splash_page = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
-$event_email = get_post_meta( $parent_id, 'lfes_event_email', true );
-
-if ( ! $event_email ) {
-	$event_email = 'events@linuxfoundation.org';
-}
 
 if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) {
 	$footer_classes = 'lf-footer has-lf-primary-700-background-color has-white-color';
@@ -64,9 +59,6 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 		<?php else : ?>
 		<p>Copyright <?php echo esc_html( gmdate( 'Y' ) ); ?> &copy; LF Asia, LLC. | info@lfasiallc.com, icp license, no. <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备17074266号-6</a></p>
 		<?php endif; ?>
-		<p>
-		We never sell attendee lists or contact information, nor do we authorize others to do so. If you receive an email claiming to sell an attendee list for a Linux Foundation event, please forward it to <a target="_blank" rel="noopener" href="mailto:<?php echo esc_attr( $event_email ); ?>"><?php echo esc_attr( $event_email ); ?></a>.
-		</p>
 	</section>
 
 	<?php
