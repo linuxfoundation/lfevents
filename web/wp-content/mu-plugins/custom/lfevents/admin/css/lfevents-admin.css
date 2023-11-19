@@ -48,3 +48,7 @@ background-color: #999;
 body.wp-admin div.pmc-sidebar ::placeholder {
 color: #c4c4c4;
 }
+
+.block-editor .editor-post-featured-image .components-responsive-wrapper__content {
+    width: 100%;
+}
