@@ -48,7 +48,7 @@ registerBlockType( 'cgb/block-pricing-block', {
 		},
 		prices: {
 			type: 'array',
-			default: [ [ '', '', '', '' ], [ '', '', '', '' ], [ '', '', '', '' ], [ '', '', '', '' ] ],
+			default: [ '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ],
 		},
 		align: {
 			type: 'string',
@@ -100,9 +100,9 @@ registerBlockType( 'cgb/block-pricing-block', {
 			newDates[ index ] = value;
 			setAttributes( { dates: newDates } );
 		}
-		function updatePrices( value, indexX, indexY ) {
+		function updatePrices( value, indexX ) {
 			const newPrices = [ ...prices ];
-			newPrices[ indexX ][ indexY ] = value;
+			newPrices[ indexX ] = value;
 			setAttributes( { prices: newPrices } );
 		}
 
@@ -322,29 +322,29 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 0 ] }
-									onChange={ value => updatePrices( value, 0, 0 ) }
+									value={ prices[ 0 ] }
+									onChange={ value => updatePrices( value, 0 ) }
 									placeholder="$ 1,050"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 0 ] }
-									onChange={ value => updatePrices( value, 1, 0 ) }
+									value={ prices[ 1 ] }
+									onChange={ value => updatePrices( value, 1 ) }
 									placeholder="$ 1,250"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 0 ] }
-									onChange={ value => updatePrices( value, 2, 0 ) }
+									value={ prices[ 2 ] }
+									onChange={ value => updatePrices( value, 2 ) }
 									placeholder="$ 1,450"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 0 ] }
-									onChange={ value => updatePrices( value, 3, 0 ) }
+									value={ prices[ 3 ] }
+									onChange={ value => updatePrices( value, 3 ) }
 									placeholder="$ 1,550"
 								/>
 							</td>
@@ -359,29 +359,29 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 1 ] }
-									onChange={ value => updatePrices( value, 0, 1 ) }
+									value={ prices[ 4 ] }
+									onChange={ value => updatePrices( value, 4 ) }
 									placeholder="$ 500"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 1 ] }
-									onChange={ value => updatePrices( value, 1, 1 ) }
+									value={ prices[ 5 ] }
+									onChange={ value => updatePrices( value, 5 ) }
 									placeholder="$ 600"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 1 ] }
-									onChange={ value => updatePrices( value, 2, 1 ) }
+									value={ prices[ 6 ] }
+									onChange={ value => updatePrices( value, 6 ) }
 									placeholder="$ 700"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 1 ] }
-									onChange={ value => updatePrices( value, 3, 1 ) }
+									value={ prices[ 7 ] }
+									onChange={ value => updatePrices( value, 7 ) }
 									placeholder="$ 800"
 								/>
 							</td>
@@ -396,29 +396,29 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 2 ] }
-									onChange={ value => updatePrices( value, 0, 2 ) }
+									value={ prices[ 8 ] }
+									onChange={ value => updatePrices( value, 8 ) }
 									placeholder="$ 150"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 2 ] }
-									onChange={ value => updatePrices( value, 1, 2 ) }
+									value={ prices[ 9 ] }
+									onChange={ value => updatePrices( value, 9 ) }
 									placeholder="$ 150"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 2 ] }
-									onChange={ value => updatePrices( value, 2, 2 ) }
+									value={ prices[ 10 ] }
+									onChange={ value => updatePrices( value, 10 ) }
 									placeholder="$ 150"
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 2 ] }
-									onChange={ value => updatePrices( value, 3, 2 ) }
+									value={ prices[ 11 ] }
+									onChange={ value => updatePrices( value, 11 ) }
 									placeholder="$ 150"
 								/>
 							</td>
@@ -432,26 +432,26 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 3 ] }
-									onChange={ value => updatePrices( value, 0, 3 ) }
+									value={ prices[ 12 ] }
+									onChange={ value => updatePrices( value, 12 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 3 ] }
-									onChange={ value => updatePrices( value, 1, 3 ) }
+									value={ prices[ 13 ] }
+									onChange={ value => updatePrices( value, 13 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 3 ] }
-									onChange={ value => updatePrices( value, 2, 3 ) }
+									value={ prices[ 14 ] }
+									onChange={ value => updatePrices( value, 14 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 3 ] }
-									onChange={ value => updatePrices( value, 3, 3 ) }
+									value={ prices[ 15 ] }
+									onChange={ value => updatePrices( value, 15 ) }
 								/>
 							</td>
 						</tr>
@@ -464,26 +464,26 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 4 ] }
-									onChange={ value => updatePrices( value, 0, 4 ) }
+									value={ prices[ 16 ] }
+									onChange={ value => updatePrices( value, 16 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 4 ] }
-									onChange={ value => updatePrices( value, 1, 4 ) }
+									value={ prices[ 17 ] }
+									onChange={ value => updatePrices( value, 17 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 4 ] }
-									onChange={ value => updatePrices( value, 2, 4 ) }
+									value={ prices[ 18 ] }
+									onChange={ value => updatePrices( value, 18 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 4 ] }
-									onChange={ value => updatePrices( value, 3, 4 ) }
+									value={ prices[ 19 ] }
+									onChange={ value => updatePrices( value, 19 ) }
 								/>
 							</td>
 						</tr>
@@ -496,26 +496,26 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 5 ] }
-									onChange={ value => updatePrices( value, 0, 5 ) }
+									value={ prices[ 20 ] }
+									onChange={ value => updatePrices( value, 20 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 5 ] }
-									onChange={ value => updatePrices( value, 1, 5 ) }
+									value={ prices[ 21 ] }
+									onChange={ value => updatePrices( value, 21 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 5 ] }
-									onChange={ value => updatePrices( value, 2, 5 ) }
+									value={ prices[ 22 ] }
+									onChange={ value => updatePrices( value, 22 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 5 ] }
-									onChange={ value => updatePrices( value, 3, 5 ) }
+									value={ prices[ 23 ] }
+									onChange={ value => updatePrices( value, 23 ) }
 								/>
 							</td>
 						</tr>
@@ -528,26 +528,26 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 6 ] }
-									onChange={ value => updatePrices( value, 0, 6 ) }
+									value={ prices[ 24 ] }
+									onChange={ value => updatePrices( value, 24 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 6 ] }
-									onChange={ value => updatePrices( value, 1, 6 ) }
+									value={ prices[ 25 ] }
+									onChange={ value => updatePrices( value, 25 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 6 ] }
-									onChange={ value => updatePrices( value, 2, 6 ) }
+									value={ prices[ 26 ] }
+									onChange={ value => updatePrices( value, 26 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 6 ] }
-									onChange={ value => updatePrices( value, 3, 6 ) }
+									value={ prices[ 27 ] }
+									onChange={ value => updatePrices( value, 27 ) }
 								/>
 							</td>
 						</tr>
@@ -560,26 +560,26 @@ registerBlockType( 'cgb/block-pricing-block', {
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 0 ][ 7 ] }
-									onChange={ value => updatePrices( value, 0, 7 ) }
+									value={ prices[ 28 ] }
+									onChange={ value => updatePrices( value, 28 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 1 ][ 7 ] }
-									onChange={ value => updatePrices( value, 1, 7 ) }
+									value={ prices[ 29 ] }
+									onChange={ value => updatePrices( value, 29 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 2 ][ 7 ] }
-									onChange={ value => updatePrices( value, 2, 7 ) }
+									value={ prices[ 30 ] }
+									onChange={ value => updatePrices( value, 30 ) }
 								/>
 							</td>
 							<td>
 								<PlainText
-									value={ prices[ 3 ][ 7 ] }
-									onChange={ value => updatePrices( value, 3, 7 ) }
+									value={ prices[ 31 ] }
+									onChange={ value => updatePrices( value, 31 ) }
 								/>
 							</td>
 						</tr>						

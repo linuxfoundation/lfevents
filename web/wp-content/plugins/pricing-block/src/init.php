@@ -115,6 +115,18 @@ function block_callback( $att ) {
 		return;
 	}
 
+	// Convert old multi-dimensional prices to new single-dimensional prices.
+	if ( is_array( $prices[0] ) ) {
+		$new_prices = array();
+		for ( $i = 0; $i < 4; $i++ ) {
+			for ( $j = 0; $j < 7; $j++ ) {
+				$new_index = ( $j * 4 ) + $i;
+				$new_prices[$new_index] = $prices[$i][$j];
+			}
+		}
+		$prices = $new_prices;
+	}
+
 	$html .= '<div class="pricing-grid alignwide">';
 	foreach ( $left_labels as $label ) {
 		if ( $label ) {
@@ -154,11 +166,12 @@ function block_callback( $att ) {
 					$html .= '</h5>';
 					$html .= '</div>';
 					$html .= '<div class="price-amount">';
+					$j = $i + ( $row * 4 ); 
 					if ( $date_end < $yesterday ) {
-						$html .= '<s>' . $prices[ $i ][ $row ] . '</s>';
+						$html .= '<s>' . $prices[ $j ] . '</s>';
 						$html .= '<span class="expired-label">' . $expire_text . '</span>';
 					} else {
-						$html .= $prices[ $i ][ $row ];
+						$html .= $prices[ $j ];
 					}
 					$html .= '</div>';
 
