@@ -20,7 +20,7 @@ class Conditional_Blocks_Register_Blocks {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		// Late prirotiy to make sure all blocks have been registered first.
+		// Late priority to make sure all blocks have been registered first.
 		add_action( 'wp_loaded', array( $this, 'register_for_server_side_render' ), 999 );
 		add_filter( 'rest_pre_dispatch', array( $this, 'maybe_remove_conditional_blocks_attributes' ), 10, 3 );
 	}
@@ -38,13 +38,13 @@ class Conditional_Blocks_Register_Blocks {
 
 			// Keep legacy conditions. We need them for converting.
 			$block->attributes['conditionalBlocksAttributes'] = array(
-				'type'    => 'object',
+				'type' => 'object',
 				'default' => array(),
 			);
 
 			$block->attributes['conditionalBlocks'] = array(
-				'type'    => 'array',
-				'default' => array(),
+				'type' => 'array',
+				'default' => []
 			);
 		}
 	}

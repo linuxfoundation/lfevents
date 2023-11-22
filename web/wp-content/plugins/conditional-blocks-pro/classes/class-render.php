@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Conditional_Blocks_Render_Block {
 
 	/**
-	 * Set the current block content which can be modifed by CB.
+	 * Set the current block content which can be modified by CB.
 	 *
 	 * @var string
 	 */
@@ -39,7 +39,7 @@ class Conditional_Blocks_Render_Block {
 		add_filter( 'conditional_blocks_register_check_userLoggedIn', array( $this, 'userLoggedIn' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_userLoggedOut', array( $this, 'userLoggedOut' ), 10, 2 );
 
-		add_filter( 'conditional_blocks_register_check_posts', array( $this, 'posts' ), 10, 2 );
+				add_filter( 'conditional_blocks_register_check_posts', array( $this, 'posts' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_postTaxonomyTerms', array( $this, 'postTaxonomyTerms' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_postType', array( $this, 'postType' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_archive', array( $this, 'archive' ), 10, 2 );
@@ -65,7 +65,7 @@ class Conditional_Blocks_Render_Block {
 
 		// Presets.
 		add_filter( 'conditional_blocks_register_check_presets', array( $this, 'presets' ), 10, 2 );
-	}
+			}
 
 	/**
 	 * Filter block content before displaying.
@@ -101,7 +101,7 @@ class Conditional_Blocks_Render_Block {
 		$should_render = $this->has_valid_sets( $condition_sets );
 
 		if ( $should_render ) {
-			return $this->current_block_content; // Modifed block.
+			return $this->current_block_content; // modified block.
 		}
 
 		return ''; // Don't render block.
@@ -356,6 +356,7 @@ class Conditional_Blocks_Render_Block {
 		return $should_render;
 	}
 
+	
 	/**
 	 * Check the current post ID.
 	 *
@@ -1533,7 +1534,7 @@ class Conditional_Blocks_Render_Block {
 
 	/**
 	 * Parses a user agent string into its important parts
-	 * Slightly modifed from 1.2.0 to meet WP standards.
+	 * Slightly modified from 1.2.0 to meet WP standards.
 	 *
 	 * @author Jesse G. Donat
 	 * @link https://github.com/donatj/PhpUserAgent
@@ -1749,7 +1750,7 @@ REGEX
 			$browser_version_key => $version ?: null,
 		);
 	}
-
+	
 	/**
 	 * Convert v2 conditions to v3 sets of conditions.
 	 *

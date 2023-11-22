@@ -83,7 +83,7 @@ class Conditional_Blocks_Enqueue {
 				'visibleInEditor' => apply_filters( 'conditional_blocks_visible_in_editor', true ), // Change if conditional blocks is visible in the editor.
 			);
 
-			$localized_data['isActive'] = ! empty( get_site_option( 'conditional-blocks-pro_license_key', false ) ) ? true : false;
+						$localized_data['isActive'] = ! empty( get_site_option( 'conditional-blocks-pro_license_key', false ) ) ? true : false;
 			$localized_data['isPro'] = true;
 			$localized_data['pluginsPage'] = admin_url( 'plugins.php' );
 			$localized_data['presets'] = $this->get_presets();
@@ -105,7 +105,7 @@ class Conditional_Blocks_Enqueue {
 
 			}
 			$localized_data['phpLogicFunctions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
-
+			
 			wp_localize_script( 'conditional-blocks-editor-js', 'conditionalblocks', $localized_data );
 
 			wp_set_script_translations(
@@ -173,7 +173,7 @@ class Conditional_Blocks_Enqueue {
 		return $screensizes;
 	}
 
-	/**
+		/**
 	 * Get the screen sizes into a nice array.
 	 *
 	 * @return array $presets.
@@ -214,6 +214,6 @@ class Conditional_Blocks_Enqueue {
 
 		return $roles;
 	}
-
+	
 }
 new Conditional_Blocks_Enqueue();
