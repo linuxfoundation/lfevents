@@ -168,6 +168,10 @@ We're always eager to hear your ideas! Reach out to us via [support](https://con
 
 == Changelog ==
 
+= 3.0.6 =
+- New: You can now easily rename Condition Presets - PRO.
+- Fixed: Notices when using PHP 8.2.
+
 = 3.0.5 =
 - Ready and tested for WordPress 6.3
 - Fixed: Conditional Indicator on blocks in the WordPress Site Editor.
@@ -194,7 +198,7 @@ We're always eager to hear your ideas! Reach out to us via [support](https://con
 = 3.0.1 =
 
 - Ready and tested for WordPress 6.1
-- Fixed: Consistenty for labels and help text for conditions fields with the [Conditions API](https://conditionalblocks.com/docs/developer/custom-conditions/).
+- Fixed: Consistent for labels and help text for conditions fields with the [Conditions API](https://conditionalblocks.com/docs/developer/custom-conditions/).
 
 = 3.0.0 =
 

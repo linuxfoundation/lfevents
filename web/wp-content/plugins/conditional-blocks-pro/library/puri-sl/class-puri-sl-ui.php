@@ -4,11 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'conblockpro_Puri_SL_UI' ) ) {
+if ( ! class_exists( 'CONBLOCKPRO_Puri_SL_UI' ) ) {
 	/**
 	 * PURI-SL version 2.0.1
 	 */
-	class conblockpro_Puri_SL_UI {
+	class CONBLOCKPRO_Puri_SL_UI {
 
 		protected $plugin    = array();
 		protected $ui_config = array();

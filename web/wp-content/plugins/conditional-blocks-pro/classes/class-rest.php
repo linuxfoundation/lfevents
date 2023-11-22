@@ -101,11 +101,11 @@ class Conditional_Blocks_REST_V1 {
 		if ( ! empty( $parameters['screensizes'] ) ) {
 			$this->update_screensizes( $parameters['screensizes'] );
 		}
-		if ( isset( $parameters['presets'] ) && is_array( $parameters['presets'] ) ) {
+				if ( isset( $parameters['presets'] ) && is_array( $parameters['presets'] ) ) {
 			// Update Presets.
 			update_option( 'conditional_blocks_presets', $parameters['presets'] );
 		}
-
+		
 		return new WP_REST_Response( $parameters, 200 );
 	}
 
