@@ -114,3 +114,7 @@
 .editor-styles-wrapper p {
   margin: revert;
 }
+
+.editor-styles-wrapper .block-editor-block-list__block li {
+  break-inside: avoid-column;
+}
