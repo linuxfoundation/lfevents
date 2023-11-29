@@ -2,6 +2,7 @@ ul,
 ol {
   li {
     background-size: 10px 25.6px; // defaults.
+    break-inside: avoid-column;
   }
   // COLUMNS
   &.has-two-columns {
@@ -61,6 +62,7 @@ ol {
     li {
       padding-left: calc(10px + 1em);
       background-size: 10px 25.6px;
+      break-inside: avoid-column;
     }
   }
   &.has-icon-size-15 {
@@ -100,6 +102,7 @@ ol {
     li {
       padding-left: calc(10px + 1em);
       background-size: 10px 25.6px;
+      break-inside: avoid-column;
     }
   }
   &.has-icon-angle-right {
