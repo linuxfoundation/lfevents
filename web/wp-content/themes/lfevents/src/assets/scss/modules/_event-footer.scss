@@ -27,6 +27,10 @@
 .event-footer-newsletter {
   margin-bottom: 3rem;
 
+  .legal-consent-container {
+    display: none;
+  }
+
   &.black {
     .hs-button {
       border: 1px solid black;
