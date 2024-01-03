@@ -736,11 +736,11 @@ function lfe_get_event_parent_id( $post ) {
 function lfe_get_newsletter_form_id() {
 	global $wp;
 	if ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-europe' ) ) {
-		return 'a6f29fd1-7fb9-4583-8c16-1c6ee13ab414';
+		return '6e22cb9c-3b4a-4ed0-978f-8ec2ac03198b';
 	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-north-america' ) ) {
-		return '1318a968-9197-47e1-ab24-8edcce797af3';
+		return 'd38c0412-cf3a-40ff-8116-908f457e483b';
 	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-open-source-summit-china' ) ) {
-		return 'c9f29688-545d-43ca-b919-2d3ede8e25d0';
+		return 'ad13f5f9-0fa8-40bf-b8b1-aa5a829e9665';
 	} elseif ( false !== strpos( $wp->request, 'open-mainframe-summit' ) ) {
 		return 'ea4777bb-3ff3-4308-a726-87d8f9c82606';
 	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) || false !== strpos( $wp->request, 'riscv-at-embedded-world' ) ) {
@@ -754,9 +754,9 @@ function lfe_get_newsletter_form_id() {
 	} elseif ( false !== strpos( $wp->request, 'continuous-delivery-summit' ) ) {
 		return '6a26b1f2-c6e2-412f-b1a1-2d75863c72f7';
 	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-north-america' ) ) {
-		return 'c9f575f0-111b-4619-b402-862a21b0632f';
+		return '2fcfd18d-fbb3-4558-997a-98c0c5bcf443';
 	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-israel' ) ) {
-		return '46b14cd0-c994-4fd5-a6f7-575794881e41';
+		return 'af51b14f-5296-4bff-8ad5-c86d222f10f8';
 	} elseif ( false !== strpos( $wp->request, 'cloud-foundry-day' ) ) {
 		return 'ff159943-6c4f-4aea-80b1-6a320b30e169';
 	} elseif ( false !== strpos( $wp->request, 'open-source-days' ) ) {
@@ -766,15 +766,15 @@ function lfe_get_newsletter_form_id() {
 	} elseif ( false !== strpos( $wp->request, 'prestocon' ) ) {
 		return 'be586757-528e-495d-a204-895b5b5725fe';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-israel' ) ) {
-		return '50d9a617-4a06-4434-9efc-b02739a0b0ef';
+		return '652d4c8f-f535-4334-9104-c75a981460f4';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-singapore' ) ) {
-		return 'e093d939-d379-49be-893b-339d6386b199';
+		return '3dc7557f-2a58-45ca-a216-5ccfa7f67f53';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-india' ) ) {
-		return '2c40ebc4-a16c-4b95-9237-3e6146528a2b';
+		return '25cccbad-fbf6-4b1b-9050-8565342f60e6';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-australia' ) ) {
-		return '4a0a303a-783f-4a9b-86ed-dbc09f741450';
+		return '17cae1d5-22b6-4af3-9d3a-721a3d77b895';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-colombia' ) ) {
-		return '283496a4-83bb-4872-931d-2e9fabdf0f64';
+		return 'df3597f2-c12f-41e9-b5ca-5dd52570c6b4';
 	} elseif ( false !== strpos( $wp->request, 'grpc' ) ) {
 		return 'abebb497-45f9-4eba-95da-13ebddabea87';
 	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
