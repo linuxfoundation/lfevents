@@ -51,10 +51,10 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 				href="https://www.linuxfoundation.org/terms/">Terms of Use</a> |
 			<a target="_blank" rel="noopener"  href="https://www.linuxfoundation.org/privacy/">Privacy
 				Policy</a> | <a target="_blank" rel="noopener"
-				href="https://www.linuxfoundation.org/bylaws/">Bylaws</a> | <a target="_blank" rel="noopener"
-				href="https://www.linuxfoundation.org/antitrust-policy/">Antitrust
+				href="https://www.linuxfoundation.org/legal/bylaws">Bylaws</a> | <a target="_blank" rel="noopener"
+				href="https://www.linuxfoundation.org/legal/antitrust-policy">Antitrust
 				Policy</a> | <a target="_blank" rel="noopener"
-				href="https://www.linuxfoundation.org/good-standing-policy/">Good
+				href="https://www.linuxfoundation.org/legal/good-standing-policy">Good
 				Standing Policy</a>.</p>
 		<?php else : ?>
 		<p>Copyright <?php echo esc_html( gmdate( 'Y' ) ); ?> &copy; LF Asia, LLC. | info@lfasiallc.com, icp license, no. <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备17074266号-6</a></p>
