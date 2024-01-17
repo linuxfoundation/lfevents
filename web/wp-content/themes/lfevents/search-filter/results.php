@@ -164,6 +164,8 @@ if ( $query->have_posts() ) {
 
 			<?php
 			if ( $is_upcoming_events ) {
+				$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
+				$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 				?>
 				<p class="event-meta text-small no-margin">
 					<span class="cfp">
@@ -176,12 +178,12 @@ if ( $query->have_posts() ) {
 								echo 'No Call for Proposals';
 							} elseif ( ! ( $cfp_date_start ) ) {
 								echo 'Details Coming Soon';
-							} elseif ( strtotime( $cfp_date_end ) < time() ) {
+							} elseif ( strtotime( $cfp_date_end ) < $time ) {
 								echo 'Closed';
-							} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) < time() ) {
+							} elseif ( strtotime( $cfp_date_end ) >= $time && strtotime( $cfp_date_start ) <= $time ) {
 								$dt_cfp_date_end   = new DateTime( $cfp_date_end );
 								echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, M j, Y' ) );
-							} elseif ( strtotime( $cfp_date_end ) > time() && strtotime( $cfp_date_start ) > time() ) {
+							} elseif ( strtotime( $cfp_date_end ) > $time && strtotime( $cfp_date_start ) > $time ) {
 								$dt_cfp_date_start = new DateTime( $cfp_date_start );
 								echo 'Opens ' . esc_html( $dt_cfp_date_start->format( 'l, M j, Y' ) );
 							}
