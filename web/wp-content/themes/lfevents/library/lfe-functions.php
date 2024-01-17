@@ -771,6 +771,8 @@ function lfe_get_newsletter_form_id() {
 		return '3dc7557f-2a58-45ca-a216-5ccfa7f67f53';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-india' ) ) {
 		return '25cccbad-fbf6-4b1b-9050-8565342f60e6';
+	} elseif ( false !== strpos( $wp->request, 'gitopscon-north-america' ) ) {
+		return '1e29eb64-c89b-4ed3-88d4-a989196141b6';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-australia' ) ) {
 		return '17cae1d5-22b6-4af3-9d3a-721a3d77b895';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-colombia' ) ) {
