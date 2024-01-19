@@ -777,6 +777,8 @@ function lfe_get_newsletter_form_id() {
 		return '17cae1d5-22b6-4af3-9d3a-721a3d77b895';
 	} elseif ( false !== strpos( $wp->request, 'kubeday-colombia' ) ) {
 		return 'df3597f2-c12f-41e9-b5ca-5dd52570c6b4';
+	} elseif ( false !== strpos( $wp->request, 'ai-dev-europe' ) ) {
+		return 'a09377ab-e334-4aee-bf48-ede645be267c';
 	} elseif ( false !== strpos( $wp->request, 'grpc' ) ) {
 		return 'abebb497-45f9-4eba-95da-13ebddabea87';
 	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
