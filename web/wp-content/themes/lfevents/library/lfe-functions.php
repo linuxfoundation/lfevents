@@ -732,9 +732,19 @@ function lfe_get_event_parent_id( $post ) {
 
 /**
  * Returns correct HubSpot newsletter form ID based on url.
+ *
+ * @param int $parent_id The parent ID of the Event.
  */
-function lfe_get_newsletter_form_id() {
+function lfe_get_newsletter_form_id( $parent_id ) {
 	global $wp;
+
+	$form_hubspot_id = get_post_meta( $parent_id, 'lfes_form_hubspot_id', true );
+
+	if ( $form_hubspot_id ) {
+		return $form_hubspot_id;
+	}
+
+	// This is how we initially configured the footer forms.
 	if ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-europe' ) ) {
 		return '6e22cb9c-3b4a-4ed0-978f-8ec2ac03198b';
 	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-north-america' ) ) {
