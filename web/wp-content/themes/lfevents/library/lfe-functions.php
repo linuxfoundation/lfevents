@@ -742,57 +742,6 @@ function lfe_get_newsletter_form_id( $parent_id ) {
 
 	if ( $form_hubspot_id ) {
 		return $form_hubspot_id;
-	}
-
-	// This is how we initially configured the footer forms.
-	if ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-europe' ) ) {
-		return '6e22cb9c-3b4a-4ed0-978f-8ec2ac03198b';
-	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-north-america' ) ) {
-		return 'd38c0412-cf3a-40ff-8116-908f457e483b';
-	} elseif ( false !== strpos( $wp->request, 'kubecon-cloudnativecon-open-source-summit-china' ) ) {
-		return 'ad13f5f9-0fa8-40bf-b8b1-aa5a829e9665';
-	} elseif ( false !== strpos( $wp->request, 'open-mainframe-summit' ) ) {
-		return 'ea4777bb-3ff3-4308-a726-87d8f9c82606';
-	} elseif ( false !== strpos( $wp->request, 'riscv-summit' ) || false !== strpos( $wp->request, 'riscv-at-embedded-world' ) ) {
-		return '8475422d-2b22-47ba-bfd8-e5fe55687686';
-	} elseif ( false !== strpos( $wp->request, 'openjs-world' ) ) {
-		return '2cda1b3c-4bb6-4b44-a23e-80610185d7bd';
-	} elseif ( false !== strpos( $wp->request, 'zephyr-developer-summit' ) ) {
-		return '03e2e1ad-f013-4706-b7c8-bc2d40860eeb';
-	} elseif ( false !== strpos( $wp->request, 'open-networking-and-edge-exec-forum' ) ) {
-		return 'feb80021-7ce2-462e-9642-fd394dc5a286';
-	} elseif ( false !== strpos( $wp->request, 'continuous-delivery-summit' ) ) {
-		return '6a26b1f2-c6e2-412f-b1a1-2d75863c72f7';
-	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-north-america' ) ) {
-		return '2fcfd18d-fbb3-4558-997a-98c0c5bcf443';
-	} elseif ( false !== strpos( $wp->request, 'cloudnativesecuritycon-israel' ) ) {
-		return 'af51b14f-5296-4bff-8ad5-c86d222f10f8';
-	} elseif ( false !== strpos( $wp->request, 'cloud-foundry-day' ) ) {
-		return 'ff159943-6c4f-4aea-80b1-6a320b30e169';
-	} elseif ( false !== strpos( $wp->request, 'open-source-days' ) ) {
-		return '4beaa5ac-9bc7-4997-8b33-9e611ae014a4';
-	} elseif ( false !== strpos( $wp->request, 'one-summit-north-america' ) ) {
-		return 'b17aedde-8553-47fd-b31c-767327f942ea';
-	} elseif ( false !== strpos( $wp->request, 'prestocon' ) ) {
-		return 'be586757-528e-495d-a204-895b5b5725fe';
-	} elseif ( false !== strpos( $wp->request, 'kubeday-israel' ) ) {
-		return '652d4c8f-f535-4334-9104-c75a981460f4';
-	} elseif ( false !== strpos( $wp->request, 'kubeday-singapore' ) ) {
-		return '3dc7557f-2a58-45ca-a216-5ccfa7f67f53';
-	} elseif ( false !== strpos( $wp->request, 'kubeday-india' ) ) {
-		return '25cccbad-fbf6-4b1b-9050-8565342f60e6';
-	} elseif ( false !== strpos( $wp->request, 'gitopscon-north-america' ) ) {
-		return '1e29eb64-c89b-4ed3-88d4-a989196141b6';
-	} elseif ( false !== strpos( $wp->request, 'kubeday-australia' ) ) {
-		return '17cae1d5-22b6-4af3-9d3a-721a3d77b895';
-	} elseif ( false !== strpos( $wp->request, 'kubeday-colombia' ) ) {
-		return 'df3597f2-c12f-41e9-b5ca-5dd52570c6b4';
-	} elseif ( false !== strpos( $wp->request, 'ai-dev-europe' ) ) {
-		return 'a09377ab-e334-4aee-bf48-ede645be267c';
-	} elseif ( false !== strpos( $wp->request, 'grpc' ) ) {
-		return 'abebb497-45f9-4eba-95da-13ebddabea87';
-	} elseif ( false !== strpos( $wp->request, 'lfenergysummit' ) ) {
-		return '97beb070-4a17-45bf-92db-1345eaf2f6b4';
 	} else {
 		return '3fd88e30-9f70-4257-a44d-72643403281d';
 	}
