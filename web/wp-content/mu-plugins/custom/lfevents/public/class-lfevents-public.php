@@ -262,7 +262,7 @@ class LFEvents_Public {
 			// In the loop.
 			if ( is_singular() ) {
 				// We don't trust WP in giving the right ID in the loop.
-				$has_parent = wp_get_post_parent_id( the_seo_framework()->get_the_real_ID() );
+				$has_parent = wp_get_post_parent_id( the_seo_framework()->query()->get_the_real_ID() );
 			}
 			// Out the loop. Use $args to evaluate the query...
 		} elseif ( ! $args['taxonomy'] ) {

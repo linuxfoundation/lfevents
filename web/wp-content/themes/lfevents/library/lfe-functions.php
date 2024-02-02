@@ -587,7 +587,7 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 
 	$tsf = the_seo_framework();
 	// Obtain the post parent ID...
-	$post_id    = isset( $args['id'] ) ? $args['id'] : $tsf->get_the_real_ID();
+	$post_id    = isset( $args['id'] ) ? $args['id'] : $tsf->query()->get_the_real_ID();
 	$parent_id  = wp_get_post_parent_id( $post_id );
 	$parent2_id = wp_get_post_parent_id( $parent_id );
 
@@ -596,8 +596,8 @@ function my_tsf_get_parent_social_meta_image( $args = null, $size = 'full' ) {
 	}
 
 	yield array(
-		'url' => $tsf->get_post_meta_item( '_social_image_url', $parent_id ),
-		'id'  => $tsf->get_post_meta_item( '_social_image_id', $parent_id ),
+		'url' => $tsf->data()->plugin()->post()->get_meta_item( '_social_image_url', $parent_id ),
+		'id'  => $tsf->data()->plugin()->post()->get_meta_item( '_social_image_id', $parent_id ),
 	);
 }
 
