@@ -161,6 +161,10 @@
           margin-top: 2em;
         }
 
+        @include breakpoint(large) {
+          max-width: 16rem;
+        }
+
         > a {
           @include breakpoint(medium down) {
             display: none;
@@ -169,6 +173,7 @@
 
         img {
           margin: 0.5em;
+          max-width: 200px;
         }
 
         .children li:first-child a,
