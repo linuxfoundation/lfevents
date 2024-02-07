@@ -68,6 +68,10 @@ wp.domReady(
 		{
 			name: 'constrained-75',
 			label: 'Restrict content 75%',
+		},
+		{
+			name: 'container-width',
+			label: 'Container Width',
 		}
 		]
 	);
