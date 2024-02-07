@@ -30,7 +30,7 @@ if ( ! defined( 'CBC_URL' ) ) {
  *
  * @return void
  */
-function custom_attributes_editor_scripts() {
+function lf_custom_attributes_editor_scripts() {
 	wp_register_script(
 		'core-block-customisations',
 		CBC_URL . 'build/index.js',
@@ -40,4 +40,112 @@ function custom_attributes_editor_scripts() {
 	);
 	wp_enqueue_script( 'core-block-customisations' );
 }
-add_action( 'enqueue_block_editor_assets', 'custom_attributes_editor_scripts' );
+add_action( 'enqueue_block_editor_assets', 'lf_custom_attributes_editor_scripts' );
+
+/**
+ * Load Cover Block customisations
+ *
+ * @param string $block_content
+ * @param array $block
+ */
+function lf_load_cover_block_customisations($block_content, $block) {
+    if ($block['blockName'] === 'core/cover' &&
+        isset($block['attrs']['activateVideo'], $block['attrs']['videoBackground']) &&
+        $block['attrs']['activateVideo'] &&
+        !empty($block['attrs']['videoBackground'])) {
+
+        $video_url = wp_get_attachment_url($block['attrs']['videoBackground']);
+		$cover_url = $block['attrs']['url'] ?? null;
+		$image_id = $block['attrs']['id'];
+		$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+
+        if (!empty($video_url) ||!empty($cover_url) ) {
+		   ob_start();
+		   ?>
+	<div class="wp-block-cover alignfull has-video-background">
+				<div aria-hidden="true" class="cover-bg__overlay"></div>
+
+		   		<img src="<?php echo esc_url( $cover_url ); ?>"
+				class="cover-bg__poster" style="width: 100%; height: 100%;"
+				alt="<?php echo esc_attr($image_alt); ?>" decoding="async">
+
+		<div class="cover-bg__video-wrapper">
+			<video class="cover-bg__video" loop muted playsinline width="100%"
+					preload="none" style="width: 100%;
+				height: 100%;
+				object-fit: cover;
+				position: absolute;
+				z-index: 1;
+				top: 0;
+				left: 0;">
+					<source
+						src="<?php echo esc_url($video_url); ?>"
+						type="video/mp4">
+					<img src="<?php echo esc_url( $cover_url ); ?>"
+						alt="<?php echo esc_attr($image_alt); ?>">
+				</video>
+		</div>
+
+		<div class="cover-bg__content">
+			<div class="container wrap">
+						<?php
+
+						if (!empty($block['innerBlocks'])) {
+							foreach ($block['innerBlocks'] as $innerBlock) {
+								echo render_block($innerBlock);
+							}
+						}
+						?>
+			</div>
+		</div>
+	</div>
+
+</section>
+		   <?php
+
+		   $custom_markup = ob_get_clean();
+
+            return $custom_markup;
+        }
+    }
+    return $block_content;
+}
+add_filter('render_block', 'lf_load_cover_block_customisations', 10, 2);
+
+/**
+ * Enqueue Script for Backend (Block Editor)
+ */
+function lf_enqueue_editor_script() {
+    global $post;
+
+    if (is_admin()) {
+        $post_id = $post->ID;
+    } else {
+        $post_id = null;
+    }
+
+    if (has_block('core/cover', $post_id) && has_block('core/cover', $post_id, array('activateVideo' => true))) {
+        wp_enqueue_script(
+            'core-block-customisations-video',
+            CBC_URL . 'js/video.js',
+            array(),
+            filemtime(CBC_PATH . 'js/video.js'),
+            true
+        );
+    }
+}
+add_action('enqueue_block_editor_assets', 'lf_enqueue_editor_script');
+
+/**
+ * Enqueue Script for Frontend
+ */
+function lf_enqueue_frontend_script() {
+    wp_enqueue_script(
+        'core-block-customisations-video',
+        CBC_URL . 'js/video.js',
+        array(),
+        filemtime(CBC_PATH . 'js/video.js'),
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'lf_enqueue_frontend_script');
