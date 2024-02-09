@@ -1,0 +1,62 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "no"
+         },
+         "hide the translations instead.": [
+            "改为隐藏翻译。"
+         ],
+         "Error happened! Please try again.": [
+            "发生错误！请重试。"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "选择内容以自动翻译为"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "保存更改并启用自动翻译"
+         ],
+         "Cancel Language Changes": [
+            "取消语言更改"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Add new languages": [
+            ""
+         ],
+         "Add new language": [
+            ""
+         ],
+         "Never mind - don't add new languages": [
+            ""
+         ],
+         "Never mind - don't add new language": [
+            ""
+         ],
+         "Choose which content to translate into the new language": [
+            ""
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            ""
+         ],
+         "Only automatically translate new content.": [
+            "仅自动翻译新内容。"
+         ],
+         "Which content do you want to translate into the new language?": [
+            ""
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            ""
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            ""
+         ]
+      }
+   }
+}

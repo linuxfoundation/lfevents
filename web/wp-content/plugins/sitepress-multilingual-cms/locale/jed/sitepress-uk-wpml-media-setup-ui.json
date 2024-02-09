@@ -1,0 +1,17 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "But...": [
+            "Але..."
+         ],
+         "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
+            "Не поспішайте перекладати вміст із мультимедіа, поки не закінчиться його налаштування. Зачекайте всього хвильку."
+         ]
+      }
+   }
+}

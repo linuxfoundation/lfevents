@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "hide the translations instead.": [
+            "إخفاء الترجمات بدلًا من ذلك."
+         ],
+         "Error happened! Please try again.": [
+            "حدث خطأ ما! يُرجى إعادة المحاولة لاحقًا."
+         ],
+         "Cancel": [
+            "إلغاء"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "اختر المحتوى المراد ترجمته آليًا إلى"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "حفظ التغييرات وتمكين الترجمة الآلية"
+         ],
+         "Cancel Language Changes": [
+            "إلغاء تغييرات اللغة"
+         ],
+         "Save": [
+            "حفظ"
+         ],
+         "Add new languages": [
+            "إضافة لغات جديدة"
+         ],
+         "Add new language": [
+            "إضافة لغة جديدة"
+         ],
+         "Never mind - don't add new languages": [
+            "لا توجد مشكلة - لا تقم بإضافة لغات جديدة"
+         ],
+         "Never mind - don't add new language": [
+            "لا توجد مشكلة - لا تقم بإضافة لغة جديدة"
+         ],
+         "Choose which content to translate into the new language": [
+            "اختر المحتوى الذي ترغب في ترجمته إلى اللغة الجديدة"
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "ترجمة جميع مقالاتي وصفحاتي تلقائيًا، بالإضافة إلى المحتوى الجديد الذي قمت بإنشائه."
+         ],
+         "Only automatically translate new content.": [
+            "ترجمة المحتوى الجديد فقط آليًا."
+         ],
+         "Which content do you want to translate into the new language?": [
+            "ما المحتوى الذي ترغب في ترجمته إلى اللغة الجديدة؟"
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "عند إلغاء الإيقاف المؤقت للترجمة الآلية، ستتم <a>ترجمة هذا المحتوى تلقائيًا</a>."
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "ما زال بإمكانك ترجمة المحتوى الحالي في أي وقت من خلال 'لوحة أدوات الترجمة' (Translation Management Dashboard)."
+         ]
+      }
+   }
+}

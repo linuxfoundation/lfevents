@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "hide the translations instead.": [
+            "em vez disso, oculte as traduções."
+         ],
+         "Error happened! Please try again.": [
+            "Ocorreu um erro! Tente novamente."
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "Escolha conteúdo para traduzir automaticamente para"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Salvar alterações e habilitar a tradução automática"
+         ],
+         "Cancel Language Changes": [
+            "Cancelar mudanças de idioma"
+         ],
+         "Save": [
+            "Salvar"
+         ],
+         "Add new languages": [
+            "Adicionar novos idiomas"
+         ],
+         "Add new language": [
+            "Adicionar novo idioma"
+         ],
+         "Never mind - don't add new languages": [
+            "Sem problemas - não adicionar novos idiomas"
+         ],
+         "Never mind - don't add new language": [
+            "Sem problemas - não adicionar novo idioma"
+         ],
+         "Choose which content to translate into the new language": [
+            "Escolha qual conteúdo traduzir para o novo idioma"
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "Traduzir automaticamente todas as minhas publicações e páginas, além de novos conteúdos à medida que os crio."
+         ],
+         "Only automatically translate new content.": [
+            "Só traduzir automaticamente conteúdo novo."
+         ],
+         "Which content do you want to translate into the new language?": [
+            "Qual conteúdo você deseja traduzir para o novo idioma?"
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "Ao retomar a tradução automática, este conteúdo será <a>traduzido automaticamente</a>."
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Você ainda pode traduzir o conteúdo existente a qualquer momento no Painel de Gerenciamento de Tradução."
+         ]
+      }
+   }
+}

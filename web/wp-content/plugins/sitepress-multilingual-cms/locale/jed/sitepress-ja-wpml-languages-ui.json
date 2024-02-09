@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "hide the translations instead.": [
+            "代わりに翻訳を非表示にします。"
+         ],
+         "Error happened! Please try again.": [
+            "エラーが発生しました！もう一度お試しください。"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "この言語に自動翻訳するコンテンツを選択してください"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "変更を保存し、自動翻訳を有効にする"
+         ],
+         "Cancel Language Changes": [
+            "言語の変更をキャンセル"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Add new languages": [
+            "新しい言語を追加"
+         ],
+         "Add new language": [
+            "新しい言語を追加"
+         ],
+         "Never mind - don't add new languages": [
+            "キャンセル - 新しい言語を追加しない"
+         ],
+         "Never mind - don't add new language": [
+            "キャンセル - 新しい言語を追加しない"
+         ],
+         "Choose which content to translate into the new language": [
+            "新しい言語に翻訳するコンテンツを選択する"
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "すべての投稿とページおよび作成された新しいコンテンツを自動翻訳する。"
+         ],
+         "Only automatically translate new content.": [
+            "新しいコンテンツのみ自動翻訳。"
+         ],
+         "Which content do you want to translate into the new language?": [
+            "どのコンテンツを新しい言語に翻訳しますか？"
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "自動翻訳を一時停止しない場合、このコンテンツは<a>自動翻訳されます</a>。"
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Translation Management ダッシュボードからいつでも既存のコンテンツを翻訳できます。"
+         ]
+      }
+   }
+}

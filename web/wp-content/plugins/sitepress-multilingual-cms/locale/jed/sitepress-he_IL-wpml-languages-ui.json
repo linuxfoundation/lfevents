@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "hide the translations instead.": [
+            "במקום זאת הסתר את התרגומים."
+         ],
+         "Error happened! Please try again.": [
+            "אירעה שגיאה! נסה שוב."
+         ],
+         "Cancel": [
+            "ביטול"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "בחר תוכן שאותו אתה רוצה לתרגם באופן אוטומטי ל-"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "שמור שינויים והפעל תרגום אוטומטי"
+         ],
+         "Cancel Language Changes": [
+            "בטל שינויי שפה"
+         ],
+         "Save": [
+            "שמור"
+         ],
+         "Add new languages": [
+            "הוסף שפות חדשות"
+         ],
+         "Add new language": [
+            "הוסף שפה חדשה"
+         ],
+         "Never mind - don't add new languages": [
+            "לא משנה - על תוסיף שפות חדשות"
+         ],
+         "Never mind - don't add new language": [
+            "לא משנה - אל תוסיף שפה חדשה"
+         ],
+         "Choose which content to translate into the new language": [
+            "בחר איזה תוכן לתרגם לשפה החדשה"
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "תרגם באופן אוטומטי את כל הפוסטים והדפים שלי, בתוספת תוכן חדש שאני אצור."
+         ],
+         "Only automatically translate new content.": [
+            "תרגם באופן אוטומטי רק תוכן חדש."
+         ],
+         "Which content do you want to translate into the new language?": [
+            "איזה תוכן אתה רוצה לתרגם לשפה החדשה?"
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "כאשר תבטל השהייה של תרגום אוטומטי, תוכן זה <a>יתורגם באופן אוטומטי</a>."
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "עדיין תוכל לתרגם תוכן קיים בכל עת מ'לוח המחוונים של ניהול התרגום'."
+         ]
+      }
+   }
+}

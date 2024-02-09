@@ -1,0 +1,22 @@
+<div class="automatically_load_mo_file clearfix">
+    <ul>
+        <li>
+            <label for="theme_localization_load_textdomain">
+                <input {{ theme_localization_load_textdomain.checked }}
+                        type="checkbox"id="theme_localization_load_textdomain"
+                        name="theme_localization_load_textdomain"
+                        value="{{ theme_localization_load_textdomain.value }}"
+                >
+                {{ theme_localization_load_textdomain.label }}
+            </label>
+        </li>
+        <li class="wpml-gettext-theme-domain-name">
+            {{ gettext_theme_domain_name.label }}
+            <input type="text"
+                   name="gettext_theme_domain_name"
+                   value="{{ gettext_theme_domain_name.value }}"
+                   {% if not theme_localization_load_textdomain.checked %} disabled="disabled"{% endif %}
+            >
+        </li>
+    </ul>
+</div>

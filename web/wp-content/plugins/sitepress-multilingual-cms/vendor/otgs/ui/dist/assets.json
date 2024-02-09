@@ -1,0 +1,30 @@
+{
+  "entrypoints": {
+    "otgsSwitcher": {
+      "js": [
+        "js/otgsSwitcher.js?ver=f595bebc725685c64364025046cefaad"
+      ],
+      "css": [
+        "css/otgsSwitcher.css?ver=f595bebc725685c64364"
+      ]
+    },
+    "otgsPopoverTooltip": {
+      "js": [
+        "js/otgsPopoverTooltip.js?ver=c3382832d52fd68ddffa33aaedb532c3"
+      ],
+      "css": [
+        "css/otgsPopoverTooltip.css?ver=c3382832d52fd68ddffa"
+      ]
+    },
+    "otgsTableStickyHeader": {
+      "js": [
+        "js/otgsTableStickyHeader.js?ver=d62ecd8af1b60da03056e0fa04b2b6da"
+      ]
+    }
+  },
+  "otgsPopoverTooltip.css": "css/otgsPopoverTooltip.css?ver=c3382832d52fd68ddffa",
+  "otgsPopoverTooltip.js": "js/otgsPopoverTooltip.js?ver=c3382832d52fd68ddffa33aaedb532c3",
+  "otgsSwitcher.css": "css/otgsSwitcher.css?ver=f595bebc725685c64364",
+  "otgsSwitcher.js": "js/otgsSwitcher.js?ver=f595bebc725685c64364025046cefaad",
+  "otgsTableStickyHeader.js": "js/otgsTableStickyHeader.js?ver=d62ecd8af1b60da03056e0fa04b2b6da"
+}

@@ -1,0 +1,19 @@
+{% set css_classes_flag    = ('wpml-ls-flag ' ~ backward_compatibility.css_classes_flag)|trim %}
+{% set css_classes_native  = ('wpml-ls-native ' ~ backward_compatibility.css_classes_native)|trim %}
+{% set css_classes_display = ('wpml-ls-display ' ~ backward_compatibility.css_classes_display)|trim %}
+{% set css_classes_bracket = ('wpml-ls-bracket ' ~ backward_compatibility.css_classes_bracket)|trim %}
+
+{% include 'flag.twig'  with {language: {flag_url: flag_url, flag_alt: flag_alt, flag_width: flag_width, flag_height: flag_height}, css_classes_flag: css_classes_flag} %}
+
+
+{%- if native_name -%}
+    <span class="{{ css_classes_native }}" lang="{{ code }}">{{ native_name }}</span>
+{%- endif -%}
+
+{%- if display_name and (display_name != native_name) -%}
+    <span class="{{ css_classes_display }}">
+    {%- if native_name -%}<span class="{{ css_classes_bracket }}"> (</span>{%- endif -%}
+        {{- display_name -}}
+        {%- if native_name -%}<span class="{{ css_classes_bracket }}">)</span>{%- endif -%}
+    </span>
+{%- endif -%}

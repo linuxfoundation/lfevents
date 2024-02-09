@@ -1,0 +1,37 @@
+<div class="wpml-section-content-inner">
+    <div class="notice notice-warning inline clearfix">
+        <p><strong>{{ strings.title }}</strong></p>
+        <p>{{ strings.more_info }}</p>
+    </div>
+    <table class="widefat inactive-content-table">
+        <thead>
+            <tr>
+                <th>{{ strings.language }}</th>
+                {% for type in content.get_content_types %}
+                    {% for slug in type %}
+                        <th>{{ slug }}</th>
+                    {% endfor %}
+                {% endfor %}
+                <th>{{ strings.delete_translated_content }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for language, counts in content.get_language_counts_rows %}
+            <tr>
+                <th>{{ language }}</th>
+                {% for count in counts %}
+                    <td>{{ count }}</td>
+                {% endfor %}
+                <td>
+                    <div
+                        class="wpml-delete-translated-content"
+                        data-language="{{ language }}"
+                        data-language-code="{{ content.getLangCode(language) }}"
+                        style="text-align: center"
+                    ></div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

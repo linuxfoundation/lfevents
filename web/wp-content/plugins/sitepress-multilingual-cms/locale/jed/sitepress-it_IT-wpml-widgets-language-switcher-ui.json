@@ -1,0 +1,17 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "it_IT"
+         },
+         "All": [
+            "Tutto"
+         ],
+         "Display on language": [
+            "Visualizza in lingua"
+         ]
+      }
+   }
+}

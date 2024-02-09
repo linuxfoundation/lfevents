@@ -1,0 +1,26 @@
+/* These are overrides to get the wpml_select2 to behave how we
+ * want in the css editor
+ */
+
+.wpml_select2-drop-mask {
+
+    z-index: 19998;
+}
+
+.wpml_select2-drop {
+    z-index: 19999;
+}
+
+
+.wpml_select2-search {
+    z-index: 20000;
+}
+
+.wpml_select2-results li {
+    margin-bottom: 0px !important;
+}
+
+.wpml_select2-results {
+    padding-left: 0px !important;
+}
+
