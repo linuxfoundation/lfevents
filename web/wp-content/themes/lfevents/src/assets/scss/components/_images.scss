@@ -32,11 +32,6 @@ p.wp-caption-text {
   padding: rem-calc(10) 0;
 }
 
-// TODO: What is this doing?
-body.page-parent .entry-content > div:first-of-type img:first-of-type {
-  min-height: 204px;
-}
-
 // Images in background
 .background-image-wrapper {
   overflow: hidden;
