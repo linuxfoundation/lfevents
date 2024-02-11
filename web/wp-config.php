@@ -216,6 +216,8 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && $_ENV['PANTHEON_ENVIRONMENT'] !==
 		define( 'DISALLOW_FILE_MODS', true );
 	endif;
 
+	define( 'WP_LANG_DIR', $_SERVER['HOME'] .'/files/languages' );
+
 endif;
 
 /**
