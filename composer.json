@@ -33,7 +33,6 @@
     "wpackagist-plugin/flying-pages": "^2.0.8",
     "wpackagist-plugin/flying-scripts": "^1.1.7",
     "wpackagist-plugin/leadin": "*",
-    "wpackagist-plugin/lh-hsts": "^1.24",
     "wpackagist-plugin/pantheon-advanced-page-cache": "^1.0.0",
     "wpackagist-plugin/photonic": "^3.02",
     "wpackagist-plugin/post-meta-controls": "^1.2.0",
