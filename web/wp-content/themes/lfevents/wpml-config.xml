@@ -1,0 +1,7 @@
+<wpml-config>
+  <gutenberg-blocks>
+    <gutenberg-block type="cgb/countdown-block" translate="1">
+        <key name="label*" />
+    </gutenberg-block>
+  </gutenberg-blocks>
+</wpml-config>
