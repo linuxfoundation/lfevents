@@ -3,5 +3,21 @@
     <gutenberg-block type="cgb/countdown-block" translate="1">
         <key name="label*" />
     </gutenberg-block>
+    <gutenberg-block type="cgb/block-text-on-image-block" translate="1">
+        <key name="bodyContent" />
+    </gutenberg-block>
+    <gutenberg-block type="cgb/block-tab-container-block" translate="1">
+        <key name="menuTitle" />
+    </gutenberg-block>
+    <gutenberg-block type="lf/button-with-expiry" translate="1">
+        <key name="expireText" />
+    </gutenberg-block>
+    <gutenberg-block type="cgb/block-pricing-block" translate="1">
+        <key name="topLabels" />
+        <key name="leftLabels" />
+    </gutenberg-block>
+    <gutenberg-block type="cgb/block-sponsors-dynamic-block" translate="1">
+        <key name="tierName" />
+    </gutenberg-block>
   </gutenberg-blocks>
 </wpml-config>
