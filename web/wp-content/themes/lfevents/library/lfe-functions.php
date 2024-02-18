@@ -746,3 +746,25 @@ function lfe_get_newsletter_form_id( $parent_id ) {
 		return '3fd88e30-9f70-4257-a44d-72643403281d';
 	}
 }
+
+/**
+ * Generates a language selector for an Event that has been translated.
+ *
+ * @param int    $parent_id ID of top parent post of the Event.
+ * @param string $background_style sets the solid or gradient background color.
+ * @param string $menu_text_color color of the txt on the topnav.
+ */
+function lfe_get_language_selector( $parent_id, $background_style, $menu_text_color ) {
+	$related_events = lfe_get_related_events( $parent_id );
+
+	echo '<li class="page_item page_item_has_children language-selector">';
+	echo '<a>Language</a>';
+	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
+	do_action( 'wpml_add_language_selector' );
+	echo '</ul></li>';
+}
+
+// WPML constants.
+define( 'ICL_DONT_LOAD_NAVIGATION_CSS', true );
+define( 'ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true );
+define( 'ICL_DONT_LOAD_LANGUAGES_JS', true );
