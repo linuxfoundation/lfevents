@@ -716,14 +716,17 @@ function show_non_event_menu() {
  * Gets the top parent ID for the given Event page.
  *
  * @param object $post The current Event page.
+ * @param bool   $english_parent Whether to return the English-language parent or the true parent of the post.
  */
-function lfe_get_event_parent_id( $post ) {
+function lfe_get_event_parent_id( $post, $english_parent = true ) {
 	if ( ! is_object( $post ) ) {
 		return;
 	}
 
-	// gets the English language post.
-	$post = get_post( apply_filters( 'wpml_object_id', $post->ID, get_post_type( $post ), true, 'en' ) );
+	if ( $english_parent ) {
+		// gets the English language post.
+		$post = get_post( apply_filters( 'wpml_object_id', $post->ID, get_post_type( $post ), true, 'en' ) );
+	}
 
 	if ( $post->post_parent ) {
 		$ancestors = get_post_ancestors( $post->ID );
@@ -763,8 +766,11 @@ function lfe_get_language_selector( $background_style, $menu_text_color ) {
 		return;
 	}
 
+	$my_current_lang = apply_filters( 'wpml_current_language', NULL );
+	$my_current_lang = apply_filters( 'wpml_translated_language_name', NULL, $my_current_lang, false );
+
 	echo '<li class="page_item page_item_has_children language-selector">';
-	echo '<a href="#">Language</a>';
+	echo '<a href="#">' . $my_current_lang . '</a>';
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
 	do_action( 'wpml_add_language_selector' );
 	echo '</ul></li>';

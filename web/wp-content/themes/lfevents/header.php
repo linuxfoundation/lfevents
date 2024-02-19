@@ -17,7 +17,7 @@ $all_classes = array(
 	$event_menu,
 	$cncf_font,
 );
-$classes     = implode( ' ', $all_classes );
+$classes = implode( ' ', $all_classes );
 ?>
 
 <!doctype html>

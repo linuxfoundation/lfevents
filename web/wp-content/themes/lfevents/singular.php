@@ -10,7 +10,8 @@
  * @since FoundationPress 1.0.0
  */
 
-$parent_id = lfe_get_event_parent_id( $post );
+$parent_id             = lfe_get_event_parent_id( $post );
+$translation_parent_id = lfe_get_event_parent_id( $post, false );
 
 get_header();
 
@@ -100,7 +101,7 @@ if ( ! $splash_page ) {
 				} else {
 					$background_style_solid = $background_style;
 				}
-				$children = lfe_get_event_menu( $parent_id, $post->post_type, $background_style_solid );
+				$children = lfe_get_event_menu( $translation_parent_id, $post->post_type, $background_style_solid );
 				if ( $children ) {
 				echo $children; //phpcs:ignore
 				}
