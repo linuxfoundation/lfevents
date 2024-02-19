@@ -721,6 +721,10 @@ function lfe_get_event_parent_id( $post ) {
 	if ( ! is_object( $post ) ) {
 		return;
 	}
+
+	// gets the English language post.
+	$post = get_post( apply_filters( 'wpml_object_id', $post->ID, get_post_type( $post ), true, 'en' ) );
+
 	if ( $post->post_parent ) {
 		$ancestors = get_post_ancestors( $post->ID );
 		$parent_id = $ancestors[ count( $ancestors ) - 1 ];
