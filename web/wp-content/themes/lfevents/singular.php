@@ -387,7 +387,7 @@ if ( ! $splash_page ) :
 		<?php endif; ?>
 
 		<?php
-		$children = lfe_get_event_menu( $parent_id, $post->post_type, null, true );
+		$children = lfe_get_event_menu( $translation_parent_id, $post->post_type, null, true );
 		if ( $children ) :
 			?>
 		<ul
