@@ -766,11 +766,11 @@ function lfe_get_language_selector( $background_style, $menu_text_color ) {
 		return;
 	}
 
-	$my_current_lang = apply_filters( 'wpml_current_language', NULL );
-	$my_current_lang = apply_filters( 'wpml_translated_language_name', NULL, $my_current_lang, false );
+	$my_current_lang = apply_filters( 'wpml_current_language', null );
+	$my_current_lang = apply_filters( 'wpml_translated_language_name', null, $my_current_lang, false );
 
 	echo '<li class="page_item page_item_has_children language-selector">';
-	echo '<a href="#">' . $my_current_lang . '</a>';
+	echo '<a href="#">' . esc_html( $my_current_lang ) . '</a>';
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
 	do_action( 'wpml_add_language_selector' );
 	echo '</ul></li>';
