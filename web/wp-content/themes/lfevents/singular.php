@@ -105,7 +105,7 @@ if ( ! $splash_page ) {
 				echo $children; //phpcs:ignore
 				}
 				lfe_get_other_events( $parent_id, $background_style_solid, $menu_text_color );
-				lfe_get_language_selector( $parent_id, $background_style_solid, $menu_text_color );
+				lfe_get_language_selector( $background_style_solid, $menu_text_color );
 				?>
 			</ul>
 		</nav>

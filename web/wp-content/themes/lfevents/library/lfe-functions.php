@@ -748,17 +748,19 @@ function lfe_get_newsletter_form_id( $parent_id ) {
 }
 
 /**
- * Generates a language selector for an Event that has been translated.
+ * Generates a language selector for an Event if it has been translated.
  *
- * @param int    $parent_id ID of top parent post of the Event.
  * @param string $background_style sets the solid or gradient background color.
  * @param string $menu_text_color color of the txt on the topnav.
  */
-function lfe_get_language_selector( $parent_id, $background_style, $menu_text_color ) {
-	$related_events = lfe_get_related_events( $parent_id );
+function lfe_get_language_selector( $background_style, $menu_text_color ) {
+	$is_translated = apply_filters( 'wpml_element_has_translations', null, get_the_id(), get_post_type() );
+	if ( ! $is_translated ) {
+		return;
+	}
 
 	echo '<li class="page_item page_item_has_children language-selector">';
-	echo '<a>Language</a>';
+	echo '<a href="#">Language</a>';
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
 	do_action( 'wpml_add_language_selector' );
 	echo '</ul></li>';
