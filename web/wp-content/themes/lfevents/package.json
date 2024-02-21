@@ -34,7 +34,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.26.0",
-    "browser-sync": "^2.27.7",
+    "browser-sync": "^3.0.2",
     "dateformat": "^3.0.3",
     "fancy-log": "^1.3.3",
     "gulp": "^4.0.2",
