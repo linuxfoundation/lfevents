@@ -99,6 +99,7 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 			'post__in'               => $sponsor_ids,
 			'orderby'                => 'title',
 			'order'                  => 'ASC',
+			'wpml_do_not_adjust_name' => true, // WPML workaround.
 		)
 	);
 

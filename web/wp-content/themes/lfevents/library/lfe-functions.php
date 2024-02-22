@@ -272,12 +272,13 @@ function lfe_get_sponsors( $parent_id ) {
 	$post_types = lfe_get_post_types();
 
 	$args = array(
-		'post_type'              => $post_types,
-		'post_parent'            => $parent_id,
-		'name'                   => 'sponsor-list',
-		'no_found_rows'          => true,  // used to improve performance.
-		'update_post_meta_cache' => false, // used to improve performance.
-		'update_post_term_cache' => false, // used to improve performance.
+		'post_type'               => $post_types,
+		'post_parent'             => $parent_id,
+		'name'                    => 'sponsor-list',
+		'no_found_rows'           => true,  // used to improve performance.
+		'update_post_meta_cache'  => false, // used to improve performance.
+		'update_post_term_cache'  => false, // used to improve performance.
+		'wpml_do_not_adjust_name' => true, // WPML workaround.
 	);
 
 	$the_query = new WP_Query( $args );
@@ -782,3 +783,28 @@ function lfe_get_language_selector( $background_style, $menu_text_color ) {
 define( 'ICL_DONT_LOAD_NAVIGATION_CSS', true );
 define( 'ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true );
 define( 'ICL_DONT_LOAD_LANGUAGES_JS', true );
+
+// WPML workaround to deal with missing sponsors pages.
+// See: https://wpml.org/forums/topic/does-wpml-manipulate-the-post_parent-value-for-posts/.
+add_filter(
+	'wpml_pre_parse_query',
+	function ( $q ) {
+		if ( empty( $q->get( 'wpml_do_not_adjust_name' ) ) ) {
+			return $q;
+		}
+
+		$name = $q->get( 'name' );
+		unset( $q->query['name'] );
+		unset( $q->query_vars['name'] );
+
+		add_filter(
+			'wpml_post_parse_query',
+			function ( $q ) use ( $name ) {
+				$q->set( 'name', $name );
+				return $q;
+			}
+		);
+
+		return $q;
+	}
+);
