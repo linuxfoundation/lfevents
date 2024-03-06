@@ -46,10 +46,10 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 		<p>Copyright © <?php echo esc_html( gmdate( 'Y' ) ); ?> The Linux Foundation®. All rights reserved. The
 			Linux Foundation has registered trademarks and uses trademarks. For
 			a list of trademarks of The Linux Foundation, please see our <a target="_blank" rel="noopener"
-				href="https://www.linuxfoundation.org/trademark-usage">Trademark Usage</a> page. Linux is a
+				href="https://www.linuxfoundation.org/legal/trademark-usage">Trademark Usage</a> page. Linux is a
 			registered trademark of Linus Torvalds. <a target="_blank" rel="noopener"
-				href="https://www.linuxfoundation.org/terms/">Terms of Use</a> |
-			<a target="_blank" rel="noopener"  href="https://www.linuxfoundation.org/privacy/">Privacy
+				href="https://www.linuxfoundation.org/legal/terms">Terms of Use</a> |
+			<a target="_blank" rel="noopener"  href="https://www.linuxfoundation.org/legal/privacy-policy">Privacy
 				Policy</a> | <a target="_blank" rel="noopener"
 				href="https://www.linuxfoundation.org/legal/bylaws">Bylaws</a> | <a target="_blank" rel="noopener"
 				href="https://www.linuxfoundation.org/legal/antitrust-policy">Antitrust
