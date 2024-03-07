@@ -3,6 +3,10 @@ div.hs_recaptcha,
   display: none;
 }
 
+.hs-form-iframe {
+  min-height: 80px;
+}
+
 .hbspt-form .hs-form {
   display: flex;
   flex-direction: column;
