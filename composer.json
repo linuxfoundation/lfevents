@@ -42,7 +42,7 @@
     "wpackagist-plugin/shortpixel-image-optimiser": "*",
     "wpackagist-plugin/simple-history": "^4.1.0",
     "wpackagist-plugin/svg-autocrop": "^0.1.0",
-    "wpackagist-plugin/wp-mail-smtp": "^3.0.1",
+    "wpackagist-plugin/wp-mail-smtp": "^4",
     "wpackagist-plugin/wp-native-php-sessions": "^1.0.0",
     "wpackagist-plugin/wp-nested-pages": "^3.2.4"
   },
