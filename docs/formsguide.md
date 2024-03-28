@@ -7,5 +7,3 @@ We have gone to great lengths to write the LFEvents site to be [as fast as possi
 We have also added [some preconnect hints](https://github.com/LF-Engineering/lfevents/blob/master/web/wp-content/themes/lfevents/library/lfe-functions.php#L872) to speed up the download of the HubSpot js files.
 
 Most HubSpot forms are embedded using the iframe method, however, all newsletter forms are embedded as raw HTML which allows us to fine-tune the styling of them.
-
-Note that the [travel fund form](https://events.linuxfoundation.org/about/travel-fund-request/) and [visa request form](https://events.linuxfoundation.org/about/visa-request/) are more sophisticated forms that can't be handled by HubSpot.  They run using custom NodeJS apps to get all the submitted info in to the right parts of SalesForce.  Editors can use shortcodes `[travel-fund-request event-id="xxx"]` and `[visa-request event-id="xxx"]` to embed event-specific forms in an event page.
