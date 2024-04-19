@@ -31,6 +31,7 @@
     "wpackagist-plugin/clone-page-tree": "^0.1.0",
     "wpackagist-plugin/find-my-blocks": "^3",
     "wpackagist-plugin/flying-pages": "^2.0.8",
+    "wpackagist-plugin/safe-svg":"2.2.4",
     "wpackagist-plugin/flying-scripts": "^1.1.7",
     "wpackagist-plugin/leadin": "*",
     "wpackagist-plugin/pantheon-advanced-page-cache": "^1.0.0",

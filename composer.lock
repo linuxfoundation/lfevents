@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "422a6a6cebc3d2acd0f9aa71aa519cfd",
+    "content-hash": "a2d8176e94b2c09328edd822a60ab19d",
     "packages": [
         {
             "name": "composer/installers",
@@ -1134,6 +1134,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/redirection/"
+        },
+        {
+            "name": "wpackagist-plugin/safe-svg",
+            "version": "2.2.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/safe-svg/",
+                "reference": "tags/2.2.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/safe-svg.2.2.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/safe-svg/"
         },
         {
             "name": "wpackagist-plugin/shortpixel-image-optimiser",
