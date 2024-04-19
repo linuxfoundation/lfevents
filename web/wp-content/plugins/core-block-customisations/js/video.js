@@ -18,6 +18,10 @@
 
 		const video = document.querySelector( '.cover-bg__video' );
 
+		if (!overlay || !poster || !video) {
+			return;
+		}
+
 		async function playVideo() {
 			try {
 				await video.play();

@@ -746,3 +746,14 @@ function lfe_get_newsletter_form_id( $parent_id ) {
 		return '3fd88e30-9f70-4257-a44d-72643403281d';
 	}
 }
+
+/**
+ * Disable OpenVerse from Media
+ *
+ * @param array $settings Settings.
+ */
+function lf_disable_openverse_media_category( $settings ) {
+	$settings['enableOpenverseMediaCategory'] = false;
+	return $settings;
+}
+add_filter( 'block_editor_settings_all', 'lf_disable_openverse_media_category', 10 );
