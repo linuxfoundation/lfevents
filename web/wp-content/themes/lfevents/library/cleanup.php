@@ -127,7 +127,7 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 
 		$new_query_args = array();
 		foreach ( $query_args as $key => $value ) {
-			if ( 'ver' !== $key || is_numeric( $value ) && 10 === strlen( $value ) ) {
+			if ( 'ver' !== $key || ( is_numeric( $value ) && 10 === strlen( $value ) ) ) {
 				$new_query_args[ $key ] = $value;
 			}
 		}
