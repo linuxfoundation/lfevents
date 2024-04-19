@@ -11,7 +11,7 @@
 <header class="non-event-hero is-style-lf-blue-gradient">
 	<div class="container wrap">
 		<?php
-		if ( function_exists( 'is_tag' ) && is_tag() || is_category() || is_tax() ) :
+		if ( ( function_exists( 'is_tag' ) && is_tag() ) || is_category() || is_tax() ) :
 			?>
 		<h1 class="blog-title"><?php single_cat_title(); ?></h1>
 			<?php
