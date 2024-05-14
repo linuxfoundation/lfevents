@@ -12,5 +12,5 @@
 * [Forms Guide](/docs/formsguide.md)
 * [Admin Guide](https://docs.google.com/document/d/1mvIuw-R9k_gbnZn_iV04qNTjG33u_lXwFlN7s-lgJ1Y/edit?usp=sharing)
 
-## Sponsors 
+## Sponsors
 <a href="http://browserstack.com"><img width="300px" src="/docs/browserstack.svg"></a>
