@@ -225,7 +225,7 @@ registerBlockType( 'cgb/countdown-block', {
 						seconds: labelSeconds,
 					} }
 					timerStyle={ style }
-					deadline={ Math.floor(new Date(endDate).getTime() / 1000 ) }
+					deadline={ false }
 					color={ circleColor }
 				/>
 				<RichText
