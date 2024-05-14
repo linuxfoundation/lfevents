@@ -80,9 +80,12 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 	$message_align     = isset( $attributes['messageAlign'] ) ? $attributes['messageAlign'] : 'left';
 	$class_name        = isset( $attributes['className'] ) ? $attributes['className'] : '';
 
-	$wordpress_timezone = get_option( 'timezone_string' );
-	$end_date = new DateTime( $end_date, new DateTimeZone( $wordpress_timezone ) );
-	$end_date = (int) $end_date->format( 'U' );
+	// handle legacy instances of the block which stored end_date as integer.
+	if ( ! is_int( $end_date ) ) {
+		$wordpress_timezone = get_option( 'timezone_string' );
+		$end_date = new DateTime( $end_date, new DateTimeZone( $wordpress_timezone ) );
+		$end_date = (int) $end_date->format( 'U' );
+	}
 
 	$time_left = $end_date - time();
 	$seconds   = $time_left % 60;
