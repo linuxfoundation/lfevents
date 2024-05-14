@@ -40,10 +40,5 @@ else
     terminus build:env:push -n "$TERMINUS_S.$TERMINUS_ENV" --yes
 fi
 
-set +ex
-echo 'terminus secrets:set'
-terminus secrets:set -n "$TERMINUS_S.$TERMINUS_ENV" token "$GITHUB_TOKEN" --file='github-secrets.json' --clear --skip-if-empty
-set -ex
-
 # Cleanup old multidevs
 terminus build:env:delete:pr -n "$TERMINUS_S" --yes
