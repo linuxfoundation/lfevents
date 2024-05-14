@@ -14,3 +14,4 @@
 
 ## Sponsors
 <a href="http://browserstack.com"><img width="300px" src="/docs/browserstack.svg"></a>
+
