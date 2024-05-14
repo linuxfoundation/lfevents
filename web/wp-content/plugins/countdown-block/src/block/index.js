@@ -28,8 +28,8 @@ registerBlockType( 'cgb/countdown-block', {
 			default: '',
 		},
 		endDate: {
-			type: 'number',
-			default: 60 * ( 1440 + Math.ceil( Date.now() / 60000 ) ), // 24 hours from Date.now
+			type: 'string',
+			default: new Date(),
 		},
 		style: {
 			type: 'string',
@@ -114,12 +114,11 @@ registerBlockType( 'cgb/countdown-block', {
 					) }
 					<PanelBody title={ __( 'Timer expiration' ) }>
 						<DateTimePicker
-							currentDate={ endDate * 1000 }
-							onChange={ value => {
-								setAttributes( {
-									endDate: Math.floor( Date.parse( value ) / 1000 ),
-								} );
+							currentDate={ endDate }
+							onChange={ ( newDate ) => {
+								setAttributes( { endDate: newDate } );
 							} }
+							is12Hour={ true }
 						/>
 					</PanelBody>
 					<PanelBody title={ __( 'Labels' ) }>
@@ -226,7 +225,7 @@ registerBlockType( 'cgb/countdown-block', {
 						seconds: labelSeconds,
 					} }
 					timerStyle={ style }
-					deadline={ endDate }
+					deadline={ Math.floor(new Date(endDate).getTime() / 1000 ) }
 					color={ circleColor }
 				/>
 				<RichText

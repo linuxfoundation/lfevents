@@ -68,7 +68,7 @@ function countdown_block_assets() { // phpcs:ignore
 function countdown_block_callback( $attributes ) { // phpcs:ignore
 	$labels            = array();
 	$block_id          = isset( $attributes['blockID'] ) ? $attributes['blockID'] : '';
-	$end_date          = isset( $attributes['endDate'] ) ? $attributes['endDate'] : time() + 86400;
+	$end_date          = isset( $attributes['endDate'] ) ? $attributes['endDate'] : false;
 	$style             = isset( $attributes['style'] ) ? $attributes['style'] : 'Odometer';
 	$circle_color      = isset( $attributes['circleColor'] ) ? $attributes['circleColor'] : '#2DB7F5';
 	$expiry_message    = isset( $attributes['expiryMessage'] ) ? $attributes['expiryMessage'] : 'Timer expired';
@@ -79,6 +79,10 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 	$labels['seconds'] = isset( $attributes['labelSeconds'] ) ? $attributes['labelSeconds'] : 'Seconds';
 	$message_align     = isset( $attributes['messageAlign'] ) ? $attributes['messageAlign'] : 'left';
 	$class_name        = isset( $attributes['className'] ) ? $attributes['className'] : '';
+
+	$wordpress_timezone = get_option( 'timezone_string' );
+	$end_date = new DateTime( $end_date, new DateTimeZone( $wordpress_timezone ) );
+	$end_date = (int) $end_date->format( 'U' );
 
 	$time_left = $end_date - time();
 	$seconds   = $time_left % 60;
