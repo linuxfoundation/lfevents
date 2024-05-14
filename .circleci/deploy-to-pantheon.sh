@@ -40,5 +40,8 @@ else
     terminus build:env:push -n "$TERMINUS_S.$TERMINUS_ENV" --yes
 fi
 
+# Clear cache
+terminus env:clear-cache "$TERMINUS_S.$TERMINUS_ENV"
+
 # Cleanup old multidevs
 terminus build:env:delete:pr -n "$TERMINUS_S" --yes
