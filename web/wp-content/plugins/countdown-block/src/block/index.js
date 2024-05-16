@@ -5,8 +5,6 @@ import icon, {
 	TickingCountdownIcon,
 } from './components/Icons';
 
-import Timer from './components/Timer';
-
 import './styles/editor.scss';
 
 const { __ } = wp.i18n;
@@ -215,19 +213,12 @@ registerBlockType( 'cgb/countdown-block', {
 				</BlockControls>
 			),
 			<Fragment key="timer-wrapper">
-				<Timer
-					key="timer-element"
-					labels={ {
-						weeks: labelWeeks,
-						days: labelDays,
-						hours: labelHours,
-						minutes: labelMinutes,
-						seconds: labelSeconds,
+				<h2
+					style={ { 
+						textAlign: messageAlign,
+						color: 'green',
 					} }
-					timerStyle={ style }
-					deadline={ false }
-					color={ circleColor }
-				/>
+				>Countdown Timer</h2>
 				<RichText
 					tagName="div"
 					placeholder={ __( 'Text to show after the countdown is over' ) }
