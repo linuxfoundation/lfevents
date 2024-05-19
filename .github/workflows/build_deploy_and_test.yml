@@ -144,10 +144,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
+      - name: Cache vendor folder
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-vendor
         with:
-          name: build-artifacts
+          path: ./vendor
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
           
       - name: Check for WordPress coding standards
         run: composer -n code-sniff
