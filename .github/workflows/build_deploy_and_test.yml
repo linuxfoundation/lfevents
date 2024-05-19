@@ -126,7 +126,7 @@ jobs:
         run: /build-tools-ci/scripts/set-environment
 
       - name: run PHP build step
-        run: ./.ci/build/php
+        run: ./php
 
 
   code_sniff_unit_test:
@@ -219,4 +219,4 @@ jobs:
           eval `ssh-agent -s`
           ssh-add ../private.key
           source $BASH_ENV
-          ./.ci/deploy/pantheon/dev-multidev
+          ./dev-multidev
