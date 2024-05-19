@@ -128,7 +128,7 @@ jobs:
   code_sniff_unit_test:
     runs-on: ubuntu-latest
     container:
-      image: drupaldocker/php:8.0-cli-2.x
+      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -136,7 +136,7 @@ jobs:
       - name: Build dev dependencies
         run: composer install --no-ansi --no-interaction --optimize-autoloader --no-progress
 
-      - name: Check for WordPress coding standards
+      - name: Check code with WordPress coding standards
         run: composer -n code-sniff
 
   
