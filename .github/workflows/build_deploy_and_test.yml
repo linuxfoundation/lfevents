@@ -129,6 +129,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: quay.io/pantheon-public/build-tools-ci:6.x
+      options: --user root
     steps:
       - name: Checkout
         uses: actions/checkout@v4
