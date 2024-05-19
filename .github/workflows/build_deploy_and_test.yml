@@ -128,26 +128,18 @@ jobs:
       - name: run PHP build step
         run: ./.github/workflows/php
 
-      - name: Check for WordPress coding standards
-        run: composer -n code-sniff
 
   code_sniff_unit_test:
     runs-on: ubuntu-latest
     container:
       image: drupaldocker/php:7.2-cli
-    needs: build_php
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache vendor folder
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-vendor
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          
+      - name: Build dev dependencies
+        run: composer install --no-ansi --no-interaction --optimize-autoloader --no-progress
+
       - name: Check for WordPress coding standards
         run: composer -n code-sniff
 
