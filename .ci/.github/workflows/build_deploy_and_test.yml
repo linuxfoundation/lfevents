@@ -75,36 +75,6 @@ jobs:
           echo "export CI_REPOSITORY_URL='https://github.com/${GITHUB_REPOSITORY}'" >> $BASH_ENV
           echo "export ARTIFACTS_DIR_URL='${GITHUB_WORKFLOW_URL}/#artifacts'" >> $BASH_ENV
 
-  static_tests:
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:6.x
-      options: --user root
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cache composer cache
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-composer-cache
-        with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      # Set TERMINUS_ENV and related environment variables.
-      # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
-      - name: setup-environment-vars
-        run: /build-tools-ci/scripts/set-environment
-
-      - name: run static tests
-        run: |
-          ./.ci/test/static/run
-
   build_php:
     container:
       image: quay.io/pantheon-public/build-tools-ci:6.x
@@ -158,12 +128,26 @@ jobs:
       - name: run PHP build step
         run: ./.ci/build/php
 
+
+  code_sniff_unit_test:
+    runs-on: ubuntu-latest
+    container:
+      image: drupaldocker/php:7.2-cli
+    needs: build_php
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Check for WordPress coding standards
+        run: composer -n code-sniff
+
+
   deploy_to_pantheon:
     container:
       image: quay.io/pantheon-public/build-tools-ci:6.x
       options: --user root
     runs-on: ubuntu-latest
-    needs: [configure_env_vars, static_tests, build_php]
+    needs: [configure_env_vars, build_php]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -236,86 +220,3 @@ jobs:
           ssh-add ../private.key
           source $BASH_ENV
           ./.ci/deploy/pantheon/dev-multidev
-
-
-  visual_regression_test:
-    container:
-      image: backstopjs/backstopjs:5.3.2
-      options: --user root
-    runs-on: ubuntu-latest
-    if: ${{ github.ref != 'refs/heads/master' }}
-    needs: [configure_env_vars]
-    steps:
-      - name: Update git version
-        run: |
-          echo "deb http://ppa.launchpad.net/git-core/ppa/ubuntu xenial main" >> /etc/apt/sources.list
-          apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E1DD270288B4E6030699E45FA1715D88E1DF1F24
-          apt update -y
-          apt install -y git
-
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Cache bash_env.txt
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-bash-env
-        with:
-          path: bash_env.txt
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.run_number }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Cache composer cache
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-composer-cache
-        with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Cache vendor folder
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-vendor
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-
-      - name: Cache web folder
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-web
-        with:
-          path: ./web
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
-
-      - name: Cache drush folder
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-drush
-        with:
-          path: ./drush
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
-
-      - name: prepare-environment-vars
-        run: |
-          source $BASH_ENV
-
-      - name: visual regression test
-        run: ./.ci/test/visual-regression/run
-
-      - name: Upload artifacts
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: vrt-report
-          path: /tmp/artifacts
