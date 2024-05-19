@@ -134,9 +134,6 @@ jobs:
           name: build-artifacts
           path: |
             vendor
-            web
-            drush        
-
 
   code_sniff_unit_test:
     runs-on: ubuntu-latest
