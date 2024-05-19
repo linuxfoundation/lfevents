@@ -5,7 +5,7 @@
  * @package FoundationPress
  */
 
-if ( ! class_exists( 'Foundationpress_Comments') ) :
+if ( ! class_exists( 'Foundationpress_Comments' ) ) :
 	/**
 	 * Comment
 	 */
