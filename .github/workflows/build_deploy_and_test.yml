@@ -9,13 +9,12 @@ env:
   TERM: dumb
   GITHUB_TOKEN: ${{ github.token }}
   TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
-  TEST_SITE_NAME: ${{ secrets.TERMINUS_SITE }}
-  TEST_SITE_NAME2: ${{ secrets.TERMINUS_SITE2 }}
+  TERMINUS_SITE: ${{ secrets.TERMINUS_SITE }}
+  TERMINUS_SITE2: ${{ secrets.TERMINUS_SITE2 }}
   BASH_ENV: "./bash_env.txt"
   CI_BRANCH: ${{ github.ref }}
   COMMIT_SHA: ${{ github.sha }}
   CI_BUILD_NUMBER: ${{ github.run_number }}
-  DEFAULT_SITE: ${{ secrets.TERMINUS_SITE }}
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   GITHUB_OWNER: ${{ github.repository_owner }}
   CI_PROJECT_NAME: ${{ github.repository }}
@@ -43,7 +42,7 @@ jobs:
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: |
-          if [ "$CI_BRANCH" != "refs/heads/master" ]; then
+          if [ "$CI_BRANCH" != "refs/heads/main" ]; then
             export PR_NUMBER=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
               "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
@@ -59,7 +58,7 @@ jobs:
               "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
               python3 -c "import sys, json; print(json.load(sys.stdin)[0]['html_url'])"`
           else
-            export CI_BRANCH="master"
+            export CI_BRANCH="main"
           fi
           export CI_PROJECT_REPONAME=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
             -H "Accept: application/vnd.github.groot-preview+json" \
