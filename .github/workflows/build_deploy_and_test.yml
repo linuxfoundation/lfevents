@@ -312,17 +312,3 @@ jobs:
           source $BASH_ENV
           ./.github/workflows/dev-multidev-lfeventsci
 
-      - name: Set deployment status to "success"
-        if: success()
-        uses: actions/github-script@v3
-        with:
-          script: |
-            github.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'success',
-              target_url: '${{ steps.get-url.outputs.url }}',
-              description: 'Deployment to dev environment successful',
-              context: 'deploy'
-            })
