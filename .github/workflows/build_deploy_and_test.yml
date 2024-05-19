@@ -126,14 +126,6 @@ jobs:
       - name: run PHP build step
         run: ./.github/workflows/php
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '14.21.3'
-
-      - name: Compile css/js
-        run: cd ./web/wp-content/themes/lfevents/; npm install; npm run build
-
-
   code_sniff_unit_test:
     runs-on: ubuntu-latest
     container:
@@ -217,6 +209,13 @@ jobs:
       # Rsync the build artifact pieces web directory
       - name: sync build artifact
         run: rsync -rz ./web ./vendor .
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.21.3'
+
+      - name: Compile css/js
+        run: cd ./web/wp-content/themes/lfevents/; npm install; npm run build
 
       # Deploy to Pantheon
       - name: deploy to Pantheon
