@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Pricing Block
- * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/pricing-block
+ * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/pricing-block
  * Description: Gutenberg block which inserts a pricing table which dynamically updates "Expired" notices with the date.
  * Author: cjyabraham
  * Version: 0.1.0

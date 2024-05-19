@@ -10,7 +10,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       LFEvents
- * Plugin URI:        https://github.com/LF-Engineering/lfevents
+ * Plugin URI:        https://github.com/linuxfoundation/lfevents
  * Description:       Core functionality for running the LFEvents site.
  * Version:           1.0.0
  * Author:            Chris Abraham

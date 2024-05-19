@@ -31,15 +31,11 @@ web/private/*
 !web/private/scripts/
 web/private/scripts/quicksilver
 !web/private/config/
-!.circleci
 
 # Add directories containing build assets below.
 # Keep all additions above the "cut" line.
 
 .lando.yml
-behat-local.yml
-wraith/configs/capture.yaml
-wraith/shots
 web/wp-content/themes/twentynineteen/node_modules
 *.code-workspace
 

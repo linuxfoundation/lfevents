@@ -1,8 +1,8 @@
 # LFEvents Developer Guide
 
-LFEvents uses a Continuous Integration (CI) infrastructure via github, CircleCI and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
+LFEvents uses a Continuous Integration (CI) infrastructure via GitHub Actions and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
 
-All these tests are run by CircleCI on each commit to the master branch, whenever a PR is created on a branch, and on each commit to a branch that has a PR open.  Such branches will have a multidev env automatically created for them by CircleCI to facilitate showing to stakeholders.  Once the PR is merged, the env will be automatically deleted.
+Git branches will have a Pantheon multidev env automatically created for them to facilitate testing.  Once the PR is merged, the env will be automatically deleted.
 
 For instructions on how to configure [the resulting site](https://events.linuxfoundation.org) to host events, please see the [Admin Instructions](https://docs.google.com/document/d/1mvIuw-R9k_gbnZn_iV04qNTjG33u_lXwFlN7s-lgJ1Y/edit?usp=sharing).
 
@@ -21,7 +21,7 @@ For instructions on how to configure [the resulting site](https://events.linuxfo
 ### Lando Setup
 (these steps were derived from [instructions provided by Pantheon](https://github.com/pantheon-systems/example-wordpress-composer#working-locally-with-lando))
 
-1. Clone this repository with HTTPS (not SSH): `git clone https://github.com/LF-Engineering/lfevents.git`
+1. Clone this repository with HTTPS (not SSH): `git clone https://github.com/linuxfoundation/lfevents.git`
   * Note that the repo does not contain all of WordPress, 3rd-party themes and plugins. They will be pulled in via [composer](https://getcomposer.org/) in step 4.
 
 2. Run `lando init` and use the following values when prompted:
@@ -113,13 +113,13 @@ lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && 
 
 ## Theme Development
 
-LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified with through the build process on CircleCI.
+LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified by the CI process.
 
 -----
 
 ## Code Sniffs
 
-The CircleCI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
+The CI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
 
 phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by composer. phpcs can be run on the command line using `lando phpcs` and phpcbf using `lando phpcbf`. Both commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory.
 
@@ -131,7 +131,7 @@ Since the lfeventsci repo includes phpcs via composer, your text editor should u
 
 ## Upgrading WordPress core, themes and plugins
 
-Dependencies of this project are managed by [Composer](https://getcomposer.org/). All dependencies of the project are set in [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) and are pulled in at deploy time according to what is set in [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock).
+Dependencies of this project are managed by [Composer](https://getcomposer.org/). All dependencies of the project are set in [composer.json](https://github.com/linuxfoundation/lfevents/blob/main/composer.json) and are pulled in at deploy time according to what is set in [composer.lock](https://github.com/linuxfoundation/lfevents/blob/main/composer.lock).
 
 composer.lock is generated from composer.json only when explicitly calling the `lando composer update` function. Any additional themes or plugins can be added first to composer.json and then `lando composer update` is run to update composer.lock and pull in the new files.  Dependencies are pegged to a version according to the composer [versioning rules](https://getcomposer.org/doc/articles/versions.md).
 
@@ -139,9 +139,9 @@ It's good practice to keep WordPress and all plugins set at their latest release
 
 To upgrade the version of a dependency, follow these steps:
 
-1. Edit [composer.json](https://github.com/LF-Engineering/lfevents/blob/master/composer.json) to set the new version rule
+1. Edit [composer.json](https://github.com/linuxfoundation/lfevents/blob/main/composer.json) to set the new version rule
 
-2. Run `lando composer update [package]` to update [composer.lock](https://github.com/LF-Engineering/lfevents/blob/master/composer.lock) for just that package or run `lando composer update` to upgrade all packages to the latest versions which satisfy the constraints set in composer.json
+2. Run `lando composer update [package]` to update [composer.lock](https://github.com/linuxfoundation/lfevents/blob/main/composer.lock) for just that package or run `lando composer update` to upgrade all packages to the latest versions which satisfy the constraints set in composer.json
 
 3. Test the site locally
 
