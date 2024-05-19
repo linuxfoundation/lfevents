@@ -131,7 +131,7 @@ jobs:
           node-version: '14.21.3'
 
       - name: Compile css/js
-        run: cd /web/wp-content/themes/lfevents/; npm install; npm run build
+        run: pwd; ls; cd /web/wp-content/themes/lfevents/; npm install; npm run build
 
 
   code_sniff_unit_test:
