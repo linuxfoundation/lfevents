@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Countdown Block
- * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/countdown-block
+ * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/countdown-block
  * Description: Gutenberg block which allows for insertion of a countdown in a page/post.
  * Author: fuerzastudio
  * Version: 0.1.0

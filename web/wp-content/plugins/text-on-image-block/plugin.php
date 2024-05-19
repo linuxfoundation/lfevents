@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Text on Image Gutenberg Block
- * Plugin URI: https://github.com/LF-Engineering/lfevents/tree/master/web/wp-content/plugins/text-on-image-block
+ * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/text-on-image-block
  * Description: This is a custom block that creates a fully responsive text box on top of an image
  * Author: cjyabraham
  * Version: 0.1.0
