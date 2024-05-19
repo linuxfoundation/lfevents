@@ -126,6 +126,13 @@ jobs:
       - name: run PHP build step
         run: ./.github/workflows/php
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.21.3'
+
+      - name: Compile css/js
+        run: cd /web/wp-content/themes/lfevents/; npm install; npm run build
+
 
   code_sniff_unit_test:
     runs-on: ubuntu-latest
@@ -141,7 +148,7 @@ jobs:
       - name: Check for WordPress coding standards
         run: composer -n code-sniff
 
-
+  
   deploy_to_pantheon:
     container:
       image: quay.io/pantheon-public/build-tools-ci:6.x
