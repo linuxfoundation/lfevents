@@ -7,12 +7,10 @@ env:
   TZ: "/usr/share/zoneinfo/America/Los_Angeles"
   NOTIFY: 'scripts/github/add-commit-comment {project} {sha} "Created multidev environment [{site}#{env}]({dashboard-url})." {site-url}'
   TERM: dumb
-  ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-  ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-  ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
   GITHUB_TOKEN: ${{ github.token }}
   TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
   TEST_SITE_NAME: ${{ secrets.TERMINUS_SITE }}
+  TEST_SITE_NAME2: ${{ secrets.TERMINUS_SITE2 }}
   BASH_ENV: "./bash_env.txt"
   CI_BRANCH: ${{ github.ref }}
   COMMIT_SHA: ${{ github.sha }}
