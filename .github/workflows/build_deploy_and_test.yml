@@ -128,13 +128,6 @@ jobs:
       - name: run PHP build step
         run: ./.github/workflows/php
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artifacts
-          path: |
-            vendor
-
   code_sniff_unit_test:
     runs-on: ubuntu-latest
     container:
