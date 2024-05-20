@@ -18,7 +18,7 @@ env:
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   GITHUB_OWNER: ${{ github.repository_owner }}
   CI_PROJECT_NAME: ${{ github.repository }}
-#  DEFAULT_BRANCH: "main"
+  DEFAULT_BRANCH: "main"
 
 
 jobs:
