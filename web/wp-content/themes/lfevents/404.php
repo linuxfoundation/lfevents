@@ -17,7 +17,7 @@ get_template_part( 'template-parts/header-global' );
 			<p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
 		</div>
 
-		<p>Please try the following:4</p>
+		<p>Please try the following:44</p>
 		<ul>
 			<li>Check your spelling
 			</li>
