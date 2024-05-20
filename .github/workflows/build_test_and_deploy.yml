@@ -1,5 +1,11 @@
 name: Build, test and deploy
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 defaults:
   run:
     shell: bash
@@ -43,6 +49,25 @@ jobs:
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: |
+          if [[ "$CI_BRANCH" =~ ^refs/pull/[0-9]+/merge$ ]]; then
+            pr_number=${BASH_REMATCH[1]}
+            export PR_NUMBER=$pr_number
+
+            export CI_BRANCH=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.groot-preview+json" \
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['head']['ref'])"`
+
+            export CI_PULL_REQUEST=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.groot-preview+json" \
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['html_url'])"`
+
+            export CI_PROJECT_REPONAME=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.groot-preview+json" \
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['base']['repo']['name'])"`
+
           if [ "$CI_BRANCH" != "refs/heads/main" ]; then
             export PR_NUMBER=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
@@ -58,13 +83,17 @@ jobs:
               -H "Accept: application/vnd.github.groot-preview+json" \
               "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
               python3 -c "import sys, json; print(json.load(sys.stdin)[0]['html_url'])"`
+            export CI_PROJECT_REPONAME=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.groot-preview+json" \
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['base']['repo']['name'])"`
           else
             export CI_BRANCH="main"
+            export CI_PROJECT_REPONAME=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.groot-preview+json" \
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['base']['repo']['name'])"`
           fi
-          export CI_PROJECT_REPONAME=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.groot-preview+json" \
-            "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
-            python3 -c "import sys, json; print(json.load(sys.stdin)[0]['base']['repo']['name'])"`
           export CI_PROJECT_USERNAME=$GITHUB_REPOSITORY_OWNER
           /build-tools-ci/scripts/set-environment
           GITHUB_WORKFLOW_URL=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
