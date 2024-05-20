@@ -41,7 +41,7 @@ get_template_part( 'template-parts/header-global' );
 				</a>
 			</div>
 			<div class="cell medium-4 large-3">
-				1234
+				12345678
 				<?php
 				if ( is_lfeventsci() ) {
 					get_template_part( 'template-parts/sidebar-lfeventsci' );
