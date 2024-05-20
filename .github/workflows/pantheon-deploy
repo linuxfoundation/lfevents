@@ -16,6 +16,12 @@ composer run prepare-for-pantheon
 
 if [[ $CI_BRANCH != $DEFAULT_BRANCH ]]
 then
+
+    if [ "${{ github.event.pull_request }}" == "null" ]; then
+        echo -e "This CI will only deploy to Pantheon if on the main branch or in a pull request.\n"
+        exit 0;
+    fi
+
     # Create a new multidev environment (or push to an existing one)
     terminus -n build:env:create "$TERMINUS_S.dev" "$TERMINUS_ENV" --yes
 else
