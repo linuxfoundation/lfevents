@@ -108,7 +108,7 @@ jobs:
           cache-name: cache-web
         with:
           path: ./web
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}-${{ github.run_number }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       # Set TERMINUS_ENV and related environment variables.
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
@@ -184,7 +184,7 @@ jobs:
           cache-name: cache-web
         with:
           path: ./web
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}-${{ github.run_number }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       # Set TERMINUS_ENV and related environment variables.
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
@@ -262,7 +262,7 @@ jobs:
           cache-name: cache-web
         with:
           path: ./web
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}-${{ github.run_number }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       # Set TERMINUS_ENV and related environment variables.
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
