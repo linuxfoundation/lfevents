@@ -116,7 +116,7 @@ jobs:
         run: /build-tools-ci/scripts/set-environment
 
       - name: run PHP build step
-        run: ./.github/workflows/php
+        run: composer -n build-assets
 
   code_sniff_unit_test:
     runs-on: ubuntu-latest
@@ -210,7 +210,7 @@ jobs:
           eval `ssh-agent -s`
           ssh-add ../private.key
           source $BASH_ENV
-          ./.github/workflows/dev-multidev-lfasiallcci
+          ./.github/workflows/dev-multidev $TERMINUS_SITE2
 
   deploy_to_pantheon_lfeventsci:
     container:
@@ -288,5 +288,5 @@ jobs:
           eval `ssh-agent -s`
           ssh-add ../private.key
           source $BASH_ENV
-          ./.github/workflows/dev-multidev-lfeventsci
+          ./.github/workflows/dev-multidev $TERMINUS_SITE
 
