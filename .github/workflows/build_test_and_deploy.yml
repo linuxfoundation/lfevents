@@ -89,10 +89,6 @@ jobs:
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Cache vendor folder
         uses: actions/cache@v4
@@ -153,10 +149,6 @@ jobs:
         with:
           path: bash_env.txt
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.run_number }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Cache composer cache
         uses: actions/cache@v4
@@ -165,10 +157,6 @@ jobs:
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Cache vendor folder
         uses: actions/cache@v4
@@ -231,10 +219,6 @@ jobs:
         with:
           path: bash_env.txt
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.run_number }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Cache composer cache
         uses: actions/cache@v4
@@ -243,10 +227,6 @@ jobs:
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Cache vendor folder
         uses: actions/cache@v4
