@@ -1,11 +1,5 @@
 name: Build, test and deploy
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: push
 defaults:
   run:
     shell: bash
