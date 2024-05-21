@@ -57,12 +57,12 @@ jobs:
             export CI_BRANCH=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
               "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
-              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['head']['ref'])"`
+              python3 -c "import sys, json; print(json.load(sys.stdin)['head']['ref'])"`
 
             export CI_PULL_REQUEST=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
               "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
-              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['html_url'])"`
+              python3 -c "import sys, json; print(json.load(sys.stdin)['html_url'])"`
 
           elif [ "$CI_BRANCH" != "refs/heads/main" ]; then
             echo '3'
