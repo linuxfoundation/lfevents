@@ -45,8 +45,6 @@ jobs:
           path: bash_env.txt
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.run_number }}
 
-      # Set TERMINUS_ENV and related environment variables.
-      # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: |
           if [[ "$GITHUB_REF" =~ ^refs/pull/([0-9]+)/merge$ ]]; then
@@ -118,8 +116,6 @@ jobs:
           path: ./web
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
-      # Set TERMINUS_ENV and related environment variables.
-      # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: ./.github/workflows/set-environment
 
@@ -186,8 +182,6 @@ jobs:
           path: ./web
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
-      # Set TERMINUS_ENV and related environment variables.
-      # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: ./.github/workflows/set-environment
 
@@ -256,8 +250,6 @@ jobs:
           path: ./web
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
-      # Set TERMINUS_ENV and related environment variables.
-      # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: ./.github/workflows/set-environment
 
