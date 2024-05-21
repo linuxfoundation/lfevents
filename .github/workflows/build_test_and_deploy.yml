@@ -49,10 +49,8 @@ jobs:
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: |
-          echo '1' $GITHUB_REF
           if [[ "$GITHUB_REF" =~ ^refs/pull/([0-9]+)/merge$ ]]; then
             export PR_NUMBER=${BASH_REMATCH[1]}
-            echo '2' $PR_NUMBER
 
             export CI_BRANCH=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
@@ -65,7 +63,6 @@ jobs:
               python3 -c "import sys, json; print(json.load(sys.stdin)['html_url'])"`
 
           elif [ "$GITHUB_REF" != "refs/heads/main" ]; then
-            echo '3'
             export PR_NUMBER=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
               "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
@@ -81,18 +78,12 @@ jobs:
               "https://api.github.com/repos/${CI_PROJECT_NAME}/commits/${COMMIT_SHA}/pulls" | \
               python3 -c "import sys, json; print(json.load(sys.stdin)[0]['html_url'])"`
           else
-            echo '4'
             export CI_BRANCH="main"
           fi
-          echo '5'
           export CI_PROJECT_REPONAME="${CI_PROJECT_NAME#*/}"
           export CI_PROJECT_USERNAME=$GITHUB_REPOSITORY_OWNER
-          /build-tools-ci/scripts/set-environment
-          GITHUB_WORKFLOW_URL=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
-          echo "export CI_BUILD_URL='${GITHUB_WORKFLOW_URL}'" >> $BASH_ENV
-          echo "export CI_NODE_INDEX=0" >> $BASH_ENV
-          echo "export CI_REPOSITORY_URL='https://github.com/${GITHUB_REPOSITORY}'" >> $BASH_ENV
-          echo "export ARTIFACTS_DIR_URL='${GITHUB_WORKFLOW_URL}/#artifacts'" >> $BASH_ENV
+          export GITHUB_WORKFLOW_URL=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+          ./.github/workflows/set-environment
 
   build_php:
     container:
@@ -130,7 +121,7 @@ jobs:
       # Set TERMINUS_ENV and related environment variables.
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
-        run: /build-tools-ci/scripts/set-environment
+        run: ./.github/workflows/set-environment
 
       - name: run PHP build step
         run: composer -n build-assets
@@ -198,7 +189,7 @@ jobs:
       # Set TERMINUS_ENV and related environment variables.
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
-        run: /build-tools-ci/scripts/set-environment
+        run: ./.github/workflows/set-environment
 
       # Rsync the build artifact pieces web directory
       - name: sync build artifact
@@ -268,7 +259,7 @@ jobs:
       # Set TERMINUS_ENV and related environment variables.
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
-        run: /build-tools-ci/scripts/set-environment
+        run: ./.github/workflows/set-environment
 
       # Rsync the build artifact pieces web directory
       - name: sync build artifact
