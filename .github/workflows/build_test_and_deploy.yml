@@ -49,7 +49,7 @@ jobs:
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: |
-          echo '1' $CI_BRANCH
+          echo '1 ' $CI_BRANCH
           if [[ "$CI_BRANCH" =~ ^refs/pull/([0-9]+)/merge$ ]]; then
             export PR_NUMBER=${BASH_REMATCH[1]}
             echo '2' $PR_NUMBER
