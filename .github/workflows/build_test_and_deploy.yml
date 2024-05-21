@@ -18,7 +18,7 @@ env:
   TERMINUS_SITE: ${{ secrets.TERMINUS_SITE }}
   TERMINUS_SITE2: ${{ secrets.TERMINUS_SITE2 }}
   BASH_ENV: "./bash_env.txt"
-  CI_BRANCH: ${{ github.ref }}
+  GITHUB_REF: ${{ github.ref }}
   COMMIT_SHA: ${{ github.sha }}
   CI_BUILD_NUMBER: ${{ github.run_number }}
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -49,22 +49,22 @@ jobs:
       # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
       - name: setup-environment-vars
         run: |
-          echo '1' $CI_BRANCH
-          if [[ "$CI_BRANCH" =~ ^refs/pull/([0-9]+)/merge$ ]]; then
+          echo '1' $GITHUB_REF
+          if [[ "$GITHUB_REF" =~ ^refs/pull/([0-9]+)/merge$ ]]; then
             export PR_NUMBER=${BASH_REMATCH[1]}
             echo '2' $PR_NUMBER
 
             export CI_BRANCH=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
-              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
-              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['head']['ref'])"`
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${PR_NUMBER}" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)['head']['ref'])"`
 
             export CI_PULL_REQUEST=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
-              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${pr_number}" | \
-              python3 -c "import sys, json; print(json.load(sys.stdin)[0]['html_url'])"`
+              "https://api.github.com/repos/${CI_PROJECT_NAME}/pulls/${PR_NUMBER}" | \
+              python3 -c "import sys, json; print(json.load(sys.stdin)['html_url'])"`
 
-          elif [ "$CI_BRANCH" != "refs/heads/main" ]; then
+          elif [ "$GITHUB_REF" != "refs/heads/main" ]; then
             echo '3'
             export PR_NUMBER=`curl -u "${GITHUB_OWNER}:${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.groot-preview+json" \
