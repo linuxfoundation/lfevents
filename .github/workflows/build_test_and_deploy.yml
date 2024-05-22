@@ -83,7 +83,7 @@ jobs:
           export GITHUB_WORKFLOW_URL=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
           ./.github/workflows/set-environment
 
-  build_php:
+  build_site:
     container:
       image: quay.io/pantheon-public/build-tools-ci:6.x
       options: --user root
@@ -122,6 +122,14 @@ jobs:
       - name: run PHP build step
         run: composer -n build-assets
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.21.3'
+
+      - name: Compile css/js
+        run: cd ./web/wp-content/themes/lfevents/; npm install; npm run build
+
+
   code_sniff_unit_test:
     runs-on: ubuntu-latest
     container:
@@ -143,7 +151,7 @@ jobs:
       image: quay.io/pantheon-public/build-tools-ci:6.x
       options: --user root
     runs-on: ubuntu-latest
-    needs: [configure_env_vars, build_php]
+    needs: [configure_env_vars, build_site]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -188,13 +196,6 @@ jobs:
       # Rsync the build artifact pieces web directory
       - name: sync build artifact
         run: rsync -rz ./web ./vendor .
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '14.21.3'
-
-      - name: Compile css/js
-        run: cd ./web/wp-content/themes/lfevents/; npm install; npm run build
 
       # Deploy to Pantheon
       - name: deploy to Pantheon
@@ -211,7 +212,7 @@ jobs:
       image: quay.io/pantheon-public/build-tools-ci:6.x
       options: --user root
     runs-on: ubuntu-latest
-    needs: [configure_env_vars, build_php]
+    needs: [configure_env_vars, build_site]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -256,13 +257,6 @@ jobs:
       # Rsync the build artifact pieces web directory
       - name: sync build artifact
         run: rsync -rz ./web ./vendor .
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '14.21.3'
-
-      - name: Compile css/js
-        run: cd ./web/wp-content/themes/lfevents/; npm install; npm run build
 
       # Deploy to Pantheon
       - name: deploy to Pantheon
