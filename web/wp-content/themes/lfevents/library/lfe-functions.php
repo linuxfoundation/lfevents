@@ -681,7 +681,7 @@ function lfe_event_alert_bar( $parent_id ) {
 	$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 
 	if ( $expiry_date ) {
-		if ( strtotime( $expiry_date ) <= $time ) {
+		if ( strtotime( $expiry_date ) < $time ) {
 			// alert has expired.
 			return;
 		}
