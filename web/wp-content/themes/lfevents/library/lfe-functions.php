@@ -676,12 +676,12 @@ function lfe_event_alert_bar( $parent_id ) {
 
 	// check for expiry date and expired date.
 	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
+
+	$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
+	$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
+
 	if ( $expiry_date ) {
-		$dt_expiry          = new DateTime( $expiry_date );
-		$dt_expiry_1d_after = new DateTime( $expiry_date );
-		$dt_expiry_1d_after->add( new DateInterval( 'P1D' ) );
-		$dt_now = new DateTime( 'now' );
-		if ( $dt_expiry_1d_after < $dt_now ) {
+		if ( strtotime( $expiry_date ) <= $time ) {
 			// alert has expired.
 			return;
 		}
