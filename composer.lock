@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eab73456ef4c559fabdbd6ebce3815f2",
+    "content-hash": "e1c594f9b864d341851c227175544e2c",
     "packages": [
         {
             "name": "composer/installers",
@@ -902,6 +902,24 @@
             "time": "2022-10-16T01:01:54+00:00"
         },
         {
+            "name": "wpackagist-plugin/advanced-access-manager",
+            "version": "6.9.30",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/advanced-access-manager/",
+                "reference": "tags/6.9.30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/advanced-access-manager.6.9.30.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/advanced-access-manager/"
+        },
+        {
             "name": "wpackagist-plugin/autodescription",
             "version": "5.0.6",
             "source": {
@@ -918,6 +936,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/autodescription/"
+        },
+        {
+            "name": "wpackagist-plugin/capability-manager-enhanced",
+            "version": "2.13.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/capability-manager-enhanced/",
+                "reference": "tags/2.13.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/capability-manager-enhanced.2.13.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/capability-manager-enhanced/"
         },
         {
             "name": "wpackagist-plugin/china-video-block",
@@ -1026,6 +1062,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/leadin/"
+        },
+        {
+            "name": "wpackagist-plugin/members",
+            "version": "3.2.9",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/members/",
+                "reference": "tags/3.2.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/members.3.2.9.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/members/"
         },
         {
             "name": "wpackagist-plugin/pantheon-advanced-page-cache",
@@ -1206,6 +1260,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/svg-autocrop/"
+        },
+        {
+            "name": "wpackagist-plugin/user-role-editor",
+            "version": "4.64.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/user-role-editor/",
+                "reference": "tags/4.64.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/user-role-editor.4.64.2.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/user-role-editor/"
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
@@ -1513,12 +1585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "255803f702f07bee1a4edb0b079348c198603514"
+                "reference": "17004a292b277ea89d742333f7d194877a565ddf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/255803f702f07bee1a4edb0b079348c198603514",
-                "reference": "255803f702f07bee1a4edb0b079348c198603514",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/17004a292b277ea89d742333f7d194877a565ddf",
+                "reference": "17004a292b277ea89d742333f7d194877a565ddf",
                 "shasum": ""
             },
             "conflict": {
@@ -1645,7 +1717,7 @@
                 "doctrine/mongodb-odm": "<1.0.2",
                 "doctrine/mongodb-odm-bundle": "<3.0.1",
                 "doctrine/orm": ">=1,<1.2.4|>=2,<2.4.8|>=2.5,<2.5.1|>=2.8.3,<2.8.4",
-                "dolibarr/dolibarr": "<=19",
+                "dolibarr/dolibarr": "<19.0.2",
                 "dompdf/dompdf": "<2.0.4",
                 "doublethreedigital/guest-entries": "<3.1.2",
                 "drupal/core": ">=6,<6.38|>=7,<7.96|>=8,<10.1.8|>=10.2,<10.2.2",
@@ -1869,7 +1941,7 @@
                 "mojo42/jirafeau": "<4.4",
                 "mongodb/mongodb": ">=1,<1.9.2",
                 "monolog/monolog": ">=1.8,<1.12",
-                "moodle/moodle": "<=4.3.3",
+                "moodle/moodle": "<4.3.4",
                 "mos/cimage": "<0.7.19",
                 "movim/moxl": ">=0.8,<=0.10",
                 "movingbytes/social-network": "<=1.2.1",
@@ -1970,7 +2042,7 @@
                 "pimcore/demo": "<10.3",
                 "pimcore/ecommerce-framework-bundle": "<1.0.10",
                 "pimcore/perspective-editor": "<1.5.1",
-                "pimcore/pimcore": "<11.1.6.5-dev|>=11.2,<11.2.3",
+                "pimcore/pimcore": "<11.2.4",
                 "pixelfed/pixelfed": "<0.11.11",
                 "plotly/plotly.js": "<2.25.2",
                 "pocketmine/bedrock-protocol": "<8.0.2",
@@ -2072,7 +2144,7 @@
                 "spoonity/tcpdf": "<6.2.22",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
                 "ssddanbrown/bookstack": "<22.02.3",
-                "statamic/cms": "<4.46",
+                "statamic/cms": "<4.46|>=5.3,<5.6.2",
                 "stormpath/sdk": "<9.9.99",
                 "studio-42/elfinder": "<2.1.62",
                 "subhh/libconnect": "<7.0.8|>=8,<8.1",
@@ -2219,7 +2291,7 @@
                 "yidashi/yii2cmf": "<=2",
                 "yii2mod/yii2-cms": "<1.9.2",
                 "yiisoft/yii": "<1.1.29",
-                "yiisoft/yii2": "<2.0.38",
+                "yiisoft/yii2": "<2.0.50",
                 "yiisoft/yii2-authclient": "<2.2.15",
                 "yiisoft/yii2-bootstrap": "<2.0.4",
                 "yiisoft/yii2-dev": "<2.0.43",
@@ -2304,7 +2376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-29T19:04:21+00:00"
+            "time": "2024-06-04T19:04:39+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
