@@ -582,7 +582,7 @@ $sidebar = array(
 							'register_meta' => true,
 							'ui_border_top' => true,
 							'default_value' => '',
-							'placeholder'   => __( '3fd88e30-9f70-4257-a44d-72643403281d' ),
+							'placeholder'   => __( 'e1540664-e39e-4b5e-b294-62169e4d12d4' ),
 						),
 					),
 				),
