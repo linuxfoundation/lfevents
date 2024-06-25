@@ -20,7 +20,7 @@ div.hs_recaptcha,
     margin-bottom: 0;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 950px) {
     flex-direction: row;
     justify-content: center;
 
@@ -81,6 +81,8 @@ div.hs_recaptcha,
     font-size: 0.725em;
     display: block;
     margin-right: 8px;
+    line-height: 1.2;
+    margin-top: 4px;
   }
 
   ::placeholder {
