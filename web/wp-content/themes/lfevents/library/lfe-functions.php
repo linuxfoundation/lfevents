@@ -743,7 +743,7 @@ function lfe_get_newsletter_form_id( $parent_id ) {
 	if ( $form_hubspot_id ) {
 		return $form_hubspot_id;
 	} else {
-		return 'e1540664-e39e-4b5e-b294-62169e4d12d4';
+		return '3fd88e30-9f70-4257-a44d-72643403281d';
 	}
 }
 
