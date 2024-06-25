@@ -29,18 +29,19 @@
       }
 
       @media (min-width: 900px) {
-        grid-template-columns: 2.5fr 2.5fr 3fr 1.75fr;
+        grid-template-columns: 2.5fr 2.5fr 2.5fr 3fr 1.75fr;
       }
 
       @media (max-width: 900px) {
-        input {
+        input, select {
           margin-top: 0.75rem;
         }
       }
 
       // underline input style.
       input[type='text'],
-      input[type='email'] {
+      input[type='email'],
+      select.hs-input {
         height: 40px;
         padding: 0.5em 0 calc(0.5em + 1px) 0;
         width: 100%;
@@ -49,6 +50,7 @@
         color: $white;
         border-bottom: 1px solid $lf-blue;
         transition: all 0.25s ease;
+        margin-bottom: 0;
 
         &::placeholder {
           color: $pure-white;
@@ -69,7 +71,7 @@
       }
 
       // Control autocomplete styles.
-      input {
+      input, select {
         &:focus {
           box-shadow: none;
         }
