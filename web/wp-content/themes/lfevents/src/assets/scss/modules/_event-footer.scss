@@ -27,13 +27,12 @@
 .event-footer-newsletter {
   margin-bottom: 3rem;
 
-  .legal-consent-container {
-    display: none;
+  .hs-button {
+    font-weight: 700;
   }
-
   &.black {
     .hs-button {
-      border: 1px solid black;
+      border: 2px solid black;
     }
 
     .hs-error-msg {
@@ -52,7 +51,8 @@
 
   &.white {
     .hs-button {
-      border: 1px solid $white;
+      border: 2px solid $white;
+      background-color: rgba(0, 0, 0, 0.25);
     }
   }
 }
@@ -64,10 +64,10 @@
 
 .event-footer-newsletter__privacy {
   font-size: 0.7em;
-  max-width: 85%;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     max-width: 800px;
   }
 
@@ -188,9 +188,9 @@
 
       &:after {
         // default dot - black.
-        content: " ";
+        content: ' ';
         letter-spacing: 2em;
-        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=")
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=')
           center center no-repeat;
       }
 

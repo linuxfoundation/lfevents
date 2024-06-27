@@ -33,7 +33,8 @@
       }
 
       @media (max-width: 900px) {
-        input, select {
+        input,
+        select {
           margin-top: 0.75rem;
         }
       }
@@ -71,7 +72,9 @@
       }
 
       // Control autocomplete styles.
-      input, select {
+      input,
+      select {
+        border-radius: 0;
         &:focus {
           box-shadow: none;
         }
@@ -97,17 +100,16 @@
           height: unset;
         }
 
+        @media (max-width: 900px) {
+          margin-top: 0.75rem;
+        }
+
         @media (min-width: 700px) {
           padding: 12px 24px;
           font-size: 14px;
           line-height: 14px;
         }
       }
-
-      .legal-consent-container {
-        display: none;
-      }
-    
     }
   }
 

@@ -8,36 +8,59 @@ div.hs_recaptcha,
 }
 
 .hbspt-form .hs-form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1rem;
-
-  input, select {
-    margin-top: 0.4rem;
-    margin-bottom: 0;
+  @media (min-width: 1300px) {
+    max-width: 1200px;
   }
 
-  @media (min-width: 950px) {
-    flex-direction: row;
-    justify-content: center;
-
-    > *:not(:last-child) {
-      margin-right: 10px;
+  input[type='text'],
+  input[type='email'],
+  select {
+    border-radius: 5px;
+    margin-bottom: 0;
+    line-height: 1.2;
+    color: $lf-grey-700;
+    &::placeholder {
+      color: $lf-grey-700;
     }
-
-    input, select {
-      margin-top: 0;
+    &:focus {
+      &::placeholder {
+        transition: color 0.2s ease;
+        color: $lf-grey-200;
+      }
     }
+  }
+
+  select {
+    height: 2.4375rem;
+    color: $lf-grey-700;
+  }
+
+  @media (min-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 650px) {
+    grid-template-columns: 0.9fr 0.9fr 1fr;
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: 0.9fr 0.9fr 1fr 1fr;
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: 0.9fr 0.9fr 1fr 0.8fr 0.8fr;
   }
 
   .button,
   .hs-button {
+    width: 100%;
     background-color: transparent;
     border: 1px solid $white;
-    padding: 0.5em 1em;
+    padding: 0.5em 2em;
     box-shadow: none;
     border-radius: 0.5rem;
     height: 2.4375rem;
@@ -52,11 +75,7 @@ div.hs_recaptcha,
     }
 
     &:hover {
-      background-color: rgba(#000000, 0.1);
-    }
-
-    @media (max-width: 700px) {
-      width: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -112,7 +131,7 @@ div.hs_recaptcha,
   overflow: hidden;
 }
 
-.searchandfilter .sf-input-text, 
+.searchandfilter .sf-input-text,
 .hbspt-form .hs-form .hs-input {
   &:focus,
   &:focus-within {
