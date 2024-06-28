@@ -7,9 +7,13 @@
     "build": "cgb-scripts build",
     "eject": "cgb-scripts eject"
   },
-  "dependencies": {
-    "cgb-scripts": "1.17.0",
+  "devDependencies": {
+    "cgb-scripts": "1.23.1",
     "debounce-promise": "^3.1.2",
     "react-select": "^4.0.0"
-  }
+  },
+  "repository": {
+        "type": "git",
+        "url": "https://github.com/linuxfoundation/lfevents"
+    }
 }
