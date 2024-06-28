@@ -21,22 +21,24 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"devDependencies": {
-		"@wordpress/block-editor": "^8.6.0",
-		"@wordpress/blocks": "^11.21.0",
-		"@wordpress/components": "^19.17.0",
-		"@wordpress/data": "^6.15.0",
-		"@wordpress/element": "^4.20.0",
-		"@wordpress/i18n": "^4.28.0",
-		"@wordpress/rich-text": "^5.20.0",
-		"@wordpress/scripts": "^20.0.2",
-		"autoprefixer": "^10.4.14",
-		"classnames": "^2.3.2"
+		"@wordpress/block-editor": "^13",
+		"@wordpress/blocks": "^13",
+		"@wordpress/components": "^28",
+		"@wordpress/data": "^10",
+		"@wordpress/element": "^6",
+		"@wordpress/html-entities": "^4",
+		"@wordpress/i18n": "^5",
+		"@wordpress/rich-text": "^7",
+		"@wordpress/scripts": "^28",
+		"autoprefixer": "^10.4.19",
+		"classnames": "^2.5.1"
 	},
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/linuxfoundation/lfevents"
+    },
 	"browserslist": [
 		"defaults",
 		"not IE 11"
-	],
-	"dependencies": {
-		"@wordpress/html-entities": "^3.28.0"
-	}
+	]
 }

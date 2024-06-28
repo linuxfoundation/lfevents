@@ -110,9 +110,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 		<?php
 	}
 	?>
-	</div>
-	<?php
-	$block_content = ob_get_clean();
-	return $block_content;
+</div>
+				<?php
+				$block_content = ob_get_clean();
+				return $block_content;
 }
 add_shortcode( 'staff', 'add_staff_shortcode' );
