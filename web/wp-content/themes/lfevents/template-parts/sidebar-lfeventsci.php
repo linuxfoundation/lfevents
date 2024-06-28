@@ -12,8 +12,8 @@
 <?php
 $query = new WP_Query(
 	array(
-		'post_type' => 'post',
-		'no_found_rows' => true,
+		'post_type'      => 'post',
+		'no_found_rows'  => true,
 		'posts_per_page' => 5,
 	)
 );
@@ -32,19 +32,19 @@ wp_reset_postdata();
 <?php
 $query = new WP_Query(
 	array(
-		'post_type' => 'lfe_community_event',
-		'no_found_rows' => true,
+		'post_type'      => 'lfe_community_event',
+		'no_found_rows'  => true,
 		'posts_per_page' => 10,
-		'meta_key'   => 'lfes_community_date_start',
-		'orderby'    => 'meta_value',
-		'order'      => 'ASC',
+		'meta_key'       => 'lfes_community_date_start',
+		'orderby'        => 'meta_value',
+		'order'          => 'ASC',
 	)
 );
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
-		$dt_date_end = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
+		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
 		echo '<h5 class="text-medium no-margin">';
 		echo '<a class="prevent-orphaned-icon" target="_blank" rel="noopener noreferrer" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
@@ -60,7 +60,7 @@ if ( $query->have_posts() ) {
 		$virtual = get_post_meta( $post->ID, 'lfes_community_virtual', true );
 		if ( $country ) {
 			$country = $country[0]->name;
-			$city = get_post_meta( $post->ID, 'lfes_community_city', true );
+			$city    = get_post_meta( $post->ID, 'lfes_community_city', true );
 			if ( $city ) {
 				$city .= ', ';
 			}

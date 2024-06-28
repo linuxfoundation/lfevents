@@ -27,7 +27,7 @@ if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$hide_from_listings = get_post_meta( $post->ID, 'lfes_hide_from_listings', true );
-		$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
+		$event_has_passed   = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
 		if ( 'hide' === $hide_from_listings || $event_has_passed ) {
 			continue;
 		}
@@ -39,23 +39,23 @@ if ( $query->have_posts() ) {
 			$date_range = 'TBA';
 		} else {
 			$dt_date_start = new DateTime( $date_start );
-			$dt_date_end = new DateTime( $date_end );
-			$date_range = jb_verbose_date_range( $dt_date_start, $dt_date_end );
+			$dt_date_end   = new DateTime( $date_end );
+			$date_range    = jb_verbose_date_range( $dt_date_start, $dt_date_end );
 		}
 
 		$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
 
-		$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
+		$speak_url      = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 		$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
-		$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
+		$cfp_date_end   = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
 
-		$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+		$sponsor_url      = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 		$sponsor_date_end = get_post_meta( $post->ID, 'lfes_cta_sponsor_date_end', true );
 
 		$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
 
 		$description = get_post_meta( $post->ID, 'lfes_description', true );
-		$parsedown = new Parsedown();
+		$parsedown   = new Parsedown();
 		$description = $parsedown->text( $description );
 		?>
 
@@ -82,7 +82,7 @@ if ( $query->have_posts() ) {
 					<?php
 					get_template_part( 'template-parts/svg/map-marker' );
 					$country = $country[0]->name;
-					$city = get_post_meta( $post->ID, 'lfes_city', true );
+					$city    = get_post_meta( $post->ID, 'lfes_city', true );
 					if ( $city ) {
 						$city .= ', ';
 					}
@@ -122,13 +122,13 @@ if ( $query->have_posts() ) {
 				echo wp_kses(
 					$description,
 					array(
-						'a' => $allowed_elements,
-						'br' => array(),
-						'ul' => array(),
-						'li' => array(),
-						'p' => array(),
-						'h4' => array(),
-						'h5' => array(),
+						'a'      => $allowed_elements,
+						'br'     => array(),
+						'ul'     => array(),
+						'li'     => array(),
+						'p'      => array(),
+						'h4'     => array(),
+						'h5'     => array(),
 						'strong' => array(),
 					)
 				);
@@ -139,8 +139,8 @@ if ( $query->have_posts() ) {
 				<?php
 
 				$have_button = false;
-				$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
-				$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
+				$pacific_tz  = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
+				$time        = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 
 				if ( $register_url ) {
 					echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';

@@ -26,14 +26,14 @@ echo '<div class="grid-x grid-margin-x">';
 if ( $query->have_posts() ) {
 	if ( 138 == $query->query['search_filter_id'] || 42 == $query->query['search_filter_id'] ) {
 		$is_upcoming_events = true;
-		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) INNER JOIN wp_postmeta pm3 ON ( wp_posts.ID = pm3.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value != 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0 AND (pm3.meta_value <> '') AND ( pm3.meta_key = 'lfes_date_start' )" );
+		$full_count         = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) INNER JOIN wp_postmeta pm3 ON ( wp_posts.ID = pm3.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value != 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type = 'page' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'pending') AND wp_posts.post_parent = 0 AND (pm3.meta_value <> '') AND ( pm3.meta_key = 'lfes_date_start' )" );
 	} else {
 		$is_upcoming_events = false;
-		$post_types = lfe_get_post_types();
+		$post_types         = lfe_get_post_types();
 		$full_count = $wpdb->get_var( "SELECT count(*) FROM wp_posts INNER JOIN wp_postmeta as pm1 ON ( wp_posts.ID = pm1.post_id ) INNER JOIN wp_postmeta pm2 ON ( wp_posts.ID = pm2.post_id ) WHERE ( pm1.meta_key = 'lfes_event_has_passed' ) AND (pm1.meta_value = 1) AND ( pm2.meta_key = 'lfes_hide_from_listings' ) AND (pm2.meta_value != 'hide') AND wp_posts.post_type IN ('" . implode( "', '", $post_types ) . "') AND (wp_posts.post_status = 'publish') AND wp_posts.post_parent = 0" ); //phpcs:ignore
 	}
 
-	$y = 0;
+	$y     = 0;
 	$month = 0;
 
 	if ( $full_count > 1 ) {
@@ -52,8 +52,8 @@ if ( $query->have_posts() ) {
 			$date_range = 'TBA';
 		} else {
 			$dt_date_start = new DateTime( $date_start );
-			$dt_date_end = new DateTime( $date_end );
-			$date_range = jb_verbose_date_range( $dt_date_start, $dt_date_end );
+			$dt_date_end   = new DateTime( $date_end );
+			$date_range    = jb_verbose_date_range( $dt_date_start, $dt_date_end );
 
 			$event_has_passed = get_post_meta( $post->ID, 'lfes_event_has_passed', true );
 			if ( ! $event_has_passed ) {
@@ -134,7 +134,7 @@ if ( $query->have_posts() ) {
 					<?php
 					get_template_part( 'template-parts/svg/map-marker' );
 					$country = $country[0]->name;
-					$city = get_post_meta( $post->ID, 'lfes_city', true );
+					$city    = get_post_meta( $post->ID, 'lfes_city', true );
 					if ( $city ) {
 						$city .= ', ';
 					}
@@ -165,7 +165,7 @@ if ( $query->have_posts() ) {
 			<?php
 			if ( $is_upcoming_events ) {
 				$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
-				$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
+				$time       = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 				?>
 				<p class="event-meta text-small no-margin">
 					<span class="cfp">
@@ -181,7 +181,7 @@ if ( $query->have_posts() ) {
 							} elseif ( strtotime( $cfp_date_end ) < $time ) {
 								echo 'Closed';
 							} elseif ( strtotime( $cfp_date_end ) >= $time && strtotime( $cfp_date_start ) <= $time ) {
-								$dt_cfp_date_end   = new DateTime( $cfp_date_end );
+								$dt_cfp_date_end = new DateTime( $cfp_date_end );
 								echo 'Closes ' . esc_html( $dt_cfp_date_end->format( 'l, M j, Y' ) );
 							} elseif ( strtotime( $cfp_date_end ) > $time && strtotime( $cfp_date_start ) > $time ) {
 								$dt_cfp_date_start = new DateTime( $cfp_date_start );

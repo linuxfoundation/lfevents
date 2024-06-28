@@ -32,10 +32,10 @@ if ( $use_cncf_font ) {
 
 if ( ! $splash_page ) {
 	// menu background color.
-	$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
-	$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
-	$menu_color_3     = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
-	$menu_text_color  = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
+	$menu_color      = get_post_meta( $parent_id, 'lfes_menu_color', true );
+	$menu_color_2    = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+	$menu_color_3    = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
+	$menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
 
 	$background_style = 'background-color: ' . $menu_color . ';';
 
@@ -52,7 +52,7 @@ if ( ! $splash_page ) {
 
 	if ( $overlay_strength || '0' === $overlay_strength ) {
 		$overlay_strength = (int) $overlay_strength * 0.8 * 0.01;
-		$overlay_style = 'opacity: ' . $overlay_strength . ';';
+		$overlay_style    = 'opacity: ' . $overlay_strength . ';';
 	}
 
 	// set hamburger and list elements color (via class name).
@@ -167,7 +167,7 @@ if ( ! $splash_page ) {
 							'fp-xlarge',
 							false,
 							array(
-								'class' => '',
+								'class'   => '',
 								'loading' => 'eager',
 							)
 						);
@@ -177,7 +177,7 @@ if ( ! $splash_page ) {
 							'fp-xlarge',
 							false,
 							array(
-								'class' => '',
+								'class'   => '',
 								'loading' => 'eager',
 							)
 						);
@@ -237,7 +237,7 @@ if ( ! $splash_page ) :
 	}
 
 	if ( get_post_meta( $parent_id, 'lfes_form_privacy', true ) ) {
-		$parsedown = new Parsedown();
+		$parsedown    = new Parsedown();
 		$form_privacy = get_post_meta( $parent_id, 'lfes_form_privacy', true );
 		$form_privacy = $parsedown->text( $form_privacy );
 		$form_privacy = str_replace( "\n", '<br>', $form_privacy );
@@ -265,7 +265,7 @@ if ( ! $splash_page ) :
 	echo wp_kses(
 		$form_privacy,
 		array(
-			'a' => $allowed_elements,
+			'a'  => $allowed_elements,
 			'br' => array(),
 		)
 	);

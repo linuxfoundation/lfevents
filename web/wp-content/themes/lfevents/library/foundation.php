@@ -199,7 +199,7 @@ if ( ! function_exists( 'foundationpress_gallery' ) ) :
 
 		$post            = get_post();
 		static $instance = 0;
-		$instance++;
+		++$instance;
 
 		if ( ! empty( $attr['ids'] ) ) {
 			// 'ids' is explicitly ordered, unless you specify otherwise.

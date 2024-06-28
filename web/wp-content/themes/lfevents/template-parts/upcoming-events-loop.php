@@ -48,11 +48,11 @@
 
 				$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
 
-				$speak_url = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
+				$speak_url      = get_post_meta( $post->ID, 'lfes_cta_speak_url', true );
 				$cfp_date_start = get_post_meta( $post->ID, 'lfes_cfp_date_start', true );
-				$cfp_date_end = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
+				$cfp_date_end   = get_post_meta( $post->ID, 'lfes_cfp_date_end', true );
 
-				$sponsor_url = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
+				$sponsor_url      = get_post_meta( $post->ID, 'lfes_cta_sponsor_url', true );
 				$sponsor_date_end = get_post_meta( $post->ID, 'lfes_cta_sponsor_date_end', true );
 
 				$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
@@ -83,7 +83,7 @@
 							<?php
 							get_template_part( 'template-parts/svg/map-marker' );
 							$country = $country[0]->name;
-							$city = get_post_meta( $post->ID, 'lfes_city', true );
+							$city    = get_post_meta( $post->ID, 'lfes_city', true );
 							if ( $city ) {
 								$city .= ', ';
 							}
@@ -120,8 +120,8 @@
 					<p class="homepage--call-to-action">
 					<?php
 					$have_button = false;
-					$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
-					$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
+					$pacific_tz  = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
+					$time        = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 
 					if ( $register_url ) {
 						echo '<a aria-label="Register for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $register_url ) . '" >Register</a>';
@@ -152,7 +152,7 @@
 				</div>
 
 				<?php
-				$i++;
+				++$i;
 			}
 			wp_reset_postdata();
 

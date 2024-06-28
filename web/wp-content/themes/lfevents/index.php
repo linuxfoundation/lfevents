@@ -23,7 +23,6 @@ get_template_part( 'template-parts/header-global' );
 		<div class="container wrap">
 		<?php
 		if ( have_posts() ) :
-			;
 			?>
 			<div class="grid-x grid-margin-x medium-up-2 large-up-3">
 			<?php

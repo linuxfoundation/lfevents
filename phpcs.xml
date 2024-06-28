@@ -5,6 +5,7 @@
 
 	<file>./web/wp-content/themes/</file>
 	<file>./web/wp-content/mu-plugins/custom/</file>
+	<!-- <file>./web/wp-content/plugins/buttons-with-expiry/</file> -->
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>

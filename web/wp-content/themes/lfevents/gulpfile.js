@@ -19,9 +19,6 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const sourcemaps = require('gulp-sourcemaps');
-const rev = require('gulp-rev');
-const gulpIf = require('gulp-if');
-const plumber = require('gulp-plumber');
 const through = require('through2');
 
 // Load settings from config.yml or fallback to config-default.yml.
@@ -35,17 +32,8 @@ function loadConfig() {
     }
 }
 
-function verifyFiles() {
-  return through.obj(function(file, enc, cb) {
-      // Log to verify the file is processed completely
-      console.log(`Processing file: ${file.path}`);
-      cb(null, file);
-  });
-}
-
 const { BROWSERSYNC, PATHS } = loadConfig();
 const PRODUCTION = !!(yargs.argv.production);
-const DEV = !!(yargs.argv.dev);
 
 // Delete the "dist" folder. This happens every time a build starts.
 function clean(done) {
