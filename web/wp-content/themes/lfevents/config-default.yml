@@ -1,10 +1,5 @@
 # Server build process looks for this file  - config-default.yml.
-# To setup browsersync or change settings for your environment, duplicate this file and rename to config.yml. This will override default, but is not committed to the repo.
-
-# Browsersync config
-BROWSERSYNC:
-  # URL of local development server goes here (ex. http://localsite.dev)
-  url: ""
+# To change settings for your environment, duplicate this file and rename to config.yml. This will override default, but is not committed to the repo.
 
 # Gulp will reference these paths when it copies files
 PATHS:

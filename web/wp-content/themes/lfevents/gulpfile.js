@@ -3,7 +3,6 @@
 const gulp = require('gulp');
 const terser = require('gulp-terser');
 const yargs = require('yargs');
-const browser = require('browser-sync').create();
 const rimraf = require('rimraf');
 const yaml = require('js-yaml');
 const fs = require('fs');
@@ -32,7 +31,7 @@ function loadConfig() {
     }
 }
 
-const { BROWSERSYNC, PATHS } = loadConfig();
+const { PATHS } = loadConfig();
 const PRODUCTION = !!(yargs.argv.production);
 
 // Delete the "dist" folder. This happens every time a build starts.
@@ -63,27 +62,7 @@ function compileCSS() {
             suffix: '.min'
         }))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(PATHS.dist + '/css'))
-        .pipe(browser.reload({
-            stream: true
-        }));
-}
-
-// Start BrowserSync to preview the site in browser.
-function server(done) {
-    browser.init({
-        proxy: BROWSERSYNC.url,
-        ui: {
-            port: 8080
-        },
-    });
-    done();
-}
-
-// Reload the browser with BrowserSync.
-function reload(done) {
-    browser.reload();
-    done();
+        .pipe(gulp.dest(PATHS.dist + '/css'));
 }
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
@@ -91,10 +70,10 @@ function watch() {
     gulp.watch('src/scss/**/*.scss', compileCSS)
         .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
         .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
-    gulp.watch('**/*.php', reload)
+    gulp.watch('**/*.php')
         .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
         .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
-    gulp.watch('src/images/**/*', gulp.series(reload));
+    gulp.watch('src/images/**/*');
 }
 
 const webpack = {
@@ -120,8 +99,6 @@ const webpack = {
       log('[webpack]', stats.toString({
           colors: true,
       }));
-
-      browser.reload();
   },
   build() {
     return gulp.src(PATHS.entries)
@@ -164,7 +141,6 @@ gulp.task('build', gulp.series(
 // Default task
 gulp.task('default', gulp.series(
   'build',
-  server,
   'webpack:watch',
   watch
 ));
