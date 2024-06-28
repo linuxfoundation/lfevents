@@ -5,7 +5,19 @@
 
 	<file>./web/wp-content/themes/</file>
 	<file>./web/wp-content/mu-plugins/custom/</file>
-	<!-- <file>./web/wp-content/plugins/buttons-with-expiry/</file> -->
+	<file>./web/wp-content/plugins/buttons-with-expiry/</file>
+	<file>./web/wp-content/plugins/core-block-customisations/</file>
+	<file>./web/wp-content/plugins/countdown-block/</file>
+	<file>./web/wp-content/plugins/custom-iframe/</file>
+	<file>./web/wp-content/plugins/icon-list/</file>
+	<file>./web/wp-content/plugins/image-box/</file>
+	<file>./web/wp-content/plugins/live-stream-gate-block/</file>
+	<file>./web/wp-content/plugins/pricing-block/</file>
+	<file>./web/wp-content/plugins/speakers-block/</file>
+	<file>./web/wp-content/plugins/sponsors-dynamic-block/</file>
+	<file>./web/wp-content/plugins/tab-container-block/</file>
+	<file>./web/wp-content/plugins/text-on-image-block/</file>
+	<file>./web/wp-content/plugins/track-grid/</file>
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
