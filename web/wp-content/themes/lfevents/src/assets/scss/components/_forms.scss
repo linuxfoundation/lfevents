@@ -1,3 +1,14 @@
+.searchandfilter .sf-input-text,
+.hbspt-form .hs-form .hs-input {
+  &:focus,
+  &:focus-within {
+    &::placeholder {
+      color: #e4e5e7;
+      transition: color 0.25s;
+    }
+  }
+}
+
 div.hs_recaptcha,
 .grecaptcha-badge {
   display: none;
@@ -7,137 +18,134 @@ div.hs_recaptcha,
   min-height: 80px;
 }
 
-.hbspt-form .hs-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1rem;
-  @media (min-width: 1300px) {
-    max-width: 1200px;
-  }
-
-  input[type='text'],
-  input[type='email'],
-  select {
-    border-radius: 5px;
-    margin-bottom: 0;
-    line-height: 1.2;
-    color: $lf-grey-700;
-    &::placeholder {
-      color: $lf-grey-700;
+// Applies to all non-iFrame HubSpot forms.
+.hbspt-form {
+  .hs-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    @media (min-width: 1300px) {
+      max-width: 1200px;
     }
-    &:focus {
+
+    input[type='text'],
+    input[type='email'],
+    select {
+      border-radius: 5px;
+      margin-bottom: 0;
+      line-height: 1.2;
+      color: $lf-grey-700;
       &::placeholder {
-        transition: color 0.2s ease;
-        color: $lf-grey-200;
+        color: $lf-grey-700;
+      }
+      &:focus {
+        &::placeholder {
+          transition: color 0.2s ease;
+          color: $lf-grey-200;
+        }
       }
     }
-  }
 
-  select {
-    height: 2.4375rem;
-    color: $lf-grey-700;
-  }
-
-  @media (min-width: 500px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (min-width: 650px) {
-    grid-template-columns: 0.9fr 0.9fr 1fr;
-  }
-  @media (min-width: 768px) {
-    grid-template-columns: 0.9fr 0.9fr 1fr 1fr;
-  }
-  @media (min-width: 1000px) {
-    grid-template-columns: 0.9fr 0.9fr 1fr 0.9fr 0.7fr;
-  }
-
-  .button,
-  .hs-button {
-    width: 100%;
-    background-color: transparent;
-    border: 1px solid $white;
-    padding: 0.5em 2em;
-    box-shadow: none;
-    border-radius: 0.5rem;
-    height: 2.4375rem;
-    color: white;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    cursor: pointer;
-
-    &:active {
-      position: relative;
-      top: 1px;
+    select {
+      height: 2.4375rem;
+      color: $lf-grey-700;
     }
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+    @media (min-width: 500px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 650px) {
+      grid-template-columns: 0.9fr 0.9fr 1fr;
+    }
+    @media (min-width: 768px) {
+      grid-template-columns: 0.9fr 0.9fr 1fr 1fr;
+    }
+    @media (min-width: 1000px) {
+      grid-template-columns: 0.9fr 0.9fr 1fr 0.9fr 0.7fr;
+    }
+
+    .button,
+    .hs-button {
+      width: 100%;
+      background-color: transparent;
+      border: 1px solid $white;
+      padding: 0.5em 2em;
+      box-shadow: none;
+      border-radius: 0.5rem;
+      height: 2.4375rem;
+      color: white;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      cursor: pointer;
+
+      &:active {
+        position: relative;
+        top: 1px;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .hs_error_rollup {
+      display: none;
+    }
+
+    .hs-error-msgs {
+      list-style-type: none;
+      margin-bottom: 0.6rem;
+      margin-left: 0;
+      text-align: left;
+
+      @media (min-width: 700px) {
+        margin-bottom: 0;
+      }
+    }
+
+    .hs-error-msg {
+      color: white;
+      font-style: italic;
+      font-size: 0.725em;
+      display: block;
+      margin-right: 8px;
+      line-height: 1.2;
+      margin-top: 4px;
+    }
+
+    ::placeholder {
+      color: #757575;
     }
   }
 
-  .hs_error_rollup {
-    display: none;
-  }
+  .submitted-message {
+    padding: 0.8em;
+    max-width: 900px;
+    margin: 1rem auto;
+    text-align: center;
+    font-weight: 600;
+    border: 2px solid white;
 
-  .hs-error-msgs {
-    list-style-type: none;
-    margin-bottom: 0.6rem;
-    margin-left: 0;
-    text-align: left;
-
-    @media (min-width: 700px) {
+    p {
       margin-bottom: 0;
+      color: white;
     }
   }
 
-  .hs-error-msg {
-    color: white;
-    font-style: italic;
-    font-size: 0.725em;
-    display: block;
-    margin-right: 8px;
-    line-height: 1.2;
-    margin-top: 4px;
+  .hs-form-field > label {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
   }
 
-  ::placeholder {
-    color: #757575;
-  }
-}
-
-.hbspt-form .submitted-message {
-  padding: 0.8em;
-  max-width: 900px;
-  margin: 1rem auto;
-  text-align: center;
-  font-weight: 600;
-  border: 2px solid white;
-
-  p {
-    margin-bottom: 0;
-    color: white;
-  }
-}
-
-.hbspt-form .hs-form-field > label {
-  clip: rect(1px, 1px, 1px, 1px);
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-}
-
-.searchandfilter .sf-input-text,
-.hbspt-form .hs-form .hs-input {
-  &:focus,
-  &:focus-within {
-    &::placeholder {
-      color: #e4e5e7;
-      transition: color 0.25s;
-    }
+  // Removes default form consent (we manually add it).
+  .legal-consent-container {
+    display: none;
   }
 }
