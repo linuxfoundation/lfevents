@@ -16,7 +16,7 @@
 		const poster = document.querySelector( '.cover-bg__poster' );
 		const video = document.querySelector( '.cover-bg__video' );
 
-		if (!video) {
+		if (!overlay || !poster || !video) {
 			return;
 		}
 
