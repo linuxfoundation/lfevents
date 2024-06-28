@@ -1,6 +1,7 @@
 .gallery {
   @include xy-grid;
-  // @include xy-gutters($negative: true); TODO: DO I need this?
+  // TODO: Do we need this to be included?
+  // @include xy-gutters($negative: true);
 
   @for $i from 1 through 9 {
     &.gallery-columns-#{$i} {
