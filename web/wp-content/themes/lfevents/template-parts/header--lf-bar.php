@@ -16,9 +16,8 @@
 			title="Linux Foundation" href="https://linuxfoundation.org">
 			<img width="258" height="15" loading="eager"
 				class="header--lf-bar__image" alt="Linux Foundation logo"
-				src="<?php echo esc_html( get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'linux-foundation-hztl-white.svg' ) ); ?>">
+				src="<?php echo esc_html( get_stylesheet_directory_uri() . '/src/images/linux-foundation-hztl-white.svg' ); ?>">
 		</a>
-
 
 		<?php if ( is_lfeventsci() ) : ?>
 		<div class="header--lf-bar__lfx">

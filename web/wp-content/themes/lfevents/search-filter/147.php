@@ -80,7 +80,7 @@ if ( $query->have_posts() ) {
 					<?php
 					get_template_part( 'template-parts/svg/map-marker' );
 					$country = $country[0]->name;
-					$city = get_post_meta( $post->ID, 'lfes_community_city', true );
+					$city    = get_post_meta( $post->ID, 'lfes_community_city', true );
 					if ( $city ) {
 						$city .= ', ';
 					}

@@ -63,11 +63,13 @@ function lf_load_cover_block_customisations($block_content, $block) {
 		   ob_start();
 		   ?>
 	<div class="wp-block-cover alignfull has-video-background">
-				<div aria-hidden="true" class="cover-bg__overlay"></div>
+		<div aria-hidden="true" class="cover-bg__overlay"></div>
 
-		   		<img src="<?php echo esc_url( $cover_url ); ?>"
+		<link rel="preload" as="image" fetchpriority="high" href="<?php echo esc_url( $cover_url ); ?>">
+
+		<img src="<?php echo esc_url( $cover_url ); ?>"
 				class="cover-bg__poster" style="width: 100%; height: 100%;"
-				alt="<?php echo esc_attr($image_alt); ?>" decoding="async">
+				alt="<?php echo esc_attr( $image_alt ); ?>" decoding="async">
 
 		<div class="cover-bg__video-wrapper">
 			<video class="cover-bg__video" loop muted playsinline width="100%"
@@ -82,7 +84,7 @@ function lf_load_cover_block_customisations($block_content, $block) {
 						src="<?php echo esc_url($video_url); ?>"
 						type="video/mp4">
 					<img src="<?php echo esc_url( $cover_url ); ?>"
-						alt="<?php echo esc_attr($image_alt); ?>">
+						alt="<?php echo esc_attr( $image_alt ); ?>">
 				</video>
 		</div>
 
@@ -99,13 +101,9 @@ function lf_load_cover_block_customisations($block_content, $block) {
 			</div>
 		</div>
 	</div>
-
-</section>
 		   <?php
-
 		   $custom_markup = ob_get_clean();
-
-            return $custom_markup;
+           return $custom_markup;
         }
     }
     return $block_content;
@@ -113,39 +111,28 @@ function lf_load_cover_block_customisations($block_content, $block) {
 add_filter('render_block', 'lf_load_cover_block_customisations', 10, 2);
 
 /**
- * Enqueue Script for Backend (Block Editor)
- */
-function lf_enqueue_editor_script() {
-    global $post;
-
-    if (is_admin()) {
-        $post_id = $post->ID;
-    } else {
-        $post_id = null;
-    }
-
-    if (has_block('core/cover', $post_id) && has_block('core/cover', $post_id, array('activateVideo' => true))) {
-        wp_enqueue_script(
-            'core-block-customisations-video',
-            CBC_URL . 'js/video.js',
-            array(),
-            filemtime(CBC_PATH . 'js/video.js'),
-            true
-        );
-    }
-}
-add_action('enqueue_block_editor_assets', 'lf_enqueue_editor_script');
-
-/**
  * Enqueue Script for Frontend
  */
 function lf_enqueue_frontend_script() {
-    wp_enqueue_script(
-        'core-block-customisations-video',
-        CBC_URL . 'js/video.js',
-        array(),
-        filemtime(CBC_PATH . 'js/video.js'),
-        true
-    );
+    global $post;
+
+    if ($post) {
+        $blocks = parse_blocks($post->post_content);
+
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'core/cover') {
+                if (isset($block['attrs']['activateVideo']) && $block['attrs']['activateVideo']) {
+                    wp_enqueue_script(
+                        'core-block-customisations-video',
+                        CBC_URL . 'js/video.js',
+                        array(),
+                        filemtime(CBC_PATH . 'js/video.js'),
+                        true
+                    );
+                    break;
+                }
+            }
+        }
+    }
 }
 add_action('wp_enqueue_scripts', 'lf_enqueue_frontend_script');

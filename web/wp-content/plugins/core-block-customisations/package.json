@@ -5,6 +5,10 @@
 	"author": "James Hunt",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/linuxfoundation/lfevents"
+    },
 	"scripts": {
 		"build": "wp-scripts build",
 		"check-engines": "wp-scripts check-engines",
@@ -22,13 +26,13 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^24.3.0",
-		"@wordpress/block-editor": "^8.6.0",
-		"@wordpress/blocks": "^11.18.0",
-		"@wordpress/i18n": "^4.19.0",
-		"classnames": "^2.3.2"
+		"@wordpress/block-editor": "^13.2.0",
+		"@wordpress/blocks": "^13.2.0",
+		"@wordpress/i18n": "^5.2.0",
+		"@wordpress/scripts": "^28.2.0",
+		"classnames": "^2.5.1"
 	},
 	"dependencies": {
-		"@wordpress/block-serialization-default-parser": "^4.21.0"
+		"@wordpress/block-serialization-default-parser": "^5.2.0"
 	}
 }

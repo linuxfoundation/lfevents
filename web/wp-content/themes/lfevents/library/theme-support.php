@@ -57,7 +57,7 @@ if ( ! function_exists( 'foundationpress_theme_support' ) ) :
 		remove_theme_support( 'widgets-block-editor' );
 
 		// Add foundation.css as editor style https://codex.wordpress.org/Editor_Style.
-		add_editor_style( 'dist/assets/css/' . foundationpress_asset_path( 'editor.css' ) ); //phpcs:ignore.
+		add_editor_style( 'dist/css/editor.css' ); //phpcs:ignore.
 	}
 
 	add_action( 'after_setup_theme', 'foundationpress_theme_support' );

@@ -23,7 +23,6 @@ get_template_part( 'template-parts/header-global' );
 		<div class="container wrap">
 		<?php
 		if ( have_posts() ) :
-			;
 			?>
 			<div class="grid-x grid-margin-x medium-up-2 large-up-3">
 			<?php
@@ -31,7 +30,7 @@ get_template_part( 'template-parts/header-global' );
 				the_post();
 				?>
 <article class="cell callout large-margin-bottom">
-								<h4 class="no-margin line-height-tight"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+								<h2 class="news-title no-margin line-height-tight"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 								<p class="text-small small-margin-top"><?php echo the_date(); ?></p>
 								<p class=""><?php the_excerpt(); ?></p>
 								</article>

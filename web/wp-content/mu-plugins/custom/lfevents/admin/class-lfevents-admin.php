@@ -399,19 +399,19 @@ class LFEvents_Admin {
 	 */
 	public function speaker_custom_column( $columns ) {
 		// take default columns.
-		$date = $columns['date'];
+		$date   = $columns['date'];
 		$author = $columns['author'];
 		// unset so we can move it.
 		unset( $columns['date'] );
 		unset( $columns['author'] );
 		// add new columns.
 		$columns['title_company'] = 'Title, Company';
-		$columns['linkedin_url'] = 'Linkedin URL';
-		$columns['twitter_url'] = 'Twitter/X URL';
-		$columns['website_url'] = 'Website URL';
+		$columns['linkedin_url']  = 'Linkedin URL';
+		$columns['twitter_url']   = 'Twitter/X URL';
+		$columns['website_url']   = 'Website URL';
 		// add back in old columns.
 		$columns['author'] = $author;
-		$columns['date'] = $date;
+		$columns['date']   = $date;
 		return $columns;
 	}
 
@@ -443,18 +443,18 @@ class LFEvents_Admin {
 	 */
 	public function sponsor_custom_column( $columns ) {
 		// take default columns.
-		$date = $columns['date'];
+		$date   = $columns['date'];
 		$author = $columns['author'];
 		// unset so we can move it.
 		unset( $columns['date'] );
 		unset( $columns['author'] );
 		// add new columns.
-		$columns['sponsor_logo'] = 'Sponsor Logo';
+		$columns['sponsor_logo']   = 'Sponsor Logo';
 		$columns['forwarding_url'] = 'Forwarding URL';
-		$columns['alt_text'] = 'Alternative Display Name';
+		$columns['alt_text']       = 'Alternative Display Name';
 		// add back in old columns.
 		$columns['author'] = $author;
-		$columns['date'] = $date;
+		$columns['date']   = $date;
 		return $columns;
 	}
 
@@ -564,7 +564,7 @@ class LFEvents_Admin {
 
 		if ( check_string_is_date( $date_start ) ) {
 			$dt_date_start = new DateTime( $date_start );
-			$year = date_format( $dt_date_start, 'Y' );
+			$year          = date_format( $dt_date_start, 'Y' );
 			update_post_meta( $post_id, 'lfes_date_start_year', $year );
 		}
 	}

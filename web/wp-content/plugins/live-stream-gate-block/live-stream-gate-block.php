@@ -64,7 +64,7 @@ function lf_live_stream_gate_block_block_enqueue()
 
 		wp_enqueue_script('lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false);
 
-		wp_enqueue_script('auth0-config', 'https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/assets/js/auth0.js', array(), '1', false);
+		wp_enqueue_script('auth0-config', 'https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/js/auth0.js', array(), '1', false);
 	}
 }
 add_action('wp_enqueue_scripts', 'lf_live_stream_gate_block_block_enqueue');

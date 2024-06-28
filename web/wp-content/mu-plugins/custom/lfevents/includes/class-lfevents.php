@@ -148,7 +148,7 @@ class LFEvents {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new LFEvents_Admin( $this->get_lfevents(), $this->get_version() );
+		$plugin_admin  = new LFEvents_Admin( $this->get_lfevents(), $this->get_version() );
 		$plugin_public = new LFEvents_Public( $this->get_lfevents(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
