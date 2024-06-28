@@ -6,6 +6,16 @@
  * @since FoundationPress 1.0.0
  */
 
+/**
+ * Add preloaded fonts to head for home.
+ */
+function add_preload_fonts() {
+	$font_url = '/wp-content/themes/lfevents/src/fonts/open-sans/open-sans-v34-latin-700.woff2';
+	echo '<link rel="preload" href="' . esc_url( $font_url ) . '" as="font" type="font/woff2" crossorigin="anonymous">';
+}
+add_action( 'wp_head', 'add_preload_fonts' );
+
+
 	// Grab the content for the top of the home page.
 	$query = new WP_Query(
 		array(

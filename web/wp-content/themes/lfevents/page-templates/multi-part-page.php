@@ -53,16 +53,18 @@ require get_template_directory() . '/singular.php';
 ?>
 
 <script>
-$( document ).ready( function() {
-	// if a menu item isn't visible, scroll it into view
-	$('#multi-part-page--magellan').on('update.zf.magellan', function (ev, elem) {
-		var activeMenuItem = elem[0];
-		var isSticky = $('.is-stuck')[0] ? true : false;
-		if (activeMenuItem && isSticky) {
-			activeMenuItem.scrollIntoView({
-				block: "nearest"
-			});
-		}
+document.addEventListener("DOMContentLoaded", function(){
+	jQuery( document ).ready( function($) {
+		// if a menu item isn't visible, scroll it into view.
+		$('#multi-part-page--magellan').on('update.zf.magellan', function (ev, elem) {
+			var activeMenuItem = elem[0];
+			var isSticky = jQuery('.is-stuck')[0] ? true : false;
+			if (activeMenuItem && isSticky) {
+				activeMenuItem.scrollIntoView({
+					block: "nearest"
+				});
+			}
+		});
 	});
 });
 </script>

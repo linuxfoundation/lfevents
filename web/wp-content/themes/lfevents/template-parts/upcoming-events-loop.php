@@ -62,11 +62,11 @@
 
 				<div id="post-<?php the_ID(); ?>" class="cell medium-6">
 
-					<h4 class="medium-margin-right small-margin-bottom line-height-tight">
+					<h2 class="event-title medium-margin-right small-margin-bottom line-height-tight">
 						<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
-							<strong><?php echo esc_html( get_the_title( $post->ID ) ); ?></strong>
+							<?php echo esc_html( get_the_title( $post->ID ) ); ?>
 						</a>
-					</h4>
+					</h2>
 
 					<p class="event-meta text-small small-margin-bottom">
 						<span class="date small-margin-right display-inline-block">

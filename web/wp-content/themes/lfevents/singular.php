@@ -24,9 +24,9 @@ if ( $use_cncf_font ) {
 			// Enqueue CNCF font stylesheet.
 	if ( WP_DEBUG === true ) {
 		// Use un-minified versions.
-		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.css' ), array(), filemtime( get_template_directory() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.css' ) ), 'all' );
+		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/css/cncf-font.css', array(), filemtime( get_template_directory() . '/dist/css/cncf-font.css' ), 'all' );
 	} else {
-		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.min.css' ), array(), filemtime( get_template_directory() . '/dist/assets/css/' . foundationpress_asset_path( 'cncf-font.min.css' ) ), 'all' );
+		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/css/cncf-font.min.css', array(), filemtime( get_template_directory() . '/dist/css/cncf-font.min.css' ), 'all' );
 	}
 }
 
@@ -126,7 +126,7 @@ if ( ! $splash_page ) {
 			<div class="entry-content">
 				<div class="alignfull text-center xlarge-padding-top large-padding-bottom"
 					style="background: <?php echo esc_html( $menu_color_3 ); ?>; color: <?php echo esc_html( $menu_text_color ); ?>; box-shadow: inset 0 -0.125rem 0 0 rgba(0,0,0,.2);">
-					<h4 class="no-margin" style="">
+					<h4 class="no-margin">
 						<svg aria-hidden="true" focusable="false" role="img"
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 448 512"

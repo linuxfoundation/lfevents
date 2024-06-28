@@ -1,0 +1,536 @@
+// Header Global.
+// This is used on Non-Event pages (like home, about, search).
+// Part of the header is used on Event Splash pages.
+
+.header-global {
+  font-family:
+    'Open Sans',
+    #{$body-font-family};
+  position: sticky;
+  @media (max-height: 500px) {
+    position: relative;
+  }
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 20;
+  // setup all menus
+  ul,
+  li {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  // This is needed as Foundation is badly made.
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6,
+  .gform_wrapper .gform_title {
+    font-family:
+      'Open Sans',
+      #{$body-font-family};
+  }
+
+  // This applies at all widths.
+  &__logo-nav {
+    &-container {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// Desktop.
+@media (min-width: 1024px) {
+  .header-global {
+    &__hamburger {
+      display: none;
+    }
+    &__logo-nav {
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 125%;
+      color: #ffffff;
+      background-color: #222222;
+      a {
+        color: #ffffff;
+      }
+      // Padding for Splash only.
+      &-splash {
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+    }
+    //ul
+    &__main-menu-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > .menu-item > a {
+        // spacing out first row.
+        display: block;
+        padding-top: 38px;
+        padding-bottom: 38px;
+        padding-left: 14px;
+        padding-right: 14px;
+        &:hover {
+          color: $lf-grey-200;
+        }
+      }
+      > .menu-item:not(:first-child) > a {
+        padding-left: 0;
+        &:before {
+          // Link line divider.
+          content: ' ';
+          background-image: url("data:image/svg+xml,%3Csvg width='1' height='20' viewBox='0 0 1 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0.5' y1='-2.18557e-08' x2='0.500001' y2='20' stroke='%23F6F7FA'/%3E%3C/svg%3E");
+          background-position: center center;
+          background-repeat: no-repeat;
+          display: inline-flex;
+          width: 1px;
+          height: 20px;
+          vertical-align: middle;
+          margin-right: 14px;
+        }
+      }
+      .menu-item {
+        white-space: nowrap;
+        &.menu-item-has-children {
+          position: relative;
+          > a {
+            cursor: default; // so parent does not appear clickable.
+            position: relative;
+            padding-right: 22px;
+            margin-right: 14px;
+            &::after {
+              // Arrow after link.
+              width: 8px;
+              height: 8px;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid $pure-white;
+              left: calc(100% - 1em);
+              position: absolute;
+              display: block;
+              top: 50%;
+              transform: translateY(-50%);
+              margin-top: 2px;
+              content: '';
+            }
+            &:hover::after {
+              border-top: 5px solid $lf-grey-200;
+            }
+          }
+          &.is-open > .sub-menu,
+          &:focus > .sub-menu,
+          &:focus-within > .sub-menu {
+            left: -1em;
+            top: 100%;
+            opacity: 1;
+            transform: translateY(0);
+            transition:
+              opacity 0.15s linear,
+              transform 0.15s linear,
+              left 0s 0.15s;
+            overflow: visible;
+          }
+        }
+        &.current-menu-item > a {
+          color: $lf-grey-300;
+        }
+        &.external-link > a::after {
+          content: '';
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23FFFFFF' d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z'/%3E%3C/svg%3E");
+          margin-left: 0.2em; // connects icon to word.
+          padding-left: 0.8em;
+          background-size: 0.7em 0.8em;
+          background-position: center center;
+          background-repeat: no-repeat;
+        }
+        &.external-link:hover > a::after {
+          // #e9e9e9.
+          // https://codepen.io/sosuke/pen/Pjoqqp
+          filter: brightness(0) saturate(100%) invert(97%) sepia(1%) saturate(107%) hue-rotate(278deg) brightness(116%)
+            contrast(83%);
+        }
+      }
+
+      // sub menus
+      .sub-menu {
+        font-size: 14px;
+        z-index: 5;
+        background-color: $black;
+        opacity: 0;
+        position: absolute;
+        left: -2999px;
+        top: 100%;
+        overflow: hidden;
+        width: 11rem;
+        box-shadow: -5px 6px 9px 0px rgba(0, 0, 0, 0.1);
+        transition:
+          opacity 0.15s linear,
+          transform 0.15s linear,
+          left 0s 0.15s;
+        display: block;
+        padding-bottom: 34px;
+        li {
+          width: 100%;
+          a {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 30px;
+            padding-right: 15px;
+            display: block;
+            &:hover {
+              background-color: #333333;
+            }
+          }
+        }
+      }
+    }
+    &__mobile-menu-lfx {
+      display: none;
+    }
+  }
+}
+
+// Mobile.
+@media (max-width: 1023px) {
+  .header-global {
+    &__hamburger {
+      margin-left: auto;
+      display: inline-block;
+      height: 50px; // Google tap target min 48px.
+      width: 50px;
+      padding: 20px;
+      position: relative;
+      &:hover,
+      &:active {
+        opacity: 0.9;
+      }
+
+      span {
+        border-radius: $lf-hamburger-border-radius;
+        background-color: $lf-hamburger-lines;
+        display: block;
+        height: $lf-hamburger-line-height;
+        margin: 0 auto;
+        position: relative;
+        width: 30px;
+        // animation
+        transition:
+          background 0.2s ease,
+          opacity 0.2s ease;
+
+        &:before,
+        &:after {
+          border-radius: $lf-hamburger-border-radius;
+          background-color: $lf-hamburger-lines;
+          content: '';
+          display: block;
+          height: $lf-hamburger-line-height;
+          position: absolute;
+          width: 30px;
+          // animation
+          transition-delay: 0.2s, 0s;
+          transition:
+            margin 0.2s,
+            transform 0.2s;
+        }
+
+        &:before {
+          margin-top: -8px;
+        }
+
+        &:after {
+          margin-top: 8px;
+        }
+      }
+
+      &.is-active {
+        span {
+          background-color: transparent;
+          transition-delay: 0.1s;
+          transition:
+            background 0.2s ease,
+            opacity 0.2s ease;
+
+          &:before {
+            margin-top: 0;
+            transform: rotate(45deg);
+            transition-delay: 0s, 0.2s;
+          }
+
+          &:after {
+            margin-top: 0;
+            transform: rotate(-45deg);
+            transition-delay: 0s, 0.2s;
+          }
+        }
+      }
+    }
+    &__logo-nav {
+      background-color: #000000;
+      padding-top: 18px;
+      padding-bottom: 18px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 130%;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #222222;
+    }
+    // underlay underlay.
+    &__mobile-menu-underlay {
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      background: #222222;
+      position: fixed;
+      top: $lf-header-height;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    &__mobile-menu-container {
+      // Apply at is-active state.
+      &.is-active {
+        .header-global__mobile-menu-underlay {
+          position: fixed;
+          visibility: visible;
+          opacity: 0.5;
+          transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .header-global__main-menu {
+          transition: 0.1s;
+          transform: translateX(0);
+          overflow: auto;
+          padding-bottom: $lf-header-height * 2;
+        }
+      }
+    }
+    &__main-menu {
+      z-index: 999;
+      position: fixed;
+      top: $lf-header-height;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      background-color: $pure-white;
+      transition: none;
+      transform: translateX(100%);
+      font-size: 14px;
+      @media (min-width: 414px) {
+        font-size: 18px;
+      }
+      &-nav {
+        > .menu-item {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #a1a1a4;
+        }
+        .menu-item {
+          a {
+            display: block;
+            color: #222222;
+            padding-left: 24px;
+            padding-right: 24px;
+            @media (min-width: 640px) {
+              padding-left: 28px;
+              padding-right: 28px;
+            }
+            &:hover {
+              color: $lf-blue;
+            }
+          }
+          &.menu-item-has-children {
+            > a {
+              position: relative;
+              &::after {
+                // Arrow after link
+                width: 8px;
+                height: 8px;
+                left: calc(100% - 38px);
+                @media (min-width: 640px) {
+                  left: calc(100% - 42px);
+                }
+                position: absolute;
+                display: block;
+                top: 50%;
+                transform: translateY(-50%);
+                content: '';
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 8px solid #222222;
+                transform: translateY(-50%);
+                transition: all 0.3s ease-out;
+              }
+            }
+            > a:hover::after {
+              // change arrow colour
+              border-top-color: $lf-blue;
+            }
+          }
+          &.external-link > a::after {
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23222222' d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z'/%3E%3C/svg%3E");
+            margin-left: 0.2em; // connects icon to word.
+            padding-left: 0.8em;
+            background-size: 0.7em 0.8em;
+            background-position: center center;
+            background-repeat: no-repeat;
+          }
+          &.external-link:hover > a::after {
+            // #0077cc
+            // https://codepen.io/sosuke/pen/Pjoqqp
+            filter: brightness(0) saturate(100%) invert(24%) sepia(49%) saturate(4221%) hue-rotate(188deg)
+              brightness(101%) contrast(106%);
+          }
+        }
+      }
+
+      // sub menu.
+      .sub-menu {
+        display: none;
+        transform: translate3d(0, 0, 0);
+        text-transform: none;
+
+        li {
+          transform: translate3d(0, 0, 0);
+          &:first-child a {
+            margin-top: 10px;
+          }
+        }
+
+        a {
+          padding-top: 7px;
+          padding-bottom: 7px;
+          display: block;
+          color: #222222;
+          font-weight: 400;
+        }
+      }
+    }
+    &__mobile-menu-addition {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #a1a1a4;
+    }
+    &__mobile-menu-lfx-link {
+      display: block;
+      color: #222222;
+      padding-left: 24px;
+      padding-right: 24px;
+      @media (min-width: 640px) {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 14px;
+      @media (min-width: 414px) {
+        font-size: 18px;
+      }
+      line-height: 1.6;
+      letter-spacing: 1.5px;
+      &:hover {
+        color: $lf-blue;
+      }
+    }
+    &__mobile-menu-lfx-button {
+      font-weight: 700;
+      font-size: 0.875rem;
+      line-height: 1;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: $pure-white;
+      background-color: $lf-blue;
+      padding: 10px 23px;
+      border-radius: 30px;
+      display: inline-block;
+      transition: background-color 0.25s ease-out;
+      margin-top: 18px;
+      margin-left: 24px;
+      @media (min-width: 640px) {
+        margin-left: 28px;
+      }
+      &:hover,
+      &:active,
+      &:visited {
+        color: $pure-white;
+      }
+
+      &:hover {
+        background-color: $lf-blue;
+      }
+    }
+  }
+}
+
+// Fix the issue where the WP admin-bar overlaps the mobile menu
+#wpadminbar {
+  position: fixed !important;
+}
+
+// Overrides for WP Admin menu on desktop and mobile.
+.admin-bar {
+  @media (min-height: 501px) {
+    .site-container:not(.add-overflow) {
+      .header-global {
+        top: 32px;
+
+        @media (max-width: 782px) {
+          top: 46px;
+        }
+      }
+    }
+  }
+
+  .header-global__mobile-menu-underlay {
+    top: calc(32px + #{$lf-header-height});
+
+    @media (max-width: 782px) {
+      top: calc(46px + #{$lf-header-height});
+    }
+  }
+
+  .header-global__main-menu {
+    top: calc(32px + #{$lf-header-height});
+
+    @media (max-width: 782px) {
+      top: calc(46px + #{$lf-header-height});
+    }
+  }
+
+  // Offset sticky top bar
+  &.f-topbar-fixed {
+    .sticky.fixed {
+      margin-top: rem-calc(32);
+    }
+  }
+
+  // Offset mobile off-canvas menu
+  &.offcanvas {
+    .off-canvas.is-open {
+      top: rem-calc(46);
+
+      @include breakpoint(783) {
+        top: rem-calc(32);
+      }
+    }
+  }
+}
