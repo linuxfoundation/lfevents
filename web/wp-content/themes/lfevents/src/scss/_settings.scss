@@ -76,7 +76,7 @@ $foundation-palette: (
   secondary: $lf-grey-400,
   success: $lf-green,
   warning: $lf-yellow,
-  alert: $lf-red,
+  alert: $lf-red
 );
 
 $body-background: $white;
@@ -109,7 +109,7 @@ $breakpoints: (
   medium: 640px,
   large: 1024px,
   xlarge: 1200px,
-  xxlarge: 1440px,
+  xxlarge: 1440px
 );
 $print-breakpoint: large;
 $breakpoint-classes: (small medium large xxlarge);
@@ -121,7 +121,7 @@ $grid-row-width: $global-width;
 $grid-column-count: 12;
 $grid-column-gutter: (
   small: 20px,
-  medium: 30px,
+  medium: 30px
 );
 $grid-column-align-edge: true;
 $grid-column-alias: 'columns';
@@ -140,44 +140,44 @@ $header-margin-bottom: 0.5rem;
 $header-styles: (
   small: (
     'h1': (
-      'font-size': 40,
+      'font-size': 40
     ),
     'h2': (
-      'font-size': 31,
+      'font-size': 31
     ),
     'h3': (
-      'font-size': 28,
+      'font-size': 28
     ),
     'h4': (
-      'font-size': 24,
+      'font-size': 24
     ),
     'h5': (
-      'font-size': 18,
+      'font-size': 18
     ),
     'h6': (
-      'font-size': 16,
-    ),
+      'font-size': 16
+    )
   ),
   medium: (
     'h1': (
-      'font-size': 48,
+      'font-size': 48
     ),
     'h2': (
-      'font-size': 40,
+      'font-size': 40
     ),
     'h3': (
-      'font-size': 31,
+      'font-size': 31
     ),
     'h4': (
-      'font-size': 25,
+      'font-size': 25
     ),
     'h5': (
-      'font-size': 20,
+      'font-size': 20
     ),
     'h6': (
-      'font-size': 16,
-    ),
-  ),
+      'font-size': 16
+    )
+  )
 );
 $header-text-rendering: optimizeLegibility;
 $small-font-size: 80%;
@@ -316,13 +316,15 @@ $button-sizes: (
   tiny: 0.6rem,
   small: 0.75rem,
   default: 0.9rem,
-  large: 1.25rem,
+  large: 1.25rem
 );
 $button-palette: $foundation-palette;
 $button-opacity-disabled: 0.25;
 $button-background-hover-lightness: -20%;
 $button-hollow-hover-lightness: -50%;
-$button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+$button-transition:
+  background-color 0.25s ease-out,
+  color 0.25s ease-out;
 
 // 12. Button Group
 // ----------------
@@ -364,15 +366,15 @@ $card-margin-bottom: $global-margin;
 $closebutton-position: right top;
 $closebutton-offset-horizontal: (
   small: 0.66rem,
-  medium: 1rem,
+  medium: 1rem
 );
 $closebutton-offset-vertical: (
   small: 0.33em,
-  medium: 0.5rem,
+  medium: 0.5rem
 );
 $closebutton-size: (
   small: 1.5em,
-  medium: 2em,
+  medium: 2em
 );
 $closebutton-lineheight: 1;
 $closebutton-color: $gray;
@@ -403,7 +405,7 @@ $dropdown-radius: $global-radius;
 $dropdown-sizes: (
   tiny: 100px,
   small: 200px,
-  large: 400px,
+  large: 400px
 );
 
 // 18. Dropdown Menu
@@ -462,11 +464,13 @@ $input-background-focus: $white;
 $input-background-disabled: $white-smoke;
 $input-border: 1px solid $silver;
 $input-border-focus: 1px solid $gray;
-$input-padding: $form-spacing / 2;
+$input-padding: calc($form-spacing / 2);
 $input-shadow: inset 0 1px 2px rgba($black, 0.1);
 $input-shadow-focus: 0 0 5px $silver;
 $input-cursor-disabled: not-allowed;
-$input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+$input-transition:
+  box-shadow 0.5s,
+  border-color 0.25s ease-in-out;
 $input-number-spinners: true;
 $input-radius: $global-radius;
 $form-button-radius: $global-radius;
@@ -518,10 +522,10 @@ $meter-fill-bad: $alert-color;
 // --------------
 
 $offcanvas-sizes: (
-  small: 250px,
+  small: 250px
 );
 $offcanvas-vertical-sizes: (
-  small: 250px,
+  small: 250px
 );
 $offcanvas-background: $dark-nav-color;
 $offcanvas-shadow: 0 0 10px rgba($black, 0.7);
@@ -658,7 +662,9 @@ $prototype-separator-margin-top: $global-margin;
 // --------------------
 
 $prototype-shadow-breakpoints: $global-prototype-breakpoints;
-$prototype-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+$prototype-box-shadow:
+  0 2px 5px 0 rgba(0, 0, 0, 0.16),
+  0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
 // 41. Prototype Sizing
 // --------------------
@@ -669,7 +675,7 @@ $prototype-sizes: (
   25: 25%,
   50: 50%,
   75: 75%,
-  100: 100%,
+  100: 100%
 );
 
 // 42. Prototype Spacing
@@ -702,7 +708,7 @@ $prototype-text-overflow: ellipsis;
 $responsive-embed-margin-bottom: rem-calc(16);
 $responsive-embed-ratios: (
   default: 4 by 3,
-  widescreen: 16 by 9,
+  widescreen: 16 by 9
 );
 
 // 47. Reveal
@@ -756,11 +762,11 @@ $table-border: 0;
 $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 2%;
 $table-row-hover: darken($table-background, $table-hover-scale);
-$table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
+$table-row-stripe-hover: darken($table-background, calc($table-color-scale + $table-hover-scale));
 $table-is-striped: false;
 $table-striped-background: smart-scale($table-background, $table-color-scale);
 $table-stripe: even;
-$table-head-background: smart-scale($table-background, $table-color-scale / 2);
+$table-head-background: smart-scale($table-background, calc($table-color-scale / 2));
 $table-head-row-hover: darken($table-head-background, $table-hover-scale);
 $table-foot-background: smart-scale($table-background, $table-color-scale);
 $table-foot-row-hover: darken($table-foot-background, $table-hover-scale);
@@ -840,7 +846,7 @@ $grid-container: $global-width;
 $grid-columns: 12;
 $grid-margin-gutters: (
   small: 20px,
-  medium: 30px,
+  medium: 30px
 );
 $grid-padding-gutters: $grid-margin-gutters;
 $grid-container-padding: $grid-padding-gutters;

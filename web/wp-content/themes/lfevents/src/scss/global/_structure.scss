@@ -142,7 +142,7 @@ body.menu-is-active {
 }
 
 .small-margin {
-  margin: $global-margin/2;
+  margin: calc($global-margin/2);
 }
 
 .medium-margin {
@@ -150,11 +150,11 @@ body.menu-is-active {
 }
 
 .large-margin {
-  margin: $global-margin * 2;
+  margin: calc($global-margin * 2);
 }
 
 .xlarge-margin {
-  margin: $global-margin * 3;
+  margin: calc($global-margin * 3);
 }
 
 // Margin for individual sides
@@ -168,33 +168,33 @@ $sides: top right bottom left;
   }
 
   .small-margin-#{$side} {
-    margin-#{$side}: $global-margin/2;
+    margin-#{$side}: calc($global-margin/2);
   }
 
   .medium-margin-#{$side} {
-    margin-#{$side}: $global-margin;
+    margin-#{$side}: calc($global-margin);
   }
 
   .large-margin-#{$side} {
-    margin-#{$side}: $global-margin * 2;
+    margin-#{$side}: calc($global-margin * 2);
   }
 
   .xlarge-margin-#{$side} {
-    margin-#{$side}: $global-margin * 3;
+    margin-#{$side}: calc($global-margin * 3);
   }
 }
 
 .large-padding {
-  padding: $global-margin * 2;
+  padding: calc($global-margin * 2);
 }
 
 .xlarge-padding {
-  padding: $global-margin * 3;
+  padding: calc($global-margin * 3);
 }
 
 .xlarge-padding-y {
-  padding-top: $global-margin * 3;
-  padding-bottom: $global-margin * 3;
+  padding-top: calc($global-margin * 3);
+  padding-bottom: calc($global-margin * 3);
 }
 
 // Padding for individual sides
@@ -208,19 +208,19 @@ $sides: top right bottom left;
   }
 
   .small-padding-#{$side} {
-    padding-#{$side}: $global-margin/2;
+    padding-#{$side}: calc($global-margin/2);
   }
 
   .medium-padding-#{$side} {
-    padding-#{$side}: $global-margin;
+    padding-#{$side}: calc($global-margin);
   }
 
   .large-padding-#{$side} {
-    padding-#{$side}: $global-margin * 2;
+    padding-#{$side}: calc($global-margin * 2);
   }
 
   .xlarge-padding-#{$side} {
-    padding-#{$side}: $global-margin * 3;
+    padding-#{$side}: calc($global-margin * 3);
   }
 }
 

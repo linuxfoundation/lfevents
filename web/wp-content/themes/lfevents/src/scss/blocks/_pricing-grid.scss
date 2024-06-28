@@ -113,7 +113,7 @@ $price-cell: 5.25rem;
       position: absolute;
       top: auto;
       right: 0;
-      bottom: calc(100% + #{$global-margin/2});
+      bottom: calc(100% + #{$global-margin} / 2);
       left: 0;
       height: $price-cell;
       padding: 0.75rem;
@@ -149,14 +149,14 @@ $price-cell: 5.25rem;
 
 .attendee-type {
   max-width: 100%;
-  margin-bottom: $global-margin/2;
+  margin-bottom: calc($global-margin/2);
 
   @include breakpoint(large) {
     display: flex;
 
     > * {
       width: 12rem;
-      margin: 0 $global-margin/4;
+      margin: 0 calc($global-margin/4);
 
       &:first-child {
         text-align: right;
@@ -181,8 +181,8 @@ $price-cell: 5.25rem;
     font-weight: normal;
     font-size: rem-calc(20);
     margin-left: 0;
-    padding-right: $global-margin/2;
-    padding-left: $global-margin/2;
+    padding-right: calc($global-margin/2);
+    padding-left: calc($global-margin/2);
     background-color: rgba(0, 0, 0, 0.05);
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 33%, rgba(0, 0, 0, 0) 100%);
     border-radius: 12px 0 0 12px;
