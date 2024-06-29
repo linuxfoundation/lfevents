@@ -18,7 +18,6 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const sourcemaps = require('gulp-sourcemaps');
-const through = require('through2');
 
 // Load settings from config.yml or fallback to config-default.yml.
 function loadConfig() {
@@ -66,7 +65,7 @@ function compileCSS() {
 }
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
-function watch() {
+function watch(done) {
     gulp.watch('src/scss/**/*.scss', compileCSS)
         .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
         .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
@@ -74,73 +73,73 @@ function watch() {
         .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
         .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
     gulp.watch('src/images/**/*');
+    done();
 }
 
 const webpack = {
-  config: {
-    mode: PRODUCTION ? 'production' : 'development',
-    module: {
-        rules: [{
-            test: /.js$/,
-            exclude: /node_modules(?![\\\/]foundation-sites)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
+    config: {
+        mode: PRODUCTION ? 'production' : 'development',
+        module: {
+            rules: [{
+                test: /.js$/,
+                exclude: /node_modules(?![\\\/]foundation-sites)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
                 }
-            }
-        }, ],
+            }],
+        },
+        externals: {
+            jquery: 'jQuery',
+        },
     },
-    externals: {
-        jquery: 'jQuery',
+    changeHandler(err, stats) {
+        log('[webpack]', stats.toString({
+            colors: true,
+        }));
     },
-  },
-  changeHandler(err, stats) {
-      log('[webpack]', stats.toString({
-          colors: true,
-      }));
-  },
-  build() {
-    return gulp.src(PATHS.entries)
-        .pipe(named())
-        .pipe(webpackStream(webpack.config, webpack2))
-        .pipe(terser().on('error', e => {
-          if (!PRODUCTION) {
-              log.error('[Terser Error]', e);
-          }
-      }))
-        .pipe(gulp.dest(PATHS.dist + '/js'));
-  },
-  watch() {
-      const watchConfig = Object.assign(webpack.config, {
-          watch: true,
-          devtool: 'inline-source-map',
-      });
+    build() {
+        return gulp.src(PATHS.entries)
+            .pipe(named())
+            .pipe(webpackStream(webpack.config, webpack2))
+            .pipe(terser().on('error', e => {
+                if (!PRODUCTION) {
+                    log.error('[Terser Error]', e);
+                }
+            }))
+            .pipe(gulp.dest(PATHS.dist + '/js'));
+    },
+    watch() {
+        const watchConfig = Object.assign(webpack.config, {
+            watch: true,
+            devtool: 'inline-source-map',
+        });
 
-      return gulp.src(PATHS.entries)
-          .pipe(named())
-          .pipe(webpackStream(watchConfig, webpack2, webpack.changeHandler)
-              .on('error', (err) => {
-                  log('[webpack:error]', err.toString({
-                      colors: true,
-                  }));
-              }),
-          )
-          .pipe(gulp.dest(PATHS.dist + '/js'));
-  },
+        return gulp.src(PATHS.entries)
+            .pipe(named())
+            .pipe(webpackStream(watchConfig, webpack2, webpack.changeHandler)
+                .on('error', (err) => {
+                    log('[webpack:error]', err.toString({
+                        colors: true,
+                    }));
+                }),
+            )
+            .pipe(gulp.dest(PATHS.dist + '/js'));
+    },
 };
 
 gulp.task('webpack:build', webpack.build);
 gulp.task('webpack:watch', webpack.watch);
 gulp.task('build', gulp.series(
-  clean,
-  compileCSS,
-  'webpack:build',
+    clean,
+    compileCSS,
+    'webpack:build',
 ));
 
 // Default task
 gulp.task('default', gulp.series(
-  'build',
-  'webpack:watch',
-  watch
+    'build',
+    gulp.parallel('webpack:watch', watch)
 ));

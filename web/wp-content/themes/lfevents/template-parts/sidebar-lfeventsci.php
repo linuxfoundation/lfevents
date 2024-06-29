@@ -8,7 +8,7 @@
 
 ?>
 
-<h4 class="medium-margin-bottom">Latest News</h4>
+<h3 class="sidebar__title medium-margin-bottom">Latest News</h3>
 <?php
 $query = new WP_Query(
 	array(
@@ -20,7 +20,7 @@ $query = new WP_Query(
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		echo '<h5 class="text-medium no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h5>';
+		echo '<h4 class="sidebar-item__title text-medium no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h4>';
 		echo '<p class="text-tiny medium-margin-bottom">' . get_the_date() . '</p>';
 	}
 }
@@ -28,7 +28,7 @@ wp_reset_postdata();
 ?>
 <p class="xlarge-margin-bottom"><a href="<?php echo esc_url( home_url( '/about/news' ) ); ?>"><strong>More News&hellip;</strong></a></p>
 
-<h4 class="medium-margin-bottom large-margin-top">Community Events</h4>
+<h3 class="sidebar__title medium-margin-bottom large-margin-top">Community Events</h3>
 <?php
 $query = new WP_Query(
 	array(
@@ -46,13 +46,12 @@ if ( $query->have_posts() ) {
 		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
 		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
-		echo '<h5 class="text-medium no-margin">';
-		echo '<a class="prevent-orphaned-icon" target="_blank" rel="noopener noreferrer" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
+		echo '<h4 class="sidebar-item__title text-medium no-margin"><a class="prevent-orphaned-icon" target="_blank" rel="noopener noreferrer" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
 		echo esc_html( get_the_title() );
 		echo '&nbsp;';
 		echo esc_html( get_template_part( 'template-parts/svg/external-link' ) );
 		echo '</a>';
-		echo '</h5>';
+		echo '</h4>';
 
 		echo '<p class="text-tiny medium-margin-bottom">';
 		echo esc_html( jb_verbose_date_range( $dt_date_start, $dt_date_end ) );
