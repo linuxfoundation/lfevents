@@ -9,7 +9,21 @@
   "scripts": {
     "start": "gulp",
     "dev": "gulp build --dev",
-    "build": "gulp build --production"
+    "build": "gulp build --production",
+    "build-buttons-with-expiry": "npm run build --prefix ../../plugins/buttons-with-expiry/",
+    "build-core-block-customisations": "npm run build --prefix ../../plugins/core-block-customisations/",
+    "build-countdown-block": "npm run build --prefix ../../plugins/countdown-block/",
+    "build-custom-iframe": "npm run build --prefix ../../plugins/custom-iframe/",
+    "build-icon-list": "npm run build --prefix ../../plugins/icon-list/",
+    "build-image-box": "npm run build --prefix ../../plugins/image-box/",
+    "build-live-stream-gate": "npm run build --prefix ../../plugins/live-stream-gate-block/",
+    "build-pricing": "npm run build --prefix ../../plugins/pricing-block/",
+    "build-speakers": "npm run build --prefix ../../plugins/speakers-block/",
+    "build-sponsors-dynamic": "npm run build --prefix ../../plugins/sponsors-dynamic-block/",
+    "build-tab-container": "npm run build --prefix ../../plugins/tab-container-block/",
+    "build-text-on-image": "npm run build --prefix ../../plugins/text-on-image-block/",
+    "build-track-grid": "npm run build --prefix ../../plugins/track-grid/",
+    "build-plugins": "npm-run-all build-countdown-block build-pricing build-sponsors-dynamic build-tab-container build-text-on-image build-speakers build-buttons-with-expiry build-core-block-customisations build-custom-iframe build-icon-list build-image-box build-live-stream-gate build-track-grid"
   },
   "dependencies": {
     "foundation-sites": "6.5.3",
@@ -31,6 +45,7 @@
     "gulp-sourcemaps": "^1.12.1",
     "gulp-terser": "^2.1.0",
     "js-yaml": "^3.14.1",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.38",
     "rimraf": "^2.7.1",
     "sass": "^1.32.13",
