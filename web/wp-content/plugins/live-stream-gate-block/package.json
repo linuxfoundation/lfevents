@@ -18,10 +18,10 @@
 		"@wordpress/data": "^10",
 		"@wordpress/element": "^6",
 		"@wordpress/i18n": "^5",
-		"@wordpress/scripts": "^28"
+		"@wordpress/scripts": "27.8.0"
 	},
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/linuxfoundation/lfevents"
-    }
+		"type": "git",
+		"url": "https://github.com/linuxfoundation/lfevents"
+	}
 }

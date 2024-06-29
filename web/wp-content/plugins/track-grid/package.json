@@ -30,7 +30,7 @@
         "@wordpress/element": "^6",
         "@wordpress/i18n": "^5",
         "@wordpress/rich-text": "^7",
-        "@wordpress/scripts": "^28",
+        "@wordpress/scripts": "27.8.0",
         "classnames": "^2.5.1"
     },
     "repository": {

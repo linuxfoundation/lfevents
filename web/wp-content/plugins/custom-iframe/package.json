@@ -22,10 +22,10 @@
 	},
 	"devDependencies": {
 		"@wordpress/element": "^6.2.0",
-		"@wordpress/scripts": "^28.2.0"
+		"@wordpress/scripts": "27.8.0"
 	},
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/linuxfoundation/lfevents"
-    }
+		"type": "git",
+		"url": "https://github.com/linuxfoundation/lfevents"
+	}
 }
