@@ -23,7 +23,21 @@
     "build-tab-container": "npm run build --prefix ../../plugins/tab-container-block/",
     "build-text-on-image": "npm run build --prefix ../../plugins/text-on-image-block/",
     "build-track-grid": "npm run build --prefix ../../plugins/track-grid/",
-    "build-plugins": "npm-run-all build-countdown-block build-pricing build-sponsors-dynamic build-tab-container build-text-on-image build-speakers build-buttons-with-expiry build-core-block-customisations build-custom-iframe build-icon-list build-image-box build-live-stream-gate build-track-grid"
+    "build-plugins": "npm-run-all build-countdown-block build-pricing build-sponsors-dynamic build-tab-container build-text-on-image build-speakers build-buttons-with-expiry build-core-block-customisations build-custom-iframe build-icon-list build-image-box build-live-stream-gate build-track-grid",
+    "install-buttons-with-expiry": "npm install --prefix ../../plugins/buttons-with-expiry/",
+    "install-core-block-customisations": "npm install --prefix ../../plugins/core-block-customisations/",
+    "install-countdown-block": "npm install --prefix ../../plugins/countdown-block/",
+    "install-custom-iframe": "npm install --prefix ../../plugins/custom-iframe/",
+    "install-icon-list": "npm install --prefix ../../plugins/icon-list/",
+    "install-image-box": "npm install --prefix ../../plugins/image-box/",
+    "install-live-stream-gate": "npm install --prefix ../../plugins/live-stream-gate-block/",
+    "install-pricing": "npm install --prefix ../../plugins/pricing-block/",
+    "install-speakers": "npm install --prefix ../../plugins/speakers-block/",
+    "install-sponsors-dynamic": "npm install --prefix ../../plugins/sponsors-dynamic-block/",
+    "install-tab-container": "npm install --prefix ../../plugins/tab-container-block/",
+    "install-text-on-image": "npm install --prefix ../../plugins/text-on-image-block/",
+    "install-track-grid": "npm install --prefix ../../plugins/track-grid/",
+    "install-plugins": "npm-run-all install-buttons-with-expiry install-core-block-customisations install-countdown-block install-custom-iframe install-icon-list install-image-box install-live-stream-gate install-pricing install-speakers install-sponsors-dynamic install-tab-container install-text-on-image install-track-grid"
   },
   "dependencies": {
     "foundation-sites": "6.5.3",

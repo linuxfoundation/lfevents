@@ -29,14 +29,14 @@
 		"@wordpress/html-entities": "^4",
 		"@wordpress/i18n": "^5",
 		"@wordpress/rich-text": "^7",
-		"@wordpress/scripts": "^28",
+		"@wordpress/scripts": "27.8.0",
 		"autoprefixer": "^10.4.19",
 		"classnames": "^2.5.1"
 	},
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/linuxfoundation/lfevents"
-    },
+		"type": "git",
+		"url": "https://github.com/linuxfoundation/lfevents"
+	},
 	"browserslist": [
 		"defaults",
 		"not IE 11"

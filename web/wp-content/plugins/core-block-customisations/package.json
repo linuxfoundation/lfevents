@@ -6,9 +6,9 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/linuxfoundation/lfevents"
-    },
+		"type": "git",
+		"url": "https://github.com/linuxfoundation/lfevents"
+	},
 	"scripts": {
 		"build": "wp-scripts build",
 		"check-engines": "wp-scripts check-engines",
@@ -29,7 +29,7 @@
 		"@wordpress/block-editor": "^13.2.0",
 		"@wordpress/blocks": "^13.2.0",
 		"@wordpress/i18n": "^5.2.0",
-		"@wordpress/scripts": "^28.2.0",
+		"@wordpress/scripts": "27.8.0",
 		"classnames": "^2.5.1"
 	},
 	"dependencies": {
