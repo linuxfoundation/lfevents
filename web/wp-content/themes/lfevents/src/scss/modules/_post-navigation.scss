@@ -27,4 +27,5 @@
 .nav-previous a,
 .nav-next a {
   @include button(false, $off-white, $white-smoke, $primary-color, solid);
+  font-weight: 700;
 }
