@@ -125,7 +125,7 @@ The CI process will sniff the code to make sure it complies with WordPress codin
 
 phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by composer. phpcs can be run on the command line using `lando phpcs` and phpcbf using `lando phpcbf`. Both commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory.
 
-It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).
+It's even more convenient to [install into your text editor](https://github.com/WordPress/WordPress-Coding-Standards/wiki).
 
 Since the lfeventsci repo includes phpcs via composer, your text editor should use that version of the binary even though you may have phpcs installed system-wide.
 
