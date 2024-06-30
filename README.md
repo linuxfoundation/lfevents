@@ -1,4 +1,4 @@
-[![Build, deploy and test](https://github.com/linuxfoundation/lfevents/actions/workflows/build_deploy_and_test.yml/badge.svg)](https://github.com/linuxfoundation/lfevents/actions/workflows/build_deploy_and_test.yml)
+[![Build, test and deploy](https://github.com/linuxfoundation/lfevents/actions/workflows/build_test_and_deploy.yml/badge.svg)](https://github.com/linuxfoundation/lfevents/actions/workflows/build_test_and_deploy.yml)
 
 ## This repository powers these sites
 * [LFEvents Main Site](https://events.linuxfoundation.org/)
