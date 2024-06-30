@@ -1,0 +1,17 @@
+# Server build process looks for this file  - config-default.yml.
+# To change settings for your environment, duplicate this file and rename to config.yml. This will override default, but is not committed to the repo.
+
+# Gulp will reference these paths when it copies files
+PATHS:
+  # Path to dist folder
+  dist: "dist"
+  # Paths to Sass libraries, which can then be loaded with @import
+  sass:
+    - "node_modules/foundation-sites/scss"
+    - "node_modules/motion-ui/src"
+  # Paths to JavaScript entry points for webpack to bundle modules
+  entries:
+    - "src/js/app.js"
+    - "src/js/auth0.js"
+    - "src/js/china.js"
+    - "src/js/responsive-table.js"
