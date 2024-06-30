@@ -84,7 +84,7 @@ tooling:
 6. Run `lando pull --code=none --files=none` and follow the prompts to download the media files and database from Pantheon:
   * `Pull database from?` >  `dev`
 
-7. run this script to activate a dev plugin used to load media files from the production server instead of hosting them locally, in addition to other dev plugins, and deactivates some production plugins:
+7. Run this script to activate a dev plugin used to load media files from the production server instead of hosting them locally, in addition to other dev plugins, and deactivates some production plugins:
 
 ```
 lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && lando wp plugin deactivate shortpixel-image-optimiser && lando wp plugin deactivate pantheon-advanced-page-cache && lando wp plugin activate load-media-from-production
@@ -113,7 +113,9 @@ lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && 
 
 ## Theme Development
 
-LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified by the CI process.
+LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified by the CI process.
+
+Custom plugins have their css/js compiled separately and it is stored in the repo. If you make edits to the plugin source files, you need to rebuild them. First you'll need to run `lando npm run-script install-plugins` to install the necessary files then `lando npm run-script build-plugins` to build the plugins. You can do this for each plugin individually as well.
 
 -----
 
