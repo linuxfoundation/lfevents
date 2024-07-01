@@ -123,9 +123,7 @@ phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.co
 
 You can get a report of required fixes on your code by running `lando sniff` and you can automatically fix some required changes by running `lando fix`. You can see warnings by running `lando warnings`.
 
-Both commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory as well as on custom plugins. This is controlled by the phpcs.xml file.
-
-If you want to run your own phpcs/cbf commands, this can be done within Lando using `lando php ./vendor/bin/phpcs ?` where `?` is your arguments to pass.
+The commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory as well as on custom plugins. This is controlled by the phpcs.xml file.
 
 It's even more convenient to [install into your IDE](https://github.com/WordPress/WordPress-Coding-Standards/wiki).
 
