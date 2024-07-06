@@ -1245,15 +1245,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
-            "version": "3.2.7",
+            "version": "3.2.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
-                "reference": "tags/3.2.7"
+                "reference": "tags/3.2.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.2.7.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.2.8.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1513,12 +1513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "27714b56f04815b654c3805502ab77207505ac19"
+                "reference": "4a150f693df8f5d7b60a8557b15660a60b4d17bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/27714b56f04815b654c3805502ab77207505ac19",
-                "reference": "27714b56f04815b654c3805502ab77207505ac19",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4a150f693df8f5d7b60a8557b15660a60b4d17bd",
+                "reference": "4a150f693df8f5d7b60a8557b15660a60b4d17bd",
                 "shasum": ""
             },
             "conflict": {
@@ -1526,7 +1526,10 @@
                 "admidio/admidio": "<4.2.13",
                 "adodb/adodb-php": "<=5.20.20|>=5.21,<=5.21.3",
                 "aheinze/cockpit": "<2.2",
+                "aimeos/ai-admin-graphql": ">=2022.04.1,<2022.10.10|>=2023.04.1,<2023.10.6|>=2024.04.1,<2024.04.6",
+                "aimeos/ai-admin-jsonadm": "<2020.10.13|>=2021.04.1,<2021.10.6|>=2022.04.1,<2022.10.3|>=2023.04.1,<2023.10.4|==2024.04.1",
                 "aimeos/ai-client-html": ">=2020.04.1,<2020.10.27|>=2021.04.1,<2021.10.22|>=2022.04.1,<2022.10.13|>=2023.04.1,<2023.10.15|>=2024.04.1,<2024.04.7",
+                "aimeos/ai-controller-frontend": "<2020.10.15|>=2021.04.1,<2021.10.8|>=2022.04.1,<2022.10.8|>=2023.04.1,<2023.10.9",
                 "aimeos/aimeos-core": ">=2022.04.1,<2022.10.17|>=2023.04.1,<2023.10.17|>=2024.04.1,<2024.04.7",
                 "aimeos/aimeos-typo3": "<19.10.12|>=20,<20.10.5",
                 "airesvsg/acf-to-rest-api": "<=3.1",
@@ -2309,7 +2312,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-26T15:05:17+00:00"
+            "time": "2024-07-05T21:04:37+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
