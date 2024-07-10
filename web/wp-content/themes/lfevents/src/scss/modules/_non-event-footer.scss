@@ -1,0 +1,183 @@
+.lf-footer {
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+
+  &__privacy {
+    font-size: 0.7rem;
+    max-width: 790px;
+    color: $lf-grey-300;
+    a {
+      font-weight: 600;
+      color: $lf-grey-300;
+    }
+  }
+
+  &__social {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__icons {
+    list-style: none;
+    margin-left: 0;
+
+    li {
+      border-radius: 50%;
+      transition: all 0.2s ease-in-out;
+      margin-right: 1rem;
+      padding: 0.4rem;
+      display: inline-flex;
+      align-content: center;
+      align-items: center;
+
+      &.s-tw:hover {
+        background-color: #46d4fe;
+      }
+      &.s-li:hover {
+        background-color: #419cca;
+      }
+      &.s-yt:hover {
+        background-color: #a72b1d;
+      }
+      &.s-fb:hover {
+        background-color: #37589b;
+      }
+      &.s-in:hover {
+        background-color: #a67658;
+      }
+
+      svg {
+        fill: white;
+        width: 17px;
+        height: 17px;
+        display: block;
+      }
+    }
+  }
+
+  .hbspt-form {
+    .submitted-message {
+      padding: 1rem;
+      max-width: 100%;
+      margin: 0; // override.
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .hs-form {
+      // overrides for generic hs-form styling.
+      margin-left: unset;
+      margin-right: unset;
+      max-width: unset;
+
+      // now style it.
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      @media (min-width: 500px) {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-row-gap: 0.25rem;
+        grid-column-gap: 1rem;
+      }
+
+      @media (min-width: 900px) {
+        grid-template-columns: 2.5fr 2.5fr 2.5fr 3fr 1.75fr;
+      }
+
+      @media (max-width: 900px) {
+        input,
+        select {
+          margin-top: 0.75rem;
+        }
+      }
+
+      // underline input style.
+      input[type='text'],
+      input[type='email'],
+      select.hs-input {
+        height: 40px;
+        padding: 0.5em 0 calc(0.5em + 1px) 0;
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: $white;
+        border-bottom: 1px solid $lf-blue;
+        transition: all 0.25s ease;
+        margin-bottom: 0;
+
+        &::placeholder {
+          color: $pure-white;
+          letter-spacing: 0px;
+        }
+
+        &:focus {
+          color: $pure-white;
+          outline: 0;
+          padding-left: 0.5em;
+          padding-bottom: calc(0.5em);
+          border-bottom: 2px solid $white;
+        }
+
+        &:focus::placeholder {
+          color: rgba($pure-white, 0.5);
+        }
+      }
+
+      // Control autocomplete styles.
+      input,
+      select {
+        border-radius: 0;
+        &:focus {
+          box-shadow: none;
+        }
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+          -webkit-text-fill-color: $white;
+          // Stop the yellow autofill by 9999s.
+          transition: background-color 9999s ease-out 0s;
+        }
+      }
+
+      // submit button.
+      .hs-button {
+        @extend .lf-button;
+        // override for hs-form styling.
+        border: 0px;
+        font-weight: 600;
+
+        @media (max-width: 699px) {
+          max-width: 180px;
+          height: unset;
+        }
+
+        @media (max-width: 900px) {
+          margin-top: 0.75rem;
+        }
+
+        @media (min-width: 700px) {
+          padding: 12px 24px;
+          font-size: 14px;
+          line-height: 14px;
+        }
+      }
+    }
+  }
+
+  // add extra spacing when only copyright.
+  section:only-child {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.lf-copyright {
+  margin-top: 8rem;
+  font-size: 0.7rem;
+  color: $lf-grey-300;
+  a {
+    font-weight: 600;
+    color: $lf-grey-300;
+  }
+}

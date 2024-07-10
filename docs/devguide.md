@@ -41,11 +41,8 @@ excludes:
 services:
   node:
     type: 'node:14'
-    ssl: true
-    scanner: false
   appserver:
     run:
-      - /app/vendor/bin/phpcs --config-set installed_paths /app/vendor/wp-coding-standards/wpcs
       - /app/vendor/bin/phpcs -i
 tooling:
   npm:
@@ -54,27 +51,26 @@ tooling:
     service: node
   npx:
     service: node
-  phpcs:
-    service: appserver
-    cmd: /app/vendor/bin/phpcs --standard="WordPress"
-    description: 'Run PHPCS commands'
-  phpcbf:
-    service: appserver
-    cmd: /app/vendor/bin/phpcbf --standard="WordPress"
-    description: 'Run PHPCBF commands'
   sniff:
     service: appserver
-    cmd: /app/vendor/bin/phpcs -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*.css" -d memory_limit=1024M --standard="WordPress" /app/web/wp-content/themes/lfevents/ /app/web/wp-content/mu-plugins/custom/
-    description: 'Run the recommended code sniffs'
+    description: "Run the recommended code sniffs"
+    cmd: "/app/vendor/bin/phpcs -ns"
+  warnings:
+    service: appserver
+    description: "Show code sniff warnings"
+    cmd: "/app/vendor/bin/phpcs -s"
   fix:
     service: appserver
-    cmd: /app/vendor/bin/phpcbf -n -s --ignore="*/build/*,*/dist/*,*/node_modules/*,*gulpfile*,*/uploads/*,*/plugins/*,*/scripts/*,*/vendor/*,*pantheon*,*.css" -d memory_limit=1024M --standard=WordPress /app/web/wp-content/themes/lfevents/ /app/web/wp-content/mu-plugins/custom/
-    description: 'Run the recommended code sniffs and fix'
+    description: "Run the recommended code sniffs and fix them"
+    cmd: "/app/vendor/bin/phpcbf -s"
+  paths:
+    service: appserver
+    description: "See code sniff paths"
+    cmd: "/app/vendor/bin/phpcs -i"
   debug:
     service: appserver
-    cmd: 'touch /app/web/wp-content/debug.log && tail -f /app/web/wp-content/debug.log'
-    description: 'Get real-time WP debug log output'
-
+    description: "Monitor WordPress debug log output"
+    cmd: "tail -f /app/web/wp-content/debug.log"
 ```
 
 4. Run `lando start` and note the local site URL provided at the end of the process
@@ -84,7 +80,7 @@ tooling:
 6. Run `lando pull --code=none --files=none` and follow the prompts to download the media files and database from Pantheon:
   * `Pull database from?` >  `dev`
 
-7. run this script to activate a dev plugin used to load media files from the production server instead of hosting them locally, in addition to other dev plugins, and deactivates some production plugins:
+7. Run this command to activate/deactivate multiple plugings that can help with local dev or are not needed for local dev. The Load Media Files from Production plugin will load media from the production server instead of needing to download them locally:
 
 ```
 lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && lando wp plugin deactivate shortpixel-image-optimiser && lando wp plugin deactivate pantheon-advanced-page-cache && lando wp plugin activate load-media-from-production
@@ -113,7 +109,9 @@ lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && 
 
 ## Theme Development
 
-LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  To optionally use Browsersync, copy `config-default.yml` to `config.yml` (git ignores this file) and change the Browsersync URL (line 4) to `https://lfeventsci.lndo.site/`. Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified by the CI process.
+LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foundationpress) theme.  Run `lando npm start` to compile CSS and JS to `dist/` (git ignores this directory) as changes are made to the source files. When deployed, `dist/` files are compiled and minified by the CI process.
+
+Custom plugins have their css/js compiled separately and it is stored in the repo. If you make edits to the plugin source files, you need to rebuild them. First you'll need to run `lando npm run-script install-plugins` to install the necessary files then `lando npm run-script build-plugins` to build the plugins. You can do this for each plugin individually as well.
 
 -----
 
@@ -121,11 +119,15 @@ LFEvents uses a fork of the [FoundationPress](https://github.com/olefredrik/foun
 
 The CI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
 
-phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by composer. phpcs can be run on the command line using `lando phpcs` and phpcbf using `lando phpcbf`. Both commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory.
+phpcs and the [WordPress Coding Standards for PHP_CodeSniffer](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) come as part of the Lando install and are installed in the vendor directory by Composer.
 
-It's even more convenient to [install into your text editor](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards#using-phpcs-and-wpcs-from-within-your-ide).
+You can get a report of required fixes on your code by running `lando sniff` and you can automatically fix some required changes by running `lando fix`. You can see warnings by running `lando warnings`.
 
-Since the lfeventsci repo includes phpcs via composer, your text editor should use that version of the binary even though you may have phpcs installed system-wide.
+The commands are setup to use WordPress Coding Standards and to run on the `wp-content/themes/` directory as well as on custom plugins. This is controlled by the phpcs.xml file.
+
+It's even more convenient to [install into your IDE](https://github.com/WordPress/WordPress-Coding-Standards/wiki).
+
+Since the lfeventsci repo includes phpcs via Composer, your IDE should use that version of the binary even though you may have phpcs installed system-wide.
 
 -----
 

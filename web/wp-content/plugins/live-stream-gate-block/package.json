@@ -13,13 +13,15 @@
 		"start": "wp-scripts start",
 		"packages-update": "wp-scripts packages-update"
 	},
-	"dependencies": {
-		"@wordpress/blocks": "^11.0.0",
-		"@wordpress/data": "^6.0.0",
-		"@wordpress/element": "^4.0.0",
-		"@wordpress/i18n": "^4.2.1"
-	},
 	"devDependencies": {
-		"@wordpress/scripts": "^17.1.0"
+		"@wordpress/blocks": "^13",
+		"@wordpress/data": "^10",
+		"@wordpress/element": "^6",
+		"@wordpress/i18n": "^5",
+		"@wordpress/scripts": "27.8.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/linuxfoundation/lfevents"
 	}
 }

@@ -21,9 +21,11 @@
 		"test:unit": "wp-scripts test-unit-js"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^17.0.0"
+		"@wordpress/element": "^6.2.0",
+		"@wordpress/scripts": "27.8.0"
 	},
-	"dependencies": {
-		"@wordpress/element": "^3.2.0"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/linuxfoundation/lfevents"
 	}
 }

@@ -80,7 +80,7 @@ if ( ! class_exists( 'Foundationpress_Comments' ) ) :
 		 * @param int    $id Comment.
 		 */
 		function start_el( &$output, $comment, $depth = 0, $args = array(), $id = 0 ) { //phpcs:ignore
-			$depth++;
+			++$depth;
 			$GLOBALS['comment_depth'] = $depth; //phpcs:ignore
 			$GLOBALS['comment']       = $comment; //phpcs:ignore
 			$parent_class             = ( empty( $args['has_children'] ) ? '' : 'parent' );

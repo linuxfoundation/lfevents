@@ -152,7 +152,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	$lfes_hide_all_upcoming_link = get_post_meta( $parent_id, 'lfes_hide_all_upcoming_link', true );
 	if ( ! $lfes_hide_all_upcoming_link ) {
 		echo '<li><a href="https://events.linuxfoundation.org/"><div class="other-logo-wrapper">
-		<img width="109" height="36" alt="The Linux Foundation logo" src="' . get_stylesheet_directory_uri() . '/dist/assets/images/' . foundationpress_asset_path( 'lf-logo-' . $menu_text_color . '.svg' ) . '"><span class="other-seperator ' . $menu_text_color . '">Events</span></div><span class="other-text">All Upcoming Events</span></a></li>'; //phpcs:ignore
+		<img width="109" height="36" alt="The Linux Foundation logo" src="' . get_stylesheet_directory_uri() . '/src/images/lf-logo-' . $menu_text_color . '.svg"><span class="other-seperator ' . $menu_text_color . '">Events</span></div><span class="other-text">All Upcoming Events</span></a></li>'; //phpcs:ignore
 	}
 
 	foreach ( $related_events as $p ) {
@@ -229,7 +229,7 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer 
 				$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
 			}
 			$pages[ $count ] = $page;
-			$count++;
+			++$count;
 		}
 		$pages = implode( '</li>', $pages );
 		$pages = strip_tags( $pages, '<li><a><br><span>' );
@@ -248,7 +248,7 @@ function lfe_get_event_menu( $parent_id, $post_type, $background_style, $footer 
 				$page = implode( '<ul class=\'children\' style=\'' . esc_html( $background_style ) . '\'>', $page );
 			}
 			$pages[ $count ] = $page;
-			$count++;
+			++$count;
 		}
 		$pages = implode( '</li>', $pages );
 		$pages = strip_tags( $pages, '<li><a><br><ul>' );
@@ -352,10 +352,10 @@ function lfe_insert_favicon() {
 	if ( $favicon ) {
 		$out = '<link rel="icon" type="image/png" sizes="32x32" href="' . wp_get_attachment_url( $favicon ) . '">' . "\n";
 	} else {
-		$out  = '<link rel="icon" sizes="any" href="' . get_stylesheet_directory_uri() . '/dist/assets/images/favicons/favicon.ico">' . "\n";
-		// $out .= '<link rel="icon" type="image/svg+xml" href="' . get_stylesheet_directory_uri() . '/dist/assets/images/favicons/favicon.svg">' . "\n"; //phpcs:ignore
-		$out .= '<link rel="apple-touch-icon" href="' . get_stylesheet_directory_uri() . '/dist/assets/images/favicons/apple-touch-icon.png">' . "\n";
-		$out .= '<link rel="manifest" href="' . get_stylesheet_directory_uri() . '/dist/assets/images/favicons/site.webmanifest">' . "\n";
+		$out = '<link rel="icon" sizes="any" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/favicon.ico">' . "\n";
+		// $out .= '<link rel="icon" type="image/svg+xml" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/favicon.svg">' . "\n"; //phpcs:ignore
+		$out .= '<link rel="apple-touch-icon" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/apple-touch-icon.png">' . "\n";
+		$out .= '<link rel="manifest" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/site.webmanifest">' . "\n";
 	}
 
 	echo $out; //phpcs:ignore
@@ -394,7 +394,7 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 		$start_date_pretty_ch = $start_date->format( 'Y年n月j日' );
 		$end_date_pretty_ch   = $end_date->format( 'n月j日' );
 	} else {
-		 // Setup basic dates.
+		// Setup basic dates.
 		$start_date_pretty    = $start_date->format( 'M j' );
 		$end_date_pretty      = $end_date->format( 'j, Y' );
 		$start_date_pretty_ch = $start_date->format( 'Y年n月j日' );
@@ -406,21 +406,21 @@ function jb_verbose_date_range( $start_date = '', $end_date = '', $ch_separator 
 
 		// If months differ add suffix and year to end_date.
 		if ( $start_date->format( 'M' ) != $end_date->format( 'M' ) ) {
-			$end_date_pretty    = $end_date->format( 'M ' ) . $end_date_pretty;
+			$end_date_pretty = $end_date->format( 'M ' ) . $end_date_pretty;
 		}
 	}
 
 	// build date_range return string.
 	if ( ! empty( $start_date ) ) {
-		  $date_range    .= $start_date_pretty;
-		  $date_range_ch .= $start_date_pretty_ch;
+			$date_range    .= $start_date_pretty;
+			$date_range_ch .= $start_date_pretty_ch;
 	}
 
 	// check if there is an end date and append if not identical.
 	if ( ! empty( $end_date ) ) {
 		if ( $end_date_pretty != $start_date_pretty ) {
-			  $date_range    .= '–' . $end_date_pretty;
-			  $date_range_ch .= '–' . $end_date_pretty_ch;
+				$date_range    .= '–' . $end_date_pretty;
+				$date_range_ch .= '–' . $end_date_pretty_ch;
 		}
 	}
 
@@ -678,7 +678,7 @@ function lfe_event_alert_bar( $parent_id ) {
 	$expiry_date = get_post_meta( $parent_id, 'lfes_alert_expiry_date', true );
 
 	$pacific_tz = new DateTimeZone( 'America/Los_Angeles' ); // timezone for Pacific Time.
-	$time = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
+	$time       = strtotime( wp_date( 'Y-m-d', null, $pacific_tz ) ); // Return current day in PT.
 
 	if ( $expiry_date ) {
 		if ( strtotime( $expiry_date ) < $time ) {
