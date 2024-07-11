@@ -146,67 +146,6 @@ jobs:
         run: composer -n code-sniff
 
   
-  deploy_to_pantheon_lfasiallcci:
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:6.x
-      options: --user root
-    runs-on: ubuntu-latest
-    needs: [configure_env_vars, build_site]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Cache bash_env.txt
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-bash-env
-        with:
-          path: bash_env.txt
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.run_number }}
-
-      - name: Cache composer cache
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-composer-cache
-        with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-
-      - name: Cache vendor folder
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-vendor
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-
-      - name: Cache web folder
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-web
-        with:
-          path: ./web
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
-
-      - name: setup-environment-vars
-        run: ./.github/workflows/set-environment
-
-      # Rsync the build artifact pieces web directory
-      - name: sync build artifact
-        run: rsync -rz ./web ./vendor .
-
-      # Deploy to Pantheon
-      - name: deploy to Pantheon
-        run: |
-          echo "$SSH_PRIVATE_KEY" > ../private.key
-          chmod 600 ../private.key
-          eval `ssh-agent -s`
-          ssh-add ../private.key
-          source $BASH_ENV
-          ./.github/workflows/pantheon-deploy $TERMINUS_SITE2
-
   deploy_to_pantheon_lfeventsci:
     container:
       image: quay.io/pantheon-public/build-tools-ci:6.x
@@ -268,3 +207,64 @@ jobs:
           source $BASH_ENV
           ./.github/workflows/pantheon-deploy $TERMINUS_SITE
 
+
+  deploy_to_pantheon_lfasiallcci:
+    container:
+      image: quay.io/pantheon-public/build-tools-ci:6.x
+      options: --user root
+    runs-on: ubuntu-latest
+    needs: [configure_env_vars, build_site]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache bash_env.txt
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-bash-env
+        with:
+          path: bash_env.txt
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.run_number }}
+
+      - name: Cache composer cache
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-composer-cache
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
+
+      - name: Cache vendor folder
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-vendor
+        with:
+          path: ./vendor
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
+
+      - name: Cache web folder
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-web
+        with:
+          path: ./web
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+
+      - name: setup-environment-vars
+        run: ./.github/workflows/set-environment
+
+      # Rsync the build artifact pieces web directory
+      - name: sync build artifact
+        run: rsync -rz ./web ./vendor .
+
+      # Deploy to Pantheon
+      - name: deploy to Pantheon
+        run: |
+          echo "$SSH_PRIVATE_KEY" > ../private.key
+          chmod 600 ../private.key
+          eval `ssh-agent -s`
+          ssh-add ../private.key
+          source $BASH_ENV
+          ./.github/workflows/pantheon-deploy $TERMINUS_SITE2
