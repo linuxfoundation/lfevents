@@ -834,6 +834,15 @@ $sidebar = array(
 							'placeholder'   => __( 'Title, Company' ),
 						),
 						array(
+							'type'          => 'image',
+							'id'            => 'company_logo',
+							'data_type'     => 'meta',
+							'data_key'      => 'company_logo',
+							'label'         => __( 'Company logo' ),
+							'register_meta' => true,
+							'ui_border_top' => false,
+						),
+						array(
 							'type'          => 'text',
 							'id'            => 'linkedin',
 							'data_type'     => 'meta',
