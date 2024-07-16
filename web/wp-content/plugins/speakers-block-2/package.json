@@ -1,6 +1,6 @@
 {
-	"name": "block-speakers-block",
-	"version": "0.2.0",
+	"name": "block-speakers-block-2",
+	"version": "0.3.0",
 	"description": "Gutenberg block which allows for insertion of a Speakers showcase in a page/post. It requires an existing Speakers CPT already setup <a href=\"https://github.com/linuxfoundation/lfevents/blob/main/web/wp-content/mu-plugins/custom/lfevents/admin/class-lfevents-admin.php#L164\">here</a>.",
 	"author": "cjyabraham, James Hunt",
 	"license": "GPL-2.0-or-later",

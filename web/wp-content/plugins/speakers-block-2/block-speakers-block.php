@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Speakers Block
+ * Plugin Name:       Speakers Block 2
  * Description:       Gutenberg block which allows for insertion of a Speakers showcase in a page/post. It requires an existing Speakers CPT already setup <a href="https://github.com/linuxfoundation/lfevents/blob/main/web/wp-content/mu-plugins/custom/lfevents/admin/class-lfevents-admin.php#L164">like this</a>.
  * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/speakers-block
  * Requires at least: 5.8
@@ -9,7 +9,7 @@
  * Author:            cjyabraham, <a href="https://www.thetwopercent.co.uk">James Hunt</a>
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       block-speakers-block
+ * Text Domain:       block-speakers-block-2
  *
  * @package           cgb
  */
@@ -21,22 +21,22 @@
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/writing-your-first-block-type/
  */
-function cgb_block_speakers_block_block_init() {
+function cgb_block_speakers_block_2_block_init() {
 	register_block_type(
 		__DIR__,
 		array(
-			'render_callback' => 'speakers_block_callback',
+			'render_callback' => 'speakers_block_2_callback',
 		)
 	);
 }
-add_action( 'init', 'cgb_block_speakers_block_block_init' );
+add_action( 'init', 'cgb_block_speakers_block_2_block_init' );
 
 /**
  * Callback for speakers block.
  *
  * @param array $attributes Atts.
  */
-function speakers_block_callback( $attributes ) {
+function speakers_block_2_callback( $attributes ) {
 	if ( empty( $attributes['speakers'] ) ) {
 		return;
 	}
@@ -67,44 +67,6 @@ function speakers_block_callback( $attributes ) {
 	$align      = 'align';
 	$align     .= $attributes['align'] ?? 'wide';
 	$classes    = $attributes['className'] ?? '';
-	$color_mode    = $attributes['colorMode'] ?? '';
-
-	$bg_color_1 = $attributes['color1'] ?? '';
-	$bg_color_2 = $attributes['color2'] ?? '';
-	$text_value = $attributes['textColor'] ?? '#FFFFFF';
-
-	// Check for textColor value - "white" was used in previous version.
-	if ( '#FFFFFF' == $text_value || 'white' == $text_value ) {
-		$text_color     = 'has-white-color has-text-color';
-		$gradient_color = 'rgba(255,255,255,0.15)';
-	} else {
-		$text_color     = 'has-black-color has-text-color';
-		$gradient_color = 'rgba(33,35,38,0.15)';
-	}
-
-	// If no color mode is set, it might be an old block, so should have at least custom color set.
-	// Or custom-colors is set.
-	if ( ( ! $color_mode && ( $bg_color_1 || $bg_color_2 ) )
-	|| ( 'is-style-custom-colors' == $color_mode )
-	) {
-
-		// color 1.
-		$bg_color_1 ? $bg_color_1 : 'transparent';
-
-		// color 2, or color1, or if not transparent.
-		$bg_color_2 ? $bg_color_2 : ($bg_color_1 ? $bg_color_1 : 'transparent');
-
-		$inline_styles = 'style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%);"';
-
-	} elseif ( 'is-style-event-gradient' == $color_mode ) {
-
-		// No inline styles, handle with class.
-		$inline_styles = '';
-
-	} else {
-		// generic grey styles if really nothing is set.
-		$inline_styles = 'style="background: linear-gradient(90deg, #f3f4f5 0%, #D5D9D3 100%);"';
-	}
 
 	// get a random int to preface speaker ids throughout the block.
 	// this almost eliminates chances of a namespace conflict between 2 speaker blocks on the same page.
@@ -113,7 +75,7 @@ function speakers_block_callback( $attributes ) {
 	ob_start();
 	?>
 
-	<section class="speakers-section <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?> <?php echo esc_html( $color_mode ); ?> <?php echo esc_html( $text_color ); ?>" <?php echo $inline_styles; ?>>
+	<section class="speakers-section <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?>">
 
 		<ul class="speaker-list grid-x">
 
@@ -125,13 +87,13 @@ function speakers_block_callback( $attributes ) {
 				$twitter  = get_post_meta( $id, 'lfes_speaker_twitter', true );
 				$github   = get_post_meta( $id, 'lfes_speaker_github', true );
 				$website  = get_post_meta( $id, 'lfes_speaker_website', true );
+				$company_logo  = get_post_meta( $id, 'lfes_speaker_company_logo', true );
 				?>
 				<li id="<?php
 				echo esc_html( $id_preface . $id );
 				?>"
 				class="speaker cell small-6 medium-4 xxlarge-3"
-				data-toggler=".open"
-				style="background: linear-gradient(-45deg, transparent 30%, <?php echo esc_html( $gradient_color ); ?> 100%);">
+				data-toggler=".open">
 					<div class="grid-x">
 						<div class="cell large-5">
 							<?php
