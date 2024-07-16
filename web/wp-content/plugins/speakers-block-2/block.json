@@ -1,8 +1,8 @@
 {
 	"apiVersion": 2,
-	"name": "cgb/block-speakers-block",
-	"version": "0.2.0",
-	"title": "Speakers",
+	"name": "cgb/block-speakers-block-2",
+	"version": "0.3.0",
+	"title": "Speakers 2",
 	"category": "common",
 	"icon": "groups",
 	"description": "Gutenberg block which allows for insertion of a Speakers showcase in a page/post.",
@@ -25,22 +25,9 @@
         "speakers": {
             "type": "array",
 			"default": []
-        },
-		"colorMode": {
-            "type": "string"
-        },
-        "color1": {
-            "type": "string"
-        },
-        "color2": {
-            "type": "string"
-        },
-        "textColor": {
-            "type": "string",
-			"default": "#FFFFFF"
         }
     },
-	"textdomain": "block-speakers-block",
+	"textdomain": "block-speakers-block-2",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css"
 }
