@@ -1,15 +1,7 @@
 import {
 	useBlockProps,
 	InspectorControls,
-	PanelColorSettings,
 } from '@wordpress/block-editor';
-
-import {
-	RadioControl,
-	PanelBody,
-	PanelRow,
-	SelectControl,
-} from '@wordpress/components';
 
 const { apiFetch } = wp;
 
@@ -107,72 +99,6 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	return [
 		<InspectorControls key="speakers-block-panel">
-			<PanelBody title="Settings" initialOpen={ true }>
-				<SelectControl
-					label="Color options"
-					help="Chose background colors"
-					value={ colorMode }
-					options={ [
-						{
-							label: "Select option",
-							value: '',
-						},
-						{
-							label: 'Event Gradient',
-							value: 'is-style-event-gradient',
-						},
-						{
-							label: 'Custom Colors',
-							value: 'is-style-custom-colors',
-						},
-					] }
-					onChange={ ( value ) =>
-						setAttributes( {
-							colorMode: '' !== value ? value : '',
-						} )
-					}
-				/>
-				<PanelRow>
-					<RadioControl
-						label="Text color:"
-						help="Chose text color"
-						selected={ textColor }
-						options={ [
-							{ label: 'White', value: '#FFFFFF' },
-							{ label: 'Black', value: '#000000' },
-						] }
-						onChange={ ( value ) => {
-							setAttributes( {
-								textColor: value,
-							} );
-						} }
-					/>
-				</PanelRow>
-				{ colorMode === 'is-style-custom-colors' && (
-					<PanelColorSettings
-						title="Color Settings"
-						initialOpen={ true }
-						colorSettings={ [
-							{
-								value: color1,
-								onChange: ( colorValue ) =>
-									setAttributes( {
-										color1: colorValue,
-									} ),
-								label: 'Color 1',
-							},
-							{
-								value: color2,
-								onChange: ( colorValue ) =>
-									setAttributes( {
-										color2: colorValue,
-									} ),
-								label: 'Color 2',
-							},
-						] }
-					></PanelColorSettings>
-				) }
-			</PanelBody>
 		</InspectorControls>,
 		<div { ...useBlockProps() } key="speakers-block-edit">
 			<p>
