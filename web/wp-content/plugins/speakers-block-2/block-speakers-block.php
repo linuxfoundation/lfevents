@@ -82,11 +82,13 @@ function speakers_block_2_callback( $attributes ) {
 			<?php
 			while ( $query->have_posts() ) {
 				$query->the_post();
-				$id       = get_the_ID();
-				$linkedin = get_post_meta( $id, 'lfes_speaker_linkedin', true );
-				$twitter  = get_post_meta( $id, 'lfes_speaker_twitter', true );
-				$github   = get_post_meta( $id, 'lfes_speaker_github', true );
-				$website  = get_post_meta( $id, 'lfes_speaker_website', true );
+				$id            = get_the_ID();
+				$linkedin      = get_post_meta( $id, 'lfes_speaker_linkedin', true );
+				$twitter       = get_post_meta( $id, 'lfes_speaker_twitter', true );
+				$github        = get_post_meta( $id, 'lfes_speaker_github', true );
+				$website       = get_post_meta( $id, 'lfes_speaker_website', true );
+				$job_title     = get_post_meta( $id, 'lfes_speaker_job_title', true );
+				$company       = get_post_meta( $id, 'lfes_speaker_company', true );
 				$company_logo  = get_post_meta( $id, 'lfes_speaker_company_logo', true );
 				?>
 				<li id="<?php
