@@ -83,10 +83,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 <div class="person__company-container">
 			<?php
 			if ( $company_logo ) {
-				?>
-				<img class="person__company-logo" src="<?php echo esc_attr( $company_logo_url ); ?>"
-						alt="Logo of <?php echo esc_html( $company ); ?>">
-				<?php
+				echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'person__company-logo', 'alt' => 'Logo of ' . $company ) );
 			} else {
 				?>
 				<h4 class="person__company"><?php echo esc_html( $company ); ?></h4>
@@ -176,11 +173,8 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 						?>
 					<div class="person__company-container">
 						<?php
-						if ( $company_logo_url ) {
-							?>
-							<img class="person__company-logo" src="<?php echo esc_attr( $company_logo_url ); ?>"
-									alt="Logo of <?php echo esc_html( $company ); ?>">
-							<?php
+						if ( $company_logo ) {
+							echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'person__company-logo', 'alt' => 'Logo of ' . $company ) );
 						} else {
 							?>
 							<h4 class="person__company"><?php echo esc_html( $company ); ?></h4>
