@@ -12,13 +12,13 @@ global $wp;
 global $post;
 $person_id     = get_the_ID();
 $person_slug   = $post->post_name;
-$linkedin      = get_post_meta( $person_id, 'lfes_person_linkedin', true );
-$twitter       = get_post_meta( $person_id, 'lfes_person_twitter', true );
-$github        = get_post_meta( $person_id, 'lfes_person_github', true );
-$website       = get_post_meta( $person_id, 'lfes_person_website', true );
-$job_title     = get_post_meta( $person_id, 'lfes_person_job_title', true );
-$company       = get_post_meta( $person_id, 'lfes_person_company', true );
-$company_logo  = get_post_meta( $person_id, 'lfes_person_company_logo', true );
+$linkedin      = get_post_meta( $person_id, 'lfes_speaker_linkedin', true );
+$twitter       = get_post_meta( $person_id, 'lfes_speaker_twitter', true );
+$github        = get_post_meta( $person_id, 'lfes_speaker_github', true );
+$website       = get_post_meta( $person_id, 'lfes_speaker_website', true );
+$job_title     = get_post_meta( $person_id, 'lfes_speaker_job_title', true );
+$company       = get_post_meta( $person_id, 'lfes_speaker_company', true );
+$company_logo  = get_post_meta( $person_id, 'lfes_speaker_company_logo', true );
 $content       = get_the_content();
 
 $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
@@ -36,8 +36,12 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 		<?php endif; ?>
 
 		<figure class="person__image">
-			<img loading="lazy" src="<?php echo esc_attr( $image_url ); ?>"
-				alt="Picture of <?php the_title_attribute(); ?>">
+			<?php
+			echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
+				'loading' => 'lazy',
+				'alt'     => "Picture of <?php the_title_attribute(); ?>",
+				) );
+			?>
 		</figure>
 		<?php
 		// Close show_modal link.
@@ -146,9 +150,12 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			<div class="modal-content-wrapper">
 
 				<figure class="person__image">
-					<img loading="lazy"
-						src="<?php echo esc_attr( $image_url ); ?>"
-						alt="Picture of <?php the_title_attribute(); ?>">
+					<?php
+					echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
+						'loading' => 'lazy',
+						'alt'     => "Picture of <?php the_title_attribute(); ?>",
+						) );
+					?>
 				</figure>
 
 				<div class="modal__content">
