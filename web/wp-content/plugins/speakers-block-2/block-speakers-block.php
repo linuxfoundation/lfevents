@@ -62,6 +62,9 @@ function speakers_block_2_callback( $attributes ) {
 
 	if ( $persons_query->have_posts() ) {
 
+		$align = 'align';
+		$align .= $attributes['align'] ?? 'wide';	
+
 		wp_enqueue_script(
 			'modal',
 			get_template_directory_uri() . '/dist/js/modal.js',
@@ -72,7 +75,7 @@ function speakers_block_2_callback( $attributes ) {
 
 		ob_start();
 		?>
-		<div class="people-wrapper">
+		<div class="people-wrapper <?php echo esc_html( $align ); ?>">
 			<?php
 			while ( $persons_query->have_posts() ) :
 				$persons_query->the_post();
