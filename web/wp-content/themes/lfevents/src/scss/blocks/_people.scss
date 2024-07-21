@@ -9,14 +9,14 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	background-color: $white;
+	background-color: white;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
 
 	button.button-reset {
 		width: 100%;
 		text-align: left;
-		color: $black;
+		color: black;
 		-webkit-tap-highlight-color: transparent;
 	}
 
@@ -117,14 +117,14 @@
 			display: inline-block;
 			&:hover {
 				svg {
-					color: $primary-color;
+					opacity: .8;
 				}
 			}
 		}
 		svg {
 			height: 30px;
 			width: auto;
-			color: $black;
+			opacity: 1;
 		}
 		&-margin {
 			margin-top: 40px;
@@ -141,7 +141,7 @@
 // person modal.
 .person-modal {
 	position: fixed;
-	background: $white;
+	background: white;
 	z-index: 667;
 	border: 0;
 	overflow: auto;
@@ -170,14 +170,14 @@
 			top: -14px;
 			width: calc(100% - 1em);
 			z-index: 99;
-			background-color: $white;
+			background-color: white;
 			display: flex;
 			justify-content: flex-end;
 		}
 	}
 
 	&-close {
-		background: $white;
+		background: white;
 		width: 50px;
 		height: 50px;
 		border: none;
@@ -203,7 +203,7 @@
 			background-size: 25px 25px;
 			background-repeat: no-repeat;
 			background-position: center center;
-			background-color: $black;
+			background-color: black;
 			width: 50px;
 			height: 50px;
 			z-index: 100;
@@ -228,7 +228,7 @@
 		&:hover,
 		&:active {
 			outline-color: #747474;
-			color: $black;
+			color: black;
 		}
 
 		&-overlay[data-background-click='disabled'] {
@@ -249,7 +249,6 @@
 			font-size: 12px;
 		}
 		a {
-			color: $primary-color;
 			font-weight: 700;
 			transition: all 0.25s ease-out;
 		}
