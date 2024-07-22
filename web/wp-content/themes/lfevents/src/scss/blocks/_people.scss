@@ -11,7 +11,7 @@
 	align-items: flex-start;
 	background-color: white;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-	border-radius: 3px;
+	border-radius: 5px;
 
 	button.button-reset {
 		width: 100%;
@@ -31,8 +31,8 @@
 			@media (min-width: 1200px) {
 				height: 250px;
 			}
-			border-top-left-radius: 3px;
-			border-top-right-radius: 3px;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
 			transition: opacity 0.25s ease-in;
 			&:hover {
 				opacity: 0.9;
@@ -73,10 +73,6 @@
 		}
 	}
 	&__company-container {
-		margin-top: 10px;
-		@media (min-width: 1200px) {
-			margin-top: 16px;
-		}
 		.person__company-logo,
 		.person__company-logo-link,
 		.person__company {
@@ -97,8 +93,8 @@
 	&__company {
 		font-size: 16px;
 		line-height: 140%;
-		color: #747474;
 		font-weight: 700;
+		margin-top: 10px;
 	}
 	&__title {
 		font-style: italic;
@@ -167,8 +163,8 @@
 	&-close__wrapper {
 		@media (max-width: 767px) {
 			position: sticky;
-			top: -14px;
-			width: calc(100% - 1em);
+			top: -16px;
+			width: 100%;
 			z-index: 99;
 			background-color: white;
 			display: flex;
@@ -257,6 +253,15 @@
 			max-width: 400px;
 		}
 
+		.person__social {
+			margin: 0 20px;
+			max-width: 400px;
+			text-align: center;
+			&-margin {
+				margin-top: 20px;
+			}
+		}
+
 		@media (min-width: 768px) {
 			.person__image {
 				flex-shrink: 0;
@@ -275,10 +280,6 @@
 						width: 310px;
 					}
 				}
-			}
-
-			.person__social {
-				margin-top: 20px;
 			}
 		}
 	}
