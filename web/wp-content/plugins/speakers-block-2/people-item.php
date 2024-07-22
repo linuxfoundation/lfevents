@@ -147,49 +147,16 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			aria-hidden="true">
 			<div class="modal-content-wrapper">
 
-				<figure class="person__image">
-					<?php
-					echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
-						'loading' => 'lazy',
-						'alt'     => "Picture of <?php the_title_attribute(); ?>",
-						) );
-					?>
-				</figure>
-
-				<div class="modal__content">
-
-					<h3 class="person__name">
-						<?php the_title(); ?>
-						<br class="show-upto-600">
-					</h3>
-
-					<?php
-					if ( $job_title ) {
-						?>
-						<h4 class="person__title"><?php echo esc_html( $job_title ); ?></h4>
+				<div class="person__image">
+					<figure>
 						<?php
-					}
-
-					if ( $company ) {
+						echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
+							'loading' => 'lazy',
+							'alt'     => "Picture of <?php the_title_attribute(); ?>",
+							) );
 						?>
-					<div class="person__company-container">
-						<?php
-						if ( $company_logo ) {
-							echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'person__company-logo', 'alt' => 'Logo of ' . $company ) );
-						} else {
-							?>
-							<h4 class="person__company"><?php echo esc_html( $company ); ?></h4>
-							<?php
-						}
-						?>
-					</div>
-						<?php
-					}
-					?>
+					</figure>
 
-					<div class="person__content">
-						<?php the_content(); ?>
-					</div>
 
 					<div class="person__social">
 						<?php
@@ -233,6 +200,42 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 								?>
 							</div>
 						<?php endif; ?>
+					</div>
+				</div>
+
+				<div class="modal__content">
+
+					<h3 class="person__name">
+						<?php the_title(); ?>
+						<br class="show-upto-600">
+					</h3>
+
+					<?php
+					if ( $job_title ) {
+						?>
+						<h4 class="person__title"><?php echo esc_html( $job_title ); ?></h4>
+						<?php
+					}
+
+					if ( $company ) {
+						?>
+					<div class="person__company-container">
+						<?php
+						if ( $company_logo ) {
+							echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'person__company-logo', 'alt' => 'Logo of ' . $company ) );
+						} else {
+							?>
+							<h4 class="person__company"><?php echo esc_html( $company ); ?></h4>
+							<?php
+						}
+						?>
+					</div>
+						<?php
+					}
+					?>
+
+					<div class="person__content">
+						<?php the_content(); ?>
 					</div>
 
 				</div>
