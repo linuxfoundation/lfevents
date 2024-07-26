@@ -25,9 +25,6 @@
 		width: 100%;
 		text-align: center;
 		margin-top: 15px;
-		@media (max-width: 767px) {
-			margin-top: 0;
-		}
 
 		img {
 			object-fit: cover;
@@ -251,9 +248,14 @@
 			font-weight: 700;
 			transition: all 0.25s ease-out;
 		}
-		.person__image img {
-			height: 280px;
-			width: 280px;
+		.person__image {
+			@media (max-width: 767px) {
+				margin-top: 0;
+			}		
+			img {
+				height: 280px;
+				width: 280px;
+			}
 		}
 
 		.person__social {
