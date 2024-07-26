@@ -39,7 +39,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			<?php
 			echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
 				'loading' => 'lazy',
-				'alt'     => "Picture of <?php the_title_attribute(); ?>",
+				'alt'     => "Picture of " . the_title_attribute( 'echo=0' ),
 				) );
 			?>
 		</figure>
@@ -105,7 +105,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 						<?php
 						echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
 							'loading' => 'lazy',
-							'alt'     => "Picture of <?php the_title_attribute(); ?>",
+							'alt'     => "Picture of " . the_title_attribute( 'echo=0' ),
 							) );
 						?>
 					</figure>
