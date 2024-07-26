@@ -14,4 +14,5 @@ PATHS:
     - "src/js/app.js"
     - "src/js/auth0.js"
     - "src/js/china.js"
+    - "src/js/modal.js"
     - "src/js/responsive-table.js"
