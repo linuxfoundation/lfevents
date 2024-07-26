@@ -264,13 +264,12 @@
 		@media (min-width: 768px) {
 			.person__image {
 				flex-shrink: 0;
+				margin-left: 15px;
 				width: 155px;
 				@media (min-width: 1000px) {
 					width: 310px;
 				}
 				img {
-					border-top-left-radius: 0px;
-					border-top-right-radius: 0px;
 					object-fit: cover;
 					height: 155px;
 					width: 155px;
