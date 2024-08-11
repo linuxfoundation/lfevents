@@ -80,7 +80,7 @@ tooling:
 6. Run `lando pull --code=none --files=none` and follow the prompts to download the media files and database from Pantheon:
   * `Pull database from?` >  `dev`
 
-7. Run this command to activate/deactivate multiple plugings that can help with local dev or are not needed for local dev. The Load Media Files from Production plugin will load media from the production server instead of needing to download them locally:
+7. Run this command to activate/deactivate multiple plugins that can help with local dev or are not needed for local dev. The Load Media Files from Production plugin will load media from the production server instead of needing to download them locally:
 
 ```
 lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && lando wp plugin deactivate shortpixel-image-optimiser && lando wp plugin deactivate pantheon-advanced-page-cache && lando wp plugin activate load-media-from-production
