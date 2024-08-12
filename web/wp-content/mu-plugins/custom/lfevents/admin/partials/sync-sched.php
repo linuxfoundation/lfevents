@@ -54,8 +54,13 @@ while ( $the_query->have_posts() ) {
 	foreach ( $sessions as $session ) {
 		// Go through all sessions and create a new array with keys of speakers.
 		// Each object in the array will have another array of all the sessions by that speaker.
-		foreach ( $session->speakers as $s ) {
-			$speakers[ $s->username ][] = $session;
+		if ( property_exists( $session, 'speakers' ) ) {
+			foreach ( $session->speakers as $sp ) {
+				if ( ! array_key_exists( $sp->username, $speakers ) ) {
+					$speakers[ $sp->username ] = array();
+				}
+				$speakers[ $sp->username ][] = $session;
+			}
 		}
 	}
 
