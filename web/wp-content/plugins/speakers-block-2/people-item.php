@@ -21,6 +21,10 @@ $company       = get_post_meta( $person_id, 'lfes_speaker_company', true );
 $company_logo  = get_post_meta( $person_id, 'lfes_speaker_company_logo', true );
 $content       = get_the_content();
 
+if ( $sched_event_id ) {
+	$sched_json = get_post_meta( $person_id, $sched_event_id, true );
+}
+
 $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 
 ?>
@@ -192,7 +196,27 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 					</div>
 
 				</div>
+
 			</div>
+			<?php
+			if ( $sched_json ) :
+				$sched = json_decode( $sched_json );
+				?>
+			<div class="modal__sched">
+				<h3 class="modal__sched-heading">Sessions</h3>
+				<?php
+				foreach ( $sched as $session ) :
+					?>
+				<div class="modal__sched-item">
+					<h4 class="modal__sched-title"><?php echo esc_html( $session->name ); ?></h4>
+					<p class="modal__sched-time"><?php echo esc_html( $session->start_time ); ?></p>
+				</div>
+					<?php
+				endforeach;
+				?>
+			</div>
+			<?php endif; ?>
+
 		</div>
 		<?php endif; ?>
 	</div>

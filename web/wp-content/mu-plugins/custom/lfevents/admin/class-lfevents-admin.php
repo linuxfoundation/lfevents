@@ -600,4 +600,12 @@ class LFEvents_Admin {
 
 		return $kid_ids;
 	}
+
+	/**
+	 * Sync Sched info for Speakers.
+	 */
+	public function sync_sched() {
+		include_once 'partials/sync-sched.php';
+	}
+
 }

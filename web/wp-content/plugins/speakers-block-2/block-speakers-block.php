@@ -48,6 +48,8 @@ function speakers_block_2_callback( $attributes ) {
 		$attributes['speakers']
 	);
 
+	$sched_event_id = $attributes['schedEventID'] ?? '';
+
 	$persons_query = new WP_Query(
 		array(
 			'no_found_rows'          => true,
