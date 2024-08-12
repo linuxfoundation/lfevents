@@ -201,7 +201,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 
 			</div>
 			<?php
-			if ( $sched_json ) :
+			if ( $sched_event_id && $sched_json ) :
 				$sched = json_decode( $sched_json );
 				?>
 			<div class="modal-sched">
