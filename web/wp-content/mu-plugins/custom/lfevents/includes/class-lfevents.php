@@ -177,7 +177,7 @@ class LFEvents {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
 
 		// Example of how to run a sync locally on demand.
-		// $this->loader->add_action( 'init', $plugin_admin, 'sync_kcds' ); //phpcs:ignore.
+		// $this->loader->add_action( 'init', $plugin_admin, 'sync_sched' ); //phpcs:ignore.
 
 		// schedule KCD sync on lfeventsci.
 		if ( isset( $_ENV['PANTHEON_SITE_NAME'] ) && 'lfeventsci' === $_ENV['PANTHEON_SITE_NAME'] ) {
@@ -185,6 +185,12 @@ class LFEvents {
 			if ( ! wp_next_scheduled( 'lfevents_sync_kcds' ) ) {
 				wp_schedule_event( time(), 'daily', 'lfevents_sync_kcds' );
 			}
+		}
+
+		// Sync Sched data for Speakers.
+		$this->loader->add_action( 'lfevents_sync_sched', $plugin_admin, 'sync_sched' );
+		if ( ! wp_next_scheduled( 'lfevents_sync_sched' ) ) {
+			wp_schedule_event( time(), 'twicedaily', 'lfevents_sync_sched' );
 		}
 	}
 

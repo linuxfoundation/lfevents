@@ -25,6 +25,9 @@
         "speakers": {
             "type": "array",
 			"default": []
+        },
+		"schedEventID": {
+            "type": "string"
         }
     },
 	"textdomain": "block-speakers-block-2",

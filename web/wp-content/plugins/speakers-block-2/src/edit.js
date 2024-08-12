@@ -3,6 +3,11 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 
+import {
+	PanelBody,
+	TextControl,
+} from '@wordpress/components';
+
 const { apiFetch } = wp;
 
 import AsyncSelect from 'react-select/async';
@@ -13,7 +18,7 @@ import debounce from 'debounce-promise';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { speakers, colorMode, color1, color2, textColor } = attributes;
+	const { speakers, schedEventID } = attributes;
 
 	const onDragEnd = ( result ) => {
 		// dropped outside the list
@@ -99,6 +104,15 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	return [
 		<InspectorControls key="speakers-block-panel">
+			<PanelBody title="Settings" initialOpen={ true }>
+				<TextControl
+					label="Sched Event ID"
+					value={ schedEventID }
+					onChange={ ( value ) =>
+						setAttributes( { schedEventID: value } )
+					}
+				/>
+			</PanelBody>
 		</InspectorControls>,
 		<div { ...useBlockProps() } key="speakers-block-edit">
 			<p>
