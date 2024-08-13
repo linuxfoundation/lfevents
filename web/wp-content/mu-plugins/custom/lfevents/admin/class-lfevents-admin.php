@@ -607,5 +607,4 @@ class LFEvents_Admin {
 	public function sync_sched() {
 		include_once 'partials/sync-sched.php';
 	}
-
 }
