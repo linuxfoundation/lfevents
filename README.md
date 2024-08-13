@@ -7,7 +7,7 @@
 ## Documentation
 * [Developer Getting Started Guide](/docs/devguide.md)
 * [Forms Guide](/docs/formsguide.md)
-* [Admin Guide](https://docs.google.com/document/d/1mvIuw-R9k_gbnZn_iV04qNTjG33u_lXwFlN7s-lgJ1Y/edit?usp=sharing)
+* [Admin Guide](/docs/adminguide.md)
 
 ## Sponsors
 <a href="http://browserstack.com"><img width="300px" src="/docs/browserstack.svg"></a>
