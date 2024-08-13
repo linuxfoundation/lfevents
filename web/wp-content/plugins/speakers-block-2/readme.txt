@@ -13,6 +13,7 @@ pop up, showing the Speaker's bio. It requires the Speakers CPT to be already se
 
 = 0.3.0 =
 * New front-end design with modal popup
+* Integration with sched to show a Speaker's schedule
 
 = 0.2.0 =
 * Switch from Create Guten Block to npx create-block package

@@ -7,29 +7,29 @@
 	"icon": "groups",
 	"description": "Gutenberg block which allows for insertion of a Speakers showcase in a page/post.",
 	"keywords": [
-        "speakers",
-        "featured",
-        "lf",
-        "committee",
-        "presenters"
-    ],
-    "supports": {
-        "anchor": false,
-        "html": false,
+		"speakers",
+		"featured",
+		"lf",
+		"committee",
+		"presenters"
+	],
+	"supports": {
+		"anchor": false,
+		"html": false,
 		"align": [
 			"full",
 			"wide"
 		]
-    },
-    "attributes": {
-        "speakers": {
-            "type": "array",
+	},
+	"attributes": {
+		"speakers": {
+			"type": "array",
 			"default": []
-        },
+		},
 		"schedEventID": {
-            "type": "string"
-        }
-    },
+			"type": "string"
+		}
+	},
 	"textdomain": "block-speakers-block-2",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css"
