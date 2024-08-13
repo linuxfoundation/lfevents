@@ -205,7 +205,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 				$sched = json_decode( $sched_json );
 				?>
 			<div class="modal-sched">
-				<h3 class="modal-sched__heading">Sessions</h3>
+				<h3 class="modal-sched__heading">Conference Sessions</h3>
 				<?php
 				foreach ( $sched as $session ) :
 					$start = new DateTime( $session->event_start );
