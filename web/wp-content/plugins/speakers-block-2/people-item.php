@@ -24,7 +24,6 @@ $content        = get_the_content();
 
 if ( $sched_event_id ) {
 	$sched_json = get_post_meta( $person_id, $sched_event_id, true );
-	$sched_profile_url = 'https://' . $sched_event_id . '.sched.com/speaker/' . $sched_username . '#sched-page-me-schedule';
 }
 
 $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
@@ -203,27 +202,38 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			<?php
 			if ( $sched_event_id && $sched_json ) :
 				$sched = json_decode( $sched_json );
-				?>
-			<div class="modal-sched">
-				<h3 class="modal-sched__heading">Conference Sessions</h3>
-				<?php
-				foreach ( $sched as $session ) :
-					$start = new DateTime( $session->event_start );
+				$active_session = false;
+				foreach ( $sched as $session ) {
+					if ( 'Y' === $session->active ) {
+						$active_session = true; 
+					}
+				}
+				if ( $active_session ) :
 					?>
-					<div class="modal-sched__item">
-						<h4 class="modal-sched__title">
-							<a href="<?php echo esc_url( $sched_profile_url ); ?>" target="_blank" rel="noopener noreferrer">
-								<?php echo esc_html( $session->name ); ?>
-							</a>
-						</h4>
-						<p class="modal-sched__time"><?php echo $start->format( 'M j, Y, g:i A' ); ?> | <?php echo esc_html( $session->venue ) ?></p>
-					</div>
-					<?php
-				endforeach;
-				?>
-			</div>
-			<?php endif; ?>
+					<div class="modal-sched">
+						<h3 class="modal-sched__heading">Conference Sessions</h3>
+						<?php
+						foreach ( $sched as $session ) :
+							if ( 'Y' !== $session->active ) {
+								continue;
+							}
 
+							$start = new DateTime( $session->event_start );
+							?>
+							<div class="modal-sched__item">
+								<h4 class="modal-sched__title">
+									<a href="https://kccncna2024.sched.com/event/<?php echo esc_attr( $session->id ); ?>" target="_blank" rel="noopener noreferrer">
+										<?php echo esc_html( $session->name ); ?>
+									</a>
+								</h4>
+								<p class="modal-sched__time"><?php echo $start->format( 'M j, Y, g:i A' ); ?> | <?php echo esc_html( $session->venue ) ?></p>
+							</div>
+							<?php
+						endforeach;
+						?>
+					</div>
+				<?php endif; ?>
+			<?php endif; ?>
 		</div>
 		<?php endif; ?>
 	</div>
