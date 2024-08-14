@@ -211,7 +211,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 				if ( $active_session ) :
 					?>
 					<div class="modal-sched">
-						<h3 class="modal-sched__heading">Conference Sessions</h3>
+						<h4 class="modal-sched__heading">Conference Sessions</h4>
 						<?php
 						foreach ( $sched as $session ) :
 							if ( 'Y' !== $session->active ) {
@@ -221,11 +221,11 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 							$start = new DateTime( $session->event_start );
 							?>
 							<div class="modal-sched__item">
-								<h4 class="modal-sched__title">
+								<h5 class="modal-sched__title">
 									<a href="https://kccncna2024.sched.com/event/<?php echo esc_attr( $session->id ); ?>" target="_blank" rel="noopener noreferrer">
 										<?php echo esc_html( $session->name ); ?>
 									</a>
-								</h4>
+								</h5>
 								<p class="modal-sched__time"><?php echo $start->format( 'M j, Y, g:i A' ); ?> | <?php echo esc_html( $session->venue ) ?></p>
 							</div>
 							<?php

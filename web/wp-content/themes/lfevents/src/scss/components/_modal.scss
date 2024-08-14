@@ -20,7 +20,6 @@ dialog {
 		padding: 1rem;
 		.modal__content {
 			margin-top: 1rem;
-			margin-bottom: 1rem;
 		}
 	}
 
@@ -30,7 +29,6 @@ dialog {
 		.modal__content {
 			margin-left: 2rem;
 			margin-right: 2rem;
-			padding-bottom: 2rem;
 			@media (min-width: 1000px) {
 				margin-left: 50px;
 				margin-right: 50px;
@@ -40,19 +38,18 @@ dialog {
 }
 
 .modal-sched {
-	margin: 0 1rem 2rem;
+	margin: 2rem 1rem 2rem;
 	@media (min-width: 768px) {
 		margin-left: 50px;
 		margin-right: 50px;
 	}
-	h3 {
-		font-size: 22px;
+	h4 {
+		font-size: 20px;
 		font-weight: 700;
 		line-height: 130%;
 	}
-	h4 {
+	h5 {
 		font-size: 17px;
-		font-weight: 700;
 		margin-top: 25px;
 		line-height: 130%;
 	}
