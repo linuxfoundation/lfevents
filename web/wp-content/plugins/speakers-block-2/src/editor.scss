@@ -11,3 +11,15 @@
 	max-width: 100%;
 	padding: 2rem;
 }
+
+.SortableList {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 10px;
+	padding: 0;
+	list-style: none;
+}
+  
+// .react-select-draggable {
+// 	z-index: 32;
+// }
