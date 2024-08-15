@@ -10,98 +10,119 @@ import {
 
 const { apiFetch } = wp;
 
+import React, { MouseEventHandler, useCallback, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { components } from 'react-select';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {
+	closestCorners,
+	DndContext,
+ } from '@dnd-kit/core';
+import { restrictToParentElement } from '@dnd-kit/modifiers';
+import {
+	arrayMove,
+	horizontalListSortingStrategy,
+	SortableContext,
+	useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 import debounce from 'debounce-promise';
 
 import './editor.scss';
 
+const MultiValue = (props/*: MultiValueProps<ColourOption>*/) => {
+	const onMouseDown /*: MouseEventHandler<HTMLDivElement>*/ = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+	};
+	const innerProps = { ...props.innerProps, onMouseDown };
+	const { attributes, listeners, setNodeRef, transform, transition } =
+		useSortable({
+			id: props.data.value,
+		});
+	const style = {
+		// ref: https://github.com/JedWatson/react-select/pull/5212#issuecomment-2096174489
+		// transform: CSS.Transform.toString(transform),
+		transform: CSS.Translate.toString(transform),
+		transition,
+	};
+  
+	return (
+		<div style={style} ref={setNodeRef} {...attributes} {...listeners}>
+			<components.MultiValue {...props} innerProps={innerProps} />
+		</div>
+	);
+};
+  
+const MultiValueRemove = (props /*: MultiValueRemoveProps<ColourOption>*/) => {
+	return (
+		<components.MultiValueRemove
+			{...props}
+			innerProps={{
+				onPointerDown: (e) => e.stopPropagation(),
+				  ...props.innerProps,
+			}}
+		  />
+	);
+};
+
+const prepareOptions = ( list ) => {
+	return list.map( ( item ) => {
+		return {
+			value: item.id,
+			label: item.title.rendered,
+		};
+	} );
+};
+
+const searchSpeakers = ( inputValue ) => {
+	const value = inputValue.replace( /\W/g, '' );
+	return apiFetch( {
+		path: `/wp/v2/lfe_speaker/?per_page=100&search=${ value }`,
+	} ).then( ( posts ) => {
+		return prepareOptions( posts );
+	} );
+};
+
+const loadOptions = debounce(
+	( inputValue ) => searchSpeakers( inputValue ),
+	1000,
+	{
+		leading: false,
+	}
+);
+
 export default function Edit( { attributes, setAttributes } ) {
 	const { speakers, schedEventID } = attributes;
 
-	const onDragEnd = ( result ) => {
-		// dropped outside the list
-		if ( ! result.destination ) {
-			return;
-		}
+	const [selected, setSelected] = useState(speakers);
 
-		const items = reorderList(
-			speakers,
-			result.source.index,
-			result.destination.index
-		);
+	const onChange = (selectedOptions) => {
+		setAttributes({
+			speakers: [...selectedOptions],
+		});
 
-		setAttributes( {
-			speakers: items,
-		} );
+		setSelected([...selectedOptions]);
 	};
 
-	const reorderList = ( list, startIndex, endIndex ) => {
-		const newList = list.slice();
-		const result = Array.from( newList );
-		const [ removed ] = result.splice( startIndex, 1 );
+	const onDragEnd = useCallback((event /*: DragEndEvent */) => {
+		const { active, over } = event;
+	  
+		if (!active || !over) return;
+	  
+		setSelected((items) => {
+			const oldIndex = items.findIndex((item) => item.value === active.id);
+			const newIndex = items.findIndex((item) => item.value === over.id);
+			let newSpeakers = arrayMove(items, oldIndex, newIndex);
 
-		result.splice( endIndex, 0, removed );
+			setAttributes({
+				speakers: [...newSpeakers],
+			});
 
-		return result;
-	};
-
-	const DragAndDropContainer = ( { data, ...restProps } ) => {
-		const getIndex = ( items, comparativeValue ) => {
-			return items.findIndex(
-				( item ) => item.value === comparativeValue
-			);
-		};
-
-		return (
-			<Draggable
-				key={ `item-${ data.value }` }
-				index={ getIndex( speakers, data.value ) }
-				draggableId={ `item-${ data.value }` }
-			>
-				{ ( provided ) => (
-					<div
-						ref={ provided.innerRef }
-						{ ...provided.draggableProps }
-						{ ...provided.dragHandleProps }
-					>
-						<components.MultiValueContainer
-							{ ...restProps }
-							data={ data }
-						/>
-					</div>
-				) }
-			</Draggable>
-		);
-	};
-
-	const prepareOptions = ( list ) => {
-		return list.map( ( item ) => {
-			return {
-				value: item.id,
-				label: item.title.rendered,
-			};
-		} );
-	};
-
-	const searchSpeakers = ( inputValue ) => {
-		const value = inputValue.replace( /\W/g, '' );
-		return apiFetch( {
-			path: `/wp/v2/lfe_speaker/?per_page=100&search=${ value }`,
-		} ).then( ( posts ) => {
-			return prepareOptions( posts );
-		} );
-	};
-
-	const loadOptions = debounce(
-		( inputValue ) => searchSpeakers( inputValue ),
-		1000,
-		{
-			leading: false,
-		}
-	);
-
+			return newSpeakers;
+		});
+	}, [setSelected]);
+	
 	return [
 		<InspectorControls key="speakers-block-panel">
 			<PanelBody title="Settings" initialOpen={ true }>
@@ -118,36 +139,38 @@ export default function Edit( { attributes, setAttributes } ) {
 			<p>
 				<strong>Featured Speakers:</strong>
 			</p>
-			<DragDropContext onDragEnd={ onDragEnd }>
-				<Droppable direction="horizontal" droppableId="droppable">
-					{ ( provided ) => (
-						<div
-							{ ...provided.droppableProps }
-							ref={ provided.innerRef }
-						>
-							<AsyncSelect
-								styles={ {
-									menu: ( styles ) => ( {
-										...styles,
-										zIndex: 99,
-									} ),
-								} }
-								isMulti
-								value={ speakers }
-								defaultOptions
-								loadOptions={ loadOptions }
-								components={ {
-									MultiValueContainer: DragAndDropContainer,
-								} }
-								onChange={ ( value ) =>
-									setAttributes( { speakers: value } )
-								}
-							/>
-							{ provided.placeholder }
-						</div>
-					) }
-				</Droppable>
-			</DragDropContext>
+			{/* ref: https://github.com/JedWatson/react-select/pull/5212#issuecomment-1273870591
+			<DndContext modifiers={[restrictToParentElement]} onDragEnd={onDragEnd} collisionDetection={closestCenter}> */}
+			<DndContext
+				modifiers={[restrictToParentElement]}
+				onDragEnd={onDragEnd}
+				collisionDetection={closestCorners}
+			>
+				<SortableContext
+					items={selected.map((o) => o.value)}
+					// ref: https://github.com/JedWatson/react-select/pull/5212#issuecomment-2096174489
+					// strategy={horizontalListSortingStrategy}
+				>
+					<AsyncSelect
+						// distance={4}
+						className='SortableList'
+						isMulti
+						defaultOptions
+						loadOptions={ loadOptions }
+						helperClass="react-select-draggable"
+						// options={selected} // For Select and not AsyncSelect
+						value={selected}
+						onChange={onChange}
+						components={{
+							// @ts-ignore We're failing to provide a required index prop to SortableElement
+							// MultiValueContainer: DragAndDropContainer,
+							MultiValue,
+							MultiValueRemove,
+						}}
+						closeMenuOnSelect={false}
+					/>
+				</SortableContext>
+			</DndContext>
 		</div>,
 	];
 }
