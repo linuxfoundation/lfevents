@@ -93,7 +93,7 @@ lando wp plugin activate debug-bar && lando wp plugin activate query-monitor && 
 
 9. Visit the local site URL saved from above.  To find it again run `lando info`.
 
-10. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the correpsonding local instance url.
+10. In the admin you will need to edit the [Search & Filter](https://lfeventsci.lndo.site/wp/wp-admin/edit.php?post_type=search-filter-widget) settings.  The full url to the result pages are hardcoded in the "Display Results" of each filter.  These will need to be set to the corresponding local instance url.
 
 11. Get your browser to trust the Lando SSL certificate by following [these instructions](https://docs.lando.dev/config/security.html#trusting-the-ca).  This step isn't essential but will stop you having to keep bypassing the privacy warning in your browser.
 
