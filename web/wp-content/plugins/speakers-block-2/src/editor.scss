@@ -20,6 +20,8 @@
 	list-style: none;
 }
   
-// .react-select-draggable {
-// 	z-index: 32;
-// }
+.editor-visual-editor .editor-styles-wrapper .wp-block-group,
+.editor-visual-editor .editor-styles-wrapper .wp-block-group.is-style-event-gradient,
+.editor-visual-editor .editor-styles-wrapper .wp-block-group.is-style-border {
+	overflow: visible;
+}
