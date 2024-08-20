@@ -14,9 +14,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 $args = array(
-	'post_type'     => 'page',
-	'post_parent'   => 0,
-	'meta_query'    => array(
+	'post_type'   => 'page',
+	'post_parent' => 0,
+	'meta_query'  => array(
 		array(
 			'key'     => 'lfes_event_has_passed',
 			'compare' => '!=',
@@ -39,10 +39,10 @@ $the_query = new WP_Query( $args );
 
 while ( $the_query->have_posts() ) {
 	$the_query->the_post();
-	$sched_event_id       = get_post_meta( get_the_ID(), 'lfes_sched_event_id', true );
-	$sched_event_api_key  = get_post_meta( get_the_ID(), 'lfes_sched_event_api_key', true );
+	$sched_event_id      = get_post_meta( get_the_ID(), 'lfes_sched_event_id', true );
+	$sched_event_api_key = get_post_meta( get_the_ID(), 'lfes_sched_event_api_key', true );
 
-	$url = 'https://' . $sched_event_id . '.sched.com/api/session/export?api_key=' . $sched_event_api_key . '&format=json&strip_html=Y&custom_data=Y';
+	$url  = 'https://' . $sched_event_id . '.sched.com/api/session/export?api_key=' . $sched_event_api_key . '&format=json&strip_html=Y&custom_data=Y';
 	$data = wp_remote_get( $url );
 	if ( is_wp_error( $data ) || ( wp_remote_retrieve_response_code( $data ) != 200 ) ) {
 		return false;
@@ -67,12 +67,12 @@ while ( $the_query->have_posts() ) {
 	foreach ( $speakers as $username => $speaker ) {
 		// Step throught the speaker array and jsonify each element.
 		// Write that string to the speaker's postmeta using the event_id as the meta key.
-		$args = array(
-			'post_type'     => 'lfe_speaker',
-			'meta_query'    => array(
+		$args          = array(
+			'post_type'  => 'lfe_speaker',
+			'meta_query' => array(
 				array(
-					'key'     => 'lfes_speaker_sched_username',
-					'value'   => $username,
+					'key'   => 'lfes_speaker_sched_username',
+					'value' => $username,
 				),
 			),
 		);
@@ -82,6 +82,7 @@ while ( $the_query->have_posts() ) {
 			$speaker_query->the_post();
 			$speaker_id = get_the_ID();
 			update_post_meta( $speaker_id, $sched_event_id, json_encode( $speaker ) );
+			update_option( 'lfevents_sync_sched_last_run', current_time( 'timestamp' ) );
 		}
 		wp_reset_postdata(); // Restore original Post Data.
 	}
