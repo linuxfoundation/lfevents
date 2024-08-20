@@ -56,17 +56,21 @@ function lf_load_cover_block_customisations($block_content, $block) {
 
         $video_url = wp_get_attachment_url($block['attrs']['videoBackground']);
 		$cover_url = $block['attrs']['url'] ?? null;
-		$image_id = $block['attrs']['id'];
-		$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
 
-        if (!empty($video_url) ||!empty($cover_url) ) {
+		if ( isset( $block['attrs']['id'] ) ) {
+			$image_id = $block['attrs']['id'];
+			$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);	
+		} else {
+			$image_alt = '';
+		}
+
+        if ( ! empty( $video_url ) || ! empty( $cover_url ) ) {
 		   ob_start();
 		   ?>
 	<div class="wp-block-cover alignfull has-video-background">
 		<div aria-hidden="true" class="cover-bg__overlay"></div>
 
 		<link rel="preload" as="image" fetchpriority="high" href="<?php echo esc_url( $cover_url ); ?>">
-
 		<img src="<?php echo esc_url( $cover_url ); ?>"
 				class="cover-bg__poster" style="width: 100%; height: 100%;"
 				alt="<?php echo esc_attr( $image_alt ); ?>" decoding="async">

@@ -138,6 +138,13 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 				$out  .= ' style="-webkit-transform: scale(' . $scale . '); -ms-transform: scale(' . $scale . '); transform: scale(' . $scale . ');"';
 			}
 			$out .= ' target="_blank" rel="noopener">';
+		} else {
+			$out .= '<div';
+			if ( is_numeric( $size ) && '100' !== $size ) {
+				$scale = $size / 100;
+				$out  .= ' style="-webkit-transform: scale(' . $scale . '); -ms-transform: scale(' . $scale . '); transform: scale(' . $scale . ');"';
+			}
+			$out .= '>';
 		}
 
 		$out .= get_the_post_thumbnail(
@@ -152,6 +159,8 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 
 		if ( $forwarding_url ) {
 			$out .= '</a>';
+		} else {
+			$out .= '</div>';
 		}
 		$out .= '</div>';
 	}
