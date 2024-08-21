@@ -65,7 +65,7 @@ function compileCSS() {
 }
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
-function watch(done) {
+function watch() {
     gulp.watch('src/scss/**/*.scss', compileCSS)
         .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
         .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
@@ -73,7 +73,6 @@ function watch(done) {
         .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
         .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
     gulp.watch('src/images/**/*');
-    done();
 }
 
 const webpack = {
@@ -132,13 +131,21 @@ const webpack = {
 
 gulp.task('webpack:build', webpack.build);
 gulp.task('webpack:watch', webpack.watch);
+
+// Build task.
 gulp.task('build', gulp.series(
-    clean,
-    compileCSS,
-    'webpack:build',
+  clean,
+  compileCSS,
+  'webpack:build',
+  function watchIfDev(done) {
+      if (!PRODUCTION) {
+          gulp.parallel('webpack:watch', watch)();
+      }
+      done();
+  }
 ));
 
-// Default task
+// Default task.
 gulp.task('default', gulp.series(
     'build',
     gulp.parallel('webpack:watch', watch)
