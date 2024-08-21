@@ -222,7 +222,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 							?>
 							<div class="modal-sched__item">
 								<h5 class="modal-sched__title">
-									<a href="https://kccncna2024.sched.com/event/<?php echo esc_attr( $session->id ); ?>#sched-content" target="_blank" rel="noopener noreferrer">
+									<a href="https://<?php echo esc_attr( $sched_event_id ); ?>.sched.com/event/<?php echo esc_attr( $session->id ); ?>#sched-content" target="_blank" rel="noopener noreferrer">
 										<?php echo esc_html( $session->name ); ?>
 									</a>
 								</h5>
