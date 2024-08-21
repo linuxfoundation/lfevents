@@ -81,7 +81,7 @@ while ( $the_query->have_posts() ) {
 		while ( $speaker_query->have_posts() ) {
 			$speaker_query->the_post();
 			$speaker_id = get_the_ID();
-			update_post_meta( $speaker_id, $sched_event_id, json_encode( $speaker ) );
+			update_post_meta( $speaker_id, $sched_event_id, wp_slash( json_encode( $speaker ) ) );
 		}
 		wp_reset_postdata(); // Restore original Post Data.
 	}
