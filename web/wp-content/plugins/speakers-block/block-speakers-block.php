@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Speakers Block
- * Description:       Gutenberg block which allows for insertion of a Speakers showcase in a page/post. It requires an existing Speakers CPT already setup <a href="https://github.com/linuxfoundation/lfevents/blob/main/web/wp-content/mu-plugins/custom/lfevents/admin/class-lfevents-admin.php#L164">like this</a>.
+ * Description:       Allows for insertion of a Speakers showcase in a page/post. It requires an existing Speakers CPT already setup <a href="https://github.com/linuxfoundation/lfevents/blob/main/web/wp-content/mu-plugins/custom/lfevents/admin/partials/cpts.php#L56">like this</a>.
  * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/speakers-block
  * Requires at least: 5.8
  * Requires PHP:      7.0

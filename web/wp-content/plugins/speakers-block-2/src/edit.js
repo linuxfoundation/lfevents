@@ -46,14 +46,14 @@ const MultiValue = (props/*: MultiValueProps<ColourOption>*/) => {
 		transform: CSS.Translate.toString(transform),
 		transition,
 	};
-  
+
 	return (
 		<div style={style} ref={setNodeRef} {...attributes} {...listeners}>
 			<components.MultiValue {...props} innerProps={innerProps} />
 		</div>
 	);
 };
-  
+
 const MultiValueRemove = (props /*: MultiValueRemoveProps<ColourOption>*/) => {
 	return (
 		<components.MultiValueRemove
@@ -107,9 +107,9 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const onDragEnd = useCallback((event /*: DragEndEvent */) => {
 		const { active, over } = event;
-	  
+
 		if (!active || !over) return;
-	  
+
 		setSelected((items) => {
 			const oldIndex = items.findIndex((item) => item.value === active.id);
 			const newIndex = items.findIndex((item) => item.value === over.id);
@@ -122,7 +122,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			return newSpeakers;
 		});
 	}, [setSelected]);
-	
+
 	return [
 		<InspectorControls key="speakers-block-panel">
 			<PanelBody title="Settings" initialOpen={ true }>
@@ -137,7 +137,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		</InspectorControls>,
 		<div { ...useBlockProps() } key="speakers-block-edit">
 			<p>
-				<strong>Featured Speakers:</strong>
+				<strong>Featured Speakers (each opens with modal):</strong>
 			</p>
 			{/* ref: https://github.com/JedWatson/react-select/pull/5212#issuecomment-1273870591
 			<DndContext modifiers={[restrictToParentElement]} onDragEnd={onDragEnd} collisionDetection={closestCenter}> */}
