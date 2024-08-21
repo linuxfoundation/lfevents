@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "cgb/block-speakers-block-2",
+	"name": "lf/speakers-block-2",
 	"version": "0.3.0",
 	"title": "Speakers 2",
 	"category": "common",
@@ -9,7 +9,7 @@
 	"keywords": [
 		"speakers",
 		"featured",
-		"lf",
+		"modal",
 		"committee",
 		"presenters"
 	],

@@ -1,48 +1,46 @@
 <?php
 /**
- * Person Block (includes Modal for each person)
+ * Singular Speaker Block (includes Modal for each speaker)
  *
  * @package WordPress
- * @subpackage cncf-theme
- * @since 1.0.0
+ * @since 0.3.0
  */
 
-// setup values.
 global $wp;
 global $post;
-$person_id      = get_the_ID();
-$person_slug    = $post->post_name;
-$linkedin       = get_post_meta( $person_id, 'lfes_speaker_linkedin', true );
-$twitter        = get_post_meta( $person_id, 'lfes_speaker_twitter', true );
-$github         = get_post_meta( $person_id, 'lfes_speaker_github', true );
-$website        = get_post_meta( $person_id, 'lfes_speaker_website', true );
-$job_title      = get_post_meta( $person_id, 'lfes_speaker_job_title', true );
-$company        = get_post_meta( $person_id, 'lfes_speaker_company', true );
-$company_logo   = get_post_meta( $person_id, 'lfes_speaker_company_logo', true );
-$sched_username = get_post_meta( $person_id, 'lfes_speaker_sched_username', true );
+$speaker_id      = get_the_ID();
+$speaker_slug    = $post->post_name;
+$linkedin       = get_post_meta( $speaker_id, 'lfes_speaker_linkedin', true );
+$twitter        = get_post_meta( $speaker_id, 'lfes_speaker_twitter', true );
+$github         = get_post_meta( $speaker_id, 'lfes_speaker_github', true );
+$website        = get_post_meta( $speaker_id, 'lfes_speaker_website', true );
+$job_title      = get_post_meta( $speaker_id, 'lfes_speaker_job_title', true );
+$company        = get_post_meta( $speaker_id, 'lfes_speaker_company', true );
+$company_logo   = get_post_meta( $speaker_id, 'lfes_speaker_company_logo', true );
 $content        = get_the_content();
 
 if ( $sched_event_id ) {
-	$sched_json = get_post_meta( $person_id, $sched_event_id, true );
+	$sched_json = get_post_meta( $speaker_id, $sched_event_id, true );
 }
 
 $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 
 ?>
-<div class="person has-animation-scale-2">
+<div class="sb2-speaker has-animation-scale-2">
 	<?php
 	// Make image link if show_modal.
 	if ( $show_modal ) :
 		?>
 
-	<button data-modal-content-id="modal-<?php echo esc_html( $person_id ); ?>"
-		data-modal-slug="<?php echo esc_html( $person_slug ); ?>"
-		data-modal-prefix-class="person" class="js-modal button-reset">
+	<button data-modal-content-id="modal-<?php echo esc_html( $speaker_id ); ?>"
+		data-modal-slug="<?php echo esc_html( $speaker_slug ); ?>"
+		data-modal-prefix-class="speaker" class="js-modal button-reset">
 		<?php endif; ?>
 
-		<figure class="person__image">
+		<figure class="sb2-speaker__image">
 			<?php
-			echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
+			echo get_the_post_thumbnail( $speaker_id, 'post-thumbnail', array(
+				'size' => 'profile-310',
 				'loading' => 'lazy',
 				'alt'     => "Picture of " . the_title_attribute( 'echo=0' ),
 				) );
@@ -55,18 +53,18 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 	</button>
 	<?php endif; ?>
 
-	<div class="person__padding">
+	<div class="sb2-speaker__padding">
 
 		<?php
 		if ( $show_modal ) :
 			?>
 		<button
-			data-modal-content-id="modal-<?php echo esc_html( $person_id ); ?>"
-			data-modal-slug="<?php echo esc_html( $person_slug ); ?>"
-			data-modal-prefix-class="person"
-			class="js-modal button-reset modal-<?php echo esc_html( $person_slug ); ?>">
+			data-modal-content-id="modal-<?php echo esc_html( $speaker_id ); ?>"
+			data-modal-slug="<?php echo esc_html( $speaker_slug ); ?>"
+			data-modal-prefix-class="speaker"
+			class="js-modal button-reset modal-<?php echo esc_html( $speaker_slug ); ?>">
 			<?php endif; ?>
-			<h3 class="person__name">
+			<h3 class="sb2-speaker__name">
 				<?php the_title(); ?>
 			</h3>
 			<?php
@@ -79,19 +77,19 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 		<?php
 		if ( $job_title ) {
 			?>
-			<h4 class="person__title"><?php echo esc_html( $job_title ); ?></h4>
+			<h4 class="sb2-speaker__title"><?php echo esc_html( $job_title ); ?></h4>
 			<?php
 		}
 
 		if ( $company ) {
 			?>
-<div class="person__company-container">
+<div class="sb2-speaker__company-container">
 			<?php
 			if ( $company_logo ) {
-				echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'person__company-logo', 'alt' => 'Logo of ' . $company ) );
+				echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'sb2-speaker__company-logo', 'alt' => 'Logo of ' . $company ) );
 			} else {
 				?>
-				<h4 class="person__company"><?php echo esc_html( $company ); ?></h4>
+				<h4 class="sb2-speaker__company"><?php echo esc_html( $company ); ?></h4>
 				<?php
 			}
 			?>
@@ -101,14 +99,15 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 		if ( $show_modal ) :
 			// Load in Modal markup.
 			?>
-		<div class="modal-hide" id="modal-<?php echo esc_html( $person_id ); ?>"
+		<div class="modal-hide" id="modal-<?php echo esc_html( $speaker_id ); ?>"
 			aria-hidden="true">
 			<div class="modal-content-wrapper">
 
-				<div class="person__image">
+				<div class="sb2-speaker__image">
 					<figure>
 						<?php
-						echo get_the_post_thumbnail( $person_id, 'post-thumbnail', array(
+						echo get_the_post_thumbnail( $speaker_id, 'post-thumbnail', array(
+							'size' => 'profile-310',
 							'loading' => 'lazy',
 							'alt'     => "Picture of " . the_title_attribute( 'echo=0' ),
 							) );
@@ -116,12 +115,12 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 					</figure>
 
 
-					<div class="person__social">
+					<div class="sb2-speaker__social">
 						<?php
 						// Social Icons.
 						if ( $linkedin || $twitter || $github || $website ) :
 							?>
-							<div class="person__social-margin">
+							<div class="sb2-speaker__social-margin">
 								<?php
 								if ( $linkedin ) :
 									?>
@@ -163,7 +162,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 
 				<div class="modal__content">
 
-					<h3 class="person__name">
+					<h3 class="sb2-speaker__name">
 						<?php the_title(); ?>
 						<br class="show-upto-600">
 					</h3>
@@ -171,19 +170,19 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 					<?php
 					if ( $job_title ) {
 						?>
-						<h4 class="person__title"><?php echo esc_html( $job_title ); ?></h4>
+						<h4 class="sb2-speaker__title"><?php echo esc_html( $job_title ); ?></h4>
 						<?php
 					}
 
 					if ( $company ) {
 						?>
-					<div class="person__company-container">
+					<div class="sb2-speaker__company-container">
 						<?php
 						if ( $company_logo ) {
-							echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'person__company-logo', 'alt' => 'Logo of ' . $company ) );
+							echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'sb2-speaker__company-logo', 'alt' => 'Logo of ' . $company ) );
 						} else {
 							?>
-							<h4 class="person__company"><?php echo esc_html( $company ); ?></h4>
+							<h4 class="sb2-speaker__company"><?php echo esc_html( $company ); ?></h4>
 							<?php
 						}
 						?>
@@ -192,7 +191,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 					}
 					?>
 
-					<div class="person__content">
+					<div class="sb2-speaker__content">
 						<?php the_content(); ?>
 					</div>
 
@@ -205,13 +204,13 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 				$active_session = false;
 				foreach ( $sched as $session ) {
 					if ( 'Y' === $session->active ) {
-						$active_session = true; 
+						$active_session = true;
 					}
 				}
 				if ( $active_session ) :
 					?>
 					<div class="modal-sched">
-						<h4 class="modal-sched__heading">Conference Sessions</h4>
+						<h2 class="modal-sched__heading">Conference Sessions</h2>
 						<?php
 						foreach ( $sched as $session ) :
 							if ( 'Y' !== $session->active ) {
@@ -221,11 +220,11 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 							$start = new DateTime( $session->event_start );
 							?>
 							<div class="modal-sched__item">
-								<h5 class="modal-sched__title">
+								<h3 class="modal-sched__title">
 									<a href="https://<?php echo esc_attr( $sched_event_id ); ?>.sched.com/event/<?php echo esc_attr( $session->id ); ?>#sched-content" target="_blank" rel="noopener noreferrer">
 										<?php echo esc_html( $session->name ); ?>
 									</a>
-								</h5>
+								</h3>
 								<p class="modal-sched__time"><?php echo $start->format( 'M j, Y, g:i A' ); ?> | <?php echo esc_html( $session->venue ) ?></p>
 							</div>
 							<?php
@@ -237,4 +236,4 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 		</div>
 		<?php endif; ?>
 	</div>
-</div><!-- end of person box  -->
+</div>

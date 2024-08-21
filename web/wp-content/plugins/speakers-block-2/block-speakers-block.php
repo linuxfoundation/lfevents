@@ -1,42 +1,38 @@
 <?php
 /**
  * Plugin Name:       Speakers Block 2
- * Description:       Gutenberg block which allows for insertion of a Speakers showcase in a page/post. It requires an existing Speakers CPT already setup <a href="https://github.com/linuxfoundation/lfevents/blob/main/web/wp-content/mu-plugins/custom/lfevents/admin/class-lfevents-admin.php#L164">like this</a>.
- * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/speakers-block
+ * Description:       Inserts a Speakers showcase in a page/post which opens each individual speakers details in a modal.
+ * Plugin URI: https://github.com/linuxfoundation/lfevents/tree/main/web/wp-content/plugins/
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           0.2.0
+ * Version:           0.3.0
  * Author:            cjyabraham, <a href="https://www.thetwopercent.co.uk">James Hunt</a>
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       block-speakers-block-2
  *
- * @package           cgb
+ * @package           WordPress
  */
 
 /**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/writing-your-first-block-type/
+ * Register the block
  */
-function cgb_block_speakers_block_2_block_init() {
+function lf_speakers_block_2_block_init() {
 	register_block_type(
 		__DIR__,
 		array(
-			'render_callback' => 'speakers_block_2_callback',
+			'render_callback' => 'lf_speakers_block_2_callback',
 		)
 	);
 }
-add_action( 'init', 'cgb_block_speakers_block_2_block_init' );
+add_action( 'init', 'lf_speakers_block_2_block_init' );
 
 /**
  * Callback for speakers block.
  *
  * @param array $attributes Atts.
  */
-function speakers_block_2_callback( $attributes ) {
+function lf_speakers_block_2_callback( $attributes ) {
 	if ( empty( $attributes['speakers'] ) ) {
 		return;
 	}
@@ -50,7 +46,7 @@ function speakers_block_2_callback( $attributes ) {
 
 	$sched_event_id = $attributes['schedEventID'] ?? '';
 
-	$persons_query = new WP_Query(
+	$speakers_query = new WP_Query(
 		array(
 			'no_found_rows'          => true,
 			'update_post_term_cache' => false,
@@ -62,10 +58,10 @@ function speakers_block_2_callback( $attributes ) {
 		)
 	);
 
-	if ( $persons_query->have_posts() ) {
+	if ( $speakers_query->have_posts() ) {
 
 		$align = 'align';
-		$align .= $attributes['align'] ?? 'wide';	
+		$align .= $attributes['align'] ?? 'wide';
 
 		wp_enqueue_script(
 			'modal',
@@ -77,11 +73,11 @@ function speakers_block_2_callback( $attributes ) {
 
 		ob_start();
 		?>
-		<div class="people-wrapper <?php echo esc_html( $align ); ?>">
+		<div class="sb2-block-wrapper <?php echo esc_html( $align ); ?>">
 			<?php
-			while ( $persons_query->have_posts() ) :
-				$persons_query->the_post();
-				include( 'people-item.php' );
+			while ( $speakers_query->have_posts() ) :
+				$speakers_query->the_post();
+				include( 'includes/speaker-block.php' );
 			endwhile;
 			wp_reset_postdata();
 		}

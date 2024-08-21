@@ -1,0 +1,340 @@
+.sb2-block-wrapper {
+  display: grid;
+  grid-row-gap: 40px;
+  grid-column-gap: 30px;
+  grid-template-columns: 1fr;
+  @media (min-width: 415px) {
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  }
+}
+
+.sb2-speaker {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+
+  button.button-reset {
+    width: 100%;
+    color: #000;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  &__image {
+    display: block;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+
+    img {
+      object-fit: cover;
+      border: 3px solid var(--event-color-1);
+      width: 100%;
+      height: 280px;
+      width: 280px;
+      border-radius: 50%;
+      @media (min-width: 1200px) {
+        height: 240px;
+        width: 240px;
+      }
+      transition: opacity 0.25s ease-in;
+      &:hover {
+        opacity: 0.9;
+        transition: opacity 0.25s ease-in;
+      }
+    }
+  }
+  &__padding {
+    width: 100%;
+    height: 100%;
+    padding: 0px 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 30px;
+    line-height: 130%;
+    @media (min-width: 1200px) {
+      margin-top: 24px;
+    }
+  }
+  &__pronouns {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 140%;
+    color: #747474;
+  }
+  &__metadata {
+    margin-top: 20px;
+    li {
+      margin-bottom: 20px;
+      @media (min-width: 1200px) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+  &__company-container {
+    .sb2-speaker__company-logo,
+    .sb2-speaker__company-logo-link,
+    .sb2-speaker__company {
+      display: block;
+    }
+    .sb2-speaker__company-logo-link {
+      display: inline-block;
+      cursor: pointer;
+    }
+    .sb2-speaker__company-logo {
+      height: 60px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      object-position: 0%;
+    }
+  }
+  &__company {
+    font-size: 16px;
+    line-height: 140%;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  &__title {
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+  }
+  &__social {
+    margin-top: auto;
+    a {
+      display: inline-block;
+      &:hover {
+        svg {
+          opacity: 0.8;
+        }
+      }
+    }
+    svg {
+      height: 30px;
+      width: auto;
+      opacity: 1;
+    }
+    &-margin {
+      margin-top: 40px;
+      > *:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+  &__content {
+    margin-top: 30px;
+  }
+}
+
+.speaker-modal {
+  position: fixed;
+  background: #fff;
+  z-index: 667;
+  border: 0;
+  overflow: auto;
+  min-height: 300px;
+  max-height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  max-width: 100%;
+  @media (min-width: 768px) {
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    max-width: 800px;
+    height: 70vh;
+    min-height: 300px;
+    max-height: 800px;
+    transform: translate(-50%, -40%);
+    padding: 0;
+  }
+
+  &-close__wrapper {
+    @media (max-width: 767px) {
+      position: sticky;
+      top: -16px;
+      width: 100%;
+      z-index: 99;
+      background-color: #fff;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &-close {
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+    @media (min-width: 768px) {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+
+    @media (min-width: 1000px) {
+      top: 0;
+      right: 0;
+    }
+    &::before {
+      content: '';
+      display: block;
+      position: relative;
+      background: url('../../src/images/icon-close.svg');
+      background-size: 25px 25px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-color: #000;
+      width: 50px;
+      height: 50px;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      outline: none;
+      cursor: pointer;
+      opacity: 1;
+      @media (min-width: 1000px) {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    &:hover {
+      &::before {
+        opacity: 0.5;
+      }
+    }
+
+    &:focus,
+    &:hover,
+    &:active {
+      outline-color: #747474;
+      color: #000;
+    }
+
+    &-overlay[data-background-click='disabled'] {
+      cursor: auto;
+    }
+  }
+
+  &__content {
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+
+    p:not(:last-child) {
+      margin-bottom: 20px;
+    }
+    @media (min-width: 768px) {
+      padding: 0;
+      font-size: 12px;
+    }
+    a {
+      font-weight: 700;
+      transition: all 0.25s ease-out;
+    }
+    .sb2-speaker__image {
+      @media (max-width: 767px) {
+        margin-top: 0;
+      }
+      img {
+        height: 280px;
+        width: 280px;
+      }
+    }
+
+    .sb2-speaker__social {
+      margin: 0 20px;
+      text-align: center;
+      &-margin {
+        margin-top: 20px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .sb2-speaker__image {
+        flex-shrink: 0;
+        margin-left: 15px;
+        width: 155px;
+        @media (min-width: 1000px) {
+          width: 310px;
+        }
+        img {
+          object-fit: cover;
+          height: 155px;
+          width: 155px;
+          @media (min-width: 1000px) {
+            height: 310px;
+            width: 310px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.speaker-modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 666;
+  cursor: pointer;
+  background: black;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(10px);
+}
+
+.modal-sched {
+  margin: 2rem 1rem 2rem;
+  @media (min-width: 768px) {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  h4 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 130%;
+  }
+  h5 {
+    font-size: 17px;
+    margin-top: 25px;
+    line-height: 130%;
+  }
+}
+
+@media (hover: hover) {
+  .has-animation-scale-2 {
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transform: translate3d(0, 0, 0);
+    &:hover {
+      transform: scale(1.013);
+    }
+  }
+  .has-animation-bump {
+    transition-property: transform;
+    transition-duration: 0.3s;
+    &:hover {
+      transform: translate3d(0, -8px, 0);
+    }
+  }
+}
