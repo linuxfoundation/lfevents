@@ -37,8 +37,17 @@ function lfe_settings_page() {
 		'lfe_options_section' // section.
 	);
 
+	add_settings_field(
+		'lfe-generic-speaker-image-id', // id.
+		'Generic Speaker Image', // title.
+		'lfe_generic_speaker_image_display', // callback.
+		'lfe_options',  // page.
+		'lfe_options_section' // section.
+	);
+
 	register_setting( 'lfe_options_section', 'lfe-faster-np-checkbox' );
 	register_setting( 'lfe_options_section', 'lfe-generic-staff-image-id' );
+	register_setting( 'lfe_options_section', 'lfe-generic-speaker-image-id' );
 }
 add_action( 'admin_init', 'lfe_settings_page' );
 
@@ -86,9 +95,39 @@ function lfe_generic_staff_image_display() {
 	<input type="button" data-id="lfe-generic-staff-image-id"
 	class="clear_upload_image_button button" value="Remove image" />
 
+	<p class="description">We recommend an image size at least 200x200px.</p>
+
 	<input type="hidden" id="lfe-generic-staff-image-id"
 	data-id="lfe-generic-staff-image-id" name="lfe-generic-staff-image-id"
 	value="<?php echo absint( $generic_staff_image_id ); ?>" />
+
+	<?php
+}
+
+/**
+ * Generic Speaker Image Upload callback.
+ */
+function lfe_generic_speaker_image_display() {
+	$generic_speaker_image_id = get_option( 'lfe-generic-speaker-image-id' ) ? absint( get_option( 'lfe-generic-speaker-image-id' ) ) : '';
+	?>
+<div class="image-preview-wrapper">
+	<img
+	src="<?php echo esc_url( wp_get_attachment_url( $generic_speaker_image_id ) ); ?>"
+		class="image-preview" height="200" width="200"
+		data-id="lfe-generic-speaker-image-id">
+</div>
+
+	<input type="button" data-id="lfe-generic-speaker-image-id"
+	class="upload_image_button button" value="Choose image" />
+
+	<input type="button" data-id="lfe-generic-speaker-image-id"
+	class="clear_upload_image_button button" value="Remove image" />
+
+	<p class="description">We recommend an image size at least 310x310px.</p>
+
+	<input type="hidden" id="lfe-generic-speaker-image-id"
+	data-id="lfe-generic-speaker-image-id" name="lfe-generic-speaker-image-id"
+	value="<?php echo absint( $generic_speaker_image_id ); ?>" />
 
 	<?php
 }
