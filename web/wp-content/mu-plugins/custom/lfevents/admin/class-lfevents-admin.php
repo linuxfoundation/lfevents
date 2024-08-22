@@ -377,14 +377,28 @@ class LFEvents_Admin {
 	 */
 	public function speaker_custom_column_data( $column, $post_id ) {
 		switch ( $column ) {
-			case 'title_company':
-				echo esc_html( get_post_meta( $post_id, 'lfes_speaker_title', true ) ? get_post_meta( $post_id, 'lfes_speaker_title', true ) : '-' );
+			case 'featured_image':
+				echo has_post_thumbnail( $post_id ) ?
+				'<span class="dashicons dashicons-yes-alt" style="color:green"></span>' :
+				'<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
+			case 'job_title':
+				echo esc_html( get_post_meta( $post_id, 'lfes_speaker_job_title', true ) ? get_post_meta( $post_id, 'lfes_speaker_job_title', true ) : '-' );
+				break;
+			case 'company':
+				echo esc_html( get_post_meta( $post_id, 'lfes_speaker_company', true ) ? get_post_meta( $post_id, 'lfes_speaker_company', true ) : '-' );
+				break;
+			case 'company_logo':
+				echo get_post_meta( $post_id, 'lfes_speaker_company_logo', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
 			case 'linkedin_url':
 				echo get_post_meta( $post_id, 'lfes_speaker_linkedin', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
 			case 'twitter_url':
 				echo get_post_meta( $post_id, 'lfes_speaker_twitter', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
+			case 'github_url':
+				echo get_post_meta( $post_id, 'lfes_speaker_github', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
 			case 'website_url':
 				echo get_post_meta( $post_id, 'lfes_speaker_website', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
@@ -405,9 +419,13 @@ class LFEvents_Admin {
 		unset( $columns['date'] );
 		unset( $columns['author'] );
 		// add new columns.
-		$columns['title_company'] = 'Title, Company';
+		$columns['featured_image'] = 'Speaker Image';
+		$columns['job_title'] = 'Title';
+		$columns['company'] = 'Company';
+		$columns['company_logo'] = 'Company Logo';
 		$columns['linkedin_url']  = 'Linkedin URL';
-		$columns['twitter_url']   = 'Twitter/X URL';
+		$columns['twitter_url']   = 'X URL';
+		$columns['github_url']   = 'GitHub URL';
 		$columns['website_url']   = 'Website URL';
 		// add back in old columns.
 		$columns['author'] = $author;
