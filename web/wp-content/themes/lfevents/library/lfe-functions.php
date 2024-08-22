@@ -144,9 +144,9 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 
 	echo '<li class="page_item page_item_has_children other-events">';
 	if ( is_lfeventsci() ) {
-		echo '<a>View All Events</a>';
+		echo '<a href="#">View All Events</a>';
 	} else {
-		echo '<a>查看所有活动<br>View All Events</a>';
+		echo '<a href="#">查看所有活动<br>View All Events</a>';
 	}
 	echo '<ul class="children" style="' . esc_html( $background_style ) . '">';
 	$lfes_hide_all_upcoming_link = get_post_meta( $parent_id, 'lfes_hide_all_upcoming_link', true );
