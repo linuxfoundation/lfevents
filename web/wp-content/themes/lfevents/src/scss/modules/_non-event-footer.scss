@@ -112,7 +112,7 @@
 
         &:focus {
           color: $pure-white;
-          outline: 0;
+          outline: 0; // replaced with border-bottom.
           padding-left: 0.5em;
           padding-bottom: calc(0.5em);
           border-bottom: 2px solid $white;
