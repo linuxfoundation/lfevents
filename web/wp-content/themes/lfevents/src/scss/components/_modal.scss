@@ -15,26 +15,3 @@ dialog {
 .modal-hide {
   display: none;
 }
-
-.modal-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 767px) {
-    padding: 1rem;
-    .modal__content {
-      margin-top: 1rem;
-    }
-  }
-  @media (min-width: 768px) {
-    flex-direction: row;
-    height: 100%;
-    .modal__content {
-      margin-left: 2rem;
-      margin-right: 2rem;
-      @media (min-width: 1000px) {
-        margin-left: 50px;
-        margin-right: 50px;
-      }
-    }
-  }
-}
