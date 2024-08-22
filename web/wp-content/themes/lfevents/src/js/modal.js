@@ -279,8 +279,10 @@ jQuery( document ).ready(
 		const url = new URL( window.location );
 		let slug  = url.searchParams.get( 'p' );
 		if ( slug ) {
-			button_class = '.modal-' + slug;
-			$( button_class ).click();
+      let button = $('button[data-modal-slug="' + slug + '"]');
+      if (button.length) {
+          button.click();
+      }
 		}
 	}
 	);
