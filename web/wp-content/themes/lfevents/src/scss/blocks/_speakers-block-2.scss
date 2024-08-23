@@ -46,7 +46,7 @@
         min-width: 280px;
         min-height: unset;
       }
-      @media (min-width: 1000px) {
+      @media (min-width: 1024px) {
         min-width: 240px;
         max-width: 240px;
       }
@@ -125,6 +125,7 @@
   max-width: 100%;
   @media (min-width: 768px) {
     left: 50%;
+    right: 50%;
     width: 75%;
     max-width: 800px;
     padding: 0;
@@ -287,7 +288,7 @@
   &-sched {
     line-height: 150%;
     letter-spacing: 0.02em;
-    background-color: #e9e9ea;
+    background-color: #fafafa;
     padding-top: 16px;
     padding-bottom: 16px;
     @media (min-width: 340px) and (max-width: 767px) {
@@ -317,7 +318,7 @@
     &__heading {
       font-size: 26px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     &__item {
       margin-bottom: 20px;
@@ -370,9 +371,6 @@
   }
   .sb2-speaker__company-text {
     font-size: 26px;
-    @media (min-width: 1024px) {
-      font-size: 30px;
-    }
   }
   .sb2-speaker__company-logo {
     max-width: 100%;
