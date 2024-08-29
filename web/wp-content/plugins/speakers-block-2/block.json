@@ -30,7 +30,7 @@
 			"type": "string"
 		}
 	},
-	"textdomain": "block-speakers-block-2",
+	"textdomain": "speakers-block-2",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css"
 }
