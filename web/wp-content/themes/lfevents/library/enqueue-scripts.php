@@ -47,7 +47,14 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		if ( show_non_event_menu() ) {
 			// Add auth SSO/LFX assets.
 			wp_enqueue_script( 'auth0', 'https://cdn.auth0.com/js/auth0-spa-js/1.13.3/auth0-spa-js.production.js', array(), '1', false );
-			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+
+			// Use different Auth0 files depending on environment.
+			if ( isset( $_SERVER['PANTHEON_ENVIRONMENT'] ) && 'live' == $_SERVER['PANTHEON_ENVIRONMENT'] ) {
+				wp_enqueue_script( 'lf-auth0', 'https://cdn.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+			} else {
+				wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+			}
+
 			wp_enqueue_script( 'auth0-config', get_stylesheet_directory_uri() . '/dist/js/auth0.js', array( 'lf-auth0', 'auth0' ), filemtime( get_template_directory() . '/dist/js/auth0.js' ), false );
 		}
 

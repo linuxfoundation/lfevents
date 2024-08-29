@@ -62,7 +62,12 @@ function lf_live_stream_gate_block_block_enqueue()
 
 		wp_enqueue_script('auth0', 'https://cdn.auth0.com/js/auth0-spa-js/1.22/auth0-spa-js.production.js', array(), '1', false);
 
-		wp_enqueue_script('lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false);
+		// Use different Auth0 files depending on environment.
+		if ( isset( $_SERVER['PANTHEON_ENVIRONMENT'] ) && 'live' == $_SERVER['PANTHEON_ENVIRONMENT'] ) {
+			wp_enqueue_script( 'lf-auth0', 'https://cdn.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+		} else {
+			wp_enqueue_script( 'lf-auth0', 'https://cdn.dev.platform.linuxfoundation.org/wordpress-auth0.js', array(), '1', false );
+		}
 
 		wp_enqueue_script('auth0-config', 'https://events.linuxfoundation.org/wp-content/themes/lfevents/dist/js/auth0.js', array(), '1', false);
 	}
