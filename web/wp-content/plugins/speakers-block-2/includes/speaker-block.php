@@ -47,7 +47,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			$speaker_alt = 'Generic Speaker Image';
 			if ( has_post_thumbnail() ) {
 				$speaker_image_id = get_post_thumbnail_id();
-				$speaker_alt = 'Picture of ' . the_title_attribute( 'echo=0' );
+				$speaker_alt = the_title_attribute( 'echo=0' ) . ' headshot';
 			}
 			echo wp_get_attachment_image(
 				$speaker_image_id,
@@ -83,7 +83,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			?>
 			<?php
 			if ( $company_logo ) {
-				echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'sb2-speaker__company-logo', 'alt' => 'Logo of ' . $company ) );
+				echo wp_get_attachment_image( $company_logo, 'full', '', array( 'class' => 'sb2-speaker__company-logo', 'alt' => $company . ' logo' ) );
 			} else {
 				?>
 			<div class="sb2-speaker__company-container">
@@ -115,7 +115,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 			$speaker_alt = 'Generic Speaker Image';
 			if ( has_post_thumbnail() ) {
 				$speaker_image_id = get_post_thumbnail_id();
-				$speaker_alt = 'Picture of ' . the_title_attribute( 'echo=0' );
+				$speaker_alt = the_title_attribute( 'echo=0' ) . ' headshot';
 			}
 			echo wp_get_attachment_image(
 				$speaker_image_id,
@@ -155,7 +155,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 							false,
 							array(
 								'class' => 'sb2-speaker__company-logo',
-								'alt' => 'Logo of ' . $company ) );
+								'alt' => $company . ' logo' ) );
 						} else {
 							?>
 							<div class="sb2-speaker__company-container">
