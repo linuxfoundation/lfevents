@@ -6,7 +6,6 @@
  * @since 0.3.0
  */
 
-global $wp;
 global $post;
 $speaker_id      = get_the_ID();
 $speaker_slug    = $post->post_name;

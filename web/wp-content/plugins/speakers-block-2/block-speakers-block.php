@@ -44,7 +44,12 @@ function lf_speakers_block_2_callback( $attributes ) {
 		$attributes['speakers']
 	);
 
-	$sched_event_id = $attributes['schedEventID'] ?? '';
+	global $post;
+	$sched_event_id = null;
+	if (function_exists('lfe_get_event_parent_id')) {
+		$parent_id = lfe_get_event_parent_id( $post );
+		$sched_event_id = get_post_meta( $parent_id, 'lfes_sched_event_id', true );
+	}
 
 	$speakers_query = new WP_Query(
 		array(

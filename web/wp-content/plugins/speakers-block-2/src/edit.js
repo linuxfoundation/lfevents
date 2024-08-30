@@ -1,12 +1,6 @@
 import {
 	useBlockProps,
-	InspectorControls,
 } from '@wordpress/block-editor';
-
-import {
-	PanelBody,
-	TextControl,
-} from '@wordpress/components';
 
 const { apiFetch } = wp;
 
@@ -93,7 +87,7 @@ const loadOptions = debounce(
 );
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { speakers, schedEventID } = attributes;
+	const { speakers } = attributes;
 
 	const [selected, setSelected] = useState(speakers);
 
@@ -124,17 +118,6 @@ export default function Edit( { attributes, setAttributes } ) {
 	}, [setSelected]);
 
 	return [
-		<InspectorControls key="speakers-block-panel">
-			<PanelBody title="Settings" initialOpen={ true }>
-				<TextControl
-					label="Sched Event ID"
-					value={ schedEventID }
-					onChange={ ( value ) =>
-						setAttributes( { schedEventID: value } )
-					}
-				/>
-			</PanelBody>
-		</InspectorControls>,
 		<div { ...useBlockProps() } key="speakers-block-edit">
 			<p>
 				<strong>Featured Speakers (each opens with modal):</strong>
