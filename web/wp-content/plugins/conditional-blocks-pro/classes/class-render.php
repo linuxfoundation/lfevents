@@ -28,6 +28,12 @@ class Conditional_Blocks_Render_Block {
 	private $logged_results = array();
 
 	/**
+	 * Set the detected geolocation country.
+	 * @var 
+	 */
+	private $detected_geolocation_country = false;
+
+	/**
 	 * Fire off the render block functions.
 	 */
 	public function init() {
@@ -55,6 +61,7 @@ class Conditional_Blocks_Render_Block {
 		add_filter( 'conditional_blocks_register_check_urlPaths', array( $this, 'urlPaths' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_postIds', array( $this, 'postIds' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_phpLogic', array( $this, 'phpLogic' ), 10, 2 );
+		add_filter( 'conditional_blocks_register_check_geolocationCountry', array( $this, 'geolocationCountry' ), 10, 2 );
 		// WooCommerce.
 		add_filter( 'conditional_blocks_register_check_wcCartTotal', array( $this, 'wcCartTotal' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_wcCustomerTotalSpent', array( $this, 'wcCustomerTotalSpent' ), 10, 2 );
@@ -110,7 +117,7 @@ class Conditional_Blocks_Render_Block {
 	/**
 	 * Get the condition sets from the block attributes with backwards compat.
 	 *
-	 * @param object $block object.
+	 * @param {object|array} $block object.
 	 * @return array $condition_sets sets of conditions.
 	 */
 	public function get_condition_sets_from_block( $block ) {
@@ -140,7 +147,7 @@ class Conditional_Blocks_Render_Block {
 	 * Check if any of the Condition Sets passes all criteria.
 	 *
 	 * @param array $condition_sets an array of sets containing their own conditions.
-	 * @return boolean true if there is atleast one valid set of conditions.
+	 * @return boolean true if there is at least one valid set of conditions.
 	 */
 	public function has_valid_sets( $condition_sets ) {
 
@@ -190,7 +197,7 @@ class Conditional_Blocks_Render_Block {
 			}
 
 			// responsiveScreenSizes will modify the existing html. Handle this early.
-			if ( $type === 'responsiveScreenSizes' && is_array( $condition['showOn'] ) ) {
+			if ( $type === 'responsiveScreenSizes' && ! empty( $condition['showOn'] ) && is_array( $condition['showOn'] ) ) {
 				$this->current_block_content = $this->apply_responsive_screensizes( $this->current_block_content, $condition['showOn'] );
 
 				// Early for modified markup.
@@ -232,6 +239,12 @@ class Conditional_Blocks_Render_Block {
 
 		// Got it.
 		$this->logged_results[] = $results;
+
+
+		// If developer mode send to Query Monitor.
+		if ( get_option( 'conditional_blocks_developer_mode', false ) ) {
+			do_action( 'qm/debug', $results );
+		}
 
 		return $should_render;
 	}
@@ -434,7 +447,7 @@ class Conditional_Blocks_Render_Block {
 			return $should_render;
 		}
 
-		$current_post_id = get_queried_object_id();
+		$current_post_id = cb_get_target_post_id();
 
 		// We are checking terms, otherwise we are checking for 'any'.
 		if ( ! empty( $condition['terms'] ) ) {
@@ -714,27 +727,29 @@ class Conditional_Blocks_Render_Block {
 	 * @return bool $should_render.
 	 */
 	public function queryStrings( $should_render, $condition ) {
-		$allowed_query_strings = $condition['allowedStrings'] ?? false;
-		$current_query_string = $_SERVER['QUERY_STRING'] ?? false;
+		$pattern_input = $condition['allowedStrings'] ?? '';
+		$current_query_string = $_SERVER['QUERY_STRING'] ?? ''; // Default to empty.
 		$block_action = $condition['blockAction'] ?? 'showBlock';
 		$requirement = $condition['requirement'] ?? 'present'; // or notPresent.
 
-		if ( ! $allowed_query_strings || ! $current_query_string ) {
+		if ( empty( $pattern_input ) ) {
 			return $should_render;
 		}
 
-		$query_strings_array = explode( "\n", $allowed_query_strings );
+		$pattern_strings = explode( "\n", $pattern_input );
 
 		$detected = 0;
 
-		foreach ( $query_strings_array as $query_pattern ) {
+		foreach ( $pattern_strings as $query_pattern ) {
 
 			$cleaned_query_pattern = ltrim( $query_pattern, '!' );
-			$is_present = strpos( $current_query_string, $cleaned_query_pattern ) !== false;
+			$cleaned_query_pattern = preg_replace( '/\s+/', '', $cleaned_query_pattern );
 
 			if ( empty( $cleaned_query_pattern ) ) {
 				continue;
 			}
+
+			$is_present = strpos( $current_query_string, $cleaned_query_pattern ) !== false;
 
 			if ( $is_present ) {
 				$detected++;
@@ -750,7 +765,6 @@ class Conditional_Blocks_Render_Block {
 		}
 
 		return $should_render;
-
 	}
 
 
@@ -767,7 +781,7 @@ class Conditional_Blocks_Render_Block {
 		$meta_operator = ! empty( $condition['metaOperator'] ) ? $condition['metaOperator'] : false;
 		$meta_value = ! empty( $condition['metaValue'] ) ? $condition['metaValue'] : '';
 
-		if ( $meta_key && $meta_operator && $meta_value ) {
+		if ( $meta_key && $meta_operator ) {
 
 			if ( $this->has_required_meta( 'user', $meta_key, $meta_operator, $meta_value ) ) {
 				$should_render = true;
@@ -952,28 +966,27 @@ class Conditional_Blocks_Render_Block {
 	 */
 	public function postIds( $should_render, $condition ) {
 
-		$post_ids = ! empty( $condition['postIds'] ) ? $condition['postIds'] : false;
-
-		$current_post_id = get_the_ID();
-
-		if ( ! empty( $post_ids ) && ! empty( $current_post_id ) ) {
-
-			// Default to "block is only allowed on these post ids".
-			$is_post_ids_allowed = empty( $condition['equal'] ) || $condition['equal'] === 'equal' ? true : false;
-
-			// Make line breaks into an array, make sure they are integers.
-			$post_ids = array_map( 'intval', explode( "\n", $post_ids ) );
-
-			if ( $is_post_ids_allowed ) {
-				if ( in_array( (int) $current_post_id, $post_ids, true ) ) {
-					$should_render = true;
-				}
-			} else {
-				if ( ! in_array( (int) $current_post_id, $post_ids, true ) ) {
-					$should_render = true;
-				}
-			}
+		if ( empty( $condition['postIds'] ) ) {
+			return $should_render;
 		}
+
+		// Get the current post ID.
+		$current_post_id = cb_get_target_post_id();
+
+		if ( empty( $current_post_id ) ) {
+			return $should_render;
+		}
+
+		// Determine if the block is only allowed on these post IDs
+		$is_post_ids_allowed = empty( $condition['equal'] ) || $condition['equal'] === 'equal';
+
+		// Convert the post IDs string into an array of integers
+		$post_ids_array = array_map( 'intval', explode( "\n", $condition['postIds'] ) );
+
+		// Check if the current post ID should render the block
+		$should_render = $is_post_ids_allowed
+			? in_array( $current_post_id, $post_ids_array, true )
+			: ! in_array( $current_post_id, $post_ids_array, true );
 
 		return $should_render;
 	}
@@ -986,77 +999,152 @@ class Conditional_Blocks_Render_Block {
 	 * @return bool $should_render.
 	 */
 	public function phpLogic( $should_render, $condition ) {
+		// Check if phpLogic is set and not empty in the condition array
+		if ( empty( $condition['phpLogic'] ) ) {
+			return $should_render;
+		}
 
-		$raw_functions = ! empty( $condition['phpLogic'] ) ? $condition['phpLogic'] : false;
+		// Get the raw functions from textarea.
+		$raw_functions = $condition['phpLogic'];
 
-		if ( $raw_functions ) {
+		// Split the string into an array of functions
+		$array_of_functions = explode( "\n", $raw_functions );
 
-			$raw_functions = ! empty( $condition['phpLogic'] ) ? $condition['phpLogic'] : false;
+		// Define the list of allowed functions
+		$allowed_functions = [ 
+			'is_single',
+			'get_post_type',
+			'has_term',
+			'in_category',
+			'is_category',
+			'get_option',
+			'has_tag',
+			'is_tag',
+			'is_tax',
+			'is_page',
+			'get_post_meta',
+			'has_post_thumbnail',
+			'has_excerpt',
+			'is_sticky',
+		];
 
-			$array_of_functions = explode( "\n", $raw_functions );
+		// Allow filtering of allowed functions
+		$allowed_functions = apply_filters( 'conditional_blocks_filter_php_logic_functions', $allowed_functions );
 
-			$allowed_functions = array(
-				'is_single',
-				'has_term',
-				'in_category',
-				'is_category',
-				'get_option',
-				'has_tag',
-				'is_tag',
-				'is_tax',
-				'is_page',
-				'get_post_meta',
-				'has_post_thumbnail',
-				'has_excerpt',
-				'is_sticky',
+		// Initialize a counter for passed functions
+		$passed_functions = 0;
+
+		foreach ( $array_of_functions as $whole_function ) {
+			// Prevent the use of dangerous functions
+			if ( strpos( $whole_function, 'eval' ) !== false || strpos( $whole_function, 'call_user_func' ) !== false ) {
+				continue;
+			}
+
+			// Extract the function name
+			$function_name = strtok( $whole_function, '(' );
+			$function_name = ltrim( $function_name, '!' );
+
+			// Check if the function is allowed and callable
+			if ( ! in_array( $function_name, $allowed_functions, true ) || ! is_callable( $function_name ) ) {
+				continue;
+			}
+
+			// Extract the parameters from the function call
+			preg_match( '/(?<=\()(.+)(?=\))/is', $whole_function, $match );
+			$params_string = $match[1] ?? ''; // Use an empty string if no parameters are found
+			$params_to_use = explode( ',', $params_string );
+
+			// Trim and sanitize parameters
+			$params_to_use = array_map( 'trim', $params_to_use );
+			$params_to_use = array_map( function ($param) {
+				return trim( $param, ' \'"' );
+			}, $params_to_use );
+
+			// Determine the expected result (negation indicates false)
+			$expected_bool = substr( $whole_function, 0, 1 ) === '!' ? false : true;
+
+			// Call the function with the parameters and get the result
+			$function_result = call_user_func_array( $function_name, $params_to_use );
+
+			// If the result matches the expected value, increment the counter
+			if ( $function_result === $expected_bool ) {
+				$passed_functions++;
+			}
+		}
+
+		// Check if all functions passed
+		if ( $passed_functions === count( $array_of_functions ) ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 *  Check Geolocation - Country
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function geolocationCountry( $should_render, $condition ) {
+		// Check if the country has been selected.
+		if ( empty( $condition['country']['value'] ) ) {
+			return $should_render;
+		}
+
+		$has_match = false;
+		$required_country = $condition['country']['value'];
+
+		// Check if we've already detected the country
+		if ( $this->detected_geolocation_country !== false ) {
+			$user_country = $this->detected_geolocation_country;
+		} else {
+			$user_ip = conditional_blocks_get_ip_address();
+
+			// Likely localhost or other non-public IPs. - prevent API call.
+			if ( empty( $user_ip ) ) {
+				return $should_render;
+			}
+
+			$api_token = get_option( 'conditional_blocks_ipinfo_api_key', false );
+
+			if ( empty( $api_token ) ) {
+				return $should_render;
+			}
+
+			$args = array(
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $api_token,
+				),
 			);
 
-			$allowed_functions = apply_filters( 'conditional_blocks_filter_php_logic_functions', $allowed_functions );
+			$response = wp_remote_get( "https://ipinfo.io/{$user_ip}", $args );
 
-			$passed_functions = 0;
-
-			foreach ( $array_of_functions as $whole_function ) {
-
-				// Make sure there isn't an eval or call_user_func anywhere. Fucntion or params to prevent attacks.
-				if ( strpos( $whole_function, 'eval' ) !== false || strpos( $whole_function, 'call_user_func' ) !== false ) {
-					continue;
-				}
-
-				$function_name = strtok( $whole_function, '(' );
-				$function_name = ltrim( $function_name, '!' );
-
-				if ( ! in_array( $function_name, $allowed_functions, true ) || ! is_callable( $function_name ) ) {
-					continue;
-				}
-
-				// Find the params.
-				preg_match( '/(?<=\()(.+)(?=\))/is', $whole_function, $match );
-				// Params as string. eg "100, 'single'".
-				$params_to_use = isset( $match[1] ) && ! empty( $match[1] ) ? $match[1] : null;
-
-				$params_to_use = explode( ',', $params_to_use );
-
-				$params_to_use = array_map(
-					function ($param) {
-						return trim( $param, ' \'"' );
-					},
-					$params_to_use
-				);
-
-				$expected_bool = substr( $whole_function, 0, 1 ) === '!' ? false : true;
-
-				$function_result = call_user_func_array( $function_name, $params_to_use );
-
-				// Make sure we have the expected result.
-				if ( $function_result === $expected_bool ) {
-					$passed_functions++;
-				}
+			if ( is_wp_error( $response ) ) {
+				return $should_render;
 			}
 
-			// We must pass all functions for the block to show.
-			if ( (int) $passed_functions === (int) count( $array_of_functions ) ) {
-				$should_render = true;
+			$body = wp_remote_retrieve_body( $response );
+			$data = json_decode( $body, true );
+
+			if ( ! empty( $data['country'] ) ) {
+				$user_country = $data['country'];
+				// Store the detected country for additional blocks.
+				$this->detected_geolocation_country = $user_country;
+			} else {
+				return $should_render;
 			}
+		}
+
+		$has_match = $user_country === $required_country ? true : false;
+
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
+
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
 		}
 
 		return $should_render;
@@ -1222,7 +1310,7 @@ class Conditional_Blocks_Render_Block {
 		}
 
 		// All products need to be in cart, otherwise any of the products.
-		$requires_all_products = ! empty( $condition['requirement'] ) && $condition['requirement'] === 'all' ? 'all' : 'any'; // Defualt to any for backwards comapt.
+		$requires_all_products = ! empty( $condition['requirement'] ) && $condition['requirement'] === 'all' ? 'all' : 'any'; // Default to any for backwards comapt.
 
 		// Matches the condition requirements.
 		$has_match = false;
@@ -1230,7 +1318,7 @@ class Conditional_Blocks_Render_Block {
 		if ( $requires_all_products === 'all' ) {
 			$has_match = ! empty( $matched_product_ids ) && ! array_diff( $selected_product_ids, $matched_product_ids ); // If there's no difference between the selected and found products.
 		} else {
-			$has_match = count( $matched_product_ids ) >= 1; // Atleast one of the selected products ids was found.
+			$has_match = count( $matched_product_ids ) >= 1; // At least one of the selected products ids was found.
 		}
 
 		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
@@ -1383,25 +1471,24 @@ class Conditional_Blocks_Render_Block {
 
 	/**
 	 * Check Post meta condition.
-	 *
-	 * @param string $meta_key array containing condition name and 'yes'/'no' if blocks should be rendered.
-	 * @param string $meta_operator Block block conditions array.
-	 * @param string $meta_value the whole block object.
-	 * @return bool if current post has the required meta.
 	 */
 	public function has_required_meta( $meta_type, $meta_key, $meta_operator, $meta_value ) {
 
-		$post_id = get_the_ID();
-
-		if ( empty( $post_id ) ) {
-			return false;
-		}
-
 		if ( $meta_type === 'post' ) {
+
+			$post_id = cb_get_target_post_id();
+
+			if ( empty( $post_id ) ) {
+				return false;
+			}
+
 			$selected_meta = get_post_meta( $post_id, $meta_key, true );
+
 		} elseif ( $meta_type === 'user' ) {
 			$selected_meta = get_user_meta( get_current_user_id(), $meta_key, true );
 		}
+
+		$selected_meta = cb_maybe_flatten_meta( $selected_meta );
 
 		if ( '===' === $meta_operator ) {
 			if ( $selected_meta === $meta_value ) {
@@ -1467,12 +1554,12 @@ class Conditional_Blocks_Render_Block {
 		$required_tax = ! empty( $condition['taxonomy']['value'] ) ? $condition['taxonomy']['value'] : false;
 		$required_include_child_terms = ! empty( $condition['includeChildTerms'] ) ? $condition['includeChildTerms'] : false;
 
-		// At minimum we need to the posttype check.
+		// At minimum we need to the post type check.
 		if ( ! $required_post_type ) {
 			return true; // Allow render.
 		}
 
-		// Hanlde post type archive pages only.
+		// Handle post type archive pages only.
 		if ( ! $required_term_ids && ! $required_tax ) {
 			// Check the post type - Multiple post type can have the same taxonomy.
 			if ( $required_post_type && is_post_type_archive( $required_post_type ) ) {
@@ -1482,7 +1569,7 @@ class Conditional_Blocks_Render_Block {
 			}
 		}
 
-		// Check the built-in taxonomies and custom taxomonies with is_tax.
+		// Check the built-in taxonomies and custom taxonomies with is_tax.
 		if ( $required_tax === 'category' ) {
 			if ( ! is_category() ) {
 				return false;
@@ -1525,7 +1612,6 @@ class Conditional_Blocks_Render_Block {
 
 				if ( ! empty( $children ) && in_array( $current_term_id, $children, true ) ) {
 					return true;
-					break;
 				}
 			}
 		}

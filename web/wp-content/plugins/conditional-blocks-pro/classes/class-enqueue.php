@@ -74,37 +74,45 @@ class Conditional_Blocks_Enqueue {
 
 		if ( method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() ) {
 
-			// Locaize data, we are on the block editor.
+			// Localize data, we are on the block editor.
 			$localized_data = array(
+				'plugin_url' => plugins_url( '', __DIR__ ),
 				'screensizes' => $this->responsive_screensizes(),
-				'registeredCategories' => apply_filters( 'conditional_blocks_register_condition_categories', array() ),
-				'registeredTypes' => apply_filters( 'conditional_blocks_register_condition_types', array() ),
-				'excludedBlockTypes' => apply_filters( 'conditional_blocks_excluded_block_types', array() ), // Exclude specific blocks.
-				'visibleInEditor' => apply_filters( 'conditional_blocks_visible_in_editor', true ), // Change if conditional blocks is visible in the editor.
+				'ipinfo_api_key' => get_option( 'conditional_blocks_ipinfo_api_key', false ),
+				'geolocation_countries' => conditional_blocks_get_countries(),
+				'registered_categories' => apply_filters( 'conditional_blocks_register_condition_categories', array() ),
+				'registered_conditions_types' => apply_filters( 'conditional_blocks_register_condition_types', array() ),
+				'excluded_block_types' => apply_filters( 'conditional_blocks_excluded_block_types', array() ), // Exclude specific blocks.
+				'visible_in_editor' => apply_filters( 'conditional_blocks_visible_in_editor', true ), // Change if conditional blocks is visible in the editor.
+				'developer_mode' => get_option( 'conditional_blocks_developer_mode', false ),
+				'open_from_toolbar' => get_option( 'conditional_blocks_open_from_toolbar', false ),
+				'only_installed_integrations' => get_option( 'conditional_blocks_only_installed_integrations', false ),
 			);
 
-						$localized_data['isActive'] = ! empty( get_site_option( 'conditional-blocks-pro_license_key', false ) ) ? true : false;
-			$localized_data['isPro'] = true;
-			$localized_data['pluginsPage'] = admin_url( 'plugins.php' );
+						$localized_data['is_active'] = ! empty( get_site_option( 'conditional-blocks-pro_license_key', false ) ) ? true : false;
+			$localized_data['is_pro'] = true;
+			$localized_data['plugins_page_url'] = admin_url( 'plugins.php' );
 			$localized_data['presets'] = $this->get_presets();
 			$localized_data['roles'] = $this->get_user_roles();
-			$localized_data['wcExists'] = class_exists( 'WooCommerce' );
+			$localized_data['is_wc_active'] = class_exists( 'WooCommerce' );
 			if ( class_exists( 'WC_Countries' ) && class_exists( 'WC_Geolocation' ) ) {
 				$wc_countries = new WC_Countries();
 				$wc_countries->get_countries();
-				$localized_data['wcCountries'] = $wc_countries->countries;
+				$localized_data['wc_countries'] = $wc_countries->countries;
 
 				$geo = new WC_Geolocation(); // Get WC_Geolocation instance object.
-				$localized_data['WcGeoIp'] = $geo->get_ip_address(); // Get user IP.
-				$localized_data['wcGeoIpLocation'] = $geo->geolocate_ip( $geo->get_ip_address() );
+				$localized_data['wc_geo_ip'] = $geo->get_ip_address(); // Get user IP.
+				$localized_data['wc_geo_ip_location'] = $geo->geolocate_ip( $geo->get_ip_address() );
 
 			} else {
-				$localized_data['wcCountries'] = false;
-				$localized_data['wcGeoIpLocation'] = false;
-				$localized_data['WcGeoIp'] = false;
-
+				$localized_data['wc_countries'] = false;
+				$localized_data['wc_geo_ip_location'] = false;
+				$localized_data['wc_geo_ip'] = false;
 			}
-			$localized_data['phpLogicFunctions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
+			$localized_data['php_logic_functions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
+			$localized_data['geolocation_countries'] = conditional_blocks_get_countries();
+			$localized_data['ipinfo_api_key'] = get_option( 'conditional_blocks_ipinfo_api_key', false );
+			$localized_data['has_valid_ip_address'] = conditional_blocks_get_ip_address() ? true : false;
 			
 			wp_localize_script( 'conditional-blocks-editor-js', 'conditionalblocks', $localized_data );
 

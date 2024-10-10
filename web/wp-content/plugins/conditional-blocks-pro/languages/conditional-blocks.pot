@@ -1,21 +1,21 @@
-# Copyright (C) 2023 Conditional Blocks
+# Copyright (C) 2024 Conditional Blocks
 # This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Conditional Blocks + Pro  3.0.4\n"
+"Project-Id-Version: Conditional Blocks Pro 3.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/conditional-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-08-12T03:22:17+00:00\n"
+"POT-Creation-Date: 2024-02-15T09:10:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: conditional-blocks\n"
 
 #. Plugin Name of the plugin
-msgid "Conditional Blocks"
+msgid "Conditional Blocks Pro"
 msgstr ""
 
 #. Description of the plugin
@@ -23,6 +23,8 @@ msgid "Conditionally change the visibility of WordPress Blocks for any reason."
 msgstr ""
 
 #. Author of the plugin
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:14747
 msgid "Conditional Blocks"
 msgstr ""
 
@@ -30,12 +32,298 @@ msgstr ""
 msgid "https://conditionalblocks.com/"
 msgstr ""
 
-#: conditional-blocks-pro.php:127
+#: conditional-blocks-pro.php:132
 msgid "Thank you for purchasing Conditional Blocks Pro! Activate your license to get started, then add conditions inside the block editor."
 msgstr ""
 
-#: conditional-blocks-pro.php:130
+#: conditional-blocks-pro.php:135
 msgid "See documentation"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:18
+msgid "Advanced Custom Fields (ACF)"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:29
+msgid "ACF Field Value"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:40
+msgid "ACF Field"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:41
+msgid "Select a ACF Field from a Field Group"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:42
+#: integrations/paid-memberships-pro.php:69
+msgid "Select a field"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:50
+#: integrations/paid-memberships-pro.php:78
+msgid "Operator"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:51
+#: integrations/paid-memberships-pro.php:79
+msgid "Select a operator used to check the value"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:54
+#: integrations/paid-memberships-pro.php:82
+msgid "Has any value"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:55
+#: integrations/paid-memberships-pro.php:83
+msgid "No value"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:56
+#: integrations/paid-memberships-pro.php:84
+msgid "Equal to"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:57
+#: integrations/paid-memberships-pro.php:85
+msgid "Not equal to"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:58
+#: integrations/paid-memberships-pro.php:86
+msgid "Contains"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:59
+#: integrations/paid-memberships-pro.php:87
+msgid "Does not contain"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:60
+#: integrations/paid-memberships-pro.php:88
+msgid "Greater than"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:61
+#: integrations/easy-digital-downloads.php:54
+#: integrations/paid-memberships-pro.php:89
+msgid "Less than"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:62
+#: integrations/paid-memberships-pro.php:90
+msgid "Greater than or equal to"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:63
+#: integrations/paid-memberships-pro.php:91
+msgid "Less than or equal to"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:73
+#: integrations/paid-memberships-pro.php:101
+msgid "Field Value"
+msgstr ""
+
+#: integrations/advanced-custom-fields.php:74
+#: integrations/paid-memberships-pro.php:102
+msgid "Set the value to compare against - case sensitive."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:33
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11828
+msgid "Cart Value"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:37
+msgid "Trigger the Block Action depending on the current customer cart value in Easy Digital Downloads."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:44
+msgid "More than"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:46
+#: integrations/easy-digital-downloads.php:56
+msgid "Any Value"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:47
+#: integrations/easy-digital-downloads.php:57
+msgid "Leave blank for any value."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:69
+msgid "Product in Cart"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:73
+msgid "Check if selected product is found in the customers cart."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:80
+msgid "Products"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:81
+msgid "Select a product to check for in the cart."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:82
+msgid "Select Product"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:96
+msgid "Product Category in Cart"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:100
+msgid "Check if selected product category are found in the customers cart."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:107
+msgid "Product Category"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:108
+msgid "Select a product category to check for in the cart."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:109
+msgid "Select Product Category"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:121
+msgid "Recurring Subscription"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:125
+msgid "Check if the current user has a recurring subscription, optionally check for a selected product or status. This condition requires the EDD Recurring Payments extension."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:132
+#: integrations/easy-digital-downloads.php:198
+msgid "Product"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:133
+msgid "Select product to check for a specific subscription, or leave blank for any."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:134
+msgid "Select Product Subscription (Leave blank for any)"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:141
+msgid "Subscription Status"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:142
+msgid "Select one or multiple statuses. Leave blank for any."
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:143
+msgid "Select Subscription Status"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:149
+msgid "Active"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:153
+msgid "Pending"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:157
+msgid "Cancelled"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:161
+msgid "Expired"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:165
+msgid "Trialling"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:169
+msgid "Failing"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:173
+msgid "Completed"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:187
+msgid "Product Purchased"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:191
+msgid "Check if the current user has purchased a specific product, or any product"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:199
+msgid "Select a product from Easy Digital Downloads"
+msgstr ""
+
+#: integrations/easy-digital-downloads.php:200
+msgid "Select Product (Leave blank for any)"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:19
+msgid "Paid Memberships Pro (PMPro)"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:30
+#: integrations/paid-memberships-pro.php:41
+msgid "Membership Level"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:34
+msgid "Check if the current user hold a specific membership level."
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:42
+#: integrations/paid-memberships-pro.php:43
+msgid "Select a level"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:56
+#: integrations/paid-memberships-pro.php:67
+msgid "User Field"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:60
+msgid "Check a user field value from Paid Memberships Pro."
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:68
+msgid "Select a user field from PMPro"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:270
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11761
+msgid "General"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:273
+msgid "No Membership"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:277
+msgid "Any Membership"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:281
+msgid "Expired Membership"
+msgstr ""
+
+#: integrations/paid-memberships-pro.php:301
+msgid "Membership Levels"
 msgstr ""
 
 #: library/puri-sl/class-puri-sl-ui.php:97
@@ -165,709 +453,957 @@ msgid "Need help?"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9199
 msgid "Remove"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9200
 msgid "Are you sure? This cannot be undone."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9201
 msgid "Yes, delete"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9202
 msgid "Cancel"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9271
 msgid "Need help setting up?"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9273
 msgid "Go to docs"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Pro"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "General"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Lockdown (Hide block from everyone)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Responsive (Screens sizes)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User Logged In"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User Logged Out"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User Roles"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User Meta Field"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Posts & CPT"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post Types"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post Taxonomy & Terms"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Posts (Includes CPT)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post Meta (Custom Fields)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post IDs"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Archive"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Server Request"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Query Strings (URL Variables)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Domain Referrers"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "URL Paths"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User Agents (Devices & Browsers)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Cookies"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Time"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Date Schedule - Range"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Date Schedule - Recurring"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Advanced"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "PHP Logic"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "WooCommerce"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Cart Value"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Cart Products"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Cart Product Categories"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Customer Total Spent"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Customer Recent Order"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Geo Location"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Preset Manager"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Presets"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Condition:"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Choose a condition"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Block Action"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "If this condition is true, then:"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Block should be visible"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Block should be hidden"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The selected block will only be visible to users who are logged into the site."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The selected block will only be visible to users who aren't logged into the site."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Presets are conditions that can be shared by multiple blocks. You can edit presets from the Preset Manager."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Requirement for the block to be visible."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "All presets must be sucessful - (AND Logic)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Atleast one preset must be sucessful - (OR logic)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select one or multiple user roles. The current user must have any of selected roles to trigger the block action."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Display the selected block based on the User Metadata (Fields)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "User Meta Key"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Use meta key."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select operator"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post Meta Value"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The expected value of your post meta data."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action if one of the selected Post Types is being viewed."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select Post Type"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search Post Types.."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action if the current post matches the selected posts."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search Posts.."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action if the current post has the selected taxonomy and (optionally) terms."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search Taxonomies.."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search Terms.. (optional)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action when the current page is an archive. You can optionally select a specific archive."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search Terms.."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Child Archive Pages"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Automatically include child terms of selected terms."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the block action when current visitor matches any of the selected devices and browsers."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Selected Cookies"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Show if cookies are present"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Hide if cookies are not present"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Display the selected block if the current post meta (Custom Fields) matches the selection."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post Meta Key"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Use custom meta key."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Each post/page in WordPress has a unique ID. You can use the ID to make sure the block on display on that post."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Show the block on post/page:"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "IDs equal below IDs"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "IDs not equal to below IDs"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Post IDs (One per line)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the block action based on the below URL paths."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "URL Paths (One per line)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "What is the requirement for the block to visible?"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The current URL path should match any of the above paths"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The current URL path should not match any above paths"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Read more about this condition in the"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "PHP Logic documentation."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Add valid PHP conditional tags. The functions must return TRUE for the selected block to be visible. This is a developer feature."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The selected block will automatically hide on screens sizes that aren't selected. You can edit screen widths from the settings tab."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Show on Mobile screens"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Show on Tablet screens"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Show on Desktop screens"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Date conditions use the timezone from your WordPress time settings. The selected block will only be visible after the start date. You can optionally select an end date."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Start Date"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Choose end date?"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "End Date"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Choose the days and time of day that the block will be visible."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Date conditions use the timezone from your WordPress time settings"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Recurring Time"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Recurring Days"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Monday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Tuesday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Wednesday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Thursday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Friday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Saturday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Sunday"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the block action when visitors who have been directed to your page from an another domain. This condition requires the third-party server to pass the referring information."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Domain referrers (comma seperate for multiple)"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Query Strings"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action if there is query string on the current URL, and it any of the query strings match."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Query String Patterns"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "For each line, input one pattern. Patterns are matched if partially found. Include longer patterns to be specific."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Requirement"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Patterns should be present in the URL"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Patterns should NOT be present in the URL"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Detect if the current visitor is from a specific country based on their IP address."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Display the selected block based on the total value of the current customer cart within WooCommerce. The cart value has to be within the set range for the block to be visible."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Configure Range"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Leave blank for ANY value"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Any value"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The selected block will be visible if the total money spent by the customer is between the set amounts."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action any of the selected products are in the customer cart."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select Products"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search products.."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Atleast one product should be matched in cart"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "All products should matched in cart"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action if products in the cart belong to the selected products categories."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Select Product Categories"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Search categories.."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Trigger the Block Action if the customer has placed an WooCommerce order within the set amount of time."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Configure"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "The amount of time to check for the recent order"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "7"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Time format"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Minutes"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Hours"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Days"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "AND"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
-msgid "Add Condition"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9789
 msgid "Current Block"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Condition Builder"
+#: assets/js/conditional-blocks-editor.js:9429
+msgid "Manage Conditions"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9461
 msgid "Remove Set"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9471
+#: assets/js/conditional-blocks-editor.js:9488
 msgid "OR"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9488
 msgid "New Condition Set"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9508
+#: assets/js/conditional-blocks-editor.js:9654
+#: assets/js/conditional-blocks-editor.js:9745
+#: assets/js/conditional-blocks-editor.js:9758
 msgid "Developer Mode"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9510
 msgid "Developer mode can be toggled from the settings. All blocks and conditions in Developer Mode are created normally. It's safe to use."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9531
+#: assets/js/conditional-blocks-editor.js:9795
+#: assets/js/conditional-blocks-editor.js:11887
+msgid "Preset Manager"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9534
 msgid "Presets are groups of conditions that can be applied across multiple blocks. Presets allow you to apply frequently used groups of conditions to blocks in one place, rather than having to edit each individual block on the site."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9540
 msgid "Create and edit your presets here. Presets can then be applied to the selected block using the Condition Builder under the Current Block tab."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9550
 msgid "Saving changes.."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9555
 msgid "Changes to presets save instantly to all blocks with that preset enabled."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Remove Preset"
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9581
+#: assets/js/conditional-blocks-editor.js:9626
 msgid "Preset Name"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Give the preset a recognizable name."
-msgstr ""
-
-#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9589
+#: assets/js/conditional-blocks-editor.js:9632
 msgid "My Preset.."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9604
+msgid "Remove Preset"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9627
+msgid "Give the preset a recognizable name."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9644
 msgid "Create Preset"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9565
 msgid "Get full control with Conditional Blocks Pro"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9567
 msgid "Learn more"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9655
 msgid "All blocks and conditions in Developer Mode are created normally. It's safe to use."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9801
 msgid "Settings"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9672
 msgid "Responsive Blocks"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9673
 msgid "Change the breakpoints of blocks with the Responsive (Screen sizes) condition to match your theme's breakpoints if needed."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9677
 msgid "Desktop Minimum (px)"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9688
 msgid "Tablet Maximum (px)"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9699
 msgid "Tablet Minimum (px)"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9710
 msgid "Mobile Maximum (px)"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Activate Developer Mode manually or by using a"
+#: assets/js/conditional-blocks-editor.js:9720
+msgid "Additional Settings"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid " domain. Developer Mode provides extra information to help development and debugging."
+#: assets/js/conditional-blocks-editor.js:9721
+msgid "Please refresh the browser/editor after changer any of these settings.."
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Configure different visibility conditions to control how the block appears to viewers."
+#: assets/js/conditional-blocks-editor.js:9725
+msgid "Open Conditions Builder from Toolbar"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9726
+msgid "Shows a button to open Conditions Builder from the block toolbar in addition to the sidebar."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9735
+msgid "Only show installed integration conditions"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9736
+msgid "Enable this to show conditions from installed plugins only."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9746
+msgid "Show extra information to help development and debugging."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9910
+msgid "Condition"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:9918
+msgid "Choose a condition"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10156
+msgid "The selected block will only be visible to users who are logged into the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10157
+msgid "The selected block will only be visible to users who aren't logged into the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10161
+msgid "Presets are conditions that can be shared by multiple blocks. You can edit presets from the Preset Manager."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10178
+msgid "Presets Action"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10181
+msgid "Requirement for the block to be visible."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10184
+msgid "All presets must be successful - (AND Logic)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10185
+msgid "At least one preset must be successful - (OR logic)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10200
+#: assets/js/conditional-blocks-editor.js:11776
+msgid "User Roles"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10203
+msgid "Select one or multiple user roles. The current user must have any of selected roles to trigger the block action."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10227
+msgid "Display the selected block based on the User Metadata (Fields)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10230
+msgid "User Meta Key"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10232
+msgid "Use meta key."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10248
+#: assets/js/conditional-blocks-editor.js:10629
+msgid "Select operator"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10276
+#: assets/js/conditional-blocks-editor.js:10657
+msgid "Post Meta Value"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10278
+#: assets/js/conditional-blocks-editor.js:10659
+msgid "The expected value of your post meta data."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10296
+msgid "Trigger the Block Action if one of the selected Post Types is being viewed."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10298
+#: assets/js/conditional-blocks-editor.js:10339
+#: assets/js/conditional-blocks-editor.js:10380
+#: assets/js/conditional-blocks-editor.js:10459
+msgid "Select Post Type"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10311
+#: assets/js/conditional-blocks-editor.js:10351
+#: assets/js/conditional-blocks-editor.js:10394
+#: assets/js/conditional-blocks-editor.js:10473
+msgid "Search Post Types.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10314
+#: assets/js/conditional-blocks-editor.js:10590
+#: assets/js/conditional-blocks-editor.js:10734
+#: assets/js/conditional-blocks-editor.js:11491
+msgid "Block Action"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10317
+msgid "If this condition is true, then:"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10320
+msgid "Block should be visible"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10321
+msgid "Block should be hidden"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10337
+msgid "Trigger the Block Action if the current post matches the selected posts."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10368
+msgid "Search Posts.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10378
+msgid "Trigger the Block Action if the current post has the selected taxonomy and (optionally) terms."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10411
+#: assets/js/conditional-blocks-editor.js:10490
+msgid "Search Taxonomies.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10429
+msgid "Search Terms.. (optional)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10438
+msgid "Trigger the Block Action when the current page is an archive. You can optionally select a specific archive."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10508
+msgid "Search Terms.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10515
+msgid "Child Archive Pages"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10517
+msgid "Automatically include child terms of selected terms."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10538
+msgid "Trigger the block action when current visitor matches any of the selected devices and browsers."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10576
+msgid "Selected Cookies"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10593
+msgid "Show if cookies are present"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10594
+msgid "Hide if cookies are not present"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10608
+msgid "Display the selected block if the current post meta (Custom Fields) matches the selection."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10611
+msgid "Post Meta Key"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10613
+msgid "Use custom meta key."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10677
+msgid "Each post/page in WordPress has a unique ID. You can use the ID to make sure the block on display on that post."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10679
+msgid "Show the block on post/page:"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10682
+msgid "IDs equal below IDs"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10683
+msgid "IDs not equal to below IDs"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10696
+msgid "Post IDs (One per line)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10714
+msgid "Trigger the block action based on the below URL paths."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10717
+#: assets/js/conditional-blocks-editor.js:11800
+msgid "URL Paths"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10720
+msgid "URL Paths (One per line)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10737
+msgid "What is the requirement for the block to visible?"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10740
+msgid "The current URL path should match any of the above paths"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10741
+msgid "The current URL path should not match any above paths"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10758
+msgid "Read more about this condition in the"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10760
+msgid "PHP Logic documentation."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10770
+#: assets/js/conditional-blocks-editor.js:11818
+msgid "PHP Logic"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10772
+msgid "Add valid PHP conditional tags. The functions must return TRUE for the selected block to be visible. This is a developer feature."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10793
+msgid "The selected block will automatically hide on screens sizes that aren't selected. You can edit screen widths from the settings tab."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10800
+msgid "Show on Mobile screens"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10824
+msgid "Show on Tablet screens"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10848
+msgid "Show on Desktop screens"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10875
+msgid "Date conditions use the timezone from your WordPress time settings. The selected block will only be visible after the start date. You can optionally select an end date."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10881
+msgid "Start Date"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10899
+msgid "Choose end date?"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10913
+msgid "End Date"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10935
+msgid "Choose the days and time of day that the block will be visible."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10936
+msgid "Date conditions use the timezone from your WordPress time settings"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10938
+msgid "Recurring Time"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10979
+msgid "Recurring Days"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:10982
+msgid "Monday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11005
+msgid "Tuesday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11028
+msgid "Wednesday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11051
+msgid "Thursday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11074
+msgid "Friday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11097
+msgid "Saturday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11120
+msgid "Sunday"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11148
+msgid "Trigger the block action when visitors who have been directed to your page from an another domain. This condition requires the third-party server to pass the referring information."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11154
+msgid "Domain referrers (comma separate for multiple)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11175
+msgid "Trigger the Block Action based on the query strings detected in the URL."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11178
+msgid "Check Patterns"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11180
+msgid "For each line, input one pattern. Patterns are matched if partially found. Include longer patterns to be specific."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11195
+#: assets/js/conditional-blocks-editor.js:11353
+msgid "Trigger"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11198
+msgid "Patterns detected in the URL (one or more)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11199
+msgid "No patterns detected in the URL"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11217
+#: assets/js/conditional-blocks-editor.js:11845
+msgid "Geolocation"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11220
+msgid "Detect if the current visitor is from a specific country based on their IP address."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11250
+msgid "Display the selected block based on the total value of the current customer cart within WooCommerce. The cart value has to be within the set range for the block to be visible."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11255
+#: assets/js/conditional-blocks-editor.js:11295
+msgid "Configure Range"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11268
+#: assets/js/conditional-blocks-editor.js:11283
+#: assets/js/conditional-blocks-editor.js:11308
+#: assets/js/conditional-blocks-editor.js:11323
+msgid "Leave blank for ANY value"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11269
+#: assets/js/conditional-blocks-editor.js:11284
+#: assets/js/conditional-blocks-editor.js:11309
+#: assets/js/conditional-blocks-editor.js:11324
+msgid "Any value"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11293
+msgid "The selected block will be visible if the total money spent by the customer is between the set amounts."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11333
+msgid "Trigger the Block Action any of the selected products are in the customer cart."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11335
+msgid "Select Products"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11348
+msgid "Search products.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11356
+msgid "If one of the product are in the cart"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11357
+msgid "If all selected products are in  the cart"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11376
+msgid "Trigger the Block Action if products in the cart belong to the selected products categories."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11378
+msgid "If Product Categories in Cart"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11391
+msgid "Search categories.."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11400
+msgid "Trigger the Block Action if the customer has placed an WooCommerce order within the set amount of time."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11402
+msgid "Configure"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11415
+msgid "The amount of time to check for the recent order"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11416
+msgid "7"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11422
+msgid "Time format"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11425
+msgid "Minutes"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11426
+msgid "Hours"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11427
+msgid "Days"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11458
+#: assets/js/conditional-blocks-editor.js:11477
+msgid "AND"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11477
+msgid "Add Condition"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11492
+msgid "Select what happens if the condition results in true or false."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11499
+#: assets/js/conditional-blocks-editor.js:11504
+msgid "If false make the block visible, otherwise hidden"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11500
+#: assets/js/conditional-blocks-editor.js:11503
+msgid "If true make the block visible, otherwise hidden"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11755
+msgid "Pro"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11765
+msgid "Lockdown (Hide block from everyone)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11766
+msgid "Responsive (Screens sizes)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11770
+msgid "User"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11774
+msgid "User Logged In"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11775
+msgid "User Logged Out"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11777
+msgid "User Meta Field"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11781
+msgid "Posts & CPT"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11785
+msgid "Post Types"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11786
+msgid "Post Taxonomy & Terms"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11787
+msgid "Posts (Includes CPT)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11788
+msgid "Post Meta (Custom Fields)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11789
+msgid "Post IDs"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11790
+msgid "Archive"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11794
+msgid "Server Request"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11798
+msgid "Query Strings (URL Variables)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11799
+msgid "Domain Referrers"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11801
+msgid "User Agents (Devices & Browsers)"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11802
+msgid "Cookies"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11806
+msgid "Time"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11810
+msgid "Date Schedule - Range"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11811
+msgid "Date Schedule - Recurring"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11815
+msgid "Advanced"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11824
+msgid "WooCommerce"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11829
+msgid "Cart Products"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11832
+msgid "Cart Product Categories"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11837
+msgid "Customer Total Spent"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11842
+msgid "Customer Recent Order"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:11889
+msgid "Presets"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:14684
 msgid "Active Conditions:"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:14754
+msgid "Configure visibility conditions to control when this block appears on the site."
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:14775
 msgid "Convert to 2.0 conditions"
 msgstr ""
 
 #: assets/js/conditional-blocks-editor.js:1
-msgid "Configure Conditions"
+#: assets/js/conditional-blocks-editor.js:14784
+msgid "Edit Visibility"
+msgstr ""
+
+#: assets/js/conditional-blocks-editor.js:1
+#: assets/js/conditional-blocks-editor.js:14888
+msgid "Open Conditional Blocks"
 msgstr ""
