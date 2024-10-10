@@ -40,7 +40,7 @@
     "wpackagist-plugin/redirection": "^5.4",
     "wpackagist-plugin/safe-svg": "^2.2",
     "wpackagist-plugin/shortpixel-image-optimiser": "^5.6",
-    "wpackagist-plugin/simple-history": "^4.15",
+    "wpackagist-plugin/simple-history": "^5",
     "wpackagist-plugin/svg-autocrop": "^0.1.2",
     "wpackagist-plugin/wp-mail-smtp": "^4.0",
     "wpackagist-plugin/wp-native-php-sessions": "^1.4",
