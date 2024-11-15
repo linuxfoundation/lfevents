@@ -58,6 +58,8 @@
 				$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
 
 				$description = get_post_meta( $post->ID, 'lfes_description', true );
+				$parsedown   = new Parsedown();
+				$description = $parsedown->text( $description );
 				?>
 
 				<div id="post-<?php the_ID(); ?>" class="cell medium-12 large-6 event callout">
