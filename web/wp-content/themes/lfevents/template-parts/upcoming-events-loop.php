@@ -60,7 +60,7 @@
 				$description = get_post_meta( $post->ID, 'lfes_description', true );
 				?>
 
-				<div id="post-<?php the_ID(); ?>" class="cell medium-6">
+				<div id="post-<?php the_ID(); ?>" class="cell medium-12 large-6 event callout">
 
 					<h2 class="event-title medium-margin-right small-margin-bottom line-height-tight">
 						<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
@@ -111,11 +111,30 @@
 						</span>
 					</p>
 
-					<p class="text-small small-margin-bottom">
+					<div class="text-small small-margin-bottom event-description">
 						<?php
-						echo esc_html( $description );
+						$allowed_elements = array(
+							'href'   => true,
+							'class'  => true,
+							'alt'    => true,
+							'rel'    => true,
+							'target' => true,
+						);
+						echo wp_kses(
+							$description,
+							array(
+								'a'      => $allowed_elements,
+								'br'     => array(),
+								'ul'     => array(),
+								'li'     => array(),
+								'p'      => array(),
+								'h4'     => array(),
+								'h5'     => array(),
+								'strong' => array(),
+							)
+						);
 						?>
-					</p>
+					</div>
 
 					<p class="homepage--call-to-action">
 					<?php
