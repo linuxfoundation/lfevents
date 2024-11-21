@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bfde847ec986484dfb84d1a0724041a",
+    "content-hash": "2f71707963a5871a7c39b47724e8d0ab",
     "packages": [
         {
             "name": "composer/installers",
@@ -1133,15 +1133,15 @@
         },
         {
             "name": "wpackagist-plugin/shortpixel-image-optimiser",
-            "version": "5.6.4",
+            "version": "6.0.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/shortpixel-image-optimiser/",
-                "reference": "tags/5.6.4"
+                "reference": "tags/6.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.5.6.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.6.0.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
