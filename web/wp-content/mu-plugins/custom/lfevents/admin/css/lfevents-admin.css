@@ -52,3 +52,10 @@ color: #c4c4c4;
 .block-editor .editor-post-featured-image .components-responsive-wrapper__content {
     width: 100%;
 }
+
+/* Get date controls to sit on one line. */
+.block-editor-block-inspector .components-datetime__time-field .components-base-control:where(:not(:last-child)),
+.block-editor-block-inspector .components-datetime__time-wrapper .components-base-control:where(:not(:last-child))
+{
+  margin-bottom: unset;
+}
