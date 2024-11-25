@@ -295,6 +295,7 @@ if ( ! $splash_page ) :
 			$youtube   = get_post_meta( $parent_id, 'lfes_youtube', true );
 			$facebook  = get_post_meta( $parent_id, 'lfes_facebook', true );
 			$twitter   = get_post_meta( $parent_id, 'lfes_twitter', true );
+			$bluesky   = get_post_meta( $parent_id, 'lfes_bluesky', true );
 			$github    = get_post_meta( $parent_id, 'lfes_github', true );
 			$instagram = get_post_meta( $parent_id, 'lfes_instagram', true );
 			$twitch    = get_post_meta( $parent_id, 'lfes_twitch', true );
@@ -304,9 +305,10 @@ if ( ! $splash_page ) :
 			$hashtag = get_post_meta( $parent_id, 'lfes_hashtag', true );
 
 			// if no custom social links are set, fallback to defaults for LF.
-			if ( ! $wechat && ! $linkedin && ! $qq && ! $youtube && ! $facebook && ! $twitter && ! $instagram ) {
+			if ( ! $wechat && ! $linkedin && ! $qq && ! $youtube && ! $facebook && ! $twitter && ! $bluesky && ! $instagram ) {
 
 				$twitter   = 'https://twitter.com/linuxfoundation';
+				$bluesky   = 'https://bsky.app/profile/linuxfoundation.org';
 				$linkedin  = 'https://www.linkedin.com/company/the-linux-foundation/';
 				$youtube   = 'https://www.youtube.com/user/TheLinuxFoundation';
 				$facebook  = 'https://www.facebook.com/TheLinuxFoundation/';
@@ -330,6 +332,11 @@ if ( ! $splash_page ) :
 				if ( $twitter ) {
 					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_html( $twitter ) . '">';
 					get_template_part( 'template-parts/svg/twitter' );
+					echo '</a></li>';
+				}
+				if ( $bluesky ) {
+					echo '<li><a rel="noopener" title="Bluesky" target="_blank" href="' . esc_html( $bluesky ) . '">';
+					get_template_part( 'template-parts/svg/bluesky' );
 					echo '</a></li>';
 				}
 				if ( $github ) {
