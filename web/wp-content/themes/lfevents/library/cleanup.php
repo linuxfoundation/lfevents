@@ -95,6 +95,12 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 				return $headers;
 			}
 		);
+
+		// Add strict-origin-when-cross-origin referrer policy.
+		add_action( 'wp_head', 'wp_strict_cross_origin_referrer' );
+
+		// Add X-Frame-Options SAMEORIGIN.
+		add_action( 'send_headers', 'send_frame_options_header', 10, 0 );
 	}
 endif;
 
