@@ -77,6 +77,12 @@
       text-decoration: underline;
     }
   }
+
+  @include breakpoint(large) {
+    .event-alert-bar ~ #event-menu .children {
+      max-height: calc(100vh - 8rem);
+    }
+  }
 }
 
 #popout-header-link {
@@ -311,8 +317,9 @@
         .children {
           position: absolute;
           top: 100%;
-          right: 0;
+          left: 0;
           min-width: 100%;
+          min-width: 14rem;
           box-shadow: none;
           visibility: hidden;
           opacity: 0;
@@ -333,6 +340,11 @@
           .current_page_item > a {
             background-color: rgba(0, 0, 0, 0.2);
           }
+        }
+
+        &.other-events .children {
+          right: 0;
+          left: unset;
         }
 
         &:hover > .children,
