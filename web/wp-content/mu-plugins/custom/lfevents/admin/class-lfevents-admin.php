@@ -397,6 +397,9 @@ class LFEvents_Admin {
 			case 'twitter_url':
 				echo get_post_meta( $post_id, 'lfes_speaker_twitter', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
+			case 'bluesky_url':
+				echo get_post_meta( $post_id, 'lfes_speaker_bluesky', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				break;
 			case 'github_url':
 				echo get_post_meta( $post_id, 'lfes_speaker_github', true ) ? '<span  class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
@@ -419,14 +422,15 @@ class LFEvents_Admin {
 		unset( $columns['date'] );
 		unset( $columns['author'] );
 		// add new columns.
-		$columns['featured_image'] = 'Speaker Image';
+		$columns['featured_image'] = 'Image';
 		$columns['job_title'] = 'Title';
 		$columns['company'] = 'Company';
-		$columns['company_logo'] = 'Company Logo';
-		$columns['linkedin_url']  = 'Linkedin URL';
-		$columns['twitter_url']   = 'X URL';
-		$columns['github_url']   = 'GitHub URL';
-		$columns['website_url']   = 'Website URL';
+		$columns['company_logo'] = 'Logo';
+		$columns['linkedin_url']  = 'Linkedin';
+		$columns['twitter_url']   = 'X';
+		$columns['bluesky_url']   = 'Bluesky';
+		$columns['github_url']   = 'GitHub';
+		$columns['website_url']   = 'Website';
 		// add back in old columns.
 		$columns['author'] = $author;
 		$columns['date']   = $date;

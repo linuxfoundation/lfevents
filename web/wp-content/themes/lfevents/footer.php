@@ -69,6 +69,7 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 
 		<?php
 		$twitter   = 'https://twitter.com/linuxfoundation';
+		$bluesky   = 'https://bsky.app/profile/linuxfoundation.org';
 		$linkedin  = 'https://www.linkedin.com/company/the-linux-foundation/';
 		$youtube   = 'https://www.youtube.com/user/TheLinuxFoundation';
 		$facebook  = 'https://www.facebook.com/TheLinuxFoundation/';
@@ -78,6 +79,11 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 		if ( $twitter ) {
 			echo '<li class="s-tw"><a rel="noopener" title="X" target="_blank" href="' . esc_html( $twitter ) . '">';
 			get_template_part( 'template-parts/svg/twitter' );
+			echo '</a></li>';
+		}
+		if ( $bluesky ) {
+			echo '<li class="s-bs"><a rel="noopener" title="Bluesky" target="_blank" href="' . esc_html( $bluesky ) . '">';
+			get_template_part( 'template-parts/svg/bluesky' );
 			echo '</a></li>';
 		}
 		if ( $linkedin ) {

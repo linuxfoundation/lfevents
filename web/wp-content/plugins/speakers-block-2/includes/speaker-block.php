@@ -14,6 +14,7 @@ $company        = get_post_meta( $speaker_id, 'lfes_speaker_company', true );
 $company_logo   = get_post_meta( $speaker_id, 'lfes_speaker_company_logo', true );
 $linkedin       = get_post_meta( $speaker_id, 'lfes_speaker_linkedin', true );
 $twitter        = get_post_meta( $speaker_id, 'lfes_speaker_twitter', true );
+$bluesky        = get_post_meta( $speaker_id, 'lfes_speaker_bluesky', true );
 $github         = get_post_meta( $speaker_id, 'lfes_speaker_github', true );
 $website        = get_post_meta( $speaker_id, 'lfes_speaker_website', true );
 $content        = get_the_content();
@@ -177,7 +178,7 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 						<div class="speaker-modal__social">
 							<?php
 						// Social Icons.
-						if ( $linkedin || $twitter || $github || $website ) :
+						if ( $linkedin || $twitter || $bluesky || $github || $website ) :
 
 								if ( $twitter ) :
 									?>
@@ -190,6 +191,14 @@ $show_modal    = ( strlen( $content ) > 20 ) ? true : false;
 										d="M738.683 543.804 1185.41 24.52h-105.86L691.657 475.407 381.848 24.52H24.52l468.492 681.821L24.52 1250.89h105.866l409.625-476.152 327.181 476.152h357.328L738.657 543.804zM593.685 712.348l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H916.996L593.685 712.374z"
 										fill="#000" />
 								</svg></a>
+							<?php
+							endif;
+							if ( $bluesky ) :
+									?>
+							<a target="_blank" rel="noopener noreferrer"
+								href="<?php echo esc_url( $bluesky ); ?>">
+								<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="2.96 3.83 18.46 16.27"><path d="M7.20057 5.27426c-1.44899-1.13849-3.82948-1.96649-3.82948.7245 0 .56924.3105 4.55394.46575 5.22674.67275 2.2252 2.94973 2.7945 5.01972 2.484-3.57073.5692-4.50222 2.5874-2.53573 4.6057 3.72597 3.8812 5.38197-.9315 5.79597-2.1735l.1035-.2588.1035.2588c.414 1.242 2.07 6.0547 5.796 2.1735 1.9664-2.0183 1.0349-4.0365-2.5358-4.6057 2.07.3105 4.347-.2588 5.0197-2.484.1553-.6728.4658-4.6575.4658-5.22674 0-2.69099-2.3805-1.86299-3.8295-.7245-2.0182 1.50074-4.2435 4.60572-5.0197 6.26174-.7763-1.65602-3.00149-4.761-5.01973-6.26174z"/></svg>
+							</a>
 							<?php
 							endif;
 							if ( $linkedin ) :
