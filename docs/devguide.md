@@ -2,7 +2,7 @@
 
 LFEvents uses a Continuous Integration (CI) infrastructure via GitHub Actions and Pantheon.  These instructions help you get a local instance up and running and explain how to run the various tests.
 
-Git branches will have a Pantheon multidev env automatically created for them to facilitate testing.  Once the PR is merged, the env will be automatically deleted.
+Git PRs will have a Pantheon multidev env automatically created for them to facilitate testing.  Once the PR is merged, the env will be automatically deleted.
 
 For instructions on how to configure [the resulting site](https://events.linuxfoundation.org) to host events, please see the [Admin Instructions](https://docs.google.com/document/d/1mvIuw-R9k_gbnZn_iV04qNTjG33u_lXwFlN7s-lgJ1Y/edit?usp=sharing).
 
