@@ -27,7 +27,7 @@ registerBlockType( 'cgb/block-text-on-image-block', {
 		},
 		imgUrl: {
 			type: 'string',
-			default: 'https://via.placeholder.com/250x250/d9d9d9/000000',
+			default: '/wp-content/plugins/text-on-image-block/image-placeholder.png',
 		},
 		imgId: {
 			type: 'number',
