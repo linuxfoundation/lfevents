@@ -25,7 +25,6 @@
 	<exclude-pattern>*/build/*</exclude-pattern>
 	<exclude-pattern>*/dist/*</exclude-pattern>
 	<exclude-pattern>*/uploads/*</exclude-pattern>
-	<exclude-pattern>*/plugins/*</exclude-pattern>
 	<exclude-pattern>*/scripts/*</exclude-pattern>
 	<exclude-pattern>*gulpfile*</exclude-pattern>
 	<exclude-pattern>*pantheon*</exclude-pattern>
