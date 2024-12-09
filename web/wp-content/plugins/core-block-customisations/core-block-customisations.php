@@ -45,11 +45,11 @@ add_action( 'enqueue_block_editor_assets', 'lf_custom_attributes_editor_scripts'
 /**
  * Load Cover Block customisations
  *
- * @param string $block_content
- * @param array  $block
+ * @param string $block_content Content of the block.
+ * @param array  $block Block attributes.
  */
 function lf_load_cover_block_customisations( $block_content, $block ) {
-	if ( $block['blockName'] === 'core/cover' &&
+	if ( 'core/cover' === $block['blockName'] &&
 		isset( $block['attrs']['activateVideo'], $block['attrs']['videoBackground'] ) &&
 		$block['attrs']['activateVideo'] &&
 		! empty( $block['attrs']['videoBackground'] ) ) {
@@ -97,8 +97,8 @@ function lf_load_cover_block_customisations( $block_content, $block ) {
 						<?php
 
 						if ( ! empty( $block['innerBlocks'] ) ) {
-							foreach ( $block['innerBlocks'] as $innerBlock ) {
-								echo render_block( $innerBlock );
+							foreach ( $block['innerBlocks'] as $inner_block ) {
+								echo render_block( $inner_block ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							}
 						}
 						?>
@@ -124,7 +124,7 @@ function lf_enqueue_frontend_script() {
 		$blocks = parse_blocks( $post->post_content );
 
 		foreach ( $blocks as $block ) {
-			if ( $block['blockName'] === 'core/cover' ) {
+			if ( 'core/cover' === $block['blockName'] ) {
 				if ( isset( $block['attrs']['activateVideo'] ) && $block['attrs']['activateVideo'] ) {
 					wp_enqueue_script(
 						'core-block-customisations-video',

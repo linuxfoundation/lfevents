@@ -290,7 +290,7 @@ $show_modal = ( strlen( $content ) > 20 ) ? true : false;
 								</a>
 							</h3>
 							<p
-								class="speaker-modal-sched__time"><?php echo $start->format( 'M j, Y, g:i A' ); ?> | <?php echo esc_html( $session->venue ); ?></p>
+								class="speaker-modal-sched__time"><?php echo esc_html( $start->format( 'M j, Y, g:i A' ) ); ?> | <?php echo esc_html( $session->venue ); ?></p>
 						</div>
 								<?php
 								endforeach;

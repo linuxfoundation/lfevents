@@ -113,7 +113,7 @@ function speakers_block_callback( $attributes ) {
 	ob_start();
 	?>
 
-	<section class="speakers-section <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?> <?php echo esc_html( $color_mode ); ?> <?php echo esc_html( $text_color ); ?>" <?php echo $inline_styles; ?>>
+	<section class="speakers-section <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?> <?php echo esc_html( $color_mode ); ?> <?php echo esc_html( $text_color ); ?>" <?php echo $inline_styles; //phpcs:ignore ?>>
 
 		<ul class="speaker-list grid-x">
 
@@ -162,12 +162,12 @@ function speakers_block_callback( $attributes ) {
 									if ( get_the_content() ) {
 										?>
 										<a class="name" role="button" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
-										<a class="title" role="button" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></a>
+										<a class="title" role="button" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo esc_html( get_post_meta( $id, 'lfes_speaker_title', true ) ); ?></a>
 										<?php
 									} else {
 										?>
 										<span class="name"><?php echo esc_html( get_the_title() ); ?></span>
-										<span class="title"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></span>
+										<span class="title"><?php echo esc_html( get_post_meta( $id, 'lfes_speaker_title', true ) ); ?></span>
 										<?php
 									}
 									?>
@@ -205,7 +205,7 @@ function speakers_block_callback( $attributes ) {
 									</ul>
 								</div>
 								<div class="bio">
-									<?php echo get_the_content(); ?>
+									<?php echo wp_kses_post( get_the_content() ); ?>
 								</div>
 						</div>
 				</li>

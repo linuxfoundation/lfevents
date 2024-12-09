@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       Live Stream Gate Block
  * Description:       Gates video streams behind LF SSO
@@ -75,8 +74,7 @@ add_action( 'wp_enqueue_scripts', 'lf_live_stream_gate_block_block_enqueue' );
 /**
  * Callback
  *
- * @param array  $attributes Post attributes.
- * @param string $content The content.
+ * @param array $block_attributes block attributes.
  */
 function live_stream_gate_callback( $block_attributes ) {
 
@@ -99,7 +97,7 @@ function live_stream_gate_callback( $block_attributes ) {
 			?>
 		</div>
 		<?php
-		// show based on auth classes (eurgh)
+		// show based on auth classes (eurgh).
 	else :
 		?>
 		<div class="wp-block-lf-live-stream-gate-block-placeholder is-auth0 only-anonymous <?php echo esc_html( $classes ); ?>" id="<?php echo esc_html( $anchor ); ?>">

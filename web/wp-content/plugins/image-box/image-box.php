@@ -15,6 +15,7 @@
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
  *
+ * @throws Error Throws error if the build/index.asset.php file doesn't exist.
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 function lf_image_box_block_init() {
