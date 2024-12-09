@@ -67,7 +67,7 @@ function speakers_block_callback( $attributes ) {
 	$align      = 'align';
 	$align     .= $attributes['align'] ?? 'wide';
 	$classes    = $attributes['className'] ?? '';
-	$color_mode    = $attributes['colorMode'] ?? '';
+	$color_mode = $attributes['colorMode'] ?? '';
 
 	$bg_color_1 = $attributes['color1'] ?? '';
 	$bg_color_2 = $attributes['color2'] ?? '';
@@ -92,7 +92,7 @@ function speakers_block_callback( $attributes ) {
 		$bg_color_1 ? $bg_color_1 : 'transparent';
 
 		// color 2, or color1, or if not transparent.
-		$bg_color_2 ? $bg_color_2 : ($bg_color_1 ? $bg_color_1 : 'transparent');
+		$bg_color_2 ? $bg_color_2 : ( $bg_color_1 ? $bg_color_1 : 'transparent' );
 
 		$inline_styles = 'style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%);"';
 
@@ -126,9 +126,11 @@ function speakers_block_callback( $attributes ) {
 				$github   = get_post_meta( $id, 'lfes_speaker_github', true );
 				$website  = get_post_meta( $id, 'lfes_speaker_website', true );
 				?>
-				<li id="<?php
+				<li id="
+				<?php
 				echo esc_html( $id_preface . $id );
-				?>"
+				?>
+				"
 				class="speaker cell small-6 medium-4 xxlarge-3"
 				data-toggler=".open"
 				style="background: linear-gradient(-45deg, transparent 30%, <?php echo esc_html( $gradient_color ); ?> 100%);">
@@ -137,25 +139,29 @@ function speakers_block_callback( $attributes ) {
 							<?php
 							if ( get_the_content() ) {
 								?>
-								<div class="headshot" role="button" data-toggle="<?php echo esc_html( $id_preface . $id );	?>">
+								<div class="headshot" role="button" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>">
 								<?php
 							} else {
 								?>
 									<div class="headshot">
 									<?php
 							}
-								echo get_the_post_thumbnail( $id, 'profile-200', array(
-									'loading' => 'lazy',
-									'alt'     => esc_html( get_the_title() . ' headshot'),
-									) );
-							?>
+								echo get_the_post_thumbnail(
+									$id,
+									'profile-200',
+									array(
+										'loading' => 'lazy',
+										'alt'     => esc_html( get_the_title() . ' headshot' ),
+									)
+								);
+				?>
 									</div><!-- end of headshot? -->
 								</div><!-- end of cell large-5 -->
 								<div class="text cell large-7">
 									<?php
 									if ( get_the_content() ) {
 										?>
-										<a class="name" role="button" data-toggle="<?php echo esc_html(  $id_preface . $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
+										<a class="name" role="button" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
 										<a class="title" role="button" data-toggle="<?php echo esc_html( $id_preface . $id ); ?>"><?php echo get_post_meta( $id, 'lfes_speaker_title', true ); ?></a>
 										<?php
 									} else {

@@ -423,14 +423,14 @@ class LFEvents_Admin {
 		unset( $columns['author'] );
 		// add new columns.
 		$columns['featured_image'] = 'Image';
-		$columns['job_title'] = 'Title';
-		$columns['company'] = 'Company';
-		$columns['company_logo'] = 'Logo';
-		$columns['linkedin_url']  = 'Linkedin';
-		$columns['twitter_url']   = 'X';
-		$columns['bluesky_url']   = 'Bluesky';
-		$columns['github_url']   = 'GitHub';
-		$columns['website_url']   = 'Website';
+		$columns['job_title']      = 'Title';
+		$columns['company']        = 'Company';
+		$columns['company_logo']   = 'Logo';
+		$columns['linkedin_url']   = 'Linkedin';
+		$columns['twitter_url']    = 'X';
+		$columns['bluesky_url']    = 'Bluesky';
+		$columns['github_url']     = 'GitHub';
+		$columns['website_url']    = 'Website';
 		// add back in old columns.
 		$columns['author'] = $author;
 		$columns['date']   = $date;

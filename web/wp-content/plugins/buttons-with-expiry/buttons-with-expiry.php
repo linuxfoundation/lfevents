@@ -27,7 +27,7 @@ function lf_buttons_with_expiry_block_init() {
 		);
 	}
 	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
+	$script_asset = require $script_asset_path;
 	wp_register_script(
 		'lf-buttons-with-expiry-block-editor',
 		plugins_url( $index_js, __FILE__ ),
@@ -58,7 +58,6 @@ function lf_buttons_with_expiry_block_init() {
 			'render_callback' => 'button_with_expiry_callback',
 		)
 	);
-
 }
 add_action( 'init', 'lf_buttons_with_expiry_block_init' );
 
@@ -71,13 +70,13 @@ add_action( 'init', 'lf_buttons_with_expiry_block_init' );
 function button_with_expiry_callback( $attributes, $content ) {
 
 	$will_expire = isset( $attributes['willExpire'] ) ? $attributes['willExpire'] : false;
-	$expire_at = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : false;
+	$expire_at   = isset( $attributes['expireAt'] ) ? $attributes['expireAt'] : false;
 	if ( ! $will_expire || ! $expire_at ) {
 		return $content;
 	}
 
 	$wordpress_timezone = get_option( 'timezone_string' );
-	$expire_text = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
+	$expire_text        = isset( $attributes['expireText'] ) ? $attributes['expireText'] : false;
 	if ( ! is_int( $expire_at ) ) {
 		$expire_at = new DateTime( $expire_at, new DateTimeZone( $wordpress_timezone ) );
 		$expire_at = (int) $expire_at->format( 'U' );

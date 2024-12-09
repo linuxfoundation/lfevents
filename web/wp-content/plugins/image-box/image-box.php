@@ -18,7 +18,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 function lf_image_box_block_init() {
-	$dir = dirname( __FILE__ );
+	$dir = __DIR__;
 
 	$script_asset_path = "$dir/build/index.asset.php";
 	if ( ! file_exists( $script_asset_path ) ) {
@@ -27,7 +27,7 @@ function lf_image_box_block_init() {
 		);
 	}
 	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
+	$script_asset = require $script_asset_path;
 	wp_register_script(
 		'lf-image-box-block-editor',
 		plugins_url( $index_js, __FILE__ ),
@@ -52,10 +52,13 @@ function lf_image_box_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
-	register_block_type( 'lf/image-box', array(
-		'editor_script' => 'lf-image-box-block-editor',
-		'editor_style'  => 'lf-image-box-block-editor',
+	register_block_type(
+		'lf/image-box',
+		array(
+			'editor_script' => 'lf-image-box-block-editor',
+			'editor_style'  => 'lf-image-box-block-editor',
 		// 'style'         => 'lf-image-box-block',
-	) );
+		)
+	);
 }
 add_action( 'init', 'lf_image_box_block_init' );

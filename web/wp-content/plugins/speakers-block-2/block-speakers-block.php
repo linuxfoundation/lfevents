@@ -46,8 +46,8 @@ function lf_speakers_block_2_callback( $attributes ) {
 
 	global $post;
 	$sched_event_id = null;
-	if (function_exists('lfe_get_event_parent_id')) {
-		$parent_id = lfe_get_event_parent_id( $post );
+	if ( function_exists( 'lfe_get_event_parent_id' ) ) {
+		$parent_id      = lfe_get_event_parent_id( $post );
 		$sched_event_id = get_post_meta( $parent_id, 'lfes_sched_event_id', true );
 	}
 
@@ -65,7 +65,7 @@ function lf_speakers_block_2_callback( $attributes ) {
 
 	if ( $speakers_query->have_posts() ) {
 
-		$align = 'align';
+		$align  = 'align';
 		$align .= $attributes['align'] ?? 'wide';
 
 		wp_enqueue_script(
@@ -82,11 +82,11 @@ function lf_speakers_block_2_callback( $attributes ) {
 			<?php
 			while ( $speakers_query->have_posts() ) :
 				$speakers_query->the_post();
-				include( 'includes/speaker-block.php' );
+				include 'includes/speaker-block.php';
 			endwhile;
 			wp_reset_postdata();
-		}
-		?>
+	}
+	?>
 		</div>
 	<?php
 	$block_content = ob_get_clean();

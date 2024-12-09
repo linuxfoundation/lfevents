@@ -31,7 +31,7 @@ function countdown_block_assets() { // phpcs:ignore
 	// Register block editor script for backend.
 	wp_register_script(
 		'countdown-block-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		plugins_url( '/dist/blocks.build.js', __DIR__ ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		filemtime( countdown_block_get_plugin_path() . 'dist/blocks.build.js' ),
 		true
@@ -40,7 +40,7 @@ function countdown_block_assets() { // phpcs:ignore
 	// Register block editor styles for backend.
 	wp_register_style(
 		'countdown-block-cgb-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		plugins_url( 'dist/blocks.editor.build.css', __DIR__ ),
 		array(),
 		filemtime( countdown_block_get_plugin_path() . 'dist/blocks.editor.build.css' )
 	);
@@ -83,8 +83,8 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 	// handle legacy instances of the block which stored end_date as integer.
 	if ( ! is_int( $end_date ) ) {
 		$wordpress_timezone = get_option( 'timezone_string' );
-		$end_date = new DateTime( $end_date, new DateTimeZone( $wordpress_timezone ) );
-		$end_date = (int) $end_date->format( 'U' );
+		$end_date           = new DateTime( $end_date, new DateTimeZone( $wordpress_timezone ) );
+		$end_date           = (int) $end_date->format( 'U' );
 	}
 
 	$time_left = $end_date - time();
@@ -112,12 +112,10 @@ function countdown_block_callback( $attributes ) { // phpcs:ignore
 				'" data-expirymessage="' . esc_attr( $expiry_message ) . '" data-expiryalign="' . esc_attr( $message_align ) . '" data-end_date="' . $end_date . '">
 			' . $selected_format
 			. '</div>';
-	} else {
-		if ( isset( $attributes['expiryMessage'] ) ) {
+	} elseif ( isset( $attributes['expiryMessage'] ) ) {
 			return '<div class="callout" style="text-align:' . $message_align . '">' . $expiry_message . '</div>';
-		} else {
-			return '';
-		}
+	} else {
+		return '';
 	}
 }
 
@@ -211,7 +209,7 @@ function countdown_block_add_frontend_assets() { //phpcs:ignore
 		if ( 'cgb/countdown-block' == $block['blockName'] ) {
 			wp_enqueue_script(
 				'lf-countdown-script',
-				plugins_url( 'src/block/front.js', dirname( __FILE__ ) ),
+				plugins_url( 'src/block/front.js', __DIR__ ),
 				array(),
 				filemtime( plugin_dir_path( __FILE__ ) . 'block/front.js' ),
 				true
@@ -220,7 +218,7 @@ function countdown_block_add_frontend_assets() { //phpcs:ignore
 			if ( ! isset( $block['attrs']['style'] ) ) {
 				wp_enqueue_script(
 					'lf-countdown-odometer-script',
-					plugins_url( 'src/block/libs/odometer.js', dirname( __FILE__ ) ),
+					plugins_url( 'src/block/libs/odometer.js', __DIR__ ),
 					array(),
 					filemtime( plugin_dir_path( __FILE__ ) . 'block/libs/odometer.js' ),
 					true

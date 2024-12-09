@@ -31,14 +31,14 @@ function pricing_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
 		'pricing_block-cgb-style-css',
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		plugins_url( 'dist/blocks.style.build.css', __DIR__ ),
 		null
 	);
 
 	// Register block editor script for backend.
 	wp_register_script(
 		'pricing_block-cgb-block-js',
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		plugins_url( '/dist/blocks.build.js', __DIR__ ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		null,
 		true
@@ -47,7 +47,7 @@ function pricing_block_cgb_block_assets() { // phpcs:ignore
 	// Register block editor styles for backend.
 	wp_register_style(
 		'pricing_block-cgb-block-editor-css',
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
+		plugins_url( 'dist/blocks.editor.build.css', __DIR__ ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
 	);
@@ -68,9 +68,9 @@ function pricing_block_cgb_block_assets() { // phpcs:ignore
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			// 'style'         => 'pricing_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'pricing_block-cgb-block-js',
+			'editor_script'   => 'pricing_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'pricing_block-cgb-block-editor-css',
+			'editor_style'    => 'pricing_block-cgb-block-editor-css',
 			'render_callback' => 'block_callback', // The render callback.
 		)
 	);
@@ -92,24 +92,24 @@ add_action( 'init', 'pricing_block_cgb_block_assets' );
  * @return string Rendered HTML.
  */
 function block_callback( $att ) {
-	$top_labels = $att['topLabels'] ?? '';
-	$dates = $att['dates'] ?? '';
+	$top_labels  = $att['topLabels'] ?? '';
+	$dates       = $att['dates'] ?? '';
 	$left_labels = $att['leftLabels'] ?? '';
-	$prices = $att['prices'] ?? '';
+	$prices      = $att['prices'] ?? '';
 	$expire_text = $att['expireText'] ?? 'Expired';
-	$color1 = $att['color1'] ?? '';
-	$color2 = $att['color2'] ?? '';
-	$color3 = $att['color3'] ?? '';
-	$color4 = $att['color4'] ?? '';
-	$color_text = $att['colorText'] ?? 'inherit';
-	$tz = $att['timeZone'] ?? '-0700';
-	$language = $att['language'] ?? 'ENG';
-	$yesterday = new DateTime( 'now', new DateTimeZone( $tz ) );
+	$color1      = $att['color1'] ?? '';
+	$color2      = $att['color2'] ?? '';
+	$color3      = $att['color3'] ?? '';
+	$color4      = $att['color4'] ?? '';
+	$color_text  = $att['colorText'] ?? 'inherit';
+	$tz          = $att['timeZone'] ?? '-0700';
+	$language    = $att['language'] ?? 'ENG';
+	$yesterday   = new DateTime( 'now', new DateTimeZone( $tz ) );
 	$yesterday->sub( new DateInterval( 'P1D' ) );
 
 	$column = 0;
-	$row = 0;
-	$html = '';
+	$row    = 0;
+	$html   = '';
 
 	if ( ! $top_labels || ! $dates || ! $left_labels || ! $prices ) {
 		return;
@@ -120,8 +120,8 @@ function block_callback( $att ) {
 		$new_prices = array();
 		for ( $i = 0; $i < 4; $i++ ) {
 			for ( $j = 0; $j < 7; $j++ ) {
-				$new_index = ( $j * 4 ) + $i;
-				$new_prices[$new_index] = $prices[$i][$j];
+				$new_index                = ( $j * 4 ) + $i;
+				$new_prices[ $new_index ] = $prices[ $i ][ $j ];
 			}
 		}
 		$prices = $new_prices;
@@ -146,7 +146,7 @@ function block_callback( $att ) {
 					}
 					try {
 						$date_start = new DateTime( $dates[ $i ], new DateTimeZone( $tz ) );
-						$date_end = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
+						$date_end   = new DateTime( $dates[ $i + 1 ], new DateTimeZone( $tz ) );
 					} catch ( Exception $e ) {
 						return;
 					}
@@ -166,7 +166,7 @@ function block_callback( $att ) {
 					$html .= '</h5>';
 					$html .= '</div>';
 					$html .= '<div class="price-amount">';
-					$j = $i + ( $row * 4 ); 
+					$j     = $i + ( $row * 4 );
 					if ( $date_end < $yesterday ) {
 						$html .= '<s>' . $prices[ $j ] . '</s>';
 						$html .= '<span class="expired-label">' . $expire_text . '</span>';
@@ -179,7 +179,7 @@ function block_callback( $att ) {
 				}
 			}
 
-			$row++;
+			++$row;
 
 			$html .= '</div>';
 		}

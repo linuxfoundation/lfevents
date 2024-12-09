@@ -20,7 +20,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 function lf_custom_iframe_block_init() {
-	$dir = dirname( __FILE__ );
+	$dir = __DIR__;
 
 	$script_asset_path = "$dir/build/index.asset.php";
 	if ( ! file_exists( $script_asset_path ) ) {

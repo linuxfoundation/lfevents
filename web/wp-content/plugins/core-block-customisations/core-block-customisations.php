@@ -46,27 +46,27 @@ add_action( 'enqueue_block_editor_assets', 'lf_custom_attributes_editor_scripts'
  * Load Cover Block customisations
  *
  * @param string $block_content
- * @param array $block
+ * @param array  $block
  */
-function lf_load_cover_block_customisations($block_content, $block) {
-    if ($block['blockName'] === 'core/cover' &&
-        isset($block['attrs']['activateVideo'], $block['attrs']['videoBackground']) &&
-        $block['attrs']['activateVideo'] &&
-        !empty($block['attrs']['videoBackground'])) {
+function lf_load_cover_block_customisations( $block_content, $block ) {
+	if ( $block['blockName'] === 'core/cover' &&
+		isset( $block['attrs']['activateVideo'], $block['attrs']['videoBackground'] ) &&
+		$block['attrs']['activateVideo'] &&
+		! empty( $block['attrs']['videoBackground'] ) ) {
 
-        $video_url = wp_get_attachment_url($block['attrs']['videoBackground']);
+		$video_url = wp_get_attachment_url( $block['attrs']['videoBackground'] );
 		$cover_url = $block['attrs']['url'] ?? null;
 
 		if ( isset( $block['attrs']['id'] ) ) {
-			$image_id = $block['attrs']['id'];
-			$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);	
+			$image_id  = $block['attrs']['id'];
+			$image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 		} else {
 			$image_alt = '';
 		}
 
-        if ( ! empty( $video_url ) || ! empty( $cover_url ) ) {
-		   ob_start();
-		   ?>
+		if ( ! empty( $video_url ) || ! empty( $cover_url ) ) {
+			ob_start();
+			?>
 	<div class="wp-block-cover alignfull has-video-background">
 		<div aria-hidden="true" class="cover-bg__overlay"></div>
 
@@ -85,7 +85,7 @@ function lf_load_cover_block_customisations($block_content, $block) {
 				top: 0;
 				left: 0;">
 					<source
-						src="<?php echo esc_url($video_url); ?>"
+						src="<?php echo esc_url( $video_url ); ?>"
 						type="video/mp4">
 					<img src="<?php echo esc_url( $cover_url ); ?>"
 						alt="<?php echo esc_attr( $image_alt ); ?>">
@@ -96,47 +96,47 @@ function lf_load_cover_block_customisations($block_content, $block) {
 			<div class="container wrap">
 						<?php
 
-						if (!empty($block['innerBlocks'])) {
-							foreach ($block['innerBlocks'] as $innerBlock) {
-								echo render_block($innerBlock);
+						if ( ! empty( $block['innerBlocks'] ) ) {
+							foreach ( $block['innerBlocks'] as $innerBlock ) {
+								echo render_block( $innerBlock );
 							}
 						}
 						?>
 			</div>
 		</div>
 	</div>
-		   <?php
-		   $custom_markup = ob_get_clean();
-           return $custom_markup;
-        }
-    }
-    return $block_content;
+			<?php
+			$custom_markup = ob_get_clean();
+			return $custom_markup;
+		}
+	}
+	return $block_content;
 }
-add_filter('render_block', 'lf_load_cover_block_customisations', 10, 2);
+add_filter( 'render_block', 'lf_load_cover_block_customisations', 10, 2 );
 
 /**
  * Enqueue Script for Frontend
  */
 function lf_enqueue_frontend_script() {
-    global $post;
+	global $post;
 
-    if ($post) {
-        $blocks = parse_blocks($post->post_content);
+	if ( $post ) {
+		$blocks = parse_blocks( $post->post_content );
 
-        foreach ($blocks as $block) {
-            if ($block['blockName'] === 'core/cover') {
-                if (isset($block['attrs']['activateVideo']) && $block['attrs']['activateVideo']) {
-                    wp_enqueue_script(
-                        'core-block-customisations-video',
-                        CBC_URL . 'js/video.js',
-                        array(),
-                        filemtime(CBC_PATH . 'js/video.js'),
-                        true
-                    );
-                    break;
-                }
-            }
-        }
-    }
+		foreach ( $blocks as $block ) {
+			if ( $block['blockName'] === 'core/cover' ) {
+				if ( isset( $block['attrs']['activateVideo'] ) && $block['attrs']['activateVideo'] ) {
+					wp_enqueue_script(
+						'core-block-customisations-video',
+						CBC_URL . 'js/video.js',
+						array(),
+						filemtime( CBC_PATH . 'js/video.js' ),
+						true
+					);
+					break;
+				}
+			}
+		}
+	}
 }
-add_action('wp_enqueue_scripts', 'lf_enqueue_frontend_script');
+add_action( 'wp_enqueue_scripts', 'lf_enqueue_frontend_script' );

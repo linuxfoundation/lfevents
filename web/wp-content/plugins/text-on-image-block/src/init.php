@@ -31,14 +31,14 @@ function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
 		'text_on_image_block-cgb-style-css',
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		plugins_url( 'dist/blocks.style.build.css', __DIR__ ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
 	// Register block editor script for backend.
 	wp_register_script(
 		'text_on_image_block-cgb-block-js',
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		plugins_url( '/dist/blocks.build.js', __DIR__ ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
 		true
@@ -47,7 +47,7 @@ function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	// Register block editor styles for backend.
 	wp_register_style(
 		'text_on_image_block-cgb-block-editor-css',
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		plugins_url( 'dist/blocks.editor.build.css', __DIR__ ),
 		array( 'wp-edit-blocks' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
