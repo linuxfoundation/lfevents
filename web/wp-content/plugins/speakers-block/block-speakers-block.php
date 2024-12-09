@@ -126,11 +126,7 @@ function speakers_block_callback( $attributes ) {
 				$github   = get_post_meta( $id, 'lfes_speaker_github', true );
 				$website  = get_post_meta( $id, 'lfes_speaker_website', true );
 				?>
-				<li id="
-				<?php
-				echo esc_html( $id_preface . $id );
-				?>
-				"
+				<li id="<?php echo esc_html( $id_preface . $id ); ?>"
 				class="speaker cell small-6 medium-4 xxlarge-3"
 				data-toggler=".open"
 				style="background: linear-gradient(-45deg, transparent 30%, <?php echo esc_html( $gradient_color ); ?> 100%);">
