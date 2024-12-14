@@ -45,7 +45,6 @@ p.wp-caption-text {
   margin-inline-start: 0;
   margin-inline-end: 0;
   img {
-    width: 100%;
     object-fit: cover;
     position: absolute;
     z-index: 1;
@@ -54,7 +53,7 @@ p.wp-caption-text {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: auto;
+    height: 100%;
     width: 100%;
   }
 }
