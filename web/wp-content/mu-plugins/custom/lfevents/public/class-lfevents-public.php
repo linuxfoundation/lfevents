@@ -194,27 +194,6 @@ class LFEvents_Public {
 	}
 
 	/**
-	 * Fix preconnect and preload to better optimize loading. Preconnect is priority, must have crossorigin; Prefetch just opens connection.
-	 *
-	 * @param string $hints returns hints.
-	 * @param string $relation_type returns priority.
-	 */
-	public function change_to_preconnect_resource_hints( $hints, $relation_type ) {
-
-		if ( 'preconnect' === $relation_type ) {
-			$hints[] = array(
-				'href'        => '//www.googletagmanager.com',
-				'crossorigin' => '',
-			);
-			$hints[] = array(
-				'href'        => '//bam-cell.nr-data.net',
-				'crossorigin' => '',
-			);
-		}
-		return $hints;
-	}
-
-	/**
 	 * Changes the ellipses after the excerpt.
 	 *
 	 * @param string $more more text.
@@ -356,6 +335,8 @@ class LFEvents_Public {
 				'https://js.hsforms.net',
 				'https://js.hs-scripts.com',
 				'https://cmp.osano.com',
+				'//www.googletagmanager.com',
+				'https://js-agent.newrelic.com',
 			);
 
 			// add them to the urls list.

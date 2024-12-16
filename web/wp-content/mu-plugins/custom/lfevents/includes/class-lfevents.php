@@ -213,7 +213,6 @@ class LFEvents {
 		$this->loader->add_filter( 'the_seo_framework_title_from_generation', $plugin_public, 'add_year_to_archive_titles' );
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'new_excerpt_more' );
 		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'custom_excerpt_length', 999 );
-		$this->loader->add_filter( 'wp_resource_hints', $plugin_public, 'change_to_preconnect_resource_hints', 10, 2 );
 		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'defer_parsing_of_js', 10, 3 );
 		$this->loader->add_filter( 'the_seo_framework_image_generation_params', $plugin_public, 'my_tsf_custom_image_generation_args', 10, 3 );
 		$this->loader->add_filter( 'tiny_mce_plugins', $plugin_public, 'disable_emojicons_tinymce' );
