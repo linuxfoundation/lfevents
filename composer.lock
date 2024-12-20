@@ -971,15 +971,15 @@
         },
         {
             "name": "wpackagist-plugin/flying-scripts",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/flying-scripts/",
-                "reference": "tags/1.2.3"
+                "reference": "tags/1.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/flying-scripts.1.2.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/flying-scripts.1.2.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1079,15 +1079,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.16.0",
+            "version": "2.17.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.16.0"
+                "reference": "tags/2.17.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.16.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.17.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1133,15 +1133,15 @@
         },
         {
             "name": "wpackagist-plugin/shortpixel-image-optimiser",
-            "version": "6.0.3",
+            "version": "6.0.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/shortpixel-image-optimiser/",
-                "reference": "tags/6.0.3"
+                "reference": "tags/6.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.6.0.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.6.0.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1187,15 +1187,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-mail-smtp/",
-                "reference": "tags/4.2.0"
+                "reference": "tags/4.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.4.2.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-mail-smtp.4.3.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1223,15 +1223,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-nested-pages",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-nested-pages/",
-                "reference": "tags/3.2.9"
+                "reference": "tags/3.2.10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.2.9.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-nested-pages.3.2.10.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
