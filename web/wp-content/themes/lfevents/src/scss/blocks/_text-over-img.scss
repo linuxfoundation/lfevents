@@ -31,7 +31,7 @@
     border-left: 0;
 
     &::before {
-      content: "\201F";
+      content: '\201F';
       float: left;
       font-size: 6rem;
       line-height: 1;
@@ -90,15 +90,13 @@
     }
   }
 
-  // TODO: Check below works as class is inside class?
-  @media print,
-  screen and (min-width: 64em) {
+  @media print, screen and (min-width: 64em) {
     .lfe-image-and-text {
       padding: 10vw !important;
     }
 
     .lfe-image-and-text img {
-      display: none
+      display: none;
     }
 
     .lfe-image-and-text .text {
@@ -107,11 +105,11 @@
     }
 
     .lfe-image-and-text.pull-right .text {
-      margin-left: 50%
+      margin-left: 50%;
     }
 
     .lfe-image-and-text.pull-left .text {
-      margin-right: 50%
+      margin-right: 50%;
     }
   }
 }

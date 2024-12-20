@@ -1,14 +1,14 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Linux Foundation Events",
+    "short_name": "LF Events",
     "icons": [
         {
-            "src": "https://events.linuxfoundation.org/wp-content/themes/lfevents/src/images/favicons/android-chrome-192x192.png",
+            "src": "/wp-content/themes/lfevents/src/images/favicons/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "https://events.linuxfoundation.org/wp-content/themes/lfevents/src/images/favicons/android-chrome-384x384.png",
+            "src": "/wp-content/themes/lfevents/src/images/favicons/android-chrome-384x384.png",
             "sizes": "384x384",
             "type": "image/png"
         }
