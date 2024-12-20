@@ -353,9 +353,8 @@ function lfe_insert_favicon() {
 		$out = '<link rel="icon" type="image/png" sizes="32x32" href="' . wp_get_attachment_url( $favicon ) . '">' . "\n";
 	} else {
 		$out = '<link rel="icon" sizes="any" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/favicon.ico">' . "\n";
-		// $out .= '<link rel="icon" type="image/svg+xml" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/favicon.svg">' . "\n"; //phpcs:ignore
 		$out .= '<link rel="apple-touch-icon" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/apple-touch-icon.png">' . "\n";
-		$out .= '<link rel="manifest" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/site.webmanifest">' . "\n";
+		$out .= '<link rel="manifest" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/site.webmanifest" async>' . "\n";
 	}
 
 	echo $out; //phpcs:ignore
