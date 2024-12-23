@@ -18,7 +18,32 @@ $splash_page      = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 $hide_header      = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
 $hide_sponsors    = get_post_meta( get_the_ID(), 'lfes_hide_sponsors', true );
 $use_cncf_font    = get_post_meta( $parent_id, 'lfes_cncf_font', true );
-$event_has_passed = false;
+$event_has_passed = get_post_meta( $parent_id, 'lfes_event_has_passed', true );
+$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
+$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+$menu_color_3     = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
+$menu_text_color  = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
+$background_style = 'background-color: ' . $menu_color . ';';
+$logo             = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
+$overlay_strength = get_post_meta( $parent_id, 'lfes_overlay_strength', true );
+
+if ( $menu_color_2 ) {
+	$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+}
+$text_style = 'color: ' . $menu_text_color . ';';
+
+if ( $logo ) {
+	$event_link_content = '<img loading="lazy" src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
+} else {
+	$event_link_content = get_the_title( $parent_id );
+}
+
+$overlay_style = '';
+
+if ( $overlay_strength || '0' === $overlay_strength ) {
+	$overlay_strength = (int) $overlay_strength * 0.8 * 0.01;
+	$overlay_style    = 'opacity: ' . $overlay_strength . ';';
+}
 
 if ( $use_cncf_font ) {
 			// Enqueue CNCF font stylesheet.
@@ -31,42 +56,11 @@ if ( $use_cncf_font ) {
 }
 
 if ( ! $splash_page ) {
-	// menu background color.
-	$menu_color      = get_post_meta( $parent_id, 'lfes_menu_color', true );
-	$menu_color_2    = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
-	$menu_color_3    = get_post_meta( $parent_id, 'lfes_menu_color_3', true );
-	$menu_text_color = get_post_meta( $parent_id, 'lfes_menu_text_color', true );
-
-	$background_style = 'background-color: ' . $menu_color . ';';
-
-	$event_has_passed = get_post_meta( $parent_id, 'lfes_event_has_passed', true );
-
-	if ( $menu_color_2 ) {
-		$background_style = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
-	}
-	$text_style = 'color: ' . $menu_text_color . ';';
-
-	$overlay_strength = get_post_meta( $parent_id, 'lfes_overlay_strength', true );
-
-	$overlay_style = '';
-
-	if ( $overlay_strength || '0' === $overlay_strength ) {
-		$overlay_strength = (int) $overlay_strength * 0.8 * 0.01;
-		$overlay_style    = 'opacity: ' . $overlay_strength . ';';
-	}
-
 	// set hamburger and list elements color (via class name).
 	if ( 'white' == $menu_text_color ) {
 		$subpage_header_elements_class = 'is-white';
 	} else {
 		$subpage_header_elements_class = 'is-black';
-	}
-
-	$logo = get_post_meta( $parent_id, 'lfes_' . $menu_text_color . '_logo', true );
-	if ( $logo ) {
-		$event_link_content = '<img loading="lazy" src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
-	} else {
-		$event_link_content = get_the_title( $parent_id );
 	}
 	?>
 
@@ -111,7 +105,6 @@ if ( ! $splash_page ) {
 
 	</header>
 </div>
-
 	<?php
 } else {
 	get_template_part( 'template-parts/event-splash-header' );
@@ -217,11 +210,6 @@ endwhile;
 	</div>
 </div>
 
-<?php
-// Only show footer if not a splash screen.
-if ( ! $splash_page ) :
-	?>
-
 <section class="event-footer xlarge-padding-y"
 	style="background: linear-gradient(90deg, <?php echo esc_html( $menu_color_2 ); ?> 0%, <?php echo esc_html( $menu_color ); ?> 100%); <?php echo esc_html( $text_style ); ?>">
 
@@ -275,7 +263,7 @@ if ( ! $splash_page ) :
 
 	<?php
 	// Only display this section if there is a logo set.
-	if ( $logo ) :
+	if ( $logo && ! $splash_page ) :
 		?>
 	<div class="event-footer-alignment">
 
@@ -402,10 +390,9 @@ if ( ! $splash_page ) :
 			?>
 		</ul>
 			<?php
-endif;
+		endif;
 		?>
 	</div>
 </section>
-<?php endif; ?>
 <?php
 get_footer();
