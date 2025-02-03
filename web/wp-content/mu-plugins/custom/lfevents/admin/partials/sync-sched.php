@@ -43,11 +43,16 @@ while ( $the_query->have_posts() ) {
 	$sched_event_api_key = get_post_meta( get_the_ID(), 'lfes_sched_event_api_key', true );
 
 	$url  = 'https://' . $sched_event_id . '.sched.com/api/session/export?api_key=' . $sched_event_api_key . '&format=json&strip_html=Y&custom_data=Y';
-	$data = wp_remote_get( $url );
+	$data = wp_remote_get(
+		$url,
+		array(
+			'headers' => array( 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' ),
+		)
+	);
+
 	if ( is_wp_error( $data ) || ( wp_remote_retrieve_response_code( $data ) != 200 ) ) {
 		return false;
 	}
-
 	$sessions = json_decode( wp_remote_retrieve_body( $data ) );
 	$speakers = array();
 
