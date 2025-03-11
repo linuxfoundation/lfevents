@@ -194,6 +194,9 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 function lfe_insert_external_link( $page ) {
 	$pattern = '/page-item-(\d+)/';
 	preg_match( $pattern, $page, $matches );
+	if ( ! $matches ) {
+		return $page;
+	}
 	$page_id = $matches[1];
 	$open_new_tab = get_post_meta( $page_id, 'lfes_open_new_tab', true );
 	if ( $open_new_tab ) {
