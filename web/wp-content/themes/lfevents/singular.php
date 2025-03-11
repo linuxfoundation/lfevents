@@ -96,7 +96,7 @@ if ( ! $splash_page ) {
 				}
 				$children = lfe_get_event_menu( $parent_id, $post->post_type, $background_style_solid );
 				if ( $children ) {
-				echo $children; //phpcs:ignore
+					echo $children; //phpcs:ignore
 				}
 				lfe_get_other_events( $parent_id, $background_style_solid, $menu_text_color );
 				?>
@@ -386,7 +386,7 @@ endwhile;
 		<ul
 			class="event-footer-menu <?php echo esc_html( $menu_text_color ); ?>">
 			<?php
-			echo wp_kses_post( $children );
+			echo $children; //phpcs:ignore
 			?>
 		</ul>
 			<?php
