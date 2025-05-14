@@ -105,6 +105,16 @@ button {
   }
 }
 
+.past-events--call-to-action {
+  a {
+    display: inline-block;
+    margin: 0;
+    font-size: rem-calc(12);
+    font-weight: bold;
+    text-transform: uppercase;
+  }  
+}
+
 .calendar-buttons {
   text-align: right;
   margin-bottom: 2rem;

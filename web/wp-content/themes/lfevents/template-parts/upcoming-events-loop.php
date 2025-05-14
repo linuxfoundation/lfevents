@@ -56,6 +56,7 @@
 				$sponsor_date_end = get_post_meta( $post->ID, 'lfes_cta_sponsor_date_end', true );
 
 				$schedule_url = get_post_meta( $post->ID, 'lfes_cta_schedule_url', true );
+				$videos_url   = get_post_meta( $post->ID, 'lfes_cta_videos_url', true );
 
 				$description = get_post_meta( $post->ID, 'lfes_description', true );
 				$parsedown   = new Parsedown();
@@ -161,6 +162,11 @@
 
 					if ( $schedule_url ) {
 						echo '<a aria-label="View schedule for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $schedule_url ) . '">Schedule</a>';
+						$have_button = true;
+					}
+
+					if ( $videos_url ) {
+						echo '<a aria-label="View videos for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $videos_url ) . '" target="_blank">Videos</a>';
 						$have_button = true;
 					}
 

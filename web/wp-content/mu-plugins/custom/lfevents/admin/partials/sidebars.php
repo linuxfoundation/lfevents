@@ -553,6 +553,18 @@ $sidebar = array(
 							'default_value' => '',
 							'placeholder'   => __( 'https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/schedule/' ),
 						),
+						array(
+							'type'          => 'text',
+							'id'            => 'cta_videos_url',
+							'data_type'     => 'meta',
+							'data_key'      => 'cta_videos_url',
+							'label'         => __( 'CTA Videos URL' ),
+							'help'          => __( 'This CTA button will be displayed whenever a url is provided.' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => __( 'https://www.youtube.com/watch?v=1u5LtsJqyrA&list=PLj6h78yzYM2N8nw1YcqqKveySH6_0VnI0' ),
+						),
 					),
 				),
 				array(

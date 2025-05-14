@@ -48,6 +48,7 @@ if ( $query->have_posts() ) {
 		$query->the_post();
 		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
 		$date_end   = get_post_meta( $post->ID, 'lfes_date_end', true );
+
 		if ( ! check_string_is_date( $date_start ) || ! check_string_is_date( $date_end ) ) {
 			$date_range = 'TBA';
 		} else {
@@ -128,6 +129,7 @@ if ( $query->have_posts() ) {
 				<?php
 				$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
 				$virtual = get_post_meta( $post->ID, 'lfes_virtual', true );
+
 				if ( $country ) {
 					?>
 					<span class="country">
@@ -192,6 +194,12 @@ if ( $query->have_posts() ) {
 					</span>
 				</p>
 				<?php
+			} else {
+				$videos_url = get_post_meta( $post->ID, 'lfes_cta_videos_url', true );
+
+				if ( $videos_url ) {
+					echo '<p class="past-events--call-to-action"><a aria-label="View videos for ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_url( $videos_url ) . '" target="_blank">Videos</a></p>';
+				}
 			}
 			?>
 
