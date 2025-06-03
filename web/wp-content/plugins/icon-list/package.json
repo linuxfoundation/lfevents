@@ -19,7 +19,7 @@
 		"@wordpress/components": "^28",
 		"@wordpress/data": "^10",
 		"@wordpress/rich-text": "^7",
-		"@wordpress/scripts": "27.8.0"
+		"@wordpress/scripts": "30.17.0"
 	},
 	"repository": {
 		"type": "git",
