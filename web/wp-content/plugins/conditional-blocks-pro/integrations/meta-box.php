@@ -145,20 +145,29 @@ class CB_Meta_Box_Integration {
 
 		if ( $field_groups ) {
 			foreach ( $field_groups as $group ) {
+				if ( empty( $group['title'] ) || empty( $group['fields'] ) ) {
+					continue;
+				}
+
 				$group_options = [];
 
-
 				foreach ( $group['fields'] as $field ) {
+					if ( empty( $field['name'] ) || empty( $field['id'] ) ) {
+						continue;
+					}
+
 					$group_options[] = [ 
 						'label' => $field['name'],
 						'value' => $field['id']
 					];
 				}
 
-				$options[] = [ 
-					'label' => $group['title'],
-					'options' => $group_options
-				];
+				if ( ! empty( $group_options ) ) {
+					$options[] = [ 
+						'label' => $group['title'],
+						'options' => $group_options
+					];
+				}
 			}
 		}
 

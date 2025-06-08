@@ -32,7 +32,9 @@ class Conditional_Blocks_Enqueue {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_content_styles' ) );
 		// Apply the CSS only when it's needed for a page, not on every page using enqueue_block_assets.
 		add_action( 'conditional_blocks_enqueue_frontend_responsive_css', array( $this, 'frontend_responsive_inline_css' ) );
-	}
+				// Debug script.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_debug_script' ) );
+			}
 
 	/**
 	 * Enqueue block JavaScript and CSS for the editor.
@@ -78,11 +80,11 @@ class Conditional_Blocks_Enqueue {
 			$localized_data = array(
 				'plugin_url' => plugins_url( '', __DIR__ ),
 				'screensizes' => $this->responsive_screensizes(),
-				'ipinfo_api_key' => get_option( 'conditional_blocks_ipinfo_api_key', false ),
-				'geolocation_countries' => conditional_blocks_get_countries(),
 				'registered_categories' => apply_filters( 'conditional_blocks_register_condition_categories', array() ),
 				'registered_conditions_types' => apply_filters( 'conditional_blocks_register_condition_types', array() ),
 				'excluded_block_types' => apply_filters( 'conditional_blocks_excluded_block_types', array() ), // Exclude specific blocks.
+				'excluded_categories' => apply_filters( 'conditional_blocks_excluded_categories', array() ), // Exclude specific categories.
+				'excluded_condition_types' => apply_filters( 'conditional_blocks_excluded_condition_types', array() ), // Exclude specific condition types.
 				'visible_in_editor' => apply_filters( 'conditional_blocks_visible_in_editor', true ), // Change if conditional blocks is visible in the editor.
 				'developer_mode' => get_option( 'conditional_blocks_developer_mode', false ),
 				'open_from_toolbar' => get_option( 'conditional_blocks_open_from_toolbar', false ),
@@ -95,6 +97,7 @@ class Conditional_Blocks_Enqueue {
 			$localized_data['presets'] = $this->get_presets();
 			$localized_data['roles'] = $this->get_user_roles();
 			$localized_data['is_wc_active'] = class_exists( 'WooCommerce' );
+
 			if ( class_exists( 'WC_Countries' ) && class_exists( 'WC_Geolocation' ) ) {
 				$wc_countries = new WC_Countries();
 				$wc_countries->get_countries();
@@ -111,6 +114,7 @@ class Conditional_Blocks_Enqueue {
 			}
 			$localized_data['php_logic_functions'] = apply_filters( 'conditional_blocks_filter_php_logic_functions', array() );
 			$localized_data['geolocation_countries'] = conditional_blocks_get_countries();
+			$localized_data['geolocation_continents'] = conditional_blocks_get_continents();
 			$localized_data['ipinfo_api_key'] = get_option( 'conditional_blocks_ipinfo_api_key', false );
 			$localized_data['has_valid_ip_address'] = conditional_blocks_get_ip_address() ? true : false;
 			
@@ -222,6 +226,38 @@ class Conditional_Blocks_Enqueue {
 
 		return $roles;
 	}
+
+	public function enqueue_debug_script() {
+		// Add debug script only for admins or when debug is enabled
+		if ( defined( 'CONDITIONAL_BLOCKS_DEBUG' ) && CONDITIONAL_BLOCKS_DEBUG ) {
+			wp_enqueue_script(
+				'conditional-blocks-debug',
+				plugin_dir_url( __FILE__ ) . '../assets/debug/debug.js',
+				[],
+				time(),
+				true
+			);
+
+			// Get geolocation debug info
+			$user_ip = conditional_blocks_get_ip_address();
+
+			// Get country data
+			$country_data = conditional_blocks_get_ipinfo_data( $user_ip );
+
+			$debug_data = apply_filters( 'conditional_blocks_debug_data', [ 
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'geolocation' => [ 
+					'detected_ip' => $user_ip,
+					'detected_country' => conditional_blocks_get_user_country(),
+					'detected_continent' => conditional_blocks_get_user_continent(),
+					'ipinfo_response' => $country_data,
+				],
+			] );
+
+			wp_localize_script( 'conditional-blocks-debug', 'conditionalblocksDebug', $debug_data );
+		}
+	}
+
 	
 }
 new Conditional_Blocks_Enqueue();

@@ -34,6 +34,12 @@ class Conditional_Blocks_Render_Block {
 	private $detected_geolocation_country = false;
 
 	/**
+	 * Set the detected geolocation continent.
+	 * @var 
+	 */
+	private $detected_geolocation_continent = false;
+
+	/**
 	 * Fire off the render block functions.
 	 */
 	public function init() {
@@ -62,6 +68,7 @@ class Conditional_Blocks_Render_Block {
 		add_filter( 'conditional_blocks_register_check_postIds', array( $this, 'postIds' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_phpLogic', array( $this, 'phpLogic' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_geolocationCountry', array( $this, 'geolocationCountry' ), 10, 2 );
+		add_filter( 'conditional_blocks_register_check_geolocationContinent', array( $this, 'geolocationContinent' ), 10, 2 );
 		// WooCommerce.
 		add_filter( 'conditional_blocks_register_check_wcCartTotal', array( $this, 'wcCartTotal' ), 10, 2 );
 		add_filter( 'conditional_blocks_register_check_wcCustomerTotalSpent', array( $this, 'wcCustomerTotalSpent' ), 10, 2 );
@@ -286,50 +293,67 @@ class Conditional_Blocks_Render_Block {
 	 * @return string $block_content
 	 */
 	public function apply_responsive_screensizes( $block_content, $show_on ) {
+		if ( empty( $block_content ) ) {
+			return $block_content;
+		}
 
+		// Build responsive classes
 		$html_classes = '';
-
 		if ( ! in_array( 'showMobileScreen', $show_on, true ) ) {
 			$html_classes .= 'conblock-hide-mobile ';
 		}
-
 		if ( ! in_array( 'showTabletScreen', $show_on, true ) ) {
 			$html_classes .= 'conblock-hide-tablet ';
 		}
-
 		if ( ! in_array( 'showDesktopScreen', $show_on, true ) ) {
 			$html_classes .= 'conblock-hide-desktop ';
 		}
 
-		if ( ! empty( $html_classes ) ) {
-
-			// Replace the first occurrence of class=" without classes.
-			// We need the classes to be added directly to the blocks. Wrapping classes can sometimes block full width content.
-			$needle = 'class="';
-
-			// Find the first occurrence.
-			$find_class_tag = strpos( $block_content, $needle );
-
-			if ( $find_class_tag !== false ) {
-				// Our classes.
-				$replacement = 'class="' . $html_classes . ' ';
-				// Replace it.
-				$new_block = substr_replace( $block_content, $replacement, $find_class_tag, strlen( $needle ) );
-			} else {
-				// Fallback to wrapping classes when block has no existing classes.
-				$new_block = '<div class="' . $html_classes . '">' . $block_content . '</div>';
-			}
-
-			// Make sure to add frontend CSS to handle the responsive blocks.
-			do_action( 'conditional_blocks_enqueue_frontend_responsive_css' );
-
-			return $new_block;
-		} else {
+		if ( empty( $html_classes ) ) {
 			return $block_content;
 		}
 
-	}
+		$html_classes = trim( $html_classes );
+		$block_content = trim( $block_content );
 
+		// Count root level elements
+		$root_elements = preg_match_all( '/<[a-zA-Z0-9]+[\s>]/', $block_content, $matches );
+
+		// If we have more than one root element or no elements, wrap everything
+		if ( $root_elements !== 1 ) {
+			$block_content = '<div class="' . $html_classes . '">' . $block_content . '</div>';
+		} else {
+			// If we get here, we have exactly one root element
+			$block_content = preg_replace_callback(
+				'/^(<[a-zA-Z0-9]+)((?:\s+[^>]*)?)(>)/',
+				function ($matches) use ($html_classes) {
+					$tag = $matches[1];
+					$attrs = $matches[2];
+
+					// If already has class attribute
+					if ( preg_match( '/\sclass\s*=\s*(["\'])(.*?)\1/', $attrs, $class_matches ) ) {
+						$attrs = preg_replace(
+							'/(\sclass\s*=\s*["\'])(.*?)(["\'])/',
+							'$1' . $html_classes . ' $2$3',
+							$attrs
+						);
+					} else {
+						// Add class attribute
+						$attrs = rtrim( $attrs ) . ' class="' . $html_classes . '"';
+					}
+
+					return $tag . $attrs . $matches[3];
+				},
+				$block_content,
+				1
+			);
+		}
+
+		// Make sure to add frontend CSS to handle the responsive blocks.
+		do_action( 'conditional_blocks_enqueue_frontend_responsive_css' );
+
+		return $block_content;
+	}
 	/**
 	 * Lockdown, this block has been isolated from everyone.
 	 *
@@ -923,6 +947,8 @@ class Conditional_Blocks_Render_Block {
 		$request_uri = ! empty( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : false;
 		$selected_paths = ! empty( $condition['selectedPaths'] ) ? $condition['selectedPaths'] : false;
 
+		$meets_requirements = false;
+
 		if ( $request_uri && $selected_paths ) {
 
 			// Default to "block is only allowed on these paths".
@@ -930,8 +956,6 @@ class Conditional_Blocks_Render_Block {
 
 			// Make line breaks into an array, make sure they are integers.
 			$selected_paths = explode( "\n", $selected_paths );
-
-			$meets_requirements = false;
 
 			foreach ( $selected_paths as $selected_path ) {
 				if ( $should_contain ) {
@@ -1088,57 +1112,49 @@ class Conditional_Blocks_Render_Block {
 	 * @return bool $should_render.
 	 */
 	public function geolocationCountry( $should_render, $condition ) {
-		// Check if the country has been selected.
 		if ( empty( $condition['country']['value'] ) ) {
 			return $should_render;
 		}
 
-		$has_match = false;
 		$required_country = $condition['country']['value'];
+		$user_country = conditional_blocks_get_user_country();
 
-		// Check if we've already detected the country
-		if ( $this->detected_geolocation_country !== false ) {
-			$user_country = $this->detected_geolocation_country;
-		} else {
-			$user_ip = conditional_blocks_get_ip_address();
-
-			// Likely localhost or other non-public IPs. - prevent API call.
-			if ( empty( $user_ip ) ) {
-				return $should_render;
-			}
-
-			$api_token = get_option( 'conditional_blocks_ipinfo_api_key', false );
-
-			if ( empty( $api_token ) ) {
-				return $should_render;
-			}
-
-			$args = array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $api_token,
-				),
-			);
-
-			$response = wp_remote_get( "https://ipinfo.io/{$user_ip}", $args );
-
-			if ( is_wp_error( $response ) ) {
-				return $should_render;
-			}
-
-			$body = wp_remote_retrieve_body( $response );
-			$data = json_decode( $body, true );
-
-			if ( ! empty( $data['country'] ) ) {
-				$user_country = $data['country'];
-				// Store the detected country for additional blocks.
-				$this->detected_geolocation_country = $user_country;
-			} else {
-				return $should_render;
-			}
+		if ( $user_country === false ) {
+			return $should_render;
 		}
 
-		$has_match = $user_country === $required_country ? true : false;
+		$has_match = strtoupper( $user_country ) === strtoupper( $required_country );
+		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
+		if ( $has_match && $block_action === 'showBlock' ) {
+			$should_render = true;
+		} elseif ( ! $has_match && $block_action === 'hideBlock' ) {
+			$should_render = true;
+		}
+
+		return $should_render;
+	}
+
+	/**
+	 *  Check Geolocation - Continent
+	 *
+	 * @param bool  $should_render if condition passed validation.
+	 * @param array $condition condition config.
+	 * @return bool $should_render.
+	 */
+	public function geolocationContinent( $should_render, $condition ) {
+		if ( empty( $condition['continent']['value'] ) ) {
+			return $should_render;
+		}
+
+		$required_continent = $condition['continent']['value'];
+		$user_continent = conditional_blocks_get_user_continent();
+
+		if ( $user_continent === false ) {
+			return $should_render;
+		}
+
+		$has_match = strtoupper( $user_continent ) === strtoupper( $required_continent );
 		$block_action = ! empty( $condition['blockAction'] ) ? $condition['blockAction'] : 'showBlock';
 
 		if ( $has_match && $block_action === 'showBlock' ) {
@@ -1462,7 +1478,7 @@ class Conditional_Blocks_Render_Block {
 		$allowed_referers = array_map( 'trim', explode( ',', $allowed_referers ) );
 
 		// Check if referer is allowed by the block.
-		if ( ! empty( $referer_parse['host'] ) && ( in_array( $referer_parse['host'], $allowed_referers, true ) ) ) {
+		if ( ! empty( $referer_parse['host'] ) && in_array( $referer_parse['host'], $allowed_referers, true ) ) {
 			return true;
 		}
 

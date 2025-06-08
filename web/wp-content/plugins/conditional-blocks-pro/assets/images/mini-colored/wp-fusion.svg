@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="39px" viewBox="0 0 38 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Mark</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-Page-(Type-Outlined)" transform="translate(-115.000000, -38.000000)">
+            <g id="Section---Splash" transform="translate(106.000000, -602.000000)">
+                <g id="Logo-(Larger)" transform="translate(9.000000, 639.050453)">
+                    <g id="Mark" transform="translate(0.000000, 0.500000)">
+                        <path d="M8,0.5 L38,0.5 L38,0.5 L38,30.5 C38,34.918278 34.418278,38.5 30,38.5 L0,38.5 L0,38.5 L0,8.5 C-5.41083001e-16,4.081722 3.581722,0.5 8,0.5 Z" id="BG" fill="#E55B10"></path>
+                        <path d="M31,15.5 C31,16.3284271 30.3284271,17 29.5,17 L17.5,16.999 L17.5,29 C17.5,29.8284271 16.8284271,30.5 16,30.5 L15,30.5 C14.1715729,30.5 13.5,29.8284271 13.5,29 L13.5,15 C13.5,14.4577643 13.7877138,13.9827278 14.2188066,13.7192253 C14.4827278,13.2877138 14.9577643,13 15.5,13 L29.5,13 C30.3284271,13 31,13.6715729 31,14.5 L31,15.5 Z" id="Path" fill="#FFFFFF"></path>
+                        <path d="M8,23 C8,22.1715729 8.67157288,21.5 9.5,21.5 L21.5,21.501 L21.5,9.5 C21.5,8.67157288 22.1715729,8 23,8 L24,8 C24.8284271,8 25.5,8.67157288 25.5,9.5 L25.5,23.5 C25.5,24.0422357 25.2122862,24.5172722 24.7811934,24.7807747 C24.5172722,25.2122862 24.0422357,25.5 23.5,25.5 L9.5,25.5 C8.67157288,25.5 8,24.8284271 8,24 L8,23 Z" id="Path" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

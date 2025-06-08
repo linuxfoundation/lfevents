@@ -1,20 +1,20 @@
 === Conditional Blocks - Advanced Content Visibility Control for WordPress ===
 Contributors: morganhvidt
 Donate link: https://www.paypal.me/morganhvidt/
-Tags: visibility, content, control, restrict, hide 
+Tags: visibility, display logic, control, restrict, hide 
 Requires at least: 5.5
-Tested up to: 6.7
-Stable tag: 3.1.6
+Tested up to: 6.8
+Stable tag: 3.2.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://conditionalblocks.com/
 
-Conditionally show or hide WordPress blocks with advanced visibility control! Effortlessly manage content block and widget visibility without writing code. Ideal for membership sites, responsive designs, and more.
+Easily show/hide WordPress blocks & widgets with powerful, no-code display logic. Perfect for restricting content. Explore advanced scheduling, Geolocation, integrations & more!
 
 == Description ==
 
-**Conditional Blocks** is a _powerful_, no code plugin that allows you to **control the visibility of any WordPress blocks** with advanced logic. 
+**Conditional Blocks** is a _powerful_, no code plugin that allows you to **control the visibility of any WordPress blocks within the Block Editor (Gutenberg)** using advanced display logic. 
 
 Replace multiple plugins with our versatile **Conditional Blocks**, developed for _fast paced_ freelancers and agencies.
 
@@ -23,14 +23,14 @@ Replace multiple plugins with our versatile **Conditional Blocks**, developed fo
 
 ## Create Better Sites with Less Plugins 🤩
 
-**Everything is block in modern WordPress development with Full Site Editing (FSE)**. In plain words, you apply visibility logic to everything.
+**Everything is block in modern WordPress development with Full Site Editing (FSE)**. In plain words, you apply conditional display logic to everything.
 
 Here's some example use-cases where **Conditional Blocks** shines.
 
 * Dynamic headers, navigation and menus,
 * Cart Messages
 * CTA & Marketing sections
-* Restrict content
+* Restrict content & Access control
 * Membership content 
 * Content Control 
 * And much more..
@@ -54,51 +54,45 @@ The _free_ version is limited.
 
 Consider joining our **PRO** community to create better WordPress sites & support development.
 
- ## The Full ToolKit with Conditional Blocks Pro ✨
+ ## The Full Toolkit with Conditional Blocks Pro ✨
 
-**Conditional Blocks Pro** gives you the **full suite** of visibility conditions & integrations with your favorite plugins.
+**Conditional Blocks Pro** unlocks the full suite of advanced block visibility conditions and integrations, allowing you to create truly dynamic and personalized user experiences:
 
-### Key Features:
+**🎯 Advanced Audience Targeting (Pro)**
 
-- **User Role-Based Visibility**: Control which blocks are visible to different user roles, including WooCommerce customers, admins, editors, subscribers, and custom-defined roles.
-  
-- **Scheduling Options**: Set blocks to appear during specific date ranges, times, or on selected days of the week.
-  
-- **Device & Browser Specific Content**: Tailor content to appear on certain devices (iPhone, Android, etc.) or browsers (Chrome, Firefox, etc.).
-  
-- **Referrer-Sensitive Blocks**: Customize visibility based on the referring URL, such as Google or X (Twitter).
-  
-- **Dynamic Display Logic**: Use post meta fields or URL query strings to dynamically show blocks, ideal for working with form plugins and custom data.
-  
-- **Selective Content Placement**: Specify block visibility for certain post IDs, URL paths, custom post types, taxonomies, and terms.
-  
-- **Meta-Based Control**: Manage visibility based on custom fields, user meta, or post meta.
-  
-- **WordPress Archive Integration**: Toggle block visibility in response to WordPress archives.
-  
-- **Presets for Conditions**: Save conditions as presets and apply them site-wide for consistent behavior.
-  
-- **Custom Conditions**: Craft custom PHP or function-based conditions for unique display scenarios.
-  
-- **Combine with AND, OR logic**:  You can combine all visibility conditions into groups using our AND, OR logic. 
+*   **Geolocation:** Target or exclude visitors based on their Country or Continent using their IP address. Ideal for region-specific content, offers, or compliance.
+*   **User Role:** Precisely control visibility for specific user roles (Admin, Editor, Subscriber, WooCommerce Customer, custom roles, etc.).
+*   **Device & Browser:** Tailor experiences by showing/hiding blocks based on device type (iPhone, Android, Tablet, Desktop) or browser (Chrome, Firefox, Safari, etc.).
+*   **Referrer URL:** Display unique content to visitors arriving from specific sources like Google, X/Twitter, or other websites.
 
-**[SEE ALL CONDITIONAL BLOCKS PRO FEATURES](https://conditionalblocks.com/features/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)**
+**⚙️ Dynamic & Automated Content (Pro)**
 
-## Third-party Integrations 🔌
+*   **Scheduling:** Automate your content calendar! Display blocks only during specific date ranges, times of day, or days of the week – perfect for sales, events, or timely announcements.
+*   **Post Meta & Custom Fields:** Leverage your existing data by showing or hiding blocks based on post meta or custom field values (including ACF).
+*   **URL Query String:** Create dynamic landing pages or respond to campaign parameters by controlling visibility based on URL query strings.
+*   **HTTP Cookies:** Adapt content based on visitor cookie values for advanced tracking or personalization (Pro).
+*   **Content Specificity:** Target blocks to specific Post IDs, URL paths, Post Types, Taxonomies (like categories or tags), and even specific Terms.
+*   **User Meta:** Personalize content based on individual user metadata.
+*   **Archive Pages:** Show or hide blocks specifically on WordPress archive pages.
 
-**Conditional Blocks Pro** integrations are automatically available when the supported plugins are installed.
+**🔌 Powerful Integrations (Pro)**
 
-* **Advanced Custom Fields (ACF):** 
-Control content based on the [ACF field values](https://conditionalblocks.com/docs/acf/field-value/?utm_source=wporg&utm_medium=referral&utm_campaign=readme).
-* **WooCommerce: (WOO)**
-Create custom cart messages based on the cart value and even [products in cart](https://conditionalblocks.com/docs/woocommerce/products-in-cart/?utm_source=wporg&utm_medium=referral&utm_campaign=readme).
-* **Easy Digital Downloads (EDD):**
-Conditions based on [cart value](https://conditionalblocks.com/docs/edd/cart-value/?utm_source=wporg&utm_medium=referral&utm_campaign=readme), [purchased products](https://conditionalblocks.com/docs/edd/products-purchased/?utm_source=wporg&utm_medium=referral&utm_campaign=readme), [products in cart](https://conditionalblocks.com/docs/edd/products-in-cart/?utm_source=wporg&utm_medium=referral&utm_campaign=readme), and [product categories in cart](https://conditionalblocks.com/docs/edd/product-categories-cart/?utm_source=wporg&utm_medium=referral&utm_campaign=readme).
-* **Paid Memberships Pro (PMPro):**
- Restrict content based on [membership levels & status](https://conditionalblocks.com/docs/paid-memberships-pro/membership-level/?utm_source=wporg&utm_medium=referral&utm_campaign=readme), or  [user fields](https://conditionalblocks.com/docs/paid-memberships-pro/pmpro-user-fields/?utm_source=wporg&utm_medium=referral&utm_campaign=readme).
+_Integrations are automatically available when the supported plugin is active._
 
-**[SEE ALL PRO INTEGRATIONS](https://conditionalblocks.com/docs/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)**
+*   **Advanced Custom Fields (ACF):** Create hyper-personalized experiences by controlling block visibility based on your ACF field values. ([Learn More](https://conditionalblocks.com/docs/acf/field-value/?utm_source=wporg&utm_medium=referral&utm_campaign=readme))
+*   **WooCommerce:** Boost sales and improve shop UX! Show targeted messages based on cart total, products in cart, purchased products, or customer details. ([Learn More](https://conditionalblocks.com/docs/woocommerce/products-in-cart/?utm_source=wporg&utm_medium=referral&utm_campaign=readme))
+*   **Easy Digital Downloads (EDD):** Enhance your digital store with conditions based on cart value, purchased products, products in cart, or cart item categories. ([Learn More](https://conditionalblocks.com/docs/edd/?utm_source=wporg&utm_medium=referral&utm_campaign=readme))
+*   **Paid Memberships Pro (PMPro):** Easily restrict content based on membership levels, status, or specific user field data. ([Learn More](https://conditionalblocks.com/docs/paid-memberships-pro/?utm_source=wporg&utm_medium=referral&utm_campaign=readme))
+*   **MetaBox:** Control block visibility based on the values stored in your MetaBox custom fields. ([Learn More](https://conditionalblocks.com/docs/metabox/field-value/?utm_source=wporg&utm_medium=referral&utm_campaign=readme))
+*   **ProfilePress:** Restrict content visibility based on users' active membership plans in ProfilePress. ([Learn More](https://conditionalblocks.com/docs/profilepress/active-membership-plans/?utm_source=wporg&utm_medium=referral&utm_campaign=readme))
 
+**🚀 Workflow Boosters (Pro)**
+
+*   **Condition Presets:** Save frequently used condition combinations and reuse them across your site with a single click.
+*   **Custom PHP Logic:** Implement highly specific or complex visibility rules using your own custom PHP functions.
+*   **Combine with AND/OR Logic:** Build sophisticated visibility rules by grouping multiple conditions with flexible AND/OR logic.
+
+**[See all Conditional Blocks Pro features & integrations](https://conditionalblocks.com/features/?utm_source=wporg&utm_medium=referral&utm_campaign=readme)**
 
 ## Advanced Usage
 
@@ -114,7 +108,7 @@ One of our favorite methods of managing WordPress content is to use Group Blocks
 
 ### Design Patterns
 
-Yes it’s also possible to pre-make dynamic templates using Conditional Blocks. You’ll have to make use of the WordPress Design Patterns. Simply make a patterns as you’ve also done while applying the visibility rules. 
+Yes it's also possible to pre-make dynamic templates using Conditional Blocks. You'll have to make use of the WordPress Design Patterns. Simply make a patterns as you've also done while applying the visibility rules. 
 
 The patterns will be ready and be conditionally displayed when you insert it on a page. We personally use the same method on Synced Patterns too. (Previously known as Reusable Blocks in Gutenberg).
 
@@ -164,7 +158,7 @@ Tested and compatible with:
 * WooCommerce Storefront
 * WordPress Site Editor
 * Gutenberg
-* Wordpress Site Templates
+* WordPress Site Templates
 * OllieWP theme
 
 For support or help with other plugins, please get in touch.
@@ -208,7 +202,7 @@ For support or help with other plugins, please get in touch.
 
 = Can I conditionally hide blocks? =
 
-Yes! You can conditionally hide any Gutenberg block using the available condition types.
+Yes! You can conditionally hide any Gutenberg block using the available condition types and **conditional logic**.
 
 = Does Conditional Blocks work for block widgets? =
 
@@ -250,15 +244,23 @@ We're always eager to hear your ideas! [Feature Request Board](https://condition
 4. Conditional Blocks 2.0+ - logged out/in user content block.
 5. Frontend showing the logged out user block.
 6. Editor options for conditionally showing block on screen sizes.
-7. Frontend showing different blocks for different screensizes using responsive blocks.
+7. Frontend showing different blocks for different screen sizes using responsive blocks.
 
 == Changelog ==
+
+= 3.2.1 = 
+
+* WordPress 6.8 Ready
+
+= 3.1.6 =
+
+* WordPress 6.7 Ready
 
 = 3.1.3 =
 
 * Change: Inside Query loops, post & meta related conditions will now target each post within the loop.
 * Change: The text on block actions to be more clear.
-* Fixed: PHP notice when Responsive Screensizes condition has no screensizes selected.
+* Fixed: PHP notice when Responsive Screen sizes condition has no screensizes selected.
 * WordPress 6.6 Ready
 
 = 3.1.1 = 
@@ -273,9 +275,9 @@ Changes:
 * Minimum PHP version set to 7.4
 
 New: 
-* Metabox integration - Value of custom fields [PRO]
+* MetaBox integration - Value of custom fields [PRO]
 
-= 3.1.0 = 
+= 3.1.0 =
 
 For a detailed overview of all updates, [visit the full release post](https://conditionalblocks.com/whats-new-v3-1/?utm_source=wporg&utm_medium=referral&utm_campaign=readme).
 
@@ -395,7 +397,7 @@ Release notes: https://conditionalblocks.com/v2-3-woocommerce-condition/
 * Improved and categorized the condition selector, now with "type to search" support.
 
 Conditional Blocks Pro
-* New - WooCommerce support available in Conditional Blocks Pro. Control the visibility of blocks using the customers total cart value.
+* New - WooCommerce support available in Conditional Blocks Pro. Control the visibility of blocks using the customer's total cart value.
 
 = 2.0.1 =
 
@@ -451,6 +453,6 @@ Complete rebuild of Conditional Blocks. Please read the 2.0 introduction & relea
 * Fixed conflict with Yoast and other plugins which triggers Gutenberg by using React.
 
 = 1.0.0 =
-* initial Release of Conditional Blocks for Gutenberg.
+* Initial Release of Conditional Blocks for Gutenberg.
 
 == Upgrade Notice ==

@@ -80,6 +80,11 @@ function cb_maybe_flatten_meta( $meta_value, $nested_key = false ) {
 }
 
 function conditional_blocks_get_ip_address() {
+	// Check for debug mode and query string override
+	if ( defined( 'CONDITIONAL_BLOCKS_GEOLOCATION_SIMULATION' ) && ! empty( $_GET['cb_ip'] ) ) {
+		return sanitize_text_field( wp_unslash( $_GET['cb_ip'] ) );
+	}
+
 	if ( isset( $_SERVER['HTTP_X_REAL_IP'] ) ) {
 		$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_REAL_IP'] ) );
 	} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {

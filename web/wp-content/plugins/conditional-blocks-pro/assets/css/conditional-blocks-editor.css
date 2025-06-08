@@ -334,13 +334,18 @@ img.conditional-blocks-category-icon, .conditional-blocks-category-icon .dashico
 }
 .conditional-block-separator-condition {
   position: absolute;
-  padding: 5px 8px;
-  /* background: #d4d4d4; */
-  background: #a6a6a6;
-  margin-top: -14px;
-  border-radius: 0px 5px 5px 0px;
-  color: #ffffff;
-  font-size: 9px;
+  padding: 3px 25px;
+  background: #fbfbfb;
+  margin-top: 0;
+  border-radius: 5px;
+  color: #50575e;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   }
 .conditional-block-separator-set {
   text-align: center;
@@ -350,8 +355,6 @@ img.conditional-blocks-category-icon, .conditional-blocks-category-icon .dashico
   font-size: 14px;
 }
 .conditional-blocks-builder__active_condition_tag {
-  padding: 5px 8px;
-  margin: 2px;
   max-width: fit-content;
   color: #007cba;
   font-size: 11px;
@@ -360,4 +363,16 @@ img.conditional-blocks-category-icon, .conditional-blocks-category-icon .dashico
   border: 1px solid #d4d4d4;
   color: #282828;
   border-radius: 5px;
+  padding: 5px 8px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  }
+  .conditional-blocks-builder__active_condition_tag img.conditional-blocks-category-icon,
+  .conditional-blocks-builder__active_condition_tag .dashicon {
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .conditional-blocks-builder-modal .components-checkbox-control  {
+    margin-bottom: 5px;
   }

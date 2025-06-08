@@ -68,7 +68,19 @@ class Conditional_Blocks_REST_V1 {
 				},
 			)
 		);
-	}
+
+				register_rest_route(
+			$this->endpoint,
+			'/validate-geolocation',
+			array(
+				'methods' => 'POST',
+				'callback' => array( $this, 'callback_validate_geolocation' ),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' ); // User data will only be available when called from WP itself.
+				},
+			)
+		);
+			}
 
 	/**
 	 * Convert the legacy conditions to fit the new structure.
@@ -145,6 +157,116 @@ class Conditional_Blocks_REST_V1 {
 
 		return $updated_options;
 	}
-}
+
+		/**
+	 * Test the geolocation functionality using IPInfo API
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function callback_validate_geolocation( $request ) {
+		$parameters = $request->get_params();
+		$api_key = $parameters['api_key'] ?? '';
+
+		if ( empty( $api_key ) ) {
+			return new WP_REST_Response(
+				array(
+					'success' => false,
+					'message' => __( 'IPInfo API key is required', 'conditional-blocks' ),
+				),
+				400
+			);
+		}
+
+		$user_ip = conditional_blocks_get_ip_address();
+
+		$args = [ 
+			'headers' => [ 
+				'Authorization' => 'Bearer ' . $api_key,
+				'Referer' => home_url(),
+			],
+			'timeout' => 15,
+		];
+
+		$response = wp_remote_get( "https://ipinfo.io/{$user_ip}", $args );
+
+		if ( is_wp_error( $response ) ) {
+			return new WP_REST_Response(
+				array(
+					'success' => false,
+					'message' => sprintf(
+						__( 'Failed to connect to IPInfo API: %s', 'conditional-blocks' ),
+						$response->get_error_message()
+					),
+				),
+				500
+			);
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+		$data = json_decode( $body, true );
+
+		if ( isset( $data['error'] ) ) {
+
+			// IPinfo may return a string or an array with the message inside.
+			$error_message = $data['error'];
+
+			// Handle specific IPInfo security error
+			if ( is_string( $error_message ) && strpos( $error_message, 'Token is not allowed access from this source. Please check your token security rules' ) !== false ) {
+				return new WP_REST_Response(
+					array(
+						'success' => false,
+						'error_type' => 'token_security',
+						'message' => sprintf(
+							__(
+								'Your IPInfo token is not configured to allow access from:\n\nDomain: %s\nServer IP: %s\n\nPlease visit your IPInfo dashboard (https://ipinfo.io/account/token) and add both domain and IP to your token\'s security rules.\n\nNOTE: localhost/local development - you will need to use a live server to use geolocation features. See our documentation for guides on testing.',
+								'conditional-blocks'
+							),
+							$_SERVER['HTTP_HOST'] ?? 'unknown',
+							$_SERVER['SERVER_ADDR'] ?? 'unknown'
+						),
+					),
+					403
+				);
+			}
+
+			return new WP_REST_Response(
+				array(
+					'success' => false,
+					'error_type' => 'api_error',
+					'message' => sprintf(
+						__( 'IPInfo API Error: %s', 'conditional-blocks' ),
+						is_string( $error_message ) ? $error_message : ( is_array( $error_message ) && isset( $error_message['message'] ) ? $error_message['message'] : json_encode( $error_message ) )
+					),
+				),
+				400
+			);
+		}
+
+		if ( empty( $data['country'] ) || empty( $data['ip'] ) ) {
+			return new WP_REST_Response(
+				array(
+					'success' => false,
+					'message' => __( 'Invalid response from IPInfo API', 'conditional-blocks' ),
+				),
+				400
+			);
+		}
+
+		return new WP_REST_Response(
+			array(
+				'success' => true,
+				'data' => array(
+					'ip' => $data['ip'],
+					'city' => $data['city'] ?? '',
+					'region' => $data['region'] ?? '',
+					'country' => $data['country'],
+					'loc' => $data['loc'] ?? '',
+					'timezone' => $data['timezone'] ?? '',
+				),
+			),
+			200
+		);
+	}
+	}
 
 new Conditional_Blocks_REST_V1();

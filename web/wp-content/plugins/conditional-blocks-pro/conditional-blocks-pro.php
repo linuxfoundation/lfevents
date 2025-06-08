@@ -3,9 +3,9 @@
 /**
  * Plugin Name: Conditional Blocks Pro
  * Author URI: https://conditionalblocks.com/
- * Description: Conditionally change the visibility of WordPress Blocks for any reason.
+ * Description:  Create personalized content by using conditions on all WordPress blocks.
  * Author: Conditional Blocks
- * Version: 3.1.6
+ * Version: 3.3.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: conditional-blocks
@@ -34,7 +34,7 @@ if ( ! defined( 'CONDITIONAL_BLOCKS_PATH' ) ) {
  * Note version could be a string such as x.x.x-beta2.
  */
 if ( ! defined( 'CONDITIONAL_BLOCKS_VERSION' ) ) {
-	define( 'CONDITIONAL_BLOCKS_VERSION', '3.1.6' );
+	define( 'CONDITIONAL_BLOCKS_VERSION', '3.3.0' );
 }
 
 /**
@@ -64,7 +64,7 @@ class CONBLOCKPRO_Init {
 
 		$this->constants = array(
 			'name' => 'Conditional Blocks Pro',
-			'version' => '3.1.6',
+			'version' => '3.3.0',
 			'slug' => plugin_basename( __FILE__, ' . php' ),
 			'base' => plugin_basename( __FILE__ ),
 			'name_sanitized' => basename( __FILE__, '. php' ),
@@ -118,7 +118,8 @@ class CONBLOCKPRO_Init {
 		}
 		
 		require_once plugin_dir_path( __FILE__ ) . 'functions/functions.php';
-		require_once plugin_dir_path( __FILE__ ) . 'data/countries.php';
+				require_once plugin_dir_path( __FILE__ ) . 'functions/geolocation.php';
+				require_once plugin_dir_path( __FILE__ ) . 'functions/languages.php';
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class-register.php';
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class-rest.php';
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class-render.php';
@@ -127,7 +128,11 @@ class CONBLOCKPRO_Init {
 		require_once plugin_dir_path( __FILE__ ) . 'integrations/advanced-custom-fields.php';
 		require_once plugin_dir_path( __FILE__ ) . 'integrations/paid-memberships-pro.php';
 		require_once plugin_dir_path( __FILE__ ) . 'integrations/meta-box.php';
+		require_once plugin_dir_path( __FILE__ ) . 'integrations/gtranslate.php';
+		require_once plugin_dir_path( __FILE__ ) . 'integrations/wp-fusion.php';
+		require_once plugin_dir_path( __FILE__ ) . 'integrations/fluent-crm.php';
 	}
+
 
 	public function activation() {
 		
@@ -145,41 +150,25 @@ class CONBLOCKPRO_Init {
 
 new CONBLOCKPRO_Init();
 
-/**
- * Run SL.
- */
-function conblockpro_run_sl() {
+function conblockpro_license_manager_init() {
 
-	if ( ! is_admin() ) {
-		return;
-	}
+	require_once plugin_dir_path( __FILE__ ) . '/license-manager/license-manager.php';
 
-	require_once plugin_dir_path( __FILE__ ) . 'library/puri-sl/class-puri-sl-ui.php';
-	require_once plugin_dir_path( __FILE__ ) . 'library/puri-sl/class-puri-sl-updater.php';
-
-	$plugin_data = array(
-		'name' => 'Conditional Blocks Pro',
-		'item_id' => '708',
+	$license_manager = new CONBLOCKPRO_License_Manager( [ 
 		'store_url' => 'https://conditionalblocks.com/',
-		'version' => '3.1.6',
+		'item_id' => '708',
+		'item_name' => 'Conditional Blocks Pro',
+		'plugin_file' => __FILE__,
+		'version' => '3.3.0',
 		'author' => 'Conditional Blocks',
-		'license_option_name' => 'conditional-blocks-pro_license_key',
-		'license' => get_site_option( 'conditional-blocks-pro_license_key', false ),
-		'beta' => get_site_option( 'conditional-blocks-pro_beta', false ),
-		'file_path' => __FILE__,
-		'base' => plugin_basename( __FILE__ ),
-		'slug' => 'conditional-blocks-pro',
-	);
-
-	$plugin_ui_config = array(
-		'support_url' => 'https://conditionalblocks.com/support/',
-		'docs_url' => 'https://conditionalblocks.com/docs/?utm_source=conditional-blocks-pro&utm_medium=referral&utm_campaign=plugin-links',
-		'beta_toggle' => true,
-	);
-
-	new CONBLOCKPRO_Puri_SL_UI( $plugin_data, $plugin_ui_config );
-
-	new conblockpro_Puri_SL_Updater( $plugin_data['store_url'], __FILE__, $plugin_data );
+		'text_domain' => 'conditional-blocks',
+		'option_prefix' => 'conditional-blocks-pro',
+		'docs_url' => 'https://conditionalblocks.com/docs/',
+		'account_url' => 'https://conditionalblocks.com/account',
+		'upgrade_url' => 'https://conditionalblocks.com/pricing/',
+	] );
 }
-add_action( 'plugins_loaded', 'conblockpro_run_sl', 10 );
+
+add_action( 'plugins_loaded', 'conblockpro_license_manager_init' );
+
 

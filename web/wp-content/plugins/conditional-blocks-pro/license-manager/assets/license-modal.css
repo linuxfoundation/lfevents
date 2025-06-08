@@ -1,0 +1,179 @@
+.license-modal{
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    margin: 20px auto;
+}
+
+@scope (.license-modal) {
+
+.license-modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.license-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.license-modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.license-input {
+    margin-bottom: 20px;
+}
+
+.license-input label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.license-input input {
+    width: 100%;
+    padding: 8px;
+}
+
+.license-status {
+    float: right;
+    margin-top: -5px;
+    margin-bottom: 25px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.license-status .status.valid {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #dff0d8;
+    color: #3c763d;
+}
+
+.license-status .status.expired {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.license-status .status.revoked {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #f2dede;
+    color: #a94442;
+}
+
+.license-status .status.inactive,
+.license-status .status.invalid {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #f5f5f5;
+    color: #666;
+}
+
+.license-message {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 10px;
+    display: none;
+}
+
+.license-message.error {
+    background-color: #f2dede;
+    color: #a94442;
+    border-radius: 3px;
+}
+
+.license-message.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border-radius: 3px;
+}
+
+.manage-license-trigger.button-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #2271b1;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.manage-license-trigger.button-link:hover,
+.manage-license-trigger.button-link:focus {
+    color: #135e96;
+    text-decoration: none;
+}
+
+.plugin-update-tr .update-message {
+    margin: 5px 20px 15px 31px;
+}
+
+.check-license {
+    margin-right: 10px !important;
+}
+
+.license-links {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 13px;
+}
+
+.license-links .button {
+    text-decoration: none;
+}
+}
+
+/* Add responsive adjustments */
+@media screen and (max-width: 600px) {
+    @scope (.license-modal) {
+        h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            font-size: 16px;
+            padding: 8px;
+        }
+
+        .button-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .button {
+            width: 100%;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+    }
+}
