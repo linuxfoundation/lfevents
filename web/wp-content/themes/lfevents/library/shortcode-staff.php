@@ -14,33 +14,13 @@
  */
 function add_staff_shortcode( $atts ) {
 
-	$meta_key = 'lfes_staff_order';
-
 	$query = new WP_Query(
 		array(
 			'post_type'      => 'lfe_staff',
 			'post_status'    => array( 'publish' ),
-			'posts_per_page' => 100,
-
-			'meta_query'     => array(
-				'relation' => 'OR',
-				array(
-					'key'     => $meta_key,
-					'compare' => 'NOT EXISTS',
-				),
-				array(
-					'relation' => 'OR',
-					array(
-						'key'   => $meta_key,
-						'value' => 'on',
-					),
-					array(
-						'key'     => $meta_key,
-						'value'   => 'on',
-						'compare' => '!=',
-					),
-				),
-			),
+			'posts_per_page' => 200,
+			'no_found_rows'  => true,
+			'meta_key'       => 'lfes_staff_order', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			'orderby'        => array(
 				'meta_value_num' => 'DESC',
 				'title'          => 'ASC',
