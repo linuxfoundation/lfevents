@@ -35,7 +35,7 @@
     "wpackagist-plugin/pantheon-advanced-page-cache": "^2.0",
     "wpackagist-plugin/photonic": "^3.10",
     "wpackagist-plugin/post-meta-controls": "^1.4",
-    "wpackagist-plugin/post-type-switcher": "^3.3",
+    "wpackagist-plugin/post-type-switcher": "^4",
     "wpackagist-plugin/publishpress-checklists": "^2.10",
     "wpackagist-plugin/redirection": "^5.4",
     "wpackagist-plugin/safe-svg": "^2.2",

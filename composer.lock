@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f71707963a5871a7c39b47724e8d0ab",
+    "content-hash": "150441ba2ce8626131ad4e201e886617",
     "packages": [
         {
             "name": "composer/installers",
@@ -1063,15 +1063,15 @@
         },
         {
             "name": "wpackagist-plugin/post-type-switcher",
-            "version": "3.3.0",
+            "version": "4.0.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/post-type-switcher/",
-                "reference": "tags/3.3.0"
+                "reference": "tags/4.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/post-type-switcher.3.3.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/post-type-switcher.4.0.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
