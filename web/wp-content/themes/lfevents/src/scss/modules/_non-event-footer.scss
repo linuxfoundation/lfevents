@@ -124,6 +124,11 @@
         &:focus::placeholder {
           color: rgba($pure-white, 0.5);
         }
+
+        option {
+					font-weight: normal;
+					color: black;
+				}
       }
 
       // Control autocomplete styles.
