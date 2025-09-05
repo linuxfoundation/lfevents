@@ -181,7 +181,7 @@ class LFEvents_Public {
 			return $url;
 		}
 		// List of scripts that should not be deferred.
-		$do_not_defer_scripts = array( 'jquery-3.5.1.min.js', 'osano.js' );
+		$do_not_defer_scripts = array( 'jquery-3.5.1.min.js', 'osano.js', 'lfx-segment' );
 
 		if ( count( $do_not_defer_scripts ) > 0 ) {
 			foreach ( $do_not_defer_scripts as $script ) {
