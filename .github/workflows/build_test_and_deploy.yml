@@ -133,7 +133,7 @@ jobs:
   code_sniff_unit_test:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pantheon-public/build-tools-ci:6.x
+      image: quay.io/pantheon-public/build-tools-ci:9.x
       options: --user root
     steps:
       - name: Checkout
