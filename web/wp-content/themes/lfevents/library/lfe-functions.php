@@ -367,6 +367,29 @@ EOD;
 }
 
 /**
+ * Inserts LFX code on main Events site.
+ */
+function lfe_insert_lfx_head() {
+	if ( ! is_lfeventsci() ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'lfx-segment',
+		'https://lfx-segment.platform.linuxfoundation.org/latest/lfx-segment-analytics.min.js',
+		array(),
+		null,
+		false
+	);
+
+	wp_add_inline_script(
+		'lfx-segment',
+		"if(window.LfxAnalytics&&window.LfxAnalytics.LfxSegmentsAnalytics){var analytics=window.LfxAnalytics.LfxSegmentsAnalytics.getInstance();analytics.init().then(function(){}).catch(function(error){console.error('Failed to initialize analytics:',error)});}else{console.warn('LfxAnalytics not found');}"
+	);
+}
+add_action( 'wp_enqueue_scripts', 'lfe_insert_lfx_head' );
+
+/**
  * Inserts Event-specific favicon if set, otherwise falls back to site favicon.
  */
 function lfe_insert_favicon() {
