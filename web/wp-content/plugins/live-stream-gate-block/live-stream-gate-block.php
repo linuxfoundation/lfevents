@@ -106,7 +106,7 @@ function live_stream_gate_callback( $block_attributes ) {
 
 				<p><strong>Sign in to your LF account to access this content</strong></p>
 
-				<button class="wp-block-lf-live-stream-gate-block-button is-signin-link is-auth0 only-anonymous is-login-link" href="">Sign In</button>
+				<button class="wp-block-lf-live-stream-gate-block-button is-signin-link is-auth0 only-anonymous is-login-link">Sign In</button>
 
 				<p>Don't have an LF account? It's free and the easiest way to access content across LF sites.</p>
 
