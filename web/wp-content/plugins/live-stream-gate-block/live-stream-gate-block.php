@@ -110,7 +110,7 @@ function live_stream_gate_callback( $block_attributes ) {
 
 				<p>Don't have an LF account? It's free and the easiest way to access content across LF sites.</p>
 
-				<a class="wp-block-lf-live-stream-gate-block-button is-signup-link is-auth0 only-anonymous is-signup-link" href="">Create Account</a>
+				<button class="wp-block-lf-live-stream-gate-block-button is-signup-link is-auth0 only-anonymous is-signup-link">Create Account</button>
 			</div>
 		</div>
 		<div class="wp-block-lf-live-stream-gate-block is-auth0 only-authenticated <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?>" id="<?php echo esc_html( $anchor ); ?>">
