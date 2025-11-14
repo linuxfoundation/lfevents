@@ -18,7 +18,7 @@
 		"@wordpress/data": "^10",
 		"@wordpress/element": "^6",
 		"@wordpress/i18n": "^5",
-		"@wordpress/scripts": "27.8.0"
+		"@wordpress/scripts": "31.0.0"
 	},
 	"repository": {
 		"type": "git",
