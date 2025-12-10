@@ -33,6 +33,11 @@
     border-radius: 0.5rem;
     font-size: 1.075rem;
     position: relative;
+    align-content: center;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100%;
+    word-break: break-word;
     z-index: 1;
     font-weight: 700;
     transition: all 0.3s ease-in-out;
