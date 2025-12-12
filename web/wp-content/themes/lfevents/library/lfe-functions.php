@@ -51,7 +51,7 @@ function lfe_get_related_events( $parent_id ) {
 	} else {
 		$term = wp_get_post_terms( $parent_id, 'lfevent-category', array( 'fields' => 'ids' ) );
 
-		if ( empty( ! $term ) ) {
+		if ( ! empty( $term ) ) {
 			$term_if_present = $term[0];
 		} else {
 			$term_if_present = '';
