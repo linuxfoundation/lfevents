@@ -14,7 +14,7 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "27.8.0",
+		"@wordpress/scripts": "31.2.0",
 		"@wordpress/block-editor": "^13",
 		"@wordpress/blocks": "^13",
 		"@wordpress/components": "^28",
