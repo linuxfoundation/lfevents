@@ -208,7 +208,6 @@ class LFEvents {
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' ); // removed as file blank.
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'redirects' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'deregister_scripts' );
-		$this->loader->add_filter( 'the_content', $plugin_public, 'rewrite_china_domains' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_filter( 'the_seo_framework_title_from_generation', $plugin_public, 'add_year_to_archive_titles' );
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'new_excerpt_more' );

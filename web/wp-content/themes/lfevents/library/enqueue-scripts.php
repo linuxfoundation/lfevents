@@ -59,7 +59,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		}
 
 		// Conditionally load china.js.
-		$chinese_domains = "'www.lfasiallc.com', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+		$chinese_domains = "'www.lfopensource.cn', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
 		$current_domain  = parse_url( home_url(), PHP_URL_HOST );
 		if ( strpos( $chinese_domains, $current_domain ) ) {
 			// scripts for Chinese-audience sites.

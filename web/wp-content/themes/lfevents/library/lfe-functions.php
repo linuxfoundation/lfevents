@@ -327,7 +327,7 @@ function lfe_get_sponsors( $parent_id ) {
  * Inserts Google Tag Manager <head> code on live sites.
  */
 function lfe_insert_google_tag_manager_head() {
-	$domains        = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+	$domains        = "'events.linuxfoundation.org', 'www.lfopensource.cn', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
 <!-- Google Tag Manager -->
@@ -350,7 +350,7 @@ EOD;
  * Inserts Google Tag Manager <body> code on live sites.
  */
 function lfe_insert_google_tag_manager_body() {
-	$domains        = "'events.linuxfoundation.org', 'www.lfasiallc.com', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfasiallc.cn', 'lfasiallc.cn'";
+	$domains        = "'events.linuxfoundation.org', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'www.lfopensource.cn', 'lfopensource.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
 	$analytics_code = <<<EOD
 <!-- Google Tag Manager (noscript) -->

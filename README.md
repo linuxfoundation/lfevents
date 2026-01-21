@@ -2,7 +2,7 @@
 
 ## This repository powers these sites
 * [LFEvents Main Site](https://events.linuxfoundation.org/)
-* [LFEvents China Site](https://www.lfasiallc.com/)
+* [LFEvents China Site](https://www.lfopensource.cn/)
 
 ## Documentation
 * [Developer Getting Started Guide](/docs/devguide.md)
