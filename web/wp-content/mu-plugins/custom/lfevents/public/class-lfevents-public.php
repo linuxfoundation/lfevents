@@ -134,21 +134,6 @@ class LFEvents_Public {
 	}
 
 	/**
-	 * Changes www.lfasiallc.com hardcoded domains to www.lfasiallc.cn when the requested url is lfasiallc.cn
-	 *
-	 * @param string $content Post content.
-	 */
-	public function rewrite_china_domains( $content ) {
-		$search = 'www.lfasiallc.com';
-		$target = 'www.lfasiallc.cn';
-
-		if ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] === $target ) {
-			$content = str_replace( $search, $target, $content );
-		}
-		return $content;
-	}
-
-	/**
 	 * Inserts css into the head with the event gradient.
 	 */
 	public function insert_event_styles() {

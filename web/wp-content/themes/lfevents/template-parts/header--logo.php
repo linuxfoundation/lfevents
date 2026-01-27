@@ -22,9 +22,9 @@
 	<a aria-label="<?php bloginfo( 'name' ); ?>" class="header--logo__link"
 		title="<?php bloginfo( 'name' ); ?>"
 		href="<?php echo esc_url( home_url( '/' ) ); ?>">
-		<img width="200" height="25" loading="eager" class="header--logo__image"
+		<img width="350" height="38" loading="eager" class="header--logo__image"
 			alt="<?php bloginfo( 'name' ); ?>"
-			src="<?php echo esc_html( get_stylesheet_directory_uri() . '/src/images/logo_lfasiallc_white.svg' ); ?>">
+			src="<?php echo esc_html( get_stylesheet_directory_uri() . '/src/images/lf_osllc_white.svg' ); ?>">
 	</a>
 	<?php endif; ?>
 </div>

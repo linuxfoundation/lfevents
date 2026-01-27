@@ -13,7 +13,7 @@ var prodConfig = {
 	clientId: "vwdLUhNE0M273cLwwIgvGTlHIrnYfCXm",
 };
 var productionURLs = [
-	'lfasiallc.com',
+	'lfopensource.cn',
 	'events.linuxfoundation.org'
 ];
 
