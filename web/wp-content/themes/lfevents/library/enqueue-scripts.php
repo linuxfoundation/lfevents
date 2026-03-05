@@ -34,8 +34,12 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// Enqueue Foundation scripts.
 		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/js/app.js', array( 'jquery' ), filemtime( get_template_directory() . '/dist/js/app.js' ), true );
 
-		// Enqueue cookie script.
-		wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', false );
+		$chinese_domains = "'www.lfopensource.cn', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
+		$current_domain  = parse_url( home_url(), PHP_URL_HOST );
+		if ( ! strpos( $chinese_domains, $current_domain ) ) {
+			// Enqueue cookie script only on main site.
+			wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', false );
+		}
 
 		if ( has_block( 'table' ) ) {
 			wp_enqueue_script( 'responsive-table', get_stylesheet_directory_uri() . '/src/js/libraries/restable.js', array( 'jquery' ), filemtime( get_template_directory() . '/src/js/libraries/restable.js' ), true );
@@ -59,8 +63,6 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		}
 
 		// Conditionally load china.js.
-		$chinese_domains = "'www.lfopensource.cn', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
-		$current_domain  = parse_url( home_url(), PHP_URL_HOST );
 		if ( strpos( $chinese_domains, $current_domain ) ) {
 			// scripts for Chinese-audience sites.
 			wp_enqueue_script( 'lfe_china', get_stylesheet_directory_uri() . '/dist/js/china.js', array(), '1.2.2', true );
