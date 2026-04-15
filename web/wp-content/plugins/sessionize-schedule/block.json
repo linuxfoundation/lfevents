@@ -1,14 +1,37 @@
 {
-	"name": "lf/custom-iframe",
-	"title": "Custom iFrame",
-	"category": "common",
-	"icon": "smiley",
-	"description": "Embed an iframe, Google Sheet or Newsletter with better formatting",
-	"textdomain": "custom-iframe",
-	"supports": {
-		"html": false
-	},
-	"editorScript": "file:./build/index.js",
-	"editorStyle": "file:./build/index.css",
-	"style": "file:./build/style-index.css"
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "custom/sessionize-schedule",
+  "version": "0.1.0",
+  "title": "Sessionize Schedule",
+  "category": "widgets",
+  "icon": "calendar-alt",
+  "description": "An interactive, dynamic schedule block powered by Sessionize.",
+  "textdomain": "sessionize-schedule",
+  "attributes": {
+    "publicSlug": {
+      "type": "string",
+      "default": "kubecon-cloudnativecon-europe-2024"
+    },
+    "primaryFilterTitle": {
+      "type": "string",
+      "default": "Track"
+    },
+    "timeFormat": {
+      "type": "string",
+      "default": "12h"
+    },
+    "enableGridView": {
+      "type": "boolean",
+      "default": true
+    },
+    "enablePersonalAgenda": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "viewScript": "file:./build/view.js",
+  "style": "file:./build/style-index.css",
+  "render": "file:./render.php"
 }
