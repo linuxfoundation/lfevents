@@ -29,6 +29,7 @@
     "install-core-block-customisations": "npm install --prefix ../../plugins/core-block-customisations/",
     "install-countdown-block": "npm install --prefix ../../plugins/countdown-block/",
     "install-custom-iframe": "npm install --prefix ../../plugins/custom-iframe/",
+    "install-sessionize-schedule": "npm install --prefix ../../plugins/sessionize-schedule/",
     "install-icon-list": "npm install --prefix ../../plugins/icon-list/",
     "install-image-box": "npm install --prefix ../../plugins/image-box/",
     "install-live-stream-gate": "npm install --prefix ../../plugins/live-stream-gate-block/",
