@@ -11,7 +11,7 @@
   "attributes": {
     "publicSlug": {
       "type": "string",
-      "default": "kubecon-cloudnativecon-europe-2024"
+      "default": "pc6leesj"
     },
     "primaryFilterTitle": {
       "type": "string",
@@ -21,6 +21,10 @@
       "type": "string",
       "default": "12h"
     },
+    "dateFormat": {
+      "type": "string",
+      "default": "dmy"
+    },
     "enableGridView": {
       "type": "boolean",
       "default": true
@@ -28,6 +32,78 @@
     "enablePersonalAgenda": {
       "type": "boolean",
       "default": true
+    },
+    "defaultShowAllDays": {
+      "type": "boolean",
+      "default": true
+    },
+    "hideTopControls": {
+      "type": "boolean",
+      "default": false
+    },
+    "speakerTitleQuestionId": {
+      "type": "string",
+      "default": "60108"
+    },
+    "speakerCompanyQuestionId": {
+      "type": "string",
+      "default": "60107"
+    },
+    "speakerCompanyOverrideQuestionId": {
+      "type": "string",
+      "default": ""
+    },
+    "cardSpeakerOverrideQuestionId": {
+      "type": "string",
+      "default": "128763"
+    },
+    "presentationSlidesQuestionId": {
+      "type": "string",
+      "default": "124661"
+    },
+    "customLinkField1QuestionId": {
+      "type": "string",
+      "default": "126625"
+    },
+    "customLinkField2QuestionId": {
+      "type": "string",
+      "default": "126626"
+    },
+    "customLinkField3QuestionId": {
+      "type": "string",
+      "default": "126627"
+    },
+    "customLinkField4QuestionId": {
+      "type": "string",
+      "default": "126628"
+    },
+    "customLinkField5QuestionId": {
+      "type": "string",
+      "default": ""
+    },
+    "hiddenFilterCategories": {
+      "type": "string",
+      "default": "Session Format"
+    },
+    "hideSessionChipsForCategories": {
+      "type": "string",
+      "default": ""
+    },
+    "hideAllChipsForPrimaryValues": {
+      "type": "string",
+      "default": ""
+    },
+    "includeSpeakerTitleForPrimaryValues": {
+      "type": "string",
+      "default": "Keynote Sessions"
+    },
+    "companyRollupNames": {
+      "type": "string",
+      "default": "Red Hat"
+    },
+    "primaryColorOverrides": {
+      "type": "string",
+      "default": "{\"Cloud Native Experience\":\"#236C39\",\"Cloud Native Novice\":\"#CC47E1\",\"Emerging + Advanced\":\"#94E147\",\"Keynote Sessions\":\"#CC0000\",\"ML/AI + Data Processing + Storage\":\"#D27A32\",\"Networking + Edge + Telco\":\"#FFF824\",\"Observability\":\"#D676DB\",\"Operations + Performance\":\"#BAB7D2\",\"Platform Engineering\":\"#4756E1\",\"Registration\":\"#69BA26\",\"SDLC\":\"#624A87\",\"Security\":\"#47E1C2\",\"Service Mesh\":\"#3BE5F1\"}"
     }
   },
   "editorScript": "file:./build/index.js",

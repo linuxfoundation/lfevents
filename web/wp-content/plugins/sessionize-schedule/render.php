@@ -6,56 +6,82 @@
  * @var array $attributes Variables passed from WordPress block editor.
  */
 
+/**
+ * Helper: parse a comma-separated string attribute into an array of trimmed non-empty values.
+ *
+ * @param string $value The comma-separated string.
+ * @return array
+ */
+if ( ! function_exists( 'sched_parse_csv' ) ) {
+	function sched_parse_csv( $value ) {
+		if ( empty( $value ) ) {
+			return array();
+		}
+		return array_values( array_filter( array_map( 'trim', explode( ',', $value ) ) ) );
+	}
+}
+
+/**
+ * Helper: convert a string question ID to int or null.
+ *
+ * @param string $value The string value.
+ * @return int|null
+ */
+if ( ! function_exists( 'sched_question_id' ) ) {
+	function sched_question_id( $value ) {
+		if ( empty( $value ) || ! is_numeric( $value ) ) {
+			return null;
+		}
+		return (int) $value;
+	}
+}
+
+// Parse primary color overrides from JSON string.
+$color_overrides = array();
+if ( ! empty( $attributes['primaryColorOverrides'] ) ) {
+	$decoded = json_decode( $attributes['primaryColorOverrides'], true );
+	if ( is_array( $decoded ) ) {
+		$color_overrides = $decoded;
+	}
+}
+
 // Build the Configuration Object based on block attributes.
 $sched_config = array(
-	'sessionizeAllDataUrl'               => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/All',
-	'sessionizeGridDataUrl'              => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/GridSmart',
-	'sessionizePublicSlug'               => esc_attr( $attributes['publicSlug'] ),
+	'sessionizeAllDataUrl'                => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/All',
+	'sessionizeGridDataUrl'               => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/GridSmart',
+	'sessionizePublicSlug'                => esc_attr( $attributes['publicSlug'] ),
 
-	'primaryFilterTitle'                 => esc_attr( $attributes['primaryFilterTitle'] ),
-	'timeFormat'                         => esc_attr( $attributes['timeFormat'] ),
-	'dateFormat'                         => 'dmy',
+	'primaryFilterTitle'                  => esc_attr( $attributes['primaryFilterTitle'] ),
+	'timeFormat'                          => esc_attr( $attributes['timeFormat'] ),
+	'dateFormat'                          => esc_attr( $attributes['dateFormat'] ),
 
-	'defaultShowAllDays'                 => true,
-	'hideTopControls'                    => false,
-	'enableGridView'                     => (bool) $attributes['enableGridView'],
-	'enablePersonalAgenda'               => (bool) $attributes['enablePersonalAgenda'],
+	'defaultShowAllDays'                  => (bool) $attributes['defaultShowAllDays'],
+	'hideTopControls'                     => (bool) $attributes['hideTopControls'],
+	'enableGridView'                      => (bool) $attributes['enableGridView'],
+	'enablePersonalAgenda'                => (bool) $attributes['enablePersonalAgenda'],
 
-	// Static Mappings.
-	'speakerTitleQuestionId'             => 60108,
-	'speakerCompanyQuestionId'           => 60107,
-	'speakerCompanyOverrideQuestionId'   => null,
-	'cardSpeakerOverrideQuestionId'      => 128763,
-	'presentationSlidesQuestionId'       => 124661,
-	'includeSpeakerTitleForPrimaryValues' => array( 'Keynote Sessions' ),
-	'companyRollupNames'                 => array( 'Red Hat' ),
+	// Sessionize Question IDs.
+	'speakerTitleQuestionId'              => sched_question_id( $attributes['speakerTitleQuestionId'] ),
+	'speakerCompanyQuestionId'            => sched_question_id( $attributes['speakerCompanyQuestionId'] ),
+	'speakerCompanyOverrideQuestionId'    => sched_question_id( $attributes['speakerCompanyOverrideQuestionId'] ),
+	'cardSpeakerOverrideQuestionId'       => sched_question_id( $attributes['cardSpeakerOverrideQuestionId'] ),
+	'presentationSlidesQuestionId'        => sched_question_id( $attributes['presentationSlidesQuestionId'] ),
 
-	'customLinkField1QuestionId'         => 126625,
-	'customLinkField2QuestionId'         => 126626,
-	'customLinkField3QuestionId'         => 126627,
-	'customLinkField4QuestionId'         => 126628,
-	'customLinkField5QuestionId'         => null,
+	'customLinkField1QuestionId'          => sched_question_id( $attributes['customLinkField1QuestionId'] ),
+	'customLinkField2QuestionId'          => sched_question_id( $attributes['customLinkField2QuestionId'] ),
+	'customLinkField3QuestionId'          => sched_question_id( $attributes['customLinkField3QuestionId'] ),
+	'customLinkField4QuestionId'          => sched_question_id( $attributes['customLinkField4QuestionId'] ),
+	'customLinkField5QuestionId'          => sched_question_id( $attributes['customLinkField5QuestionId'] ),
 
-	'hideAllChipsForPrimaryValues'       => array(),
-	'hideSessionChipsForCategories'      => array(),
-	'hiddenFilterCategories'             => array( 'Session Format' ),
+	// Filtering & visibility (comma-separated strings → arrays).
+	'includeSpeakerTitleForPrimaryValues' => sched_parse_csv( $attributes['includeSpeakerTitleForPrimaryValues'] ),
+	'companyRollupNames'                  => sched_parse_csv( $attributes['companyRollupNames'] ),
+	'hideAllChipsForPrimaryValues'        => sched_parse_csv( $attributes['hideAllChipsForPrimaryValues'] ),
+	'hideSessionChipsForCategories'       => sched_parse_csv( $attributes['hideSessionChipsForCategories'] ),
+	'hiddenFilterCategories'              => sched_parse_csv( $attributes['hiddenFilterCategories'] ),
 
-	// Hardcoded color overrides.
-	'primaryColorOverrides'              => array(
-		'Cloud Native Experience'           => '#236C39',
-		'Cloud Native Novice'               => '#CC47E1',
-		'Emerging + Advanced'               => '#94E147',
-		'Keynote Sessions'                  => '#CC0000',
-		'ML/AI + Data Processing + Storage' => '#D27A32',
-		'Networking + Edge + Telco'         => '#FFF824',
-		'Observability'                     => '#D676DB',
-		'Operations + Performance'          => '#BAB7D2',
-		'Platform Engineering'              => '#4756E1',
-		'Registration'                      => '#69BA26',
-		'SDLC'                              => '#624A87',
-		'Security'                          => '#47E1C2',
-		'Service Mesh'                      => '#3BE5F1',
-	),
+	// Color overrides.
+	'primaryColorOverrides'               => $color_overrides,
 );
 ?>
 
