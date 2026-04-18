@@ -63,7 +63,7 @@
     gap:6px;
     padding:6px;
     border:1px solid var(--border);
-    border-radius:999px;
+    border-radius:999px !important;
     background:#fff;
     box-shadow: 0 6px 18px rgba(2,6,23,.04);
   }
@@ -72,7 +72,7 @@
     border:0;
     background:transparent;
     color:var(--muted);
-    border-radius:999px;
+    border-radius:999px !important;
     padding:8px 14px;
     font-size:13px;
     font-weight:800;
@@ -177,7 +177,7 @@
     background:var(--chip);
     color:var(--text);
     padding:6px 12px;
-    border-radius:999px;
+    border-radius:999px !important;
     font-size:12px;
     cursor:pointer;
     display:inline-flex;
@@ -191,7 +191,7 @@
 
   .sched-chip .chip-dot{
     width:10px; height:10px;
-    border-radius:999px;
+    border-radius:999px !important;
     background: var(--dot, transparent);
     border:1px solid color-mix(in srgb, var(--dot, #fff) 55%, #94a3b8);
     flex:0 0 auto;
@@ -357,7 +357,7 @@
   border:0;
   background:transparent;
   color:#64748b;
-  border-radius:999px;
+  border-radius:999px !important;
   min-width:28px;
   height:28px;
   padding:0 7px;
@@ -916,7 +916,7 @@
     gap:6px;
     margin-top:10px;
     padding:4px 8px;
-    border-radius:999px;
+    border-radius:999px !important;
     font-size:11px;
     font-weight:800;
     background: var(--tag-bg, #ffffff);
@@ -1213,7 +1213,7 @@ body.sched--agenda-disabled .sched-favoritebtn{
   .tag{
     font-size:11px;
     padding:3px 8px;
-    border-radius:999px;
+    border-radius:999px !important;
     background: var(--tag-bg, #ffffff);
     color: var(--tag-text, var(--muted));
     border:1px solid var(--tag-border, var(--chip-border));
@@ -1589,7 +1589,7 @@ opacity:.62;
     color:var(--text);
     background: color-mix(in srgb, white 90%, var(--modal-bg));
     border:1px solid color-mix(in srgb, var(--modal-border) 68%, white);
-    border-radius:999px;
+    border-radius:999px !important;
     padding:6px 12px;
     font-size:12px;
     font-weight:700;
@@ -1715,7 +1715,7 @@ opacity:.62;
     display:inline-flex;
     align-items:center;
     padding:6px 10px;
-    border-radius:999px;
+    border-radius:999px !important;
     background:rgba(15,23,42,.06);
     border:1px solid rgba(15,23,42,.08);
     font-size:11px;
@@ -1761,7 +1761,7 @@ opacity:.62;
     border:1px solid var(--border);
     background:#fff;
     color:var(--text);
-    border-radius:999px;
+    border-radius:999px !important;
     padding:8px 12px;
     font-size:12px;
     font-weight:800;
