@@ -3,6 +3,7 @@
  * Plugin Name:       Sessionize Schedule
  * Description:       A custom dynamic block for the Sessionize schedule.
  * Version:           1.0.0
+ * Author:            Chris Abraham
  * Text Domain:       sessionize-schedule
  *
  * @package           Sessionize_Schedule
