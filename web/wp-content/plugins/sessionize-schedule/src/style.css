@@ -104,7 +104,7 @@
     background:#fff;
     color:var(--text);
     padding:6px 12px;
-    border-radius:999px;
+    border-radius:999px !important;
     font-size:12px;
     cursor:pointer;
   }
@@ -124,7 +124,7 @@
     flex:1 1 auto;
     width:100%;
     border:1px solid var(--border);
-    border-radius:12px;
+    border-radius:12px !important;
     padding:12px 14px;
     font-size:14px;
     outline:none;
@@ -295,7 +295,7 @@
   .sched__prevbtn{
     border:1px solid #cbd5e1;
     background:#f8fafc;
-    border-radius:16px;
+    border-radius:16px !important;
     padding:12px 18px;
     min-width:260px;
     font-size:13px;
@@ -409,7 +409,7 @@
 .sched-speakercard{
   border:1px solid var(--border);
   background:#fff;
-  border-radius:8px;
+  border-radius:8px !important;
   padding:14px;
   text-align:left;
   cursor:pointer;
@@ -1129,6 +1129,7 @@
     transition: transform .08s ease, box-shadow .16s ease, border-color .16s ease;
     position:relative;
     min-width:0;
+    overflow: hidden;
   }
 
   .sess.has-primary{
@@ -1140,11 +1141,10 @@
   .sess.has-primary::before{
     content:"";
     position:absolute;
-    left:-1px;
-    top:-1px;
-    bottom:-1px;
+    left:0;
+    top:0;
+    bottom:0;
     width:6px;
-    border-radius:12px 0 0 12px;
     background: var(--primary-border, var(--border));
   }
 
@@ -1244,7 +1244,7 @@ body.sched--agenda-disabled .sched-favoritebtn{
     border:1px solid color-mix(in srgb, var(--accent) 50%, var(--border));
     background:#0f172a;
     color:#fff;
-    border-radius:8px;
+    border-radius:8px !important;
     padding:10px 14px;
     font-size:13px;
     font-weight:800;
@@ -1397,7 +1397,7 @@ body.sched--agenda-disabled .sched-favoritebtn{
     color:#fff;
     width:46px;
     height:46px;
-    border-radius:0 0 0 16px;
+    border-radius:0 0 0 16px !important;
     cursor:pointer;
     font-size:28px;
     line-height:46px;
