@@ -113,6 +113,7 @@
 	align-items: center;
 	text-align: center;
 	min-height: 320px;
+	height: 100%;
 	overflow: hidden;
 	transition: box-shadow 0.22s ease;
 }
