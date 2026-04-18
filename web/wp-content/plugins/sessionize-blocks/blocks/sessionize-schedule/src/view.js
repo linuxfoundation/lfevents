@@ -1755,6 +1755,7 @@ async function initSchedBlock( root ) {
 			const table = document.createElement( 'div' );
 			table.className = 'sched-grid__table';
 			table.style.gridTemplateColumns = `120px repeat(${ day.rooms.length }, minmax(180px, 1fr))`;
+			table.style.minWidth = `${ 120 + day.rooms.length * 180 }px`;
 
 			const slotTimesMs = day.timeSlots.map( slot => new Date( `${ day.dayStr }T${ slot.slotStart }` ).getTime() );
 
