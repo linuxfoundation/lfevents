@@ -1,0 +1,16 @@
+{
+  "name": "sessionize-blocks",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "npm run build:schedule && npm run build:speakers",
+    "build:schedule": "wp-scripts build --output-path=blocks/sessionize-schedule/build blocks/sessionize-schedule/src/index.js blocks/sessionize-schedule/src/view.js",
+    "build:speakers": "wp-scripts build --output-path=blocks/sessionize-speakers/build blocks/sessionize-speakers/src/index.js blocks/sessionize-speakers/src/view.js",
+    "start": "npm run start:schedule",
+    "start:schedule": "wp-scripts start --output-path=blocks/sessionize-schedule/build blocks/sessionize-schedule/src/index.js blocks/sessionize-schedule/src/view.js",
+    "start:speakers": "wp-scripts start --output-path=blocks/sessionize-speakers/build blocks/sessionize-speakers/src/index.js blocks/sessionize-speakers/src/view.js",
+    "format": "wp-scripts format"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^27.0.0"
+  }
+}
