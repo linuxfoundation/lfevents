@@ -1,0 +1,69 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "custom/sessionize-speakers",
+  "version": "0.1.0",
+  "title": "Sessionize Speakers",
+  "category": "widgets",
+  "icon": "groups",
+  "description": "A featured speakers grid block powered by Sessionize.",
+  "textdomain": "sessionize-blocks",
+  "attributes": {
+    "publicSlug": {
+      "type": "string",
+      "default": "pc6leesj"
+    },
+    "scheduleBaseUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "companyQuestionId": {
+      "type": "string",
+      "default": "60107"
+    },
+    "speakerTitleQuestionId": {
+      "type": "string",
+      "default": "60108"
+    },
+    "companyLogoUrlQuestionId": {
+      "type": "string",
+      "default": "124072"
+    },
+    "companyLogoUploadQuestionId": {
+      "type": "string",
+      "default": "124073"
+    },
+    "topSpeakersOnly": {
+      "type": "boolean",
+      "default": true
+    },
+    "excludeSpeakersExact": {
+      "type": "string",
+      "default": ""
+    },
+    "forceOrderExact": {
+      "type": "string",
+      "default": ""
+    },
+    "companyRollupNames": {
+      "type": "string",
+      "default": ""
+    },
+    "timeFormat": {
+      "type": "string",
+      "default": "24h"
+    },
+    "dateFormat": {
+      "type": "string",
+      "default": "dmy"
+    },
+    "sessionLinkBehavior": {
+      "type": "string",
+      "default": "link"
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "viewScript": "file:./build/view.js",
+  "style": "file:./build/style-index.css",
+  "render": "file:./render.php"
+}
