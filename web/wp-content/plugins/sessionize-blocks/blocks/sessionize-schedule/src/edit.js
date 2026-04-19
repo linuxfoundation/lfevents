@@ -1,5 +1,6 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, TextareaControl, ToggleControl, SelectControl, Placeholder } from '@wordpress/components';
+import { PanelBody, TextControl, TextareaControl, ToggleControl, SelectControl, Placeholder, ColorPicker, Button, Flex, FlexItem, FlexBlock } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -16,6 +17,41 @@ export default function Edit( { attributes, setAttributes } ) {
 		companyRollupNames, primaryColorOverrides,
 	} = attributes;
 	const blockProps = useBlockProps();
+
+	// Parse color overrides JSON into an object.
+	let colorMap = {};
+	try {
+		colorMap = primaryColorOverrides ? JSON.parse( primaryColorOverrides ) : {};
+	} catch ( e ) {
+		colorMap = {};
+	}
+
+	const colorEntries = Object.entries( colorMap );
+	const [ expandedColorKey, setExpandedColorKey ] = useState( null );
+	const [ newColorLabel, setNewColorLabel ] = useState( '' );
+
+	function updateColor( key, color ) {
+		const updated = { ...colorMap, [ key ]: color };
+		setAttributes( { primaryColorOverrides: JSON.stringify( updated ) } );
+	}
+
+	function removeColor( key ) {
+		const updated = { ...colorMap };
+		delete updated[ key ];
+		setAttributes( { primaryColorOverrides: JSON.stringify( updated ) } );
+		if ( expandedColorKey === key ) {
+			setExpandedColorKey( null );
+		}
+	}
+
+	function addColor() {
+		const label = newColorLabel.trim();
+		if ( ! label || colorMap.hasOwnProperty( label ) ) return;
+		const updated = { ...colorMap, [ label ]: '#000000' };
+		setAttributes( { primaryColorOverrides: JSON.stringify( updated ) } );
+		setNewColorLabel( '' );
+		setExpandedColorKey( label );
+	}
 
 	return (
 		<div { ...blockProps }>
@@ -181,13 +217,77 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				<PanelBody title="Primary Color Overrides" initialOpen={ false }>
-					<TextareaControl
-						label="Color Overrides (JSON)"
-						value={ primaryColorOverrides }
-						onChange={ ( val ) => setAttributes( { primaryColorOverrides: val } ) }
-						help='JSON object mapping primary filter values to hex colors. e.g., {"Keynote Sessions":"#CC0000","Security":"#47E1C2"}'
-						rows={ 8 }
-					/>
+					<p className="components-base-control__help" style={ { marginTop: 0 } }>
+						Assign colors to primary filter values (e.g., track names). Click a swatch to change its color.
+					</p>
+					{ colorEntries.map( ( [ key, color ] ) => (
+						<div key={ key } style={ { marginBottom: '12px' } }>
+							<Flex align="center">
+								<FlexItem>
+									<button
+										type="button"
+										onClick={ () => setExpandedColorKey( expandedColorKey === key ? null : key ) }
+										style={ {
+											width: '28px',
+											height: '28px',
+											borderRadius: '4px',
+											border: '1px solid #ccc',
+											backgroundColor: color,
+											cursor: 'pointer',
+											padding: 0,
+										} }
+										aria-label={ `Change color for ${ key }` }
+									/>
+								</FlexItem>
+								<FlexBlock>
+									<span style={ { fontSize: '13px' } }>{ key }</span>
+								</FlexBlock>
+								<FlexItem>
+									<Button
+										isDestructive
+										variant="tertiary"
+										size="small"
+										onClick={ () => removeColor( key ) }
+										aria-label={ `Remove ${ key }` }
+									>
+										✕
+									</Button>
+								</FlexItem>
+							</Flex>
+							{ expandedColorKey === key && (
+								<div style={ { marginTop: '8px' } }>
+									<ColorPicker
+										color={ color }
+										onChange={ ( val ) => updateColor( key, val ) }
+										enableAlpha={ false }
+									/>
+								</div>
+							) }
+						</div>
+					) ) }
+					<div style={ { marginTop: '16px', borderTop: '1px solid #e0e0e0', paddingTop: '12px' } }>
+						<Flex align="flex-end">
+							<FlexBlock>
+								<TextControl
+									label="New entry label"
+									value={ newColorLabel }
+									onChange={ setNewColorLabel }
+									placeholder="e.g., Keynote Sessions"
+								/>
+							</FlexBlock>
+							<FlexItem>
+								<Button
+									variant="secondary"
+									size="compact"
+									onClick={ addColor }
+									disabled={ ! newColorLabel.trim() }
+									style={ { marginBottom: '8px' } }
+								>
+									Add
+								</Button>
+							</FlexItem>
+						</Flex>
+					</div>
 				</PanelBody>
 			</InspectorControls>
 
