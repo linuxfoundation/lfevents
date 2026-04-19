@@ -3,7 +3,7 @@ import { PanelBody, TextControl, ToggleControl, SelectControl, Placeholder } fro
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
-		publicSlug, scheduleBaseUrl,
+		apiCode, scheduleBaseUrl,
 		companyQuestionId, speakerTitleQuestionId,
 		companyLogoUrlQuestionId, companyLogoUploadQuestionId,
 		topSpeakersOnly, excludeSpeakersExact, forceOrderExact,
@@ -17,10 +17,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorControls>
 				<PanelBody title="Sessionize Configuration" initialOpen={ true }>
 					<TextControl
-						label="Public Slug"
-						value={ publicSlug }
-						onChange={ ( val ) => setAttributes( { publicSlug: val } ) }
-						help="The Sessionize public API slug (e.g., pc6leesj)"
+						label="Sessionize API Code"
+						value={ apiCode }
+						onChange={ ( val ) => setAttributes( { apiCode: val } ) }
+						help="The Sessionize API code used to fetch speaker data (e.g., pc6leesj)."
 					/>
 					<TextControl
 						label="Schedule Base URL"
@@ -43,6 +43,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						options={ [
 							{ label: 'Day/Month/Year', value: 'dmy' },
 							{ label: 'Month/Day/Year', value: 'mdy' },
+							{ label: 'Year/Month/Day', value: 'ymd' },
 						] }
 						onChange={ ( val ) => setAttributes( { dateFormat: val } ) }
 					/>
@@ -115,7 +116,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<Placeholder
 				icon="groups"
 				label="Sessionize Speakers Block"
-				instructions={ `Configured for slug: ${ publicSlug }. Configure further settings in the block sidebar.` }
+				instructions={ `Configured for API code: ${ apiCode }. Configure further settings in the block sidebar.` }
 			/>
 		</div>
 	);
