@@ -47,8 +47,9 @@ if ( ! empty( $attributes['primaryColorOverrides'] ) ) {
 
 // Build the Configuration Object based on block attributes.
 $sched_config = array(
-	'sessionizeAllDataUrl'                => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/All',
-	'sessionizeGridDataUrl'               => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/GridSmart',
+	'sessionizeAllDataUrl'                => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['apiCode'] ) . '/view/All',
+	'sessionizeGridDataUrl'               => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['apiCode'] ) . '/view/GridSmart',
+	'sessionizeApiCode'                   => esc_attr( $attributes['apiCode'] ),
 	'sessionizePublicSlug'                => esc_attr( $attributes['publicSlug'] ),
 
 	'primaryFilterTitle'                  => esc_attr( $attributes['primaryFilterTitle'] ),

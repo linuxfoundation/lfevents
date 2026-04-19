@@ -3,7 +3,7 @@ import { PanelBody, TextControl, TextareaControl, ToggleControl, SelectControl, 
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
-		publicSlug, primaryFilterTitle, timeFormat, dateFormat,
+		apiCode, publicSlug, primaryFilterTitle, timeFormat, dateFormat,
 		enableGridView, enablePersonalAgenda, defaultShowAllDays, hideTopControls,
 		speakerTitleQuestionId, speakerCompanyQuestionId,
 		speakerCompanyOverrideQuestionId, cardSpeakerOverrideQuestionId,
@@ -22,10 +22,16 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorControls>
 				<PanelBody title="Sessionize Configuration" initialOpen={ true }>
 					<TextControl
+						label="Sessionize API Code"
+						value={ apiCode }
+						onChange={ ( val ) => setAttributes( { apiCode: val } ) }
+						help="The Sessionize API code used to fetch schedule data (e.g., pc6leesj)."
+					/>
+					<TextControl
 						label="Public Slug"
 						value={ publicSlug }
 						onChange={ ( val ) => setAttributes( { publicSlug: val } ) }
-						help="The Sessionize public API slug (e.g., pc6leesj)"
+						help="The event's public Sessionize slug for the fallback web/mobile experience (e.g., kubecon-cloudnativecon-europe-2024)."
 					/>
 					<TextControl
 						label="Primary Filter Title"
@@ -48,6 +54,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						options={ [
 							{ label: 'Day/Month/Year', value: 'dmy' },
 							{ label: 'Month/Day/Year', value: 'mdy' },
+							{ label: 'Year/Month/Day', value: 'ymd' },
 						] }
 						onChange={ ( val ) => setAttributes( { dateFormat: val } ) }
 					/>
@@ -187,7 +194,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<Placeholder
 				icon="calendar-alt"
 				label="Sessionize Schedule Block"
-				instructions={ `Configured for slug: ${ publicSlug }. Configure further settings in the block sidebar.` }
+				instructions={ `Configured for API code: ${ apiCode }. Configure further settings in the block sidebar.` }
 			/>
 		</div>
 	);
