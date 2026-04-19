@@ -9,7 +9,7 @@
   "description": "A featured speakers grid block powered by Sessionize.",
   "textdomain": "sessionize-blocks",
   "attributes": {
-    "publicSlug": {
+    "apiCode": {
       "type": "string",
       "default": "pc6leesj"
     },

@@ -27,7 +27,7 @@ if ( ! function_exists( 'sched_question_id' ) ) {
 
 // Build the config object from block attributes.
 $speaker_config = array(
-	'sessionizeAllDataUrl'       => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['publicSlug'] ) . '/view/All',
+	'sessionizeAllDataUrl'       => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['apiCode'] ) . '/view/All',
 	'scheduleBaseUrl'            => esc_url( $attributes['scheduleBaseUrl'] ),
 
 	'companyQuestionId'          => sched_question_id( $attributes['companyQuestionId'] ),
