@@ -9,7 +9,7 @@ async function initSchedBlock( root ) {
 	}
 
 	const schedConfig = JSON.parse( rawConfig );
-	const FAVORITES_STORAGE_KEY = `sched-favorites-v1-${ schedConfig.sessionizePublicSlug }`;
+	const FAVORITES_STORAGE_KEY = `sched-favorites-v1-${ schedConfig.sessionizeApiCode }`;
 
 	root.classList.add( 'is-loading' );
 
@@ -83,8 +83,12 @@ async function initSchedBlock( root ) {
 		document.body.appendChild( elSpeakerModal );
 	}
 
-	const SESSIONIZE_PUBLIC_SITE_BASE = `https://${ schedConfig.sessionizePublicSlug }.sessionize.com`;
-	const sessionizeHomeLink = `<a href="${ SESSIONIZE_PUBLIC_SITE_BASE }" target="_blank" rel="noopener">schedule from Sessionize</a>`;
+	const SESSIONIZE_PUBLIC_SITE_BASE = schedConfig.sessionizePublicSlug
+		? `https://${ schedConfig.sessionizePublicSlug }.sessionize.com`
+		: '';
+	const sessionizeHomeLink = SESSIONIZE_PUBLIC_SITE_BASE
+		? `<a href="${ SESSIONIZE_PUBLIC_SITE_BASE }" target="_blank" rel="noopener">schedule from Sessionize</a>`
+		: 'schedule from Sessionize';
 
 	elStatus.innerHTML = `Loading ${ sessionizeHomeLink }…`;
 
@@ -404,13 +408,22 @@ async function initSchedBlock( root ) {
 		const day = formatDT( d, { day: 'numeric' }, state.dateLocale );
 		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
 		if ( 'dmy' === mode ) return `${ weekday } ${ day } ${ month }`;
+		if ( 'ymd' === mode ) {
+			const year = formatDT( d, { year: 'numeric' }, state.dateLocale );
+			return `${ weekday } ${ year } ${ month } ${ day }`;
+		}
 		return `${ weekday } ${ month } ${ day }`;
 	}
 
 	function fmtShortDate( d ) {
 		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
 		if ( 'dmy' === mode ) return formatDT( d, { day: 'numeric', month: 'short' }, 'en-GB' );
-		if ( 'ymd' === mode ) return formatDT( d, { year: 'numeric', month: 'short', day: 'numeric' }, 'en-CA' );
+		if ( 'ymd' === mode ) {
+			const year = formatDT( d, { year: 'numeric' }, 'en-CA' );
+			const month = formatDT( d, { month: '2-digit' }, 'en-CA' );
+			const day = formatDT( d, { day: '2-digit' }, 'en-CA' );
+			return `${ year }/${ month }/${ day }`;
+		}
 		return formatDT( d, { month: 'short', day: 'numeric' }, 'en-US' );
 	}
 
@@ -1300,12 +1313,21 @@ async function initSchedBlock( root ) {
 	function getDays() { return Array.from( new Set( state.derived.map( x => x.dayStr ) ) ).sort(); }
 
 	function getDateFilterItems() {
+		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
 		return getDays().map( dayStr => {
 			const d = new Date( dayStr + 'T00:00:00' );
-			return {
-				id: dayStr,
-				name: formatDT( d, { weekday: 'short', day: 'numeric', month: 'short' }, 'en-GB' )
-			};
+			let name;
+			if ( 'ymd' === mode ) {
+				const wd = formatDT( d, { weekday: 'short' }, undefined );
+				const m = formatDT( d, { month: '2-digit' }, 'en-CA' );
+				const day = formatDT( d, { day: '2-digit' }, 'en-CA' );
+				name = `${ wd } ${ m }/${ day }`;
+			} else if ( 'mdy' === mode ) {
+				name = formatDT( d, { weekday: 'short', month: 'short', day: 'numeric' }, 'en-US' );
+			} else {
+				name = formatDT( d, { weekday: 'short', day: 'numeric', month: 'short' }, 'en-GB' );
+			}
+			return { id: dayStr, name };
 		} );
 	}
 
@@ -3136,9 +3158,9 @@ async function initSchedBlock( root ) {
 			root.classList.remove( 'is-loading' );
 			elControls.style.display = 'none';
 			elDaysRow.style.display = 'none';
-			elStatus.innerHTML = `
-			  <a href="${ SESSIONIZE_PUBLIC_SITE_BASE }" target="_blank" rel="noopener">View the full schedule on Sessionize</a>
-			`;
+			elStatus.innerHTML = SESSIONIZE_PUBLIC_SITE_BASE
+			  ? `<a href="${ SESSIONIZE_PUBLIC_SITE_BASE }" target="_blank" rel="noopener">View the full schedule on Sessionize</a>`
+			  : 'Unable to load the schedule. Please try again later.';
 
 			elTimeline.hidden = true;
 			elGridWrap.hidden = true;

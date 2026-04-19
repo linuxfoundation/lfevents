@@ -9,9 +9,13 @@
   "description": "An interactive, dynamic schedule block powered by Sessionize.",
   "textdomain": "sessionize-blocks",
   "attributes": {
-    "publicSlug": {
+    "apiCode": {
       "type": "string",
       "default": "pc6leesj"
+    },
+    "publicSlug": {
+      "type": "string",
+      "default": ""
     },
     "primaryFilterTitle": {
       "type": "string",
