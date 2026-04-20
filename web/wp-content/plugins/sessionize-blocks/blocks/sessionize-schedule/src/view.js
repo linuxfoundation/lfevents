@@ -397,7 +397,7 @@ async function initSchedBlock( root ) {
 			const y = parts.find( p => 'year' === p.type )?.value || '';
 			const m = parts.find( p => 'month' === p.type )?.value || '';
 			const day = parts.find( p => 'day' === p.type )?.value || '';
-			return `${ y }/${ m }/${ day }`;
+			return `${ y }-${ m }-${ day }`;
 		}
 		return formatDT( d, { year: 'numeric', month: '2-digit', day: '2-digit' }, state.dateLocale );
 	}
@@ -410,7 +410,7 @@ async function initSchedBlock( root ) {
 		if ( 'dmy' === mode ) return `${ weekday } ${ day } ${ month }`;
 		if ( 'ymd' === mode ) {
 			const year = formatDT( d, { year: 'numeric' }, state.dateLocale );
-			return `${ weekday } ${ year } ${ month } ${ day }`;
+			return `${ weekday } ${ year }-${ month }-${ day }`;
 		}
 		return `${ weekday } ${ month } ${ day }`;
 	}
@@ -422,7 +422,7 @@ async function initSchedBlock( root ) {
 			const year = formatDT( d, { year: 'numeric' }, 'en-CA' );
 			const month = formatDT( d, { month: '2-digit' }, 'en-CA' );
 			const day = formatDT( d, { day: '2-digit' }, 'en-CA' );
-			return `${ year }/${ month }/${ day }`;
+			return `${ year }-${ month }-${ day }`;
 		}
 		return formatDT( d, { month: 'short', day: 'numeric' }, 'en-US' );
 	}
@@ -1321,7 +1321,7 @@ async function initSchedBlock( root ) {
 				const wd = formatDT( d, { weekday: 'short' }, undefined );
 				const m = formatDT( d, { month: '2-digit' }, 'en-CA' );
 				const day = formatDT( d, { day: '2-digit' }, 'en-CA' );
-				name = `${ wd } ${ m }/${ day }`;
+				name = `${ wd } ${ m }-${ day }`;
 			} else if ( 'mdy' === mode ) {
 				name = formatDT( d, { weekday: 'short', month: 'short', day: 'numeric' }, 'en-US' );
 			} else {
