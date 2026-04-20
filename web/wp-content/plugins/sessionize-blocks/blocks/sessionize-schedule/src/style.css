@@ -1814,7 +1814,7 @@ body.sched-modal-open > *:not(.sched-modal){
   }
 }
 
-@media (max-width:520px){
+@media (max-width:768px){
   .sched-modal{
     padding:10px 10px calc(env(safe-area-inset-bottom, 0px) + 10px);
   }
@@ -1827,7 +1827,9 @@ body.sched-modal-open > *:not(.sched-modal){
     margin-bottom:0;
     border-radius:18px;
   }
+}
 
+@media (max-width:520px){
   .sched-modal__title{ font-size:18px; }
   .sched-modal__chips{ gap:8px; }
   .sched-modal__resourcesactions{ gap:8px; }
