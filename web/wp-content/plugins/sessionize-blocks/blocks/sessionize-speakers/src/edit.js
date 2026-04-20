@@ -43,7 +43,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						options={ [
 							{ label: 'Day/Month/Year', value: 'dmy' },
 							{ label: 'Month/Day/Year', value: 'mdy' },
-							{ label: 'Year/Month/Day', value: 'ymd' },
 						] }
 						onChange={ ( val ) => setAttributes( { dateFormat: val } ) }
 					/>
