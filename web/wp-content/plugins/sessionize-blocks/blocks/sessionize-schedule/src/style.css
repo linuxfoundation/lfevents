@@ -1816,16 +1816,16 @@ body.sched-modal-open > *:not(.sched-modal){
 
 @media (max-width:768px){
   .sched-modal{
-    padding:10px 10px calc(env(safe-area-inset-bottom, 0px) + 10px);
+    padding:10px 10px calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
   }
 
   .sched-modal__dialog{
-    width:100%;
-    max-width:none;
-    max-height:calc(100dvh - 20px - env(safe-area-inset-bottom, 0px));
-    margin-top:0;
-    margin-bottom:0;
-    border-radius:18px;
+    width:100% !important;
+    max-width:none !important;
+    max-height:calc(100dvh - 20px - env(safe-area-inset-bottom, 0px)) !important;
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+    border-radius:18px !important;
   }
 }
 
