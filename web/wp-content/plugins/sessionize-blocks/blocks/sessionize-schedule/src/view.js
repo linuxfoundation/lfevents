@@ -410,7 +410,7 @@ async function initSchedBlock( root ) {
 		if ( 'dmy' === mode ) return `${ weekday } ${ day } ${ month }`;
 		if ( 'ymd' === mode ) {
 			const year = formatDT( d, { year: 'numeric' }, state.dateLocale );
-			return `${ weekday } ${ year }-${ month }-${ day }`;
+			return `${ weekday } ${ year } ${ month } ${ day }`;
 		}
 		return `${ weekday } ${ month } ${ day }`;
 	}
