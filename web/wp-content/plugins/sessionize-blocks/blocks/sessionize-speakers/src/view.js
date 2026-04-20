@@ -152,14 +152,6 @@
 				return new Intl.DateTimeFormat( undefined, { month: 'short', day: 'numeric', year: 'numeric' } ).format( d );
 			}
 
-			if ( dateFormat === 'ymd' ) {
-				const parts = new Intl.DateTimeFormat( 'en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' } ).formatToParts( d );
-				const y = parts.find( p => p.type === 'year' )?.value || '';
-				const m = parts.find( p => p.type === 'month' )?.value || '';
-				const day = parts.find( p => p.type === 'day' )?.value || '';
-				return `${ y }-${ m }-${ day }`;
-			}
-
 			const locale = dateFormat === 'dmy' ? 'en-GB' : 'en-US';
 			return new Intl.DateTimeFormat( locale, { month: 'short', day: 'numeric', year: 'numeric' } ).format( d );
 		}

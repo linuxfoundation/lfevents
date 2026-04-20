@@ -368,7 +368,6 @@ async function initSchedBlock( root ) {
 		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
 		if ( 'mdy' === mode ) return 'en-US';
 		if ( 'dmy' === mode ) return 'en-GB';
-		if ( 'ymd' === mode ) return 'en-CA';
 		return undefined;
 	}
 
@@ -391,14 +390,6 @@ async function initSchedBlock( root ) {
 	}
 
 	function fmtDayNumeric( d ) {
-		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
-		if ( 'ymd' === mode ) {
-			const parts = new Intl.DateTimeFormat( 'en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' } ).formatToParts( d );
-			const y = parts.find( p => 'year' === p.type )?.value || '';
-			const m = parts.find( p => 'month' === p.type )?.value || '';
-			const day = parts.find( p => 'day' === p.type )?.value || '';
-			return `${ y }-${ m }-${ day }`;
-		}
 		return formatDT( d, { year: 'numeric', month: '2-digit', day: '2-digit' }, state.dateLocale );
 	}
 
@@ -408,22 +399,12 @@ async function initSchedBlock( root ) {
 		const day = formatDT( d, { day: 'numeric' }, state.dateLocale );
 		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
 		if ( 'dmy' === mode ) return `${ weekday } ${ day } ${ month }`;
-		if ( 'ymd' === mode ) {
-			const year = formatDT( d, { year: 'numeric' }, state.dateLocale );
-			return `${ weekday } ${ year } ${ month } ${ day }`;
-		}
 		return `${ weekday } ${ month } ${ day }`;
 	}
 
 	function fmtShortDate( d ) {
 		const mode = String( schedConfig.dateFormat || 'auto' ).toLowerCase();
 		if ( 'dmy' === mode ) return formatDT( d, { day: 'numeric', month: 'short' }, 'en-GB' );
-		if ( 'ymd' === mode ) {
-			const year = formatDT( d, { year: 'numeric' }, 'en-CA' );
-			const month = formatDT( d, { month: '2-digit' }, 'en-CA' );
-			const day = formatDT( d, { day: '2-digit' }, 'en-CA' );
-			return `${ year }-${ month }-${ day }`;
-		}
 		return formatDT( d, { month: 'short', day: 'numeric' }, 'en-US' );
 	}
 
@@ -1317,12 +1298,7 @@ async function initSchedBlock( root ) {
 		return getDays().map( dayStr => {
 			const d = new Date( dayStr + 'T00:00:00' );
 			let name;
-			if ( 'ymd' === mode ) {
-				const wd = formatDT( d, { weekday: 'short' }, undefined );
-				const m = formatDT( d, { month: '2-digit' }, 'en-CA' );
-				const day = formatDT( d, { day: '2-digit' }, 'en-CA' );
-				name = `${ wd } ${ m }-${ day }`;
-			} else if ( 'mdy' === mode ) {
+			if ( 'mdy' === mode ) {
 				name = formatDT( d, { weekday: 'short', month: 'short', day: 'numeric' }, 'en-US' );
 			} else {
 				name = formatDT( d, { weekday: 'short', day: 'numeric', month: 'short' }, 'en-GB' );
