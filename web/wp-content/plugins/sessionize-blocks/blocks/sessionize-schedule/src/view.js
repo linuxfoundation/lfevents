@@ -3372,9 +3372,15 @@ async function initSchedBlock( root ) {
 	init();
 }
 
-document.addEventListener( 'DOMContentLoaded', () => {
+function initAllSchedBlocks() {
 	const blocks = document.querySelectorAll( '.sched-wrapper' );
 	blocks.forEach( ( block ) => {
 		initSchedBlock( block );
 	} );
-} );
+}
+
+if ( document.readyState === 'loading' ) {
+	document.addEventListener( 'DOMContentLoaded', initAllSchedBlocks, { once: true } );
+} else {
+	initAllSchedBlocks();
+}
