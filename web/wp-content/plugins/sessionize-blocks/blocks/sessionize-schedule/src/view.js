@@ -1884,15 +1884,24 @@ async function initSchedBlock( root ) {
 	function setVisualViewportVars() {
 		const doc = document.documentElement;
 		const vv = window.visualViewport;
-		const h = vv ? Math.round( vv.height ) : Math.round( window.innerHeight );
+
+		const vvHeight = vv ? Math.round( vv.height ) : 0;
+		const innerHeight = Math.round( window.innerHeight || 0 );
+		const h = vvHeight && innerHeight
+			? Math.min( vvHeight, innerHeight )
+			: ( vvHeight || innerHeight );
+
 		const top = vv ? Math.round( vv.offsetTop || 0 ) : 0;
+
 		doc.style.setProperty( '--sched-vvh', h + 'px' );
 		doc.style.setProperty( '--sched-vvtop', top + 'px' );
 	}
 
 	function setModalTopOffset() {
-		const isMobileish = window.matchMedia( '(max-width: 768px)' ).matches;
-		if ( isMobileish ) {
+		const isNarrow = window.matchMedia( '(max-width: 768px)' ).matches;
+		const isShortLandscape = window.matchMedia( '(orientation: landscape) and (max-height: 600px)' ).matches;
+
+		if ( isNarrow || isShortLandscape ) {
 			document.documentElement.style.setProperty( '--sched-modal-top-offset', '0px' );
 			return;
 		}
@@ -1900,8 +1909,55 @@ async function initSchedBlock( root ) {
 		document.documentElement.style.setProperty( '--sched-modal-top-offset', '138px' );
 	}
 
+	function syncActiveModalHeight() {
+		const shortLandscape = window.matchMedia( '(orientation: landscape) and (max-height: 600px)' ).matches;
+
+		const vv = window.visualViewport;
+		const vvHeight = vv ? Math.round( vv.height || 0 ) : 0;
+		const innerHeight = Math.round( window.innerHeight || 0 );
+		const viewportHeight = vvHeight && innerHeight
+			? Math.min( vvHeight, innerHeight )
+			: ( vvHeight || innerHeight );
+
+		const modalHeight = Math.max( 320, viewportHeight - 16 );
+
+		[ elModalDialog, elSpeakerModalDialog ].forEach( ( dialog ) => {
+			if ( ! dialog ) return;
+
+			if ( shortLandscape ) {
+				dialog.style.height = modalHeight + 'px';
+				dialog.style.maxHeight = modalHeight + 'px';
+			} else {
+				dialog.style.height = '';
+				dialog.style.maxHeight = '';
+			}
+		} );
+	}
+
+	function forceReflowFix() {
+		setVisualViewportVars();
+		syncActiveModalHeight();
+
+		const activeModal =
+			'false' === elSpeakerModal.getAttribute( 'aria-hidden' )
+				? elSpeakerModal
+				: 'false' === elModal.getAttribute( 'aria-hidden' )
+					? elModal
+					: null;
+
+		if ( activeModal ) {
+			void activeModal.offsetHeight;
+			requestAnimationFrame( () => {
+				setVisualViewportVars();
+				syncActiveModalHeight();
+				updateModalFade();
+			} );
+		}
+	}
+
 	setVisualViewportVars();
 	setModalTopOffset();
+	syncActiveModalHeight();
 	applyThemeColor();
 	loadHintState();
 
@@ -1915,11 +1971,32 @@ async function initSchedBlock( root ) {
 		elModal.classList.add( 'sched--arrowhint-seen' );
 	}
 
-	window.addEventListener( 'resize', debounce( () => { setVisualViewportVars(); setModalTopOffset(); }, 120 ) );
-	window.addEventListener( 'orientationchange', () => setTimeout( () => { setVisualViewportVars(); setModalTopOffset(); }, 80 ) );
+	window.addEventListener( 'resize', debounce( () => {
+		setVisualViewportVars();
+		setModalTopOffset();
+		syncActiveModalHeight();
+	}, 120 ) );
+	window.addEventListener( 'orientationchange', () => {
+		const run = () => {
+			setVisualViewportVars();
+			setModalTopOffset();
+			syncActiveModalHeight();
+			forceReflowFix();
+			updateModalFade();
+		};
+
+		setTimeout( run, 80 );
+		setTimeout( run, 180 );
+		setTimeout( run, 320 );
+	} );
 	if ( window.visualViewport ) {
-		window.visualViewport.addEventListener( 'resize', debounce( setVisualViewportVars, 60 ) );
-		window.visualViewport.addEventListener( 'scroll', debounce( setVisualViewportVars, 60 ) );
+		const syncViewport = debounce( () => {
+			setVisualViewportVars();
+			syncActiveModalHeight();
+		}, 60 );
+
+		window.visualViewport.addEventListener( 'resize', syncViewport );
+		window.visualViewport.addEventListener( 'scroll', syncViewport );
 	}
 
 	elModalBody.addEventListener( 'scroll', updateModalFade );
@@ -2343,6 +2420,7 @@ async function initSchedBlock( root ) {
 		setModalTopOffset();
 		elModal.setAttribute( 'aria-hidden', 'false' );
 		document.body.classList.add( 'sched-modal-open' );
+		forceReflowFix();
 
 		elModalBody.scrollTop = 0;
 		requestAnimationFrame( () => {
@@ -2550,6 +2628,7 @@ async function initSchedBlock( root ) {
 		setModalTopOffset();
 		elSpeakerModal.setAttribute( 'aria-hidden', 'false' );
 		document.body.classList.add( 'sched-modal-open' );
+		forceReflowFix();
 
 		elSpeakerModalBody.scrollTop = 0;
 		requestAnimationFrame( () => {

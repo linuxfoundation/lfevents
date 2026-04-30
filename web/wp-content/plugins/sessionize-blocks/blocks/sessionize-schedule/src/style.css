@@ -1277,7 +1277,7 @@ body.sched-modal-open > *:not(.sched-modal){
   position:relative;
   z-index: 2147483647;
   width: min(920px, calc(100vw - 28px));
-  max-height: calc(100dvh - (var(--sched-modal-top-offset) + 18px) - env(safe-area-inset-bottom, 0px));
+  max-height: calc(var(--sched-vvh) - (var(--sched-modal-top-offset) + 18px) - env(safe-area-inset-bottom, 0px));
   display:flex;
   flex-direction:column;
   overflow:hidden;
@@ -1840,13 +1840,38 @@ body.sched-modal-open > *:not(.sched-modal){
     width: 100%;
     max-width: 100%;
     margin: 0;
-    max-height: calc(100dvh - 16px - env(safe-area-inset-bottom, 0px));
+    max-height: calc(var(--sched-vvh) - 16px - env(safe-area-inset-bottom, 0px));
     border-radius: 18px;
   }
 
   .sched-modal__title{ font-size:18px; }
   .sched-modal__chips{ gap:8px; }
   .sched-modal__resourcesactions{ gap:8px; }
+}
+
+@media (orientation: landscape) and (max-height: 600px){
+  .sched-modal{
+    inset: 0;
+    padding: 8px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .sched-modal__dialog{
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    max-height: calc(var(--sched-vvh) - 16px - env(safe-area-inset-bottom, 0px));
+    border-radius: 16px;
+  }
+
+  .sched-modal__body{
+    min-height: 0;
+  }
 }
 
 @media (orientation: landscape) and (max-width: 1024px){
