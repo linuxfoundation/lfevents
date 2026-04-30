@@ -100,6 +100,25 @@ async function initSchedBlock( root ) {
 		} catch ( _ ) { return ''; }
 	}
 
+	function getPersistentSchedParams() {
+		const url = new URL( window.location.href );
+		const params = new URLSearchParams();
+
+		[ 'sched_now', 'sched_debug' ].forEach( ( key ) => {
+			const value = url.searchParams.get( key );
+			if ( null !== value ) params.set( key, value );
+		} );
+
+		return params;
+	}
+
+	function applyPersistentSchedParams( url ) {
+		const params = getPersistentSchedParams();
+		for ( const [ key, value ] of params.entries() ) {
+			url.searchParams.set( key, value );
+		}
+	}
+
 	function debugEnabled() { return '1' === qsParam( 'sched_debug' ); }
 
 	function getSessionIdFromQuery() {
@@ -123,8 +142,9 @@ async function initSchedBlock( root ) {
 	function updateUrlWithSessionId( sessionId, mode = 'push' ) {
 		if ( isHandlingPopState ) return;
 		const url = new URL( window.location.href );
+		url.search = '';
+		applyPersistentSchedParams( url );
 		url.searchParams.set( 'id', String( sessionId ) );
-		url.searchParams.delete( 'speaker' );
 		const fn = 'replace' === mode ? 'replaceState' : 'pushState';
 		window.history[ fn ]( { id: String( sessionId ) }, '', url );
 	}
@@ -140,7 +160,8 @@ async function initSchedBlock( root ) {
 	function updateUrlWithSpeakerName( speakerName, mode = 'push' ) {
 		if ( isHandlingPopState ) return;
 		const url = new URL( window.location.href );
-		url.searchParams.delete( 'id' );
+		url.search = '';
+		applyPersistentSchedParams( url );
 		url.searchParams.set( 'speaker', String( speakerName ) );
 		const fn = 'replace' === mode ? 'replaceState' : 'pushState';
 		window.history[ fn ]( { speaker: String( speakerName ) }, '', url );
@@ -175,14 +196,35 @@ async function initSchedBlock( root ) {
 		const param = String( qsParam( 'days' ) || '' ).toLowerCase();
 		if ( 'single' === param ) return false;
 		if ( 'all' === param ) return true;
-		return schedConfig.defaultShowAllDays;
+		return true;
+	}
+
+	function parseSchedNow( value ) {
+		const s = String( value || '' ).trim();
+		if ( ! s ) return null;
+
+		const m = s.match( /^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2}):(\d{2})(?::(\d{2}))?)?$/ );
+		if ( m ) {
+			const year = Number( m[ 1 ] );
+			const month = Number( m[ 2 ] ) - 1;
+			const day = Number( m[ 3 ] );
+			const hour = Number( m[ 4 ] || 0 );
+			const minute = Number( m[ 5 ] || 0 );
+			const second = Number( m[ 6 ] || 0 );
+
+			const d = new Date( year, month, day, hour, minute, second );
+			if ( ! Number.isNaN( d.getTime() ) ) return d;
+		}
+
+		const fallback = new Date( s );
+		return Number.isNaN( fallback.getTime() ) ? null : fallback;
 	}
 
 	function nowDate() {
 		const forced = qsParam( 'sched_now' );
 		if ( forced ) {
-			const d = new Date( forced );
-			if ( ! Number.isNaN( d.getTime() ) ) return d;
+			const parsed = parseSchedNow( forced );
+			if ( parsed ) return parsed;
 		}
 		return new Date();
 	}
@@ -325,6 +367,7 @@ async function initSchedBlock( root ) {
 
 	let lastFocusedEl = null;
 	let isHandlingPopState = false;
+	let lastFilterUrl = '';
 	let modalSessionList = [];
 	let modalSessionIndex = -1;
 	let modalSpeakerList = [];
@@ -446,21 +489,19 @@ async function initSchedBlock( root ) {
 		const id = String( sessionId || '' );
 		if ( ! id ) return;
 
-		const favoriteBtn = root.querySelector( `[data-favorite-session-id="${ id }"]` );
-		const wrap = favoriteBtn ? favoriteBtn.closest( '.sess-wrap, .sched-grid__cardwrap' ) : null;
-		const target =
-			wrap ||
-			favoriteBtn ||
-			Array.from( root.querySelectorAll( '.sess-link, .sched-grid__cellbtn' ) ).find( btn => {
-				return btn.textContent && state.derivedById.get( id );
-			} );
+		const targetBtn = root.querySelector( `[data-session-id="${ id }"]` );
+		if ( ! targetBtn ) return;
 
-		if ( ! target ) return;
+		const target = targetBtn.closest( '.sess-wrap, .sched-grid__cardwrap' ) || targetBtn;
 
-		target.scrollIntoView( { block: 'center', inline: 'nearest', behavior: 'smooth' } );
+		target.scrollIntoView( {
+			block: 'center',
+			inline: 'nearest',
+			behavior: 'smooth'
+		} );
 
-		if ( typeof target.focus === 'function' ) {
-			target.focus( { preventScroll: true } );
+		if ( typeof targetBtn.focus === 'function' ) {
+			targetBtn.focus( { preventScroll: true } );
 		}
 	}
 
@@ -481,19 +522,7 @@ async function initSchedBlock( root ) {
 	}
 
 	function buildFavoriteButton( sessionId ) {
-		if ( ! schedConfig.enablePersonalAgenda ) return document.createDocumentFragment();
-
-		const btn = document.createElement( 'button' );
-		btn.type = 'button';
-		btn.className = 'sched-favoritebtn';
-		btn.dataset.favoriteSessionId = String( sessionId );
-		updateFavoriteButtonUi( btn, isFavoriteSessionId( sessionId ) );
-		btn.addEventListener( 'click', ( e ) => {
-			e.preventDefault();
-			e.stopPropagation();
-			toggleFavoriteSession( sessionId );
-		} );
-		return btn;
+		return document.createDocumentFragment();
 	}
 
 	function renderSpeakerSessionMetaHtml( d ) {
@@ -690,6 +719,7 @@ async function initSchedBlock( root ) {
 			url.searchParams.delete( 'search' );
 		}
 
+		applyPersistentSchedParams( url );
 		window.history.replaceState( window.history.state || {}, '', url );
 	}
 
@@ -1384,6 +1414,15 @@ async function initSchedBlock( root ) {
 			b.className = 'sched-filtercat' + ( state.activeFilterCategoryTitle === title ? ' is-active' : '' );
 			b.textContent = title;
 			b.addEventListener( 'click', () => {
+				if ( title === schedConfig.primaryFilterTitle ) {
+					clearAllFilters();
+					state.activeFilterCategoryTitle = title;
+					buildFilterCategorySwitcher();
+					buildChips();
+					render();
+					return;
+				}
+
 				state.activeFilterCategoryTitle = title;
 				buildFilterCategorySwitcher();
 				buildChips();
@@ -1604,6 +1643,7 @@ async function initSchedBlock( root ) {
 		const button = document.createElement( 'button' );
 		button.type = 'button';
 		button.className = 'sched-grid__cellbtn';
+		button.dataset.sessionId = String( derived.id );
 
 		const card = document.createElement( 'div' );
 		card.className = 'sched-gridcard' + ( derived.primaryColors ? ' has-primary' : '' );
@@ -1851,16 +1891,9 @@ async function initSchedBlock( root ) {
 	}
 
 	function setModalTopOffset() {
-		const isMobileish = window.matchMedia( '(max-width: 1024px)' ).matches;
-		const isLandscapePhone = window.matchMedia( '(max-height: 520px) and (orientation: landscape)' ).matches;
-
-		if ( isLandscapePhone ) {
-			document.documentElement.style.setProperty( '--sched-modal-top-offset', '8px' );
-			return;
-		}
-
+		const isMobileish = window.matchMedia( '(max-width: 768px)' ).matches;
 		if ( isMobileish ) {
-			document.documentElement.style.setProperty( '--sched-modal-top-offset', '10px' );
+			document.documentElement.style.setProperty( '--sched-modal-top-offset', '0px' );
 			return;
 		}
 
@@ -2160,6 +2193,15 @@ async function initSchedBlock( root ) {
 			hideSpeakerModalForSwap();
 		}
 
+		if (
+			'false' !== elModal.getAttribute( 'aria-hidden' ) &&
+			'false' !== elSpeakerModal.getAttribute( 'aria-hidden' ) &&
+			! getSessionIdFromQuery() &&
+			! getSpeakerFromQuery()
+		) {
+			lastFilterUrl = window.location.href;
+		}
+
 		updateUrlWithSessionId( d.id, 'false' === elModal.getAttribute( 'aria-hidden' ) ? 'replace' : 'push' );
 
 		syncModalSessionPosition( d.id );
@@ -2321,27 +2363,35 @@ async function initSchedBlock( root ) {
 			markArrowHintSeen();
 		}
 
+		const closingSessionId = state.currentModalSessionId;
+
 		elModal.setAttribute( 'aria-hidden', 'true' );
 		document.body.classList.remove( 'sched-modal-open' );
 		elModalFade.hidden = true;
 		elModalPrev.hidden = true;
 		elModalNext.hidden = true;
-		removeSessionIdFromUrl( 'replace' );
 
-		const closingSessionId = state.currentModalSessionId;
+		if ( lastFilterUrl ) {
+			window.history.replaceState( {}, '', lastFilterUrl );
+			lastFilterUrl = '';
+		} else {
+			removeSessionIdFromUrl( 'replace' );
+		}
 
 		if ( lastFocusedEl && 'function' === typeof lastFocusedEl.focus ) {
 			lastFocusedEl.focus( { preventScroll: true } );
 		}
 
-		if ( closingSessionId ) {
-			setTimeout( () => {
-				scrollSessionIntoView( closingSessionId );
-			}, 30 );
-		}
-
 		state.currentModalSessionId = null;
 		lastFocusedEl = null;
+
+		if ( closingSessionId ) {
+			requestAnimationFrame( () => {
+				requestAnimationFrame( () => {
+					scrollSessionIntoView( closingSessionId );
+				} );
+			} );
+		}
 	}
 
 	function openSpeakerModal( speaker ) {
@@ -2349,6 +2399,15 @@ async function initSchedBlock( root ) {
 
 		if ( 'false' === elModal.getAttribute( 'aria-hidden' ) ) {
 			hideSessionModalForSwap();
+		}
+
+		if (
+			'false' !== elModal.getAttribute( 'aria-hidden' ) &&
+			'false' !== elSpeakerModal.getAttribute( 'aria-hidden' ) &&
+			! getSessionIdFromQuery() &&
+			! getSpeakerFromQuery()
+		) {
+			lastFilterUrl = window.location.href;
 		}
 
 		updateUrlWithSpeakerName(
@@ -2506,7 +2565,6 @@ async function initSchedBlock( root ) {
 
 		elSpeakerModal.setAttribute( 'aria-hidden', 'true' );
 		state.currentSpeakerModalId = null;
-		removeSpeakerFromUrl( 'replace' );
 
 		if ( returnSessionId ) {
 			state.returnToSessionId = null;
@@ -2516,6 +2574,13 @@ async function initSchedBlock( root ) {
 				openModal( sessionMatch );
 				return;
 			}
+		}
+
+		if ( lastFilterUrl ) {
+			window.history.replaceState( {}, '', lastFilterUrl );
+			lastFilterUrl = '';
+		} else {
+			removeSpeakerFromUrl( 'replace' );
 		}
 
 		document.body.classList.remove( 'sched-modal-open' );
@@ -2656,6 +2721,7 @@ async function initSchedBlock( root ) {
 			const btn = document.createElement( 'button' );
 			btn.type = 'button';
 			btn.className = 'sess-link';
+			btn.dataset.sessionId = String( d.id );
 
 			const cardVars = d.primaryColors
 				? `style="--primary-bg:${ escapeHtml( d.primaryColors.bg ) };--primary-border:${ escapeHtml( d.primaryColors.border ) };--tag-bg:${ escapeHtml( d.primaryColors.bg ) };--tag-border:${ escapeHtml( d.primaryColors.border ) };"`
@@ -2761,7 +2827,14 @@ async function initSchedBlock( root ) {
 			buildChips();
 		}
 
-		buildDays( days );
+		const hasTopDateFilter = state.filterCategoryTitles.includes( CUSTOM_DATE_FILTER_TITLE );
+
+		if ( hasTopDateFilter ) {
+			elDays.innerHTML = '';
+			elDays.style.display = 'none';
+		} else {
+			buildDays( days );
+		}
 
 		if ( isSpeakerMode ) {
 			elDaysRow.style.display = 'none';
@@ -2820,7 +2893,10 @@ async function initSchedBlock( root ) {
 			? list
 			: list.filter( x => x.dayStr === state.selectedDay );
 
-		modalSessionList = visibleList.slice();
+		modalSessionList = getRenderedSessionListForModal();
+		if ( ! modalSessionList.length ) {
+			modalSessionList = visibleList.slice();
+		}
 
 		if ( ! visibleList.length ) {
 			if ( 'speakers' === state.viewMode ) {
@@ -2905,9 +2981,44 @@ async function initSchedBlock( root ) {
 		return list;
 	}
 
+	function getRenderedSessionListForModal() {
+		const buttons = Array.from( root.querySelectorAll( '.sess-link[data-session-id], .sched-grid__cellbtn[data-session-id]' ) );
+		const ids = buttons
+			.map( btn => String( btn.dataset.sessionId || '' ) )
+			.filter( Boolean );
+
+		const seen = new Set();
+		const ordered = [];
+
+		for ( const id of ids ) {
+			if ( seen.has( id ) ) continue;
+			seen.add( id );
+
+			const match = state.derivedById.get( id );
+			if ( match ) ordered.push( match );
+		}
+
+		return ordered;
+	}
+
 	function syncModalSessionPosition( sessionId ) {
-		modalSessionList = getVisibleSessionsForModal();
+		const renderedList = getRenderedSessionListForModal();
+		modalSessionList = renderedList.length ? renderedList : getVisibleSessionsForModal();
 		modalSessionIndex = modalSessionList.findIndex( d => String( d.id ) === String( sessionId ) );
+	}
+
+	function refreshModalSessionNavigation() {
+		if ( ! state.currentModalSessionId ) return false;
+
+		const renderedList = getRenderedSessionListForModal();
+		modalSessionList = renderedList.length ? renderedList : getVisibleSessionsForModal();
+
+		modalSessionIndex = modalSessionList.findIndex(
+			d => String( d.id ) === String( state.currentModalSessionId )
+		);
+
+		updateModalNavButtons();
+		return modalSessionIndex >= 0 && modalSessionList.length > 0;
 	}
 
 	function getVisibleSpeakersForModal() {
@@ -2933,14 +3044,14 @@ async function initSchedBlock( root ) {
 	}
 
 	function goToNextSession() {
-		if ( modalSessionIndex < 0 ) return;
+		if ( ! refreshModalSessionNavigation() ) return;
 		if ( modalSessionIndex >= modalSessionList.length - 1 ) return;
 		openModal( modalSessionList[ modalSessionIndex + 1 ] );
 		animateModalSwap();
 	}
 
 	function goToPreviousSession() {
-		if ( modalSessionIndex <= 0 ) return;
+		if ( ! refreshModalSessionNavigation() ) return;
 		openModal( modalSessionList[ modalSessionIndex - 1 ] );
 		animateModalSwap();
 	}

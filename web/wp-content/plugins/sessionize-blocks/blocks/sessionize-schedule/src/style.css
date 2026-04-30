@@ -1140,11 +1140,20 @@ body.sched--agenda-disabled .sched-favoritebtn{
   gap:10px;
   align-items:center;
   font-size:12px;
+  line-height:1.35;
   color:var(--muted);
   min-width:0;
+  padding-bottom:2px;
 }
 .sess__room{ font-weight:750; color:color-mix(in srgb, var(--muted) 70%, black); }
-.sess__speakers{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+.sess__speakers{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  min-width:0;
+  line-height:1.35;
+  padding-bottom:1px;
+}
 @media (max-width: 520px){ .sess__speakers{ white-space:normal; } }
 
 .sess__tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
@@ -1353,9 +1362,11 @@ body.sched-modal-open > *:not(.sched-modal){
   flex:1 1 auto;
   min-height:0;
   overflow:auto;
+  overflow-x:hidden;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   padding:14px 16px 20px;
+  word-break: break-word;
 }
 
 .sched-modal__body.is-swap-animating{
@@ -1814,22 +1825,25 @@ body.sched-modal-open > *:not(.sched-modal){
   }
 }
 
-@media (max-width:768px){
+@media (max-width: 768px){
   .sched-modal{
-    padding:10px 10px calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
+    inset: 0;
+    padding: 8px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
   }
 
   .sched-modal__dialog{
-    width:100% !important;
-    max-width:none !important;
-    max-height:calc(100dvh - 20px - env(safe-area-inset-bottom, 0px)) !important;
-    margin-top:0 !important;
-    margin-bottom:0 !important;
-    border-radius:18px !important;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    max-height: calc(100dvh - 16px - env(safe-area-inset-bottom, 0px));
+    border-radius: 18px;
   }
-}
 
-@media (max-width:520px){
   .sched-modal__title{ font-size:18px; }
   .sched-modal__chips{ gap:8px; }
   .sched-modal__resourcesactions{ gap:8px; }
@@ -1837,16 +1851,18 @@ body.sched-modal-open > *:not(.sched-modal){
 
 @media (orientation: landscape) and (max-width: 1024px){
   .sched-modal{
-    padding:8px;
+    padding: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .sched-modal__dialog{
-    width:100%;
-    max-width:none;
-    max-height:calc(100dvh - 16px);
-    margin-top:0;
-    margin-bottom:0;
-    border-radius:16px;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 16px);
+    margin: 0;
+    border-radius: 16px;
   }
 }
 
