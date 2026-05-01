@@ -1216,6 +1216,11 @@ body.sched-modal-open > *:not(.sched-modal){
   transition: filter .22s ease;
 }
 
+@media (max-width: 768px){
+  body.sched-modal-open > *:not(.sched-modal) {
+    filter: none;
+  }
+}
 .sched-modal{
   position: fixed;
   inset: 0;
