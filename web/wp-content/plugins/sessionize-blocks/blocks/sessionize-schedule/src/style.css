@@ -1211,16 +1211,6 @@ body.sched--agenda-disabled .sched-favoritebtn{
 body.sched-modal-open{ overflow:hidden; }
 .sched-modal[aria-hidden="true"]{ display:none; }
 
-body.sched-modal-open > *:not(.sched-modal){
-  filter: blur(10px) brightness(.82);
-  transition: filter .22s ease;
-}
-
-@media (max-width: 768px){
-  body.sched-modal-open > *:not(.sched-modal) {
-    filter: none;
-  }
-}
 .sched-modal{
   position: fixed;
   inset: 0;
