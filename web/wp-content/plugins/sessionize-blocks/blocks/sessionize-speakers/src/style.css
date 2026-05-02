@@ -449,6 +449,8 @@
 .sz-modal__link[data-kind="youtube"]:hover { color: #FF0000; }
 .sz-modal__link[data-kind="github"]:hover { color: #181717; }
 .sz-modal__link[data-kind="sessionize"]:hover { color: #1AB394; }
+.sz-modal__link[data-kind="blog"]:hover { color: #FF5722; }
+.sz-modal__link[data-kind="company"]:hover { color: #455A64; }
 
 .sz-modal__linkicon {
 	display: inline-flex;
