@@ -528,26 +528,35 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
   width:44px;
   height:44px;
   border-radius:999px;
-  border:1px solid color-mix(in srgb, #cbd5e1 78%, white);
+  border:1px solid rgba(0, 0, 0, 0.10);
   background:#fff;
-  color:color-mix(in srgb, var(--site-accent) 72%, #0f172a);
+  color:#000;
   text-decoration:none;
-  box-shadow:0 4px 12px rgba(2,6,23,.04);
+  box-shadow:0 4px 12px rgba(0, 0, 0, 0.06);
   transition:transform .12s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
 }
 
 .sched-speaker-modal__link:hover{
   transform:translateY(-1px);
-  border-color:color-mix(in srgb, var(--site-accent) 52%, #cbd5e1);
-  background:color-mix(in srgb, var(--site-accent) 8%, white);
-  color:color-mix(in srgb, var(--site-accent) 85%, #0f172a);
-  box-shadow:0 8px 18px rgba(2,6,23,.08);
+  border-color:rgba(0, 0, 0, 0.18);
+  background:#fafafa;
+  box-shadow:0 8px 18px rgba(0, 0, 0, 0.10);
 }
 
 .sched-speaker-modal__link:focus-visible{
-  outline:3px solid color-mix(in srgb, var(--site-accent) 22%, white);
+  outline:3px solid rgba(0, 0, 0, 0.14);
   outline-offset:2px;
 }
+
+/* Brand hover colors */
+.sched-speaker-modal__link[data-kind="x"]:hover { color: #000; }
+.sched-speaker-modal__link[data-kind="linkedin"]:hover { color: #0A66C2; }
+.sched-speaker-modal__link[data-kind="facebook"]:hover { color: #1877F2; }
+.sched-speaker-modal__link[data-kind="instagram"]:hover { color: #E4405F; }
+.sched-speaker-modal__link[data-kind="bluesky"]:hover { color: #0285FF; }
+.sched-speaker-modal__link[data-kind="youtube"]:hover { color: #FF0000; }
+.sched-speaker-modal__link[data-kind="github"]:hover { color: #181717; }
+.sched-speaker-modal__link[data-kind="sessionize"]:hover { color: #1AB394; }
 
 .sched-speaker-modal__linkicon{
   display:inline-flex;
@@ -564,9 +573,15 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
 }
 
 .sched-speaker-modal__linkemoji{
+  filter: grayscale(1) brightness(0);
+  transition: filter 0.18s ease;
   display:block;
   font-size:18px;
   line-height:1;
+}
+
+.sched-speaker-modal__link:hover .sched-speaker-modal__linkemoji{
+  filter: none;
 }
 
 .sched-speaker-modal__linktext{
@@ -603,6 +618,20 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
   height:20px;
   display:block;
   object-fit:contain;
+  filter: grayscale(1) brightness(0);
+  transition: filter 0.18s ease;
+}
+
+.sched-speaker-modal__link:hover .sched-speaker-modal__linkicon img{
+  filter: none;
+}
+
+/* Sessionize inline SVG: bg stays white, mark follows currentColor */
+.sched-speaker-modal__sz-bg{
+  fill: #fff !important;
+}
+.sched-speaker-modal__sz-mark{
+  fill: currentColor;
 }
 
 .sched-speaker-modal__meta{

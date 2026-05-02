@@ -422,10 +422,10 @@
 	border-radius: 999px;
 	border: 1px solid rgba(0, 0, 0, 0.10);
 	background: #fff;
-	color: var(--sz-text);
+	color: #000;
 	text-decoration: none;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-	transition: transform 0.14s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+	transition: transform 0.14s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
 }
 
 .sz-modal__link:hover {
@@ -440,6 +440,16 @@
 	outline-offset: 2px;
 }
 
+/* Brand hover colors */
+.sz-modal__link[data-kind="x"]:hover { color: #000; }
+.sz-modal__link[data-kind="linkedin"]:hover { color: #0A66C2; }
+.sz-modal__link[data-kind="facebook"]:hover { color: #1877F2; }
+.sz-modal__link[data-kind="instagram"]:hover { color: #E4405F; }
+.sz-modal__link[data-kind="bluesky"]:hover { color: #0285FF; }
+.sz-modal__link[data-kind="youtube"]:hover { color: #FF0000; }
+.sz-modal__link[data-kind="github"]:hover { color: #181717; }
+.sz-modal__link[data-kind="sessionize"]:hover { color: #1AB394; }
+
 .sz-modal__linkicon {
 	display: inline-flex;
 	align-items: center;
@@ -452,6 +462,17 @@
 	width: 20px;
 	height: 20px;
 	display: block;
+}
+
+.sz-modal__linkicon img,
+.sz-modal__linkemoji {
+	filter: grayscale(1) brightness(0);
+	transition: filter 0.18s ease;
+}
+
+.sz-modal__link:hover .sz-modal__linkicon img,
+.sz-modal__link:hover .sz-modal__linkemoji {
+	filter: none;
 }
 
 .sz-modal__linkicon img {

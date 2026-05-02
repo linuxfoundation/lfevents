@@ -648,7 +648,47 @@
 			return Array.isArray( speaker?.links ) ? speaker.links.filter( ( link ) => link && link.url ) : [];
 		}
 
-		function getSpeakerLinkKind_( linkType, title ) {
+		function getUrlHost_( url ) {
+			try {
+				return new URL( String( url || '' ).trim() ).hostname.toLowerCase().replace( /^www\./, '' );
+			} catch ( _ ) {
+				return '';
+			}
+		}
+
+		function getSpeakerLinkKindFromUrl_( url ) {
+			const host = getUrlHost_( url );
+			if ( ! host ) {
+				return '';
+			}
+			if ( host === 'twitter.com' || host === 'x.com' || host.endsWith( '.twitter.com' ) || host.endsWith( '.x.com' ) ) {
+				return 'x';
+			}
+			if ( host === 'linkedin.com' || host.endsWith( '.linkedin.com' ) ) {
+				return 'linkedin';
+			}
+			if ( host === 'facebook.com' || host === 'fb.com' || host.endsWith( '.facebook.com' ) || host.endsWith( '.fb.com' ) ) {
+				return 'facebook';
+			}
+			if ( host === 'instagram.com' || host.endsWith( '.instagram.com' ) ) {
+				return 'instagram';
+			}
+			if ( host === 'sessionize.com' || host.endsWith( '.sessionize.com' ) ) {
+				return 'sessionize';
+			}
+			if ( host === 'bsky.app' || host.endsWith( '.bsky.app' ) || host === 'bsky.social' || host.endsWith( '.bsky.social' ) || host === 'bluesky.app' || host.endsWith( '.bluesky.app' ) ) {
+				return 'bluesky';
+			}
+			if ( host === 'youtube.com' || host === 'youtu.be' || host.endsWith( '.youtube.com' ) ) {
+				return 'youtube';
+			}
+			if ( host === 'github.com' || host.endsWith( '.github.com' ) || host === 'github.io' || host.endsWith( '.github.io' ) ) {
+				return 'github';
+			}
+			return '';
+		}
+
+		function getSpeakerLinkKind_( linkType, title, url ) {
 			const key = String( linkType || title || '' ).trim().toLowerCase();
 			if ( key === 'twitter' || key === 'x' || key === 'x (twitter)' ) {
 				return 'x';
@@ -665,29 +705,42 @@
 			if ( key === 'sessionize' ) {
 				return 'sessionize';
 			}
+			if ( key === 'bluesky' || key === 'bsky' ) {
+				return 'bluesky';
+			}
+			if ( key === 'youtube' || key === 'yt' ) {
+				return 'youtube';
+			}
+			if ( key === 'github' || key === 'gh' ) {
+				return 'github';
+			}
 			if ( key === 'blog' ) {
 				return 'blog';
 			}
 			if ( key === 'company website' || key === 'company' ) {
 				return 'company';
 			}
+			const urlKind = getSpeakerLinkKindFromUrl_( url );
+			if ( urlKind ) {
+				return urlKind;
+			}
 			return 'other';
 		}
 
-		function getSpeakerLinkLabel_( linkType, title ) {
-			const kind = getSpeakerLinkKind_( linkType, title );
-			const labels = { x: 'X', linkedin: 'LinkedIn', facebook: 'Facebook', instagram: 'Instagram', sessionize: 'Sessionize', blog: 'Blog', company: 'Company Website', other: 'Other' };
+		function getSpeakerLinkLabel_( linkType, title, url ) {
+			const kind = getSpeakerLinkKind_( linkType, title, url );
+			const labels = { x: 'X', linkedin: 'LinkedIn', facebook: 'Facebook', instagram: 'Instagram', sessionize: 'Sessionize', bluesky: 'Bluesky', youtube: 'YouTube', github: 'GitHub', blog: 'Blog', company: 'Company Website', other: 'Other' };
 			return labels[ kind ] || String( title || linkType || 'Link' ).trim() || 'Link';
 		}
 
 		function getSpeakerLinkSortOrder_( link ) {
-			const kind = getSpeakerLinkKind_( link?.linkType, link?.title );
-			const order = { x: 1, linkedin: 2, facebook: 3, instagram: 4, sessionize: 5, blog: 6, company: 7, other: 8 };
+			const kind = getSpeakerLinkKind_( link?.linkType, link?.title, link?.url );
+			const order = { x: 1, linkedin: 2, bluesky: 3, facebook: 4, instagram: 5, youtube: 6, github: 7, sessionize: 8, blog: 9, company: 10, other: 11 };
 			return order[ kind ] || 99;
 		}
 
-		function getSpeakerLinkSvg_( linkType, title ) {
-			const kind = getSpeakerLinkKind_( linkType, title );
+		function getSpeakerLinkSvg_( linkType, title, url ) {
+			const kind = getSpeakerLinkKind_( linkType, title, url );
 
 			if ( kind === 'x' ) {
 				return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-24.52 -24.52 1248.04 1275.04" aria-hidden="true" focusable="false"><path fill="currentColor" d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.612-476.152 327.181 476.152H1200L714.137 519.284zM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854z"></path></svg>';
@@ -702,7 +755,16 @@
 				return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141Zm0 189.6c-41.2 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.5 74.7-74.7 74.7Zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9 0-14.9 12-26.9 26.9-26.9 14.8 0 26.9 12 26.9 26.9Zm76.1 27.3c-1.7-35.3-9.7-66.7-35.6-92.5S354.1 37 318.8 35.2c-35.4-2-141.4-2-176.8 0-35.3 1.7-66.7 9.7-92.5 35.6S11.3 105.9 9.5 141.2c-2 35.4-2 141.4 0 176.8 1.7 35.3 9.7 66.7 35.6 92.5s57.2 33.8 92.5 35.6c35.4 2 141.4 2 176.8 0 35.3-1.7 66.7-9.7 92.5-35.6s33.8-57.2 35.6-92.5c2-35.4 2-141.3 0-176.8ZM398.8 388c-7.7 19.4-22.7 34.4-42.1 42.1-29.1 11.5-98.1 8.9-130.3 8.9s-101.3 2.6-130.3-8.9c-19.4-7.7-34.4-22.7-42.1-42.1-11.5-29.1-8.9-98.1-8.9-130.3s-2.6-101.3 8.9-130.3c7.7-19.4 22.7-34.4 42.1-42.1 29.1-11.5 98.1-8.9 130.3-8.9s101.3-2.6 130.3 8.9c19.4 7.7 34.4 22.7 42.1 42.1 11.5 29.1 8.9 98.1 8.9 130.3s2.7 101.2-8.9 130.3Z"></path></svg>';
 			}
 			if ( kind === 'sessionize' ) {
-				return '<img src="https://sessionize.com/landing/images/brand/logo/sessionize-avatar.svg" alt="" loading="lazy" decoding="async">';
+				return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path class="sz-modal__sz-bg" d="M4 0h20c13.255 0 24 10.745 24 24v20a4 4 0 01-4 4H4a4 4 0 01-4-4V4a4 4 0 014-4z" fill="#fff"/><path class="sz-modal__sz-mark" d="M24 0c13.255 0 24 10.745 24 24v20a4 4 0 01-4 4H29l-.003-.338c-.097-5.789-2.694-9.804-7.417-11.92L48 24l-.639-.218C41.644 21.784 36.857 18.857 33 15c-3.857-3.857-6.784-8.644-8.782-14.361L24 0 8 36c0 1.333.333 2.333 1 3 .667.667 1.667 1 3 1l.374.002C19.915 40.082 23 42.592 23 48H4a4 4 0 01-4-4V4a4 4 0 014-4h20zm14.414 9.586c-1.562-1.562-3.461-2.195-4.242-1.414-.781.78-.148 2.68 1.414 4.242 1.562 1.562 3.461 2.195 4.242 1.414.781-.78.148-2.68-1.414-4.242z" fill="currentColor"/></svg>';
+			}
+			if ( kind === 'bluesky' ) {
+				return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 530" aria-hidden="true" focusable="false"><path fill="currentColor" d="M135.72 44.03C202.216 93.951 273.74 195.17 300 249.49c26.262-54.316 97.782-155.539 164.28-205.46C512.26 8.009 590-19.862 590 68.825c0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.38-3.69-10.832-3.708-7.896-.017-2.936-1.193.516-3.707 7.896-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.106 11.421-142.55-7.45-163.25-81.433C20.156 217.613 10 86.535 10 68.825c0-88.687 77.742-60.816 125.72-24.795z"></path></svg>';
+			}
+			if ( kind === 'youtube' ) {
+				return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>';
+			}
+			if ( kind === 'github' ) {
+				return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"></path></svg>';
 			}
 			return '<span class="sz-modal__linkemoji" aria-hidden="true">\uD83D\uDD17</span>';
 		}
@@ -730,11 +792,13 @@
 			modalLinks.hidden = false;
 
 			links.forEach( ( link ) => {
-				const label = getSpeakerLinkLabel_( link.linkType, link.title );
-				const icon = getSpeakerLinkSvg_( link.linkType, link.title );
+				const kind = getSpeakerLinkKind_( link.linkType, link.title, link.url );
+				const label = getSpeakerLinkLabel_( link.linkType, link.title, link.url );
+				const icon = getSpeakerLinkSvg_( link.linkType, link.title, link.url );
 
 				const a = document.createElement( 'a' );
 				a.className = 'sz-modal__link';
+				a.setAttribute( 'data-kind', kind );
 				a.href = String( link.url || '' ).trim();
 				a.target = '_blank';
 				a.rel = 'noopener';
