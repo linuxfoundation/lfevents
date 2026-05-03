@@ -333,6 +333,7 @@ async function initSchedBlock( root ) {
 		derivedById: new Map(),
 		derivedSpeakers: [],
 		derivedSpeakersById: new Map(),
+		questionTitleToId: new Map(),
 		currentSpeakerModalId: null,
 
 		viewMode: 'list',
@@ -748,6 +749,28 @@ async function initSchedBlock( root ) {
 		return null;
 	}
 
+	function normalizeQuestionLookupKey( value ) {
+		return String( value || '' ).trim().toLowerCase();
+	}
+
+	function resolveConfiguredQuestionId( ref ) {
+		if ( null == ref || '' === ref ) return null;
+
+		if ( 'number' === typeof ref ) {
+			return Number.isFinite( ref ) && ref > 0 ? ref : null;
+		}
+
+		const raw = String( ref ).trim();
+		if ( ! raw ) return null;
+
+		const numeric = Number( raw );
+		if ( Number.isFinite( numeric ) && numeric > 0 ) {
+			return numeric;
+		}
+
+		return state.questionTitleToId.get( normalizeQuestionLookupKey( raw ) ) || null;
+	}
+
 	function extractAnswerValue( row ) {
 		if ( ! row ) return '';
 		if ( null != row.answer ) {
@@ -762,7 +785,7 @@ async function initSchedBlock( root ) {
 	function getSpeakerAnswerByQuestionId( speaker, qid ) {
 		const qa = speaker?.questionAnswers;
 		if ( ! Array.isArray( qa ) || ! qa.length ) return '';
-		const targetId = Number( qid );
+		const targetId = resolveConfiguredQuestionId( qid );
 		if ( ! Number.isFinite( targetId ) || targetId <= 0 ) return '';
 
 		const hit = qa.find( row => {
@@ -775,7 +798,7 @@ async function initSchedBlock( root ) {
 	function getSessionAnswerRowByQuestionId( session, qid ) {
 		const qa = session?.questionAnswers;
 		if ( ! Array.isArray( qa ) || ! qa.length ) return null;
-		const targetId = Number( qid );
+		const targetId = resolveConfiguredQuestionId( qid );
 		if ( ! Number.isFinite( targetId ) || targetId <= 0 ) return null;
 
 		return qa.find( row => {
@@ -880,7 +903,7 @@ async function initSchedBlock( root ) {
 			schedConfig.customLinkField4QuestionId,
 			schedConfig.customLinkField5QuestionId
 		]
-		.map( v => ( null == v || '' === v ? null : Number( v ) ) )
+		.map( resolveConfiguredQuestionId )
 		.filter( v => Number.isFinite( v ) && v > 0 );
 	}
 
@@ -1255,8 +1278,11 @@ async function initSchedBlock( root ) {
 			const recordingUrl = String( s.recordingUrl || '' ).trim() || '';
 			const slidesUrl = getPresentationSlidesUrl( s );
 			const customLinks = buildCustomLinksForSession( s );
+			const descriptionText = htmlToText(
+				s.description ?? s.descriptionHtml ?? s.shortDescription ?? s.shortDescriptionHtml ?? ''
+			);
 
-			const hay = `${ s.title || '' } ${ room } ${ speakerLine } ${ tags.map( t => t.name ).join( ' ' ) } ${ recordingUrl } ${ slidesUrl } ${ customLinks.map( x => `${ x.label } ${ x.url }` ).join( ' ' ) }`.toLowerCase();
+			const hay = `${ s.title || '' } ${ room } ${ speakerLine } ${ descriptionText } ${ tags.map( t => t.name ).join( ' ' ) } ${ recordingUrl } ${ slidesUrl } ${ customLinks.map( x => `${ x.label } ${ x.url }` ).join( ' ' ) }`.toLowerCase();
 
 			out.push( {
 				raw: s,
@@ -1269,6 +1295,7 @@ async function initSchedBlock( root ) {
 				tags,
 				primaryColors,
 				hay,
+				descriptionText,
 				primaryName,
 				recordingUrl,
 				slidesUrl,
@@ -2447,10 +2474,9 @@ async function initSchedBlock( root ) {
 						const speakerData = state.derivedSpeakersById.get( speakerId );
 						if ( ! speakerData ) return;
 
-						state.returnToSessionId = d.id;
 						elModal.setAttribute( 'aria-hidden', 'true' );
 						elModalFade.hidden = true;
-						openSpeakerModal( speakerData );
+						openSpeakerModal( speakerData, { sessionScopeId: d.id } );
 					} );
 
 					details.appendChild( head );
@@ -2520,7 +2546,7 @@ async function initSchedBlock( root ) {
 		}
 	}
 
-	function openSpeakerModal( speaker ) {
+	function openSpeakerModal( speaker, options = {} ) {
 		if ( ! speaker ) return;
 
 		if ( 'false' === elModal.getAttribute( 'aria-hidden' ) ) {
@@ -2541,6 +2567,14 @@ async function initSchedBlock( root ) {
 			'false' === elSpeakerModal.getAttribute( 'aria-hidden' ) ? 'replace' : 'push'
 		);
 
+		const scopedSessionId =
+			null != options.sessionScopeId
+				? String( options.sessionScopeId )
+				: state.returnToSessionId
+					? String( state.returnToSessionId )
+					: null;
+
+		state.returnToSessionId = scopedSessionId;
 		syncSpeakerModalPosition( speaker.id );
 
 		state.currentSpeakerModalId = speaker.id;
@@ -2769,6 +2803,18 @@ async function initSchedBlock( root ) {
 		if ( speakerModalOpen && 'Escape' === e.key ) {
 			e.preventDefault();
 			closeSpeakerModal();
+			return;
+		}
+
+		if ( speakerModalOpen && 'ArrowLeft' === e.key ) {
+			e.preventDefault();
+			goToPreviousSpeaker();
+			return;
+		}
+
+		if ( speakerModalOpen && 'ArrowRight' === e.key ) {
+			e.preventDefault();
+			goToNextSpeaker();
 			return;
 		}
 
@@ -3148,7 +3194,29 @@ async function initSchedBlock( root ) {
 		return modalSessionIndex >= 0 && modalSessionList.length > 0;
 	}
 
+	function getSessionScopedSpeakers( sessionId ) {
+		const session = state.derivedById.get( String( sessionId || '' ) );
+		if ( ! session || ! Array.isArray( session.raw.speakers ) ) return [];
+
+		const speakers = [];
+		const seen = new Set();
+
+		for ( const speakerId of session.raw.speakers ) {
+			const sp = state.derivedSpeakersById.get( String( speakerId ) );
+			if ( ! sp || seen.has( sp.id ) ) continue;
+			seen.add( sp.id );
+			speakers.push( sp );
+		}
+
+		return speakers;
+	}
+
 	function getVisibleSpeakersForModal() {
+		if ( state.returnToSessionId ) {
+			const scoped = getSessionScopedSpeakers( state.returnToSessionId );
+			if ( scoped.length ) return scoped;
+		}
+
 		return state.derivedSpeakers.slice();
 	}
 
@@ -3234,6 +3302,22 @@ async function initSchedBlock( root ) {
 			state.roomsById = new Map( ( payload.rooms || [] ).map( r => [ String( r.id ), r ] ) );
 			state.categoryItemById = new Map();
 			state.questionById = new Map( ( payload.questions || [] ).map( q => [ String( q.id ), q ] ) );
+			state.questionTitleToId = new Map();
+
+			for ( const q of ( payload.questions || [] ) ) {
+				const questionId = Number( q?.id );
+				if ( ! Number.isFinite( questionId ) || questionId <= 0 ) continue;
+
+				const keys = [ q?.question, q?.name ]
+					.map( normalizeQuestionLookupKey )
+					.filter( Boolean );
+
+				for ( const key of keys ) {
+					if ( ! state.questionTitleToId.has( key ) ) {
+						state.questionTitleToId.set( key, questionId );
+					}
+				}
+			}
 
 			for ( const cat of ( payload.categories || [] ) ) {
 				for ( const item of ( cat.items || [] ) ) {
