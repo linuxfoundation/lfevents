@@ -936,7 +936,7 @@ async function initSchedBlock( root ) {
 	}
 
 	function getSpeakerCompany( speaker ) {
-		const overrideQid = Number( schedConfig.speakerCompanyOverrideQuestionId );
+		const overrideQid = resolveConfiguredQuestionId( schedConfig.speakerCompanyOverrideQuestionId );
 		if ( Number.isFinite( overrideQid ) && overrideQid > 0 ) {
 			const override = getSpeakerAnswerByQuestionId( speaker, overrideQid );
 			if ( override ) return override;
