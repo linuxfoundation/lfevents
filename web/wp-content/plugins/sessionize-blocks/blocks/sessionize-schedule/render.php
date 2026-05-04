@@ -22,17 +22,27 @@ if ( ! function_exists( 'sched_parse_csv' ) ) {
 }
 
 /**
- * Helper: convert a string question ID to int or null.
+ * Helper: preserve a Sessionize question reference as either:
+ * - int, when the value is numeric
+ * - string, when the value is a question label
+ * - null, when blank
  *
- * @param string $value The string value.
- * @return int|null
+ * @param string $value The configured question reference.
+ * @return int|string|null
  */
-if ( ! function_exists( 'sched_question_id' ) ) {
-	function sched_question_id( $value ) {
-		if ( empty( $value ) || ! is_numeric( $value ) ) {
+if ( ! function_exists( 'sched_question_ref' ) ) {
+	function sched_question_ref( $value ) {
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
 			return null;
 		}
-		return (int) $value;
+
+		if ( is_numeric( $value ) ) {
+			return (int) $value;
+		}
+
+		return $value;
 	}
 }
 
@@ -62,17 +72,17 @@ $sched_config = array(
 	'enablePersonalAgenda'                => (bool) $attributes['enablePersonalAgenda'],
 
 	// Sessionize Question IDs.
-	'speakerTitleQuestionId'              => sched_question_id( $attributes['speakerTitleQuestionId'] ),
-	'speakerCompanyQuestionId'            => sched_question_id( $attributes['speakerCompanyQuestionId'] ),
-	'speakerCompanyOverrideQuestionId'    => sched_question_id( $attributes['speakerCompanyOverrideQuestionId'] ),
-	'cardSpeakerOverrideQuestionId'       => sched_question_id( $attributes['cardSpeakerOverrideQuestionId'] ),
-	'presentationSlidesQuestionId'        => sched_question_id( $attributes['presentationSlidesQuestionId'] ),
+	'speakerTitleQuestionId'              => sched_question_ref( $attributes['speakerTitleQuestionId'] ),
+	'speakerCompanyQuestionId'            => sched_question_ref( $attributes['speakerCompanyQuestionId'] ),
+	'speakerCompanyOverrideQuestionId'    => sched_question_ref( $attributes['speakerCompanyOverrideQuestionId'] ),
+	'cardSpeakerOverrideQuestionId'       => sched_question_ref( $attributes['cardSpeakerOverrideQuestionId'] ),
+	'presentationSlidesQuestionId'        => sched_question_ref( $attributes['presentationSlidesQuestionId'] ),
 
-	'customLinkField1QuestionId'          => sched_question_id( $attributes['customLinkField1QuestionId'] ),
-	'customLinkField2QuestionId'          => sched_question_id( $attributes['customLinkField2QuestionId'] ),
-	'customLinkField3QuestionId'          => sched_question_id( $attributes['customLinkField3QuestionId'] ),
-	'customLinkField4QuestionId'          => sched_question_id( $attributes['customLinkField4QuestionId'] ),
-	'customLinkField5QuestionId'          => sched_question_id( $attributes['customLinkField5QuestionId'] ),
+	'customLinkField1QuestionId'          => sched_question_ref( $attributes['customLinkField1QuestionId'] ),
+	'customLinkField2QuestionId'          => sched_question_ref( $attributes['customLinkField2QuestionId'] ),
+	'customLinkField3QuestionId'          => sched_question_ref( $attributes['customLinkField3QuestionId'] ),
+	'customLinkField4QuestionId'          => sched_question_ref( $attributes['customLinkField4QuestionId'] ),
+	'customLinkField5QuestionId'          => sched_question_ref( $attributes['customLinkField5QuestionId'] ),
 
 	// Filtering & visibility (comma-separated strings → arrays).
 	'includeSpeakerTitleForPrimaryValues' => sched_parse_csv( $attributes['includeSpeakerTitleForPrimaryValues'] ),

@@ -16,12 +16,19 @@ if ( ! function_exists( 'sched_parse_csv' ) ) {
 	}
 }
 
-if ( ! function_exists( 'sched_question_id' ) ) {
-	function sched_question_id( $value ) {
-		if ( empty( $value ) || ! is_numeric( $value ) ) {
+if ( ! function_exists( 'sched_question_ref' ) ) {
+	function sched_question_ref( $value ) {
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
 			return null;
 		}
-		return (int) $value;
+
+		if ( is_numeric( $value ) ) {
+			return (int) $value;
+		}
+
+		return $value;
 	}
 }
 
@@ -30,10 +37,10 @@ $speaker_config = array(
 	'sessionizeAllDataUrl'       => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['apiCode'] ) . '/view/All',
 	'scheduleBaseUrl'            => esc_url( $attributes['scheduleBaseUrl'] ),
 
-	'companyQuestionId'          => sched_question_id( $attributes['companyQuestionId'] ),
-	'speakerTitleQuestionId'     => sched_question_id( $attributes['speakerTitleQuestionId'] ),
-	'companyLogoUrlQuestionId'   => sched_question_id( $attributes['companyLogoUrlQuestionId'] ),
-	'companyLogoUploadQuestionId'=> sched_question_id( $attributes['companyLogoUploadQuestionId'] ),
+	'companyQuestionId'          => sched_question_ref( $attributes['companyQuestionId'] ),
+	'speakerTitleQuestionId'     => sched_question_ref( $attributes['speakerTitleQuestionId'] ),
+	'companyLogoUrlQuestionId'   => sched_question_ref( $attributes['companyLogoUrlQuestionId'] ),
+	'companyLogoUploadQuestionId'=> sched_question_ref( $attributes['companyLogoUploadQuestionId'] ),
 
 	'topSpeakersOnly'            => (bool) $attributes['topSpeakersOnly'],
 	'excludeSpeakersExact'       => sched_parse_csv( $attributes['excludeSpeakersExact'] ),
