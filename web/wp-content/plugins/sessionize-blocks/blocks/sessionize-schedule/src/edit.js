@@ -120,65 +120,75 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 
-				<PanelBody title="Sessionize Question IDs" initialOpen={ false }>
+				<PanelBody title="Sessionize Question References" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Enter the numeric Sessionize question IDs used to extract speaker and session metadata. Leave blank to disable.
+						Enter either the numeric Sessionize question ID or the question title to extract speaker and session metadata. Leave blank to disable.
 					</p>
 					<TextControl
-						label="Speaker Title Question ID"
+						label="Speaker Title Question"
 						value={ speakerTitleQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerTitleQuestionId: val } ) }
+						help="Question ID or title (e.g., 60108 or Speaker Title)."
 					/>
 					<TextControl
-						label="Speaker Company Question ID"
+						label="Speaker Company Question"
 						value={ speakerCompanyQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerCompanyQuestionId: val } ) }
+						help="Question ID or title (e.g., 60107 or Company)."
 					/>
 					<TextControl
-						label="Speaker Company Override Question ID"
+						label="Speaker Company Override Question"
 						value={ speakerCompanyOverrideQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerCompanyOverrideQuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
-						label="Card Speaker Override Question ID"
+						label="Card Speaker Override Question"
 						value={ cardSpeakerOverrideQuestionId }
 						onChange={ ( val ) => setAttributes( { cardSpeakerOverrideQuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
-						label="Presentation Slides Question ID"
+						label="Presentation Slides Question"
 						value={ presentationSlidesQuestionId }
 						onChange={ ( val ) => setAttributes( { presentationSlidesQuestionId: val } ) }
+						help="Question ID or title."
 					/>
 				</PanelBody>
 
-				<PanelBody title="Custom Link Field Question IDs" initialOpen={ false }>
+				<PanelBody title="Custom Link Field Questions" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Question IDs for up to 5 custom link fields on sessions. Leave blank to disable.
+						Question ID or title for up to 5 custom link fields on sessions. Leave blank to disable.
 					</p>
 					<TextControl
 						label="Custom Link Field 1"
 						value={ customLinkField1QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField1QuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
 						label="Custom Link Field 2"
 						value={ customLinkField2QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField2QuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
 						label="Custom Link Field 3"
 						value={ customLinkField3QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField3QuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
 						label="Custom Link Field 4"
 						value={ customLinkField4QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField4QuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
 						label="Custom Link Field 5"
 						value={ customLinkField5QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField5QuestionId: val } ) }
+						help="Question ID or title."
 					/>
 				</PanelBody>
 

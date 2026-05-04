@@ -58,29 +58,33 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 
-				<PanelBody title="Sessionize Question IDs" initialOpen={ false }>
+				<PanelBody title="Sessionize Question References" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Enter the numeric Sessionize question IDs used to extract speaker metadata. Leave blank to disable.
+						Enter either the numeric Sessionize question ID or the question title to extract speaker metadata. Leave blank to disable.
 					</p>
 					<TextControl
-						label="Speaker Title Question ID"
+						label="Speaker Title Question"
 						value={ speakerTitleQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerTitleQuestionId: val } ) }
+						help="Question ID or title (e.g., 60108 or Speaker Title)."
 					/>
 					<TextControl
-						label="Company Question ID"
+						label="Company Question"
 						value={ companyQuestionId }
 						onChange={ ( val ) => setAttributes( { companyQuestionId: val } ) }
+						help="Question ID or title (e.g., 60107 or Company)."
 					/>
 					<TextControl
-						label="Company Logo URL Question ID"
+						label="Company Logo URL Question"
 						value={ companyLogoUrlQuestionId }
 						onChange={ ( val ) => setAttributes( { companyLogoUrlQuestionId: val } ) }
+						help="Question ID or title."
 					/>
 					<TextControl
-						label="Company Logo Upload Question ID"
+						label="Company Logo Upload Question"
 						value={ companyLogoUploadQuestionId }
 						onChange={ ( val ) => setAttributes( { companyLogoUploadQuestionId: val } ) }
+						help="Question ID or title."
 					/>
 				</PanelBody>
 
