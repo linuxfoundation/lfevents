@@ -377,7 +377,7 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
 
 .sched-speakergrid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:14px;
 }
 
@@ -664,6 +664,12 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
 
   .sched-speaker-modal__links{
     justify-content:center;
+  }
+}
+
+@media (max-width: 1024px){
+  .sched-speakergrid{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
   }
 }
 
