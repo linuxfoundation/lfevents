@@ -370,10 +370,6 @@ EOD;
  * Inserts LFX code on main Events site.
  */
 function lfe_insert_lfx_head() {
-	if ( ! is_lfeventsci() ) {
-		return;
-	}
-
 	wp_enqueue_script(
 		'lfx-segment',
 		'https://lfx-segment.platform.linuxfoundation.org/latest/lfx-segment-analytics.min.js',
