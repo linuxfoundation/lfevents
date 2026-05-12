@@ -364,7 +364,7 @@ async function initSchedBlock( root ) {
 	};
 
 	const CUSTOM_DATE_FILTER_TITLE = 'Date';
-	const CUSTOM_ROOM_FILTER_TITLE = 'Room';
+	const CUSTOM_ROOM_FILTER_TITLE = 'Location';
 
 	let lastFocusedEl = null;
 	let isHandlingPopState = false;
@@ -2937,6 +2937,17 @@ async function initSchedBlock( root ) {
 		return slotEl;
 	}
 
+	function moveFilterChipsAboveSearch() {
+		const searchRow = elSearch.closest( '.sched__searchrow' );
+		if ( ! searchRow || ! elChips || ! searchRow.parentNode ) return;
+
+		if ( elChips.nextElementSibling === searchRow ) {
+			return;
+		}
+
+		searchRow.parentNode.insertBefore( elChips, searchRow );
+	}
+
 	function render() {
 		const days = getDays();
 		const favoriteCount = state.favoriteSessionIds.size;
@@ -2979,9 +2990,10 @@ async function initSchedBlock( root ) {
 			: `<span class="sched__btnicon" aria-hidden="true">↓</span>Slides available`;
 
 		state.elSlidesBtn.classList.toggle( 'is-active', state.showSlidesOnly );
+		moveFilterChipsAboveSearch();
 
 		const elFilterLabel = root.querySelector( '.sched__label' );
-		if ( elFilterLabel ) elFilterLabel.style.display = isSpeakerMode ? 'none' : '';
+		if ( elFilterLabel ) elFilterLabel.style.display = 'none';
 
 		if ( schedConfig.hideTopControls ) {
 			elControls.style.display = 'none';

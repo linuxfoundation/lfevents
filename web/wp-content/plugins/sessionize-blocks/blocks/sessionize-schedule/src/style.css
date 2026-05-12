@@ -126,6 +126,7 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
   font-size:14px;
   outline:none;
   background:#fff;
+  margin: 1rem 0 !important;
 }
 .sched__search:focus{
   border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
@@ -971,6 +972,7 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
     flex-direction:column;
     align-items:stretch;
     gap:10px;
+    margin-bottom: 20px;
   }
 
   .sched__viewbar{
@@ -1021,7 +1023,7 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
     gap:10px;
   }
 
-  .sched__toprow{ margin-bottom:8px; }
+  .sched__toprow{ margin-bottom:20px; }
   .sched__filtercats{ margin-bottom:8px; }
   .sched__divider{ margin: 4px 0 10px; }
   .sched__searchrow{ margin: 0 0 10px; }
