@@ -236,6 +236,10 @@ async function initSchedBlock( root ) {
 	}
 
 	function updateToTopButton() {
+		if ( schedConfig.hideTopControls ) {
+			elToTop.hidden = true;
+			return;
+		}
 		const rootTop = root.getBoundingClientRect().top + window.scrollY;
 		const showAfter = rootTop + 1200;
 		const shouldShow = window.scrollY > showAfter;
@@ -243,6 +247,10 @@ async function initSchedBlock( root ) {
 	}
 
 	function scrollToTopSmooth() {
+		if ( schedConfig.hideTopControls ) {
+			elToTop.hidden = true;
+			return;
+		}
 		elToTop.hidden = true;
 
 		const targetEl = elControls || root;
