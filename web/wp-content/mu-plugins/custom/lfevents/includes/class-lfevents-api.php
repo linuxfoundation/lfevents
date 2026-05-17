@@ -117,10 +117,28 @@ class LFEvents_API {
 		);
 
 		if ( '' !== $search ) {
-			$args['s'] = $search;
+			$args['s']                   = $search;
+			$args['lfevents_title_only'] = true;
 		}
 
-		$query  = new WP_Query( $args );
+		$title_only_filter = function ( $search_sql, $wp_query ) {
+			global $wpdb;
+			if ( ! $wp_query->get( 'lfevents_title_only' ) ) {
+				return $search_sql;
+			}
+			$term = $wp_query->get( 's' );
+			if ( '' === $term ) {
+				return $search_sql;
+			}
+			$like = '%' . $wpdb->esc_like( $term ) . '%';
+			return $wpdb->prepare( " AND ({$wpdb->posts}.post_title LIKE %s) ", $like );
+		};
+		add_filter( 'posts_search', $title_only_filter, 10, 2 );
+
+		$query = new WP_Query( $args );
+
+		remove_filter( 'posts_search', $title_only_filter, 10 );
+
 		$events = array();
 
 		foreach ( $query->posts as $post ) {
