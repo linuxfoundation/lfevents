@@ -60,7 +60,7 @@ class LFEvents_API {
 			$status = 'upcoming';
 		}
 
-		$post_types = array_values( array_diff( lfe_get_post_types(), array( 'page' ) ) );
+		$post_types = lfe_get_post_types();
 
 		$meta_query = array(
 			'relation' => 'AND',
@@ -75,6 +75,11 @@ class LFEvents_API {
 					'value'   => 'hide',
 					'compare' => '!=',
 				),
+			),
+			array(
+				'key'     => 'lfes_date_start',
+				'value'   => '',
+				'compare' => '!=',
 			),
 		);
 
