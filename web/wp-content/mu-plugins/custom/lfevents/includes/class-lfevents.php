@@ -120,6 +120,11 @@ class LFEvents {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-lfevents-public.php';
 
+		/**
+		 * The class responsible for the public REST API.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-api.php';
+
 		$this->loader = new LFEvents_Loader();
 	}
 
@@ -218,6 +223,9 @@ class LFEvents {
 		$this->loader->add_action( 'pre_ping', $plugin_public, 'disable_pingback' );
 		$this->loader->add_filter( 'wp_resource_hints', $plugin_public, 'dns_prefetch_to_preconnect', 0, 2 );
 		$this->loader->add_action( 'send_headers', $plugin_public, 'add_header_cache', 15 );
+
+		$plugin_api = new LFEvents_API();
+		$this->loader->add_action( 'rest_api_init', $plugin_api, 'register_routes' );
 	}
 
 	/**
