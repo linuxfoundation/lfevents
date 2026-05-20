@@ -397,6 +397,42 @@ async function initSchedBlock( root ) {
 			.replaceAll( "'", '&#039;' );
 	}
 
+	function linkifyPlainText( text ) {
+		const value = String( text || '' );
+		if ( ! value ) return '';
+
+		const pattern = /((?:https?:\/\/|www\.)[^\s<>"']+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi;
+		let html = '';
+		let lastIndex = 0;
+		let match;
+
+		while ( null !== ( match = pattern.exec( value ) ) ) {
+			const fullMatch = match[0];
+			let linkText = fullMatch;
+			let trailing = '';
+
+			while ( /[.,;:!?)]$/.test( linkText ) ) {
+				trailing = linkText.slice( -1 ) + trailing;
+				linkText = linkText.slice( 0, -1 );
+			}
+
+			html += escapeHtml( value.slice( lastIndex, match.index ) );
+
+			if ( linkText.includes( '@' ) && ! /^https?:\/\//i.test( linkText ) && ! /^www\./i.test( linkText ) ) {
+				html += `<a href="mailto:${ escapeHtml( linkText ) }">${ escapeHtml( linkText ) }</a>`;
+			} else {
+				const href = /^https?:\/\//i.test( linkText ) ? linkText : `https://${ linkText }`;
+				html += `<a href="${ escapeHtml( href ) }" target="_blank" rel="noopener">${ escapeHtml( linkText ) }</a>`;
+			}
+
+			html += escapeHtml( trailing );
+			lastIndex = match.index + fullMatch.length;
+		}
+
+		html += escapeHtml( value.slice( lastIndex ) );
+		return html;
+	}
+
 	function htmlToText( maybeHtml ) {
 		const s = String( maybeHtml || '' );
 		if ( ! s ) return '';
@@ -469,7 +505,7 @@ async function initSchedBlock( root ) {
 	}
 
 	function fmtSessionMetaLine( d ) {
-		return `${ fmtShortDate( new Date( d.startMs ) ) } • ${ fmtTimeRange( d.startMs, d.endMs ) } • ${ getDurationMinutes( d.startMs, d.endMs ) } min`;
+		return `${ fmtShortDate( new Date( d.startMs ) ) } • ${ fmtTimeRange( d.startMs, d.endMs ) }`;
 	}
 
 	function isFavoriteSessionId( sessionId ) {
@@ -2438,7 +2474,8 @@ async function initSchedBlock( root ) {
 		renderModalResources( d );
 
 		const descRaw = s.description ?? s.descriptionHtml ?? s.shortDescription ?? s.shortDescriptionHtml ?? '';
-		elModalDesc.textContent = htmlToText( descRaw ) || '';
+		const descText = htmlToText( descRaw ) || '';
+		elModalDesc.innerHTML = linkifyPlainText( descText );
 
 		elModalSpeakers.innerHTML = '';
 
