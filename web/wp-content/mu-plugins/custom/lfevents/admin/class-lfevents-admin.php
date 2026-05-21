@@ -529,11 +529,10 @@ class LFEvents_Admin {
 				$dt_date_start = new DateTime( $event->start_date_iso );
 				$dt_date_end   = new DateTime( $event->end_date_iso );
 
-				$virtual = strpos( strtolower( $event->title ), 'virtual' ) + strpos( strtolower( $event->description_short ), 'virtual' );
-				if ( 0 < $virtual || ! $event->venue_city ) {
+				$virtual = str_contains( strtolower( $event->title ), 'virtual' )
+					|| str_contains( strtolower( $event->description_short ?? '' ), 'virtual' );
+				if ( ! $virtual && ! $event->venue_city ) {
 					$virtual = true;
-				} else {
-					$virtual = false;
 				}
 
 				$event_title = $event->title;
