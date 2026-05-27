@@ -65,11 +65,17 @@ function countdown_block_assets() { // phpcs:ignore
 	);
 }
 
-function countdown_block_callback( $attributes ) { // phpcs:ignore
+function countdown_block_callback( $attributes, $content = '', $block = null ) { // phpcs:ignore
 	$labels            = array();
 	$block_id          = isset( $attributes['blockID'] ) ? $attributes['blockID'] : '';
 	$end_date          = isset( $attributes['endDate'] ) ? $attributes['endDate'] : false;
-	$style             = isset( $attributes['style'] ) ? $attributes['style'] : 'Odometer';
+	// Read "style" from the raw parsed block attrs because WP core now treats
+	// the "style" attribute name as reserved (object schema for block supports)
+	// and strips our string value during prepare_attributes_for_render().
+	$raw_style         = ( $block instanceof WP_Block && isset( $block->parsed_block['attrs']['style'] ) )
+		? $block->parsed_block['attrs']['style']
+		: ( isset( $attributes['style'] ) ? $attributes['style'] : null );
+	$style             = is_string( $raw_style ) ? $raw_style : 'Odometer';
 	$circle_color      = isset( $attributes['circleColor'] ) ? $attributes['circleColor'] : '#2DB7F5';
 	$expiry_message    = isset( $attributes['expiryMessage'] ) ? $attributes['expiryMessage'] : 'Timer expired';
 	$labels['weeks']   = isset( $attributes['labelWeeks'] ) ? $attributes['labelWeeks'] : 'Weeks';
