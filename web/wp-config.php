@@ -230,26 +230,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
 
-/*
- * Block bot traffic to /search before WordPress bootstraps.
- *
- * We have no /search page, but bots hammer it and break the cache. Redirect any
- * request for /search (including /search/... and /search?...) to the homepage
- * with a 301 so these requests never load WordPress core.
- */
-if ( php_sapi_name() != 'cli' && isset( $_SERVER['REQUEST_URI'] ) ) {
-	$lf_request_path = strtok( $_SERVER['REQUEST_URI'], '?' );
-	if ( '/search' === $lf_request_path || 0 === strpos( $lf_request_path, '/search/' ) ) {
-		// Name transaction "redirect" in New Relic for improved reporting (optional).
-		if ( extension_loaded( 'newrelic' ) ) {
-			newrelic_name_transaction( 'redirect' );
-		}
-		header( 'HTTP/1.0 301 Moved Permanently' );
-		header( 'Location: /' );
-		exit();
-	}
-}
-
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
 
