@@ -1249,6 +1249,14 @@ async function initSchedBlock( root ) {
 			.includes( String( primaryName || '' ).trim().toLowerCase() );
 	}
 
+	function formatSpeakerList( names ) {
+		if ( ! Array.isArray( names ) || ! names.length ) return '';
+		if ( 1 === names.length ) return names[0];
+		if ( 2 === names.length ) return names.join( ' & ' );
+
+		return `${ names.slice( 0, -1 ).join( ', ' ) } & ${ names[ names.length - 1 ] }`;
+	}
+
 	function groupSpeakersByCompanyForDisplay( speakers, primaryName, options = {} ) {
 		if ( ! Array.isArray( speakers ) || ! speakers.length ) return '';
 
@@ -1278,7 +1286,7 @@ async function initSchedBlock( root ) {
 		}, {} );
 
 		const renderedGroups = Object.values( grouped ).map( group => {
-			const speakerText = group.speakers.join( ' & ' );
+			const speakerText = formatSpeakerList( group.speakers );
 			return group.company ? `${ speakerText }, ${ group.company }` : speakerText;
 		} );
 
