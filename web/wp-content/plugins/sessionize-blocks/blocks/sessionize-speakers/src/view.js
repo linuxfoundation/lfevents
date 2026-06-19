@@ -445,10 +445,16 @@
 			const map = new Map();
 
 			sessions.forEach( ( sess ) => {
+				const startsAt = String( getStartFromSession_( sess ) || '' ).trim();
+
+				// Skip sessions that aren't actually scheduled yet (e.g. co-chair placeholders)
+				if ( ! startsAt || Number.isNaN( Date.parse( startsAt ) ) ) {
+					return;
+				}
+
 				const id = sess?.id ?? sess?.Id;
 				const title = sess?.title ?? sess?.Title ?? '';
 				const speakerIds = sess?.speakers ?? sess?.speakerIds ?? sess?.Speakers ?? sess?.SpeakerIds ?? [];
-				const startsAt = String( getStartFromSession_( sess ) || '' ).trim();
 				const endsAt = String( getEndFromSession_( sess ) || '' ).trim();
 				const durationMinutes = getDurationMinutesFromSession_( sess );
 				const roomName = String( getRoomNameFromSession_( sess, roomMap ) || '' ).trim();
@@ -1010,9 +1016,16 @@
 				} )
 				: [];
 
+			const sessionsBox = modalSessions.closest( '.sz-modal__sessionsBox' );
+
 			if ( ! sess.length && ! companySessions.length ) {
-				modalSessions.innerHTML = '<li class="sz-modal__sessItem"><div class="sz-modal__sessTitle">No sessions listed.</div></li>';
+				if ( sessionsBox ) {
+					sessionsBox.hidden = true;
+				}
 			} else {
+				if ( sessionsBox ) {
+					sessionsBox.hidden = false;
+				}
 				const behavior = String( SPEAKER_CONFIG.sessionLinkBehavior || 'link' ).toLowerCase();
 
 				const speakerSessionsHtml = sess.map( ( x ) => {
