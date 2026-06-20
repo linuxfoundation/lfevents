@@ -156,7 +156,7 @@ class LFEvents_API {
 	 */
 	private function format_event( WP_Post $post ) {
 		$post_id      = $post->ID;
-		$external_url = get_post_meta( $post_id, 'lfes_external_url', true );
+		$external_url = (string) get_post_meta( $post_id, 'lfes_external_url', true );
 		$url          = $external_url ? $external_url : get_permalink( $post );
 
 		$country_name  = '';
@@ -165,22 +165,68 @@ class LFEvents_API {
 			$country_name = $country_terms[0]->name;
 		}
 
-		$virtual = get_post_meta( $post_id, 'lfes_virtual', true );
+		$virtual            = get_post_meta( $post_id, 'lfes_virtual', true );
+		$white_logo_url     = $this->resolve_media_url( get_post_meta( $post_id, 'lfes_white_logo', true ) );
+		$black_logo_url     = $this->resolve_media_url( get_post_meta( $post_id, 'lfes_black_logo', true ) );
+		$featured_image_url = (string) get_the_post_thumbnail_url( $post_id, 'full' );
 
 		return array(
-			'id'                    => $post_id,
-			'name'                  => html_entity_decode( get_the_title( $post ), ENT_QUOTES, 'UTF-8' ),
-			'start_date'            => (string) get_post_meta( $post_id, 'lfes_date_start', true ),
-			'end_date'              => (string) get_post_meta( $post_id, 'lfes_date_end', true ),
-			'location'              => array(
+			'id'                   => $post_id,
+			'name'                 => html_entity_decode( get_the_title( $post ), ENT_QUOTES, 'UTF-8' ),
+			'description'          => (string) get_post_meta( $post_id, 'lfes_description', true ),
+			'date_start'           => (string) get_post_meta( $post_id, 'lfes_date_start', true ),
+			'date_end'             => (string) get_post_meta( $post_id, 'lfes_date_end', true ),
+			'external_url'         => $external_url,
+			'white_logo'           => $white_logo_url,
+			'black_logo'           => $black_logo_url,
+			'menu_color'           => (string) get_post_meta( $post_id, 'lfes_menu_color', true ),
+			'menu_color_2'         => (string) get_post_meta( $post_id, 'lfes_menu_color_2', true ),
+			'menu_color_3'         => (string) get_post_meta( $post_id, 'lfes_menu_color_3', true ),
+			'menu_text_color'      => (string) get_post_meta( $post_id, 'lfes_menu_text_color', true ),
+			'featured_image'       => $featured_image_url,
+			'start_date'           => (string) get_post_meta( $post_id, 'lfes_date_start', true ),
+			'end_date'             => (string) get_post_meta( $post_id, 'lfes_date_end', true ),
+			'location'             => array(
 				'city'    => (string) get_post_meta( $post_id, 'lfes_city', true ),
 				'country' => (string) $country_name,
+				'region'  => (string) get_post_meta( $post_id, 'lfes_region', true ),
 				'virtual' => (bool) $virtual,
 			),
-			'url'                   => $url,
-			'menu_background_color' => (string) get_post_meta( $post_id, 'lfes_menu_color', true ),
-			'menu_gradient_color'   => (string) get_post_meta( $post_id, 'lfes_menu_color_2', true ),
-			'menu_dropdown_color'   => (string) get_post_meta( $post_id, 'lfes_menu_color_3', true ),
+			'cfp_active'           => (bool) get_post_meta( $post_id, 'lfes_cfp_active', true ),
+			'cfp_date_start'       => (string) get_post_meta( $post_id, 'lfes_cfp_date_start', true ),
+			'cfp_date_end'         => (string) get_post_meta( $post_id, 'lfes_cfp_date_end', true ),
+			'cta_speak_url'        => (string) get_post_meta( $post_id, 'lfes_cta_speak_url', true ),
+			'cta_register_url'     => (string) get_post_meta( $post_id, 'lfes_cta_register_url', true ),
+			'cta_sponsor_url'      => (string) get_post_meta( $post_id, 'lfes_cta_sponsor_url', true ),
+			'cta_sponsor_date_end' => (string) get_post_meta( $post_id, 'lfes_cta_sponsor_date_end', true ),
+			'cta_schedule_url'     => (string) get_post_meta( $post_id, 'lfes_cta_schedule_url', true ),
+			'cta_videos_url'       => (string) get_post_meta( $post_id, 'lfes_cta_videos_url', true ),
+			'url'                  => $url,
 		);
+	}
+
+	/**
+	 * Resolve a media meta value to a URL.
+	 *
+	 * Supports attachment IDs and direct URLs.
+	 *
+	 * @param mixed $value Raw media meta value.
+	 * @return string
+	 */
+	private function resolve_media_url( $value ) {
+		if ( empty( $value ) ) {
+			return '';
+		}
+
+		if ( is_numeric( $value ) ) {
+			$attachment_url = wp_get_attachment_url( (int) $value );
+			return $attachment_url ? (string) $attachment_url : '';
+		}
+
+		if ( is_string( $value ) ) {
+			return $value;
+		}
+
+		return '';
 	}
 }
