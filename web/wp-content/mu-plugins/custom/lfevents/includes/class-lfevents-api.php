@@ -188,8 +188,8 @@ class LFEvents_API {
 			'end_date'             => (string) get_post_meta( $post_id, 'lfes_date_end', true ),
 			'location'             => array(
 				'city'    => (string) get_post_meta( $post_id, 'lfes_city', true ),
-				'country' => (string) $country_name,
 				'region'  => (string) get_post_meta( $post_id, 'lfes_region', true ),
+				'country' => (string) $country_name,
 				'virtual' => (bool) $virtual,
 			),
 			'cfp_active'           => (bool) get_post_meta( $post_id, 'lfes_cfp_active', true ),
