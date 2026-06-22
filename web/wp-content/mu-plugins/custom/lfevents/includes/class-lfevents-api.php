@@ -155,9 +155,10 @@ class LFEvents_API {
 	 * @return array
 	 */
 	private function format_event( WP_Post $post ) {
-		$post_id      = $post->ID;
-		$external_url = (string) get_post_meta( $post_id, 'lfes_external_url', true );
-		$url          = $external_url ? $external_url : get_permalink( $post );
+		$post_id          = $post->ID;
+		$external_url     = (string) get_post_meta( $post_id, 'lfes_external_url', true );
+		$url              = $external_url ? $external_url : get_permalink( $post );
+		$social_image_url = $this->get_tsf_social_image_url( $post_id );
 
 		$country_name  = '';
 		$country_terms = get_the_terms( $post_id, 'lfevent-country' );
@@ -184,6 +185,7 @@ class LFEvents_API {
 			'menu_color_3'         => (string) get_post_meta( $post_id, 'lfes_menu_color_3', true ),
 			'menu_text_color'      => (string) get_post_meta( $post_id, 'lfes_menu_text_color', true ),
 			'featured_image'       => $featured_image_url,
+			'social_image_url'     => $social_image_url,
 			'start_date'           => (string) get_post_meta( $post_id, 'lfes_date_start', true ),
 			'end_date'             => (string) get_post_meta( $post_id, 'lfes_date_end', true ),
 			'location'             => array(
@@ -203,6 +205,40 @@ class LFEvents_API {
 			'cta_videos_url'       => (string) get_post_meta( $post_id, 'lfes_cta_videos_url', true ),
 			'url'                  => $url,
 		);
+	}
+
+	/**
+	 * Get the SEO Framework social image URL for a post.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return string
+	 */
+	private function get_tsf_social_image_url( $post_id ) {
+		if ( ! function_exists( 'the_seo_framework' ) ) {
+			return '';
+		}
+
+		$tsf = the_seo_framework();
+		if ( ! is_object( $tsf ) || ! method_exists( $tsf, 'data' ) ) {
+			return '';
+		}
+
+		$data = $tsf->data();
+		if ( ! is_object( $data ) || ! method_exists( $data, 'plugin' ) ) {
+			return '';
+		}
+
+		$plugin_data = $data->plugin();
+		if ( ! is_object( $plugin_data ) || ! method_exists( $plugin_data, 'post' ) ) {
+			return '';
+		}
+
+		$post_data = $plugin_data->post();
+		if ( ! is_object( $post_data ) || ! method_exists( $post_data, 'get_meta_item' ) ) {
+			return '';
+		}
+
+		return (string) $post_data->get_meta_item( '_social_image_url', (int) $post_id );
 	}
 
 	/**
