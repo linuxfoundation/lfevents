@@ -28,13 +28,19 @@ class LFEvents_API {
 				'permission_callback' => '__return_true',
 				'callback'            => array( $this, 'get_events' ),
 				'args'                => array(
-					's'      => array(
+					's'        => array(
 						'description'       => 'Free text search on event name.',
 						'type'              => 'string',
 						'required'          => false,
 						'sanitize_callback' => 'sanitize_text_field',
 					),
-					'status' => array(
+					'category' => array(
+						'description'       => 'Filter by event category slug.',
+						'type'              => 'string',
+						'required'          => false,
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'status'   => array(
 						'description'       => 'Filter by event status.',
 						'type'              => 'string',
 						'required'          => false,
@@ -54,8 +60,9 @@ class LFEvents_API {
 	 * @return WP_REST_Response
 	 */
 	public function get_events( WP_REST_Request $request ) {
-		$search = trim( (string) $request->get_param( 's' ) );
-		$status = $request->get_param( 'status' );
+		$search   = trim( (string) $request->get_param( 's' ) );
+		$category = trim( (string) $request->get_param( 'category' ) );
+		$status   = $request->get_param( 'status' );
 		if ( ! in_array( $status, array( 'upcoming', 'past', 'all' ), true ) ) {
 			$status = 'upcoming';
 		}
@@ -119,6 +126,16 @@ class LFEvents_API {
 		if ( '' !== $search ) {
 			$args['s']                   = $search;
 			$args['lfevents_title_only'] = true;
+		}
+
+		if ( '' !== $category ) {
+			$args['tax_query'] = array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				array(
+					'taxonomy' => 'lfevent-category',
+					'field'    => 'slug',
+					'terms'    => array( $category ),
+				),
+			);
 		}
 
 		$title_only_filter = function ( $search_sql, $wp_query ) {
