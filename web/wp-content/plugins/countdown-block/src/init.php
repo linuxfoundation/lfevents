@@ -241,13 +241,16 @@ if ( ! function_exists( 'lf_checkout_inner_blocks' ) ) {
 
 		$current = $block;
 
-		if ( 'core/block' == $block['blockName'] ) {
-			$current = parse_blocks( get_post_field( 'post_content', $block['attrs']['ref'] ) )[0];
+		if ( isset( $block['blockName'] ) && 'core/block' === $block['blockName'] && isset( $block['attrs']['ref'] ) ) {
+			$parsed_blocks = parse_blocks( get_post_field( 'post_content', $block['attrs']['ref'] ) );
+			if ( ! empty( $parsed_blocks ) && isset( $parsed_blocks[0] ) && is_array( $parsed_blocks[0] ) ) {
+				$current = $parsed_blocks[0];
+			}
 		}
 
-		if ( '' != $current['blockName'] ) {
+		if ( is_array( $current ) && ! empty( $current['blockName'] ) ) {
 			array_push( $current_blocks, $current );
-			if ( count( $current['innerBlocks'] ) > 0 ) {
+			if ( ! empty( $current['innerBlocks'] ) ) {
 				foreach ( $current['innerBlocks'] as $inner_block ) {
 					lf_checkout_inner_blocks( $inner_block );
 				}

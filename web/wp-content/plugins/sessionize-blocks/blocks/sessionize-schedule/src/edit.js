@@ -58,22 +58,22 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorControls>
 				<PanelBody title="Sessionize Configuration" initialOpen={ true }>
 					<TextControl
-						label="Sessionize API Code"
+						label="Sessionize API Code *"
 						value={ apiCode }
 						onChange={ ( val ) => setAttributes( { apiCode: val } ) }
-						help="The Sessionize API code used to fetch schedule data (e.g., pc6leesj)."
+						help="Your unique Sessionize endpoint ID. Found under API / Embed in Sessionize."
 					/>
 					<TextControl
-						label="Public Slug"
+						label="Sessionize Public Slug *"
 						value={ publicSlug }
 						onChange={ ( val ) => setAttributes( { publicSlug: val } ) }
-						help="The event's public Sessionize slug for the fallback web/mobile experience (e.g., kubecon-cloudnativecon-europe-2024)."
+						help="Your event's Sessionize URL slug (e.g., kubecon-cloudnativecon-japan-2026)."
 					/>
 					<TextControl
-						label="Primary Filter Title"
+						label="Primary Category Name *"
 						value={ primaryFilterTitle }
 						onChange={ ( val ) => setAttributes( { primaryFilterTitle: val } ) }
-						help="The name of the primary grouping category (e.g., Track)."
+						help="The exact Question/Title of the Sessionize field that contains your main session groupings. Drives color-coding and the first filter chip."
 					/>
 					<SelectControl
 						label="Time Format"
@@ -97,137 +97,137 @@ export default function Edit( { attributes, setAttributes } ) {
 
 				<PanelBody title="Display Options" initialOpen={ false }>
 					<ToggleControl
-						label="Enable Grid View"
+						label="Enable Grid, List, and Speaker Views"
 						checked={ enableGridView }
 						onChange={ ( val ) => setAttributes( { enableGridView: val } ) }
+						help="If off, attendees only see the list view with no toggle."
 					/>
 					<ToggleControl
-						label="Enable Personal Agenda"
+						label="Allow Attendees to Save Sessions"
 						checked={ enablePersonalAgenda }
 						onChange={ ( val ) => setAttributes( { enablePersonalAgenda: val } ) }
-						help="Allow users to save sessions to a personal agenda stored in their browser."
+						help="Lets attendees star sessions and build a personal agenda in their browser."
 					/>
 					<ToggleControl
-						label="Show All Days by Default"
+						label="Show All Conference Days at Once"
 						checked={ defaultShowAllDays }
 						onChange={ ( val ) => setAttributes( { defaultShowAllDays: val } ) }
+						help="If off, the schedule splits by day."
 					/>
 					<ToggleControl
-						label="Hide Top Controls"
+						label="Hide Filters and Search Bar"
 						checked={ hideTopControls }
 						onChange={ ( val ) => setAttributes( { hideTopControls: val } ) }
-						help="Hide the filter bar and search controls."
+						help="Hides all filter chips and search from attendees."
 					/>
 				</PanelBody>
 
-				<PanelBody title="Sessionize Question References" initialOpen={ false }>
+				<PanelBody title="Speaker and Session Data Fields" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Enter either the numeric Sessionize question ID or the question title to extract speaker and session metadata. Leave blank to disable.
+						Enter the exact Question/Title of each field as it appears in your Sessionize form.
 					</p>
 					<TextControl
-						label="Speaker Title Question"
+						label="Speaker Title Field *"
 						value={ speakerTitleQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerTitleQuestionId: val } ) }
-						help="Question ID or title (e.g., 60108 or Speaker Title)."
+						help="Submission field where speakers enter their job title."
 					/>
 					<TextControl
-						label="Speaker Company Question"
+						label="Speaker Company Field *"
 						value={ speakerCompanyQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerCompanyQuestionId: val } ) }
-						help="Question ID or title (e.g., 60107 or Company)."
+						help="Submission field where speakers enter their organization."
 					/>
 					<TextControl
-						label="Speaker Company Override Question"
+						label="Speaker Company Override Field"
 						value={ speakerCompanyOverrideQuestionId }
 						onChange={ ( val ) => setAttributes( { speakerCompanyOverrideQuestionId: val } ) }
-						help="Question ID or title."
+						help="Internal field used to display a role (e.g., Program Chair) instead of company name on the session card."
 					/>
 					<TextControl
-						label="Card Speaker Override Question"
+						label="Card Speaker Display Override"
 						value={ cardSpeakerOverrideQuestionId }
 						onChange={ ( val ) => setAttributes( { cardSpeakerOverrideQuestionId: val } ) }
-						help="Question ID or title."
+						help="Internal field where organizers enter a comma-separated list of speaker names to show on the session card."
 					/>
 					<TextControl
-						label="Presentation Slides Question"
+						label="Presentation Slides Field *"
 						value={ presentationSlidesQuestionId }
 						onChange={ ( val ) => setAttributes( { presentationSlidesQuestionId: val } ) }
-						help="Question ID or title."
+						help="Additional field where speakers link their slide deck. Adds a Slides button to the session popup."
 					/>
 				</PanelBody>
 
-				<PanelBody title="Custom Link Field Questions" initialOpen={ false }>
+				<PanelBody title="Custom Session Links" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Question ID or title for up to 5 custom link fields on sessions. Leave blank to disable.
+						Enter the exact Question/Title of a web address session field in Sessionize. The field's title appears as the button label on the session popup.
 					</p>
 					<TextControl
-						label="Custom Link Field 1"
+						label="Custom Link 1"
 						value={ customLinkField1QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField1QuestionId: val } ) }
-						help="Question ID or title."
 					/>
 					<TextControl
-						label="Custom Link Field 2"
+						label="Custom Link 2"
 						value={ customLinkField2QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField2QuestionId: val } ) }
-						help="Question ID or title."
 					/>
 					<TextControl
-						label="Custom Link Field 3"
+						label="Custom Link 3"
 						value={ customLinkField3QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField3QuestionId: val } ) }
-						help="Question ID or title."
 					/>
 					<TextControl
-						label="Custom Link Field 4"
+						label="Custom Link 4"
 						value={ customLinkField4QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField4QuestionId: val } ) }
-						help="Question ID or title."
 					/>
 					<TextControl
-						label="Custom Link Field 5"
+						label="Custom Link 5"
 						value={ customLinkField5QuestionId }
 						onChange={ ( val ) => setAttributes( { customLinkField5QuestionId: val } ) }
-						help="Question ID or title."
 					/>
 				</PanelBody>
 
-				<PanelBody title="Filtering & Visibility" initialOpen={ false }>
+				<PanelBody title="Filtering and Visibility" initialOpen={ false }>
+					<p className="components-base-control__help" style={ { marginTop: 0 } }>
+						All fields in this section accept comma-separated values.
+					</p>
 					<TextControl
-						label="Hidden Filter Categories"
+						label="Categories to Hide from Filters"
 						value={ hiddenFilterCategories }
 						onChange={ ( val ) => setAttributes( { hiddenFilterCategories: val } ) }
-						help="Comma-separated category names to hide from filters (e.g., Session Format)."
+						help="Category names that will not appear as filter options at the top. Tags still show on session cards."
 					/>
 					<TextControl
-						label="Hide Session Chips for Categories"
+						label="Hide Tags on Session Cards"
 						value={ hideSessionChipsForCategories }
 						onChange={ ( val ) => setAttributes( { hideSessionChipsForCategories: val } ) }
-						help="Comma-separated category names whose chips should be hidden on session cards."
+						help="Category names whose tag badges will not appear on session cards. Still filterable at the top."
 					/>
 					<TextControl
-						label="Hide All Chips for Primary Values"
+						label="Hide All Tags for These Primary Values"
 						value={ hideAllChipsForPrimaryValues }
 						onChange={ ( val ) => setAttributes( { hideAllChipsForPrimaryValues: val } ) }
-						help="Comma-separated primary filter values for which all chips are hidden."
+						help="Primary category values where no tag badges appear on the session card (e.g., Breaks, Registration)."
 					/>
 					<TextControl
-						label="Include Speaker Title for Primary Values"
+						label="Show Speaker Title for These Primary Values"
 						value={ includeSpeakerTitleForPrimaryValues }
 						onChange={ ( val ) => setAttributes( { includeSpeakerTitleForPrimaryValues: val } ) }
-						help="Comma-separated primary values where speaker title is shown on cards (e.g., Keynote Sessions)."
+						help="Primary category values where speaker job titles appear on session cards. Typically used for Keynote Sessions."
 					/>
 					<TextControl
-						label="Company Rollup Names"
+						label="Sponsor Company Rollup"
 						value={ companyRollupNames }
 						onChange={ ( val ) => setAttributes( { companyRollupNames: val } ) }
-						help="Comma-separated company names to group in speaker modal 'More from' section."
+						help="Sponsor company names. Adds a More from [Company] section in the speaker profile. Sponsor benefit."
 					/>
 				</PanelBody>
 
-				<PanelBody title="Primary Color Overrides" initialOpen={ false }>
+				<PanelBody title="Track Color Overrides" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Assign colors to primary filter values (e.g., track names). Click a swatch to change its color.
+						Type the exact track name as it appears in Sessionize, then click the swatch to assign a color. Tracks not listed here are auto-colored.
 					</p>
 					{ colorEntries.map( ( [ key, color ] ) => (
 						<div key={ key } style={ { marginBottom: '12px' } }>

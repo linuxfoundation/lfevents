@@ -337,7 +337,7 @@ function lfe_insert_google_tag_manager_head() {
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-TK7D99');</script>
 	<!-- End Google Tag Manager -->
-
+	<meta name="google-site-verification" content="-gukSsqWFlePhF0bBHUrwFbg7eaR4N09IFCKY9QmtYc" />
 EOD;
 
 	if ( strpos( $domains, $current_domain ) && ! is_user_logged_in() ) {

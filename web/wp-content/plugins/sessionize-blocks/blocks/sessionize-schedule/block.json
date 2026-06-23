@@ -6,12 +6,12 @@
   "title": "Sessionize Schedule",
   "category": "widgets",
   "icon": "calendar-alt",
-  "description": "An interactive, dynamic schedule block powered by Sessionize.",
+  "description": "An interactive, dynamic schedule block powered by Sessionize. Fields marked * are required.",
   "textdomain": "sessionize-blocks",
   "attributes": {
     "apiCode": {
       "type": "string",
-      "default": "pc6leesj"
+      "default": ""
     },
     "publicSlug": {
       "type": "string",
@@ -19,7 +19,7 @@
     },
     "primaryFilterTitle": {
       "type": "string",
-      "default": "Track"
+      "default": ""
     },
     "timeFormat": {
       "type": "string",
@@ -27,7 +27,7 @@
     },
     "dateFormat": {
       "type": "string",
-      "default": "dmy"
+      "default": "mdy"
     },
     "enableGridView": {
       "type": "boolean",
@@ -35,7 +35,7 @@
     },
     "enablePersonalAgenda": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "defaultShowAllDays": {
       "type": "boolean",
@@ -47,11 +47,11 @@
     },
     "speakerTitleQuestionId": {
       "type": "string",
-      "default": "60108"
+      "default": "Speaker Title"
     },
     "speakerCompanyQuestionId": {
       "type": "string",
-      "default": "60107"
+      "default": "Company"
     },
     "speakerCompanyOverrideQuestionId": {
       "type": "string",
@@ -59,27 +59,27 @@
     },
     "cardSpeakerOverrideQuestionId": {
       "type": "string",
-      "default": "128763"
+      "default": ""
     },
     "presentationSlidesQuestionId": {
       "type": "string",
-      "default": "124661"
+      "default": "Presentation Slides"
     },
     "customLinkField1QuestionId": {
       "type": "string",
-      "default": "126625"
+      "default": ""
     },
     "customLinkField2QuestionId": {
       "type": "string",
-      "default": "126626"
+      "default": ""
     },
     "customLinkField3QuestionId": {
       "type": "string",
-      "default": "126627"
+      "default": ""
     },
     "customLinkField4QuestionId": {
       "type": "string",
-      "default": "126628"
+      "default": ""
     },
     "customLinkField5QuestionId": {
       "type": "string",
@@ -87,7 +87,7 @@
     },
     "hiddenFilterCategories": {
       "type": "string",
-      "default": "Session Format"
+      "default": ""
     },
     "hideSessionChipsForCategories": {
       "type": "string",
@@ -99,15 +99,15 @@
     },
     "includeSpeakerTitleForPrimaryValues": {
       "type": "string",
-      "default": "Keynote Sessions"
+      "default": ""
     },
     "companyRollupNames": {
       "type": "string",
-      "default": "Red Hat"
+      "default": ""
     },
     "primaryColorOverrides": {
       "type": "string",
-      "default": "{\"Cloud Native Experience\":\"#236C39\",\"Cloud Native Novice\":\"#CC47E1\",\"Emerging + Advanced\":\"#94E147\",\"Keynote Sessions\":\"#CC0000\",\"ML/AI + Data Processing + Storage\":\"#D27A32\",\"Networking + Edge + Telco\":\"#FFF824\",\"Observability\":\"#D676DB\",\"Operations + Performance\":\"#BAB7D2\",\"Platform Engineering\":\"#4756E1\",\"Registration\":\"#69BA26\",\"SDLC\":\"#624A87\",\"Security\":\"#47E1C2\",\"Service Mesh\":\"#3BE5F1\"}"
+      "default": "{}"
     }
   },
   "editorScript": "file:./build/index.js",

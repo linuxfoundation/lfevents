@@ -57,6 +57,7 @@
 		let speakersById = new Map();
 		let sessionsBySpeakerId = new Map();
 		let roomNameById = new Map();
+		let questionTitleToId = new Map();
 
 		/* ==================================================================
 		   Viewport helpers
@@ -399,6 +400,41 @@
 			return map;
 		}
 
+		function extractQuestions_( data ) {
+			if ( Array.isArray( data?.questions ) ) {
+				return data.questions;
+			}
+			if ( Array.isArray( data?.Questions ) ) {
+				return data.Questions;
+			}
+			if ( Array.isArray( data?.data?.questions ) ) {
+				return data.data.questions;
+			}
+			if ( Array.isArray( data?.data?.Questions ) ) {
+				return data.data.Questions;
+			}
+			return [];
+		}
+
+		function buildQuestionTitleMap_( data ) {
+			const map = new Map();
+			extractQuestions_( data ).forEach( ( q ) => {
+				const questionId = Number( q?.id ?? q?.Id );
+				if ( ! Number.isFinite( questionId ) || questionId <= 0 ) {
+					return;
+				}
+				[ q?.question, q?.Question, q?.name, q?.Name ]
+					.map( normalizeQuestionLookupKey_ )
+					.filter( Boolean )
+					.forEach( ( key ) => {
+						if ( ! map.has( key ) ) {
+							map.set( key, questionId );
+						}
+					} );
+			} );
+			return map;
+		}
+
 		function getStartFromSession_( sess ) {
 			return sess?.startsAt ?? sess?.StartsAt ?? sess?.startTime ?? sess?.StartTime ?? '';
 		}
@@ -445,10 +481,16 @@
 			const map = new Map();
 
 			sessions.forEach( ( sess ) => {
+				const startsAt = String( getStartFromSession_( sess ) || '' ).trim();
+
+				// Skip sessions that aren't actually scheduled yet (e.g. co-chair placeholders)
+				if ( ! startsAt || Number.isNaN( Date.parse( startsAt ) ) ) {
+					return;
+				}
+
 				const id = sess?.id ?? sess?.Id;
 				const title = sess?.title ?? sess?.Title ?? '';
 				const speakerIds = sess?.speakers ?? sess?.speakerIds ?? sess?.Speakers ?? sess?.SpeakerIds ?? [];
-				const startsAt = String( getStartFromSession_( sess ) || '' ).trim();
 				const endsAt = String( getEndFromSession_( sess ) || '' ).trim();
 				const durationMinutes = getDurationMinutesFromSession_( sess );
 				const roomName = String( getRoomNameFromSession_( sess, roomMap ) || '' ).trim();
@@ -539,8 +581,30 @@
 		   Speaker metadata getters
 		   ================================================================== */
 
+		function normalizeQuestionLookupKey_( value ) {
+			return String( value || '' ).trim().toLowerCase();
+		}
+
+		function resolveConfiguredQuestionId_( ref ) {
+			if ( null == ref || '' === ref ) {
+				return null;
+			}
+
+			const raw = String( ref ).trim();
+			if ( ! raw ) {
+				return null;
+			}
+
+			const numeric = Number( raw );
+			if ( Number.isFinite( numeric ) && numeric > 0 ) {
+				return numeric;
+			}
+
+			return questionTitleToId.get( normalizeQuestionLookupKey_( raw ) ) || null;
+		}
+
 		function getAnswerByQid_( speaker, qid ) {
-			const q = Number( qid );
+			const q = resolveConfiguredQuestionId_( qid );
 			if ( ! Number.isFinite( q ) || q <= 0 ) {
 				return '';
 			}
@@ -1010,9 +1074,16 @@
 				} )
 				: [];
 
+			const sessionsBox = modalSessions.closest( '.sz-modal__sessionsBox' );
+
 			if ( ! sess.length && ! companySessions.length ) {
-				modalSessions.innerHTML = '<li class="sz-modal__sessItem"><div class="sz-modal__sessTitle">No sessions listed.</div></li>';
+				if ( sessionsBox ) {
+					sessionsBox.hidden = true;
+				}
 			} else {
+				if ( sessionsBox ) {
+					sessionsBox.hidden = false;
+				}
 				const behavior = String( SPEAKER_CONFIG.sessionLinkBehavior || 'link' ).toLowerCase();
 
 				const speakerSessionsHtml = sess.map( ( x ) => {
@@ -1241,6 +1312,7 @@
 					return;
 				}
 
+				questionTitleToId = buildQuestionTitleMap_( data );
 				speakersById = new Map( speakers.map( ( s ) => [ String( s.id ), s ] ) );
 				roomNameById = buildRoomNameMap_( data );
 				sessionsBySpeakerId = buildSessionsBySpeakerId_( data, roomNameById );
