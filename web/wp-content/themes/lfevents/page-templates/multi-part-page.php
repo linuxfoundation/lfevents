@@ -30,6 +30,10 @@ function lfe_content_filter( $content ) {
 		preg_match( '/data-menu-slug="([^"]*)"/i', $match, $id );
 		preg_match( '/data-menu-title="([^"]*)"/i', $match, $menu_title );
 
+		if ( ! isset( $id[1], $menu_title[1] ) ) {
+			continue;
+		}
+
 		$menu .= '<li><a href="#' . $id[1] . '">' . $menu_title[1] . '</a></li>';
 	}
 
