@@ -160,6 +160,7 @@ class LFEvents {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_editor_scripts' );
+		$this->loader->add_filter( 'block_editor_settings_all', $plugin_public, 'inject_event_gradient_editor_style', 10, 2 );
 		$this->loader->add_action( 'init', $plugin_admin, 'new_cpts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_event_categories' );
 		$this->loader->add_action( 'init', $plugin_admin, 'change_page_label' );
@@ -214,6 +215,7 @@ class LFEvents {
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'redirects' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'deregister_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'insert_event_styles' );
+		$this->loader->add_action( 'enqueue_block_assets', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_filter( 'the_seo_framework_title_from_generation', $plugin_public, 'add_year_to_archive_titles' );
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'new_excerpt_more' );
 		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'custom_excerpt_length', 999 );

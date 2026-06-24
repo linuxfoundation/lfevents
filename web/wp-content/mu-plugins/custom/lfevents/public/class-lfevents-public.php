@@ -137,15 +137,56 @@ class LFEvents_Public {
 	 * Inserts css into the head with the event gradient.
 	 */
 	public function insert_event_styles() {
+		static $did_enqueue = false;
 
-		global $pagenow;
-		// Run on frontend event post types, or pages.
-		if ( is_singular( lfe_get_post_types() ) ) {
-			self::create_event_styles();
+		if ( $did_enqueue ) {
+			return;
 		}
 
-		if ( is_admin() && 'post.php' == $pagenow ) {
-			self::create_event_styles();
+		$post_id = 0;
+
+		global $pagenow;
+
+		// Frontend event pages.
+		if ( is_singular( lfe_get_post_types() ) ) {
+			$post_id = get_queried_object_id();
+		}
+
+		// Block editor and classic admin post editing pages.
+		if ( is_admin() && ( 'post.php' === $pagenow || 'post-new.php' === $pagenow ) ) {
+			$get_post_id  = filter_input( INPUT_GET, 'post', FILTER_VALIDATE_INT );
+			$form_post_id = filter_input( INPUT_POST, 'post_ID', FILTER_VALIDATE_INT );
+
+			if ( $get_post_id ) {
+				$post_id = (int) $get_post_id;
+			} elseif ( $form_post_id ) {
+				$post_id = (int) $form_post_id;
+			} else {
+				global $post;
+				if ( is_object( $post ) && isset( $post->ID ) ) {
+					$post_id = (int) $post->ID;
+				}
+			}
+
+			// Some block editor asset requests do not include post in query params.
+			if ( ! $post_id ) {
+				$referer = wp_get_referer();
+				if ( $referer ) {
+					$referer_query = wp_parse_url( $referer, PHP_URL_QUERY );
+					if ( $referer_query ) {
+						parse_str( $referer_query, $referer_args );
+						if ( ! empty( $referer_args['post'] ) ) {
+							$post_id = (int) $referer_args['post'];
+						} elseif ( ! empty( $referer_args['postId'] ) ) {
+							$post_id = (int) $referer_args['postId'];
+						}
+					}
+				}
+			}
+		}
+
+		if ( $post_id ) {
+			$did_enqueue = self::create_event_styles( $post_id );
 		}
 	}
 
@@ -355,44 +396,140 @@ class LFEvents_Public {
 
 	/**
 	 * Creates css into the head with the event gradient
+	 *
+	 * @param int $post_id Optional post ID to derive event colors from.
+	 * @return bool True when styles are generated and enqueued.
 	 */
-	public function create_event_styles() {
+	public function create_event_styles( $post_id = 0 ) {
 
-		global $post;
-
-		if ( $post->post_parent ) {
-			$ancestors = get_post_ancestors( $post->ID );
-			$parent_id = $ancestors[ count( $ancestors ) - 1 ];
-		} else {
-			$parent_id = $post->ID;
+		if ( ! $post_id ) {
+			global $post;
+			if ( ! is_object( $post ) || ! isset( $post->ID ) ) {
+				return false;
+			}
+			$post_id = (int) $post->ID;
 		}
 
-		if ( in_array( $post->post_type, lfe_get_post_types() ) && $parent_id ) {
+		$event_post = get_post( $post_id );
+		if ( ! $event_post ) {
+			return false;
+		}
 
-			$menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
-			$menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
-			$background_color = 'background-color: ' . $menu_color . ';';
-			if ( $menu_color_2 ) {
-				$background_color = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+		if ( ! in_array( $event_post->post_type, lfe_get_post_types(), true ) ) {
+			return false;
+		}
 
+		if ( $event_post->post_parent ) {
+			$ancestors = get_post_ancestors( $post_id );
+			$parent_id = $ancestors[ count( $ancestors ) - 1 ];
+		} else {
+			$parent_id = $post_id;
+		}
+
+		if ( $parent_id ) {
+
+			$event_css = $this->build_event_gradient_css( $parent_id );
+			if ( ! $event_css ) {
+				return false;
 			}
-			$background_style = '.is-style-event-gradient { ' . esc_html( $background_color ) . '}';
 
-			// adding CSS variables, use these for future styles per event.
-			$css_variables_for_events = '
+			// Register and enqueue an empty style sheet first.
+			wp_register_style( 'event-gradient-inline-style', false, array(), $this->version, 'all' );
+			wp_enqueue_style( 'event-gradient-inline-style' );
+
+			// Then add the inline styles to it.
+			wp_add_inline_style( 'event-gradient-inline-style', $event_css );
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Inject event gradient CSS directly into block editor settings.
+	 *
+	 * @param array  $editor_settings Editor settings array.
+	 * @param object $editor_context Current editor context.
+	 * @return array
+	 */
+	public function inject_event_gradient_editor_style( $editor_settings, $editor_context ) {
+		$post_id = 0;
+
+		if ( is_object( $editor_context ) && isset( $editor_context->post ) && is_object( $editor_context->post ) ) {
+			$post_id = (int) $editor_context->post->ID;
+		}
+
+		if ( ! $post_id ) {
+			$get_post_id = filter_input( INPUT_GET, 'post', FILTER_VALIDATE_INT );
+			if ( $get_post_id ) {
+				$post_id = (int) $get_post_id;
+			}
+		}
+
+		if ( ! $post_id ) {
+			return $editor_settings;
+		}
+
+		$event_post = get_post( $post_id );
+		if ( ! $event_post || ! in_array( $event_post->post_type, lfe_get_post_types(), true ) ) {
+			return $editor_settings;
+		}
+
+		if ( $event_post->post_parent ) {
+			$ancestors = get_post_ancestors( $post_id );
+			$parent_id = (int) end( $ancestors );
+		} else {
+			$parent_id = $post_id;
+		}
+		if ( ! $parent_id ) {
+			return $editor_settings;
+		}
+
+		$event_css = $this->build_event_gradient_css( $parent_id );
+		if ( ! $event_css ) {
+			return $editor_settings;
+		}
+
+		if ( ! isset( $editor_settings['styles'] ) || ! is_array( $editor_settings['styles'] ) ) {
+			$editor_settings['styles'] = array();
+		}
+
+		$editor_settings['styles'][] = array(
+			'css' => $event_css,
+		);
+
+		return $editor_settings;
+	}
+
+	/**
+	 * Build CSS for event gradient and event color variables.
+	 *
+	 * @param int $parent_id Root event page ID.
+	 * @return string|false
+	 */
+	private function build_event_gradient_css( $parent_id ) {
+		$menu_color   = get_post_meta( $parent_id, 'lfes_menu_color', true );
+		$menu_color_2 = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
+
+		if ( empty( $menu_color ) ) {
+			return false;
+		}
+
+		$background_color = 'background-color: ' . $menu_color . ';';
+		if ( $menu_color_2 ) {
+			$background_color = 'background: linear-gradient(90deg, ' . $menu_color . ' 0%, ' . $menu_color_2 . ' 100%);';
+		}
+
+		$background_style = '.is-style-event-gradient { ' . esc_html( $background_color ) . '}';
+
+		$css_variables_for_events = '
 :root {
 --event-color-1: ' . esc_html( $menu_color ) . ';
 --event-color-2: ' . esc_html( $menu_color_2 ? $menu_color_2 : $menu_color ) . ';
 }';
 
-			// Register and enqueue an empty style sheet first.
-			wp_register_style( 'event-gradient-inline-style', false, array(), true, 'all' );
-			wp_enqueue_style( 'event-gradient-inline-style' );
-
-			// Then add the inline styles to it.
-			wp_add_inline_style( 'event-gradient-inline-style', $background_style );
-			wp_add_inline_style( 'event-gradient-inline-style', $css_variables_for_events );
-		}
+		return $background_style . "\n" . $css_variables_for_events;
 	}
 
 	/**
