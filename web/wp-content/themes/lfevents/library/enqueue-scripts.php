@@ -39,6 +39,21 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		if ( ! strpos( $chinese_domains, $current_domain ) ) {
 			// Enqueue cookie script only on main site.
 			wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', false );
+
+			// Enqueue Transcend airgap.js consent management.
+			wp_enqueue_script( 'transcend-airgap', 'https://transcend-cdn.com/cm/f484e2d0-ad2e-43a9-9d64-d07f6fa20966/airgap.js', array(), '1', false );
+			add_filter(
+				'script_loader_tag',
+				function ( $tag, $handle ) {
+					if ( 'transcend-airgap' === $handle ) {
+						$tag = '<script data-cfasync="false" src="https://transcend-cdn.com/cm/f484e2d0-ad2e-43a9-9d64-d07f6fa20966/airgap.js" onload="window.dataLayer.push({\'event\': \'transcend_consent_ready\'})" onerror="console.error(\'Transcend airgap.js failed to load\')"></script>' . "\n"; // phpcs:ignore
+					}
+					return $tag;
+				},
+				10,
+				2
+			);
+
 		}
 
 		if ( has_block( 'table' ) ) {
