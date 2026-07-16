@@ -76,6 +76,9 @@ if ( ! function_exists( 'foundationpress_cleanup_head' ) ) :
 		// Remove application passwords.
 		add_filter( 'wp_is_application_passwords_available', '__return_false' );
 
+		// Restrict the REST API users endpoint to logged-in users only.
+		add_filter( 'rest_endpoints', 'lf_restrict_rest_users_endpoint' );
+
 		// Controls whether XML-RPC methods requiring authentication are enabled.
 		add_filter( 'xmlrpc_enabled', '__return_false' );
 
@@ -148,5 +151,30 @@ if ( ! function_exists( 'lf_update_default_version_to_be_filemtime' ) ) :
 			$src = add_query_arg( $new_query_string, '', $src );
 		}
 		return $src;
+	}
+endif;
+
+// Restrict the REST API users endpoint to logged-in users.
+if ( ! function_exists( 'lf_restrict_rest_users_endpoint' ) ) :
+	/**
+	 * Remove the users endpoints from the REST API for unauthenticated requests.
+	 *
+	 * @param array $endpoints The available REST API endpoints.
+	 * @return array
+	 */
+	function lf_restrict_rest_users_endpoint( $endpoints ) {
+		if ( is_user_logged_in() ) {
+			return $endpoints;
+		}
+
+		if ( isset( $endpoints['/wp/v2/users'] ) ) {
+			unset( $endpoints['/wp/v2/users'] );
+		}
+
+		if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+			unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+		}
+
+		return $endpoints;
 	}
 endif;
