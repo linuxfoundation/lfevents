@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccece8845012f158da25a39380a15229",
+    "content-hash": "51d87d0044ee1964f27e17035515e73d",
     "packages": [
         {
             "name": "composer/installers",
@@ -962,24 +962,6 @@
             "homepage": "https://wordpress.org/plugins/clone-page-tree/"
         },
         {
-            "name": "wpackagist-plugin/find-my-blocks",
-            "version": "4.0.3",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/find-my-blocks/",
-                "reference": "tags/4.0.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/find-my-blocks.4.0.3.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/find-my-blocks/"
-        },
-        {
             "name": "wpackagist-plugin/flying-pages",
             "version": "2.4.7",
             "source": {
@@ -1104,24 +1086,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/post-type-switcher/"
-        },
-        {
-            "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.28.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.28.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.28.0.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/publishpress-checklists/"
         },
         {
             "name": "wpackagist-plugin/redirection",
