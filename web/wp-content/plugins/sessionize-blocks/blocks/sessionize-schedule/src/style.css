@@ -1291,12 +1291,6 @@ body.sched-modal-open{ overflow:hidden; }
   .sched-speaker-modal[aria-hidden="false"] .sched-modal__dialog{
     animation: sched-modal-in .32s cubic-bezier(.2,.8,.2,1) both !important;
   }
-
-  .sched-modal[aria-hidden="false"]:not(.sched--swipehint-seen) .sched-modal__dialog{
-    animation:
-      sched-modal-in .32s cubic-bezier(.2,.8,.2,1) both,
-      sched-swipe-nudge 1s ease .45s 1;
-  }
 }
 
 .sched-modal__overlay{
@@ -1405,62 +1399,6 @@ body.sched-modal-open{ overflow:hidden; }
 
 .sched-modal__body.is-swap-animating{
   animation: sched-modal-swap 180ms ease;
-}
-
-@media (max-width: 768px){
-  .sched-modal__body::before{
-    content:"Swipe to browse schedule";
-    display:block;
-    text-align:center;
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:color-mix(in srgb, var(--muted) 58%, white);
-    margin:0 0 6px;
-    opacity:.62;
-
-    transition: opacity .22s ease;
-    pointer-events:none;
-  }
-
-  .sched-modal.sched--swipehint-seen .sched-modal__body::before{
-    opacity:0;
-    height:0;
-    margin:0;
-    overflow:hidden;
-    content:"";
-  }
-}
-
-@media (min-width: 769px){
-  .sched-modal__body::before{
-    content:"Use arrow keys to browse schedule";
-    display:block;
-    text-align:center;
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:color-mix(in srgb, var(--muted) 58%, white);
-    margin:0 0 6px;
-    opacity:.62;
-    transition: opacity .22s ease;
-    pointer-events:none;
-  }
-
-  .sched-modal.sched--arrowhint-seen .sched-modal__body::before{
-    opacity:0;
-    height:0;
-    margin:0;
-    overflow:hidden;
-    content:"";
-  }
-}
-
-.sched-speaker-modal .sched-modal__body::before{
-  content:"" !important;
-  display:none !important;
 }
 
 .sched-modal__title{
@@ -1820,18 +1758,6 @@ body.sched-modal-open{ overflow:hidden; }
   to{
     opacity:1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes sched-swipe-nudge{
-  0%, 100%{
-    transform: translateX(0);
-  }
-  30%{
-    transform: translateX(-10px);
-  }
-  60%{
-    transform: translateX(6px);
   }
 }
 

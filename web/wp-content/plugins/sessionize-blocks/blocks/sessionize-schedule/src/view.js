@@ -385,8 +385,6 @@ async function initSchedBlock( root ) {
 	let touchStartY = 0;
 	let speakerTouchStartX = 0;
 	let speakerTouchStartY = 0;
-	let hasSeenSwipeHint = false;
-	let hasSeenArrowHint = false;
 
 	function escapeHtml( str ) {
 		return ( str ?? '' )
@@ -717,6 +715,29 @@ async function initSchedBlock( root ) {
 				}
 
 				state.selectedByCategoryTitle.set( cat.title, set );
+			}
+
+			for ( const [ catTitle, items ] of ( state.customFilterItemsByTitle || new Map() ).entries() ) {
+				const key = slugify( catTitle );
+				const raw = params.get( key );
+				if ( ! raw ) continue;
+				const values = raw.split( '|' ).map( v => v.trim() ).filter( Boolean );
+				if ( ! values.length ) continue;
+				const set = new Set( state.selectedByCategoryTitle.get( catTitle ) || [] );
+
+				for ( const v of values ) {
+					const match = ( items || [] ).find( it => slugify( it.name ) === slugify( v ) );
+					if ( ! match ) continue;
+					set.add( String( match.id ?? match.name ) );
+					if ( ! firstMatchedCategoryTitle ) firstMatchedCategoryTitle = catTitle;
+				}
+
+				state.selectedByCategoryTitle.set( catTitle, set );
+
+				if ( catTitle === CUSTOM_DATE_FILTER_TITLE ) {
+					state.showAllDays = 0 === set.size;
+					state.selectedDay = 1 === set.size ? Array.from( set )[0] : null;
+				}
 			}
 
 			if ( firstMatchedCategoryTitle ) {
@@ -2038,17 +2059,6 @@ async function initSchedBlock( root ) {
 	setModalTopOffset();
 	syncActiveModalHeight();
 	applyThemeColor();
-	loadHintState();
-
-	if ( hasSeenSwipeHint ) {
-		root.classList.add( 'sched--swipehint-seen' );
-		elModal.classList.add( 'sched--swipehint-seen' );
-	}
-
-	if ( hasSeenArrowHint ) {
-		root.classList.add( 'sched--arrowhint-seen' );
-		elModal.classList.add( 'sched--arrowhint-seen' );
-	}
 
 	window.addEventListener( 'resize', debounce( () => {
 		setVisualViewportVars();
@@ -2097,8 +2107,6 @@ async function initSchedBlock( root ) {
 		if ( Math.abs( dx ) < 50 ) return;
 		if ( Math.abs( dx ) <= Math.abs( dy ) ) return;
 
-		markSwipeHintSeen();
-
 		if ( dx < 0 ) {
 			goToNextSession();
 		} else {
@@ -2124,8 +2132,6 @@ async function initSchedBlock( root ) {
 		if ( Math.abs( dx ) < 50 ) return;
 		if ( Math.abs( dx ) <= Math.abs( dy ) ) return;
 
-		markSwipeHintSeen();
-
 		if ( dx < 0 ) {
 			goToNextSpeaker();
 		} else {
@@ -2140,34 +2146,6 @@ async function initSchedBlock( root ) {
 	}, 60 ), { passive: true } );
 	elToTop.addEventListener( 'click', scrollToTopSmooth );
 
-	function loadHintState() {
-		try {
-			hasSeenSwipeHint = '1' === window.sessionStorage.getItem( 'schedSwipeHintSeen' );
-			hasSeenArrowHint = '1' === window.sessionStorage.getItem( 'schedArrowHintSeen' );
-		} catch ( _ ) {
-			hasSeenSwipeHint = false;
-			hasSeenArrowHint = false;
-		}
-	}
-
-	function markSwipeHintSeen() {
-		hasSeenSwipeHint = true;
-		try {
-			window.sessionStorage.setItem( 'schedSwipeHintSeen', '1' );
-		} catch ( _ ) {}
-		root.classList.add( 'sched--swipehint-seen' );
-		elModal.classList.add( 'sched--swipehint-seen' );
-	}
-
-	function markArrowHintSeen() {
-		hasSeenArrowHint = true;
-		try {
-			window.sessionStorage.setItem( 'schedArrowHintSeen', '1' );
-		} catch ( _ ) {}
-		root.classList.add( 'sched--arrowhint-seen' );
-		elModal.classList.add( 'sched--arrowhint-seen' );
-	}
-
 	function animateModalSwap() {
 		elModalBody.classList.remove( 'is-swap-animating' );
 		void elModalBody.offsetWidth;
@@ -2178,15 +2156,6 @@ async function initSchedBlock( root ) {
 		elSpeakerModalBody.classList.remove( 'is-swap-animating' );
 		void elSpeakerModalBody.offsetWidth;
 		elSpeakerModalBody.classList.add( 'is-swap-animating' );
-	}
-
-	function isDesktopLike() {
-		return window.matchMedia( '(min-width: 769px)' ).matches;
-	}
-
-	function markDesktopArrowHintSeenIfNeeded() {
-		if ( ! isDesktopLike() ) return;
-		markArrowHintSeen();
 	}
 
 	function canScrollModalBodyUp() {
@@ -2564,10 +2533,6 @@ async function initSchedBlock( root ) {
 	}
 
 	function closeModal() {
-		if ( isDesktopLike() && ! hasSeenArrowHint ) {
-			markArrowHintSeen();
-		}
-
 		const closingSessionId = state.currentModalSessionId;
 
 		elModal.setAttribute( 'aria-hidden', 'true' );
@@ -2887,14 +2852,12 @@ async function initSchedBlock( root ) {
 
 		if ( sessionModalOpen && 'ArrowLeft' === e.key ) {
 			e.preventDefault();
-			markDesktopArrowHintSeenIfNeeded();
 			goToPreviousSession();
 			return;
 		}
 
 		if ( sessionModalOpen && 'ArrowRight' === e.key ) {
 			e.preventDefault();
-			markDesktopArrowHintSeenIfNeeded();
 			goToNextSession();
 			return;
 		}
@@ -2902,7 +2865,6 @@ async function initSchedBlock( root ) {
 		if ( sessionModalOpen && 'ArrowUp' === e.key ) {
 			if ( canScrollModalBodyUp() ) {
 				e.preventDefault();
-				markDesktopArrowHintSeenIfNeeded();
 				scrollModalBodyBy( -140 );
 			}
 			return;
@@ -2911,7 +2873,6 @@ async function initSchedBlock( root ) {
 		if ( sessionModalOpen && 'ArrowDown' === e.key ) {
 			if ( canScrollModalBodyDown() ) {
 				e.preventDefault();
-				markDesktopArrowHintSeenIfNeeded();
 				scrollModalBodyBy( 140 );
 			}
 			return;
@@ -3457,7 +3418,10 @@ async function initSchedBlock( root ) {
 			applySlidesParamFromUrl();
 			applySearchParamFromUrl();
 
-			state.selectedDay = chooseDefaultDay( getDays() );
+			const restoredDateSelection = state.selectedByCategoryTitle.get( CUSTOM_DATE_FILTER_TITLE );
+			if ( ! restoredDateSelection || 0 === restoredDateSelection.size ) {
+				state.selectedDay = chooseDefaultDay( getDays() );
+			}
 
 			const syncSearch = () => {
 				const v = ( elSearch.value || '' ).trim().toLowerCase();
