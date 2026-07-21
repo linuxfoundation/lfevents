@@ -89,6 +89,9 @@ function lf_sponsor_directory_render( $attributes ) {
 					<?php endforeach; ?>
 				</select>
 			</div>
+			<button type="button" class="sponsor-directory__reset" data-reset-filters disabled>
+				<?php esc_html_e( 'Reset', 'sponsor-directory-block' ); ?>
+			</button>
 		</div>
 
 		<p class="sponsor-directory__result-count" data-result-count aria-live="polite">

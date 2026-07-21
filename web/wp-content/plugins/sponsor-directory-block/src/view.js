@@ -3,10 +3,17 @@ import { sponsorMatchesFilters } from './filter';
 const initializeDirectory = ( directory ) => {
 	const categorySelect = directory.querySelector( '[data-category-filter]' );
 	const levelSelect = directory.querySelector( '[data-level-filter]' );
+	const resetButton = directory.querySelector( '[data-reset-filters]' );
 	const count = directory.querySelector( '[data-result-count]' );
 	const empty = directory.querySelector( '[data-no-results]' );
 
-	if ( ! categorySelect || ! levelSelect || ! count || ! empty ) {
+	if (
+		! categorySelect ||
+		! levelSelect ||
+		! resetButton ||
+		! count ||
+		! empty
+	) {
 		return;
 	}
 
@@ -43,10 +50,16 @@ const initializeDirectory = ( directory ) => {
 		count.textContent =
 			visibleCount === 1 ? '1 sponsor' : `${ visibleCount } sponsors`;
 		empty.hidden = visibleCount !== 0;
+		resetButton.disabled = ! categorySelect.value && ! levelSelect.value;
 	};
 
 	categorySelect.addEventListener( 'change', update );
 	levelSelect.addEventListener( 'change', update );
+	resetButton.addEventListener( 'click', () => {
+		categorySelect.value = '';
+		levelSelect.value = '';
+		update();
+	} );
 	update();
 };
 

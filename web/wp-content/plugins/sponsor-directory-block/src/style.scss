@@ -2,7 +2,8 @@
 
 	.sponsor-directory__filters {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 280px));
+		grid-template-columns: repeat(2, minmax(0, 280px)) auto;
+		align-items: end;
 		gap: 16px;
 		margin-bottom: 18px;
 	}
@@ -19,7 +20,33 @@
 		select {
 			width: 100%;
 			min-height: 44px;
+			margin-bottom: 0;
 			padding: 8px 36px 8px 10px;
+		}
+	}
+
+	.sponsor-directory__reset {
+		min-height: 44px;
+		padding: 8px 18px;
+		border: 2px solid currentcolor;
+		background: transparent;
+		color: inherit;
+		font-weight: 700;
+		cursor: pointer;
+
+		&:focus-visible {
+			outline: 3px solid currentcolor;
+			outline-offset: 3px;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			opacity: 0.45;
+		}
+
+		&:hover:not(:disabled) {
+			background: #222;
+			color: #fff;
 		}
 	}
 
@@ -37,10 +64,13 @@
 	.sponsor-directory__grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+		justify-items: start;
 		gap: 24px;
 	}
 
 	.sponsor-directory__card {
+		width: 100%;
+		max-width: 350px;
 		min-width: 0;
 	}
 
@@ -118,6 +148,10 @@
 
 		.sponsor-directory__filters {
 			grid-template-columns: 1fr;
+		}
+
+		.sponsor-directory__reset {
+			justify-self: start;
 		}
 	}
 
@@ -207,7 +241,7 @@
 		display: grid;
 		grid-template-columns: minmax(180px, 30%) 1fr;
 		gap: 36px;
-		padding: 56px 48px 48px;
+		padding: 32px 48px 48px;
 	}
 
 	&__logo-wrapper {
@@ -223,7 +257,8 @@
 	}
 
 	&-title {
-		margin: 0 0 18px;
+		margin: 0;
+		padding: 56px 48px 0;
 		font-size: 32px;
 		line-height: 1.2;
 	}
@@ -253,7 +288,11 @@
 		&__inner {
 			grid-template-columns: 1fr;
 			gap: 24px;
-			padding: 64px 24px 32px;
+			padding: 24px 24px 32px;
+		}
+
+		&-title {
+			padding: 64px 24px 0;
 		}
 
 		&__logo-wrapper {
