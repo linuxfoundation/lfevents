@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lf/sponsor-directory",
+	"version": "0.1.0",
+	"title": "Sponsor Directory",
+	"category": "common",
+	"icon": "groups",
+	"description": "Import and display a filterable sponsor directory from a published Google Sheet.",
+	"keywords": [ "sponsors", "directory", "google sheets" ],
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"attributes": {
+		"csvUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"sponsors": {
+			"type": "array",
+			"default": []
+		},
+		"importedAt": {
+			"type": "string",
+			"default": ""
+		},
+		"importReport": {
+			"type": "object",
+			"default": {
+				"matchedCount": 0,
+				"skippedCount": 0,
+				"skipped": [],
+				"warnings": []
+			}
+		}
+	},
+	"textdomain": "sponsor-directory-block",
+	"editorScript": "file:./index.js",
+	"viewScript": "file:./view.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
