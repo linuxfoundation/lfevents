@@ -11,7 +11,7 @@
   "attributes": {
     "apiCode": {
       "type": "string",
-      "default": "pc6leesj"
+      "default": ""
     },
     "scheduleBaseUrl": {
       "type": "string",
@@ -19,19 +19,19 @@
     },
     "companyQuestionId": {
       "type": "string",
-      "default": "60107"
+      "default": "Company"
     },
     "speakerTitleQuestionId": {
       "type": "string",
-      "default": "60108"
+      "default": "Speaker Title"
     },
     "companyLogoUrlQuestionId": {
       "type": "string",
-      "default": "124072"
+      "default": "Company URL"
     },
     "companyLogoUploadQuestionId": {
       "type": "string",
-      "default": "124073"
+      "default": "Company Logo"
     },
     "topSpeakersOnly": {
       "type": "boolean",
@@ -51,11 +51,11 @@
     },
     "timeFormat": {
       "type": "string",
-      "default": "24h"
+      "default": "12h"
     },
     "dateFormat": {
       "type": "string",
-      "default": "dmy"
+      "default": "mdy"
     },
     "sessionLinkBehavior": {
       "type": "string",
