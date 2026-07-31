@@ -368,11 +368,57 @@ async function initSchedBlock( root ) {
 		currentModalSessionId: null,
 		returnToSessionId: null,
 		favoriteSessionIds: new Set(),
-		showAgendaOnly: false
+		showAgendaOnly: false,
+
+		// Vertical scale of the grid, in pixels per minute. Set by the
+		// +/- buttons in the corner of the time column.
+		gridPxPerMinute: null
 	};
 
 	const CUSTOM_DATE_FILTER_TITLE = 'Date';
 	const CUSTOM_ROOM_FILTER_TITLE = 'Location';
+
+	// ---------------------------------------------------------------------------
+	// Grid view settings.
+	// ---------------------------------------------------------------------------
+	// Size of every row on the time axis, in minutes.
+	const GRID_SLOT_MINUTES = 30;
+
+	// Minimum width of each room column in this mode. Lower than the standard
+	// grid so more rooms fit on screen at once.
+	const GRID_COL_MIN_PX = 132;
+
+	// Width of the sticky time column in this mode.
+	const GRID_TIME_COL_PX = 88;
+
+	// Vertical scale for proportional mode. 4px per minute puts a 30 minute
+	// session at 120px and a 5 minute lightning talk at 20px.
+	const GRID_PX_PER_MINUTE = 4;
+
+	// Floor for very short sessions so a 3 minute keynote stays readable and
+	// clickable. Slightly overstates those sessions on purpose.
+	const GRID_MIN_CARD_PX = 20;
+
+	// Show a small start time on cards when several sessions share one cell,
+	// which is what happens to back to back lightning talks.
+	const GRID_SHOW_TIME_WHEN_STACKED = true;
+
+	// Height of the scrolling grid pane. Room headers and the time column stay
+	// pinned inside it, so both remain visible however far you scroll. The pixel
+	// cap matters inside the WordPress editor, where a Custom HTML block is
+	// previewed in a self-sizing iframe and vh units are meaningless.
+	const GRID_PANE_VH = 78;
+	const GRID_PANE_MAX_PX = 860;
+
+	// Zoom steps for the +/- buttons in the corner of the time column, in pixels
+	// per minute. GRID_PX_PER_MINUTE is the starting point.
+	const GRID_ZOOM_STEPS = [ 1.6, 2, 2.6, 3.2, 4, 5, 6.4, 8, 10 ];
+
+	// Show a hover panel with speaker headshots on the AV grid cards.
+	const GRID_HOVER_SPEAKERS = true;
+	const GRID_HOVER_DELAY_MS = 130;
+
+	
 
 	let lastFocusedEl = null;
 	let isHandlingPopState = false;
@@ -1871,6 +1917,512 @@ async function initSchedBlock( root ) {
 		requestAnimationFrame( updateSpeakerJumpActive );
 	}
 
+	// ---------------------------------------------------------------------------
+	// Hover panel with speaker headshots, AV grid cards only
+	// ---------------------------------------------------------------------------
+
+	let hoverCardEl = null;
+	let hoverCardTimer = null;
+
+	function ensureHoverCard() {
+		if ( hoverCardEl ) return hoverCardEl;
+
+		hoverCardEl = document.createElement( 'div' );
+		hoverCardEl.className = 'sched-hovercard';
+		hoverCardEl.setAttribute( 'aria-hidden', 'true' );
+		document.body.appendChild( hoverCardEl );
+
+		return hoverCardEl;
+	}
+
+	function getSessionSpeakerObjects( derived ) {
+		const ids = Array.isArray( derived.raw.speakers ) ? derived.raw.speakers : [];
+		return ids
+			.map( id => state.speakersById.get( String( id ) ) )
+			.filter( Boolean );
+	}
+
+	function buildHoverCardHtml( derived ) {
+		const speakers = getSessionSpeakerObjects( derived );
+
+		const metaBits = [ `${ fmtShortDate( new Date( derived.startMs ) ) } • ${ fmtTimeRange( derived.startMs, derived.endMs ) }` ];
+		if ( derived.room ) metaBits.push( derived.room );
+
+		const rows = speakers.map( sp => {
+			const name = getSpeakerDisplayName( sp );
+			const sub = [ getSpeakerTitle( sp ), getSpeakerCompany( sp ) ].filter( Boolean ).join( ', ' );
+			const avatar = getSpeakerAvatarUrl( sp );
+
+			return `
+			  <div class="sched-hovercard__speaker">
+				${ avatar
+					? `<img class="sched-hovercard__avatar" src="${ escapeHtml( avatar ) }" alt="" decoding="async">`
+					: `<div class="sched-hovercard__avatar" aria-hidden="true"></div>` }
+				<div class="sched-hovercard__speakertext">
+				  <div class="sched-hovercard__name">${ escapeHtml( name ) }</div>
+				  ${ sub ? `<div class="sched-hovercard__sub">${ escapeHtml( sub ) }</div>` : '' }
+				</div>
+			  </div>
+			`;
+		} ).join( '' );
+
+		// Same chip set the session modal shows, including the primary category
+		// colour treatment.
+		const chips = getVisibleTagsForDisplay( derived.tags || [] ).map( t => {
+			const isPrimary = ( t.title === schedConfig.primaryFilterTitle );
+
+			if ( isPrimary ) {
+				const c = primaryColorsFromName( t.name || '' );
+				const vars = `--chip-bg:${ c.bg };--chip-border2:${ c.border };--dot:${ c.dot }`;
+				return `<span class="sched-chip is-primary" style="${ escapeHtml( vars ) }"><span class="chip-dot" aria-hidden="true"></span>${ escapeHtml( t.name || '' ) }</span>`;
+			}
+
+			return `<span class="sched-chip">${ escapeHtml( t.name || '' ) }</span>`;
+		} ).join( '' );
+
+		return `
+		  <div class="sched-hovercard__title">${ escapeHtml( derived.raw.title || '' ) }</div>
+		  <div class="sched-hovercard__meta">${ escapeHtml( metaBits.join( '  •  ' ) ) }</div>
+		  ${ chips ? `<div class="sched-hovercard__chips">${ chips }</div>` : '' }
+		  ${ rows ? `<div class="sched-hovercard__speakers">${ rows }</div>` : '' }
+		`;
+	}
+
+	// Sits beside the card, flipping to the other side and clamping vertically
+	// when it would run off screen.
+	function positionHoverCard( anchor ) {
+		const el = hoverCardEl;
+		const rect = anchor.getBoundingClientRect();
+		const gap = 10;
+		const edge = 8;
+
+		el.style.visibility = 'hidden';
+		const width = el.offsetWidth;
+		const height = el.offsetHeight;
+
+		let left = rect.right + gap;
+		if ( left + width > window.innerWidth - edge ) left = rect.left - gap - width;
+		if ( left < edge ) {
+			left = Math.max( edge, Math.min( window.innerWidth - width - edge, rect.left ) );
+		}
+
+		let top = rect.top + ( rect.height / 2 ) - ( height / 2 );
+		top = Math.max( edge, Math.min( window.innerHeight - height - edge, top ) );
+
+		el.style.left = `${ Math.round( left ) }px`;
+		el.style.top = `${ Math.round( top ) }px`;
+		el.style.visibility = '';
+	}
+
+	function showHoverCard( anchor, derived ) {
+		const el = ensureHoverCard();
+		el.innerHTML = buildHoverCardHtml( derived );
+		el.classList.add( 'is-visible' );
+		el.setAttribute( 'aria-hidden', 'false' );
+		positionHoverCard( anchor );
+	}
+
+	function hideHoverCard() {
+		if ( hoverCardTimer ) {
+			clearTimeout( hoverCardTimer );
+			hoverCardTimer = null;
+		}
+		if ( ! hoverCardEl ) return;
+		hoverCardEl.classList.remove( 'is-visible' );
+		hoverCardEl.setAttribute( 'aria-hidden', 'true' );
+	}
+
+	function attachSessionHoverCard( button, derived ) {
+		if ( ! GRID_HOVER_SPEAKERS ) return;
+
+		button.addEventListener( 'mouseenter', () => {
+			if ( hoverCardTimer ) clearTimeout( hoverCardTimer );
+			hoverCardTimer = setTimeout( () => showHoverCard( button, derived ), GRID_HOVER_DELAY_MS );
+		} );
+
+		button.addEventListener( 'mouseleave', hideHoverCard );
+		button.addEventListener( 'click', hideHoverCard );
+
+		// Keyboard users get the same panel when tabbing through cards.
+		button.addEventListener( 'focus', () => showHoverCard( button, derived ) );
+		button.addEventListener( 'blur', hideHoverCard );
+	}
+
+	window.addEventListener( 'scroll', hideHoverCard, { passive: true } );
+	window.addEventListener( 'resize', hideHoverCard );
+
+	// ---------------------------------------------------------------------------
+	// Uniform grid mode
+	// ---------------------------------------------------------------------------
+
+	function getUniformSlotMs() {
+		return GRID_SLOT_MINUTES * 60000;
+	}
+
+	// Floor a timestamp to the nearest slot boundary, measured from local
+	// midnight so the axis lands on clean clock times in every timezone,
+	// including the ones offset by :30 or :45.
+	function floorMsToSlotStart( ms ) {
+		const size = getUniformSlotMs();
+		const d = new Date( ms );
+		const midnight = new Date( d.getFullYear(), d.getMonth(), d.getDate() ).getTime();
+		return midnight + Math.floor( ( ms - midnight ) / size ) * size;
+	}
+
+	// Column order comes from the Sessionize GridSmart payload when available so
+	// rooms stay in their published order, and stays consistent across days.
+	function getUniformRoomOrder() {
+		const order = new Map();
+		if ( ! Array.isArray( state.gridData ) ) return order;
+
+		let index = 0;
+		for ( const day of state.gridData ) {
+			for ( const room of ( day.rooms || [] ) ) {
+				const id = null == room?.id ? '' : String( room.id );
+				if ( ! order.has( id ) ) order.set( id, index++ );
+			}
+		}
+		return order;
+	}
+
+	function getSessionRoomKey( d ) {
+		return null == d.raw.roomId ? '' : String( d.raw.roomId );
+	}
+
+	// ---------------------------------------------------------------------------
+	// Proportional mode: real start and end times, 30 minute reference lines
+	// ---------------------------------------------------------------------------
+
+	function ceilMsToSlotEnd( ms ) {
+		const size = getUniformSlotMs();
+		const floored = floorMsToSlotStart( ms );
+		return floored === ms ? ms : floored + size;
+	}
+
+	// Greedy packing so overlapping sessions in one room sit side by side
+	// instead of on top of each other. Rooms like the Solutions Showcase hall
+	// run all-day items alongside shorter ones.
+	function packRoomSessions( sessions ) {
+		const sorted = sessions.slice().sort(
+			( a, b ) => ( a.startMs - b.startMs ) || ( a.endMs - b.endMs )
+		);
+
+		const columnEnds = [];
+		const placed = [];
+
+		for ( const session of sorted ) {
+			let column = columnEnds.findIndex( end => end <= session.startMs );
+
+			if ( -1 === column ) {
+				columnEnds.push( session.endMs );
+				column = columnEnds.length - 1;
+			} else {
+				columnEnds[ column ] = session.endMs;
+			}
+
+			placed.push( { session, column } );
+		}
+
+		return { placed, columnCount: Math.max( 1, columnEnds.length ) };
+	}
+
+	function buildProportionalDays( list ) {
+		const roomOrder = getUniformRoomOrder();
+		const byDay = new Map();
+
+		for ( const d of list ) {
+			if ( ! byDay.has( d.dayStr ) ) byDay.set( d.dayStr, [] );
+			byDay.get( d.dayStr ).push( d );
+		}
+
+		const out = [];
+
+		for ( const dayStr of Array.from( byDay.keys() ).sort() ) {
+			const sessions = byDay.get( dayStr );
+			if ( ! sessions.length ) continue;
+
+			let minStart = Infinity;
+			let maxEnd = -Infinity;
+			const roomIds = [];
+			const byRoom = new Map();
+
+			for ( const d of sessions ) {
+				if ( d.startMs < minStart ) minStart = d.startMs;
+				if ( d.endMs > maxEnd ) maxEnd = d.endMs;
+
+				const roomId = getSessionRoomKey( d );
+				if ( ! roomIds.includes( roomId ) ) {
+					roomIds.push( roomId );
+					byRoom.set( roomId, [] );
+				}
+				byRoom.get( roomId ).push( d );
+			}
+
+			roomIds.sort( ( a, b ) => {
+				const ai = roomOrder.has( a ) ? roomOrder.get( a ) : Number.MAX_SAFE_INTEGER;
+				const bi = roomOrder.has( b ) ? roomOrder.get( b ) : Number.MAX_SAFE_INTEGER;
+				if ( ai !== bi ) return ai - bi;
+
+				const an = state.roomsById.get( a )?.name || '';
+				const bn = state.roomsById.get( b )?.name || '';
+				return an.localeCompare( bn );
+			} );
+
+			const rooms = roomIds.map( id => Object.assign(
+				{ id, name: state.roomsById.get( id )?.name || 'Room' },
+				packRoomSessions( byRoom.get( id ) )
+			) );
+
+			const dayStartMs = floorMsToSlotStart( minStart );
+			const dayEndMs = Math.max( ceilMsToSlotEnd( maxEnd ), dayStartMs + getUniformSlotMs() );
+
+			const ticks = [];
+			for ( let t = dayStartMs; t <= dayEndMs; t += getUniformSlotMs() ) ticks.push( t );
+
+			out.push( { dayStr, rooms, dayStartMs, dayEndMs, ticks } );
+		}
+
+		return out;
+	}
+
+	function minutesBetween( fromMs, toMs ) {
+		return ( toMs - fromMs ) / 60000;
+	}
+
+	function renderProportionalCard( derived, geometry ) {
+		const wrap = document.createElement( 'div' );
+		wrap.className = 'sched-grid__cardwrap is-abs';
+		wrap.style.top = `${ geometry.top }px`;
+		wrap.style.height = `${ geometry.height }px`;
+		wrap.style.left = `${ geometry.left }%`;
+		wrap.style.width = `${ geometry.width }%`;
+
+		const button = document.createElement( 'button' );
+		button.type = 'button';
+		button.className = 'sched-grid__cellbtn';
+		button.dataset.sessionId = String( derived.id );
+
+		const card = document.createElement( 'div' );
+		card.className = 'sched-gridcard sched-gridcard--compact sched-gridcard--abs'
+			+ ( derived.primaryColors ? ' has-primary' : '' )
+			+ ( geometry.height < 34 ? ' is-tiny' : '' );
+
+		if ( derived.primaryColors ) {
+			card.style.setProperty( '--primary-bg', derived.primaryColors.bg );
+			card.style.setProperty( '--primary-border', derived.primaryColors.border );
+			card.style.setProperty( '--dot', derived.primaryColors.dot );
+		}
+
+		// Position already conveys the time on taller cards, so only the short
+		// ones get an explicit start time.
+		const startTime = ( geometry.height < 46 && GRID_SHOW_TIME_WHEN_STACKED )
+			? `<span class="sched-gridcard__starttime">${ escapeHtml( fmtTime( new Date( derived.startMs ) ) ) }</span>`
+			: '';
+
+		card.innerHTML = `<div class="sched-gridcard__title">${ startTime }${ escapeHtml( derived.raw.title || '' ) }</div>`;
+
+		// The hover panel replaces the native tooltip, which would otherwise
+		// appear on top of it. Screen readers still get the full label.
+		button.setAttribute(
+			'aria-label',
+			`${ fmtTimeRange( derived.startMs, derived.endMs ) } ${ derived.raw.title || '' }`
+		);
+
+		button.appendChild( card );
+		button.addEventListener( 'click', () => openModal( derived ) );
+		attachSessionHoverCard( button, derived );
+		wrap.appendChild( button );
+		return wrap;
+	}
+
+	function getGridPxPerMinute() {
+		return state.gridPxPerMinute || GRID_PX_PER_MINUTE;
+	}
+
+	function getZoomStorageKey() {
+		return `sched-avzoom-v1-${ schedConfig.sessionizeApiCode }`;
+	}
+
+	function loadGridZoom() {
+		const storage = getStorage();
+		if ( ! storage ) return;
+
+		try {
+			const raw = parseFloat( storage.getItem( getZoomStorageKey() ) );
+			if ( GRID_ZOOM_STEPS.some( s => Math.abs( s - raw ) < 0.001 ) ) {
+				state.gridPxPerMinute = raw;
+			}
+		} catch ( _ ) {}
+	}
+
+	function saveGridZoom() {
+		const storage = getStorage();
+		if ( ! storage ) return;
+		try {
+			storage.setItem( getZoomStorageKey(), String( getGridPxPerMinute() ) );
+		} catch ( _ ) {}
+	}
+
+	function getZoomIndex() {
+		const current = getGridPxPerMinute();
+		const exact = GRID_ZOOM_STEPS.findIndex( s => Math.abs( s - current ) < 0.001 );
+		if ( -1 !== exact ) return exact;
+
+		const fallback = GRID_ZOOM_STEPS.indexOf( GRID_PX_PER_MINUTE );
+		return -1 === fallback ? 0 : fallback;
+	}
+
+	function setGridZoom( direction ) {
+		const index = getZoomIndex();
+		const next = Math.max( 0, Math.min( GRID_ZOOM_STEPS.length - 1, index + direction ) );
+		if ( next === index ) return;
+
+		// Keep the same moment of the day at the top of the pane, so zooming
+		// does not throw away your place in the schedule.
+		const pane = root.querySelector( '.sched-avgrid' );
+		const anchorMinutes = pane ? ( pane.scrollTop / getGridPxPerMinute() ) : 0;
+		const anchorLeft = pane ? pane.scrollLeft : 0;
+
+		state.gridPxPerMinute = GRID_ZOOM_STEPS[ next ];
+		saveGridZoom();
+		render();
+
+		const nextPane = root.querySelector( '.sched-avgrid' );
+		if ( nextPane ) {
+			nextPane.scrollTop = anchorMinutes * getGridPxPerMinute();
+			nextPane.scrollLeft = anchorLeft;
+		}
+	}
+
+	function buildZoomControls() {
+		const index = getZoomIndex();
+
+		const wrap = document.createElement( 'div' );
+		wrap.className = 'sched-avgrid__zoom';
+
+		const make = ( label, direction, title, disabled ) => {
+			const btn = document.createElement( 'button' );
+			btn.type = 'button';
+			btn.className = 'sched-avgrid__zoombtn';
+			btn.textContent = label;
+			btn.title = title;
+			btn.setAttribute( 'aria-label', title );
+			btn.disabled = disabled;
+			btn.addEventListener( 'click', ( e ) => {
+				e.preventDefault();
+				e.stopPropagation();
+				setGridZoom( direction );
+			} );
+			return btn;
+		};
+
+		wrap.appendChild( make( '\u2212', -1, 'Shorter time slots', 0 === index ) );
+		wrap.appendChild( make( '+', 1, 'Taller time slots', index === GRID_ZOOM_STEPS.length - 1 ) );
+
+		return wrap;
+	}
+
+	function renderGridProportional( list ) {
+		const days = buildProportionalDays( list );
+
+		if ( ! days.length ) {
+			elStatus.textContent = 'No sessions match your filters.';
+			elGridWrap.hidden = true;
+			return;
+		}
+
+		elStatus.textContent = '';
+		elGridWrap.hidden = false;
+		elGridWrap.innerHTML = '';
+
+		const pxPerMinute = getGridPxPerMinute();
+		const slotPx = GRID_SLOT_MINUTES * pxPerMinute;
+
+		for ( const day of days ) {
+			elGridWrap.appendChild( renderDayDivider( day.dayStr ) );
+
+			// The pane is the only scroll container, in both axes. Everything
+			// sticky below is pinned relative to it.
+			const pane = document.createElement( 'div' );
+			pane.className = 'sched-avgrid';
+			pane.style.setProperty( '--slot-px', `${ slotPx }px` );
+			pane.style.setProperty( '--time-col', `${ GRID_TIME_COL_PX }px` );
+			pane.style.setProperty( '--room-col', `${ GRID_COL_MIN_PX }px` );
+			pane.style.setProperty( '--pane-h', `${ GRID_PANE_VH }vh` );
+			pane.style.setProperty( '--pane-cap', `${ GRID_PANE_MAX_PX }px` );
+			pane.addEventListener( 'scroll', hideHoverCard, { passive: true } );
+
+			// Rows are flex, not grid, so each sticky child is clamped to a
+			// containing block that spans the whole scroll width.
+			const inner = document.createElement( 'div' );
+			inner.className = 'sched-avgrid__inner';
+			inner.style.minWidth = `${ GRID_TIME_COL_PX + day.rooms.length * GRID_COL_MIN_PX }px`;
+
+			const headRow = document.createElement( 'div' );
+			headRow.className = 'sched-avgrid__headrow';
+
+			const timeHead = document.createElement( 'div' );
+			timeHead.className = 'sched-avgrid__timehead';
+			timeHead.appendChild( buildZoomControls() );
+			headRow.appendChild( timeHead );
+
+			for ( const room of day.rooms ) {
+				const roomHead = document.createElement( 'div' );
+				roomHead.className = 'sched-avgrid__roomhead';
+				roomHead.textContent = room.name || 'Room';
+				roomHead.title = room.name || '';
+				headRow.appendChild( roomHead );
+			}
+
+			inner.appendChild( headRow );
+
+			const laneHeight = minutesBetween( day.dayStartMs, day.dayEndMs ) * pxPerMinute;
+
+			const lanesRow = document.createElement( 'div' );
+			lanesRow.className = 'sched-avgrid__lanes';
+			lanesRow.style.height = `${ laneHeight }px`;
+
+			const timeCol = document.createElement( 'div' );
+			timeCol.className = 'sched-avgrid__timecol';
+
+			for ( const tickMs of day.ticks ) {
+				const tick = document.createElement( 'div' );
+				tick.className = 'sched-avgrid__tick';
+				tick.style.top = `${ minutesBetween( day.dayStartMs, tickMs ) * pxPerMinute }px`;
+				tick.innerHTML = `<strong>${ escapeHtml( fmtTime( new Date( tickMs ) ) ) }</strong>`;
+				timeCol.appendChild( tick );
+			}
+
+			lanesRow.appendChild( timeCol );
+
+			for ( const room of day.rooms ) {
+				const lane = document.createElement( 'div' );
+				lane.className = 'sched-avgrid__lane';
+
+				const width = 100 / room.columnCount;
+
+				for ( const entry of room.placed ) {
+					const d = entry.session;
+					const top = minutesBetween( day.dayStartMs, d.startMs ) * pxPerMinute;
+					const exact = minutesBetween( d.startMs, d.endMs ) * pxPerMinute;
+
+					lane.appendChild( renderProportionalCard( d, {
+						top,
+						height: Math.max( GRID_MIN_CARD_PX, exact ),
+						left: entry.column * width,
+						width
+					} ) );
+				}
+
+				lanesRow.appendChild( lane );
+			}
+
+			inner.appendChild( lanesRow );
+			pane.appendChild( inner );
+			elGridWrap.appendChild( pane );
+		}
+	}
+
 	function renderGrid( list ) {
 		const gridDays = getFilteredGridDays( list );
 
@@ -2975,6 +3527,7 @@ async function initSchedBlock( root ) {
 			state.showAgendaOnly;
 
 		const isSpeakerMode = 'speakers' === state.viewMode;
+		const isGridMode = 'grid' === state.viewMode && hasGridData();
 		elClearAll.hidden = isSpeakerMode || ! hasActiveFilters;
 
 		elAgendaBtn.hidden = ! schedConfig.enablePersonalAgenda || 0 === favoriteCount;
@@ -3073,6 +3626,11 @@ async function initSchedBlock( root ) {
 			}
 		}
 
+		if ( isGridMode ) {
+			elPrevBtn.hidden = true;
+			elPrevBtn.classList.remove( 'is-active' );
+		}
+
 		elActions.hidden = isSpeakerMode || ( elPrevBtn.hidden && elAgendaBtn.hidden && ( ! state.elSlidesBtn || state.elSlidesBtn.hidden ) );
 
 		let list = state.derived.filter( matchesChips );
@@ -3081,7 +3639,7 @@ async function initSchedBlock( root ) {
 			list = list.filter( x => x.hasSlides );
 		}
 
-		if ( ! state.eventOver ) {
+		if ( ! state.eventOver && ! isGridMode ) {
 			if ( ! state.showPrevious ) {
 				const now = nowDate().getTime();
 				list = list.filter( x => x.endMs > now );
@@ -3129,7 +3687,7 @@ async function initSchedBlock( root ) {
 			elTimeline.innerHTML = '';
 			elSpeakerWall.innerHTML = '';
 			elGridWrap.innerHTML = '';
-			renderGrid( visibleList );
+			renderGridProportional( visibleList );
 			return;
 		}
 
@@ -3417,6 +3975,7 @@ async function initSchedBlock( root ) {
 			applyFiltersFromQueryParams();
 			applySlidesParamFromUrl();
 			applySearchParamFromUrl();
+			loadGridZoom();
 
 			const restoredDateSelection = state.selectedByCategoryTitle.get( CUSTOM_DATE_FILTER_TITLE );
 			if ( ! restoredDateSelection || 0 === restoredDateSelection.size ) {
