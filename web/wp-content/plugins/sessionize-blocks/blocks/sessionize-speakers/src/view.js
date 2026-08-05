@@ -539,7 +539,10 @@
 		   ================================================================== */
 
 		function norm_( s ) {
-			return String( s || '' ).trim().toLowerCase();
+			return String( s || '' )
+				.trim()
+				.toLowerCase()
+				.replace( /['‘’`]/g, '' );
 		}
 
 		function isExcluded_( fullName, list ) {
