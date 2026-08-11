@@ -20,6 +20,7 @@ const initializeDirectory = ( directory ) => {
 	const cards = Array.from(
 		directory.querySelectorAll( '[data-sponsor-card]' )
 	);
+	const totalCount = cards.length;
 
 	const update = () => {
 		let visibleCount = 0;
@@ -48,7 +49,11 @@ const initializeDirectory = ( directory ) => {
 		} );
 
 		count.textContent =
-			visibleCount === 1 ? '1 sponsor' : `${ visibleCount } sponsors`;
+			visibleCount === totalCount
+				? `${ totalCount } ${
+						totalCount === 1 ? 'sponsor' : 'sponsors'
+				  }`
+				: `Showing ${ visibleCount } of ${ totalCount } sponsors`;
 		empty.hidden = visibleCount !== 0;
 		resetButton.disabled = ! categorySelect.value && ! levelSelect.value;
 	};

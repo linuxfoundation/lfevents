@@ -122,6 +122,7 @@ function lf_sponsor_directory_render( $attributes ) {
 					data-categories="<?php echo esc_attr( wp_json_encode( $sponsor['categories'] ) ); ?>">
 					<button type="button"
 						class="sponsor-directory__card-button js-modal"
+						aria-label="<?php echo esc_attr( $sponsor['name'] ); ?>"
 						data-modal-content-id="<?php echo esc_attr( $modal_id ); ?>"
 						data-modal-title="<?php echo esc_attr( $sponsor['name'] ); ?>"
 						data-modal-prefix-class="sponsor-directory">
@@ -129,7 +130,6 @@ function lf_sponsor_directory_render( $attributes ) {
 							<figure class="sponsor-directory__logo-wrapper"><?php echo $logo; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
 						<?php endif; ?>
 						<span class="sponsor-directory__card-content">
-							<span class="sponsor-directory__name"><?php echo esc_html( $sponsor['name'] ); ?></span>
 							<?php lf_sponsor_directory_render_details( $sponsor ); ?>
 						</span>
 					</button>
