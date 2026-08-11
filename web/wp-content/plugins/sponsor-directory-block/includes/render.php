@@ -130,7 +130,10 @@ function lf_sponsor_directory_render( $attributes ) {
 							<figure class="sponsor-directory__logo-wrapper"><?php echo $logo; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
 						<?php endif; ?>
 						<span class="sponsor-directory__card-content">
-							<?php lf_sponsor_directory_render_details( $sponsor ); ?>
+							<?php lf_sponsor_directory_render_details( $sponsor, 'sponsor-directory__details', false ); ?>
+							<?php if ( $sponsor['description'] ) : ?>
+								<span class="sponsor-directory__excerpt"><?php echo esc_html( wp_html_excerpt( $sponsor['description'], 100, '…' ) ); ?></span>
+							<?php endif; ?>
 						</span>
 					</button>
 
@@ -268,9 +271,10 @@ function lf_sponsor_directory_unique_values( $sponsors, $key ) {
  *
  * @param array  $sponsor Sanitized sponsor row.
  * @param string $class_name Details wrapper class.
+ * @param bool   $show_categories Whether to output the category list.
  * @return void
  */
-function lf_sponsor_directory_render_details( $sponsor, $class_name = 'sponsor-directory__details' ) {
+function lf_sponsor_directory_render_details( $sponsor, $class_name = 'sponsor-directory__details', $show_categories = true ) {
 	?>
 	<span class="<?php echo esc_attr( $class_name ); ?>">
 		<?php if ( $sponsor['level'] ) : ?>
@@ -279,7 +283,7 @@ function lf_sponsor_directory_render_details( $sponsor, $class_name = 'sponsor-d
 		<?php if ( $sponsor['boothLocation'] ) : ?>
 			<span><strong><?php esc_html_e( 'Booth:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( $sponsor['boothLocation'] ); ?></span>
 		<?php endif; ?>
-		<?php if ( ! empty( $sponsor['categories'] ) ) : ?>
+		<?php if ( $show_categories && ! empty( $sponsor['categories'] ) ) : ?>
 			<span><strong><?php esc_html_e( 'Categories:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( implode( ', ', $sponsor['categories'] ) ); ?></span>
 		<?php endif; ?>
 	</span>
