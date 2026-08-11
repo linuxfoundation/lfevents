@@ -128,6 +128,13 @@
 		gap: 7px;
 	}
 
+	.sponsor-directory__name {
+		margin-bottom: 4px;
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 1.25;
+	}
+
 	.sponsor-directory__details {
 		font-size: 15px;
 		line-height: 1.45;
@@ -239,7 +246,7 @@
 		display: grid;
 		grid-template-columns: minmax(180px, 30%) 1fr;
 		gap: 36px;
-		padding: 56px 48px 48px;
+		padding: 32px 48px 48px;
 	}
 
 	&__logo-wrapper {
@@ -255,18 +262,10 @@
 	}
 
 	&-title {
-
-		// The logo already identifies the sponsor, so the title is for assistive tech only.
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0;
-		overflow: hidden;
-		clip: rect(0 0 0 0);
-		clip-path: inset(50%);
-		white-space: nowrap;
-		border: 0;
+		margin: 0;
+		padding: 56px 48px 0;
+		font-size: 32px;
+		line-height: 1.2;
 	}
 
 	&__details {
@@ -294,7 +293,11 @@
 		&__inner {
 			grid-template-columns: 1fr;
 			gap: 24px;
-			padding: 64px 24px 32px;
+			padding: 24px 24px 32px;
+		}
+
+		&-title {
+			padding: 64px 24px 0;
 		}
 
 		&__logo-wrapper {
