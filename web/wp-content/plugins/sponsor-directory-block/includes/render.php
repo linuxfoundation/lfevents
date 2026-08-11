@@ -72,9 +72,9 @@ function lf_sponsor_directory_render( $attributes ) {
 	<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 		<div class="sponsor-directory__filters" aria-label="<?php esc_attr_e( 'Filter sponsors', 'sponsor-directory-block' ); ?>">
 			<div class="sponsor-directory__filter">
-				<label for="<?php echo esc_attr( $instance ); ?>-category"><?php esc_html_e( 'Category', 'sponsor-directory-block' ); ?></label>
+				<label for="<?php echo esc_attr( $instance ); ?>-category"><?php esc_html_e( 'Find solutions for...', 'sponsor-directory-block' ); ?></label>
 				<select id="<?php echo esc_attr( $instance ); ?>-category" data-category-filter>
-					<option value=""><?php esc_html_e( 'All categories', 'sponsor-directory-block' ); ?></option>
+					<option value=""><?php esc_html_e( 'Solutions', 'sponsor-directory-block' ); ?></option>
 					<?php foreach ( $categories as $category ) : ?>
 						<option value="<?php echo esc_attr( $category ); ?>"><?php echo esc_html( $category ); ?></option>
 					<?php endforeach; ?>
