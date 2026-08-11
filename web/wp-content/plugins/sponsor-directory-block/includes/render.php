@@ -284,7 +284,7 @@ function lf_sponsor_directory_render_details( $sponsor, $class_name = 'sponsor-d
 			<span><strong><?php esc_html_e( 'Booth:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( $sponsor['boothLocation'] ); ?></span>
 		<?php endif; ?>
 		<?php if ( $show_categories && ! empty( $sponsor['categories'] ) ) : ?>
-			<span><strong><?php esc_html_e( 'Categories:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( implode( ', ', $sponsor['categories'] ) ); ?></span>
+			<span><strong><?php echo esc_html( _n( 'Solution:', 'Solutions:', count( $sponsor['categories'] ), 'sponsor-directory-block' ) ); ?></strong> <?php echo esc_html( implode( ', ', $sponsor['categories'] ) ); ?></span>
 		<?php endif; ?>
 	</span>
 	<?php
