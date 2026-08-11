@@ -496,14 +496,24 @@ function lfe_insert_structured_data() {
 		return;
 	}
 
-	if ( $post->post_parent || 'page' != $post->post_type ) {
+	if ( 'page' != $post->post_type ) {
 		return;
 	}
 
-	$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
+	$event_id = lfe_get_event_parent_id( $post );
+	if ( ! $event_id || ! get_post_meta( $event_id, 'lfes_date_start', true ) ) {
+		return;
+	}
+
+	$event_post = get_post( $event_id );
+	if ( ! is_object( $event_post ) ) {
+		return;
+	}
+
+	$date_start = get_post_meta( $event_id, 'lfes_date_start', true );
 	if ( check_string_is_date( $date_start ) ) {
 		$dt_date_start = new DateTime( $date_start );
-		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_date_end', true ) );
+		$dt_date_end   = new DateTime( get_post_meta( $event_id, 'lfes_date_end', true ) );
 		$date_start    = $dt_date_start->format( 'Y-m-d' );
 		$date_end      = $dt_date_end->format( 'Y-m-d' );
 	} else {
@@ -511,30 +521,30 @@ function lfe_insert_structured_data() {
 		$date_end   = '';
 	}
 
-	$country = wp_get_post_terms( $post->ID, 'lfevent-country' );
+	$country = wp_get_post_terms( $event_id, 'lfevent-country' );
 	if ( $country ) {
 		$country = $country[0]->name;
 	} else {
 		$country = '';
 	}
 
-	$image_url = get_post_meta( $post->ID, '_social_image_url', true );
+	$image_url = get_post_meta( $event_id, '_social_image_url', true );
 	if ( ! $image_url ) {
-		$image_url = get_the_post_thumbnail_url();
+		$image_url = get_the_post_thumbnail_url( $event_id );
 	}
 
-	$description    = get_post_meta( $post->ID, 'lfes_description', true );
-	$virtual        = get_post_meta( $post->ID, 'lfes_virtual', true );
-	$city           = get_post_meta( $post->ID, 'lfes_city', true );
-	$venue          = get_post_meta( $post->ID, 'lfes_venue', true );
-	$street_address = get_post_meta( $post->ID, 'lfes_street_address', true );
-	$postal_code    = get_post_meta( $post->ID, 'lfes_postal_code', true );
-	$region         = get_post_meta( $post->ID, 'lfes_region', true );
-	$city           = get_post_meta( $post->ID, 'lfes_city', true );
+	$description    = get_post_meta( $event_id, 'lfes_description', true );
+	$virtual        = get_post_meta( $event_id, 'lfes_virtual', true );
+	$city           = get_post_meta( $event_id, 'lfes_city', true );
+	$venue          = get_post_meta( $event_id, 'lfes_venue', true );
+	$street_address = get_post_meta( $event_id, 'lfes_street_address', true );
+	$postal_code    = get_post_meta( $event_id, 'lfes_postal_code', true );
+	$region         = get_post_meta( $event_id, 'lfes_region', true );
+	$city           = get_post_meta( $event_id, 'lfes_city', true );
 
-	$virtual_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
+	$virtual_url = get_post_meta( $event_id, 'lfes_cta_register_url', true );
 	if ( ! $virtual_url ) {
-		$virtual_url = get_permalink();
+		$virtual_url = get_permalink( $event_id );
 	}
 
 	if ( $virtual && $city ) {
@@ -586,7 +596,7 @@ function lfe_insert_structured_data() {
 	$event = array(
 		'@context'            => 'http://schema.org/',
 		'@type'               => 'Event',
-		'name'                => esc_html( $post->post_title ),
+		'name'                => esc_html( $event_post->post_title ),
 		'startDate'           => $date_start,
 		'endDate'             => $date_end,
 		'eventAttendanceMode' => $attendance_mode,
