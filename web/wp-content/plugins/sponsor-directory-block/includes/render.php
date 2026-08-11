@@ -23,7 +23,7 @@ function lf_sponsor_directory_render( $attributes ) {
 			'post_type'              => 'lfe_sponsor',
 			'post_status'            => 'publish',
 			'post__in'               => $post_ids,
-			'posts_per_page'         => 100,
+			'posts_per_page'         => -1,
 			'no_found_rows'          => true,
 			'update_post_term_cache' => false,
 		)
@@ -196,7 +196,7 @@ function lf_sponsor_directory_normalize_sponsors( $rows ) {
 
 	$sponsors = array();
 	$seen     = array();
-	foreach ( array_slice( $rows, 0, 100 ) as $row ) {
+	foreach ( $rows as $row ) {
 		if ( ! is_array( $row ) ) {
 			continue;
 		}
