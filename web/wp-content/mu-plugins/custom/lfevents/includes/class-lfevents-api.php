@@ -63,6 +63,50 @@ class LFEvents_API {
 		$search   = trim( (string) $request->get_param( 's' ) );
 		$category = trim( (string) $request->get_param( 'category' ) );
 		$status   = $request->get_param( 'status' );
+
+		$args = self::build_event_query_args( $status, $search, $category );
+
+		$title_only_filter = function ( $search_sql, $wp_query ) {
+			global $wpdb;
+			if ( ! $wp_query->get( 'lfevents_title_only' ) ) {
+				return $search_sql;
+			}
+			$term = $wp_query->get( 's' );
+			if ( '' === $term ) {
+				return $search_sql;
+			}
+			$like = '%' . $wpdb->esc_like( $term ) . '%';
+			return $wpdb->prepare( " AND ({$wpdb->posts}.post_title LIKE %s) ", $like );
+		};
+		add_filter( 'posts_search', $title_only_filter, 10, 2 );
+
+		$query = new WP_Query( $args );
+
+		remove_filter( 'posts_search', $title_only_filter, 10 );
+
+		$events = array();
+
+		foreach ( $query->posts as $post ) {
+			$events[] = $this->format_event( $post );
+		}
+
+		return new WP_REST_Response( $events, 200 );
+	}
+
+	/**
+	 * Build the canonical WP_Query arguments for listing top-level Events.
+	 *
+	 * Shared by the REST endpoint and the llms.txt generator so both always
+	 * describe the same set of Events.
+	 *
+	 * @param string $status   One of 'upcoming', 'past' or 'all'. Invalid values fall back to 'upcoming'.
+	 * @param string $search   Optional free text search on the Event name.
+	 * @param string $category Optional 'lfevent-category' term slug to filter by.
+	 * @return array
+	 */
+	public static function build_event_query_args( $status, $search = '', $category = '' ) {
+		$search   = trim( (string) $search );
+		$category = trim( (string) $category );
 		if ( ! in_array( $status, array( 'upcoming', 'past', 'all' ), true ) ) {
 			$status = 'upcoming';
 		}
@@ -138,31 +182,7 @@ class LFEvents_API {
 			);
 		}
 
-		$title_only_filter = function ( $search_sql, $wp_query ) {
-			global $wpdb;
-			if ( ! $wp_query->get( 'lfevents_title_only' ) ) {
-				return $search_sql;
-			}
-			$term = $wp_query->get( 's' );
-			if ( '' === $term ) {
-				return $search_sql;
-			}
-			$like = '%' . $wpdb->esc_like( $term ) . '%';
-			return $wpdb->prepare( " AND ({$wpdb->posts}.post_title LIKE %s) ", $like );
-		};
-		add_filter( 'posts_search', $title_only_filter, 10, 2 );
-
-		$query = new WP_Query( $args );
-
-		remove_filter( 'posts_search', $title_only_filter, 10 );
-
-		$events = array();
-
-		foreach ( $query->posts as $post ) {
-			$events[] = $this->format_event( $post );
-		}
-
-		return new WP_REST_Response( $events, 200 );
+		return $args;
 	}
 
 	/**

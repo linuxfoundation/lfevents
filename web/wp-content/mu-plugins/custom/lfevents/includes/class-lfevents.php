@@ -125,6 +125,11 @@ class LFEvents {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-api.php';
 
+		/**
+		 * The class responsible for the /llms.txt document.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-llms-txt.php';
+
 		$this->loader = new LFEvents_Loader();
 	}
 
@@ -228,6 +233,11 @@ class LFEvents {
 
 		$plugin_api = new LFEvents_API();
 		$this->loader->add_action( 'rest_api_init', $plugin_api, 'register_routes' );
+
+		$plugin_llms_txt = new LFEvents_LLMS_Txt();
+		$this->loader->add_action( 'parse_request', $plugin_llms_txt, 'maybe_serve' );
+		$this->loader->add_action( 'save_post', $plugin_llms_txt, 'purge_edge_cache' );
+		$this->loader->add_filter( 'the_seo_framework_robots_txt_sections', $plugin_llms_txt, 'add_robots_txt_pointer' );
 	}
 
 	/**
