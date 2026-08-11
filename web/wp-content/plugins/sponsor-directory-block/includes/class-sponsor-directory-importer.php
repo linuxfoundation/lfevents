@@ -25,13 +25,6 @@ class Sponsor_Directory_Importer {
 	const MAX_RESPONSE_SIZE = 2097152;
 
 	/**
-	 * Maximum number of non-empty data rows.
-	 *
-	 * @var int
-	 */
-	const MAX_ROWS = 100;
-
-	/**
 	 * Required CSV headers mapped to internal keys.
 	 *
 	 * @var array
@@ -241,17 +234,6 @@ class Sponsor_Directory_Importer {
 				'values' => $row,
 			);
 		}
-		if ( count( $rows ) > self::MAX_ROWS ) {
-			return new WP_Error(
-				'sponsor_directory_too_many_rows',
-				sprintf(
-					/* translators: %d: maximum sponsor row count. */
-					__( 'The CSV contains more than the maximum of %d sponsor rows.', 'sponsor-directory-block' ),
-					self::MAX_ROWS
-				),
-				array( 'status' => 400 )
-			);
-		}
 
 		return array(
 			'columns' => $columns,
@@ -311,7 +293,7 @@ class Sponsor_Directory_Importer {
 				'post_type'              => 'lfe_sponsor',
 				'post_status'            => 'publish',
 				'post__in'               => $post_ids,
-				'posts_per_page'         => self::MAX_ROWS,
+				'posts_per_page'         => -1,
 				'fields'                 => 'ids',
 				'no_found_rows'          => true,
 				'update_post_meta_cache' => false,
