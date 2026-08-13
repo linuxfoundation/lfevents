@@ -1578,6 +1578,17 @@ async function initSchedBlock( root ) {
 		}
 	}
 
+	function categoryItemHasSessions( catTitle, item ) {
+		if ( catTitle === CUSTOM_DATE_FILTER_TITLE ) {
+			return state.derived.some( d => d.dayStr === String( item.id ) );
+		}
+		if ( catTitle === CUSTOM_ROOM_FILTER_TITLE ) {
+			return state.derived.some( d => String( d.raw.roomId ?? '' ) === String( item.id ) );
+		}
+		const itemId = String( item.id ?? item.name );
+		return state.derived.some( d => ( d.raw.categoryItems || [] ).map( String ).includes( itemId ) );
+	}
+
 	function buildChips() {
 		const catTitle = state.activeFilterCategoryTitle;
 		const cat = ( state.data.categories || [] ).find( c => c.title === catTitle );
@@ -1586,8 +1597,17 @@ async function initSchedBlock( root ) {
 			: ( cat?.items || [] ).slice().sort( ( a, b ) => ( a.name || '' ).localeCompare( b.name || '' ) );
 		const selectedSet = state.selectedByCategoryTitle.get( catTitle ) || new Set();
 
+		// Hide chips with zero matching sessions, unless already selected
+		// (e.g. selected via a URL param), so the primary track filter (and
+		// any other filter category) doesn't show an option that always
+		// resolves to "No sessions match your filters."
+		const visibleItems = items.filter( item => {
+			const id = String( item.id ?? item.name );
+			return selectedSet.has( id ) || categoryItemHasSessions( catTitle, item );
+		} );
+
 		elChips.innerHTML = '';
-		for ( const item of items ) {
+		for ( const item of visibleItems ) {
 			const b = document.createElement( 'button' );
 			b.type = 'button';
 
