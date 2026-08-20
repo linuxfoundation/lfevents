@@ -71,12 +71,11 @@ class LFEvents_Well_Known {
 					'anchor'       => esc_url_raw( rest_url( LFEvents_API::NAMESPACE_V1 . '/events' ) ),
 					'service-desc' => array(
 						array(
-							'href' => esc_url_raw( rest_url() ),
-							'type' => 'application/json',
+							'href'  => esc_url_raw( rest_url() ),
+							'type'  => 'application/json',
+							'title' => 'Linux Foundation Events API: upcoming and past conference and event data.',
 						),
 					),
-					'description'  => 'Linux Foundation Events API: upcoming and past conference and event data.',
-				),
 			),
 		);
 	}
