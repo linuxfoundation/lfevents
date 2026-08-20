@@ -395,6 +395,19 @@ class LFEvents_Public {
 	}
 
 	/**
+	 * Points agents at the API catalog from the homepage.
+	 *
+	 * @link https://www.rfc-editor.org/rfc/rfc8288
+	 */
+	public function add_agent_discovery_headers() {
+		if ( ! is_front_page() || headers_sent() ) {
+			return;
+		}
+
+		header( 'Link: </.well-known/api-catalog>; rel="api-catalog"', false );
+	}
+
+	/**
 	 * Creates css into the head with the event gradient
 	 *
 	 * @param int $post_id Optional post ID to derive event colors from.

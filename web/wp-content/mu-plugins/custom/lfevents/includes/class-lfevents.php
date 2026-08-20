@@ -130,6 +130,11 @@ class LFEvents {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-llms-txt.php';
 
+		/**
+		 * The class responsible for the .well-known discovery documents.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-well-known.php';
+
 		$this->loader = new LFEvents_Loader();
 	}
 
@@ -218,6 +223,7 @@ class LFEvents {
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' ); // removed as file blank.
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' ); // removed as file blank.
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'redirects' );
+		$this->loader->add_action( 'template_redirect', $plugin_public, 'add_agent_discovery_headers' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'deregister_scripts' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_action( 'enqueue_block_assets', $plugin_public, 'insert_event_styles' );
@@ -238,6 +244,10 @@ class LFEvents {
 		$this->loader->add_action( 'parse_request', $plugin_llms_txt, 'maybe_serve' );
 		$this->loader->add_action( 'save_post', $plugin_llms_txt, 'purge_edge_cache' );
 		$this->loader->add_filter( 'the_seo_framework_robots_txt_sections', $plugin_llms_txt, 'add_robots_txt_pointer' );
+		$this->loader->add_filter( 'the_seo_framework_robots_txt_sections', $plugin_llms_txt, 'add_content_signal' );
+
+		$plugin_well_known = new LFEvents_Well_Known();
+		$this->loader->add_action( 'parse_request', $plugin_well_known, 'maybe_serve' );
 	}
 
 	/**
