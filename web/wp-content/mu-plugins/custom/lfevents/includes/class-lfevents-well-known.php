@@ -76,6 +76,7 @@ class LFEvents_Well_Known {
 							'title' => 'Linux Foundation Events API: upcoming and past conference and event data.',
 						),
 					),
+				),
 			),
 		);
 	}
