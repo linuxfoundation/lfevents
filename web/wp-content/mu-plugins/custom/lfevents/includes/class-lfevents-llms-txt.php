@@ -102,7 +102,7 @@ class LFEvents_LLMS_Txt {
 		}
 
 		$sections['lfe_content_signal'] = array(
-			'raw'      => 'Content-Signal: ai-train=no, search=yes, ai-input=no' . "\n",
+			'raw'      => 'User-agent: *' . "\n" . 'Content-Signal: ai-train=no, search=yes, ai-input=no' . "\n",
 			'priority' => 900,
 		);
 
