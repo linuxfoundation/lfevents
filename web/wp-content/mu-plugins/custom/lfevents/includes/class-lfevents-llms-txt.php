@@ -88,6 +88,28 @@ class LFEvents_LLMS_Txt {
 	}
 
 	/**
+	 * Declare AI content usage preferences via Content Signals.
+	 *
+	 * The SEO Framework owns robots.txt output on this site. See
+	 * https://contentsignals.org/ for the directive format.
+	 *
+	 * @param array $sections The robots.txt sections.
+	 * @return array
+	 */
+	public function add_content_signal( $sections ) {
+		if ( ! is_array( $sections ) ) {
+			return $sections;
+		}
+
+		$sections['lfe_content_signal'] = array(
+			'raw'      => 'Content-Signal: ai-train=no, search=yes, ai-input=no' . "\n",
+			'priority' => 900,
+		);
+
+		return $sections;
+	}
+
+	/**
 	 * Purge the edge cache for /llms.txt whenever an Event is saved.
 	 *
 	 * @param int $post_id The post that was saved.
