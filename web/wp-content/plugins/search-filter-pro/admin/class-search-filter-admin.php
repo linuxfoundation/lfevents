@@ -584,8 +584,8 @@ class Search_Filter_Admin {
 			);
 
 			// Call the custom API.
-			$response = wp_remote_get(
-				add_query_arg( $api_params, SEARCH_FILTER_STORE_URL ),
+			$response = wp_safe_remote_get(
+				esc_url_raw( add_query_arg( $api_params, SEARCH_FILTER_STORE_URL ) ),
 				array(
 					'timeout'   => 15,
 					'sslverify' => false,
@@ -653,8 +653,8 @@ class Search_Filter_Admin {
 			);
 
 			// Call the custom API.
-			$response = wp_remote_get(
-				add_query_arg( $api_params, SEARCH_FILTER_STORE_URL ),
+			$response = wp_safe_remote_get(
+				esc_url_raw( add_query_arg( $api_params, SEARCH_FILTER_STORE_URL ) ),
 				array(
 					'timeout'   => 15,
 					'sslverify' => false,
