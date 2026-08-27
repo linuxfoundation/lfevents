@@ -45,6 +45,10 @@
       "type": "boolean",
       "default": false
     },
+    "hideSessionTimes": {
+      "type": "boolean",
+      "default": false
+    },
     "speakerTitleQuestionId": {
       "type": "string",
       "default": "Speaker Title"

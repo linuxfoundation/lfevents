@@ -18,6 +18,15 @@ async function initSchedBlock( root ) {
 		document.body.classList.add( 'sched--agenda-disabled' );
 	}
 
+	// Optional "dates only" mode: never print a session's time, only the date
+	// heading above each group of sessions. Off by default; toggled per block
+	// instance via the "Hide Session Times" setting. Grid view (if enabled)
+	// keeps its own time axis regardless, since a grid is inherently
+	// time-based — see the CSS scoped under this class for what it changes.
+	if ( schedConfig.hideSessionTimes ) {
+		root.classList.add( 'sched--hide-times' );
+	}
+
 	const elControls = root.querySelector( '[data-role="controls"]' );
 	const elStatus = root.querySelector( '[data-role="status"]' );
 	const elTimeline = root.querySelector( '[data-role="timeline"]' );
@@ -51,6 +60,7 @@ async function initSchedBlock( root ) {
 	const elModalResourcesActions = root.querySelector( '[data-role="modalResourcesActions"]' );
 	const elModalMedia = root.querySelector( '[data-role="modalMedia"]' );
 	const elModalDesc = root.querySelector( '[data-role="modalDesc"]' );
+	const elModalLogo = root.querySelector( '[data-role="modalLogo"]' );
 	const elModalSpeakersWrap = root.querySelector( '[data-role="modalSpeakersWrap"]' );
 	const elModalSpeakers = root.querySelector( '[data-role="modalSpeakers"]' );
 	const elModalFade = root.querySelector( '[data-role="modalFade"]' );
@@ -73,7 +83,7 @@ async function initSchedBlock( root ) {
 
 	if ( ! elControls || ! elStatus || ! elTimeline || ! elGridWrap || ! elSpeakerWall || ! elViewBar || ! elViewToggle || ! elDaysRow || ! elDays || ! elActions || ! elChips || ! elFilterCats || ! elSearch || ! elClear || ! elPrevBtn || ! elAgendaBtn || ! elDebug || ! elToTop || ! elClearAll ) return;
 
-	if ( ! elModal || ! elModalDialog || ! elModalBody || ! elModalHeaderLink || ! elModalTitle || ! elModalWhen || ! elModalRoom || ! elModalChips || ! elModalResources || ! elModalResourcesActions || ! elModalMedia || ! elModalDesc || ! elModalSpeakersWrap || ! elModalSpeakers || ! elModalFade || ! elModalFavorite || ! elModalPrev || ! elModalNext || ! elSpeakerModal || ! elSpeakerModalDialog || ! elSpeakerModalBody || ! elSpeakerModalAvatar || ! elSpeakerModalTitle || ! elSpeakerModalSub || ! elSpeakerModalLinks || ! elSpeakerModalBio || ! elSpeakerModalSessionsWrap || ! elSpeakerModalSessions ) return;
+	if ( ! elModal || ! elModalDialog || ! elModalBody || ! elModalHeaderLink || ! elModalTitle || ! elModalWhen || ! elModalRoom || ! elModalLogo || ! elModalChips || ! elModalResources || ! elModalResourcesActions || ! elModalMedia || ! elModalDesc || ! elModalSpeakersWrap || ! elModalSpeakers || ! elModalFade || ! elModalFavorite || ! elModalPrev || ! elModalNext || ! elSpeakerModal || ! elSpeakerModalDialog || ! elSpeakerModalBody || ! elSpeakerModalAvatar || ! elSpeakerModalTitle || ! elSpeakerModalSub || ! elSpeakerModalLinks || ! elSpeakerModalBio || ! elSpeakerModalSessionsWrap || ! elSpeakerModalSessions ) return;
 
 	if ( elModal.parentNode !== document.body ) {
 		document.body.appendChild( elModal );
@@ -477,6 +487,182 @@ async function initSchedBlock( root ) {
 		return html;
 	}
 
+	// Session descriptions can be real formatted text. Two input shapes are
+	// supported:
+	//
+	//   1. Real HTML tags (`<ul>`, `<a href="...">`, etc.) — supported for
+	//      completeness/back-compat, but Sessionize's own admin UI actually
+	//      blocks typing literal `<`/`>` into a text field ("due to security
+	//      reasons"), so organizers can't produce this from the Sessionize
+	//      editor. If a description ever does contain real tags (e.g. data
+	//      imported another way), it's sanitized with DOMPurify and rendered
+	//      as-is.
+	//   2. Lightweight Markdown-style plain text — this is what organizers
+	//      actually type in Sessionize, since none of its punctuation uses
+	//      `<`/`>`: `**bold**`, `_italic_`, `[label](https://url)`, lines
+	//      starting with `- ` for a bullet list or `1. ` for a numbered
+	//      list, a blank line between paragraphs, bare URLs/emails
+	//      auto-linked. This is converted to the same allowlisted HTML tags
+	//      below, then still run through DOMPurify as a second layer of
+	//      defense even though the converter only ever emits its own
+	//      trusted tags around already-escaped user text.
+	const SCHED_DESC_ALLOWED_TAGS = [
+		'a', 'b', 'strong', 'i', 'em', 'u', 's', 'p', 'br', 'ul', 'ol', 'li',
+		'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre',
+		'span', 'div', 'hr', 'sub', 'sup',
+		'table', 'thead', 'tbody', 'tr', 'td', 'th', 'img'
+	];
+	const SCHED_DESC_ALLOWED_ATTR = [ 'href', 'target', 'rel', 'src', 'alt', 'title', 'class' ];
+
+	function looksLikeHtml( value ) {
+		return /<\s*[a-z][\s\S]*>/i.test( String( value || '' ) );
+	}
+
+	function sanitizeHtmlAllowlist( html ) {
+		if ( window.DOMPurify && 'function' === typeof window.DOMPurify.sanitize ) {
+			return window.DOMPurify.sanitize( html, {
+				ALLOWED_TAGS: SCHED_DESC_ALLOWED_TAGS,
+				ALLOWED_ATTR: SCHED_DESC_ALLOWED_ATTR,
+				ALLOW_DATA_ATTR: false
+			} );
+		}
+		return null; // signals "DOMPurify unavailable" to callers
+	}
+
+	// Turns already-escaped inline text into the allowlisted inline tags:
+	// [label](url) links (label may itself contain **bold**/_italic_), bare
+	// URL/email auto-linking, then **bold** and _italic_. Links are pulled
+	// out into placeholder tokens before the bold/italic pass runs, so that
+	// pass never touches characters sitting inside an href attribute.
+	function mdInlineToHtml( escapedText ) {
+		const placeholders = [];
+		const stash = ( html ) => {
+			placeholders.push( html );
+			return `\u0000${ placeholders.length - 1 }\u0000`;
+		};
+
+		let out = escapedText.replace(
+			/\[([^\[\]]+)\]\((https?:\/\/[^\s()<>]+)\)/g,
+			( m, label, url ) => stash( `<a href="${ url }" target="_blank" rel="noopener noreferrer">${ mdBoldItalicToHtml( label ) }</a>` )
+		);
+
+		out = out.replace(
+			/((?:https?:\/\/|www\.)[^\s<>"']+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi,
+			( m ) => {
+				let linkText = m;
+				let trailing = '';
+				while ( /[.,;:!?)]$/.test( linkText ) ) {
+					trailing = linkText.slice( -1 ) + trailing;
+					linkText = linkText.slice( 0, -1 );
+				}
+
+				let html;
+				if ( linkText.includes( '@' ) && ! /^https?:\/\//i.test( linkText ) && ! /^www\./i.test( linkText ) ) {
+					html = `<a href="mailto:${ linkText }">${ linkText }</a>`;
+				} else {
+					const href = /^https?:\/\//i.test( linkText ) ? linkText : `https://${ linkText }`;
+					html = `<a href="${ href }" target="_blank" rel="noopener noreferrer">${ linkText }</a>`;
+				}
+
+				return stash( html ) + trailing;
+			}
+		);
+
+		out = mdBoldItalicToHtml( out );
+
+		out = out.replace( /\u0000(\d+)\u0000/g, ( m, i ) => placeholders[ Number( i ) ] );
+
+		return out;
+	}
+
+	function mdBoldItalicToHtml( text ) {
+		return text
+			.replace( /\*\*([^\n]+?)\*\*/g, '<strong>$1</strong>' )
+			.replace( /_([^\n_]+?)_/g, '<em>$1</em>' );
+	}
+
+	// Converts the lightweight Markdown-style plain text described above
+	// into the same allowlisted HTML tags real-HTML descriptions use.
+	function renderMarkdownLiteToHtml( raw ) {
+		const value = String( raw ?? '' );
+		if ( ! value.trim() ) return '';
+
+		const escaped = escapeHtml( value ).replace( /\r\n?/g, '\n' );
+		const blocks = escaped.split( /\n[ \t]*\n+/ );
+
+		const bulletRe = /^[-*]\s+(.*)$/;
+		const numberRe = /^\d+[.)]\s+(.*)$/;
+		// "#"/"##"/"###" at the start of its own line/block is a heading.
+		// Mapped to h3/h4/h5 (not h1/h2) so a heading typed into a session
+		// description can never visually outrank the modal's own title.
+		const headingRe = /^(#{1,3})\s+(.*)$/;
+		const HEADING_TAGS = { 1: 'h3', 2: 'h4', 3: 'h5' };
+
+		const html = blocks
+			.map( ( block ) => {
+				const lines = block.split( '\n' ).map( ( l ) => l.trim() ).filter( ( l ) => l.length );
+				if ( ! lines.length ) return '';
+
+				if ( 1 === lines.length ) {
+					const headingMatch = headingRe.exec( lines[0] );
+					if ( headingMatch ) {
+						const tag = HEADING_TAGS[ headingMatch[1].length ];
+						return `<${ tag }>${ mdInlineToHtml( headingMatch[2] ) }</${ tag }>`;
+					}
+				}
+
+				if ( lines.every( ( l ) => bulletRe.test( l ) ) ) {
+					const items = lines.map( ( l ) => `<li>${ mdInlineToHtml( l.replace( bulletRe, '$1' ) ) }</li>` ).join( '' );
+					return `<ul>${ items }</ul>`;
+				}
+				if ( lines.every( ( l ) => numberRe.test( l ) ) ) {
+					const items = lines.map( ( l ) => `<li>${ mdInlineToHtml( l.replace( numberRe, '$1' ) ) }</li>` ).join( '' );
+					return `<ol>${ items }</ol>`;
+				}
+
+				return `<p>${ lines.map( ( l ) => mdInlineToHtml( l ) ).join( '<br>' ) }</p>`;
+			} )
+			.filter( Boolean )
+			.join( '' );
+
+		const sanitized = sanitizeHtmlAllowlist( html );
+		if ( null !== sanitized ) return sanitized;
+
+		// DOMPurify didn't load for some reason (blocked script, offline
+		// preview, etc.) — never dump unsanitized HTML on the page. Fall
+		// back to escaped plain text rather than rendering it raw.
+		dbg( 'DOMPurify not found on window; rendering description as escaped text.' );
+		return escapeHtml( value ).replaceAll( '\n', '<br>' );
+	}
+
+	function sanitizeDescriptionHtml( raw ) {
+		const value = String( raw ?? '' );
+		if ( ! value.trim() ) return '';
+
+		if ( ! looksLikeHtml( value ) ) {
+			return renderMarkdownLiteToHtml( value );
+		}
+
+		const sanitized = sanitizeHtmlAllowlist( value );
+		if ( null !== sanitized ) return sanitized;
+
+		// DOMPurify didn't load for some reason (blocked script, offline
+		// preview, etc.) — never dump unsanitized HTML on the page. Fall
+		// back to escaped plain text rather than rendering it raw.
+		dbg( 'DOMPurify not found on window; rendering description as escaped text.' );
+		return escapeHtml( value ).replaceAll( '\n', '<br>' );
+	}
+
+	// Every link inside a sanitized description should open in a new tab,
+	// same as the rest of the schedule's outbound links.
+	function hardenDescriptionLinks( container ) {
+		if ( ! container ) return;
+		container.querySelectorAll( 'a[href]' ).forEach( ( a ) => {
+			a.setAttribute( 'target', '_blank' );
+			a.setAttribute( 'rel', 'noopener noreferrer' );
+		} );
+	}
+
 	function htmlToText( maybeHtml ) {
 		const s = String( maybeHtml || '' );
 		if ( ! s ) return '';
@@ -549,6 +735,9 @@ async function initSchedBlock( root ) {
 	}
 
 	function fmtSessionMetaLine( d ) {
+		if ( schedConfig.hideSessionTimes ) {
+			return fmtShortDate( new Date( d.startMs ) );
+		}
 		return `${ fmtShortDate( new Date( d.startMs ) ) } • ${ fmtTimeRange( d.startMs, d.endMs ) }`;
 	}
 
@@ -621,7 +810,7 @@ async function initSchedBlock( root ) {
 			  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				<path fill="currentColor" d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8H4.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5Z"/>
 			  </svg>
-			  <div><strong>${ escapeHtml( fmtShortDate( new Date( d.startMs ) ) ) } • ${ escapeHtml( fmtTimeRange( d.startMs, d.endMs ) ) }</strong></div>
+			  <div><strong>${ escapeHtml( fmtSessionMetaLine( d ) ) }</strong></div>
 			</div>
 			${ d.room ? `
 			  <div class="sched-modal__metaitem sched-modal__metaitem--room">
@@ -963,6 +1152,16 @@ async function initSchedBlock( root ) {
 
 	function hasSlides( session ) {
 		return !! getPresentationSlidesUrl( session );
+	}
+
+	// Per-session "Event Logo" image, from a Sessionize image-upload
+	// question. Mirrors getPresentationSlidesUrl above exactly. Not exposed
+	// as a block attribute, so it defaults to the question titled exactly
+	// "Event Logo" (see setup docs); override by setting
+	// schedConfig.eventLogoQuestionId to a different question title or ID.
+	function getEventLogoUrl( session ) {
+		const qid = schedConfig.eventLogoQuestionId ?? 'Event Logo';
+		return extractFileUrlFromAnswerRow( getSessionAnswerRowByQuestionId( session, qid ) );
 	}
 
 	function getCardSpeakerOverrideNames( session ) {
@@ -1396,6 +1595,7 @@ async function initSchedBlock( root ) {
 
 			const recordingUrl = String( s.recordingUrl || '' ).trim() || '';
 			const slidesUrl = getPresentationSlidesUrl( s );
+			const logoUrl = getEventLogoUrl( s );
 			const customLinks = buildCustomLinksForSession( s );
 			const descriptionText = htmlToText(
 				s.description ?? s.descriptionHtml ?? s.shortDescription ?? s.shortDescriptionHtml ?? ''
@@ -1418,6 +1618,7 @@ async function initSchedBlock( root ) {
 				primaryName,
 				recordingUrl,
 				slidesUrl,
+				logoUrl,
 				hasSlides: hasSlides( s ),
 				customLinks
 			} );
@@ -1965,7 +2166,7 @@ async function initSchedBlock( root ) {
 	function buildHoverCardHtml( derived ) {
 		const speakers = getSessionSpeakerObjects( derived );
 
-		const metaBits = [ `${ fmtShortDate( new Date( derived.startMs ) ) } • ${ fmtTimeRange( derived.startMs, derived.endMs ) }` ];
+		const metaBits = [ fmtSessionMetaLine( derived ) ];
 		if ( derived.room ) metaBits.push( derived.room );
 
 		const rows = speakers.map( sp => {
@@ -2998,6 +3199,14 @@ async function initSchedBlock( root ) {
 		  <div><strong>${ escapeHtml( d.room ) }</strong></div>
 		` : '';
 
+		if ( d.logoUrl ) {
+			elModalLogo.hidden = false;
+			elModalLogo.innerHTML = `<img src="${ escapeHtml( d.logoUrl ) }" alt="">`;
+		} else {
+			elModalLogo.hidden = true;
+			elModalLogo.innerHTML = '';
+		}
+
 		elModalMedia.innerHTML = '';
 		elModalMedia.hidden = true;
 
@@ -3023,8 +3232,8 @@ async function initSchedBlock( root ) {
 		renderModalResources( d );
 
 		const descRaw = s.description ?? s.descriptionHtml ?? s.shortDescription ?? s.shortDescriptionHtml ?? '';
-		const descText = htmlToText( descRaw ) || '';
-		elModalDesc.innerHTML = linkifyPlainText( descText );
+		elModalDesc.innerHTML = sanitizeDescriptionHtml( descRaw );
+		hardenDescriptionLinks( elModalDesc );
 
 		elModalSpeakers.innerHTML = '';
 
@@ -3461,14 +3670,25 @@ async function initSchedBlock( root ) {
 	}
 
 	function renderSlot( slot ) {
-		const startStr = fmtTime( new Date( slot.startMs ) );
-
 		const slotEl = document.createElement( 'section' );
 		slotEl.className = 'slot';
-		slotEl.innerHTML = `
-		  <div class="slot__time"><strong>${ escapeHtml( startStr ) }</strong></div>
-		  <div class="slot__stack"></div>
-		`;
+
+		// In "hide session times" mode, renderDayDivider() already printed the
+		// date once above every group of slots for that day (both in "all
+		// days" mode and single-day/tab mode), so a slot only needs its card
+		// stack — no per-slot time heading. See fmtSessionMetaLine above for
+		// the same rule applied to the modal/hover-card/speaker-list text.
+		if ( schedConfig.hideSessionTimes ) {
+			slotEl.innerHTML = `
+			  <div class="slot__stack"></div>
+			`;
+		} else {
+			const startStr = fmtTime( new Date( slot.startMs ) );
+			slotEl.innerHTML = `
+			  <div class="slot__time"><strong>${ escapeHtml( startStr ) }</strong></div>
+			  <div class="slot__stack"></div>
+			`;
+		}
 
 		const stack = slotEl.querySelector( '.slot__stack' );
 
@@ -3496,21 +3716,30 @@ async function initSchedBlock( root ) {
 
 			btn.innerHTML = `
 			  <div class="sess ${ d.primaryColors ? 'has-primary' : '' }" ${ cardVars }>
-				<div class="sess__title">${ escapeHtml( s.title || '' ) }</div>
-				<div class="sess__meta">
-				  ${ d.room ? `<span class="sess__room">${ escapeHtml( d.room ) }</span>` : '' }
-				  ${ d.speakerLine ? `<span class="sess__speakers">${ escapeHtml( d.speakerLine ) }</span>` : '' }
-				</div>
-				${ hasAnyTagsOrAssets ? `
-				  <div class="sess__tags">
-					${ visibleSessionTags.map( t => {
-						const isPrimary = ( t.title === schedConfig.primaryFilterTitle );
-						return `<span class="tag ${ isPrimary ? 'tag--primary' : '' }">${ escapeHtml( t.name ) }</span>`;
-					} ).join( '' ) }
-					${ d.recordingUrl ? `<span class="tag tag--asset" aria-label="Recording available">▶ Recording</span>` : '' }
-					${ d.slidesUrl ? `<span class="tag tag--asset" aria-label="Slides available">↓ Slides</span>` : '' }
+				<div class="sess__row">
+				  <div class="sess__main">
+					<div class="sess__title">${ escapeHtml( s.title || '' ) }</div>
+					<div class="sess__meta">
+					  ${ d.room ? `<span class="sess__room">${ escapeHtml( d.room ) }</span>` : '' }
+					  ${ d.speakerLine ? `<span class="sess__speakers">${ escapeHtml( d.speakerLine ) }</span>` : '' }
+					</div>
+					${ hasAnyTagsOrAssets ? `
+					  <div class="sess__tags">
+						${ visibleSessionTags.map( t => {
+							const isPrimary = ( t.title === schedConfig.primaryFilterTitle );
+							return `<span class="tag ${ isPrimary ? 'tag--primary' : '' }">${ escapeHtml( t.name ) }</span>`;
+						} ).join( '' ) }
+						${ d.recordingUrl ? `<span class="tag tag--asset" aria-label="Recording available">▶ Recording</span>` : '' }
+						${ d.slidesUrl ? `<span class="tag tag--asset" aria-label="Slides available">↓ Slides</span>` : '' }
+					  </div>
+					` : '' }
 				  </div>
-				` : '' }
+				  ${ d.logoUrl ? `
+					<div class="sess__logo">
+					  <img src="${ escapeHtml( d.logoUrl ) }" alt="" loading="lazy" decoding="async">
+					</div>
+				  ` : '' }
+				</div>
 			  </div>
 			`;
 

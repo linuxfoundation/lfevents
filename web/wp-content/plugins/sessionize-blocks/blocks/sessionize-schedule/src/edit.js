@@ -5,7 +5,7 @@ import { useState } from '@wordpress/element';
 export default function Edit( { attributes, setAttributes } ) {
 	const {
 		apiCode, publicSlug, primaryFilterTitle, timeFormat, dateFormat,
-		enableGridView, enablePersonalAgenda, defaultShowAllDays, hideTopControls,
+		enableGridView, enablePersonalAgenda, defaultShowAllDays, hideTopControls, hideSessionTimes,
 		speakerTitleQuestionId, speakerCompanyQuestionId,
 		speakerCompanyOverrideQuestionId, cardSpeakerOverrideQuestionId,
 		presentationSlidesQuestionId,
@@ -119,6 +119,12 @@ export default function Edit( { attributes, setAttributes } ) {
 						checked={ hideTopControls }
 						onChange={ ( val ) => setAttributes( { hideTopControls: val } ) }
 						help="Hides all filter chips and search from attendees."
+					/>
+					<ToggleControl
+						label="Hide Session Times (Dates Only)"
+						checked={ hideSessionTimes }
+						onChange={ ( val ) => setAttributes( { hideSessionTimes: val } ) }
+						help="Groups each day's sessions under a single date heading instead of printing a time on every session. Session order is unaffected — only the printed time is hidden. If Grid view is enabled above, it keeps its own time axis regardless of this setting, since a grid is inherently time-based."
 					/>
 				</PanelBody>
 

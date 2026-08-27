@@ -68,6 +68,7 @@ $sched_config = array(
 
 	'defaultShowAllDays'                  => (bool) $attributes['defaultShowAllDays'],
 	'hideTopControls'                     => (bool) $attributes['hideTopControls'],
+	'hideSessionTimes'                    => (bool) $attributes['hideSessionTimes'],
 	'enableGridView'                      => (bool) $attributes['enableGridView'],
 	'enablePersonalAgenda'                => (bool) $attributes['enablePersonalAgenda'],
 
@@ -165,7 +166,10 @@ $sched_config = array(
 					<div class="sched-modal__resourcesactions" data-role="modalResourcesActions"></div>
 				</div>
 				<div class="sched-modal__media" data-role="modalMedia" hidden></div>
-				<div class="sched-modal__desc" data-role="modalDesc"></div>
+				<div class="sched-modal__descrow">
+					<div class="sched-modal__desc" data-role="modalDesc"></div>
+					<div class="sched-modal__logo" data-role="modalLogo" hidden></div>
+				</div>
 				<div class="sched-modal__speakerswrap" data-role="modalSpeakersWrap" hidden>
 					<div class="sched-modal__speakerslabel">Speakers</div>
 					<div class="sched-modal__speakers" data-role="modalSpeakers"></div>

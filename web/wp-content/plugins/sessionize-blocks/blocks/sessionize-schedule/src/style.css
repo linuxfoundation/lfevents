@@ -956,6 +956,16 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
   overflow-x:hidden;
 }
 
+/* "Hide Session Times" mode (schedConfig.hideSessionTimes, toggled via the
+   sched--hide-times class in view.js): no per-slot time column is rendered,
+   so a slot collapses to a single block — the date heading above each group
+   of slots (see renderDayDivider) is the only date/time text shown. Higher
+   specificity than the plain .slot rule and its responsive overrides below,
+   so this applies at every breakpoint without needing !important. */
+.sched--hide-times .slot{
+  display:block;
+}
+
 @media (min-width: 701px){
   .sched__clear{ display:none !important; }
 }
@@ -1130,6 +1140,40 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
 }
 
 .sess:hover{ transform: translateY(-1px); box-shadow: 0 8px 22px rgba(2,6,23,.08); }
+
+/* Card layout: existing content on the left, an optional Event Logo image
+   pinned to the far right. */
+.sess__row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.sess__main{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+.sess__logo{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+}
+
+.sess__logo img{
+  display:block;
+  max-height:56px;
+  max-width:120px;
+  object-fit:contain;
+}
+
+@media (max-width: 520px){
+  .sess__logo img{
+    max-height:40px;
+    max-width:80px;
+  }
+}
 
 .sched-favoritebtn{
   position:absolute;
@@ -1507,6 +1551,96 @@ body.sched-modal-open{ overflow:hidden; }
   color:var(--text);
   margin:12px 0 14px;
   white-space:pre-wrap;
+}
+
+/* Sanitized HTML descriptions: sane defaults for the tags DOMPurify allows
+   through (see SCHED_DESC_ALLOWED_TAGS in view.js). Plain-text
+   descriptions never contain these tags, so this only affects sessions
+   whose Sessionize description field actually includes markup or
+   Markdown-lite syntax. */
+.sched-modal__desc a{
+  color: var(--site-accent, #0b5bd3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.sched-modal__desc p{ margin: 0 0 12px; white-space:normal; }
+.sched-modal__desc p:last-child{ margin-bottom: 0; }
+.sched-modal__desc ul,
+.sched-modal__desc ol{ margin: 0 0 12px; padding-left: 22px; white-space:normal; }
+.sched-modal__desc li{ margin: 0 0 6px; }
+.sched-modal__desc h1,
+.sched-modal__desc h2,
+.sched-modal__desc h3,
+.sched-modal__desc h4,
+.sched-modal__desc h5,
+.sched-modal__desc h6{ margin: 16px 0 8px; line-height: 1.3; color: var(--text); font-weight: 700; }
+/* Explicit sizes so the 3 heading levels the Markdown-lite syntax can
+   produce (#/##/### -> h3/h4/h5) always read as clearly different sizes,
+   instead of relying on each browser's own default h1-h6 scaling. */
+.sched-modal__desc h1{ font-size: 22px; }
+.sched-modal__desc h2{ font-size: 20px; }
+.sched-modal__desc h3{ font-size: 18px; }
+.sched-modal__desc h4{ font-size: 16px; }
+.sched-modal__desc h5{ font-size: 15px; }
+.sched-modal__desc h6{ font-size: 14px; }
+.sched-modal__desc h1:first-child,
+.sched-modal__desc h2:first-child,
+.sched-modal__desc h3:first-child,
+.sched-modal__desc h4:first-child,
+.sched-modal__desc h5:first-child,
+.sched-modal__desc h6:first-child{ margin-top: 0; }
+.sched-modal__desc blockquote{
+  margin: 0 0 12px;
+  padding: 4px 0 4px 14px;
+  border-left: 3px solid var(--border);
+  color: var(--muted);
+  white-space:normal;
+}
+.sched-modal__desc img{ max-width:100%; height:auto; border-radius:8px; margin: 6px 0; }
+.sched-modal__desc table{ border-collapse:collapse; margin:0 0 12px; max-width:100%; }
+.sched-modal__desc td,
+.sched-modal__desc th{ border:1px solid var(--border); padding:6px 10px; text-align:left; }
+
+/* Description + Event Logo, side by side: text on the left, the logo
+   pinned to the right (same left-content/right-logo pattern as the card). */
+.sched-modal__descrow{
+  display:flex;
+  align-items:flex-start;
+  gap:20px;
+  margin:12px 0 14px;
+}
+
+.sched-modal__descrow .sched-modal__desc{
+  flex:1 1 auto;
+  min-width:0;
+  margin:0;
+}
+
+.sched-modal__logo{
+  flex:0 0 auto;
+  display:flex;
+  align-items:flex-start;
+}
+
+.sched-modal__logo img{
+  display:block;
+  max-height:220px;
+  max-width:240px;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+@media (max-width: 640px){
+  .sched-modal__descrow{
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+
+  .sched-modal__logo img{
+    max-height:140px;
+    max-width:70%;
+  }
 }
 
 .sched-modal__media{ margin:2px 0 18px; }
