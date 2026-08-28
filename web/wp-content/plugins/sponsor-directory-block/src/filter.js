@@ -4,17 +4,21 @@ export const normalizeFilterValue = ( value = '' ) =>
 export const sponsorMatchesFilters = (
 	sponsor,
 	selectedCategory = '',
-	selectedLevel = ''
+	selectedLevel = '',
+	searchTerm = ''
 ) => {
 	const category = normalizeFilterValue( selectedCategory );
 	const level = normalizeFilterValue( selectedLevel );
+	const search = normalizeFilterValue( searchTerm );
 	const sponsorLevel = normalizeFilterValue( sponsor.level );
+	const sponsorName = normalizeFilterValue( sponsor.name );
 	const sponsorCategories = Array.isArray( sponsor.categories )
 		? sponsor.categories.map( normalizeFilterValue )
 		: [];
 
 	return (
 		( ! category || sponsorCategories.includes( category ) ) &&
-		( ! level || sponsorLevel === level )
+		( ! level || sponsorLevel === level ) &&
+		( ! search || sponsorName.includes( search ) )
 	);
 };

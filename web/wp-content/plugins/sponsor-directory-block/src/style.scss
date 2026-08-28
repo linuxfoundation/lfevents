@@ -2,7 +2,7 @@
 
 	.sponsor-directory__filters {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 280px)) auto;
+		grid-template-columns: repeat(3, minmax(0, 280px)) auto;
 		align-items: end;
 		gap: 16px;
 		margin-bottom: 40px;
@@ -17,7 +17,8 @@
 			font-weight: 700;
 		}
 
-		select {
+		select,
+		input[type="search"] {
 			width: 100%;
 			min-height: 44px;
 			margin-bottom: 0;

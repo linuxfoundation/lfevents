@@ -1,12 +1,19 @@
 import { sponsorMatchesFilters } from './filter';
 
 const initializeDirectory = ( directory ) => {
+	const searchInput = directory.querySelector( '[data-search-filter]' );
 	const categorySelect = directory.querySelector( '[data-category-filter]' );
 	const levelSelect = directory.querySelector( '[data-level-filter]' );
 	const resetButton = directory.querySelector( '[data-reset-filters]' );
 	const empty = directory.querySelector( '[data-no-results]' );
 
-	if ( ! categorySelect || ! levelSelect || ! resetButton || ! empty ) {
+	if (
+		! searchInput ||
+		! categorySelect ||
+		! levelSelect ||
+		! resetButton ||
+		! empty
+	) {
 		return;
 	}
 
@@ -27,11 +34,13 @@ const initializeDirectory = ( directory ) => {
 
 			const matches = sponsorMatchesFilters(
 				{
+					name: card.dataset.name || '',
 					level: card.dataset.level || '',
 					categories,
 				},
 				categorySelect.value,
-				levelSelect.value
+				levelSelect.value,
+				searchInput.value
 			);
 
 			card.hidden = ! matches;
@@ -41,12 +50,17 @@ const initializeDirectory = ( directory ) => {
 		} );
 
 		empty.hidden = visibleCount !== 0;
-		resetButton.disabled = ! categorySelect.value && ! levelSelect.value;
+		resetButton.disabled =
+			! categorySelect.value &&
+			! levelSelect.value &&
+			! searchInput.value.trim();
 	};
 
+	searchInput.addEventListener( 'input', update );
 	categorySelect.addEventListener( 'change', update );
 	levelSelect.addEventListener( 'change', update );
 	resetButton.addEventListener( 'click', () => {
+		searchInput.value = '';
 		categorySelect.value = '';
 		levelSelect.value = '';
 		update();

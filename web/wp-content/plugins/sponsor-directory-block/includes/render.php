@@ -72,7 +72,15 @@ function lf_sponsor_directory_render( $attributes ) {
 	<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 		<div class="sponsor-directory__filters" aria-label="<?php esc_attr_e( 'Filter sponsors', 'sponsor-directory-block' ); ?>">
 			<div class="sponsor-directory__filter">
-				<label for="<?php echo esc_attr( $instance ); ?>-category"><?php esc_html_e( 'Find solutions for...', 'sponsor-directory-block' ); ?></label>
+				<label for="<?php echo esc_attr( $instance ); ?>-search"><?php esc_html_e( 'Search by company name', 'sponsor-directory-block' ); ?></label>
+				<input type="search"
+					id="<?php echo esc_attr( $instance ); ?>-search"
+					data-search-filter
+					autocomplete="off"
+					placeholder="<?php esc_attr_e( 'Company name', 'sponsor-directory-block' ); ?>" />
+			</div>
+			<div class="sponsor-directory__filter">
+				<label for="<?php echo esc_attr( $instance ); ?>-category"><?php esc_html_e( 'Find solutions for', 'sponsor-directory-block' ); ?></label>
 				<select id="<?php echo esc_attr( $instance ); ?>-category" data-category-filter>
 					<option value=""><?php esc_html_e( 'All solutions', 'sponsor-directory-block' ); ?></option>
 					<?php foreach ( $categories as $category ) : ?>
@@ -107,6 +115,7 @@ function lf_sponsor_directory_render( $attributes ) {
 				?>
 				<article class="sponsor-directory__card"
 					data-sponsor-card
+					data-name="<?php echo esc_attr( $sponsor['name'] ); ?>"
 					data-level="<?php echo esc_attr( $sponsor['level'] ); ?>"
 					data-categories="<?php echo esc_attr( wp_json_encode( $sponsor['categories'] ) ); ?>">
 					<button type="button"

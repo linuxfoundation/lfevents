@@ -1,6 +1,7 @@
 import { normalizeFilterValue, sponsorMatchesFilters } from './filter';
 
 const sponsor = {
+	name: 'Acme Cloud Inc.',
 	level: ' Gold ',
 	categories: [ 'Cloud Native', 'AI' ],
 };
@@ -40,5 +41,24 @@ describe( 'sponsor directory filtering', () => {
 		expect(
 			sponsorMatchesFilters( { level: '', categories: [] }, '', 'gold' )
 		).toBe( false );
+	} );
+
+	test( 'matches company name partially and case-insensitively', () => {
+		expect( sponsorMatchesFilters( sponsor, '', '', ' acme ' ) ).toBe(
+			true
+		);
+		expect( sponsorMatchesFilters( sponsor, '', '', 'CLOUD' ) ).toBe( true );
+		expect( sponsorMatchesFilters( sponsor, '', '', 'globex' ) ).toBe(
+			false
+		);
+	} );
+
+	test( 'combines search with the select filters', () => {
+		expect( sponsorMatchesFilters( sponsor, 'ai', 'gold', 'acme' ) ).toBe(
+			true
+		);
+		expect( sponsorMatchesFilters( sponsor, 'ai', 'gold', 'globex' ) ).toBe(
+			false
+		);
 	} );
 } );
