@@ -446,6 +446,9 @@ class LFEvents_Admin {
 	 */
 	public function sponsor_custom_column_data( $column, $post_id ) {
 		switch ( $column ) {
+			case 'sponsor_id':
+				echo esc_html( $post_id );
+				break;
 			case 'sponsor_logo':
 				echo has_post_thumbnail( $post_id ) ? '<span class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
 				break;
@@ -471,6 +474,7 @@ class LFEvents_Admin {
 		unset( $columns['date'] );
 		unset( $columns['author'] );
 		// add new columns.
+		$columns['sponsor_id']     = 'Post ID';
 		$columns['sponsor_logo']   = 'Sponsor Logo';
 		$columns['forwarding_url'] = 'Forwarding URL';
 		$columns['alt_text']       = 'Alternative Display Name';
