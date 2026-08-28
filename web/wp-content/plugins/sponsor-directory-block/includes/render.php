@@ -74,7 +74,7 @@ function lf_sponsor_directory_render( $attributes ) {
 			<div class="sponsor-directory__filter">
 				<label for="<?php echo esc_attr( $instance ); ?>-category"><?php esc_html_e( 'Find solutions for...', 'sponsor-directory-block' ); ?></label>
 				<select id="<?php echo esc_attr( $instance ); ?>-category" data-category-filter>
-					<option value=""><?php esc_html_e( 'Solutions', 'sponsor-directory-block' ); ?></option>
+					<option value=""><?php esc_html_e( 'All solutions', 'sponsor-directory-block' ); ?></option>
 					<?php foreach ( $categories as $category ) : ?>
 						<option value="<?php echo esc_attr( $category ); ?>"><?php echo esc_html( $category ); ?></option>
 					<?php endforeach; ?>
@@ -94,17 +94,6 @@ function lf_sponsor_directory_render( $attributes ) {
 			</button>
 		</div>
 
-		<p class="sponsor-directory__result-count" data-result-count aria-live="polite">
-			<?php
-			echo esc_html(
-				sprintf(
-					/* translators: %d: number of visible sponsors. */
-					_n( '%d sponsor', '%d sponsors', count( $sponsors ), 'sponsor-directory-block' ),
-					count( $sponsors )
-				)
-			);
-			?>
-		</p>
 		<p class="sponsor-directory__no-results" data-no-results hidden><?php esc_html_e( 'No sponsors match the selected filters.', 'sponsor-directory-block' ); ?></p>
 
 		<div class="sponsor-directory__grid">

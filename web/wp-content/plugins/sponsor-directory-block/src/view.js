@@ -4,23 +4,15 @@ const initializeDirectory = ( directory ) => {
 	const categorySelect = directory.querySelector( '[data-category-filter]' );
 	const levelSelect = directory.querySelector( '[data-level-filter]' );
 	const resetButton = directory.querySelector( '[data-reset-filters]' );
-	const count = directory.querySelector( '[data-result-count]' );
 	const empty = directory.querySelector( '[data-no-results]' );
 
-	if (
-		! categorySelect ||
-		! levelSelect ||
-		! resetButton ||
-		! count ||
-		! empty
-	) {
+	if ( ! categorySelect || ! levelSelect || ! resetButton || ! empty ) {
 		return;
 	}
 
 	const cards = Array.from(
 		directory.querySelectorAll( '[data-sponsor-card]' )
 	);
-	const totalCount = cards.length;
 
 	const update = () => {
 		let visibleCount = 0;
@@ -48,12 +40,6 @@ const initializeDirectory = ( directory ) => {
 			}
 		} );
 
-		count.textContent =
-			visibleCount === totalCount
-				? `${ totalCount } ${
-						totalCount === 1 ? 'sponsor' : 'sponsors'
-				  }`
-				: `Showing ${ visibleCount } of ${ totalCount } sponsors`;
 		empty.hidden = visibleCount !== 0;
 		resetButton.disabled = ! categorySelect.value && ! levelSelect.value;
 	};

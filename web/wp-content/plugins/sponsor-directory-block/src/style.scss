@@ -5,7 +5,7 @@
 		grid-template-columns: repeat(2, minmax(0, 280px)) auto;
 		align-items: end;
 		gap: 16px;
-		margin-bottom: 18px;
+		margin-bottom: 40px;
 	}
 
 	.sponsor-directory__filter {
@@ -48,11 +48,6 @@
 			background: #222;
 			color: #fff;
 		}
-	}
-
-	.sponsor-directory__result-count {
-		margin: 0 0 18px;
-		font-weight: 700;
 	}
 
 	.sponsor-directory__no-results {
