@@ -72,7 +72,7 @@ function lf_sponsor_directory_render( $attributes ) {
 	<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 		<div class="sponsor-directory__filters" aria-label="<?php esc_attr_e( 'Filter sponsors', 'sponsor-directory-block' ); ?>">
 			<div class="sponsor-directory__filter">
-				<label for="<?php echo esc_attr( $instance ); ?>-search"><?php esc_html_e( 'Search by company name', 'sponsor-directory-block' ); ?></label>
+				<label for="<?php echo esc_attr( $instance ); ?>-search"><?php esc_html_e( 'Search', 'sponsor-directory-block' ); ?></label>
 				<input type="search"
 					id="<?php echo esc_attr( $instance ); ?>-search"
 					data-search-filter
