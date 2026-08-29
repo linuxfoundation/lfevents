@@ -10,7 +10,13 @@
   "devDependencies": {
     "cgb-scripts": "1.23.1",
     "debounce-promise": "^3.1.2",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
     "react-select": "^4.0.0"
+  },
+  "comment-overrides": "node-sass 4.x has no prebuilt binary for arm64/Node 20 and cannot compile from source, which made this block unbuildable. dart-sass exposes the same render API that sass-loader 6 calls, so it is substituted here.",
+  "overrides": {
+    "node-sass": "npm:sass@^1.77.0"
   },
   "repository": {
     "type": "git",
