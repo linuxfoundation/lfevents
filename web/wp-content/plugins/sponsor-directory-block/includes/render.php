@@ -112,6 +112,11 @@ function lf_sponsor_directory_render( $attributes ) {
 				$url        = esc_url( get_post_meta( $post_id, 'lfes_sponsor_url', true ) );
 				$logo       = lf_sponsor_directory_get_logo( $post_id, $sponsor['name'], 'sponsor-directory__logo' );
 				$modal_logo = lf_sponsor_directory_get_logo( $post_id, $sponsor['name'], 'sponsor-directory-modal__logo' );
+
+				$description = '';
+				if ( $sponsor['description'] ) {
+					$description = wpautop( wp_targeted_link_rel( links_add_target( make_clickable( esc_html( $sponsor['description'] ) ), '_blank' ) ) );
+				}
 				?>
 				<article class="sponsor-directory__card"
 					data-sponsor-card
@@ -142,8 +147,8 @@ function lf_sponsor_directory_render( $attributes ) {
 							<?php endif; ?>
 							<div class="sponsor-directory-modal__body">
 								<?php lf_sponsor_directory_render_details( $sponsor, 'sponsor-directory-modal__details' ); ?>
-								<?php if ( $sponsor['description'] ) : ?>
-									<div class="sponsor-directory-modal__description"><?php echo wpautop( esc_html( $sponsor['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+								<?php if ( $description ) : ?>
+									<div class="sponsor-directory-modal__description"><?php echo $description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 								<?php endif; ?>
 								<?php if ( $url ) : ?>
 									<p><a class="sponsor-directory-modal__website" href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Visit sponsor website', 'sponsor-directory-block' ); ?></a></p>
