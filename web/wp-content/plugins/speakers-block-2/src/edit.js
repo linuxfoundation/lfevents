@@ -4,9 +4,11 @@ import {
 
 const { apiFetch } = wp;
 
-import React, { MouseEventHandler, useCallback, useState } from 'react';
+import React, { MouseEventHandler, useCallback, useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { components } from 'react-select';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 import {
 	closestCorners,
 	DndContext,
@@ -86,10 +88,47 @@ const loadOptions = debounce(
 	}
 );
 
+/**
+ * react-select styles itself with Emotion, which injects its <style> tags into
+ * the document the block script runs in. As of WordPress 7.1 the editor canvas
+ * is always an iframe, so those tags land in the parent admin document while the
+ * select markup lives inside the iframe, leaving the control unstyled. Binding a
+ * dedicated Emotion cache to the block's own document puts the styles where the
+ * markup actually is.
+ *
+ * @param {?HTMLElement} node A node rendered inside the editor canvas.
+ * @return {?Object} Emotion cache scoped to the canvas document.
+ */
+const useCanvasEmotionCache = ( node ) => {
+	const [ cache, setCache ] = useState( null );
+
+	useEffect( () => {
+		const head = node?.ownerDocument?.head;
+
+		if ( ! head ) {
+			return;
+		}
+
+		setCache( ( current ) =>
+			current?.sheet?.container === head
+				? current
+				: createCache( {
+					key: 'speakers-block-2',
+					container: head,
+				} )
+		);
+	}, [ node ] );
+
+	return cache;
+};
+
 export default function Edit( { attributes, setAttributes } ) {
 	const { speakers } = attributes;
 
 	const [selected, setSelected] = useState(speakers);
+	const [ canvasNode, setCanvasNode ] = useState( null );
+	const emotionCache = useCanvasEmotionCache( canvasNode );
+	const blockProps = useBlockProps( { ref: setCanvasNode } );
 
 	const onChange = (selectedOptions) => {
 		setAttributes({
@@ -118,12 +157,14 @@ export default function Edit( { attributes, setAttributes } ) {
 	}, [setSelected]);
 
 	return [
-		<div { ...useBlockProps() } key="speakers-block-edit">
+		<div { ...blockProps } key="speakers-block-edit">
 			<p>
 				<strong>Featured Speakers (each opens with modal):</strong>
 			</p>
 			{/* ref: https://github.com/JedWatson/react-select/pull/5212#issuecomment-1273870591
 			<DndContext modifiers={[restrictToParentElement]} onDragEnd={onDragEnd} collisionDetection={closestCenter}> */}
+			{ emotionCache && (
+			<CacheProvider value={emotionCache}>
 			<DndContext
 				modifiers={[restrictToParentElement]}
 				onDragEnd={onDragEnd}
@@ -154,6 +195,8 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</SortableContext>
 			</DndContext>
+			</CacheProvider>
+			) }
 		</div>,
 	];
 }
