@@ -59,7 +59,11 @@
 
 	.sponsor-directory__grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+
+		// auto-fill (rather than auto-fit) keeps the empty tracks in place so a
+		// short result set stays left-aligned at the normal tile width instead of
+		// being stretched across the full row.
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
 		justify-items: start;
 		gap: 24px;
 	}
