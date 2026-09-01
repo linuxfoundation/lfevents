@@ -5,6 +5,7 @@
 
 	<file>./web/wp-content/themes/</file>
 	<file>./web/wp-content/mu-plugins/custom/</file>
+	<file>./web/wp-content/plugins/agent-prompt-block/</file>
 	<file>./web/wp-content/plugins/buttons-with-expiry/</file>
 	<file>./web/wp-content/plugins/core-block-customisations/</file>
 	<file>./web/wp-content/plugins/countdown-block/</file>
