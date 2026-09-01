@@ -149,3 +149,5 @@ web/wp-content/plugins/sessionize-blocks/node_modules
 web/wp-content/plugins/live-stream-gate-block/node_modules
 !web/wp-content/plugins/core-block-customisations
 web/wp-content/plugins/core-block-customisations/node_modules
+!web/wp-content/plugins/agent-prompt-block
+web/wp-content/plugins/agent-prompt-block/node_modules

@@ -1,0 +1,19 @@
+/**
+ * Editor-only tweaks.
+ *
+ * The preview is rendered server-side, so the front-end stylesheet already
+ * applies. We only need to keep the dropdown from getting in the way while
+ * editing.
+ */
+
+.editor-styles-wrapper .wp-block-lf-agent-prompt {
+
+	.lf-agent-prompt__menu {
+		position: static;
+		width: 15rem;
+	}
+
+	.lf-agent-prompt__chevron {
+		display: none;
+	}
+}

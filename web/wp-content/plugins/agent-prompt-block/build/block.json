@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "lf/agent-prompt",
+  "version": "0.1.0",
+  "title": "Agent Prompt",
+  "category": "widgets",
+  "icon": "format-chat",
+  "description": "A dropdown that opens a pre-filled prompt in Claude, ChatGPT and other AI assistants, with a \"Copy prompt\" fallback.",
+  "keywords": [
+    "ai",
+    "agent",
+    "chatgpt",
+    "claude",
+    "prompt"
+  ],
+  "textdomain": "agent-prompt-block",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "left",
+      "center",
+      "right"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": false
+    }
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Discuss the program with your agent"
+    },
+    "prompt": {
+      "type": "string",
+      "default": "Help me plan which sessions to attend based on my interests; ask me if you're unsure. Format every recommended session title as a clickable link using its exact URL from the agenda."
+    },
+    "contextUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "providers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "claude",
+        "chatgpt"
+      ]
+    },
+    "showCopy": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}
