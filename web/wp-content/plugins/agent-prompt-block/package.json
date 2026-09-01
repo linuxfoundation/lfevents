@@ -18,7 +18,7 @@
 		"@wordpress/blocks": "^13",
 		"@wordpress/components": "^28",
 		"@wordpress/i18n": "^5",
-		"@wordpress/scripts": "27.8.0",
+		"@wordpress/scripts": "34.2.0",
 		"@wordpress/server-side-render": "^5",
 		"typescript": "^5"
 	},
