@@ -90,6 +90,16 @@ class Sessionize_Store {
 	}
 
 	/**
+	 * Returns the option name holding an event's cold-start fetch lock.
+	 *
+	 * @param string $api_code Sessionize API code.
+	 * @return string Option name.
+	 */
+	private static function lock_option( $api_code ) {
+		return 'sessionize_lock_' . md5( strtolower( (string) $api_code ) );
+	}
+
+	/**
 	 * Returns the cache lifetime in seconds.
 	 *
 	 * @return int TTL in seconds.
@@ -167,12 +177,14 @@ class Sessionize_Store {
 		}
 
 		// Cold start: nothing cached at all. One request pays the latency.
-		if ( ! self::acquire_lock( $api_code ) ) {
+		$lock = self::acquire_lock( $api_code );
+
+		if ( false === $lock ) {
 			return null;
 		}
 
 		$refreshed = self::refresh( $api_code );
-		self::release_lock( $api_code );
+		self::release_lock( $api_code, $lock );
 
 		return is_wp_error( $refreshed ) ? null : $refreshed;
 	}
@@ -376,23 +388,101 @@ class Sessionize_Store {
 	/**
 	 * Takes the cold-start fetch lock for an event.
 	 *
+	 * The Options API cannot arbitrate this. add_option()'s INSERT uses ON
+	 * DUPLICATE KEY UPDATE, so the only thing standing between two concurrent
+	 * callers is the check-then-act get_option() guard inside it — both can read
+	 * "absent" and both can then be told they created the row. Locking is
+	 * therefore done with statements MySQL itself makes atomic: INSERT IGNORE
+	 * against the unique index on option_name to claim a free lock, and a
+	 * compare-and-swap UPDATE to take over an expired one. Exactly one caller
+	 * sees a row affected in either case.
+	 *
+	 * This mirrors WP_Upgrader::create_lock(), which lives in wp-admin and so is
+	 * not loadable from a front-end render.
+	 *
 	 * @param string $api_code Sessionize API code.
-	 * @return bool True when the caller owns the lock.
+	 * @return string|false Opaque lock value to pass to release_lock(), or false
+	 *                      when another request holds the lock.
 	 */
 	private static function acquire_lock( $api_code ) {
-		$key = 'sessionize_lock_' . md5( strtolower( (string) $api_code ) );
+		global $wpdb;
 
-		return (bool) add_option( $key, time(), '', false )
-			|| ( (int) get_option( $key ) < ( time() - self::LOCK_TTL ) && update_option( $key, time(), false ) );
+		$key   = self::lock_option( $api_code );
+		$value = wp_generate_password( 20, false ) . ':' . time();
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Lock acquisition has to be atomic in the database; the Options API cannot express it.
+		$claimed = $wpdb->query( $wpdb->prepare( "INSERT IGNORE INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, 'no')", $key, $value ) );
+
+		self::flush_lock_cache( $key );
+
+		if ( $claimed ) {
+			return $value;
+		}
+
+		$current = get_option( $key );
+
+		if ( ! is_string( $current ) || '' === $current ) {
+			// The holder released it in the moment between the INSERT and this
+			// read. Bow out rather than racing for it; the next request will claim
+			// it cleanly.
+			return false;
+		}
+
+		$held_since = (int) substr( (string) strrchr( $current, ':' ), 1 );
+
+		if ( $held_since > ( time() - self::LOCK_TTL ) ) {
+			return false;
+		}
+
+		/*
+		 * The lock has expired, which means its holder died mid-fetch. Take it
+		 * over with a compare-and-swap keyed on the exact stale value, so that if
+		 * several requests all spot the same expired lock only the one whose
+		 * UPDATE matches first is granted it. A read-then-write would hand the
+		 * lock to all of them.
+		 */
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- See above; this is the compare-and-swap.
+		$taken = $wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->options} SET option_value = %s WHERE option_name = %s AND option_value = %s", $value, $key, $current ) );
+
+		self::flush_lock_cache( $key );
+
+		return $taken ? $value : false;
 	}
 
 	/**
 	 * Releases the cold-start fetch lock for an event.
 	 *
-	 * @param string $api_code Sessionize API code.
+	 * The delete is conditional on the caller still holding the lock. A request
+	 * that overran LOCK_TTL and had its lock taken over must not delete the new
+	 * owner's lock on its way out.
+	 *
+	 * @param string $api_code   Sessionize API code.
+	 * @param string $lock_value Value returned by acquire_lock().
 	 * @return void
 	 */
-	private static function release_lock( $api_code ) {
-		delete_option( 'sessionize_lock_' . md5( strtolower( (string) $api_code ) ) );
+	private static function release_lock( $api_code, $lock_value ) {
+		global $wpdb;
+
+		$key = self::lock_option( $api_code );
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Ownership check and delete must be one atomic statement.
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name = %s AND option_value = %s", $key, $lock_value ) );
+
+		self::flush_lock_cache( $key );
+	}
+
+	/**
+	 * Drops the object-cache entries for a lock option.
+	 *
+	 * The lock is written with direct SQL, so the Options API's caches have to be
+	 * invalidated by hand — including `notoptions`, which would otherwise keep
+	 * reporting a freshly inserted lock as absent.
+	 *
+	 * @param string $key Lock option name.
+	 * @return void
+	 */
+	private static function flush_lock_cache( $key ) {
+		wp_cache_delete( $key, 'options' );
+		wp_cache_delete( 'notoptions', 'options' );
 	}
 }
