@@ -18,6 +18,13 @@
 
 /* ---------- Grid wrapper ---------- */
 
+/* Themes routinely set `display` on generic descendant selectors, which beats
+   the user-agent rule for [hidden]. Reassert it so the crawler-only speaker
+   detail below the grid stays out of the visible layout. */
+.sz-speakers-wrap [hidden] {
+	display: none !important;
+}
+
 .sz-speakers-wrap {
 	background: var(--sz-purple);
 	padding: 22px;

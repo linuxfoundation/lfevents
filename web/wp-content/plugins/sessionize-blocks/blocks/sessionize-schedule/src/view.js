@@ -4084,6 +4084,68 @@ async function initSchedBlock( root ) {
 		animateModalSwap();
 	}
 
+	// Schedule data is fetched and cached on the server and printed into the page
+	// as a JSON island (see render.php), so there is normally no network request
+	// here at all: the timeline is already in the HTML and this only layers the
+	// filtering, search and modals on top. Falling back to fetching Sessionize
+	// directly covers the cold-start case where the server had no cached copy.
+	function readInlineSchedData() {
+		const node = root.querySelector( 'script.sched-data' );
+		if ( ! node ) return null;
+
+		try {
+			const parsed = JSON.parse( node.textContent || 'null' );
+			if ( ! parsed || ! parsed.all ) return null;
+			return {
+				payload: parsed.all,
+				gridPayload: Array.isArray( parsed.grid ) ? parsed.grid : null
+			};
+		} catch ( e ) {
+			// eslint-disable-next-line no-console
+			console.error( 'Sessionize Schedule: invalid inline data', e );
+			return null;
+		}
+	}
+
+	async function fetchSchedDataFromSessionize() {
+		const allController = new AbortController();
+		const allTimer = setTimeout( () => allController.abort(), 8000 );
+
+		const gridController = new AbortController();
+		const gridTimer = setTimeout( () => gridController.abort(), 8000 );
+
+		let allRes, gridRes;
+		try {
+			[ allRes, gridRes ] = await Promise.all( [
+				fetch( schedConfig.sessionizeAllDataUrl, {
+					cache: 'default',
+					signal: allController.signal
+				} ),
+				fetch( schedConfig.sessionizeGridDataUrl, {
+					cache: 'default',
+					signal: gridController.signal
+				} ).catch( () => null )
+			] );
+		} finally {
+			clearTimeout( allTimer );
+			clearTimeout( gridTimer );
+		}
+
+		if ( ! allRes || ! allRes.ok ) throw new Error( `Fetch failed: ${ allRes ? allRes.status : 'unknown' }` );
+
+		const payload = await allRes.json();
+
+		let gridPayload = null;
+		if ( gridRes && gridRes.ok ) {
+			try {
+				const parsed = await gridRes.json();
+				if ( Array.isArray( parsed ) ) gridPayload = parsed;
+			} catch ( _ ) {}
+		}
+
+		return { payload, gridPayload };
+	}
+
 	async function init() {
 		try {
 			elStatus.innerHTML = `Loading ${ sessionizeHomeLink }…`;
@@ -4092,40 +4154,7 @@ async function initSchedBlock( root ) {
 				elControls.style.display = 'none';
 			}
 
-			const allController = new AbortController();
-			const allTimer = setTimeout( () => allController.abort(), 8000 );
-
-			const gridController = new AbortController();
-			const gridTimer = setTimeout( () => gridController.abort(), 8000 );
-
-			let allRes, gridRes;
-			try {
-				[ allRes, gridRes ] = await Promise.all( [
-					fetch( schedConfig.sessionizeAllDataUrl, {
-						cache: 'default',
-						signal: allController.signal
-					} ),
-					fetch( schedConfig.sessionizeGridDataUrl, {
-						cache: 'default',
-						signal: gridController.signal
-					} ).catch( () => null )
-				] );
-			} finally {
-				clearTimeout( allTimer );
-				clearTimeout( gridTimer );
-			}
-
-			if ( ! allRes || ! allRes.ok ) throw new Error( `Fetch failed: ${ allRes ? allRes.status : 'unknown' }` );
-
-			const payload = await allRes.json();
-
-			let gridPayload = null;
-			if ( gridRes && gridRes.ok ) {
-				try {
-					const parsed = await gridRes.json();
-					if ( Array.isArray( parsed ) ) gridPayload = parsed;
-				} catch ( _ ) {}
-			}
+			const { payload, gridPayload } = readInlineSchedData() || await fetchSchedDataFromSessionize();
 
 			state.data = payload;
 			state.gridData = gridPayload;
