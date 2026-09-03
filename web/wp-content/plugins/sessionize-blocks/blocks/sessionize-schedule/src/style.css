@@ -4,7 +4,9 @@
   --muted:#64748b;
   --border:#e2e8f0;
   --accent:#0ea5a4;
-  --site-accent: var(--accent);
+  /* Same as the speakers block: resolve the event's brand colour in CSS so the
+     server-rendered markup is not painted with the default accent first. */
+  --site-accent: var(--event-color-1, var(--event-color-2, var(--accent)));
 
   --chip:#ffffff;
   --chip-border:#cbd5e1;

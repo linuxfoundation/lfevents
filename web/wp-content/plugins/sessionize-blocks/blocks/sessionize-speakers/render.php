@@ -68,6 +68,7 @@ if ( ! function_exists( 'sz_speakers_session_url' ) ) {
 <div
 	class="sz-speakers-wrap"
 	data-speaker-config="<?php echo esc_attr( wp_json_encode( $speaker_config ) ); ?>"
+	<?php echo empty( $sz_speakers ) ? '' : 'data-sz-ssr="1"'; ?>
 	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 >
 	<link rel="preconnect" href="https://cache.sessionize.com" crossorigin="anonymous">

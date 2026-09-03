@@ -1295,7 +1295,7 @@
 		setModalTopOffset_();
 		window.addEventListener( 'resize', debounce_( setModalTopOffset_, 150 ) );
 
-		if ( status ) {
+		if ( status && ! root.hasAttribute( 'data-sz-ssr' ) ) {
 			status.textContent = 'Loading speakers\u2026';
 		}
 

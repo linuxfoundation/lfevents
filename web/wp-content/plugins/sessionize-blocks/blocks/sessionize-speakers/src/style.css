@@ -3,8 +3,14 @@
    ========================================================================== */
 
 :root {
-	--sz-purple: #7a1f52;
-	--sz-purple-2: #8b2a62;
+	/*
+	 * The LFEvents theme publishes the event's brand colour as --event-color-1
+	 * (see class-lfevents-public.php). Resolve it here rather than leaving it to
+	 * the script, which can only apply it after it runs — long enough for the
+	 * server-rendered cards to be painted against the default colour first.
+	 */
+	--sz-purple: var(--event-color-1, var(--event-color-2, #7a1f52));
+	--sz-purple-2: var(--event-color-1, var(--event-color-2, #8b2a62));
 	--sz-card: #ffffff;
 	--sz-text: #121212;
 	--sz-muted: #4b4b4b;
@@ -29,6 +35,16 @@
 	background: var(--sz-purple);
 	padding: 22px;
 	border-radius: var(--sz-radius);
+}
+
+/* The entrance animation exists to cover the wait for speaker data. When the
+   grid is server-rendered there is no wait — the cards are in the HTML on first
+   paint — and the animation would run a second time when the script re-renders
+   the grid, making the cards appear to load twice. */
+.sz-speakers-wrap[data-sz-ssr] .sz-card-btn {
+	opacity: 1;
+	transform: none;
+	animation: none;
 }
 
 .sz-speakers-grid {
