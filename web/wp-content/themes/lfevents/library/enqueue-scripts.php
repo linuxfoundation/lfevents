@@ -37,9 +37,6 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		$chinese_domains = "'www.lfopensource.cn', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
 		$current_domain  = parse_url( home_url(), PHP_URL_HOST );
 		if ( ! strpos( $chinese_domains, $current_domain ) ) {
-			// Enqueue cookie script only on main site.
-			wp_enqueue_script( 'osano', 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/3b49aaa9-15ab-4d47-a8fb-96cc25b5543c/osano.js', array(), '1', false );
-
 			// Enqueue Transcend airgap.js consent management.
 			wp_enqueue_script( 'transcend-airgap', 'https://transcend-cdn.com/cm/f484e2d0-ad2e-43a9-9d64-d07f6fa20966/airgap.js', array(), '1', false );
 			add_filter(
