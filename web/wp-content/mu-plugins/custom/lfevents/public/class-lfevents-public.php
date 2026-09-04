@@ -558,4 +558,37 @@ class LFEvents_Public {
 
 		return $title;
 	}
+
+	/**
+	 * Formats event subpage titles as [Page Title] | [Event Name].
+	 *
+	 * @param string $title Generated title.
+	 * @return string
+	 */
+	public function format_event_page_title( $title ) {
+		global $post;
+
+		if ( ! is_object( $post ) || ! is_singular() || ! in_array( $post->post_type, lfe_get_post_types(), true ) ) {
+			return $title;
+		}
+
+		if ( ! $post->post_parent ) {
+			return $title;
+		}
+
+		$ancestors = get_post_ancestors( $post->ID );
+		if ( empty( $ancestors ) ) {
+			return $title;
+		}
+
+		$event_id    = (int) end( $ancestors );
+		$event_title = get_the_title( $event_id );
+		$page_title  = get_the_title( $post->ID );
+
+		if ( empty( $event_title ) || empty( $page_title ) || $event_title === $page_title ) {
+			return $title;
+		}
+
+		return $page_title . ' | ' . $event_title;
+	}
 }
