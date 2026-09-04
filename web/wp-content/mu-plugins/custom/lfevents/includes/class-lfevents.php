@@ -228,6 +228,8 @@ class LFEvents {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_action( 'enqueue_block_assets', $plugin_public, 'insert_event_styles' );
 		$this->loader->add_filter( 'the_seo_framework_title_from_generation', $plugin_public, 'add_year_to_archive_titles' );
+		$this->loader->add_filter( 'the_seo_framework_title_from_generation', $plugin_public, 'format_event_page_title' );
+		$this->loader->add_filter( 'pre_get_document_title', $plugin_public, 'format_event_page_title' );
 		$this->loader->add_filter( 'excerpt_more', $plugin_public, 'new_excerpt_more' );
 		$this->loader->add_filter( 'excerpt_length', $plugin_public, 'custom_excerpt_length', 999 );
 		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'defer_parsing_of_js', 10, 3 );
