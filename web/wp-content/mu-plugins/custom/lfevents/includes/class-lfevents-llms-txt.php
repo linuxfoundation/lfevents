@@ -36,6 +36,11 @@ class LFEvents_LLMS_Txt {
 	const KEY_PAGES_MENU_LOCATION = 'about-pages-nav';
 
 	/**
+	 * Slug to descend into ahead of its siblings when resolving a link target.
+	 */
+	const PREFERRED_CHILD_SLUG = 'schedule';
+
+	/**
 	 * Serve /llms.txt when it is requested.
 	 *
 	 * Hooked to 'parse_request', which runs before WordPress decides the request
@@ -269,10 +274,38 @@ class LFEvents_LLMS_Txt {
 				continue;
 			}
 
-			$links[] = $this->format_link( get_the_title( $child ), $url );
+			$link         = $this->format_link( get_the_title( $child ), $url );
+			$markdown_url = $this->get_markdown_url( $target );
+
+			if ( '' !== $markdown_url ) {
+				$link .= ': full session listing as Markdown at ' . $markdown_url;
+			}
+
+			$links[] = $link;
 		}
 
 		return $links;
+	}
+
+	/**
+	 * The Markdown mirror of a schedule page, when one is available.
+	 *
+	 * Pages carrying a Sessionize schedule block are also served as plain
+	 * Markdown, which is a far more reliable read for an agent than the
+	 * rendered page: no navigation, no sponsor wall, and every session's
+	 * abstract in full. Sessionize Blocks is a separate plugin, so it may be
+	 * inactive, and it only serves the document once the event's data has been
+	 * cached — both of which it reports by returning an empty string.
+	 *
+	 * @param WP_Post $post The page being linked to.
+	 * @return string URL, or an empty string when there is no Markdown mirror.
+	 */
+	private function get_markdown_url( WP_Post $post ) {
+		if ( ! class_exists( 'Sessionize_Schedule_Md' ) ) {
+			return '';
+		}
+
+		return esc_url_raw( Sessionize_Schedule_Md::url_for_post( $post ) );
 	}
 
 	/**
@@ -369,7 +402,7 @@ class LFEvents_LLMS_Txt {
 					'post_type'        => $post->post_type,
 					'post_parent'      => $post->ID,
 					'post_status'      => 'publish',
-					'numberposts'      => 1,
+					'numberposts'      => -1,
 					'orderby'          => 'menu_order',
 					'order'            => 'ASC',
 					'suppress_filters' => false,
@@ -380,11 +413,35 @@ class LFEvents_LLMS_Txt {
 				break;
 			}
 
-			$post = $children[0];
+			$post = $this->pick_child( $children );
 			++$depth;
 		}
 
 		return $post;
+	}
+
+	/**
+	 * Choose which child to descend into.
+	 *
+	 * Ordinarily this is the first child, matching where the parent redirects.
+	 * A Program section that leads with "Schedule at a Glance" is the exception:
+	 * that page is a compact grid, while its sibling "Schedule" carries the full
+	 * session listing — abstracts, speakers, rooms — and the Markdown mirror
+	 * that goes with it. Both are real pages that render rather than redirect,
+	 * so preferring the fuller one still avoids advertising a URL that only
+	 * bounces, which is the point of the walk.
+	 *
+	 * @param WP_Post[] $children Published children, in menu order.
+	 * @return WP_Post
+	 */
+	private function pick_child( array $children ) {
+		foreach ( $children as $child ) {
+			if ( self::PREFERRED_CHILD_SLUG === $child->post_name ) {
+				return $child;
+			}
+		}
+
+		return $children[0];
 	}
 
 	/**

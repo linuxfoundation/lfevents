@@ -108,6 +108,43 @@ class Sessionize_Schedule_Md {
 	}
 
 	/**
+	 * Returns the Markdown URL for a post, when it has one.
+	 *
+	 * Public so other code — llms.txt, for one — can advertise the mirror
+	 * without needing to know how schedule pages are detected.
+	 *
+	 * @param WP_Post|int|null $post Post or post ID.
+	 * @return string URL, or an empty string when there is no Markdown mirror.
+	 */
+	public static function url_for_post( $post ) {
+		$post = get_post( $post );
+
+		if ( ! $post instanceof WP_Post || 'publish' !== $post->post_status || '' !== $post->post_password ) {
+			return '';
+		}
+
+		$attributes = self::find_block_attributes( $post->post_content );
+
+		if ( null === $attributes ) {
+			return '';
+		}
+
+		/*
+		 * Never advertise a document that would 404. The endpoint renders
+		 * nothing until the event's data has been cached at least once, so
+		 * check the store — with peek(), which reads what is already there
+		 * rather than triggering a fetch of its own.
+		 */
+		$data = Sessionize_Store::peek( $attributes['apiCode'] );
+
+		if ( ! is_array( $data ) || empty( $data['all'] ) ) {
+			return '';
+		}
+
+		return self::markdown_url( $post );
+	}
+
+	/**
 	 * Points agents and crawlers at the Markdown mirror from the HTML page.
 	 *
 	 * @return void
@@ -117,13 +154,7 @@ class Sessionize_Schedule_Md {
 			return;
 		}
 
-		$post = get_post();
-
-		if ( ! $post instanceof WP_Post || null === self::find_block_attributes( $post->post_content ) ) {
-			return;
-		}
-
-		$url = self::markdown_url( $post );
+		$url = self::url_for_post( get_post() );
 
 		if ( '' === $url ) {
 			return;
