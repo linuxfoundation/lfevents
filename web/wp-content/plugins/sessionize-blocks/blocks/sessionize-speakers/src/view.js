@@ -1295,17 +1295,45 @@
 		setModalTopOffset_();
 		window.addEventListener( 'resize', debounce_( setModalTopOffset_, 150 ) );
 
-		if ( status ) {
+		if ( status && ! root.hasAttribute( 'data-sz-ssr' ) ) {
 			status.textContent = 'Loading speakers\u2026';
 		}
 
-		fetch( SPEAKER_CONFIG.sessionizeAllDataUrl )
-			.then( ( r ) => {
+		// Speaker data is fetched and cached on the server and printed into the
+		// page as a JSON island (see render.php), so there is normally no network
+		// request here at all: the grid is already rendered in the HTML and this
+		// only adds the interactive behaviour on top. Falling back to fetching
+		// Sessionize directly covers the cold-start case where the server had no
+		// cached copy to render from.
+		function readInlineSpeakerData_() {
+			const node = root.querySelector( 'script.sz-speakers-data' );
+			if ( ! node ) {
+				return null;
+			}
+			try {
+				return JSON.parse( node.textContent || 'null' );
+			} catch ( e ) {
+				// eslint-disable-next-line no-console
+				console.error( 'Sessionize Speakers: invalid inline data', e );
+				return null;
+			}
+		}
+
+		function loadSpeakerData_() {
+			const inline = readInlineSpeakerData_();
+			if ( inline ) {
+				return Promise.resolve( inline );
+			}
+
+			return fetch( SPEAKER_CONFIG.sessionizeAllDataUrl ).then( ( r ) => {
 				if ( ! r.ok ) {
 					throw new Error( 'Sessionize fetch failed (' + r.status + ')' );
 				}
 				return r.json();
-			} )
+			} );
+		}
+
+		loadSpeakerData_()
 			.then( ( data ) => {
 				const speakers = extractSpeakers_( data );
 				if ( ! speakers.length ) {

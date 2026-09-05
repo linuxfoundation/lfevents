@@ -1,50 +1,24 @@
 <?php
 /**
- * Dynamic Block Render Template
+ * Dynamic Block Render Template — Sessionize Schedule
+ *
+ * Session data is fetched and cached on the server (see includes/ in the plugin
+ * root), so the list view is rendered here as real HTML rather than being
+ * assembled in the browser. That makes the full programme — titles, times,
+ * rooms, speakers and abstracts — readable by search engines and AI agents, and
+ * keeps the schedule working when sessionize.com is unreachable.
+ *
+ * The same data is emitted as an inline JSON island, which the front-end script
+ * reads in place of its former network requests. It re-renders the timeline on
+ * load to add filtering, search and the modals, so the markup produced here
+ * mirrors renderSlot() in src/view.js closely enough to avoid a visible reflow.
  *
  * @package Sessionize_Blocks
- * @var array $attributes Variables passed from WordPress block editor.
  */
 
-/**
- * Helper: parse a comma-separated string attribute into an array of trimmed non-empty values.
- *
- * @param string $value The comma-separated string.
- * @return array
- */
-if ( ! function_exists( 'sched_parse_csv' ) ) {
-	function sched_parse_csv( $value ) {
-		if ( empty( $value ) ) {
-			return array();
-		}
-		return array_values( array_filter( array_map( 'trim', explode( ',', $value ) ) ) );
-	}
-}
+// $attributes is provided by WordPress when it renders the block.
 
-/**
- * Helper: preserve a Sessionize question reference as either:
- * - int, when the value is numeric
- * - string, when the value is a question label
- * - null, when blank
- *
- * @param string $value The configured question reference.
- * @return int|string|null
- */
-if ( ! function_exists( 'sched_question_ref' ) ) {
-	function sched_question_ref( $value ) {
-		$value = trim( (string) $value );
-
-		if ( '' === $value ) {
-			return null;
-		}
-
-		if ( is_numeric( $value ) ) {
-			return (int) $value;
-		}
-
-		return $value;
-	}
-}
+require_once __DIR__ . '/includes/data.php';
 
 // Parse primary color overrides from JSON string.
 $color_overrides = array();
@@ -95,12 +69,20 @@ $sched_config = array(
 	// Color overrides.
 	'primaryColorOverrides'               => $color_overrides,
 );
+
+$sched_data     = sessionize_block_data( $attributes['apiCode'] );
+$sched_all      = ( is_array( $sched_data ) && isset( $sched_data['all'] ) ) ? $sched_data['all'] : array();
+$sched_sessions = empty( $sched_all ) ? array() : sched_prepare_sessions( $sched_all, $sched_config );
+$sched_days     = sched_group_by_day( $sched_sessions );
+$sched_has_ssr  = ! empty( $sched_days );
+$sched_page_url = esc_url_raw( (string) get_permalink() );
 ?>
 
 <div 
 	class="sched-wrapper sched" 
 	data-sched-config="<?php echo esc_attr( wp_json_encode( $sched_config ) ); ?>"
-	<?php echo get_block_wrapper_attributes(); ?>
+	<?php echo $sched_has_ssr ? 'data-sched-ssr="1"' : ''; ?>
+	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 >
 	<link rel="preconnect" href="https://cache.sessionize.com" crossorigin="anonymous">
 
@@ -138,9 +120,137 @@ $sched_config = array(
 	</div>
 
 	<div class="sched__status" data-role="status"></div>
-	<div class="sched__timeline" data-role="timeline" hidden></div>
+	<div class="sched__timeline" data-role="timeline" <?php echo $sched_has_ssr ? '' : 'hidden'; ?>>
+		<?php foreach ( $sched_days as $sched_day => $sched_slots ) : ?>
+			<div class="day-divider">
+				<div class="day-divider__title"><?php echo esc_html( sched_day_heading( $sched_day, $sched_config['dateFormat'] ) ); ?></div>
+			</div>
+
+			<?php foreach ( $sched_slots as $sched_slot_sessions ) : ?>
+				<section class="slot">
+					<?php if ( ! $sched_config['hideSessionTimes'] ) : ?>
+						<div class="slot__time">
+							<strong><?php echo esc_html( sessionize_format_time( $sched_slot_sessions[0]['start'], $sched_config['timeFormat'] ) ); ?></strong>
+						</div>
+					<?php endif; ?>
+
+					<div class="slot__stack">
+						<?php foreach ( $sched_slot_sessions as $sched_session ) : ?>
+							<?php
+							$sched_colors = $sched_session['primaryColors'];
+							$sched_style  = null === $sched_colors
+								? ''
+								: '--primary-bg:' . $sched_colors['bg'] . ';--primary-border:' . $sched_colors['border'] . ';--tag-bg:' . $sched_colors['bg'] . ';--tag-border:' . $sched_colors['border'] . ';';
+
+							$sched_has_extras = ! empty( $sched_session['tags'] ) || '' !== $sched_session['recordingUrl'] || '' !== $sched_session['slidesUrl'];
+							?>
+							<div class="sess-wrap">
+								<?php
+								/*
+								 * An anchor rather than the button the script uses, so the
+								 * session is a real, crawlable link that still works before
+								 * (or without) hydration. The script replaces the timeline
+								 * on load and takes over the click handling.
+								 */
+								?>
+								<a class="sess-link" href="<?php echo esc_url( add_query_arg( 'id', rawurlencode( $sched_session['id'] ), $sched_page_url ) ); ?>" data-session-id="<?php echo esc_attr( $sched_session['id'] ); ?>">
+									<div class="sess <?php echo null !== $sched_colors ? 'has-primary' : ''; ?>" style="<?php echo esc_attr( $sched_style ); ?>">
+										<div class="sess__row">
+											<div class="sess__main">
+												<div class="sess__title"><?php echo esc_html( $sched_session['title'] ); ?></div>
+												<div class="sess__meta">
+													<?php if ( '' !== $sched_session['room'] ) : ?>
+														<span class="sess__room"><?php echo esc_html( $sched_session['room'] ); ?></span>
+													<?php endif; ?>
+													<?php if ( ! empty( $sched_session['speakerNames'] ) ) : ?>
+														<span class="sess__speakers"><?php echo esc_html( implode( ', ', $sched_session['speakerNames'] ) ); ?></span>
+													<?php endif; ?>
+												</div>
+												<?php if ( $sched_has_extras ) : ?>
+													<div class="sess__tags">
+														<?php foreach ( $sched_session['tags'] as $sched_tag ) : ?>
+															<span class="tag <?php echo $sched_tag['isPrimary'] ? 'tag--primary' : ''; ?>"><?php echo esc_html( $sched_tag['name'] ); ?></span>
+														<?php endforeach; ?>
+														<?php if ( '' !== $sched_session['recordingUrl'] ) : ?>
+															<span class="tag tag--asset" aria-label="Recording available">&#9654; Recording</span>
+														<?php endif; ?>
+														<?php if ( '' !== $sched_session['slidesUrl'] ) : ?>
+															<span class="tag tag--asset" aria-label="Slides available">&darr; Slides</span>
+														<?php endif; ?>
+													</div>
+												<?php endif; ?>
+											</div>
+											<?php if ( '' !== $sched_session['logoUrl'] ) : ?>
+												<div class="sess__logo">
+													<img src="<?php echo esc_url( $sched_session['logoUrl'] ); ?>" alt="" loading="lazy" decoding="async">
+												</div>
+											<?php endif; ?>
+										</div>
+									</div>
+								</a>
+
+								<?php
+								/*
+								 * Abstract and resource links, rendered for crawlers and AI
+								 * agents. For sighted users this content lives in the session
+								 * modal, which the script builds on demand — so it is emitted
+								 * here too, hidden, rather than existing only in JavaScript.
+								 */
+								?>
+								<div class="sess__seo" hidden>
+									<div class="sess__seotime">
+										<time datetime="<?php echo esc_attr( $sched_session['start']->format( 'Y-m-d\TH:i:s' ) ); ?>">
+											<?php echo esc_html( sessionize_format_time( $sched_session['start'], $sched_config['timeFormat'] ) ); ?>
+										</time>
+										&ndash;
+										<time datetime="<?php echo esc_attr( $sched_session['end']->format( 'Y-m-d\TH:i:s' ) ); ?>">
+											<?php echo esc_html( sessionize_format_time( $sched_session['end'], $sched_config['timeFormat'] ) ); ?>
+										</time>
+									</div>
+									<?php if ( '' !== $sched_session['description'] ) : ?>
+										<div class="sess__seodesc">
+											<?php echo wp_kses( $sched_session['description'], Sessionize_Sanitizer::allowed_html() ); ?>
+										</div>
+									<?php endif; ?>
+									<?php if ( ! empty( $sched_session['customLinks'] ) || '' !== $sched_session['slidesUrl'] || '' !== $sched_session['recordingUrl'] ) : ?>
+										<ul class="sess__seolinks">
+											<?php if ( '' !== $sched_session['slidesUrl'] ) : ?>
+												<li><a href="<?php echo esc_url( $sched_session['slidesUrl'] ); ?>" rel="noopener">Slides</a></li>
+											<?php endif; ?>
+											<?php if ( '' !== $sched_session['recordingUrl'] ) : ?>
+												<li><a href="<?php echo esc_url( $sched_session['recordingUrl'] ); ?>" rel="noopener">Recording</a></li>
+											<?php endif; ?>
+											<?php foreach ( $sched_session['customLinks'] as $sched_link ) : ?>
+												<li><a href="<?php echo esc_url( $sched_link['url'] ); ?>" rel="noopener"><?php echo esc_html( $sched_link['label'] ); ?></a></li>
+											<?php endforeach; ?>
+										</ul>
+									<?php endif; ?>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</section>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
+	</div>
 	<div class="sched__gridwrap" data-role="gridwrap" hidden></div>
 	<div class="sched__speakerwall" data-role="speakerwall" hidden></div>
+
+	<?php if ( $sched_has_ssr ) : ?>
+		<?php
+		$sched_page_title = get_the_title();
+		$sched_jsonld     = Sessionize_JsonLd::schedule( $sched_sessions, $sched_page_title, $sched_page_url );
+
+		echo Sessionize_JsonLd::render( $sched_jsonld ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a fully escaped <script> element.
+
+		$sched_inline = array(
+			'all'  => $sched_all,
+			'grid' => isset( $sched_data['grid'] ) ? $sched_data['grid'] : null,
+		);
+
+		echo sessionize_inline_json( $sched_inline, 'sched-data' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns a fully escaped <script> element.
+		?>
+	<?php endif; ?>
 
 	<div class="sched-modal" data-role="modal" aria-hidden="true">
 		<div class="sched-modal__overlay" data-sched-close></div>

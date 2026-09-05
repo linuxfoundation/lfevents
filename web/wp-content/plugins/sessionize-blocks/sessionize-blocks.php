@@ -15,6 +15,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Server-side data layer.
+ *
+ * Event data is fetched from Sessionize on the server, cached durably, and
+ * rendered into the page as real HTML — so search engines and AI agents can read
+ * the schedule, and so the site keeps working when sessionize.com does not.
+ */
+require_once __DIR__ . '/includes/class-sessionize-client.php';
+require_once __DIR__ . '/includes/class-sessionize-sanitizer.php';
+require_once __DIR__ . '/includes/class-sessionize-normalizer.php';
+require_once __DIR__ . '/includes/class-sessionize-store.php';
+require_once __DIR__ . '/includes/class-sessionize-registry.php';
+require_once __DIR__ . '/includes/class-sessionize-cron.php';
+require_once __DIR__ . '/includes/class-sessionize-jsonld.php';
+require_once __DIR__ . '/includes/class-sessionize-admin.php';
+require_once __DIR__ . '/includes/helpers.php';
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require_once __DIR__ . '/includes/class-sessionize-cli.php';
+}
+
+Sessionize_Registry::init();
+Sessionize_Cron::init();
+Sessionize_Admin::init();
+
+register_deactivation_hook( __FILE__, array( 'Sessionize_Cron', 'unschedule' ) );
+
+/**
  * Registers all Sessionize blocks.
  *
  * Each block lives in its own directory under blocks/ with its own block.json.

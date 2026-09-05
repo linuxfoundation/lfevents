@@ -115,6 +115,51 @@ Custom plugins have their css/js compiled separately and it is stored in the rep
 
 -----
 
+## Sessionize Blocks
+
+The `sessionize-blocks` plugin provides two blocks — Sessionize Schedule and Sessionize Speakers — that display event data from [Sessionize](https://sessionize.com). Each block takes an **API code** attribute, which is the event identifier in Sessionize's URLs.
+
+### How the data flows
+
+Event data is fetched **on the server**, not in the browser. This means the full schedule is present in the HTML source, so search engines and AI agents can read it, and the page keeps working when sessionize.com is slow or down.
+
+1. `Sessionize_Client` fetches `https://sessionize.com/api/v2/{apiCode}/view/All` and `.../view/GridSmart`.
+2. `Sessionize_Normalizer` sanitizes every session description (a PHP port of the block's markdown-lite renderer) and slims the grid payload.
+3. `Sessionize_Store` saves the result gzipped into a non-autoloaded option keyed by the API code.
+4. `render.php` reads the cache and renders real session cards, speaker cards, JSON-LD, and an inline `<script type="application/json">` island.
+5. `view.js` hydrates from that inline island instead of making a network request, then takes over filtering, search, grid view, modals and favorites as before.
+
+The cache is **stale-while-revalidate**. A page render never blocks on sessionize.com except on a true cold start (no cached copy at all), and that one fetch is behind a lock so concurrent requests don't stampede. If a refresh fails, the last known good copy is kept and the error is recorded — bad data never overwrites good data.
+
+### Refreshing
+
+Data refreshes automatically via WP-Cron (`sessionize_refresh_all`). Note that Pantheon fires wp-cron roughly hourly regardless of the declared interval; the stale-while-revalidate behaviour covers the gap.
+
+To force a refresh:
+
+- **Admin UI**: Tools → Sessionize Data. Shows last sync, session/speaker counts, cached size and last error per API code, with a "Refresh now" button.
+- **WP-CLI**: `lando wp sessionize refresh` (all events) or `lando wp sessionize refresh --code=abc12345`. `lando wp sessionize status` prints the same table as the admin screen.
+
+Both paths purge the Pantheon edge cache for the affected pages afterwards, so visitors aren't served stale HTML.
+
+### Cache TTL
+
+The default TTL is 15 minutes. Override it with the `sessionize_cache_ttl` filter (values below 60 seconds are ignored):
+
+```php
+add_filter( 'sessionize_cache_ttl', function() { return 300; } );
+```
+
+### Rebuilding the block assets
+
+From `web/wp-content/plugins/sessionize-blocks/`, run `npm install` then `npm run build`. Commit the regenerated `build/` directories.
+
+### Gotcha: two renderers
+
+Sessions are now rendered in **both** PHP (`render.php` and `includes/data.php`) and JavaScript (`src/view.js`). If you change how a session card looks or how a field is derived, change both — otherwise the card will visibly shift when the page hydrates. The riskiest areas are date/time formatting and the category colour hash, which are deliberately byte-for-byte ports of the JS versions.
+
+-----
+
 ## Code Sniffs
 
 The CI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).

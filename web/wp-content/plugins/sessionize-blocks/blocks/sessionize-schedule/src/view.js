@@ -2177,7 +2177,7 @@ async function initSchedBlock( root ) {
 			return `
 			  <div class="sched-hovercard__speaker">
 				${ avatar
-					? `<img class="sched-hovercard__avatar" src="${ escapeHtml( avatar ) }" alt="" decoding="async">`
+					? `<img class="sched-hovercard__avatar" src="${ escapeHtml( avatar ) }" alt="" decoding="async" fetchpriority="high">`
 					: `<div class="sched-hovercard__avatar" aria-hidden="true"></div>` }
 				<div class="sched-hovercard__speakertext">
 				  <div class="sched-hovercard__name">${ escapeHtml( name ) }</div>
@@ -2253,10 +2253,28 @@ async function initSchedBlock( root ) {
 		hoverCardEl.setAttribute( 'aria-hidden', 'true' );
 	}
 
+	// Avatars are only ever fetched for the sessions a visitor actually points at.
+	// Warming them the moment the pointer lands means the headshots are usually
+	// decoded by the time the hover delay elapses, without the page downloading
+	// every speaker photo on a large event up front.
+	const warmedAvatarUrls = new Set();
+
+	function warmSessionSpeakerAvatars( derived ) {
+		getSessionSpeakerObjects( derived ).forEach( sp => {
+			const url = getSpeakerAvatarUrl( sp );
+			if ( ! url || warmedAvatarUrls.has( url ) ) return;
+			warmedAvatarUrls.add( url );
+			const img = new Image();
+			img.decoding = 'async';
+			img.src = url;
+		} );
+	}
+
 	function attachSessionHoverCard( button, derived ) {
 		if ( ! GRID_HOVER_SPEAKERS ) return;
 
 		button.addEventListener( 'mouseenter', () => {
+			warmSessionSpeakerAvatars( derived );
 			if ( hoverCardTimer ) clearTimeout( hoverCardTimer );
 			hoverCardTimer = setTimeout( () => showHoverCard( button, derived ), GRID_HOVER_DELAY_MS );
 		} );
@@ -3262,7 +3280,7 @@ async function initSchedBlock( root ) {
 					head.className = 'sched-speaker__headbtn';
 					head.innerHTML = `
 					  ${ avatar
-						? `<img class="sched-speaker__avatar" src="${ escapeHtml( avatar ) }" alt="">`
+						? `<img class="sched-speaker__avatar" src="${ escapeHtml( avatar ) }" alt="" loading="lazy" decoding="async">`
 						: `<div class="sched-speaker__avatar" aria-hidden="true"></div>` }
 					  <div class="sched-speaker__text">
 						<div class="sched-speaker__name">${ escapeHtml( name ) }</div>
@@ -4084,6 +4102,68 @@ async function initSchedBlock( root ) {
 		animateModalSwap();
 	}
 
+	// Schedule data is fetched and cached on the server and printed into the page
+	// as a JSON island (see render.php), so there is normally no network request
+	// here at all: the timeline is already in the HTML and this only layers the
+	// filtering, search and modals on top. Falling back to fetching Sessionize
+	// directly covers the cold-start case where the server had no cached copy.
+	function readInlineSchedData() {
+		const node = root.querySelector( 'script.sched-data' );
+		if ( ! node ) return null;
+
+		try {
+			const parsed = JSON.parse( node.textContent || 'null' );
+			if ( ! parsed || ! parsed.all ) return null;
+			return {
+				payload: parsed.all,
+				gridPayload: Array.isArray( parsed.grid ) ? parsed.grid : null
+			};
+		} catch ( e ) {
+			// eslint-disable-next-line no-console
+			console.error( 'Sessionize Schedule: invalid inline data', e );
+			return null;
+		}
+	}
+
+	async function fetchSchedDataFromSessionize() {
+		const allController = new AbortController();
+		const allTimer = setTimeout( () => allController.abort(), 8000 );
+
+		const gridController = new AbortController();
+		const gridTimer = setTimeout( () => gridController.abort(), 8000 );
+
+		let allRes, gridRes;
+		try {
+			[ allRes, gridRes ] = await Promise.all( [
+				fetch( schedConfig.sessionizeAllDataUrl, {
+					cache: 'default',
+					signal: allController.signal
+				} ),
+				fetch( schedConfig.sessionizeGridDataUrl, {
+					cache: 'default',
+					signal: gridController.signal
+				} ).catch( () => null )
+			] );
+		} finally {
+			clearTimeout( allTimer );
+			clearTimeout( gridTimer );
+		}
+
+		if ( ! allRes || ! allRes.ok ) throw new Error( `Fetch failed: ${ allRes ? allRes.status : 'unknown' }` );
+
+		const payload = await allRes.json();
+
+		let gridPayload = null;
+		if ( gridRes && gridRes.ok ) {
+			try {
+				const parsed = await gridRes.json();
+				if ( Array.isArray( parsed ) ) gridPayload = parsed;
+			} catch ( _ ) {}
+		}
+
+		return { payload, gridPayload };
+	}
+
 	async function init() {
 		try {
 			elStatus.innerHTML = `Loading ${ sessionizeHomeLink }…`;
@@ -4092,40 +4172,7 @@ async function initSchedBlock( root ) {
 				elControls.style.display = 'none';
 			}
 
-			const allController = new AbortController();
-			const allTimer = setTimeout( () => allController.abort(), 8000 );
-
-			const gridController = new AbortController();
-			const gridTimer = setTimeout( () => gridController.abort(), 8000 );
-
-			let allRes, gridRes;
-			try {
-				[ allRes, gridRes ] = await Promise.all( [
-					fetch( schedConfig.sessionizeAllDataUrl, {
-						cache: 'default',
-						signal: allController.signal
-					} ),
-					fetch( schedConfig.sessionizeGridDataUrl, {
-						cache: 'default',
-						signal: gridController.signal
-					} ).catch( () => null )
-				] );
-			} finally {
-				clearTimeout( allTimer );
-				clearTimeout( gridTimer );
-			}
-
-			if ( ! allRes || ! allRes.ok ) throw new Error( `Fetch failed: ${ allRes ? allRes.status : 'unknown' }` );
-
-			const payload = await allRes.json();
-
-			let gridPayload = null;
-			if ( gridRes && gridRes.ok ) {
-				try {
-					const parsed = await gridRes.json();
-					if ( Array.isArray( parsed ) ) gridPayload = parsed;
-				} catch ( _ ) {}
-			}
+			const { payload, gridPayload } = readInlineSchedData() || await fetchSchedDataFromSessionize();
 
 			state.data = payload;
 			state.gridData = gridPayload;
@@ -4271,22 +4318,6 @@ async function initSchedBlock( root ) {
 			render();
 			updateToTopButton();
 			root.classList.remove( 'is-loading' );
-
-			setTimeout( () => {
-				const seen = new Set();
-				state.derived.forEach( d => {
-					if ( ! d.raw.speakers ) return;
-					d.raw.speakers.forEach( id => {
-						const sp = state.speakersById.get( String( id ) );
-						const url = getSpeakerAvatarUrl( sp );
-						if ( ! url || seen.has( url ) ) return;
-						seen.add( url );
-						const img = new Image();
-						img.decoding = 'async';
-						img.src = url;
-					} );
-				} );
-			}, 150 );
 
 		} catch ( err ) {
 			console.error( 'SCHED INIT ERROR', err );
