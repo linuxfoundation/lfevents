@@ -528,3 +528,70 @@ if ( ! function_exists( 'sched_day_heading' ) ) {
 			: $date->format( 'l F j' );
 	}
 }
+
+if ( ! function_exists( 'sched_build_config' ) ) {
+	/**
+	 * Builds the schedule configuration object from block attributes.
+	 *
+	 * Shared by render.php and the Markdown endpoint so both read the same
+	 * question ids, filters and formats out of a single block's attributes.
+	 *
+	 * @param array $attributes Block attributes, with defaults already applied.
+	 * @return array Configuration object.
+	 */
+	function sched_build_config( $attributes ) {
+		$attr = function ( $key, $fallback = '' ) use ( $attributes ) {
+			return isset( $attributes[ $key ] ) ? $attributes[ $key ] : $fallback;
+		};
+
+		// Parse primary color overrides from JSON string.
+		$color_overrides = array();
+		$raw_overrides   = $attr( 'primaryColorOverrides', '' );
+		if ( ! empty( $raw_overrides ) ) {
+			$decoded = json_decode( $raw_overrides, true );
+			if ( is_array( $decoded ) ) {
+				$color_overrides = $decoded;
+			}
+		}
+
+		return array(
+			'sessionizeAllDataUrl'                => 'https://sessionize.com/api/v2/' . esc_attr( $attr( 'apiCode' ) ) . '/view/All',
+			'sessionizeGridDataUrl'               => 'https://sessionize.com/api/v2/' . esc_attr( $attr( 'apiCode' ) ) . '/view/GridSmart',
+			'sessionizeApiCode'                   => esc_attr( $attr( 'apiCode' ) ),
+			'sessionizePublicSlug'                => esc_attr( $attr( 'publicSlug' ) ),
+
+			'primaryFilterTitle'                  => esc_attr( $attr( 'primaryFilterTitle' ) ),
+			'timeFormat'                          => esc_attr( $attr( 'timeFormat', '12h' ) ),
+			'dateFormat'                          => esc_attr( $attr( 'dateFormat', 'mdy' ) ),
+
+			'defaultShowAllDays'                  => (bool) $attr( 'defaultShowAllDays', true ),
+			'hideTopControls'                     => (bool) $attr( 'hideTopControls', false ),
+			'hideSessionTimes'                    => (bool) $attr( 'hideSessionTimes', false ),
+			'enableGridView'                      => (bool) $attr( 'enableGridView', true ),
+			'enablePersonalAgenda'                => (bool) $attr( 'enablePersonalAgenda', false ),
+
+			// Sessionize Question IDs.
+			'speakerTitleQuestionId'              => sched_question_ref( $attr( 'speakerTitleQuestionId' ) ),
+			'speakerCompanyQuestionId'            => sched_question_ref( $attr( 'speakerCompanyQuestionId' ) ),
+			'speakerCompanyOverrideQuestionId'    => sched_question_ref( $attr( 'speakerCompanyOverrideQuestionId' ) ),
+			'cardSpeakerOverrideQuestionId'       => sched_question_ref( $attr( 'cardSpeakerOverrideQuestionId' ) ),
+			'presentationSlidesQuestionId'        => sched_question_ref( $attr( 'presentationSlidesQuestionId' ) ),
+
+			'customLinkField1QuestionId'          => sched_question_ref( $attr( 'customLinkField1QuestionId' ) ),
+			'customLinkField2QuestionId'          => sched_question_ref( $attr( 'customLinkField2QuestionId' ) ),
+			'customLinkField3QuestionId'          => sched_question_ref( $attr( 'customLinkField3QuestionId' ) ),
+			'customLinkField4QuestionId'          => sched_question_ref( $attr( 'customLinkField4QuestionId' ) ),
+			'customLinkField5QuestionId'          => sched_question_ref( $attr( 'customLinkField5QuestionId' ) ),
+
+			// Filtering & visibility (comma-separated strings → arrays).
+			'includeSpeakerTitleForPrimaryValues' => sched_parse_csv( $attr( 'includeSpeakerTitleForPrimaryValues' ) ),
+			'companyRollupNames'                  => sched_parse_csv( $attr( 'companyRollupNames' ) ),
+			'hideAllChipsForPrimaryValues'        => sched_parse_csv( $attr( 'hideAllChipsForPrimaryValues' ) ),
+			'hideSessionChipsForCategories'       => sched_parse_csv( $attr( 'hideSessionChipsForCategories' ) ),
+			'hiddenFilterCategories'              => sched_parse_csv( $attr( 'hiddenFilterCategories' ) ),
+
+			// Color overrides.
+			'primaryColorOverrides'               => $color_overrides,
+		);
+	}
+}
