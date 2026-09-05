@@ -20,55 +20,8 @@
 
 require_once __DIR__ . '/includes/data.php';
 
-// Parse primary color overrides from JSON string.
-$color_overrides = array();
-if ( ! empty( $attributes['primaryColorOverrides'] ) ) {
-	$decoded = json_decode( $attributes['primaryColorOverrides'], true );
-	if ( is_array( $decoded ) ) {
-		$color_overrides = $decoded;
-	}
-}
-
 // Build the Configuration Object based on block attributes.
-$sched_config = array(
-	'sessionizeAllDataUrl'                => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['apiCode'] ) . '/view/All',
-	'sessionizeGridDataUrl'               => 'https://sessionize.com/api/v2/' . esc_attr( $attributes['apiCode'] ) . '/view/GridSmart',
-	'sessionizeApiCode'                   => esc_attr( $attributes['apiCode'] ),
-	'sessionizePublicSlug'                => esc_attr( $attributes['publicSlug'] ),
-
-	'primaryFilterTitle'                  => esc_attr( $attributes['primaryFilterTitle'] ),
-	'timeFormat'                          => esc_attr( $attributes['timeFormat'] ),
-	'dateFormat'                          => esc_attr( $attributes['dateFormat'] ),
-
-	'defaultShowAllDays'                  => (bool) $attributes['defaultShowAllDays'],
-	'hideTopControls'                     => (bool) $attributes['hideTopControls'],
-	'hideSessionTimes'                    => (bool) $attributes['hideSessionTimes'],
-	'enableGridView'                      => (bool) $attributes['enableGridView'],
-	'enablePersonalAgenda'                => (bool) $attributes['enablePersonalAgenda'],
-
-	// Sessionize Question IDs.
-	'speakerTitleQuestionId'              => sched_question_ref( $attributes['speakerTitleQuestionId'] ),
-	'speakerCompanyQuestionId'            => sched_question_ref( $attributes['speakerCompanyQuestionId'] ),
-	'speakerCompanyOverrideQuestionId'    => sched_question_ref( $attributes['speakerCompanyOverrideQuestionId'] ),
-	'cardSpeakerOverrideQuestionId'       => sched_question_ref( $attributes['cardSpeakerOverrideQuestionId'] ),
-	'presentationSlidesQuestionId'        => sched_question_ref( $attributes['presentationSlidesQuestionId'] ),
-
-	'customLinkField1QuestionId'          => sched_question_ref( $attributes['customLinkField1QuestionId'] ),
-	'customLinkField2QuestionId'          => sched_question_ref( $attributes['customLinkField2QuestionId'] ),
-	'customLinkField3QuestionId'          => sched_question_ref( $attributes['customLinkField3QuestionId'] ),
-	'customLinkField4QuestionId'          => sched_question_ref( $attributes['customLinkField4QuestionId'] ),
-	'customLinkField5QuestionId'          => sched_question_ref( $attributes['customLinkField5QuestionId'] ),
-
-	// Filtering & visibility (comma-separated strings → arrays).
-	'includeSpeakerTitleForPrimaryValues' => sched_parse_csv( $attributes['includeSpeakerTitleForPrimaryValues'] ),
-	'companyRollupNames'                  => sched_parse_csv( $attributes['companyRollupNames'] ),
-	'hideAllChipsForPrimaryValues'        => sched_parse_csv( $attributes['hideAllChipsForPrimaryValues'] ),
-	'hideSessionChipsForCategories'       => sched_parse_csv( $attributes['hideSessionChipsForCategories'] ),
-	'hiddenFilterCategories'              => sched_parse_csv( $attributes['hiddenFilterCategories'] ),
-
-	// Color overrides.
-	'primaryColorOverrides'               => $color_overrides,
-);
+$sched_config = sched_build_config( $attributes );
 
 $sched_data     = sessionize_block_data( $attributes['apiCode'] );
 $sched_all      = ( is_array( $sched_data ) && isset( $sched_data['all'] ) ) ? $sched_data['all'] : array();

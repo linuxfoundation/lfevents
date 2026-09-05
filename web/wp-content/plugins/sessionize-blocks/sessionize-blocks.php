@@ -29,6 +29,7 @@ require_once __DIR__ . '/includes/class-sessionize-registry.php';
 require_once __DIR__ . '/includes/class-sessionize-cron.php';
 require_once __DIR__ . '/includes/class-sessionize-jsonld.php';
 require_once __DIR__ . '/includes/class-sessionize-admin.php';
+require_once __DIR__ . '/includes/class-sessionize-schedule-md.php';
 require_once __DIR__ . '/includes/helpers.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -38,6 +39,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 Sessionize_Registry::init();
 Sessionize_Cron::init();
 Sessionize_Admin::init();
+Sessionize_Schedule_Md::init();
 
 register_deactivation_hook( __FILE__, array( 'Sessionize_Cron', 'unschedule' ) );
 
