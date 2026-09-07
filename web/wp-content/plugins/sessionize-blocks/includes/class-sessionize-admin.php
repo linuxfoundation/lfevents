@@ -29,6 +29,16 @@ class Sessionize_Admin {
 	const SLUG = 'sessionize-blocks';
 
 	/**
+	 * Capability required to view and refresh the cache.
+	 *
+	 * Editors as well as Administrators have `edit_pages`, so both roles can
+	 * check on and re-sync schedule data without needing full site admin rights.
+	 *
+	 * @var string
+	 */
+	const CAPABILITY = 'edit_pages';
+
+	/**
 	 * Registers admin hooks.
 	 *
 	 * @return void
@@ -47,7 +57,7 @@ class Sessionize_Admin {
 		add_management_page(
 			__( 'Sessionize Data', 'sessionize-blocks' ),
 			__( 'Sessionize Data', 'sessionize-blocks' ),
-			'manage_options',
+			self::CAPABILITY,
 			self::SLUG,
 			array( __CLASS__, 'render_page' )
 		);
@@ -59,7 +69,7 @@ class Sessionize_Admin {
 	 * @return void
 	 */
 	public static function handle_refresh() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( self::CAPABILITY ) ) {
 			wp_die( esc_html__( 'You do not have permission to refresh Sessionize data.', 'sessionize-blocks' ) );
 		}
 
@@ -91,7 +101,7 @@ class Sessionize_Admin {
 	 * @return void
 	 */
 	public static function render_page() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( self::CAPABILITY ) ) {
 			return;
 		}
 
