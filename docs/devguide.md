@@ -137,7 +137,7 @@ Data refreshes automatically via WP-Cron (`sessionize_refresh_all`). Note that P
 
 To force a refresh:
 
-- **Admin UI**: Tools → Sessionize Data. Shows last sync, session/speaker counts, cached size and last error per API code, with a "Refresh now" button.
+- **Admin UI**: Tools → Sessionize Data (available to Editors and Administrators). Shows last sync, session/speaker counts, cached size and last error per API code, with a "Refresh now" button.
 - **WP-CLI**: `lando wp sessionize refresh` (all events) or `lando wp sessionize refresh --code=abc12345`. `lando wp sessionize status` prints the same table as the admin screen.
 
 Both paths purge the Pantheon edge cache for the affected pages afterwards, so visitors aren't served stale HTML.
