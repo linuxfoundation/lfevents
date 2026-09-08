@@ -18,7 +18,7 @@
 		"@wordpress/blocks": "^13",
 		"@wordpress/components": "^28",
 		"@wordpress/i18n": "^5",
-		"@wordpress/scripts": "27.8.0",
+		"@wordpress/scripts": "34.2.0",
 		"typescript": "^5"
 	},
 	"repository": {
