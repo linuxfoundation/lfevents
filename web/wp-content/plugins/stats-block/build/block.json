@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "lf/stats",
+  "version": "0.1.0",
+  "title": "Stats",
+  "category": "widgets",
+  "icon": "chart-bar",
+  "description": "A row of stat cards with big numbers that count up from zero.",
+  "keywords": [
+    "stats",
+    "statistics",
+    "counter",
+    "numbers",
+    "metrics"
+  ],
+  "textdomain": "stats-block",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "stats": {
+      "type": "array",
+      "default": [
+        {
+          "number": "10,000+",
+          "label": "Builders"
+        },
+        {
+          "number": "500+",
+          "label": "Speakers"
+        },
+        {
+          "number": "3 Days",
+          "label": "Tech &amp; Community"
+        },
+        {
+          "number": "40+",
+          "label": "Countries"
+        }
+      ],
+      "items": {
+        "type": "object"
+      }
+    },
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "animate": {
+      "type": "boolean",
+      "default": true
+    },
+    "duration": {
+      "type": "number",
+      "default": 2000
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

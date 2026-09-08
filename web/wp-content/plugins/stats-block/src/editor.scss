@@ -1,0 +1,25 @@
+.lf-stats--editor {
+
+	.lf-stats__item {
+		padding-bottom: 3rem;
+	}
+
+	.lf-stats__item-actions {
+		position: absolute;
+		right: 0.5rem;
+		bottom: 0.5rem;
+		display: flex;
+		gap: 0.125rem;
+		opacity: 0;
+		transition: opacity 120ms ease-in-out;
+	}
+
+	.lf-stats__item:hover .lf-stats__item-actions,
+	.lf-stats__item:focus-within .lf-stats__item-actions {
+		opacity: 1;
+	}
+
+	.lf-stats__add {
+		margin-top: 1rem;
+	}
+}
