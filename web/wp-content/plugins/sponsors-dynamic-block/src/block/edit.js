@@ -1,11 +1,62 @@
 const { __ } = wp.i18n;
-const { Component } = wp.element;
+const { Component, useEffect, useState } = wp.element;
 const { InspectorControls } = wp.blockEditor;
 const { TextControl, PanelBody, SelectControl } = wp.components;
 const { apiFetch } = wp;
 
 import AsyncSelect from 'react-select/async';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 import debounce from 'debounce-promise';
+
+/**
+ * react-select styles itself with Emotion, which injects its <style> tags into
+ * the document the block script runs in. As of WordPress 7.1 the editor canvas is
+ * always an iframe, so those tags land in the parent admin document while the
+ * select markup lives inside the iframe, leaving the control unstyled. Binding a
+ * dedicated Emotion cache to the block's own document puts the styles where the
+ * markup actually is.
+ *
+ * @param {Object} props Props forwarded to AsyncSelect.
+ * @return {Object} AsyncSelect scoped to the editor canvas document.
+ */
+const CanvasAsyncSelect = ( props ) => {
+	const [ node, setNode ] = useState( null );
+	const [ cache, setCache ] = useState( null );
+
+	useEffect( () => {
+		if ( ! node || ! node.ownerDocument ) {
+			return;
+		}
+
+		const head = node.ownerDocument.head;
+
+		if ( ! head ) {
+			return;
+		}
+
+		setCache( ( current ) => {
+			if ( current && current.sheet && current.sheet.container === head ) {
+				return current;
+			}
+
+			return createCache( {
+				key: 'sponsors-dynamic-block',
+				container: head,
+			} );
+		} );
+	}, [ node ] );
+
+	return (
+		<div ref={ setNode }>
+			{ cache && (
+				<CacheProvider value={ cache }>
+					<AsyncSelect { ...props } />
+				</CacheProvider>
+			) }
+		</div>
+	);
+};
 
 export default class Edit extends Component {
 	construct( props ) {
@@ -96,7 +147,7 @@ export default class Edit extends Component {
 			</InspectorControls>,
 			<div key="sponsors-dynamic-block-edit" className={ this.props.className }>
 				<p><strong>{ tierName } Sponsors</strong></p>
-				<AsyncSelect
+				<CanvasAsyncSelect
 					styles={ { menu: ( styles ) => ( { ...styles, zIndex: 99 } ) } }
 					isMulti
 					value={ sponsors }

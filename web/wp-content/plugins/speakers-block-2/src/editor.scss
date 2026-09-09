@@ -22,8 +22,11 @@
 	list-style: none;
 }
 
-.editor-visual-editor .editor-styles-wrapper .wp-block-group,
-.editor-visual-editor .editor-styles-wrapper .wp-block-group.is-style-event-gradient,
-.editor-visual-editor .editor-styles-wrapper .wp-block-group.is-style-border {
+// As of WordPress 7.1 the editor canvas is always an iframe, so `.editor-visual-editor`
+// (which lives in the parent admin document) is no longer an ancestor of these blocks.
+// Match on `.editor-styles-wrapper` alone so the dropdown stays unclipped in both cases.
+.editor-styles-wrapper .wp-block-group,
+.editor-styles-wrapper .wp-block-group.is-style-event-gradient,
+.editor-styles-wrapper .wp-block-group.is-style-border {
 	overflow: visible;
 }
