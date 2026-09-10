@@ -32,7 +32,7 @@ const getProviders = () =>
 		: FALLBACK_PROVIDERS;
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { label, prompt, contextUrl, providers, showCopy } = attributes;
+	const { label, prompt, providers, showCopy } = attributes;
 	const blockProps = useBlockProps();
 	const available = getProviders();
 
@@ -62,27 +62,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 						__nextHasNoMarginBottom
 					/>
-					<TextControl
-						label={ __( 'Context URL', 'agent-prompt-block' ) }
-						help={ __(
-							'Optional. A document the assistant should read first. Leave empty to use the current page. Point this at a plain-text or Markdown export where one exists, since assistants parse those more reliably than HTML.',
-							'agent-prompt-block'
-						) }
-						type="url"
-						value={ contextUrl }
-						placeholder={ __(
-							'Current page',
-							'agent-prompt-block'
-						) }
-						onChange={ ( value ) =>
-							setAttributes( { contextUrl: value } )
-						}
-						__nextHasNoMarginBottom
-					/>
 					<TextareaControl
 						label={ __( 'Prompt text', 'agent-prompt-block' ) }
 						help={ __(
-							'What the assistant should do once it has the context.',
+							'Sent to the assistant verbatim. Replace the placeholders with the event homepage and schedule URLs.',
 							'agent-prompt-block'
 						) }
 						rows={ 8 }

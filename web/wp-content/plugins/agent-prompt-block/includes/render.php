@@ -8,76 +8,13 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Returns the URL the assistant should read when the block has no explicit one.
- *
- * Falls back to the permalink of the post being rendered. In the editor this
- * resolves too, because ServerSideRender passes `post_id` to the block-renderer
- * endpoint, which calls setup_postdata() before invoking the render callback.
- *
- * @return string Permalink, or an empty string when there is no post in scope.
- */
-function lf_agent_prompt_default_context_url() {
-	$post = get_post();
-
-	if ( ! $post ) {
-		return '';
-	}
-
-	$permalink = get_permalink( $post );
-
-	return $permalink ? $permalink : '';
-}
-
-/**
- * Builds the final prompt text from the block attributes.
- *
- * The context URL is prepended with an instruction telling the assistant to pull
- * that document into the conversation first. When the block has no context URL
- * of its own, the current page is used.
- *
- * @param array $attributes Block attributes.
- * @return string Raw (unencoded, unescaped) prompt text.
- */
-function lf_agent_prompt_compose_prompt( $attributes ) {
-	$prompt      = isset( $attributes['prompt'] ) ? trim( (string) $attributes['prompt'] ) : '';
-	$context_url = isset( $attributes['contextUrl'] ) ? trim( (string) $attributes['contextUrl'] ) : '';
-
-	if ( '' === $context_url ) {
-		$context_url = lf_agent_prompt_default_context_url();
-	}
-
-	if ( '' !== $context_url ) {
-		$context_url = esc_url_raw( $context_url, array( 'http', 'https' ) );
-	}
-
-	if ( '' === $context_url ) {
-		return $prompt;
-	}
-
-	$instruction = sprintf(
-		/* translators: %s: URL of a document the assistant should read first. */
-		__( 'Load the contents of %s into this chat\'s context.', 'agent-prompt-block' ),
-		$context_url
-	);
-
-	return '' === $prompt ? $instruction : $instruction . ' ' . $prompt;
-}
-
-/**
  * Renders the block.
  *
  * @param array $attributes Block attributes.
  * @return string Block HTML.
  */
 function lf_agent_prompt_render_callback( $attributes ) {
-	// The context URL now has a default, so guard on the author-supplied task
-	// instead of the composed prompt — otherwise clearing the prompt text would
-	// still render a widget that only tells the assistant to read the page.
-	if ( ! isset( $attributes['prompt'] ) || '' === trim( (string) $attributes['prompt'] ) ) {
-		return '';
-	}
-
-	$prompt = lf_agent_prompt_compose_prompt( $attributes );
+	$prompt = isset( $attributes['prompt'] ) ? trim( (string) $attributes['prompt'] ) : '';
 
 	if ( '' === $prompt ) {
 		return '';

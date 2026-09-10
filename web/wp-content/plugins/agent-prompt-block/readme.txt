@@ -18,8 +18,7 @@ Each menu entry is a plain link to the assistant's web app with the prompt passe
 = Block settings =
 
 * **Button label** — text on the pill, e.g. "Discuss the program with your agent".
-* **Context URL** — a URL the assistant should read first. Defaults to the current page. The prompt is prefixed with "Load the contents of <url> into this chat's context." Point this at a plain-text or Markdown export where one exists, since assistants parse those more reliably than HTML.
-* **Prompt text** — what the assistant should do once it has the context. Required; the block renders nothing without it.
+* **Prompt text** — the full prompt sent to the assistant, verbatim. Required; the block renders nothing without it. Edit the placeholders in the default text to point at the event homepage and schedule.
 * **Assistants** — which providers to list. Claude and ChatGPT are enabled by default.
 * **Show "Copy prompt"** — adds a button that copies the raw prompt to the clipboard.
 

@@ -25,11 +25,7 @@
 		},
 		"prompt": {
 			"type": "string",
-			"default": "Help me plan which sessions to attend based on my interests; ask me if you're unsure. Format every recommended session title as a clickable link using its exact URL from the agenda."
-		},
-		"contextUrl": {
-			"type": "string",
-			"default": ""
+			"default": "For the event described at [Event homepage URL], help me plan my schedule to make the most of the event. You can see the schedule here: [Sessionize schedule markdown url] and instructions on how to use the Sessionize schedule app here: https://events.linuxfoundation.org/sessionize-app-experience/. Ask me follow-up questions if needed. Include direct links to relevant website pages."
 		},
 		"providers": {
 			"type": "array",
