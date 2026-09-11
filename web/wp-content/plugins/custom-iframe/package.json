@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@wordpress/element": "^6.2.0",
-		"@wordpress/scripts": "27.8.0"
+		"@wordpress/scripts": "33.0.0"
 	},
 	"repository": {
 		"type": "git",
