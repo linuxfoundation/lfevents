@@ -133,6 +133,7 @@ class Sessionize_Admin {
 				<table class="widefat striped">
 					<thead>
 						<tr>
+							<th scope="col"><?php esc_html_e( 'Event', 'sessionize-blocks' ); ?></th>
 							<th scope="col"><?php esc_html_e( 'API code', 'sessionize-blocks' ); ?></th>
 							<th scope="col"><?php esc_html_e( 'Last synced', 'sessionize-blocks' ); ?></th>
 							<th scope="col"><?php esc_html_e( 'Sessions', 'sessionize-blocks' ); ?></th>
@@ -148,8 +149,25 @@ class Sessionize_Admin {
 							$meta         = Sessionize_Store::meta( $code );
 							$last_success = isset( $meta['last_success'] ) ? (int) $meta['last_success'] : 0;
 							$last_error   = isset( $meta['last_error'] ) ? (string) $meta['last_error'] : '';
+							$events       = self::event_names( $code );
 							?>
 							<tr>
+								<td>
+									<?php if ( empty( $events ) ) : ?>
+										&mdash;
+									<?php else : ?>
+										<?php foreach ( $events as $event_id => $event_name ) : ?>
+											<?php $edit_link = get_edit_post_link( $event_id ); ?>
+											<div>
+												<?php if ( $edit_link ) : ?>
+													<a href="<?php echo esc_url( $edit_link ); ?>"><?php echo esc_html( $event_name ); ?></a>
+												<?php else : ?>
+													<?php echo esc_html( $event_name ); ?>
+												<?php endif; ?>
+											</div>
+										<?php endforeach; ?>
+									<?php endif; ?>
+								</td>
 								<td><code><?php echo esc_html( $code ); ?></code></td>
 								<td>
 									<?php
@@ -189,5 +207,41 @@ class Sessionize_Admin {
 			<?php endif; ?>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Returns the events using an API code.
+	 *
+	 * The registry records the posts a code was found on, which are usually
+	 * child pages ("Schedule", "Speakers") whose top-level ancestor is the
+	 * Event — and that ancestor's title is the name an editor recognises.
+	 *
+	 * @param string $api_code Sessionize API code.
+	 * @return array Map of event post id to event name.
+	 */
+	private static function event_names( $api_code ) {
+		$events = array();
+
+		foreach ( Sessionize_Registry::post_ids( $api_code ) as $post_id ) {
+			if ( ! get_post( $post_id ) instanceof WP_Post ) {
+				continue;
+			}
+
+			$ancestors = get_post_ancestors( $post_id );
+			$event_id  = empty( $ancestors ) ? $post_id : (int) end( $ancestors );
+
+			if ( isset( $events[ $event_id ] ) ) {
+				continue;
+			}
+
+			$title = get_the_title( $event_id );
+
+			$events[ $event_id ] = '' !== $title
+				? $title
+				/* translators: %d: post id. */
+				: sprintf( __( '(no title, post %d)', 'sessionize-blocks' ), $event_id );
+		}
+
+		return $events;
 	}
 }
