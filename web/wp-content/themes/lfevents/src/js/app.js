@@ -193,13 +193,11 @@ document.body.addEventListener(
 document.addEventListener(
 	'click',
 	function( e ) {
-		const link = e.target.closest( 'a' );
+		const trigger = e.target.closest( '.cookie-settings-link' );
 
-		if ( ! link || link.textContent.trim().toLowerCase() !== 'cookie settings' ) {
+		if ( ! trigger ) {
 			return;
 		}
-
-		e.preventDefault();
 
 		if ( window.transcend && typeof window.transcend.showConsentManager === 'function' ) {
 			window.transcend.showConsentManager();
