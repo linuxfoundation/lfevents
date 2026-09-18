@@ -199,10 +199,14 @@
     color: $lf-grey-300;
 
     &:hover,
-    &:focus,
     &:active,
     &:visited {
       color: $lf-grey-300;
+    }
+
+    &:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 2px;
     }
   }
 }
