@@ -105,7 +105,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	const emotionCache = useMemo(
 		() =>
 			styleHost
-				? createCache( { key: 'speakers-block-2', container: styleHost } )
+				// Key must match /^[a-z-]+$/ — Emotion rejects digits in dev builds.
+				? createCache( { key: 'speakers-block-two', container: styleHost } )
 				: null,
 		[ styleHost ]
 	);
