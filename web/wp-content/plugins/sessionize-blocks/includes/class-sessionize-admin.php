@@ -220,28 +220,53 @@ class Sessionize_Admin {
 	 * @return array Map of event post id to event name.
 	 */
 	private static function event_names( $api_code ) {
-		$events = array();
+		$event_ids = array();
 
 		foreach ( Sessionize_Registry::post_ids( $api_code ) as $post_id ) {
-			if ( ! get_post( $post_id ) instanceof WP_Post ) {
+			$post = get_post( $post_id );
+
+			if ( ! $post instanceof WP_Post ) {
 				continue;
 			}
 
-			$ancestors = get_post_ancestors( $post_id );
-			$event_id  = empty( $ancestors ) ? $post_id : (int) end( $ancestors );
+			$event_ids[ self::root_event_id( $post ) ] = true;
+		}
 
-			if ( isset( $events[ $event_id ] ) ) {
+		$events = array();
+
+		foreach ( array_keys( $event_ids ) as $event_id ) {
+			$event = get_post( $event_id );
+
+			if ( ! $event instanceof WP_Post ) {
 				continue;
 			}
 
-			$title = get_the_title( $event_id );
-
-			$events[ $event_id ] = '' !== $title
-				? $title
+			$events[ $event_id ] = '' !== $event->post_title
+				? $event->post_title
 				/* translators: %d: post id. */
 				: sprintf( __( '(no title, post %d)', 'sessionize-blocks' ), $event_id );
 		}
 
 		return $events;
+	}
+
+	/**
+	 * Returns the root event post id for a page in an event tree.
+	 *
+	 * @param WP_Post $post Post using the Sessionize API code.
+	 * @return int
+	 */
+	private static function root_event_id( WP_Post $post ) {
+		while ( $post->post_parent ) {
+			$parent = get_post( (int) $post->post_parent );
+
+			if ( ! $parent instanceof WP_Post ) {
+				break;
+			}
+
+			$post = $parent;
+		}
+
+		return (int) $post->ID;
 	}
 }

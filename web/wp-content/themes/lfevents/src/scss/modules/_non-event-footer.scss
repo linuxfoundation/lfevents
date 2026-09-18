@@ -189,4 +189,20 @@
     font-weight: 600;
     color: $lf-grey-300;
   }
+
+  .cookie-settings-link {
+    display: inline;
+    font: inherit;
+    line-height: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    color: $lf-grey-300;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+      color: $lf-grey-300;
+    }
+  }
 }

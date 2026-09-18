@@ -55,7 +55,7 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 				href="https://www.linuxfoundation.org/legal/antitrust-policy">Antitrust
 				Policy</a> | <a target="_blank" rel="noopener"
 				href="https://www.linuxfoundation.org/legal/good-standing-policy">Good
-				Standing Policy</a> | <button type="button" class="cookie-settings-link">Cookie Settings</button>.</p>
+				Standing Policy</a> | <button type="button" class="cookie-settings-link button-reset">Cookie Settings</button>.</p>
 		<?php else : ?>
 		<p>Copyright <?php echo esc_html( gmdate( 'Y' ) ); ?> &copy; LF Open Source, LLC. | info@lfopensource.cn, icp license, no. <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备17074266号-8</a></p>
 		<?php endif; ?>
