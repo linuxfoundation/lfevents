@@ -191,6 +191,14 @@
   }
 
   .cookie-settings-link {
+    border: 0;
+    background: none;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    cursor: pointer;
+    appearance: none;
     display: inline;
     font: inherit;
     line-height: inherit;
