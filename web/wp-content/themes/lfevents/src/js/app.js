@@ -188,3 +188,21 @@ document.body.addEventListener(
 		}
 	}
 );
+
+// Open the Transcend consent manager from any "Cookie Settings" link.
+document.addEventListener(
+	'click',
+	function( e ) {
+		const link = e.target.closest( 'a' );
+
+		if ( ! link || link.textContent.trim().toLowerCase() !== 'cookie settings' ) {
+			return;
+		}
+
+		e.preventDefault();
+
+		if ( window.transcend && typeof window.transcend.showConsentManager === 'function' ) {
+			window.transcend.showConsentManager();
+		}
+	}
+);
