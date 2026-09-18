@@ -199,6 +199,8 @@ document.addEventListener(
 			return;
 		}
 
+		e.preventDefault();
+
 		if ( window.transcend && typeof window.transcend.showConsentManager === 'function' ) {
 			window.transcend.showConsentManager();
 		}
