@@ -63,7 +63,7 @@ if ( $query->have_posts() ) {
 		<div id="post-<?php the_ID(); ?>" class="cell medium-12 large-6 event callout">
 
 			<h2 class="event-title medium-margin-right small-margin-bottom line-height-tight">
-				<a class="unstyled-link" href="<?php echo esc_html( lfe_get_event_url( $post->ID ) ); ?>">
+				<a class="unstyled-link" href="<?php echo esc_url( lfe_get_event_url( $post->ID ) ); ?>">
 					<?php echo esc_html( get_the_title( $post->ID ) ); ?>
 				</a>
 			</h2>
@@ -169,7 +169,7 @@ if ( $query->have_posts() ) {
 				}
 
 				if ( ! $have_button ) {
-					echo '<a aria-label="Learn more about ' . esc_html( get_the_title( $post->ID ) ) . '" href="' . esc_html( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
+					echo '<a aria-label="Learn more about ' . esc_attr( get_the_title( $post->ID ) ) . '" href="' . esc_url( lfe_get_event_url( $post->ID ) ) . '">Learn more</a>';
 				}
 				?>
 			</p>

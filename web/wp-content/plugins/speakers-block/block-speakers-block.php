@@ -94,7 +94,7 @@ function speakers_block_callback( $attributes ) {
 		// color 2, or color1, or if not transparent.
 		$bg_color_2 ? $bg_color_2 : ( $bg_color_1 ? $bg_color_1 : 'transparent' );
 
-		$inline_styles = 'style="background: linear-gradient(90deg, ' . $bg_color_1 . ' 0%, ' . $bg_color_2 . ' 100%);"';
+		$inline_styles = 'style="background: linear-gradient(90deg, ' . esc_attr( $bg_color_1 ) . ' 0%, ' . esc_attr( $bg_color_2 ) . ' 100%);"';
 
 	} elseif ( 'is-style-event-gradient' == $color_mode ) {
 

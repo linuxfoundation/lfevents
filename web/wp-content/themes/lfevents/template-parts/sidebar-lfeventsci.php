@@ -20,7 +20,7 @@ $query = new WP_Query(
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		echo '<h4 class="sidebar-item__title text-medium no-margin"><a href="' . esc_html( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h4>';
+		echo '<h4 class="sidebar-item__title text-medium no-margin"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h4>';
 		echo '<p class="text-tiny medium-margin-bottom">' . get_the_date() . '</p>';
 	}
 }
@@ -46,7 +46,7 @@ if ( $query->have_posts() ) {
 		$dt_date_start = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_start', true ) );
 		$dt_date_end   = new DateTime( get_post_meta( $post->ID, 'lfes_community_date_end', true ) );
 
-		echo '<h4 class="sidebar-item__title text-medium no-margin"><a class="prevent-orphaned-icon" target="_blank" rel="noopener noreferrer" href="' . esc_html( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
+		echo '<h4 class="sidebar-item__title text-medium no-margin"><a class="prevent-orphaned-icon" target="_blank" rel="noopener noreferrer" href="' . esc_url( get_post_meta( $post->ID, 'lfes_community_external_url', true ) ) . '">';
 		echo esc_html( get_the_title() );
 		echo '&nbsp;';
 		echo esc_html( get_template_part( 'template-parts/svg/external-link' ) );

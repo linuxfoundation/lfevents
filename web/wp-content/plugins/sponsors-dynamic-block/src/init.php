@@ -111,9 +111,9 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 
 	$out = '<div class="wp-block-cgb-sponsors-block">';
 	if ( $tier_name ) {
-		$out .= '<h3 class="sponsors-logos--header">' . $tier_name . '</h3>';
+		$out .= '<h3 class="sponsors-logos--header">' . esc_html( $tier_name ) . '</h3>';
 	}
-	$out .= '<div class="sponsors-logos ' . $tier_size . ' ' . get_sponsor_logos_class( $query->found_posts ) . '">';
+	$out .= '<div class="sponsors-logos ' . esc_attr( $tier_size ) . ' ' . get_sponsor_logos_class( $query->found_posts ) . '">';
 
 	// temporarily deactivate the size calculation for SVGs.
 	add_filter( 'safesvg_try_calculate_image_sizes', '__return_false' );
@@ -124,11 +124,12 @@ function sponsors_dynamic_block_callback( $attributes, $content ) {
 		$id             = get_the_ID();
 		$forwarding_url = esc_url( get_post_meta( $id, 'lfes_sponsor_url', true ) );
 		$size           = get_post_meta( $id, 'lfes_sponsor_size', true );
-		$alt_text       = esc_attr( get_post_meta( $id, 'lfes_sponsor_alt_text', true ) );
+		$alt_text       = get_post_meta( $id, 'lfes_sponsor_alt_text', true );
 
 		if ( ! $alt_text ) {
 			$alt_text = get_the_title();
 		}
+		$alt_text = esc_attr( $alt_text );
 
 		$out .= '<div class="sponsors-logo-item">';
 		if ( $forwarding_url ) {

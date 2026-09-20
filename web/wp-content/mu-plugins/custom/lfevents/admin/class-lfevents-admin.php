@@ -200,6 +200,23 @@ class LFEvents_Admin {
 	}
 
 	/**
+	 * Strips secret meta (the Sched API key) from public REST responses.
+	 *
+	 * The post-meta-controls plugin registers every sidebar field with show_in_rest, which
+	 * would otherwise expose the key to anonymous /wp/v2/pages requests.
+	 *
+	 * @param WP_REST_Response $response The response object.
+	 * @param WP_Post          $post     The post being returned.
+	 * @return WP_REST_Response
+	 */
+	public function hide_secret_meta_from_rest( $response, $post ) {
+		if ( ! current_user_can( 'edit_post', $post->ID ) && isset( $response->data['meta'] ) && is_array( $response->data['meta'] ) ) {
+			unset( $response->data['meta']['lfes_sched_event_api_key'] );
+		}
+		return $response;
+	}
+
+	/**
 	 * Adds filters to the Events listing in wp-admin
 	 */
 	public function event_filters() {
@@ -244,6 +261,9 @@ class LFEvents_Admin {
 	 * @param object $query Existing query.
 	 */
 	public function event_list_filter( $query ) {
+		if ( ! is_admin() || ! $query->is_main_query() ) {
+			return;
+		}
 		$post_id = isset( $_GET['admin-single-event'] ) ? (int) $_GET['admin-single-event'] : '';
 		if ( ! $post_id ) {
 			return;
