@@ -81,7 +81,7 @@ function live_stream_gate_callback( $block_attributes ) {
 	$classes      = isset( $block_attributes['className'] ) ? $block_attributes['className'] : '';
 	$anchor       = isset( $block_attributes['anchor'] ) ? $block_attributes['anchor'] : '';
 	$align        = isset( $block_attributes['align'] ) ? 'align-' . $block_attributes['align'] : '';
-	$content      = isset( $block_attributes['content'] ) ? wp_kses_post( $block_attributes['content'] ) : '';
+	$content      = isset( $block_attributes['content'] ) ? $block_attributes['content'] : '';
 	$sso_disabled = isset( $block_attributes['ssoDisabled'] ) ? $block_attributes['ssoDisabled'] : '';
 
 	if ( ! $content ) {
@@ -93,7 +93,7 @@ function live_stream_gate_callback( $block_attributes ) {
 	if ( $sso_disabled ) : ?>
 
 		<div class="wp-block-lf-live-stream-gate-block <?php echo esc_attr( $align ); ?> <?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $anchor ); ?>">
-			<?php echo $content; // phpcs:ignore -- kses-filtered above.
+			<?php echo $content; // phpcs:ignore.
 			?>
 		</div>
 		<?php
@@ -114,7 +114,7 @@ function live_stream_gate_callback( $block_attributes ) {
 			</div>
 		</div>
 		<div class="wp-block-lf-live-stream-gate-block is-auth0 only-authenticated <?php echo esc_attr( $align ); ?> <?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $anchor ); ?>">
-			<?php echo $content; // phpcs:ignore -- kses-filtered above.
+			<?php echo $content; // phpcs:ignore.
 			?>
 		</div>
 
