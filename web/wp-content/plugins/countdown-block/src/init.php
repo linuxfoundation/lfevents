@@ -113,13 +113,13 @@ function countdown_block_callback( $attributes, $content = '', $block = null ) {
 	}
 
 	if ( $time_left > 0 ) {
-		return '<div data-nosnippet ' . ( '' == $block_id ? '' : 'id="ub_countdown_' . $block_id . '"' ) . 'class="ub-countdown' .
+		return '<div data-nosnippet ' . ( '' == $block_id ? '' : 'id="ub_countdown_' . esc_attr( $block_id ) . '" ' ) . 'class="ub-countdown' .
 				( isset( $class_name ) ? ' ' . esc_attr( $class_name ) : '' ) .
-				'" data-expirymessage="' . esc_attr( $expiry_message ) . '" data-expiryalign="' . esc_attr( $message_align ) . '" data-end_date="' . $end_date . '">
+				'" data-expirymessage="' . esc_attr( $expiry_message ) . '" data-expiryalign="' . esc_attr( $message_align ) . '" data-end_date="' . (int) $end_date . '">
 			' . $selected_format
 			. '</div>';
 	} elseif ( isset( $attributes['expiryMessage'] ) ) {
-			return '<div class="callout" style="text-align:' . $message_align . '">' . $expiry_message . '</div>';
+			return '<div class="callout" style="text-align:' . esc_attr( $message_align ) . '">' . wp_kses_post( $expiry_message ) . '</div>';
 	} else {
 		return '';
 	}
@@ -128,11 +128,12 @@ function countdown_block_callback( $attributes, $content = '', $block = null ) {
 function countdown_block_generate_circle( $label, $value, $limit, $color ) { // phpcs:ignore
 	$circle_path = 'M 50,50 m 0,-35 a 35,35 0 1 1 0,70 a 35,35 0 1 1 0,-70';
 	$prefix      = 'ub_countdown_circle_';
+	$value       = (int) $value;
 
 	return '<div class="' . $prefix . $label . '">
 				<svg height="70" width="70" viewBox="0 0 100 100">
 					<path class="' . $prefix . 'trail" d="' . $circle_path . '" stroke-width="3" ></path>
-					<path class="' . $prefix . 'path" d="' . $circle_path . '" stroke="' . $color .
+					<path class="' . $prefix . 'path" d="' . $circle_path . '" stroke="' . esc_attr( $color ) .
 						'" stroke-width="3" style="stroke-dasharray: ' . $value * 219.911 / $limit . 'px, 219.911px;"></path>
 				</svg>
 				<div class="' . $prefix . 'label ub_countdown_' . $label . '">' . $value . '</div>

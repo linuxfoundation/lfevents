@@ -8,9 +8,18 @@
     "eject": "cgb-scripts eject"
   },
   "devDependencies": {
+    "@emotion/cache": "^11",
+    "@emotion/react": "^11",
     "cgb-scripts": "1.23.1",
     "debounce-promise": "^3.1.2",
     "react-select": "^4.0.0"
+  },
+  "comments": {
+    "overrides": "node-sass 4.x has no arm64/Node 20 binary and cannot build from source. sass-loader 6 predates the `implementation` option, so aliasing node-sass to dart-sass is the only lever.",
+    "build": "cgb-scripts needs NODE_OPTIONS=--openssl-legacy-provider on Node 17+, and it exits 0 even when compilation fails - always check the log for 'Built successfully'."
+  },
+  "overrides": {
+    "node-sass": "npm:sass@^1"
   },
   "repository": {
     "type": "git",

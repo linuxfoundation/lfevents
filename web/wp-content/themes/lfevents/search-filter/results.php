@@ -112,7 +112,7 @@ if ( $query->have_posts() ) {
 				<strong>
 					<?php
 					if ( 'publish' == $post->post_status ) {
-						echo '<a href="' . lfe_get_event_url( $post->ID ) . '">' . get_the_title() . '</a>'; //phpcs:ignore
+						echo '<a href="' . esc_url( lfe_get_event_url( $post->ID ) ) . '">' . esc_html( get_the_title() ) . '</a>';
 					} else {
 						the_title();
 					}

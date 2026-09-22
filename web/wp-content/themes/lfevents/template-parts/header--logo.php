@@ -16,7 +16,7 @@
 		href="<?php echo esc_url( home_url( '/' ) ); ?>">
 		<img width="161" height="48" loading="eager" class="header--logo__image"
 			alt="Linux Foundation Events logo"
-			src="<?php echo esc_html( get_stylesheet_directory_uri() . '/src/images/lf-events-logo.svg' ); ?>">
+			src="<?php echo esc_url( get_stylesheet_directory_uri() . '/src/images/lf-events-logo.svg' ); ?>">
 	</a>
 	<?php else : ?>
 	<a aria-label="<?php bloginfo( 'name' ); ?>" class="header--logo__link"
@@ -24,7 +24,7 @@
 		href="<?php echo esc_url( home_url( '/' ) ); ?>">
 		<img width="350" height="38" loading="eager" class="header--logo__image"
 			alt="<?php bloginfo( 'name' ); ?>"
-			src="<?php echo esc_html( get_stylesheet_directory_uri() . '/src/images/lf_osllc_white.svg' ); ?>">
+			src="<?php echo esc_url( get_stylesheet_directory_uri() . '/src/images/lf_osllc_white.svg' ); ?>">
 	</a>
 	<?php endif; ?>
 </div>

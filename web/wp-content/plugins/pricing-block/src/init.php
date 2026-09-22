@@ -96,12 +96,12 @@ function block_callback( $att ) {
 	$dates       = $att['dates'] ?? '';
 	$left_labels = $att['leftLabels'] ?? '';
 	$prices      = $att['prices'] ?? '';
-	$expire_text = $att['expireText'] ?? 'Expired';
-	$color1      = $att['color1'] ?? '';
-	$color2      = $att['color2'] ?? '';
-	$color3      = $att['color3'] ?? '';
-	$color4      = $att['color4'] ?? '';
-	$color_text  = $att['colorText'] ?? 'inherit';
+	$expire_text = wp_kses_post( $att['expireText'] ?? 'Expired' );
+	$color1      = esc_attr( $att['color1'] ?? '' );
+	$color2      = esc_attr( $att['color2'] ?? '' );
+	$color3      = esc_attr( $att['color3'] ?? '' );
+	$color4      = esc_attr( $att['color4'] ?? '' );
+	$color_text  = esc_attr( $att['colorText'] ?? 'inherit' );
 	$tz          = $att['timeZone'] ?? '-0700';
 	$language    = $att['language'] ?? 'ENG';
 	$yesterday   = new DateTime( 'now', new DateTimeZone( $tz ) );
@@ -132,7 +132,7 @@ function block_callback( $att ) {
 		if ( $label ) {
 			$html .= '<div class="attendee-type" style="color:' . $color_text . ';">';
 
-			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . '; border-color:' . $color1 . ';">' . $label . '</h4>';
+			$html .= '<h4 class="attendee-type--name" style="color:' . $color1 . '; border-color:' . $color1 . ';">' . wp_kses_post( $label ) . '</h4>';
 			for ( $i = 0; $i < 4; $i++ ) {
 				if ( $top_labels[ $i ] ) {
 					if ( 0 === $i ) {
@@ -161,17 +161,17 @@ function block_callback( $att ) {
 					$html .= '<div class="price-cell ' . $expired . '" style="background-color:' . $color . ';">';
 
 					$html .= '<div class="price-window" style="background-color:' . $color . '">';
-					$html .= '<h5 class="price-window--name">' . $top_labels[ $i ];
+					$html .= '<h5 class="price-window--name">' . wp_kses_post( $top_labels[ $i ] );
 					$html .= '<small class="price-window--date-range">' . jb_verbose_date_range( $date_start, $date_end, '<br>', $language ) . '</small>';
 					$html .= '</h5>';
 					$html .= '</div>';
 					$html .= '<div class="price-amount">';
 					$j     = $i + ( $row * 4 );
 					if ( $date_end < $yesterday ) {
-						$html .= '<s>' . $prices[ $j ] . '</s>';
+						$html .= '<s>' . wp_kses_post( $prices[ $j ] ) . '</s>';
 						$html .= '<span class="expired-label">' . $expire_text . '</span>';
 					} else {
-						$html .= $prices[ $j ];
+						$html .= wp_kses_post( $prices[ $j ] );
 					}
 					$html .= '</div>';
 

@@ -96,7 +96,7 @@ function text_on_image_block_callback( $attributes ) {
 		<?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
 		<div class="text">
 			<blockquote>
-				<div class="copy-bd"><?php echo apply_filters( 'the_content', $text ); // phpcs:ignore ?></div>
+				<div class="copy-bd"><?php echo wp_kses_post( apply_filters( 'the_content', $text ) ); ?></div>
 			</blockquote>
 		</div>
 	</div>

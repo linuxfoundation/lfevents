@@ -158,9 +158,9 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	foreach ( $related_events as $p ) {
 		$logo = get_post_meta( $p['ID'], 'lfes_' . $menu_text_color . '_logo', true );
 		if ( $logo ) {
-			$event_link_content = '<img src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $p['ID'] ) . '">';
+			$event_link_content = '<img src="' . esc_url( wp_get_attachment_url( $logo ) ) . '" alt="' . esc_attr( get_the_title( $p['ID'] ) ) . '">';
 		} else {
-			$event_link_content = get_the_title( $p['ID'] );
+			$event_link_content = esc_html( get_the_title( $p['ID'] ) );
 		}
 
 		echo '<li><a href="' . esc_url( lfe_get_event_url( $p['ID'] ) ) . '">' . $event_link_content . '</a></li>'; //phpcs:ignore
@@ -177,7 +177,7 @@ function lfe_get_other_events( $parent_id, $background_style, $menu_text_color )
 	$extra_link_text = get_post_meta( $parent_id, 'lfes_extra_vae_link_text', true );
 	$extra_link_url  = get_post_meta( $parent_id, 'lfes_extra_vae_link_url', true );
 	if ( $extra_link_text && $extra_link_url ) {
-		echo '<li class="external-link"><a target="_blank" href="' . esc_attr( $extra_link_url ) . '"><span class="subtext">'; //phpcs:ignore
+		echo '<li class="external-link"><a target="_blank" href="' . esc_url( $extra_link_url ) . '"><span class="subtext">';
 		echo esc_html( $extra_link_text ) . ' ';
 		echo esc_html( get_template_part( 'template-parts/svg/external-link' ) );
 		echo '</span></a></li>';
@@ -394,11 +394,11 @@ function lfe_insert_favicon() {
 	$favicon   = get_post_meta( $parent_id, 'lfes_favicon', true );
 
 	if ( $favicon ) {
-		$out = '<link rel="icon" type="image/png" sizes="32x32" href="' . wp_get_attachment_url( $favicon ) . '">' . "\n";
+		$out = '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url( wp_get_attachment_url( $favicon ) ) . '">' . "\n";
 	} else {
-		$out = '<link rel="icon" sizes="any" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/favicon.ico">' . "\n";
-		$out .= '<link rel="apple-touch-icon" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/apple-touch-icon.png">' . "\n";
-		$out .= '<link rel="manifest" href="' . get_stylesheet_directory_uri() . '/src/images/favicons/site.webmanifest" async>' . "\n";
+		$out  = '<link rel="icon" sizes="any" href="' . esc_url( get_stylesheet_directory_uri() . '/src/images/favicons/favicon.ico' ) . '">' . "\n";
+		$out .= '<link rel="apple-touch-icon" href="' . esc_url( get_stylesheet_directory_uri() . '/src/images/favicons/apple-touch-icon.png' ) . '">' . "\n";
+		$out .= '<link rel="manifest" href="' . esc_url( get_stylesheet_directory_uri() . '/src/images/favicons/site.webmanifest' ) . '" async>' . "\n";
 	}
 
 	echo $out; //phpcs:ignore
@@ -746,8 +746,12 @@ function lfe_event_alert_bar( $parent_id ) {
 	// get alert background color or set default.
 	$alert_background_color = get_post_meta( $parent_id, 'lfes_alert_background_color', true ) ? get_post_meta( $parent_id, 'lfes_alert_background_color', true ) : '#0082ad';
 
-	$out  = '<div class="event-alert-bar" style="color: ' . esc_html( $alert_text_color ) . '; background-color: ' . esc_html( $alert_background_color ) . ';">';
-	$out .= preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a href="$2">$1</a>', $alert_text );
+	// Alert text is plain text with optional [label](https://url) links; kses strips anything else the regex lets through.
+	$alert_html = preg_replace( '/\[(.*?)]\((https?.*?)\)/', '<a href="$2">$1</a>', $alert_text );
+	$alert_html = wp_kses( $alert_html, array( 'a' => array( 'href' => true ) ) );
+
+	$out  = '<div class="event-alert-bar" style="color: ' . esc_attr( $alert_text_color ) . '; background-color: ' . esc_attr( $alert_background_color ) . ';">';
+	$out .= $alert_html;
 	$out .= '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon--inline small-margin-left"><path fill="currentColor" d="M363.8 264.5L217 412.5c-4.7 4.7-12.3 4.7-17 0l-19.8-19.8c-4.7-4.7-4.7-12.3 0-17L298.7 256 180.2 136.3c-4.7-4.7-4.7-12.3 0-17L200 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17zm-160-17L57 99.5c-4.7-4.7-12.3-4.7-17 0l-19.8 19.8c-4.7 4.7-4.7 12.3 0 17L138.7 256 20.2 375.7c-4.7 4.7-4.7 12.3 0 17L40 412.5c4.7 4.7 12.3 4.7 17 0l146.8-148c4.7-4.7 4.7-12.3 0-17z" class=""></path></svg>';
 	$out .= '</div>';
 
