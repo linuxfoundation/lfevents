@@ -1188,3 +1188,114 @@ $sidebar = array(
 // Push the $sidebar we just assigned to the variable
 // to the array of $sidebars that comes in the function argument.
 $sidebars[] = $sidebar;
+
+$sidebar = array(
+	'id'              => 'lfevent-sidebar-external',
+	'id_prefix'       => 'lfes_external_',
+	'label'           => __( 'Event Settings' ),
+	'post_type'       => 'lfe_external_event',
+	'data_key_prefix' => 'lfes_external_',
+	'icon_dashicon'   => 'format-gallery',
+	'tabs'            => array(
+		array(
+			'label'  => __( 'Tab label' ),
+			'panels' => array(
+				array(
+					'label'        => __( 'General' ),
+					'initial_open' => true,
+					'settings'     => array(
+						array(
+							'type'          => 'text',
+							'id'            => 'date_start',
+							'data_type'     => 'meta',
+							'data_key'      => 'date_start',
+							'label'         => __( 'Event start date' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => 'YYYY/MM/DD',
+						),
+						array(
+							'type'          => 'text',
+							'id'            => 'date_end',
+							'data_type'     => 'meta',
+							'data_key'      => 'date_end',
+							'label'         => __( 'Event end date' ),
+							'register_meta' => true,
+							'ui_border_top' => false,
+							'default_value' => '',
+							'placeholder'   => 'YYYY/MM/DD',
+						),
+						array(
+							'type'          => 'text',
+							'id'            => 'event_url',
+							'data_type'     => 'meta',
+							'data_key'      => 'event_url',
+							'label'         => __( 'URL to event site' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => 'https://example.com/conference/',
+						),
+						array(
+							'type'          => 'text',
+							'id'            => 'organizer',
+							'data_type'     => 'meta',
+							'data_key'      => 'organizer',
+							'label'         => __( 'Organizer' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => __( 'Organization name' ),
+						),
+						array(
+							'type'          => 'textarea',
+							'id'            => 'description',
+							'data_type'     => 'meta',
+							'data_key'      => 'description',
+							'label'         => __( 'Short description' ),
+							'help'          => __( 'Use markdown for links and bullets' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => '',
+						),
+					),
+				),
+				array(
+					'label'        => __( 'Location' ),
+					'initial_open' => true,
+					'settings'     => array(
+						array(
+							'type'          => 'checkbox',
+							'id'            => 'virtual',
+							'data_type'     => 'meta',
+							'data_key'      => 'virtual',
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => false,
+							'use_toggle'    => false,
+							'input_label'   => __( 'Virtual' ),
+						),
+						array(
+							'type'          => 'text',
+							'id'            => 'city',
+							'data_type'     => 'meta',
+							'data_key'      => 'city',
+							'label'         => __( 'City' ),
+							'help'          => __( 'Set the country using the Event Countries panel' ),
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => '',
+							'placeholder'   => __( 'Paris' ),
+						),
+					),
+				),
+			),
+		),
+	),
+);
+
+// Push the $sidebar we just assigned to the variable
+// to the array of $sidebars that comes in the function argument.
+$sidebars[] = $sidebar;

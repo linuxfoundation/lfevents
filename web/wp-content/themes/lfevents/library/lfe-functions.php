@@ -624,6 +624,222 @@ function lfe_get_event_url( $post_id ) {
 }
 
 /**
+ * Returns the country name of a post from the lfevent-country taxonomy, or ''.
+ *
+ * @param int $post_id Post id.
+ */
+function lfe_get_event_country_name( $post_id ) {
+	$terms = wp_get_post_terms( $post_id, 'lfevent-country' );
+	if ( $terms && ! is_wp_error( $terms ) ) {
+		return $terms[0]->name;
+	}
+	return '';
+}
+
+/**
+ * Gathers the upcoming LF Events and External Events that share the lfevent-category
+ * terms assigned to a Theme Calendar post, normalised into one date-sorted array.
+ *
+ * @param int $calendar_id The lfe_theme_calendar post id.
+ * @return array Each item: id, title, url, date_start, date_end, city, country, virtual,
+ *               cfp_active, cfp_date_start, cfp_date_end, organizer, description, is_external.
+ */
+function lfe_get_theme_calendar_events( $calendar_id ) {
+	$term_ids = wp_get_post_terms( $calendar_id, 'lfevent-category', array( 'fields' => 'ids' ) );
+	if ( empty( $term_ids ) || is_wp_error( $term_ids ) ) {
+		return array();
+	}
+
+	$tax_query = array(
+		array(
+			'taxonomy' => 'lfevent-category',
+			'field'    => 'term_id',
+			'terms'    => $term_ids,
+		),
+	);
+	$today     = gmdate( 'Y/m/d' );
+	$events    = array();
+
+	// LF Events. lfes_event_has_passed is only updated lazily, so also check the end date here.
+	$args              = LFEvents_API::build_event_query_args( 'upcoming' );
+	$args['tax_query'] = $tax_query; //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+	$query             = new WP_Query( $args );
+	foreach ( $query->posts as $post ) {
+		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
+		$date_end   = get_post_meta( $post->ID, 'lfes_date_end', true );
+		if ( check_string_is_date( $date_end ) && $date_end < $today ) {
+			continue;
+		}
+		$events[] = array(
+			'id'             => $post->ID,
+			'title'          => get_the_title( $post ),
+			'url'            => lfe_get_event_url( $post->ID ),
+			'date_start'     => $date_start,
+			'date_end'       => $date_end,
+			'city'           => get_post_meta( $post->ID, 'lfes_city', true ),
+			'country'        => lfe_get_event_country_name( $post->ID ),
+			'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_virtual', true ),
+			'cfp_active'     => get_post_meta( $post->ID, 'lfes_cfp_active', true ),
+			'cfp_date_start' => get_post_meta( $post->ID, 'lfes_cfp_date_start', true ),
+			'cfp_date_end'   => get_post_meta( $post->ID, 'lfes_cfp_date_end', true ),
+			'organizer'      => '',
+			'description'    => get_post_meta( $post->ID, 'lfes_description', true ),
+			'is_external'    => false,
+		);
+	}
+
+	// External Events. Dates are YYYY/MM/DD strings so lexical comparison works.
+	$query = new WP_Query(
+		array(
+			'post_type'      => 'lfe_external_event',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'no_found_rows'  => true,
+			'tax_query'      => $tax_query, //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			'meta_query'     => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'relation' => 'OR',
+				array(
+					'key'     => 'lfes_external_date_end',
+					'value'   => $today,
+					'compare' => '>=',
+				),
+				array(
+					'key'     => 'lfes_external_date_end',
+					'value'   => '',
+					'compare' => '=',
+				),
+				array(
+					'key'     => 'lfes_external_date_end',
+					'compare' => 'NOT EXISTS',
+				),
+			),
+		)
+	);
+	foreach ( $query->posts as $post ) {
+		$events[] = array(
+			'id'             => $post->ID,
+			'title'          => get_the_title( $post ),
+			'url'            => get_post_meta( $post->ID, 'lfes_external_event_url', true ),
+			'date_start'     => get_post_meta( $post->ID, 'lfes_external_date_start', true ),
+			'date_end'       => get_post_meta( $post->ID, 'lfes_external_date_end', true ),
+			'city'           => get_post_meta( $post->ID, 'lfes_external_city', true ),
+			'country'        => lfe_get_event_country_name( $post->ID ),
+			'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_external_virtual', true ),
+			'cfp_active'     => '',
+			'cfp_date_start' => '',
+			'cfp_date_end'   => '',
+			'organizer'      => get_post_meta( $post->ID, 'lfes_external_organizer', true ),
+			'description'    => get_post_meta( $post->ID, 'lfes_external_description', true ),
+			'is_external'    => true,
+		);
+	}
+
+	// Sort by start date; events without a valid date (TBA) go last.
+	usort(
+		$events,
+		function ( $a, $b ) {
+			$a_valid = check_string_is_date( $a['date_start'] );
+			$b_valid = check_string_is_date( $b['date_start'] );
+			if ( $a_valid !== $b_valid ) {
+				return $a_valid ? -1 : 1;
+			}
+			if ( $a_valid && $a['date_start'] !== $b['date_start'] ) {
+				return strcmp( $a['date_start'], $b['date_start'] );
+			}
+			return strcasecmp( $a['title'], $b['title'] );
+		}
+	);
+
+	return $events;
+}
+
+/**
+ * Outputs a schema.org ItemList of Events for a Theme Calendar.
+ *
+ * @param array $events Normalised events from lfe_get_theme_calendar_events().
+ */
+function lfe_insert_theme_calendar_structured_data( $events ) {
+	$items = array();
+
+	foreach ( $events as $i => $event ) {
+		if ( ! check_string_is_date( $event['date_start'] ) ) {
+			continue;
+		}
+
+		$date_start = ( new DateTime( $event['date_start'] ) )->format( 'Y-m-d' );
+		$date_end   = check_string_is_date( $event['date_end'] ) ? ( new DateTime( $event['date_end'] ) )->format( 'Y-m-d' ) : $date_start;
+
+		$place  = array(
+			'@type'   => 'Place',
+			'name'    => esc_html( $event['city'] ),
+			'address' => array(
+				'@type'           => 'PostalAddress',
+				'addressLocality' => esc_html( $event['city'] ),
+				'addressCountry'  => esc_html( $event['country'] ),
+			),
+		);
+		$online = array(
+			'@type' => 'VirtualLocation',
+			'url'   => esc_url( $event['url'] ),
+		);
+
+		if ( $event['virtual'] && $event['city'] ) {
+			$attendance_mode = 'https://schema.org/MixedEventAttendanceMode';
+			$location        = array( $place, $online );
+		} elseif ( $event['virtual'] ) {
+			$attendance_mode = 'https://schema.org/OnlineEventAttendanceMode';
+			$location        = array( $online );
+		} else {
+			$attendance_mode = 'https://schema.org/OfflineEventAttendanceMode';
+			$location        = array( $place );
+		}
+
+		$item = array(
+			'@type'               => 'Event',
+			'name'                => esc_html( $event['title'] ),
+			'url'                 => esc_url( $event['url'] ),
+			'startDate'           => $date_start,
+			'endDate'             => $date_end,
+			'eventAttendanceMode' => $attendance_mode,
+			'eventStatus'         => 'https://schema.org/EventScheduled',
+			'location'            => $location,
+		);
+
+		if ( $event['description'] ) {
+			$parsedown = new Parsedown();
+			$parsedown->setSafeMode( true );
+			$item['description'] = esc_html( trim( wp_strip_all_tags( $parsedown->text( $event['description'] ) ) ) );
+		}
+
+		$item['organizer'] = array(
+			'@type' => 'Organization',
+			'name'  => $event['is_external'] && $event['organizer'] ? esc_html( $event['organizer'] ) : 'The Linux Foundation',
+		);
+
+		$items[] = array(
+			'@type'    => 'ListItem',
+			'position' => count( $items ) + 1,
+			'item'     => $item,
+		);
+	}
+
+	if ( ! $items ) {
+		return;
+	}
+
+	$list = array(
+		'@context'        => 'https://schema.org',
+		'@type'           => 'ItemList',
+		'name'            => esc_html( get_the_title() ),
+		'url'             => esc_url( get_permalink() ),
+		'numberOfItems'   => count( $items ),
+		'itemListElement' => $items,
+	);
+
+	echo '<script type="application/ld+json">' . json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>'; //phpcs:ignore
+}
+
+/**
  * Generates image URL and ID via my_get_image_value.
  *
  * @generator
