@@ -188,6 +188,8 @@ class LFEvents {
 		$this->loader->add_action( 'manage_lfe_speaker_posts_custom_column', $plugin_admin, 'speaker_custom_column_data', 10, 2 );
 		$this->loader->add_filter( 'manage_lfe_sponsor_posts_columns', $plugin_admin, 'sponsor_custom_column' );
 		$this->loader->add_action( 'manage_lfe_sponsor_posts_custom_column', $plugin_admin, 'sponsor_custom_column_data', 10, 2 );
+		$this->loader->add_filter( 'manage_lfe_external_event_posts_columns', $plugin_admin, 'external_event_custom_column' );
+		$this->loader->add_action( 'manage_lfe_external_event_posts_custom_column', $plugin_admin, 'external_event_custom_column_data', 10, 2 );
 
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );

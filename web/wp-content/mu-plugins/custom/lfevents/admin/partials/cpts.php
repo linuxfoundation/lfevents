@@ -118,8 +118,49 @@ $opts = array(
 	'show_in_rest'       => true,
 	'hierarchical'       => true,
 	'menu_icon'          => 'dashicons-admin-site',
+	'menu_position'      => 21,
 	'rewrite'            => array( 'slug' => 'community' ),
 	'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields', 'author' ),
 );
 
 register_post_type( 'lfe_community_event', $opts );
+
+$opts = array(
+	'labels'             => array(
+		'name'          => __( 'External Events' ),
+		'singular_name' => __( 'External Event' ),
+		'all_items'     => __( 'All External Events' ),
+	),
+	'public'             => false, // not publicly viewable.
+	'publicly_queryable' => false, // not publicly queryable.
+	'show_ui'            => true, // But still show admin UI.
+	'has_archive'        => false,
+	'show_in_nav_menus'  => false,
+	'show_in_rest'       => true,
+	'hierarchical'       => false,
+	'menu_icon'          => 'dashicons-external',
+	'menu_position'      => 22,
+	'rewrite'            => array( 'slug' => 'external-events' ),
+	// 'editor' loads the block editor (hosts the sidebar); 'custom-fields' enables REST meta so it can save.
+	'supports'           => array( 'title', 'editor', 'custom-fields', 'revisions', 'author' ),
+);
+
+register_post_type( 'lfe_external_event', $opts );
+
+$opts = array(
+	'labels'        => array(
+		'name'          => __( 'Theme Calendars' ),
+		'singular_name' => __( 'Theme Calendar' ),
+		'all_items'     => __( 'All Theme Calendars' ),
+	),
+	'public'        => true,
+	'has_archive'   => false,
+	'show_in_rest'  => true,
+	'hierarchical'  => false,
+	'menu_icon'     => 'dashicons-calendar-alt',
+	'menu_position' => 23,
+	'rewrite'       => array( 'slug' => 'calendar' ),
+	'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'author' ),
+);
+
+register_post_type( 'lfe_theme_calendar', $opts );

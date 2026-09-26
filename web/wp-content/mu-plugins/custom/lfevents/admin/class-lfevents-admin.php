@@ -159,7 +159,7 @@ class LFEvents_Admin {
 			'show_ui'            => true, // But still show admin UI.
 		);
 
-		register_taxonomy( 'lfevent-category', $this->post_types, $args );
+		register_taxonomy( 'lfevent-category', array_merge( $this->post_types, array( 'lfe_theme_calendar', 'lfe_external_event' ) ), $args );
 
 		$labels = array(
 			'name'              => _x( 'Event Countries', 'taxonomy general name' ),
@@ -184,7 +184,7 @@ class LFEvents_Admin {
 			'show_ui'            => true, // But still show admin UI.
 		);
 
-		register_taxonomy( 'lfevent-country', array_merge( $this->post_types, array( 'lfe_community_event' ) ), $args );
+		register_taxonomy( 'lfevent-country', array_merge( $this->post_types, array( 'lfe_community_event', 'lfe_external_event' ) ), $args );
 	}
 
 	/**
@@ -477,6 +477,54 @@ class LFEvents_Admin {
 		// add back in old columns.
 		$columns['author'] = $author;
 		$columns['date']   = $date;
+		return $columns;
+	}
+
+	/**
+	 * Add custom column data to lfe_external_event admin display.
+	 *
+	 * @param string $column The column.
+	 * @param int    $post_id The post.
+	 * @return void
+	 */
+	public function external_event_custom_column_data( $column, $post_id ) {
+		switch ( $column ) {
+			case 'event_dates':
+				$start = get_post_meta( $post_id, 'lfes_external_date_start', true );
+				$end   = get_post_meta( $post_id, 'lfes_external_date_end', true );
+				echo esc_html( $start ? $start . ( $end && $end !== $start ? ' – ' . $end : '' ) : '-' );
+				break;
+			case 'organizer':
+				$organizer = get_post_meta( $post_id, 'lfes_external_organizer', true );
+				echo esc_html( $organizer ? $organizer : '-' );
+				break;
+			case 'event_url':
+				$url = get_post_meta( $post_id, 'lfes_external_event_url', true );
+				echo $url ? '<a href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . esc_html( $url ) . '</a>' : '-';
+				break;
+			case 'event_category':
+				$terms = wp_get_post_terms( $post_id, 'lfevent-category', array( 'fields' => 'names' ) );
+				echo esc_html( ( $terms && ! is_wp_error( $terms ) ) ? implode( ', ', $terms ) : '-' );
+				break;
+		}
+	}
+
+	/**
+	 * Add custom column header to lfe_external_event admin display.
+	 *
+	 * @param array $columns Column headers.
+	 */
+	public function external_event_custom_column( $columns ) {
+		$date   = $columns['date'];
+		$author = $columns['author'];
+		unset( $columns['date'] );
+		unset( $columns['author'] );
+		$columns['event_dates']    = 'Event Dates';
+		$columns['organizer']      = 'Organizer';
+		$columns['event_url']      = 'Event URL';
+		$columns['event_category'] = 'Event Category';
+		$columns['author']         = $author;
+		$columns['date']           = $date;
 		return $columns;
 	}
 
