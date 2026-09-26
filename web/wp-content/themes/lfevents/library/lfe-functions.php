@@ -637,6 +637,31 @@ function lfe_get_event_country_name( $post_id ) {
 }
 
 /**
+ * Normalises a top-level LF Event post into the shape shared with External Events.
+ *
+ * @param WP_Post $post The event post.
+ * @return array
+ */
+function lfe_normalize_lf_event( WP_Post $post ) {
+	return array(
+		'id'             => $post->ID,
+		'title'          => get_the_title( $post ),
+		'url'            => lfe_get_event_url( $post->ID ),
+		'date_start'     => get_post_meta( $post->ID, 'lfes_date_start', true ),
+		'date_end'       => get_post_meta( $post->ID, 'lfes_date_end', true ),
+		'city'           => get_post_meta( $post->ID, 'lfes_city', true ),
+		'country'        => lfe_get_event_country_name( $post->ID ),
+		'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_virtual', true ),
+		'cfp_active'     => get_post_meta( $post->ID, 'lfes_cfp_active', true ),
+		'cfp_date_start' => get_post_meta( $post->ID, 'lfes_cfp_date_start', true ),
+		'cfp_date_end'   => get_post_meta( $post->ID, 'lfes_cfp_date_end', true ),
+		'organizer'      => '',
+		'description'    => get_post_meta( $post->ID, 'lfes_description', true ),
+		'is_external'    => false,
+	);
+}
+
+/**
  * Gathers the upcoming LF Events and External Events that share the lfevent-category
  * terms assigned to a Theme Calendar post, normalised into one date-sorted array.
  *
@@ -665,27 +690,11 @@ function lfe_get_theme_calendar_events( $calendar_id ) {
 	$args['tax_query'] = $tax_query; //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 	$query             = new WP_Query( $args );
 	foreach ( $query->posts as $post ) {
-		$date_start = get_post_meta( $post->ID, 'lfes_date_start', true );
-		$date_end   = get_post_meta( $post->ID, 'lfes_date_end', true );
-		if ( check_string_is_date( $date_end ) && $date_end < $today ) {
+		$event = lfe_normalize_lf_event( $post );
+		if ( check_string_is_date( $event['date_end'] ) && $event['date_end'] < $today ) {
 			continue;
 		}
-		$events[] = array(
-			'id'             => $post->ID,
-			'title'          => get_the_title( $post ),
-			'url'            => lfe_get_event_url( $post->ID ),
-			'date_start'     => $date_start,
-			'date_end'       => $date_end,
-			'city'           => get_post_meta( $post->ID, 'lfes_city', true ),
-			'country'        => lfe_get_event_country_name( $post->ID ),
-			'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_virtual', true ),
-			'cfp_active'     => get_post_meta( $post->ID, 'lfes_cfp_active', true ),
-			'cfp_date_start' => get_post_meta( $post->ID, 'lfes_cfp_date_start', true ),
-			'cfp_date_end'   => get_post_meta( $post->ID, 'lfes_cfp_date_end', true ),
-			'organizer'      => '',
-			'description'    => get_post_meta( $post->ID, 'lfes_description', true ),
-			'is_external'    => false,
-		);
+		$events[] = $event;
 	}
 
 	// External Events. Dates are YYYY/MM/DD strings so lexical comparison works.
@@ -754,14 +763,16 @@ function lfe_get_theme_calendar_events( $calendar_id ) {
 }
 
 /**
- * Outputs a schema.org ItemList of Events for a Theme Calendar.
+ * Outputs a schema.org ItemList of Events for a listing page.
  *
- * @param array $events Normalised events from lfe_get_theme_calendar_events().
+ * @param array  $events Normalised events (see lfe_normalize_lf_event()).
+ * @param string $name   List name; defaults to the queried page title.
+ * @param string $url    List URL; defaults to the queried page permalink.
  */
-function lfe_insert_theme_calendar_structured_data( $events ) {
+function lfe_insert_events_structured_data( $events, $name = '', $url = '' ) {
 	$items = array();
 
-	foreach ( $events as $i => $event ) {
+	foreach ( $events as $event ) {
 		if ( ! check_string_is_date( $event['date_start'] ) ) {
 			continue;
 		}
@@ -827,11 +838,19 @@ function lfe_insert_theme_calendar_structured_data( $events ) {
 		return;
 	}
 
+	$queried = get_queried_object();
+	if ( '' === $name && $queried instanceof WP_Post ) {
+		$name = get_the_title( $queried );
+	}
+	if ( '' === $url && $queried instanceof WP_Post ) {
+		$url = get_permalink( $queried );
+	}
+
 	$list = array(
 		'@context'        => 'https://schema.org',
 		'@type'           => 'ItemList',
-		'name'            => esc_html( get_the_title() ),
-		'url'             => esc_url( get_permalink() ),
+		'name'            => esc_html( $name ),
+		'url'             => esc_url( $url ),
 		'numberOfItems'   => count( $items ),
 		'itemListElement' => $items,
 	);

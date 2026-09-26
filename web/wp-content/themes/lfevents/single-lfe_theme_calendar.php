@@ -15,7 +15,7 @@ get_template_part( 'template-parts/header-global' );
 	while ( have_posts() ) :
 		the_post();
 		$events = lfe_get_theme_calendar_events( get_the_ID() );
-		lfe_insert_theme_calendar_structured_data( $events );
+		lfe_insert_events_structured_data( $events );
 		?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<div class="entry-content event-calendar-header wrap container">

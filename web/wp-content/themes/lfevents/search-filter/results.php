@@ -206,6 +206,10 @@ if ( $query->have_posts() ) {
 		</article>
 		<?php
 	}
+
+	// Pending events are listed without links, so leave them out of the structured data.
+	$published = array_filter( $query->posts, fn( $p ) => 'publish' === $p->post_status );
+	lfe_insert_events_structured_data( array_map( 'lfe_normalize_lf_event', $published ) );
 } else {
 	get_template_part( 'template-parts/no-events-message' );
 }
