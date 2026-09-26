@@ -510,100 +510,9 @@ function lfe_insert_structured_data() {
 		return;
 	}
 
-	$date_start = get_post_meta( $event_id, 'lfes_date_start', true );
-	if ( check_string_is_date( $date_start ) ) {
-		$dt_date_start = new DateTime( $date_start );
-		$dt_date_end   = new DateTime( get_post_meta( $event_id, 'lfes_date_end', true ) );
-		$date_start    = $dt_date_start->format( 'Y-m-d' );
-		$date_end      = $dt_date_end->format( 'Y-m-d' );
-	} else {
-		$date_start = '';
-		$date_end   = '';
-	}
-
-	$country = wp_get_post_terms( $event_id, 'lfevent-country' );
-	if ( $country ) {
-		$country = $country[0]->name;
-	} else {
-		$country = '';
-	}
-
-	$image_url = get_post_meta( $event_id, '_social_image_url', true );
-	if ( ! $image_url ) {
-		$image_url = get_the_post_thumbnail_url( $event_id );
-	}
-
-	$description    = get_post_meta( $event_id, 'lfes_description', true );
-	$virtual        = get_post_meta( $event_id, 'lfes_virtual', true );
-	$city           = get_post_meta( $event_id, 'lfes_city', true );
-	$venue          = get_post_meta( $event_id, 'lfes_venue', true );
-	$street_address = get_post_meta( $event_id, 'lfes_street_address', true );
-	$postal_code    = get_post_meta( $event_id, 'lfes_postal_code', true );
-	$region         = get_post_meta( $event_id, 'lfes_region', true );
-	$city           = get_post_meta( $event_id, 'lfes_city', true );
-
-	$virtual_url = get_post_meta( $event_id, 'lfes_cta_register_url', true );
-	if ( ! $virtual_url ) {
-		$virtual_url = get_permalink( $event_id );
-	}
-
-	if ( $virtual && $city ) {
-		$attendance_mode = 'https://schema.org/MixedEventAttendanceMode';
-		$location        = array(
-			array(
-				'@type'   => 'Place',
-				'name'    => esc_html( $venue ),
-				'address' => array(
-					'@type'           => 'PostalAddress',
-					'streetAddress'   => esc_html( $street_address ),
-					'addressLocality' => esc_html( $city ),
-					'postalCode'      => esc_html( $postal_code ),
-					'addressRegion'   => esc_html( $region ),
-					'addressCountry'  => esc_html( $country ),
-				),
-			),
-			array(
-				'@type' => 'VirtualLocation',
-				'url'   => esc_url( $virtual_url ),
-			),
-		);
-	} elseif ( $virtual ) {
-		$attendance_mode = 'https://schema.org/OnlineEventAttendanceMode';
-		$location        = array(
-			array(
-				'@type' => 'VirtualLocation',
-				'url'   => esc_url( $virtual_url ),
-			),
-		);
-	} else {
-		$attendance_mode = 'https://schema.org/OfflineEventAttendanceMode';
-		$location        = array(
-			array(
-				'@type'   => 'Place',
-				'name'    => esc_html( $venue ),
-				'address' => array(
-					'@type'           => 'PostalAddress',
-					'streetAddress'   => esc_html( $street_address ),
-					'addressLocality' => esc_html( $city ),
-					'postalCode'      => esc_html( $postal_code ),
-					'addressRegion'   => esc_html( $region ),
-					'addressCountry'  => esc_html( $country ),
-				),
-			),
-		);
-	}
-
-	$event = array(
-		'@context'            => 'http://schema.org/',
-		'@type'               => 'Event',
-		'name'                => esc_html( $event_post->post_title ),
-		'startDate'           => $date_start,
-		'endDate'             => $date_end,
-		'eventAttendanceMode' => $attendance_mode,
-		'eventStatus'         => 'https://schema.org/EventScheduled',
-		'location'            => $location,
-		'image'               => array( esc_url( $image_url ) ),
-		'description'         => esc_html( $description ),
+	$event = array_merge(
+		array( '@context' => 'https://schema.org' ),
+		lfe_build_event_schema( lfe_normalize_lf_event( $event_post ) )
 	);
 
 	echo '<script type="application/ld+json">' . json_encode( $event, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>'; //phpcs:ignore
@@ -643,15 +552,29 @@ function lfe_get_event_country_name( $post_id ) {
  * @return array
  */
 function lfe_normalize_lf_event( WP_Post $post ) {
+	$image = get_post_meta( $post->ID, '_social_image_url', true );
+	if ( ! $image ) {
+		$image = (string) get_the_post_thumbnail_url( $post->ID );
+	}
+
+	$url          = lfe_get_event_url( $post->ID );
+	$register_url = get_post_meta( $post->ID, 'lfes_cta_register_url', true );
+
 	return array(
 		'id'             => $post->ID,
 		'title'          => get_the_title( $post ),
-		'url'            => lfe_get_event_url( $post->ID ),
+		'url'            => $url,
+		'virtual_url'    => $register_url ? $register_url : $url,
 		'date_start'     => get_post_meta( $post->ID, 'lfes_date_start', true ),
 		'date_end'       => get_post_meta( $post->ID, 'lfes_date_end', true ),
+		'venue'          => get_post_meta( $post->ID, 'lfes_venue', true ),
+		'street_address' => get_post_meta( $post->ID, 'lfes_street_address', true ),
+		'postal_code'    => get_post_meta( $post->ID, 'lfes_postal_code', true ),
+		'region'         => get_post_meta( $post->ID, 'lfes_region', true ),
 		'city'           => get_post_meta( $post->ID, 'lfes_city', true ),
 		'country'        => lfe_get_event_country_name( $post->ID ),
 		'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_virtual', true ),
+		'image'          => $image,
 		'cfp_active'     => get_post_meta( $post->ID, 'lfes_cfp_active', true ),
 		'cfp_date_start' => get_post_meta( $post->ID, 'lfes_cfp_date_start', true ),
 		'cfp_date_end'   => get_post_meta( $post->ID, 'lfes_cfp_date_end', true ),
@@ -659,6 +582,112 @@ function lfe_normalize_lf_event( WP_Post $post ) {
 		'description'    => get_post_meta( $post->ID, 'lfes_description', true ),
 		'is_external'    => false,
 	);
+}
+
+/**
+ * Normalises an External Event post into the shape shared with LF Events.
+ *
+ * @param WP_Post $post The lfe_external_event post.
+ * @return array
+ */
+function lfe_normalize_external_event( WP_Post $post ) {
+	$url = get_post_meta( $post->ID, 'lfes_external_event_url', true );
+
+	return array(
+		'id'             => $post->ID,
+		'title'          => get_the_title( $post ),
+		'url'            => $url,
+		'virtual_url'    => $url,
+		'date_start'     => get_post_meta( $post->ID, 'lfes_external_date_start', true ),
+		'date_end'       => get_post_meta( $post->ID, 'lfes_external_date_end', true ),
+		'venue'          => '',
+		'street_address' => '',
+		'postal_code'    => '',
+		'region'         => '',
+		'city'           => get_post_meta( $post->ID, 'lfes_external_city', true ),
+		'country'        => lfe_get_event_country_name( $post->ID ),
+		'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_external_virtual', true ),
+		'image'          => '',
+		'cfp_active'     => '',
+		'cfp_date_start' => '',
+		'cfp_date_end'   => '',
+		'organizer'      => get_post_meta( $post->ID, 'lfes_external_organizer', true ),
+		'description'    => get_post_meta( $post->ID, 'lfes_external_description', true ),
+		'is_external'    => true,
+	);
+}
+
+/**
+ * Builds a schema.org Event array (without @context) from a normalised event.
+ * Shared by the single Event page and the calendar ItemLists.
+ *
+ * @param array $event Normalised event from lfe_normalize_lf_event() or lfe_normalize_external_event().
+ * @return array
+ */
+function lfe_build_event_schema( $event ) {
+	$date_start = '';
+	$date_end   = '';
+	if ( check_string_is_date( $event['date_start'] ) ) {
+		$date_start = ( new DateTime( $event['date_start'] ) )->format( 'Y-m-d' );
+		$date_end   = check_string_is_date( $event['date_end'] ) ? ( new DateTime( $event['date_end'] ) )->format( 'Y-m-d' ) : $date_start;
+	}
+
+	$address = array_filter(
+		array(
+			'streetAddress'   => esc_html( $event['street_address'] ),
+			'addressLocality' => esc_html( $event['city'] ),
+			'postalCode'      => esc_html( $event['postal_code'] ),
+			'addressRegion'   => esc_html( $event['region'] ),
+			'addressCountry'  => esc_html( $event['country'] ),
+		)
+	);
+	$place   = array(
+		'@type'   => 'Place',
+		'name'    => esc_html( $event['venue'] ? $event['venue'] : $event['city'] ),
+		'address' => array_merge( array( '@type' => 'PostalAddress' ), $address ),
+	);
+	$online  = array(
+		'@type' => 'VirtualLocation',
+		'url'   => esc_url( $event['virtual_url'] ),
+	);
+
+	if ( $event['virtual'] && $event['city'] ) {
+		$attendance_mode = 'https://schema.org/MixedEventAttendanceMode';
+		$location        = array( $place, $online );
+	} elseif ( $event['virtual'] ) {
+		$attendance_mode = 'https://schema.org/OnlineEventAttendanceMode';
+		$location        = array( $online );
+	} else {
+		$attendance_mode = 'https://schema.org/OfflineEventAttendanceMode';
+		$location        = array( $place );
+	}
+
+	$schema = array(
+		'@type'               => 'Event',
+		'name'                => esc_html( $event['title'] ),
+		'url'                 => esc_url( $event['url'] ),
+		'startDate'           => $date_start,
+		'endDate'             => $date_end,
+		'eventAttendanceMode' => $attendance_mode,
+		'eventStatus'         => 'https://schema.org/EventScheduled',
+		'location'            => $location,
+		'organizer'           => array(
+			'@type' => 'Organization',
+			'name'  => $event['is_external'] && $event['organizer'] ? esc_html( $event['organizer'] ) : 'The Linux Foundation',
+		),
+	);
+
+	if ( $event['image'] ) {
+		$schema['image'] = array( esc_url( $event['image'] ) );
+	}
+
+	if ( $event['description'] ) {
+		$parsedown = new Parsedown();
+		$parsedown->setSafeMode( true );
+		$schema['description'] = esc_html( trim( wp_strip_all_tags( $parsedown->text( $event['description'] ) ) ) );
+	}
+
+	return $schema;
 }
 
 /**
@@ -725,22 +754,7 @@ function lfe_get_theme_calendar_events( $calendar_id ) {
 		)
 	);
 	foreach ( $query->posts as $post ) {
-		$events[] = array(
-			'id'             => $post->ID,
-			'title'          => get_the_title( $post ),
-			'url'            => get_post_meta( $post->ID, 'lfes_external_event_url', true ),
-			'date_start'     => get_post_meta( $post->ID, 'lfes_external_date_start', true ),
-			'date_end'       => get_post_meta( $post->ID, 'lfes_external_date_end', true ),
-			'city'           => get_post_meta( $post->ID, 'lfes_external_city', true ),
-			'country'        => lfe_get_event_country_name( $post->ID ),
-			'virtual'        => (bool) get_post_meta( $post->ID, 'lfes_external_virtual', true ),
-			'cfp_active'     => '',
-			'cfp_date_start' => '',
-			'cfp_date_end'   => '',
-			'organizer'      => get_post_meta( $post->ID, 'lfes_external_organizer', true ),
-			'description'    => get_post_meta( $post->ID, 'lfes_external_description', true ),
-			'is_external'    => true,
-		);
+		$events[] = lfe_normalize_external_event( $post );
 	}
 
 	// Sort by start date; events without a valid date (TBA) go last.
@@ -777,60 +791,10 @@ function lfe_insert_events_structured_data( $events, $name = '', $url = '' ) {
 			continue;
 		}
 
-		$date_start = ( new DateTime( $event['date_start'] ) )->format( 'Y-m-d' );
-		$date_end   = check_string_is_date( $event['date_end'] ) ? ( new DateTime( $event['date_end'] ) )->format( 'Y-m-d' ) : $date_start;
-
-		$place  = array(
-			'@type'   => 'Place',
-			'name'    => esc_html( $event['city'] ),
-			'address' => array(
-				'@type'           => 'PostalAddress',
-				'addressLocality' => esc_html( $event['city'] ),
-				'addressCountry'  => esc_html( $event['country'] ),
-			),
-		);
-		$online = array(
-			'@type' => 'VirtualLocation',
-			'url'   => esc_url( $event['url'] ),
-		);
-
-		if ( $event['virtual'] && $event['city'] ) {
-			$attendance_mode = 'https://schema.org/MixedEventAttendanceMode';
-			$location        = array( $place, $online );
-		} elseif ( $event['virtual'] ) {
-			$attendance_mode = 'https://schema.org/OnlineEventAttendanceMode';
-			$location        = array( $online );
-		} else {
-			$attendance_mode = 'https://schema.org/OfflineEventAttendanceMode';
-			$location        = array( $place );
-		}
-
-		$item = array(
-			'@type'               => 'Event',
-			'name'                => esc_html( $event['title'] ),
-			'url'                 => esc_url( $event['url'] ),
-			'startDate'           => $date_start,
-			'endDate'             => $date_end,
-			'eventAttendanceMode' => $attendance_mode,
-			'eventStatus'         => 'https://schema.org/EventScheduled',
-			'location'            => $location,
-		);
-
-		if ( $event['description'] ) {
-			$parsedown = new Parsedown();
-			$parsedown->setSafeMode( true );
-			$item['description'] = esc_html( trim( wp_strip_all_tags( $parsedown->text( $event['description'] ) ) ) );
-		}
-
-		$item['organizer'] = array(
-			'@type' => 'Organization',
-			'name'  => $event['is_external'] && $event['organizer'] ? esc_html( $event['organizer'] ) : 'The Linux Foundation',
-		);
-
 		$items[] = array(
 			'@type'    => 'ListItem',
 			'position' => count( $items ) + 1,
-			'item'     => $item,
+			'item'     => lfe_build_event_schema( $event ),
 		);
 	}
 
