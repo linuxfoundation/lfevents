@@ -160,6 +160,29 @@ Sessions are now rendered in **both** PHP (`render.php` and `includes/data.php`)
 
 -----
 
+## Theme Calendars and External Events
+
+A **Theme Calendar** (`lfe_theme_calendar`, URL `/calendar/<slug>/`) lists every upcoming event sharing its Event Category: LF Events plus **External Events** (`lfe_external_event`), a non-public CPT for third-party conferences. Assign the category to the calendar with the standard Event Categories panel; both listings and the schema.org `ItemList` come from `lfe_get_theme_calendar_events()` in the theme.
+
+### Agent discovery of External Events
+
+`LFEvents_Agent_Discovery` (mu-plugin `includes/`) asks an LLM with web search — through a LiteLLM proxy — for upcoming conferences on each category that is attached to a published Theme Calendar, then files them as **draft** External Events for an admin to review. It never publishes, never edits published or trashed posts, and only refreshes posts that are still drafts.
+
+Configure it on **Settings › LFEvents Options › Agent Discovery**: LiteLLM base URL, API key (stored in `wp_options`, masked in the UI, not exposed via REST — use a LiteLLM virtual key with a spend cap), model (`claude-sonnet-5`; it must support `web_search_options`), look-ahead window and max events per run. **Test connection** verifies the key, lists models and confirms web search actually fires. **Run now** processes one category (optionally as a dry run) and shows the outcome; the run log below it keeps the last 30 runs.
+
+The weekly schedule (`lfevents_agent_discovery`, one category per run in rotation) only fires on the Pantheon **live** environment; override with the `lfevents_agent_discovery_cron_allowed` filter for local testing. WP-CLI:
+
+```
+lando wp lfevents test-litellm
+lando wp lfevents discover --category=ai-events --dry-run
+lando wp lfevents discover --all
+lando wp lfevents discover-status
+```
+
+Each draft records evidence (source URLs, confidence, notes) in the **Agent Review** sidebar panel and is flagged in the External Events list, which has a "Source" filter. Dedupe is by normalised-URL fingerprint (`lfes_external_agent_fingerprint`), then fuzzy title within the same year and country. Trashing a draft acts as a "don't suggest again" signal. Candidate URLs whose host doesn't resolve are rejected as likely hallucinations (`lfevents_agent_discovery_verify_dns` filter).
+
+-----
+
 ## Code Sniffs
 
 The CI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).

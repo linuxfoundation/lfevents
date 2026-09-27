@@ -135,6 +135,15 @@ class LFEvents {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-well-known.php';
 
+		/**
+		 * LiteLLM client and the agent that discovers External Events.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-litellm-client.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-agent-discovery.php';
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-cli.php';
+		}
+
 		$this->loader = new LFEvents_Loader();
 	}
 
@@ -190,6 +199,14 @@ class LFEvents {
 		$this->loader->add_action( 'manage_lfe_sponsor_posts_custom_column', $plugin_admin, 'sponsor_custom_column_data', 10, 2 );
 		$this->loader->add_filter( 'manage_lfe_external_event_posts_columns', $plugin_admin, 'external_event_custom_column' );
 		$this->loader->add_action( 'manage_lfe_external_event_posts_custom_column', $plugin_admin, 'external_event_custom_column_data', 10, 2 );
+		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'external_event_filters' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'external_event_list_filter' );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_agent_meta' );
+		$this->loader->add_action( 'transition_post_status', $plugin_admin, 'purge_theme_calendars_on_external_event_change', 10, 3 );
+
+		// Agent discovery of External Events: weekly, one category per run.
+		add_action( 'init', array( 'LFEvents_Agent_Discovery', 'sync_schedule' ) );
+		add_action( LFEvents_Agent_Discovery::CRON_HOOK, array( 'LFEvents_Agent_Discovery', 'cron_run' ) );
 
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
