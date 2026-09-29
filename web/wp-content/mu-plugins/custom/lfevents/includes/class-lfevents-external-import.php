@@ -102,13 +102,14 @@ class LFEvents_External_Import {
 	}
 
 	/**
-	 * Capability required to use the importer: the same one needed to create External Events.
+	 * Capability required to use the importer. Imports can refresh other users' drafts and
+	 * add categories to published events, so this is Editor-level rather than create_posts.
 	 *
 	 * @return string
 	 */
 	public static function capability() {
 		$post_type = get_post_type_object( 'lfe_external_event' );
-		return $post_type ? $post_type->cap->create_posts : 'edit_posts';
+		return $post_type ? $post_type->cap->edit_others_posts : 'edit_others_posts';
 	}
 
 	/**
@@ -462,6 +463,11 @@ class LFEvents_External_Import {
 		} else {
 			$reason = 'Already published in another category; will add "' . $term->name . '" to ' . $label;
 			$action = 'tag';
+		}
+
+		if ( in_array( $action, array( 'update', 'tag' ), true ) && ! current_user_can( 'edit_post', $existing['post_id'] ) ) {
+			$reason = 'You don\'t have permission to edit ' . $label;
+			$action = 'skip';
 		}
 
 		return array(
