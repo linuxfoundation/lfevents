@@ -33,9 +33,9 @@ if ( $menu_color_2 ) {
 $text_style = 'color: ' . $menu_text_color . ';';
 
 if ( $logo ) {
-	$event_link_content = '<img loading="lazy" src="' . wp_get_attachment_url( $logo ) . '" alt="' . get_the_title( $parent_id ) . '">';
+	$event_link_content = '<img loading="lazy" src="' . esc_url( wp_get_attachment_url( $logo ) ) . '" alt="' . esc_attr( get_the_title( $parent_id ) ) . '">';
 } else {
-	$event_link_content = get_the_title( $parent_id );
+	$event_link_content = esc_html( get_the_title( $parent_id ) );
 }
 
 $overlay_style = '';
@@ -72,7 +72,7 @@ if ( ! $splash_page ) {
 
 		<div class="pre-nav">
 			<?php
-				echo '<a class="event-home-link" href="' . get_permalink( $parent_id ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
+				echo '<a class="event-home-link" href="' . esc_url( get_permalink( $parent_id ) ) . '">' . $event_link_content . '</a>'; //phpcs:ignore
 			?>
 			<button class="menu-toggler button alignright" type="button"
 				aria-label="Toggle Menu" data-toggle="event-menu">
@@ -86,7 +86,7 @@ if ( ! $splash_page ) {
 				class="event-menu-list <?php echo esc_html( $subpage_header_elements_class ); ?>">
 				<li class="page_item event-home-link" id="popout-header-link"><a
 						href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"
-						style="background-color:<?php echo $menu_color; ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a>
+						style="background-color:<?php echo esc_attr( $menu_color ); ?>;"><?php echo $event_link_content; //phpcs:ignore ?></a>
 				</li>
 				<?php
 				if ( $menu_color_3 ) {
@@ -318,52 +318,52 @@ endwhile;
 					echo '</li>';
 				}
 				if ( $twitter ) {
-					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_html( $twitter ) . '">';
+					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_url( $twitter ) . '">';
 					get_template_part( 'template-parts/svg/twitter' );
 					echo '</a></li>';
 				}
 				if ( $bluesky ) {
-					echo '<li><a rel="noopener" title="Bluesky" target="_blank" href="' . esc_html( $bluesky ) . '">';
+					echo '<li><a rel="noopener" title="Bluesky" target="_blank" href="' . esc_url( $bluesky ) . '">';
 					get_template_part( 'template-parts/svg/bluesky' );
 					echo '</a></li>';
 				}
 				if ( $github ) {
-					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_html( $github ) . '">';
+					echo '<li><a rel="noopener" title="X" target="_blank" href="' . esc_url( $github ) . '">';
 					get_template_part( 'template-parts/svg/github' );
 					echo '</a></li>';
 				}
 				if ( $linkedin ) {
-					echo '<li><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_html( $linkedin ) . '">';
+					echo '<li><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_url( $linkedin ) . '">';
 					get_template_part( 'template-parts/svg/linkedin' );
 					echo '</a></li>';
 				}
 				if ( $qq ) {
-					echo '<li><a rel="noopener" title="QQ" target="_blank" href="' . esc_html( $qq ) . '">';
+					echo '<li><a rel="noopener" title="QQ" target="_blank" href="' . esc_url( $qq ) . '">';
 					get_template_part( 'template-parts/svg/qq' );
 					echo '</a></li>';
 				}
 				if ( $youtube ) {
-					echo '<li><a rel="noopener" title="YouTube" target="_blank" href="' . esc_html( $youtube ) . '">';
+					echo '<li><a rel="noopener" title="YouTube" target="_blank" href="' . esc_url( $youtube ) . '">';
 					get_template_part( 'template-parts/svg/youtube' );
 					echo '</a></li>';
 				}
 				if ( $facebook ) {
-					echo '<li><a rel="noopener" title="Facebook" target="_blank" href="' . esc_html( $facebook ) . '">';
+					echo '<li><a rel="noopener" title="Facebook" target="_blank" href="' . esc_url( $facebook ) . '">';
 					get_template_part( 'template-parts/svg/facebook' );
 					echo '</a></li>';
 				}
 				if ( $instagram ) {
-					echo '<li><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
+					echo '<li><a rel="noopener" title="Instagram" target="_blank" href="' . esc_url( $instagram ) . '">';
 					get_template_part( 'template-parts/svg/instagram' );
 					echo '</a></li>';
 				}
 				if ( $twitch ) {
-					echo '<li><a rel="noopener" title="Twitch" target="_blank" href="' . esc_html( $twitch ) . '">';
+					echo '<li><a rel="noopener" title="Twitch" target="_blank" href="' . esc_url( $twitch ) . '">';
 					get_template_part( 'template-parts/svg/twitch' );
 					echo '</a></li>';
 				}
 				if ( $slack ) {
-					echo '<li><a rel="noopener" title="Slack" target="_blank" href="' . esc_html( $slack ) . '">';
+					echo '<li><a rel="noopener" title="Slack" target="_blank" href="' . esc_url( $slack ) . '">';
 					get_template_part( 'template-parts/svg/slack' );
 					echo '</a></li>';
 				}

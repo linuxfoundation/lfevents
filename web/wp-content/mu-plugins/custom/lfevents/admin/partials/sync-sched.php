@@ -42,7 +42,20 @@ while ( $the_query->have_posts() ) {
 	$sched_event_id      = get_post_meta( get_the_ID(), 'lfes_sched_event_id', true );
 	$sched_event_api_key = get_post_meta( get_the_ID(), 'lfes_sched_event_api_key', true );
 
-	$url  = 'https://' . $sched_event_id . '.sched.com/api/session/export?api_key=' . $sched_event_api_key . '&format=json&strip_html=Y&custom_data=Y';
+	// The ID becomes the request hostname, so reject anything that could redirect the API key elsewhere.
+	if ( ! preg_match( '/^[A-Za-z0-9-]+$/', $sched_event_id ) ) {
+		continue;
+	}
+
+	$url  = add_query_arg(
+		array(
+			'api_key'     => rawurlencode( $sched_event_api_key ),
+			'format'      => 'json',
+			'strip_html'  => 'Y',
+			'custom_data' => 'Y',
+		),
+		'https://' . $sched_event_id . '.sched.com/api/session/export'
+	);
 	$data = wp_remote_get(
 		$url,
 		array(
@@ -51,9 +64,12 @@ while ( $the_query->have_posts() ) {
 	);
 
 	if ( is_wp_error( $data ) || ( wp_remote_retrieve_response_code( $data ) != 200 ) ) {
-		return false;
+		continue;
 	}
 	$sessions = json_decode( wp_remote_retrieve_body( $data ) );
+	if ( ! is_array( $sessions ) ) {
+		continue;
+	}
 	$speakers = array();
 
 	foreach ( $sessions as $session ) {

@@ -92,7 +92,7 @@ function live_stream_gate_callback( $block_attributes ) {
 	// check for SSO disabled setting.
 	if ( $sso_disabled ) : ?>
 
-		<div class="wp-block-lf-live-stream-gate-block <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?>" id="<?php echo esc_html( $anchor ); ?>">
+		<div class="wp-block-lf-live-stream-gate-block <?php echo esc_attr( $align ); ?> <?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $anchor ); ?>">
 			<?php echo $content; // phpcs:ignore.
 			?>
 		</div>
@@ -100,7 +100,7 @@ function live_stream_gate_callback( $block_attributes ) {
 		// show based on auth classes (eurgh).
 	else :
 		?>
-		<div class="wp-block-lf-live-stream-gate-block-placeholder is-auth0 only-anonymous <?php echo esc_html( $classes ); ?>" id="<?php echo esc_html( $anchor ); ?>">
+		<div class="wp-block-lf-live-stream-gate-block-placeholder is-auth0 only-anonymous <?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $anchor ); ?>">
 			<div class="wp-block-lf-live-stream-gate-block-placeholder-inner">
 				<img src="<?php echo esc_url( LIVE_STREAM_GATE_URL . '/src/images/thelinuxfoundation-color.svg' ); ?>" alt="The Linux Foundation" width="200">
 
@@ -113,7 +113,7 @@ function live_stream_gate_callback( $block_attributes ) {
 				<button class="wp-block-lf-live-stream-gate-block-button is-signup-link is-auth0 only-anonymous is-signup-link">Create Account</button>
 			</div>
 		</div>
-		<div class="wp-block-lf-live-stream-gate-block is-auth0 only-authenticated <?php echo esc_html( $align ); ?> <?php echo esc_html( $classes ); ?>" id="<?php echo esc_html( $anchor ); ?>">
+		<div class="wp-block-lf-live-stream-gate-block is-auth0 only-authenticated <?php echo esc_attr( $align ); ?> <?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $anchor ); ?>">
 			<?php echo $content; // phpcs:ignore.
 			?>
 		</div>
