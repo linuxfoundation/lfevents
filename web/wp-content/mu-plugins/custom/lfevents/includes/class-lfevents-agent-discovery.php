@@ -264,16 +264,13 @@ class LFEvents_Agent_Discovery {
 			array_slice( $known, 0, self::KNOWN_LIMIT )
 		);
 
-		// Term descriptions may carry HTML/entities and stray trailing separators.
-		$scope = trim( wp_strip_all_tags( html_entity_decode( (string) $term->description, ENT_QUOTES, 'UTF-8' ) ), " \t\n\r,;" );
-
 		$system = 'You are a research assistant that finds real, upcoming technology conferences and summits for a public events calendar run by The Linux Foundation. '
 			. 'You must use web search to verify every event and must only report events for which you found the official event website. '
 			. 'Never invent events, dates, or URLs. If you are unsure about a detail, leave that field empty rather than guessing. '
 			. 'Respond with a single JSON object and nothing else: no prose, no markdown fences.';
 
 		$user = "Find up to {$max} upcoming conferences or summits anywhere in the world on the theme \"{$term->name}\""
-			. ( $scope ? " ({$scope})" : '' )
+			. ( $term->description ? " ({$term->description})" : '' )
 			. " that start between {$today} and {$until}.\n\n"
 			. "Requirements:\n"
 			. "- Multi-track conferences, summits and major industry events only (no meetups, webinars, workshops, courses or trade-show booths).\n"
