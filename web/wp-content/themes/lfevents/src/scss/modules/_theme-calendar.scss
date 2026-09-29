@@ -1,0 +1,44 @@
+// Theme Calendar (single-lfe_theme_calendar.php)
+.theme-calendar {
+  padding-bottom: $global-margin * 2;
+
+  .results-count {
+    color: $dark-gray;
+  }
+}
+
+.theme-calendar-card {
+  &__source {
+    color: $dark-gray; // ~6.1:1 on white; $gray fails AA
+  }
+
+  &__logo {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.35em;
+    vertical-align: -0.1em;
+  }
+
+  .event-description {
+    color: $charcoal;
+
+    h4,
+    h5 {
+      color: $charcoal;
+      margin-bottom: 0.3rem;
+      font-size: 1.15em;
+      font-weight: bold;
+    }
+
+    p:last-child,
+    ul:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &--external h5 a::after {
+    content: ' \2197';
+    font-size: 0.8em;
+  }
+}

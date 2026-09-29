@@ -160,6 +160,14 @@ Sessions are now rendered in **both** PHP (`render.php` and `includes/data.php`)
 
 -----
 
+## Theme Calendars and External Events
+
+A **Theme Calendar** (`lfe_theme_calendar`, `/calendar/<slug>/`) lists every upcoming event that shares its Event Category: LF Events plus **External Events** (`lfe_external_event`), a non-public CPT for third-party conferences. Assign the category to the calendar with the Event Categories panel.
+
+External Events can be found with **External Events › Import from AI Search** (`LFEvents_External_Import` in the mu-plugin). The screen generates a research prompt for a category (it includes the category's Description and lists the events already known, including trashed ones), which an admin runs in Claude Desktop with web search. The JSON Claude returns is pasted back, validated, and de-duplicated against all upcoming LF Events and all External Events by normalised URL and then by similar title in the same year and country. Selected events are saved as **drafts** with Claude's sources and confidence in the **Import Review** sidebar panel. Nothing is published automatically. Trashing a draft stops it being suggested or imported again. The step-by-step instructions for admins are on the screen itself.
+
+-----
+
 ## Code Sniffs
 
 The CI process will sniff the code to make sure it complies with WordPress coding standards.  All Linux Foundation code should comply with [these guidelines](https://docs.google.com/document/d/1TYqCwG874i6PdJDf5UX9gnCZaarvf121G1GdNH7Vl5k/edit#heading=h.dz20heii56uf).
