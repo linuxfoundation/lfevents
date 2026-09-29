@@ -38,7 +38,8 @@
   }
 
   &--external h5 a::after {
-    content: ' \2197';
+    // No-break space keeps the arrow on the same line as the title's last word.
+    content: '\00a0\2197';
     font-size: 0.8em;
   }
 }
