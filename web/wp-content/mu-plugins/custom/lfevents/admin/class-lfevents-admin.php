@@ -506,15 +506,6 @@ class LFEvents_Admin {
 				$terms = wp_get_post_terms( $post_id, 'lfevent-category', array( 'fields' => 'names' ) );
 				echo esc_html( ( $terms && ! is_wp_error( $terms ) ) ? implode( ', ', $terms ) : '-' );
 				break;
-			case 'agent_source':
-				if ( get_post_meta( $post_id, LFEvents_Agent_Discovery::META_SOURCE, true ) ) {
-					$confidence = get_post_meta( $post_id, LFEvents_Agent_Discovery::META_CONFIDENCE, true );
-					$seen       = get_post_meta( $post_id, LFEvents_Agent_Discovery::META_LAST_SEEN, true );
-					echo '<span class="dashicons dashicons-superhero-alt" title="Suggested by agent"></span> ' . esc_html( ucfirst( $confidence ) ) . ( $seen ? '<br><small>seen ' . esc_html( $seen ) . '</small>' : '' );
-				} else {
-					echo 'Manual';
-				}
-				break;
 		}
 	}
 
@@ -532,116 +523,9 @@ class LFEvents_Admin {
 		$columns['organizer']      = 'Organizer';
 		$columns['event_url']      = 'Event URL';
 		$columns['event_category'] = 'Event Category';
-		$columns['agent_source']   = 'Source';
 		$columns['author']         = $author;
 		$columns['date']           = $date;
 		return $columns;
-	}
-
-	/**
-	 * Adds a "Source" dropdown to the External Events list.
-	 *
-	 * @param string $post_type Current list post type.
-	 */
-	public function external_event_filters( $post_type ) {
-		if ( 'lfe_external_event' !== $post_type ) {
-			return;
-		}
-		$current = isset( $_GET['lfe_agent_source'] ) ? sanitize_key( $_GET['lfe_agent_source'] ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		echo '<select name="lfe_agent_source">';
-		echo '<option value="">All sources</option>';
-		echo '<option value="agent"' . selected( $current, 'agent', false ) . '>Agent-suggested</option>';
-		echo '<option value="manual"' . selected( $current, 'manual', false ) . '>Manually added</option>';
-		echo '</select>';
-	}
-
-	/**
-	 * Applies the External Events "Source" filter.
-	 *
-	 * @param WP_Query $query Admin list query.
-	 */
-	public function external_event_list_filter( $query ) {
-		if ( ! is_admin() || ! $query->is_main_query() || 'lfe_external_event' !== $query->get( 'post_type' ) ) {
-			return;
-		}
-		$source = isset( $_GET['lfe_agent_source'] ) ? sanitize_key( $_GET['lfe_agent_source'] ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( 'agent' === $source ) {
-			$query->set( 'meta_key', LFEvents_Agent_Discovery::META_SOURCE ); //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-			$query->set( 'meta_value', '1' ); //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-		} elseif ( 'manual' === $source ) {
-			$query->set(
-				'meta_query', //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				array(
-					'relation' => 'OR',
-					array(
-						'key'     => LFEvents_Agent_Discovery::META_SOURCE,
-						'compare' => 'NOT EXISTS',
-					),
-					array(
-						'key'   => LFEvents_Agent_Discovery::META_SOURCE,
-						'value' => '',
-					),
-				)
-			);
-		}
-	}
-
-	/**
-	 * Registers agent meta that is not managed through a sidebar field.
-	 */
-	public function register_agent_meta() {
-		register_post_meta(
-			'lfe_external_event',
-			LFEvents_Agent_Discovery::META_FINGERPRINT,
-			array(
-				'type'              => 'string',
-				'single'            => true,
-				'show_in_rest'      => false,
-				'sanitize_callback' => 'sanitize_text_field',
-			)
-		);
-	}
-
-	/**
-	 * Purges the Pantheon edge cache for Theme Calendars when an External Event
-	 * enters or leaves the published state.
-	 *
-	 * @param string  $new_status New status.
-	 * @param string  $old_status Old status.
-	 * @param WP_Post $post       The post.
-	 */
-	public function purge_theme_calendars_on_external_event_change( $new_status, $old_status, $post ) {
-		if ( 'lfe_external_event' !== $post->post_type || $new_status === $old_status || ! function_exists( 'pantheon_wp_clear_edge_keys' ) ) {
-			return;
-		}
-		if ( 'publish' !== $new_status && 'publish' !== $old_status ) {
-			return;
-		}
-
-		$terms = wp_get_post_terms( $post->ID, 'lfevent-category', array( 'fields' => 'ids' ) );
-		if ( ! $terms || is_wp_error( $terms ) ) {
-			return;
-		}
-
-		$calendars = get_posts(
-			array(
-				'post_type'      => 'lfe_theme_calendar',
-				'post_status'    => 'publish',
-				'posts_per_page' => -1,
-				'fields'         => 'ids',
-				'no_found_rows'  => true,
-				'tax_query'      => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-					array(
-						'taxonomy' => 'lfevent-category',
-						'field'    => 'term_id',
-						'terms'    => $terms,
-					),
-				),
-			)
-		);
-		if ( $calendars ) {
-			pantheon_wp_clear_edge_keys( array_map( fn( $id ) => 'post-' . $id, $calendars ) );
-		}
 	}
 
 	/**
