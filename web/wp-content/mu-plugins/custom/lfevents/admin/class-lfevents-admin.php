@@ -506,6 +506,14 @@ class LFEvents_Admin {
 				$terms = wp_get_post_terms( $post_id, 'lfevent-category', array( 'fields' => 'names' ) );
 				echo esc_html( ( $terms && ! is_wp_error( $terms ) ) ? implode( ', ', $terms ) : '-' );
 				break;
+			case 'import_source':
+				if ( get_post_meta( $post_id, LFEvents_External_Import::META_SOURCE, true ) ) {
+					$confidence = get_post_meta( $post_id, LFEvents_External_Import::META_CONFIDENCE, true );
+					echo 'AI search' . ( $confidence ? '<br><small>' . esc_html( ucfirst( $confidence ) ) . ' confidence</small>' : '' );
+				} else {
+					echo 'Manual';
+				}
+				break;
 		}
 	}
 
@@ -523,6 +531,7 @@ class LFEvents_Admin {
 		$columns['organizer']      = 'Organizer';
 		$columns['event_url']      = 'Event URL';
 		$columns['event_category'] = 'Event Category';
+		$columns['import_source']  = 'Source';
 		$columns['author']         = $author;
 		$columns['date']           = $date;
 		return $columns;

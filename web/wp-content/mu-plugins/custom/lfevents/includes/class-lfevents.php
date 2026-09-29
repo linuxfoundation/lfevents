@@ -135,6 +135,11 @@ class LFEvents {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-well-known.php';
 
+		/**
+		 * The admin tool for importing External Events researched with Claude Desktop.
+		 */
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-lfevents-external-import.php';
+
 		$this->loader = new LFEvents_Loader();
 	}
 
@@ -190,6 +195,10 @@ class LFEvents {
 		$this->loader->add_action( 'manage_lfe_sponsor_posts_custom_column', $plugin_admin, 'sponsor_custom_column_data', 10, 2 );
 		$this->loader->add_filter( 'manage_lfe_external_event_posts_columns', $plugin_admin, 'external_event_custom_column' );
 		$this->loader->add_action( 'manage_lfe_external_event_posts_custom_column', $plugin_admin, 'external_event_custom_column_data', 10, 2 );
+
+		$external_import = new LFEvents_External_Import();
+		$this->loader->add_action( 'init', $external_import, 'register_meta' );
+		$this->loader->add_action( 'admin_menu', $external_import, 'add_page' );
 
 		// Hook to save year in a meta field for events.
 		$this->loader->add_action( 'save_post', $plugin_admin, 'set_event_year', 10, 3 );
