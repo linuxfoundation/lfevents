@@ -93,7 +93,7 @@ function lf_sponsor_directory_render( $attributes ) {
 				<select id="<?php echo esc_attr( $instance ); ?>-level" data-level-filter>
 					<option value=""><?php esc_html_e( 'All levels', 'sponsor-directory-block' ); ?></option>
 					<?php foreach ( $levels as $level ) : ?>
-						<option value="<?php echo esc_attr( $level ); ?>"><?php echo esc_html( $level ); ?></option>
+						<option value="<?php echo esc_attr( $level ); ?>"><?php echo esc_html( lf_sponsor_directory_level_label( $level ) ); ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
@@ -236,7 +236,14 @@ function lf_sponsor_directory_normalize_sponsors( $rows ) {
 	usort(
 		$sponsors,
 		function ( $first, $second ) {
-			$comparison = strcasecmp( $first['name'], $second['name'] );
+			// Sponsors without a level sort last.
+			$comparison = ( '' === $first['level'] ) <=> ( '' === $second['level'] );
+			if ( 0 === $comparison ) {
+				$comparison = strnatcasecmp( $first['level'], $second['level'] );
+			}
+			if ( 0 === $comparison ) {
+				$comparison = strcasecmp( $first['name'], $second['name'] );
+			}
 			return 0 !== $comparison ? $comparison : $first['postId'] <=> $second['postId'];
 		}
 	);
@@ -270,6 +277,16 @@ function lf_sponsor_directory_unique_values( $sponsors, $key ) {
 }
 
 /**
+ * Strip the numeric sort prefix from a level (e.g. "1 Diamond" => "Diamond").
+ *
+ * @param string $level Raw level value.
+ * @return string
+ */
+function lf_sponsor_directory_level_label( $level ) {
+	return preg_replace( '/^\d+\s+/', '', $level );
+}
+
+/**
  * Render level, booth, and category details shared by cards and modals.
  *
  * @param array  $sponsor Sanitized sponsor row.
@@ -281,7 +298,7 @@ function lf_sponsor_directory_render_details( $sponsor, $class_name = 'sponsor-d
 	?>
 	<span class="<?php echo esc_attr( $class_name ); ?>">
 		<?php if ( $sponsor['level'] ) : ?>
-			<span><strong><?php esc_html_e( 'Level:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( $sponsor['level'] ); ?></span>
+			<span><strong><?php esc_html_e( 'Level:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( lf_sponsor_directory_level_label( $sponsor['level'] ) ); ?></span>
 		<?php endif; ?>
 		<?php if ( $sponsor['boothLocation'] ) : ?>
 			<span><strong><?php esc_html_e( 'Booth:', 'sponsor-directory-block' ); ?></strong> <?php echo esc_html( $sponsor['boothLocation'] ); ?></span>
