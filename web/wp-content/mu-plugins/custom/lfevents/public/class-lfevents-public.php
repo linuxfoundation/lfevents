@@ -582,13 +582,25 @@ class LFEvents_Public {
 		}
 
 		$event_id    = (int) end( $ancestors );
-		$event_title = get_the_title( $event_id );
-		$page_title  = get_the_title( $post->ID );
+		$event_title = $this->strip_title_markup( get_the_title( $event_id ) );
+		$page_title  = $this->strip_title_markup( get_the_title( $post->ID ) );
 
 		if ( empty( $event_title ) || empty( $page_title ) || $event_title === $page_title ) {
 			return $title;
 		}
 
 		return $page_title . ' | ' . $event_title;
+	}
+
+	/**
+	 * Converts <br> tags to spaces and strips any other markup from a title.
+	 *
+	 * @param string $title Title.
+	 * @return string
+	 */
+	private function strip_title_markup( $title ) {
+		$title = preg_replace( '/<br\s*\/?>/i', ' ', $title );
+		$title = wp_strip_all_tags( $title );
+		return trim( preg_replace( '/\s+/', ' ', $title ) );
 	}
 }
