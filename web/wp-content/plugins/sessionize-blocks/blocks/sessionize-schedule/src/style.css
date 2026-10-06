@@ -1170,6 +1170,12 @@ body.sched-modal-open .sched-modal__body{ overflow-x: hidden; }
   object-fit:contain;
 }
 
+/* SVGs without width/height attributes have no intrinsic size and collapse to 0x0 here. */
+.sess__logo img[src$=".svg" i]{
+  width:120px;
+  height:auto;
+}
+
 @media (max-width: 520px){
   .sess__logo img{
     max-height:40px;
@@ -1630,6 +1636,11 @@ body.sched-modal-open{ overflow:hidden; }
   max-width:240px;
   object-fit:contain;
   border-radius:8px;
+}
+
+.sched-modal__logo img[src$=".svg" i]{
+  width:240px;
+  height:auto;
 }
 
 @media (max-width: 640px){
