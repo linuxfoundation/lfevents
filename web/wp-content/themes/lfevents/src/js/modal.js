@@ -85,7 +85,7 @@ jQuery( document ).ready(
 				$modal_code += '</button></div>';
 				$modal_code += '<div class="' + $modal_prefix_classes + 'modal__content">';
 				if ( $modal_title !== '' ) {
-					$modal_code += '<h1 id="modal-title" class="' + $modal_prefix_classes + 'modal-title">' + $modal_title + '</h1>';
+					$modal_code += '<h1 id="modal-title" class="' + $modal_prefix_classes + 'modal-title"></h1>';
 				}
 
 				if ( $modal_text !== '' ) {
@@ -99,6 +99,8 @@ jQuery( document ).ready(
 				$modal_code += '</div></div></' + $modal_tag + '>';
 
 				$( $modal_code ).insertAfter( $page );
+				// The browser decodes the data attribute, so set it as text to avoid injecting HTML.
+				$( '#modal-title' ).text( String( $modal_title ) );
 				$body.addClass( 'no-scroll' );
 
 				$page.attr( 'aria-hidden', 'true' );
