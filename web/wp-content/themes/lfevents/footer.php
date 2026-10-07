@@ -77,32 +77,32 @@ if ( show_non_event_menu() && ! $splash_page && is_lfeventsci() ) :
 
 		echo '<ul class="lf-footer__icons">';
 		if ( $twitter ) {
-			echo '<li class="s-tw"><a rel="noopener" title="X" target="_blank" href="' . esc_html( $twitter ) . '">';
+			echo '<li class="s-tw"><a rel="noopener" title="X" target="_blank" href="' . esc_url( $twitter ) . '">';
 			get_template_part( 'template-parts/svg/twitter' );
 			echo '</a></li>';
 		}
 		if ( $bluesky ) {
-			echo '<li class="s-bs"><a rel="noopener" title="Bluesky" target="_blank" href="' . esc_html( $bluesky ) . '">';
+			echo '<li class="s-bs"><a rel="noopener" title="Bluesky" target="_blank" href="' . esc_url( $bluesky ) . '">';
 			get_template_part( 'template-parts/svg/bluesky' );
 			echo '</a></li>';
 		}
 		if ( $linkedin ) {
-			echo '<li class="s-li"><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_html( $linkedin ) . '">';
+			echo '<li class="s-li"><a rel="noopener" title="Linkedin" target="_blank" href="' . esc_url( $linkedin ) . '">';
 			get_template_part( 'template-parts/svg/linkedin' );
 			echo '</a></li>';
 		}
 		if ( $youtube ) {
-			echo '<li class="s-yt"><a rel="noopener" title="YouTube" target="_blank" href="' . esc_html( $youtube ) . '">';
+			echo '<li class="s-yt"><a rel="noopener" title="YouTube" target="_blank" href="' . esc_url( $youtube ) . '">';
 			get_template_part( 'template-parts/svg/youtube' );
 			echo '</a></li>';
 		}
 		if ( $facebook ) {
-			echo '<li class="s-fb"><a rel="noopener" title="Facebook" target="_blank" href="' . esc_html( $facebook ) . '">';
+			echo '<li class="s-fb"><a rel="noopener" title="Facebook" target="_blank" href="' . esc_url( $facebook ) . '">';
 			get_template_part( 'template-parts/svg/facebook' );
 			echo '</a></li>';
 		}
 		if ( $instagram ) {
-			echo '<li class="s-in"><a rel="noopener" title="Instagram" target="_blank" href="' . esc_html( $instagram ) . '">';
+			echo '<li class="s-in"><a rel="noopener" title="Instagram" target="_blank" href="' . esc_url( $instagram ) . '">';
 			get_template_part( 'template-parts/svg/instagram' );
 			echo '</a></li>';
 		}

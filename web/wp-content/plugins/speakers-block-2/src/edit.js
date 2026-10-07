@@ -4,7 +4,9 @@ import {
 
 const { apiFetch } = wp;
 
-import React, { MouseEventHandler, useCallback, useState } from 'react';
+import React, { MouseEventHandler, useCallback, useMemo, useState } from 'react';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 import AsyncSelect from 'react-select/async';
 import { components } from 'react-select';
 import {
@@ -91,6 +93,24 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const [selected, setSelected] = useState(speakers);
 
+	// Since WP 7.1 the post editor canvas is always an iframe. Emotion (used by
+	// react-select) would otherwise inject its <style> tags into the parent
+	// document, leaving the control unstyled inside the iframe.
+	const [ styleHost, setStyleHost ] = useState( null );
+
+	const blockRef = useCallback( ( node ) => {
+		setStyleHost( node ? node.ownerDocument.head : null );
+	}, [] );
+
+	const emotionCache = useMemo(
+		() =>
+			styleHost
+				// Key must match /^[a-z-]+$/ — Emotion rejects digits in dev builds.
+				? createCache( { key: 'speakers-block-two', container: styleHost } )
+				: null,
+		[ styleHost ]
+	);
+
 	const onChange = (selectedOptions) => {
 		setAttributes({
 			speakers: [...selectedOptions],
@@ -118,12 +138,14 @@ export default function Edit( { attributes, setAttributes } ) {
 	}, [setSelected]);
 
 	return [
-		<div { ...useBlockProps() } key="speakers-block-edit">
+		<div { ...useBlockProps( { ref: blockRef } ) } key="speakers-block-edit">
 			<p>
 				<strong>Featured Speakers (each opens with modal):</strong>
 			</p>
 			{/* ref: https://github.com/JedWatson/react-select/pull/5212#issuecomment-1273870591
 			<DndContext modifiers={[restrictToParentElement]} onDragEnd={onDragEnd} collisionDetection={closestCenter}> */}
+			{ emotionCache && (
+			<CacheProvider value={ emotionCache }>
 			<DndContext
 				modifiers={[restrictToParentElement]}
 				onDragEnd={onDragEnd}
@@ -154,6 +176,8 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</SortableContext>
 			</DndContext>
+			</CacheProvider>
+			) }
 		</div>,
 	];
 }

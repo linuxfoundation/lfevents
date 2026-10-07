@@ -57,8 +57,7 @@ function tab_container_block_cgb_block_assets() { // phpcs:ignore
 		'tab_container_block-cgb-block-js',
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		array(
-			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
+			'pluginDirUrl' => plugin_dir_url( __DIR__ ),
 			// Add more data here that you want to access from `cgbGlobal` object.
 		)
 	);
