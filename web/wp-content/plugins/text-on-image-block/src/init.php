@@ -32,6 +32,7 @@ function text_on_image_block_cgb_block_assets() { // phpcs:ignore
 	wp_register_style(
 		'text_on_image_block-cgb-style-css',
 		plugins_url( 'dist/blocks.style.build.css', __DIR__ ),
+		array(),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 

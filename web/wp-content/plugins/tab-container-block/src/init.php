@@ -32,7 +32,8 @@ function tab_container_block_cgb_block_assets() { // phpcs:ignore
 	wp_register_style(
 		'tab_container_block-cgb-style-css',
 		plugins_url( 'dist/blocks.style.build.css', __DIR__ ), // Block style CSS.
-		null
+		array(),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
 	// Register block editor script for backend.
@@ -40,7 +41,7 @@ function tab_container_block_cgb_block_assets() { // phpcs:ignore
 		'tab_container_block-cgb-block-js',
 		plugins_url( '/dist/blocks.build.js', __DIR__ ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
 	);
 
@@ -49,7 +50,7 @@ function tab_container_block_cgb_block_assets() { // phpcs:ignore
 		'tab_container_block-cgb-block-editor-css',
 		plugins_url( 'dist/blocks.editor.build.css', __DIR__ ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
 
 	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.

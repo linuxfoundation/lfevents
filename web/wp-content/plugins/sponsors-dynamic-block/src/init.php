@@ -14,6 +14,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Cache-busting version string for a built asset.
+ *
+ * Passing null to wp_register_script() omits the ?ver arg entirely, so the URL
+ * never changes and Fastly/browsers keep serving a stale bundle after a deploy.
+ *
+ * @param string $relative_path Asset path relative to the plugin root.
+ */
+function sponsors_dynamic_block_asset_version( $relative_path ) {
+	$file = plugin_dir_path( __DIR__ ) . $relative_path;
+
+	if ( ! file_exists( $file ) ) {
+		return '0.1.0';
+	}
+
+	return (string) filemtime( $file );
+}
+
+/**
  * Enqueue Gutenberg block assets for both frontend + backend.
  *
  * Assets enqueued:
@@ -33,7 +51,7 @@ function sponsors_dynamic_block_cgb_block_assets() { // phpcs:ignore
 		'sponsors-dynamic_block-cgb-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', __DIR__ ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
-		null,
+		sponsors_dynamic_block_asset_version( 'dist/blocks.build.js' ),
 		true
 	);
 
@@ -42,7 +60,7 @@ function sponsors_dynamic_block_cgb_block_assets() { // phpcs:ignore
 		'sponsors-dynamic_block-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', __DIR__ ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+		sponsors_dynamic_block_asset_version( 'dist/blocks.editor.build.css' )
 	);
 
 	/**
