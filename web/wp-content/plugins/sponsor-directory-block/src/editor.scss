@@ -1,0 +1,51 @@
+.sponsor-directory-editor {
+	padding: 24px;
+	border: 1px solid #dcdcde;
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 16px;
+	}
+
+	&__empty,
+	&__source,
+	&__report {
+		margin-top: 16px;
+	}
+
+	&__report {
+		padding: 12px 16px;
+		background: #f6f7f7;
+
+		ul {
+			margin: 4px 0 12px 20px;
+		}
+	}
+
+	&__preview {
+		max-height: 360px;
+		overflow: auto;
+		margin-top: 16px;
+		border: 1px solid #dcdcde;
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 8px 10px;
+			border-bottom: 1px solid #dcdcde;
+			text-align: left;
+		}
+
+		th {
+			position: sticky;
+			top: 0;
+			background: #f6f7f7;
+		}
+	}
+}
