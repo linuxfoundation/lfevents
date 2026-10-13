@@ -510,9 +510,14 @@ function lfe_insert_structured_data() {
 		return;
 	}
 
+	$normalized = lfe_normalize_lf_event( $event_post );
+	if ( lfe_normalized_event_has_passed( $normalized ) ) {
+		return;
+	}
+
 	$event = array_merge(
 		array( '@context' => 'https://schema.org' ),
-		lfe_build_event_schema( lfe_normalize_lf_event( $event_post ) )
+		lfe_build_event_schema( $normalized )
 	);
 
 	echo '<script type="application/ld+json">' . json_encode( $event, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>'; //phpcs:ignore
@@ -615,6 +620,20 @@ function lfe_normalize_external_event( WP_Post $post ) {
 		'description'    => get_post_meta( $post->ID, 'lfes_external_description', true ),
 		'is_external'    => true,
 	);
+}
+
+/**
+ * Whether a normalised event has ended (end date, or start date if none, is before today).
+ *
+ * @param array $event Normalised event from lfe_normalize_lf_event() or lfe_normalize_external_event().
+ * @return bool
+ */
+function lfe_normalized_event_has_passed( $event ) {
+	$last_day = check_string_is_date( $event['date_end'] ) ? $event['date_end'] : $event['date_start'];
+	if ( ! check_string_is_date( $last_day ) ) {
+		return false;
+	}
+	return $last_day < gmdate( 'Y/m/d' );
 }
 
 /**
@@ -787,7 +806,7 @@ function lfe_insert_events_structured_data( $events, $name = '', $url = '' ) {
 	$items = array();
 
 	foreach ( $events as $event ) {
-		if ( ! check_string_is_date( $event['date_start'] ) ) {
+		if ( ! check_string_is_date( $event['date_start'] ) || lfe_normalized_event_has_passed( $event ) ) {
 			continue;
 		}
 
