@@ -470,7 +470,15 @@ class LFEvents_Admin {
 				echo esc_html( $post_id );
 				break;
 			case 'sponsor_logo':
-				echo has_post_thumbnail( $post_id ) ? '<span class="dashicons dashicons-yes-alt" style="color:green"></span>' : '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				$logo_url = get_the_post_thumbnail_url( $post_id, 'full' );
+				if ( $logo_url ) {
+					printf(
+						'<a href="%1$s" target="_blank" rel="noopener">View</a> | <a href="#" data-url="%1$s" onclick="event.preventDefault();var l=this;navigator.clipboard.writeText(l.dataset.url).then(function(){l.textContent=\'Copied!\';setTimeout(function(){l.textContent=\'Copy Image URL\';},1500);});">Copy Image URL</a>',
+						esc_url( $logo_url )
+					);
+				} else {
+					echo '<span class="dashicons dashicons-no-alt" style="color:red"></span>';
+				}
 				break;
 			case 'forwarding_url':
 				echo esc_html( get_post_meta( $post_id, 'lfes_sponsor_url', true ) ? get_post_meta( $post_id, 'lfes_sponsor_url', true ) : '-' );
