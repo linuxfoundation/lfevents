@@ -1,6 +1,7 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, TextareaControl, ToggleControl, SelectControl, Placeholder, Button, Flex, FlexItem, FlexBlock } from '@wordpress/components';
+import { PanelBody, TextControl, TextareaControl, ToggleControl, SelectControl, Placeholder, Button, Flex, FlexItem, FlexBlock, Dropdown } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { useSessionizeOptions, SessionizeLoadStatus, FieldSelect, ListField, questionOptions } from '../../shared/sessionize-fields';
 
 /*
  * Curated track colours.
@@ -20,6 +21,13 @@ import { useState } from '@wordpress/element';
  * dimension: within the 55–100% range the plugin allows, a muted and a vivid
  * version of one hue are too close to tell apart. Each hex is
  * hsl(hue 70% 50%), matching auto-coloured tracks, and round-trips exactly.
+ *
+ * Gray and Brown, at the end, are the exception: they differ from the others
+ * by saturation and darkness rather than hue, so the front end draws them with
+ * their own settings (`neutral` below; see NEUTRAL_TRACK_COLORS in view.js and
+ * sched_primary_colors() in includes/data.php, which key on these exact hexes).
+ * "Add all tracks" never hands out Gray on its own; it's meant to be chosen for
+ * things like Breaks or Registration.
  */
 const TRACK_PALETTE = [
 	{ label: 'Scarlet', hue: 13, hex: '#d94d26' },
@@ -42,6 +50,8 @@ const TRACK_PALETTE = [
 	{ label: 'Fuchsia', hue: 321, hex: '#d9269a' },
 	{ label: 'Pink', hue: 339, hex: '#d92665' },
 	{ label: 'Crimson', hue: 353, hex: '#d9263b' },
+	{ label: 'Brown', hue: 28, hex: '#815731', neutral: { s: 45, bgS: 35, darken: 15 } },
+	{ label: 'Gray', hue: 0, hex: '#80807f', neutral: { s: 0, bgS: 0, darken: 5 }, manualOnly: true },
 ];
 
 function paletteEntry( hex ) {
@@ -63,6 +73,15 @@ function swatchStyle( hex ) {
 		flexShrink: 0,
 	};
 
+	if ( entry && entry.neutral ) {
+		return {
+			...base,
+			background: `hsl(${ entry.hue } ${ entry.neutral.bgS }% 95%)`,
+			border: `1px solid hsl(${ entry.hue } ${ entry.neutral.s }% ${ 50 - entry.neutral.darken }%)`,
+			borderLeftWidth: '5px',
+		};
+	}
+
 	if ( entry ) {
 		return {
 			...base,
@@ -74,6 +93,144 @@ function swatchStyle( hex ) {
 
 	// Legacy custom colour chosen with the old picker.
 	return { ...base, background: hex, border: '1px solid #ccc' };
+}
+
+/*
+ * Order in which "Add all tracks" hands out colours: the 20 hues first,
+ * stepping 7 places around the wheel each time so tracks next to each other in
+ * the list get clearly different hues (7 shares no factor with 20, so every hue
+ * is visited once before any repeats), then Brown. Gray is left out.
+ */
+const HUE_COLORS = TRACK_PALETTE.filter( ( p ) => ! p.neutral );
+const ASSIGN_ORDER = [
+	...HUE_COLORS.map( ( _, i ) => HUE_COLORS[ ( i * 7 ) % HUE_COLORS.length ] ),
+	...TRACK_PALETTE.filter( ( p ) => p.neutral && ! p.manualOnly ),
+];
+
+/*
+ * Picks the colour for each track added by "Add all tracks": colours nobody
+ * uses yet first, then whichever is least used, never giving two tracks in a
+ * row the same colour.
+ */
+function assignColors( existingColors, count ) {
+	const usage = new Map( ASSIGN_ORDER.map( ( p ) => [ p.hex, 0 ] ) );
+	existingColors.forEach( ( c ) => {
+		const k = String( c ).toLowerCase();
+		if ( usage.has( k ) ) usage.set( k, usage.get( k ) + 1 );
+	} );
+
+	const picked = [];
+	let previous = existingColors.length ? String( existingColors[ existingColors.length - 1 ] ).toLowerCase() : null;
+	for ( let i = 0; i < count; i++ ) {
+		let best = null;
+		ASSIGN_ORDER.forEach( ( p ) => {
+			if ( p.hex === previous && ASSIGN_ORDER.length > 1 ) return;
+			if ( ! best || usage.get( p.hex ) < usage.get( best.hex ) ) best = p;
+		} );
+		usage.set( best.hex, usage.get( best.hex ) + 1 );
+		picked.push( best.hex );
+		previous = best.hex;
+	}
+	return picked;
+}
+
+/*
+ * The colour grid inside the picker: every palette colour with its name
+ * underneath, a count on colours other tracks already use, and a line at the
+ * bottom naming those tracks for whichever colour is hovered or focused.
+ */
+function ColorGrid( { track, selectedHex, tracksUsing, onPick } ) {
+	const [ focusHex, setFocusHex ] = useState( selectedHex );
+	const focused = TRACK_PALETTE.find( ( p ) => p.hex === focusHex ) || null;
+	const focusedUsers = focused ? tracksUsing( focused.hex, track ) : [];
+
+	return (
+		<div style={ { padding: '12px', width: '264px' } }>
+			<div style={ { fontSize: '12px', fontWeight: 600, marginBottom: '10px' } }>{ track }</div>
+			<div role="group" aria-label={ `Colors for ${ track }` } style={ { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px 6px' } }>
+				{ TRACK_PALETTE.map( ( p ) => {
+					const users = tracksUsing( p.hex, track );
+					const selected = selectedHex === p.hex;
+					const a11y = users.length ? `${ p.label }, also used by ${ users.join( ', ' ) }` : p.label;
+					return (
+						<button
+							key={ p.hex }
+							type="button"
+							aria-label={ a11y }
+							aria-pressed={ selected }
+							onClick={ () => onPick( p.hex ) }
+							onMouseEnter={ () => setFocusHex( p.hex ) }
+							onFocus={ () => setFocusHex( p.hex ) }
+							style={ {
+								display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
+								background: 'none', border: 0, padding: '2px', cursor: 'pointer',
+								borderRadius: '4px',
+								outline: selected ? '2px solid #1e1e1e' : 'none',
+							} }
+						>
+							<span aria-hidden="true" style={ { ...swatchStyle( p.hex ), width: '36px', height: '36px', position: 'relative', display: 'block' } }>
+								{ users.length > 0 && (
+									<span style={ { position: 'absolute', right: '3px', bottom: '1px', fontSize: '10px', fontWeight: 600, color: '#1e1e1e' } }>
+										{ users.length }
+									</span>
+								) }
+							</span>
+							<span aria-hidden="true" style={ { fontSize: '11px', lineHeight: 1.2, color: '#1e1e1e', fontWeight: selected ? 600 : 400 } }>
+								{ p.label }
+							</span>
+						</button>
+					);
+				} ) }
+			</div>
+			<p style={ { fontSize: '11px', color: '#757575', margin: '10px 0 0', minHeight: '28px' } }>
+				{ focused
+					? ( focusedUsers.length
+						? `${ focused.label }: used by ${ focusedUsers.join( ', ' ) }`
+						: `${ focused.label }: not used by any other track` )
+					: 'Numbers show how many other tracks use a color.' }
+			</p>
+		</div>
+	);
+}
+
+/*
+ * A track's current colour (swatch and name); click it to open the colour grid.
+ */
+function TrackColorPicker( { track, color, onChange, tracksUsing } ) {
+	const entry = paletteEntry( color );
+	const sharedWith = tracksUsing( color, track );
+
+	return (
+		<Dropdown
+			popoverProps={ { placement: 'left-start' } }
+			renderToggle={ ( { isOpen, onToggle } ) => (
+				<Button
+					onClick={ onToggle }
+					aria-expanded={ isOpen }
+					aria-label={ `Color for ${ track }: ${ entry ? entry.label : 'Custom' }. Change color` }
+					style={ { height: 'auto', padding: '2px 4px', gap: '8px', textAlign: 'left' } }
+				>
+					<span aria-hidden="true" style={ { display: 'block', ...swatchStyle( color ) } } />
+					<span style={ { fontSize: '12px', lineHeight: 1.3 } }>
+						{ entry ? entry.label : `Custom (${ color })` }
+						{ sharedWith.length > 0 && (
+							<span style={ { display: 'block', color: '#757575' } }>
+								{ `Also: ${ sharedWith.join( ', ' ) }` }
+							</span>
+						) }
+					</span>
+				</Button>
+			) }
+			renderContent={ ( { onClose } ) => (
+				<ColorGrid
+					track={ track }
+					selectedHex={ entry ? entry.hex : null }
+					tracksUsing={ tracksUsing }
+					onPick={ ( hex ) => { onChange( hex ); onClose(); } }
+				/>
+			) }
+		/>
+	);
 }
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -91,6 +248,21 @@ export default function Edit( { attributes, setAttributes } ) {
 		companyRollupNames, primaryColorOverrides,
 	} = attributes;
 	const blockProps = useBlockProps();
+
+	const sessionize = useSessionizeOptions( apiCode, {
+		companyField: speakerCompanyQuestionId,
+		companyOverrideField: speakerCompanyOverrideQuestionId,
+	} );
+	const loaded = 'ready' === sessionize.status && !! sessionize.data;
+	const categories = loaded ? ( sessionize.data.categories || [] ) : [];
+	const questions = loaded ? ( sessionize.data.questions || [] ) : [];
+	const categoryTitles = categories.map( ( c ) => c.title );
+	// Exact match, like the live page (view.js compares the title with ===).
+	const primaryCategory = categories.find( ( c ) => c.title === primaryFilterTitle );
+	const primaryValues = primaryCategory ? primaryCategory.items : [];
+	const speakerQuestionOptions = questionOptions( questions, [ 'speaker' ] );
+	const sessionQuestionOptions = questionOptions( questions, [ 'session' ] );
+	const categoryOptions = categoryTitles.map( ( t ) => ( { value: t, label: t } ) );
 
 	// Parse color overrides JSON into an object.
 	let colorMap = {};
@@ -114,42 +286,36 @@ export default function Edit( { attributes, setAttributes } ) {
 		setAttributes( { primaryColorOverrides: JSON.stringify( updated ) } );
 	}
 
-	// Which track (if any) already uses each palette colour.
-	function trackUsing( hex, exceptKey ) {
-		const needle = hex.toLowerCase();
-		const match = colorEntries.find(
-			( [ k, v ] ) => k !== exceptKey && String( v ).toLowerCase() === needle
-		);
-		return match ? match[ 0 ] : null;
+	// Every other track already using a colour.
+	function tracksUsing( hex, exceptKey ) {
+		const needle = String( hex ).toLowerCase();
+		return colorEntries
+			.filter( ( [ k, v ] ) => k !== exceptKey && String( v ).toLowerCase() === needle )
+			.map( ( [ k ] ) => k );
 	}
 
-	function colorOptions( key, current ) {
-		const options = TRACK_PALETTE.map( ( p ) => {
-			const usedBy = trackUsing( p.hex, key );
-			return {
-				value: p.hex,
-				label: usedBy ? `${ p.label } (used by ${ usedBy })` : p.label,
-			};
-		} );
-
-		// Keep a colour picked with the old free-form picker selectable, so
-		// opening an existing page never silently changes a track's colour.
-		if ( current && ! paletteEntry( current ) ) {
-			options.unshift( { value: current, label: `Custom (${ current })` } );
-		}
-
-		return options;
-	}
-
+	// Manual add, used only when the track list can't be loaded from Sessionize.
 	function addColor() {
 		const label = newColorLabel.trim();
 		if ( ! label || colorMap.hasOwnProperty( label ) ) return;
 
-		// Start with the first colour no other track is using yet.
-		const firstFree = TRACK_PALETTE.find( ( p ) => ! trackUsing( p.hex, null ) ) || TRACK_PALETTE[ 0 ];
-		const updated = { ...colorMap, [ label ]: firstFree.hex };
-		setAttributes( { primaryColorOverrides: JSON.stringify( updated ) } );
+		const [ hex ] = assignColors( colorEntries.map( ( [ , v ] ) => v ), 1 );
+		setAttributes( { primaryColorOverrides: JSON.stringify( { ...colorMap, [ label ]: hex } ) } );
 		setNewColorLabel( '' );
+	}
+
+	// Tracks in the primary category that don't have a colour yet.
+	const missingTracks = primaryValues.filter( ( v ) => ! colorMap.hasOwnProperty( v ) );
+
+	// Adds every missing track at the bottom; existing tracks and colours are left alone.
+	function addAllTracks() {
+		if ( ! missingTracks.length ) return;
+		const colors = assignColors( colorEntries.map( ( [ , v ] ) => v ), missingTracks.length );
+		const updated = { ...colorMap };
+		missingTracks.forEach( ( track, i ) => {
+			updated[ track ] = colors[ i ];
+		} );
+		setAttributes( { primaryColorOverrides: JSON.stringify( updated ) } );
 	}
 
 	return (
@@ -159,20 +325,26 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label="Sessionize API Code *"
 						value={ apiCode }
-						onChange={ ( val ) => setAttributes( { apiCode: val } ) }
-						help="Your unique Sessionize endpoint ID. Found under API / Embed in Sessionize."
+						onChange={ ( val ) => setAttributes( { apiCode: val.trim() } ) }
+						help="Your unique Sessionize endpoint ID. Found under API / Embed in Sessionize. Once entered, the fields below become dropdowns of this event's Sessionize fields."
 					/>
+					<SessionizeLoadStatus sessionize={ sessionize } />
 					<TextControl
 						label="Sessionize Public Slug *"
 						value={ publicSlug }
 						onChange={ ( val ) => setAttributes( { publicSlug: val } ) }
-						help="Your event's Sessionize URL slug (e.g., kubecon-cloudnativecon-japan-2026)."
+						help="Your event's Sessionize URL slug (e.g., kubecon-cloudnativecon-japan-2026), the part after sessionize.com/ on your event's public page. The Sessionize API doesn't provide this, so it has to be entered by hand."
 					/>
-					<TextControl
+					<FieldSelect
 						label="Primary Category Name *"
 						value={ primaryFilterTitle }
+						options={ categoryOptions }
+						loaded={ loaded }
+						exact
 						onChange={ ( val ) => setAttributes( { primaryFilterTitle: val } ) }
-						help="The exact Question/Title of the Sessionize field that contains your main session groupings. Drives color-coding and the first filter chip."
+						help={ loaded
+							? 'The Sessionize category that holds your main session groupings. Drives color-coding and the first filter chip.'
+							: 'The exact Question/Title of the Sessionize field that contains your main session groupings. Drives color-coding and the first filter chip.' }
 					/>
 					<SelectControl
 						label="Time Format"
@@ -223,41 +395,53 @@ export default function Edit( { attributes, setAttributes } ) {
 						label="Hide Session Times (Dates Only)"
 						checked={ hideSessionTimes }
 						onChange={ ( val ) => setAttributes( { hideSessionTimes: val } ) }
-						help="Groups each day's sessions under a single date heading instead of printing a time on every session. Session order is unaffected — only the printed time is hidden. If Grid view is enabled above, it keeps its own time axis regardless of this setting, since a grid is inherently time-based."
+						help="Groups each day's sessions under a single date heading instead of printing a time on every session."
 					/>
 				</PanelBody>
 
 				<PanelBody title="Speaker and Session Data Fields" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Enter the exact Question/Title of each field as it appears in your Sessionize form.
+						{ loaded
+							? 'Choose the Sessionize field that holds each piece of information.'
+							: 'Enter the exact Question/Title of each field as it appears in your Sessionize form.' }
 					</p>
-					<TextControl
+					<FieldSelect
 						label="Speaker Title Field *"
 						value={ speakerTitleQuestionId }
+						options={ speakerQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { speakerTitleQuestionId: val } ) }
 						help="Submission field where speakers enter their job title."
 					/>
-					<TextControl
+					<FieldSelect
 						label="Speaker Company Field *"
 						value={ speakerCompanyQuestionId }
+						options={ speakerQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { speakerCompanyQuestionId: val } ) }
 						help="Submission field where speakers enter their organization."
 					/>
-					<TextControl
+					<FieldSelect
 						label="Speaker Company Override Field"
 						value={ speakerCompanyOverrideQuestionId }
+						options={ speakerQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { speakerCompanyOverrideQuestionId: val } ) }
 						help="Internal field used to display a role (e.g., Program Chair) instead of company name on the session card."
 					/>
-					<TextControl
+					<FieldSelect
 						label="Card Speaker Display Override"
 						value={ cardSpeakerOverrideQuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { cardSpeakerOverrideQuestionId: val } ) }
 						help="Internal field where organizers enter a comma-separated list of speaker names to show on the session card."
 					/>
-					<TextControl
+					<FieldSelect
 						label="Presentation Slides Field *"
 						value={ presentationSlidesQuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { presentationSlidesQuestionId: val } ) }
 						help="Additional field where speakers link their slide deck. Adds a Slides button to the session popup."
 					/>
@@ -265,90 +449,135 @@ export default function Edit( { attributes, setAttributes } ) {
 
 				<PanelBody title="Custom Session Links" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Enter the exact Question/Title of a web address session field in Sessionize. The field's title appears as the button label on the session popup.
+						{ loaded
+							? 'Choose a web address session field from Sessionize. The field\'s title appears as the button label on the session popup.'
+							: 'Enter the exact Question/Title of a web address session field in Sessionize. The field\'s title appears as the button label on the session popup.' }
 					</p>
-					<TextControl
+					<FieldSelect
 						label="Custom Link 1"
 						value={ customLinkField1QuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { customLinkField1QuestionId: val } ) }
 					/>
-					<TextControl
+					<FieldSelect
 						label="Custom Link 2"
 						value={ customLinkField2QuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { customLinkField2QuestionId: val } ) }
 					/>
-					<TextControl
+					<FieldSelect
 						label="Custom Link 3"
 						value={ customLinkField3QuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { customLinkField3QuestionId: val } ) }
 					/>
-					<TextControl
+					<FieldSelect
 						label="Custom Link 4"
 						value={ customLinkField4QuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { customLinkField4QuestionId: val } ) }
 					/>
-					<TextControl
+					<FieldSelect
 						label="Custom Link 5"
 						value={ customLinkField5QuestionId }
+						options={ sessionQuestionOptions }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { customLinkField5QuestionId: val } ) }
 					/>
 				</PanelBody>
 
 				<PanelBody title="Filtering and Visibility" initialOpen={ false }>
 					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						All fields in this section accept comma-separated values.
+						{ loaded
+							? 'Pick one or more values in each field. Suggestions come from Sessionize; you can also type your own.'
+							: 'All fields in this section accept comma-separated values.' }
 					</p>
-					<TextControl
+					<ListField
 						label="Categories to Hide from Filters"
 						value={ hiddenFilterCategories }
+						suggestions={ categoryTitles }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { hiddenFilterCategories: val } ) }
 						help="Category names that will not appear as filter options at the top. Tags still show on session cards."
 					/>
-					<TextControl
+					<ListField
 						label="Hide Tags on Session Cards"
 						value={ hideSessionChipsForCategories }
+						suggestions={ categoryTitles }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { hideSessionChipsForCategories: val } ) }
 						help="Category names whose tag badges will not appear on session cards. Still filterable at the top."
 					/>
-					<TextControl
+					<ListField
 						label="Hide All Tags for These Primary Values"
 						value={ hideAllChipsForPrimaryValues }
+						suggestions={ primaryValues }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { hideAllChipsForPrimaryValues: val } ) }
 						help="Primary category values where no tag badges appear on the session card (e.g., Breaks, Registration)."
 					/>
-					<TextControl
+					<ListField
 						label="Show Speaker Title for These Primary Values"
 						value={ includeSpeakerTitleForPrimaryValues }
+						suggestions={ primaryValues }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { includeSpeakerTitleForPrimaryValues: val } ) }
 						help="Primary category values where speaker job titles appear on session cards. Typically used for Keynote Sessions."
 					/>
-					<TextControl
+					<ListField
 						label="Sponsor Company Rollup"
 						value={ companyRollupNames }
+						suggestions={ ( sessionize.data?.companies || [] ) }
+						loaded={ loaded }
 						onChange={ ( val ) => setAttributes( { companyRollupNames: val } ) }
 						help="Sponsor company names. Adds a More from [Company] section in the speaker profile. Sponsor benefit."
 					/>
 				</PanelBody>
 
 				<PanelBody title="Track Color Overrides" initialOpen={ false }>
-					<p className="components-base-control__help" style={ { marginTop: 0 } }>
-						Type the exact track name as it appears in Sessionize, then choose a color. Tracks not listed here are auto-colored.
-					</p>
+					{ loaded && primaryValues.length > 0 ? (
+						<>
+							<p className="components-base-control__help" style={ { marginTop: 0 } }>
+								Add every track from your primary category, then click a track's color to change it. Running Add all tracks again only adds new tracks and leaves existing colors alone.
+							</p>
+							<Button
+								variant="secondary"
+								onClick={ addAllTracks }
+								disabled={ ! missingTracks.length }
+								style={ { marginBottom: '16px' } }
+							>
+								{ missingTracks.length
+									? `Add all tracks (${ missingTracks.length } new)`
+									: 'All tracks added' }
+							</Button>
+						</>
+					) : (
+						<p className="components-base-control__help" style={ { marginTop: 0 } }>
+							{ loaded
+								? 'Choose a Primary Category Name above to add its tracks here.'
+								: 'Type the exact track name as it appears in Sessionize, then choose a color. Tracks not listed here are auto-colored.' }
+						</p>
+					) }
+
 					{ colorEntries.map( ( [ key, color ] ) => (
-						<div key={ key } style={ { marginBottom: '12px' } }>
-							<div style={ { fontSize: '13px', fontWeight: 500, marginBottom: '4px' } }>{ key }</div>
-							<Flex align="center">
-								<FlexItem>
-									<span aria-hidden="true" style={ { display: 'block', ...swatchStyle( color ) } } />
-								</FlexItem>
+						<div key={ key } style={ { marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #f0f0f0' } }>
+							<Flex align="flex-start">
 								<FlexBlock>
-									<SelectControl
-										label={ `Color for ${ key }` }
-										hideLabelFromVision
-										value={ paletteEntry( color ) ? paletteEntry( color ).hex : color }
-										options={ colorOptions( key, color ) }
-										onChange={ ( val ) => updateColor( key, val ) }
-										__nextHasNoMarginBottom
+									<div style={ { fontSize: '13px', fontWeight: 500, marginBottom: '4px' } }>
+										{ key }
+										{ loaded && primaryValues.length > 0 && ! primaryValues.includes( key ) && (
+											<span style={ { fontWeight: 400, color: '#b26200' } }> (not in Sessionize)</span>
+										) }
+									</div>
+									<TrackColorPicker
+										track={ key }
+										color={ color }
+										onChange={ ( hex ) => updateColor( key, hex ) }
+										tracksUsing={ tracksUsing }
 									/>
 								</FlexBlock>
 								<FlexItem>
@@ -365,29 +594,32 @@ export default function Edit( { attributes, setAttributes } ) {
 							</Flex>
 						</div>
 					) ) }
-					<div style={ { marginTop: '16px', borderTop: '1px solid #e0e0e0', paddingTop: '12px' } }>
-						<Flex align="flex-end">
-							<FlexBlock>
-								<TextControl
-									label="New entry label"
-									value={ newColorLabel }
-									onChange={ setNewColorLabel }
-									placeholder="e.g., Keynote Sessions"
-								/>
-							</FlexBlock>
-							<FlexItem>
-								<Button
-									variant="secondary"
-									size="compact"
-									onClick={ addColor }
-									disabled={ ! newColorLabel.trim() }
-									style={ { marginBottom: '8px' } }
-								>
-									Add
-								</Button>
-							</FlexItem>
-						</Flex>
-					</div>
+
+					{ ! ( loaded && primaryValues.length > 0 ) && (
+						<div style={ { marginTop: '16px', borderTop: '1px solid #e0e0e0', paddingTop: '12px' } }>
+							<Flex align="flex-end">
+								<FlexBlock>
+									<TextControl
+										label="New entry label"
+										value={ newColorLabel }
+										onChange={ setNewColorLabel }
+										placeholder="e.g., Keynote Sessions"
+									/>
+								</FlexBlock>
+								<FlexItem>
+									<Button
+										variant="secondary"
+										size="compact"
+										onClick={ addColor }
+										disabled={ ! newColorLabel.trim() }
+										style={ { marginBottom: '8px' } }
+									>
+										Add
+									</Button>
+								</FlexItem>
+							</Flex>
+						</div>
+					) }
 				</PanelBody>
 			</InspectorControls>
 

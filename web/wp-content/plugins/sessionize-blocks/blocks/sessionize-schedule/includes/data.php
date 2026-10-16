@@ -109,6 +109,39 @@ if ( ! function_exists( 'sched_primary_colors' ) ) {
 	 * @return array Array with bg and border CSS colour strings.
 	 */
 	function sched_primary_colors( $name, $overrides ) {
+		/*
+		 * Neutral track colours (Gray, Brown) keep their own saturation and get a
+		 * darker border, instead of being reduced to a hue like every other
+		 * colour. Mirrors NEUTRAL_TRACK_COLORS in view.js. Gray is deliberately
+		 * #80807f rather than #808080, so a gray picked with the old free-form
+		 * colour picker keeps rendering exactly as it does today.
+		 */
+		$neutrals = array(
+			'#80807f' => array(
+				'h'      => 0,
+				's'      => 0,
+				'bg_s'   => 0,
+				'darken' => 5,
+			),
+			'#815731' => array(
+				'h'      => 28,
+				's'      => 45,
+				'bg_s'   => 35,
+				'darken' => 15,
+			),
+		);
+
+		if ( isset( $overrides[ $name ] ) && is_string( $overrides[ $name ] ) ) {
+			$key = strtolower( trim( (string) $overrides[ $name ] ) );
+			if ( isset( $neutrals[ $key ] ) ) {
+				$n = $neutrals[ $key ];
+				return array(
+					'bg'     => 'hsl(' . $n['h'] . ' ' . $n['bg_s'] . '% 95%)',
+					'border' => 'hsl(' . $n['h'] . ' ' . $n['s'] . '% ' . ( 50 - $n['darken'] ) . '%)',
+				);
+			}
+		}
+
 		if ( isset( $overrides[ $name ] ) && '' !== $overrides[ $name ] ) {
 			$hsl = sched_hex_to_hsl( $overrides[ $name ] );
 

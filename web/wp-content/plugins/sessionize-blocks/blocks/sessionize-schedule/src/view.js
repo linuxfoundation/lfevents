@@ -897,8 +897,34 @@ async function initSchedBlock( root ) {
 		return { h: Math.round( hue ), s: Math.round( sat * 100 ), l: Math.round( light * 100 ) };
 	}
 
+	/*
+	 * Neutral track colours (Gray, Brown) from the editor palette. Other colours
+	 * only keep their hue (saturation is raised to at least 55% and lightness is
+	 * fixed), which would turn gray into a pink and brown into plain orange, so
+	 * these two are drawn with their own saturation and a darker border instead.
+	 * Keyed by the exact hex the editor saves; mirrors the $neutrals table in
+	 * sched_primary_colors() in includes/data.php.
+	 */
+	const NEUTRAL_TRACK_COLORS = {
+		'#80807f': { h: 0, s: 0, bgS: 0, darken: 5 },
+		'#815731': { h: 28, s: 45, bgS: 35, darken: 15 },
+	};
+
+	function shiftLightness( value, delta ) {
+		const n = parseFloat( value );
+		return `${ Math.max( 0, Math.min( 100, ( Number.isFinite( n ) ? n : 50 ) - delta ) ) }%`;
+	}
+
 	function primaryColorsFromName( name, bgLightness = '95%', borderLightness = '50%', dotLightness = '55%' ) {
 		const overrideHex = schedConfig.primaryColorOverrides?.[ name ];
+		const neutral = overrideHex ? NEUTRAL_TRACK_COLORS[ String( overrideHex ).trim().toLowerCase() ] : null;
+		if ( neutral ) {
+			return {
+				bg: `hsl(${ neutral.h } ${ neutral.bgS }% ${ bgLightness })`,
+				border: `hsl(${ neutral.h } ${ neutral.s }% ${ shiftLightness( borderLightness, neutral.darken ) })`,
+				dot: `hsl(${ neutral.h } ${ neutral.s }% ${ shiftLightness( dotLightness, neutral.darken ) })`,
+			};
+		}
 		if ( overrideHex ) {
 			const hsl = hexToHsl( overrideHex );
 			if ( hsl ) {
