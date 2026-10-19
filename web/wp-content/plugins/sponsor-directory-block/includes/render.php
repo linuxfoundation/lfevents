@@ -236,14 +236,7 @@ function lf_sponsor_directory_normalize_sponsors( $rows ) {
 	usort(
 		$sponsors,
 		function ( $first, $second ) {
-			// Sponsors without a level sort last.
-			$comparison = ( '' === $first['level'] ) <=> ( '' === $second['level'] );
-			if ( 0 === $comparison ) {
-				$comparison = strnatcasecmp( $first['level'], $second['level'] );
-			}
-			if ( 0 === $comparison ) {
-				$comparison = strcasecmp( $first['name'], $second['name'] );
-			}
+			$comparison = strcasecmp( $first['name'], $second['name'] );
 			return 0 !== $comparison ? $comparison : $first['postId'] <=> $second['postId'];
 		}
 	);
