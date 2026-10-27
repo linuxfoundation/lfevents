@@ -329,12 +329,16 @@ function lfe_get_sponsors( $parent_id ) {
 function lfe_insert_google_tag_manager_head() {
 	$domains        = "'events.linuxfoundation.org', 'www.lfopensource.cn', 'bagevent.com', 'www.cvent.com', 'events19.linuxfoundation.org', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
 	$current_domain = parse_url( home_url(), PHP_URL_HOST );
+	// Google Tag Gateway: Cloudflare proxies /telemetry to Google on this zone only.
+	$gtm_src        = 'events.linuxfoundation.org' === $current_domain
+		? '/telemetry/gtm.js?id='
+		: 'https://www.googletagmanager.com/gtm.js?id=';
 	$analytics_code = <<<EOD
 <!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	'{$gtm_src}'+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-TK7D99');</script>
 	<!-- End Google Tag Manager -->
 	<meta name="google-site-verification" content="-gukSsqWFlePhF0bBHUrwFbg7eaR4N09IFCKY9QmtYc" />
