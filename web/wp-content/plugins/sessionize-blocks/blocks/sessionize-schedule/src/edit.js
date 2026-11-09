@@ -15,12 +15,15 @@ import { useSessionizeOptions, SessionizeLoadStatus, FieldSelect, ListField, que
  * These twenty hues were spaced with a perceptual colour-difference check
  * (CIEDE2000) to maximise the smallest difference between any two border
  * colours (every pair differs by ~11.5 or more at 50% lightness). At the pale
- * 95% card background, the closest neighbours (Teal/Aqua, Aqua/Cyan,
- * Pink/Crimson, Fuchsia/Pink) are near-identical, so tracks are told apart by
- * the border and chip rather than the tint. Saturation is not used as a second
- * dimension: within the 55–100% range the plugin allows, a muted and a vivid
- * version of one hue are too close to tell apart. Each hex is
- * hsl(hue 70% 50%), matching auto-coloured tracks, and round-trips exactly.
+ * 95% card background, the closest neighbours (Turquoise/Robin Egg, Robin
+ * Egg/Pacific Blue, Ruby/Crimson, Mulberry/Ruby) are near-identical, so tracks
+ * are told apart by the border and chip rather than the tint. Each standard hex
+ * is hsl(hue 70% 50%), matching auto-coloured tracks, and round-trips exactly.
+ *
+ * Each hue also has a vivid version at hsl(hue 100% 50%) for brighter cards.
+ * A hue's standard and vivid versions are close to each other, so the picker
+ * groups them separately and assignColors() treats them as one hue: it won't
+ * put both on one schedule until all 20 hues are in use.
  *
  * Gray and Brown, at the end, are the exception: they differ from the others
  * by saturation and darkness rather than hue, so the front end draws them with
@@ -30,26 +33,51 @@ import { useSessionizeOptions, SessionizeLoadStatus, FieldSelect, ListField, que
  * things like Breaks or Registration.
  */
 const TRACK_PALETTE = [
-	{ label: 'Scarlet', hue: 13, hex: '#d94d26' },
-	{ label: 'Vermilion', hue: 25, hex: '#d97126' },
-	{ label: 'Orange', hue: 35, hex: '#d98e26' },
-	{ label: 'Amber', hue: 45, hex: '#d9ac26' },
-	{ label: 'Yellow', hue: 57, hex: '#d9d026' },
-	{ label: 'Lime', hue: 77, hex: '#a6d926' },
-	{ label: 'Green', hue: 120, hex: '#26d926' },
-	{ label: 'Emerald', hue: 153, hex: '#26d988' },
-	{ label: 'Teal', hue: 171, hex: '#26d9be' },
-	{ label: 'Aqua', hue: 183, hex: '#26d0d9' },
-	{ label: 'Cyan', hue: 192, hex: '#26b5d9' },
-	{ label: 'Sky', hue: 202, hex: '#2697d9' },
-	{ label: 'Azure', hue: 213, hex: '#2677d9' },
-	{ label: 'Cobalt', hue: 224, hex: '#2656d9' },
-	{ label: 'Blue', hue: 241, hex: '#2926d9' },
-	{ label: 'Violet', hue: 274, hex: '#8b26d9' },
-	{ label: 'Orchid', hue: 295, hex: '#ca26d9' },
-	{ label: 'Fuchsia', hue: 321, hex: '#d9269a' },
-	{ label: 'Pink', hue: 339, hex: '#d92665' },
-	{ label: 'Crimson', hue: 353, hex: '#d9263b' },
+	// Standard: hsl(hue 70% 50%). Hex values are unchanged from the original
+	// palette, so schedules that already use them render exactly as before;
+	// only the labels changed, to the closest standard colour name.
+	{ label: 'Flame', hue: 13, sat: 70, hex: '#d94d26' },
+	{ label: 'Persimmon', hue: 25, sat: 70, hex: '#d97126' },
+	{ label: 'Carrot', hue: 35, sat: 70, hex: '#d98e26' },
+	{ label: 'Mustard', hue: 45, sat: 70, hex: '#d9ac26' },
+	{ label: 'Citrine', hue: 57, sat: 70, hex: '#d9d026' },
+	{ label: 'Yellow-Green', hue: 77, sat: 70, hex: '#a6d926' },
+	{ label: 'Malachite', hue: 120, sat: 70, hex: '#26d926' },
+	{ label: 'Emerald', hue: 153, sat: 70, hex: '#26d988' },
+	{ label: 'Turquoise', hue: 171, sat: 70, hex: '#26d9be' },
+	{ label: 'Robin Egg', hue: 183, sat: 70, hex: '#26d0d9' },
+	{ label: 'Pacific Blue', hue: 192, sat: 70, hex: '#26b5d9' },
+	{ label: 'Dodger Blue', hue: 202, sat: 70, hex: '#2697d9' },
+	{ label: 'Azure', hue: 213, sat: 70, hex: '#2677d9' },
+	{ label: 'Sapphire', hue: 224, sat: 70, hex: '#2656d9' },
+	{ label: 'Persian Blue', hue: 241, sat: 70, hex: '#2926d9' },
+	{ label: 'Blue Violet', hue: 274, sat: 70, hex: '#8b26d9' },
+	{ label: 'Steel Pink', hue: 295, sat: 70, hex: '#ca26d9' },
+	{ label: 'Mulberry', hue: 321, sat: 70, hex: '#d9269a' },
+	{ label: 'Ruby', hue: 339, sat: 70, hex: '#d92665' },
+	{ label: 'Crimson', hue: 353, sat: 70, hex: '#d9263b' },
+	// Vivid: the same hues at hsl(hue 100% 50%). The front end keeps saturation
+	// above 55%, so these render as stronger tints and borders.
+	{ label: 'Scarlet', hue: 13, sat: 100, vivid: true, hex: '#ff3700' },
+	{ label: 'Safety Orange', hue: 25, sat: 100, vivid: true, hex: '#ff6a00' },
+	{ label: 'Tangerine', hue: 35, sat: 100, vivid: true, hex: '#ff9500' },
+	{ label: 'Amber', hue: 45, sat: 100, vivid: true, hex: '#ffbf00' },
+	{ label: 'Canary', hue: 57, sat: 100, vivid: true, hex: '#fff200' },
+	{ label: 'Lime', hue: 77, sat: 100, vivid: true, hex: '#b7ff00' },
+	{ label: 'Neon Green', hue: 120, sat: 100, vivid: true, hex: '#00ff00' },
+	{ label: 'Spring Green', hue: 153, sat: 100, vivid: true, hex: '#00ff8c' },
+	{ label: 'Aquamarine', hue: 171, sat: 100, vivid: true, hex: '#00ffd9' },
+	{ label: 'Cyan', hue: 183, sat: 100, vivid: true, hex: '#00f2ff' },
+	{ label: 'Capri', hue: 192, sat: 100, vivid: true, hex: '#00ccff' },
+	{ label: 'Cerulean', hue: 202, sat: 100, vivid: true, hex: '#00a2ff' },
+	{ label: 'Brandeis Blue', hue: 213, sat: 100, vivid: true, hex: '#0073ff' },
+	{ label: 'Neon Blue', hue: 224, sat: 100, vivid: true, hex: '#0044ff' },
+	{ label: 'Ultramarine', hue: 241, sat: 100, vivid: true, hex: '#0400ff' },
+	{ label: 'Electric Violet', hue: 274, sat: 100, vivid: true, hex: '#9000ff' },
+	{ label: 'Phlox', hue: 295, sat: 100, vivid: true, hex: '#ea00ff' },
+	{ label: 'Hollywood Cerise', hue: 321, sat: 100, vivid: true, hex: '#ff00a6' },
+	{ label: 'Amaranth', hue: 339, sat: 100, vivid: true, hex: '#ff0059' },
+	{ label: 'Red', hue: 353, sat: 100, vivid: true, hex: '#ff001e' },
 	{ label: 'Brown', hue: 28, hex: '#815731', neutral: { s: 45, bgS: 35, darken: 15 } },
 	{ label: 'Gray', hue: 0, hex: '#80807f', neutral: { s: 0, bgS: 0, darken: 5 }, manualOnly: true },
 ];
@@ -85,8 +113,8 @@ function swatchStyle( hex ) {
 	if ( entry ) {
 		return {
 			...base,
-			background: `hsl(${ entry.hue } 70% 95%)`,
-			border: `1px solid hsl(${ entry.hue } 70% 50%)`,
+			background: `hsl(${ entry.hue } ${ entry.sat }% 95%)`,
+			border: `1px solid hsl(${ entry.hue } ${ entry.sat }% 50%)`,
 			borderLeftWidth: '5px',
 		};
 	}
@@ -96,43 +124,90 @@ function swatchStyle( hex ) {
 }
 
 /*
- * Order in which "Add all tracks" hands out colours: the 20 hues first,
- * stepping 7 places around the wheel each time so tracks next to each other in
- * the list get clearly different hues (7 shares no factor with 20, so every hue
- * is visited once before any repeats), then Brown. Gray is left out.
+ * Colours that can be handed out automatically: all 20 hues (standard and
+ * vivid), then Brown. Gray is only ever chosen by hand.
  */
-const HUE_COLORS = TRACK_PALETTE.filter( ( p ) => ! p.neutral );
-const ASSIGN_ORDER = [
-	...HUE_COLORS.map( ( _, i ) => HUE_COLORS[ ( i * 7 ) % HUE_COLORS.length ] ),
-	...TRACK_PALETTE.filter( ( p ) => p.neutral && ! p.manualOnly ),
-];
+const AUTO_HUES = TRACK_PALETTE.filter( ( p ) => ! p.neutral );
+const AUTO_NEUTRALS = TRACK_PALETTE.filter( ( p ) => p.neutral && ! p.manualOnly );
+
+function hueGap( a, b ) {
+	const d = Math.abs( a - b ) % 360;
+	return Math.min( d, 360 - d );
+}
 
 /*
- * Picks the colour for each track added by "Add all tracks": colours nobody
- * uses yet first, then whichever is least used, never giving two tracks in a
- * row the same colour.
+ * Picks the colour for each track added by "Add all tracks" or the manual Add
+ * button.
+ *
+ * - Every hue is used once before any hue is used twice. A hue's standard and
+ *   vivid versions count as the same hue, so they don't both land on one
+ *   schedule until all 20 hues are taken.
+ * - Each pick goes as far around the colour wheel as it can from the hues
+ *   already in use, so a few tracks get clearly different colours instead of
+ *   neighbours like Flame and Persimmon.
+ * - The starting hue, the choice among picks that are nearly as far apart,
+ *   and standard vs vivid are all random, so each event gets its own mix.
+ * - Brown joins once all 20 hues are in use.
+ *
+ * `random` can be swapped for a seeded generator in tests.
  */
-function assignColors( existingColors, count ) {
-	const usage = new Map( ASSIGN_ORDER.map( ( p ) => [ p.hex, 0 ] ) );
+const SPREAD_TOLERANCE = 0.85;
+
+function assignColors( existingColors, count, random = Math.random ) {
+	const colorUse = new Map( TRACK_PALETTE.map( ( p ) => [ p.hex, 0 ] ) );
+	const hueUse = new Map( AUTO_HUES.map( ( p ) => [ p.hue, 0 ] ) );
+	const addUse = ( p ) => {
+		colorUse.set( p.hex, colorUse.get( p.hex ) + 1 );
+		if ( ! p.neutral ) hueUse.set( p.hue, hueUse.get( p.hue ) + 1 );
+	};
 	existingColors.forEach( ( c ) => {
-		const k = String( c ).toLowerCase();
-		if ( usage.has( k ) ) usage.set( k, usage.get( k ) + 1 );
+		const p = paletteEntry( c );
+		if ( p ) addUse( p );
 	} );
 
+	const pickRandom = ( list ) => list[ Math.floor( random() * list.length ) ];
 	const picked = [];
-	let previous = existingColors.length ? String( existingColors[ existingColors.length - 1 ] ).toLowerCase() : null;
+
 	for ( let i = 0; i < count; i++ ) {
-		let best = null;
-		ASSIGN_ORDER.forEach( ( p ) => {
-			if ( p.hex === previous && ASSIGN_ORDER.length > 1 ) return;
-			if ( ! best || usage.get( p.hex ) < usage.get( best.hex ) ) best = p;
-		} );
-		usage.set( best.hex, usage.get( best.hex ) + 1 );
-		picked.push( best.hex );
-		previous = best.hex;
+		const level = Math.min( ...hueUse.values() );
+
+		// Brown gets one turn per full round of the 20 hues.
+		const neutral = AUTO_NEUTRALS.find( ( p ) => colorUse.get( p.hex ) < level );
+		if ( neutral ) {
+			addUse( neutral );
+			picked.push( neutral.hex );
+			continue;
+		}
+
+		// Hues used the fewest times, scored by distance to the nearest hue
+		// that's already been used more.
+		const busier = [ ...hueUse ].filter( ( [ , n ] ) => n > level ).map( ( [ h ] ) => h );
+		const scored = [ ...hueUse ]
+			.filter( ( [ , n ] ) => n === level )
+			.map( ( [ h ] ) => ( {
+				hue: h,
+				dist: busier.length ? Math.min( ...busier.map( ( u ) => hueGap( h, u ) ) ) : Infinity,
+			} ) );
+		const best = Math.max( ...scored.map( ( c ) => c.dist ) );
+		const shortlist = scored.filter( ( c ) => ! Number.isFinite( best ) || c.dist >= best * SPREAD_TOLERANCE );
+		const hue = pickRandom( shortlist ).hue;
+
+		// Standard or vivid: whichever is used less, at random on a tie.
+		const versions = AUTO_HUES.filter( ( p ) => p.hue === hue );
+		const fewest = Math.min( ...versions.map( ( p ) => colorUse.get( p.hex ) ) );
+		const choice = pickRandom( versions.filter( ( p ) => colorUse.get( p.hex ) === fewest ) );
+
+		addUse( choice );
+		picked.push( choice.hex );
 	}
 	return picked;
 }
+
+const PALETTE_GROUPS = [
+	{ label: 'Standard', colors: TRACK_PALETTE.filter( ( p ) => ! p.neutral && ! p.vivid ) },
+	{ label: 'Vivid', colors: TRACK_PALETTE.filter( ( p ) => p.vivid ) },
+	{ label: 'Neutral', colors: TRACK_PALETTE.filter( ( p ) => p.neutral ) },
+];
 
 /*
  * The colour grid inside the picker: every palette colour with its name
@@ -145,43 +220,48 @@ function ColorGrid( { track, selectedHex, tracksUsing, onPick } ) {
 	const focusedUsers = focused ? tracksUsing( focused.hex, track ) : [];
 
 	return (
-		<div style={ { padding: '12px', width: '264px' } }>
+		<div style={ { padding: '12px', width: '320px' } }>
 			<div style={ { fontSize: '12px', fontWeight: 600, marginBottom: '10px' } }>{ track }</div>
-			<div role="group" aria-label={ `Colors for ${ track }` } style={ { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px 6px' } }>
-				{ TRACK_PALETTE.map( ( p ) => {
-					const users = tracksUsing( p.hex, track );
-					const selected = selectedHex === p.hex;
-					const a11y = users.length ? `${ p.label }, also used by ${ users.join( ', ' ) }` : p.label;
-					return (
-						<button
-							key={ p.hex }
-							type="button"
-							aria-label={ a11y }
-							aria-pressed={ selected }
-							onClick={ () => onPick( p.hex ) }
-							onMouseEnter={ () => setFocusHex( p.hex ) }
-							onFocus={ () => setFocusHex( p.hex ) }
-							style={ {
-								display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
-								background: 'none', border: 0, padding: '2px', cursor: 'pointer',
-								borderRadius: '4px',
-								outline: selected ? '2px solid #1e1e1e' : 'none',
-							} }
-						>
-							<span aria-hidden="true" style={ { ...swatchStyle( p.hex ), width: '36px', height: '36px', position: 'relative', display: 'block' } }>
-								{ users.length > 0 && (
-									<span style={ { position: 'absolute', right: '3px', bottom: '1px', fontSize: '10px', fontWeight: 600, color: '#1e1e1e' } }>
-										{ users.length }
+			{ PALETTE_GROUPS.map( ( group ) => (
+				<div key={ group.label } style={ { marginBottom: '10px' } }>
+					<div style={ { fontSize: '11px', color: '#757575', marginBottom: '6px' } }>{ group.label }</div>
+					<div role="group" aria-label={ `${ group.label } colors for ${ track }` } style={ { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px 6px' } }>
+						{ group.colors.map( ( p ) => {
+							const users = tracksUsing( p.hex, track );
+							const selected = selectedHex === p.hex;
+							const a11y = users.length ? `${ p.label }, also used by ${ users.join( ', ' ) }` : p.label;
+							return (
+								<button
+									key={ p.hex }
+									type="button"
+									aria-label={ a11y }
+									aria-pressed={ selected }
+									onClick={ () => onPick( p.hex ) }
+									onMouseEnter={ () => setFocusHex( p.hex ) }
+									onFocus={ () => setFocusHex( p.hex ) }
+									style={ {
+										display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
+										background: 'none', border: 0, padding: '2px', cursor: 'pointer',
+										borderRadius: '4px',
+										outline: selected ? '2px solid #1e1e1e' : 'none',
+									} }
+								>
+									<span aria-hidden="true" style={ { ...swatchStyle( p.hex ), width: '36px', height: '36px', position: 'relative', display: 'block' } }>
+										{ users.length > 0 && (
+											<span style={ { position: 'absolute', right: '3px', bottom: '1px', fontSize: '10px', fontWeight: 600, color: '#1e1e1e' } }>
+												{ users.length }
+											</span>
+										) }
 									</span>
-								) }
-							</span>
-							<span aria-hidden="true" style={ { fontSize: '11px', lineHeight: 1.2, color: '#1e1e1e', fontWeight: selected ? 600 : 400 } }>
-								{ p.label }
-							</span>
-						</button>
-					);
-				} ) }
-			</div>
+									<span aria-hidden="true" style={ { fontSize: '11px', lineHeight: 1.2, color: '#1e1e1e', fontWeight: selected ? 600 : 400 } }>
+										{ p.label }
+									</span>
+								</button>
+							);
+						} ) }
+					</div>
+				</div>
+			) ) }
 			<p style={ { fontSize: '11px', color: '#757575', margin: '10px 0 0', minHeight: '28px' } }>
 				{ focused
 					? ( focusedUsers.length
