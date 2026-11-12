@@ -166,7 +166,7 @@ $( 'a[href*="cvent.com"]' ).each(
 // Registration attribution, with nothing stored in the browser (no consent needed). When this page's
 // address carries the visitor's UTM parameters, copy them onto this page's links to the same event's
 // pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent after a
-// detour such as the FAQ. Registration links and links within this site always lose UTMs written on
+// detour such as the FAQ. Registration links and links within this event always lose UTMs written on
 // them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their real
 // source. `RefId` (Cvent's reporting field) marks registrations that started on this site and where:
 // `lfevents-hero` by default; a link that already has a RefId keeps it, so editors can mark other
@@ -237,14 +237,10 @@ $( 'a[href*="cvent.com"]' ).each(
 				if ( ! hasRefId ) {
 					url.searchParams.set( 'RefId', refIdValue );
 				}
-			} else if ( url.origin === window.location.origin && ! isThisPage( url ) ) {
-				// Links within this site never keep UTMs written on them: the next page would take them
-				// for the visitor's own. Only the same event's pages get the visitor's UTMs.
-				if ( isThisEvent( url ) ) {
-					useVisitorUtm( url );
-				} else {
-					stripUtm( url );
-				}
+			} else if ( url.origin === window.location.origin && ! isThisPage( url ) && isThisEvent( url ) ) {
+				// Links within this event never keep UTMs written on them (the next page would take them
+				// for the visitor's own); they carry the visitor's UTMs, if any. Other links are left alone.
+				useVisitorUtm( url );
 			} else {
 				return;
 			}

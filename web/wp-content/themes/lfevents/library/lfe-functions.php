@@ -1006,6 +1006,22 @@ function lfe_get_event_parent_id( $post ) {
 }
 
 /**
+ * Root path of the event the current page belongs to: /event-slug/ for current events (pages),
+ * /archive/<year>/event-slug/ for archived ones (lfevent<year> posts). Splash pages are event pages
+ * too. Empty on the front page and on other post types (about pages, blog posts).
+ *
+ * @return string
+ */
+function lfe_event_root_path() {
+	$post_type = (string) get_post_type();
+	if ( ! is_singular() || is_front_page() || ( 'page' !== $post_type && 0 !== strpos( $post_type, 'lfevent' ) ) ) {
+		return '';
+	}
+	$parent_id = lfe_get_event_parent_id( get_post() );
+	return $parent_id ? wp_make_link_relative( (string) get_permalink( $parent_id ) ) : '';
+}
+
+/**
  * Returns correct HubSpot newsletter form ID based on url.
  *
  * @param int $parent_id The parent ID of the Event.
