@@ -165,9 +165,9 @@ $( 'a[href*="cvent.com"]' ).each(
 
 // Registration attribution: forward the visitor's own UTM parameters to registration links on
 // register.linuxfoundation.org, so Cvent records the campaign that brought them. They are kept for
-// the browser session, so they survive the hop from an event page to its Register page. A visitor
-// who arrived without UTMs gets none: fixed UTMs on the link would overwrite their real source.
-// `ref` marks registrations that started on this site.
+// the browser session, so they survive the hop from an event page to its Register page. UTMs written
+// on the link are always removed, and a visitor who arrived without UTMs gets none: fixed UTMs would
+// overwrite their real source. `ref` marks registrations that started on this site.
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
 	var registerRef = 'events-site';
@@ -186,6 +186,9 @@ $( 'a[href*="cvent.com"]' ).each(
 			window.sessionStorage.setItem( storageKey, JSON.stringify( utm ) );
 		} else {
 			utm = JSON.parse( window.sessionStorage.getItem( storageKey ) ) || [];
+			if ( ! Array.isArray( utm ) ) {
+				utm = [];
+			}
 		}
 	} catch ( e ) {
 		// Storage blocked or unreadable: forward only what this page's URL carries.
@@ -201,20 +204,18 @@ $( 'a[href*="cvent.com"]' ).each(
 		if ( url.hostname !== registerHost ) {
 			return;
 		}
-		if ( utm.length ) {
-			Array.from( url.searchParams.keys() ).forEach(
-				function ( name ) {
-					if ( 0 === name.indexOf( 'utm_' ) ) {
-						url.searchParams.delete( name );
-					}
+		Array.from( url.searchParams.keys() ).forEach(
+			function ( name ) {
+				if ( 0 === name.indexOf( 'utm_' ) ) {
+					url.searchParams.delete( name );
 				}
-			);
-			utm.forEach(
-				function ( pair ) {
-					url.searchParams.append( pair[0], pair[1] );
-				}
-			);
-		}
+			}
+		);
+		utm.forEach(
+			function ( pair ) {
+				url.searchParams.append( pair[0], pair[1] );
+			}
+		);
 		if ( ! url.searchParams.has( 'ref' ) ) {
 			url.searchParams.set( 'ref', registerRef );
 		}
