@@ -163,6 +163,80 @@ $( 'a[href*="cvent.com"]' ).each(
 	}
 );
 
+// Registration attribution: forward the visitor's own UTM parameters to registration links on
+// register.linuxfoundation.org, so Cvent records the campaign that brought them. They are kept for
+// the browser session, so they survive the hop from an event page to its Register page. A visitor
+// who arrived without UTMs gets none: fixed UTMs on the link would overwrite their real source.
+// `ref` marks registrations that started on this site.
+( function () {
+	var registerHost = 'register.linuxfoundation.org';
+	var registerRef = 'events-site';
+	var storageKey = 'lfe_register_utm';
+	var utm = [];
+
+	new URLSearchParams( window.location.search ).forEach(
+		function ( value, name ) {
+			if ( 0 === name.indexOf( 'utm_' ) && value ) {
+				utm.push( [ name, value ] );
+			}
+		}
+	);
+	try {
+		if ( utm.length ) {
+			window.sessionStorage.setItem( storageKey, JSON.stringify( utm ) );
+		} else {
+			utm = JSON.parse( window.sessionStorage.getItem( storageKey ) ) || [];
+		}
+	} catch ( e ) {
+		// Storage blocked or unreadable: forward only what this page's URL carries.
+	}
+
+	function decorate( link ) {
+		var url;
+		try {
+			url = new URL( link.href );
+		} catch ( e ) {
+			return;
+		}
+		if ( url.hostname !== registerHost ) {
+			return;
+		}
+		if ( utm.length ) {
+			Array.from( url.searchParams.keys() ).forEach(
+				function ( name ) {
+					if ( 0 === name.indexOf( 'utm_' ) ) {
+						url.searchParams.delete( name );
+					}
+				}
+			);
+			utm.forEach(
+				function ( pair ) {
+					url.searchParams.append( pair[0], pair[1] );
+				}
+			);
+		}
+		if ( ! url.searchParams.has( 'ref' ) ) {
+			url.searchParams.set( 'ref', registerRef );
+		}
+		if ( url.href !== link.href ) {
+			link.href = url.href;
+		}
+	}
+
+	document.querySelectorAll( 'a[href*="' + registerHost + '"]' ).forEach( decorate );
+	// Links rendered after load are decorated when clicked.
+	document.addEventListener(
+		'click',
+		function ( e ) {
+			var link = e.target.closest && e.target.closest( 'a[href*="' + registerHost + '"]' );
+			if ( link ) {
+				decorate( link );
+			}
+		},
+		true
+	);
+}() );
+
 function readCookie(name) {
 	var nameEQ = name + "=";
 	var ca = document.cookie.split( ';' );
