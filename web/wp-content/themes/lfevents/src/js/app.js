@@ -169,11 +169,12 @@ $( 'a[href*="cvent.com"]' ).each(
 // detour such as the FAQ. Registration links and links within this event always lose UTMs written on
 // them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their real
 // source. `RefId` (Cvent's reporting field) marks registrations that started on this site and where:
-// `lfevents-hero` by default; a link that already has a RefId keeps it, so editors can mark other
-// placements.
+// `lfevents-hero` on event pages (their register buttons are the hero today), `lfevents` elsewhere
+// (such as the home page's event listing). A link that already has a RefId keeps it, so editors can
+// mark other placements.
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
-	var refIdValue = 'lfevents-hero';
+	var refIdValue = 'lfevents';
 	var utm = [];
 	var eventPrefix = '';
 
@@ -189,6 +190,9 @@ $( 'a[href*="cvent.com"]' ).each(
 		// /archive/<year>/event-slug/. Elsewhere internal links get no UTMs.
 		var root = window.lfeEventRoot;
 		eventPrefix = 'string' === typeof root && '/' === root.charAt( 0 ) ? root.replace( /\/?$/, '/' ) : '';
+		if ( eventPrefix ) {
+			refIdValue = 'lfevents-hero';
+		}
 	} catch ( e ) {
 		return;
 	}
