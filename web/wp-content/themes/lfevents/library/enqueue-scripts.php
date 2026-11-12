@@ -34,6 +34,16 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// Enqueue Foundation scripts.
 		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/js/app.js', array( 'jquery' ), filemtime( get_template_directory() . '/dist/js/app.js' ), true );
 
+		// Registration attribution in app.js copies a visitor's UTMs onto links within the current
+		// event only. Give it the event's root path: /event-slug/ or /archive/<year>/event-slug/.
+		$lfe_post_type = (string) get_post_type();
+		if ( is_singular() && ! is_front_page() && ! show_non_event_menu() && ( 'page' === $lfe_post_type || 0 === strpos( $lfe_post_type, 'lfevent' ) ) ) {
+			$lfe_event_root = wp_make_link_relative( (string) get_permalink( lfe_get_event_parent_id( get_post() ) ) );
+			if ( $lfe_event_root ) {
+				wp_add_inline_script( 'foundation', 'window.lfeEventRoot = ' . wp_json_encode( $lfe_event_root ) . ';', 'before' );
+			}
+		}
+
 		$chinese_domains = "'www.lfopensource.cn', 'events19.lfasiallc.com', 'events.linuxfoundation.cn', 'events19.linuxfoundation.cn', 'lfopensource.cn'";
 		$current_domain  = parse_url( home_url(), PHP_URL_HOST );
 		if ( ! strpos( $chinese_domains, $current_domain ) ) {

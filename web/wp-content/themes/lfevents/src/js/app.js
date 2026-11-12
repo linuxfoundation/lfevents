@@ -168,10 +168,12 @@ $( 'a[href*="cvent.com"]' ).each(
 // pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent after a
 // detour such as the FAQ. Registration links and links within this site always lose UTMs written on
 // them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their real
-// source. `ref` marks registrations that started on this site.
+// source. `RefId` (Cvent's reporting field) marks registrations that started on this site and where:
+// `lfevents-hero` by default; a link that already has a RefId keeps it, so editors can mark other
+// placements.
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
-	var registerRef = 'events-site';
+	var refIdValue = 'lfevents-hero';
 	var utm = [];
 	var eventPrefix = '';
 
@@ -183,9 +185,10 @@ $( 'a[href*="cvent.com"]' ).each(
 				}
 			}
 		);
-		// An event's pages share the first path segment: /kubecon-cloudnativecon-north-america/...
-		var segment = window.location.pathname.split( '/' )[1];
-		eventPrefix = segment ? '/' + segment + '/' : '';
+		// The current event's root path, given by the theme on event pages only: /event-slug/ or
+		// /archive/<year>/event-slug/. Elsewhere internal links get no UTMs.
+		var root = window.lfeEventRoot;
+		eventPrefix = 'string' === typeof root && '/' === root.charAt( 0 ) ? root.replace( /\/?$/, '/' ) : '';
 	} catch ( e ) {
 		return;
 	}
@@ -226,8 +229,13 @@ $( 'a[href*="cvent.com"]' ).each(
 			}
 			if ( url.hostname === registerHost ) {
 				useVisitorUtm( url );
-				if ( ! url.searchParams.has( 'ref' ) ) {
-					url.searchParams.set( 'ref', registerRef );
+				var hasRefId = Array.from( url.searchParams.keys() ).some(
+					function ( name ) {
+						return 'refid' === name.toLowerCase();
+					}
+				);
+				if ( ! hasRefId ) {
+					url.searchParams.set( 'RefId', refIdValue );
 				}
 			} else if ( url.origin === window.location.origin && ! isThisPage( url ) ) {
 				// Links within this site never keep UTMs written on them: the next page would take them
