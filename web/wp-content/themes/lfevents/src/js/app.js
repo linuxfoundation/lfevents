@@ -163,47 +163,34 @@ $( 'a[href*="cvent.com"]' ).each(
 	}
 );
 
-// Registration attribution: forward the visitor's own UTM parameters to registration links on
-// register.linuxfoundation.org, so Cvent records the campaign that brought them. They are kept for
-// the browser session, so they survive the hop from an event page to its Register page. UTMs written
-// on the link are always removed, and a visitor who arrived without UTMs gets none: fixed UTMs would
-// overwrite their real source. `ref` marks registrations that started on this site.
+// Registration attribution, with nothing stored in the browser (no consent needed). When this page's
+// address carries the visitor's UTM parameters, copy them onto this page's links to the same event's
+// pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent after a
+// detour such as the FAQ. Registration links always lose UTMs written on them, so a visitor who
+// arrived without UTMs sends none: fixed UTMs would overwrite their real source. `ref` marks
+// registrations that started on this site.
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
 	var registerRef = 'events-site';
-	var storageKey = 'lfe_register_utm';
 	var utm = [];
+	var eventPrefix = '';
 
-	new URLSearchParams( window.location.search ).forEach(
-		function ( value, name ) {
-			if ( 0 === name.indexOf( 'utm_' ) && value ) {
-				utm.push( [ name, value ] );
-			}
-		}
-	);
 	try {
-		if ( utm.length ) {
-			window.sessionStorage.setItem( storageKey, JSON.stringify( utm ) );
-		} else {
-			utm = JSON.parse( window.sessionStorage.getItem( storageKey ) ) || [];
-			if ( ! Array.isArray( utm ) ) {
-				utm = [];
+		new URLSearchParams( window.location.search ).forEach(
+			function ( value, name ) {
+				if ( 0 === name.indexOf( 'utm_' ) && value ) {
+					utm.push( [ name, value ] );
+				}
 			}
-		}
+		);
+		// An event's pages share the first path segment: /kubecon-cloudnativecon-north-america/...
+		var segment = window.location.pathname.split( '/' )[1];
+		eventPrefix = segment ? '/' + segment + '/' : '';
 	} catch ( e ) {
-		// Storage blocked or unreadable: forward only what this page's URL carries.
+		return;
 	}
 
-	function decorate( link ) {
-		var url;
-		try {
-			url = new URL( link.href );
-		} catch ( e ) {
-			return;
-		}
-		if ( url.hostname !== registerHost ) {
-			return;
-		}
+	function useVisitorUtm( url ) {
 		Array.from( url.searchParams.keys() ).forEach(
 			function ( name ) {
 				if ( 0 === name.indexOf( 'utm_' ) ) {
@@ -216,15 +203,44 @@ $( 'a[href*="cvent.com"]' ).each(
 				url.searchParams.append( pair[0], pair[1] );
 			}
 		);
-		if ( ! url.searchParams.has( 'ref' ) ) {
-			url.searchParams.set( 'ref', registerRef );
+	}
+
+	function isSameEventPage( url ) {
+		if ( ! utm.length || ! eventPrefix || url.origin !== window.location.origin ) {
+			return false;
 		}
-		if ( url.href !== link.href ) {
-			link.href = url.href;
+		// A link to this same page (such as #faq) must stay an in-page jump, not a reload.
+		if ( url.pathname === window.location.pathname && url.search === window.location.search ) {
+			return false;
+		}
+		return 0 === url.pathname.replace( /\/?$/, '/' ).indexOf( eventPrefix );
+	}
+
+	function decorate( link ) {
+		try {
+			var url = new URL( link.href );
+			if ( 'https:' !== url.protocol && 'http:' !== url.protocol ) {
+				return;
+			}
+			if ( url.hostname === registerHost ) {
+				useVisitorUtm( url );
+				if ( ! url.searchParams.has( 'ref' ) ) {
+					url.searchParams.set( 'ref', registerRef );
+				}
+			} else if ( isSameEventPage( url ) ) {
+				useVisitorUtm( url );
+			} else {
+				return;
+			}
+			if ( url.href !== link.href ) {
+				link.href = url.href;
+			}
+		} catch ( e ) {
+			// A link this can't parse is left as it is; nothing else on the page is affected.
 		}
 	}
 
-	document.querySelectorAll( 'a[href*="' + registerHost + '"]' ).forEach( decorate );
+	document.querySelectorAll( 'a[href]' ).forEach( decorate );
 	// Links rendered after load are decorated when they are opened: a click, a middle-click
 	// (`auxclick`) or the context menu ("Open in new tab", "Copy link").
 	[ 'click', 'auxclick', 'contextmenu' ].forEach(
@@ -232,7 +248,7 @@ $( 'a[href*="cvent.com"]' ).each(
 			document.addEventListener(
 				type,
 				function ( e ) {
-					var link = e.target.closest && e.target.closest( 'a[href*="' + registerHost + '"]' );
+					var link = e.target.closest && e.target.closest( 'a[href]' );
 					if ( link ) {
 						decorate( link );
 					}
