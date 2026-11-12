@@ -166,9 +166,9 @@ $( 'a[href*="cvent.com"]' ).each(
 // Registration attribution, with nothing stored in the browser (no consent needed). When this page's
 // address carries the visitor's UTM parameters, copy them onto this page's links to the same event's
 // pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent after a
-// detour such as the FAQ. Registration links always lose UTMs written on them, so a visitor who
-// arrived without UTMs sends none: fixed UTMs would overwrite their real source. `ref` marks
-// registrations that started on this site.
+// detour such as the FAQ. Registration links and links within this site always lose UTMs written on
+// them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their real
+// source. `ref` marks registrations that started on this site.
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
 	var registerRef = 'events-site';
@@ -190,7 +190,7 @@ $( 'a[href*="cvent.com"]' ).each(
 		return;
 	}
 
-	function useVisitorUtm( url ) {
+	function stripUtm( url ) {
 		Array.from( url.searchParams.keys() ).forEach(
 			function ( name ) {
 				if ( 0 === name.indexOf( 'utm_' ) ) {
@@ -198,6 +198,10 @@ $( 'a[href*="cvent.com"]' ).each(
 				}
 			}
 		);
+	}
+
+	function useVisitorUtm( url ) {
+		stripUtm( url );
 		utm.forEach(
 			function ( pair ) {
 				url.searchParams.append( pair[0], pair[1] );
@@ -205,15 +209,13 @@ $( 'a[href*="cvent.com"]' ).each(
 		);
 	}
 
-	function isSameEventPage( url ) {
-		if ( ! utm.length || ! eventPrefix || url.origin !== window.location.origin ) {
-			return false;
-		}
-		// A link to this same page (such as #faq) must stay an in-page jump, not a reload.
-		if ( url.pathname === window.location.pathname && url.search === window.location.search ) {
-			return false;
-		}
-		return 0 === url.pathname.replace( /\/?$/, '/' ).indexOf( eventPrefix );
+	// A link to this same page (such as #faq) must stay an in-page jump, not a reload.
+	function isThisPage( url ) {
+		return url.pathname === window.location.pathname && url.search === window.location.search;
+	}
+
+	function isThisEvent( url ) {
+		return '' !== eventPrefix && 0 === url.pathname.replace( /\/?$/, '/' ).indexOf( eventPrefix );
 	}
 
 	function decorate( link ) {
@@ -227,8 +229,14 @@ $( 'a[href*="cvent.com"]' ).each(
 				if ( ! url.searchParams.has( 'ref' ) ) {
 					url.searchParams.set( 'ref', registerRef );
 				}
-			} else if ( isSameEventPage( url ) ) {
-				useVisitorUtm( url );
+			} else if ( url.origin === window.location.origin && ! isThisPage( url ) ) {
+				// Links within this site never keep UTMs written on them: the next page would take them
+				// for the visitor's own. Only the same event's pages get the visitor's UTMs.
+				if ( isThisEvent( url ) ) {
+					useVisitorUtm( url );
+				} else {
+					stripUtm( url );
+				}
 			} else {
 				return;
 			}
