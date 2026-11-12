@@ -225,16 +225,21 @@ $( 'a[href*="cvent.com"]' ).each(
 	}
 
 	document.querySelectorAll( 'a[href*="' + registerHost + '"]' ).forEach( decorate );
-	// Links rendered after load are decorated when clicked.
-	document.addEventListener(
-		'click',
-		function ( e ) {
-			var link = e.target.closest && e.target.closest( 'a[href*="' + registerHost + '"]' );
-			if ( link ) {
-				decorate( link );
-			}
-		},
-		true
+	// Links rendered after load are decorated when they are opened: a click, a middle-click
+	// (`auxclick`) or the context menu ("Open in new tab", "Copy link").
+	[ 'click', 'auxclick', 'contextmenu' ].forEach(
+		function ( type ) {
+			document.addEventListener(
+				type,
+				function ( e ) {
+					var link = e.target.closest && e.target.closest( 'a[href*="' + registerHost + '"]' );
+					if ( link ) {
+						decorate( link );
+					}
+				},
+				true
+			);
+		}
 	);
 }() );
 
