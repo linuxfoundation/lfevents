@@ -173,8 +173,12 @@ $( 'a[href*="cvent.com"]' ).each(
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
 	var refIdValue = 'lfevents';
-	// Only the standard campaign fields are carried; other utm_* names (such as a stray `utm_`) are not.
-	var utmNames = [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ];
+	// The campaign fields Google Analytics documents (support.google.com/analytics/answer/10917952) are
+	// carried; other utm_* names, such as a bare `utm_`, are not.
+	var utmNames = [
+		'utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_source_platform', 'utm_term',
+		'utm_content', 'utm_creative_format', 'utm_marketing_tactic'
+	];
 	var utm = [];
 	var eventPrefix = '';
 
