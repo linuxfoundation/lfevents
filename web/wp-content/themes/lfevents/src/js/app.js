@@ -164,24 +164,24 @@ $( 'a[href*="cvent.com"]' ).each(
 );
 
 // Registration attribution, with nothing stored in the browser (no consent needed). When this page's
-// address carries the visitor's UTM parameters, copy them onto this page's links to the same event's
-// pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent after a
-// detour such as the FAQ. Registration links and links within this event always lose UTMs written on
-// them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their real
-// source. `RefId` (Cvent's reporting field) marks registrations that started on this site and where:
-// `lfevents-hero` on event pages (their register buttons are the hero today), `lfevents` elsewhere
-// (such as the home page's event listing). A link that already has a RefId keeps it, so editors can
-// mark other placements.
+// address carries the visitor's standard UTM parameters, copy them onto this page's links to the same
+// event's pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent
+// after a detour such as the FAQ. Registration links and links within this event always lose UTMs
+// written on them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their
+// real source. `RefId=lfevents` (Cvent's reporting field) marks registrations that started on this
+// site. A link that already has a RefId keeps it, so editors can mark a placement on a given link.
 ( function () {
 	var registerHost = 'register.linuxfoundation.org';
 	var refIdValue = 'lfevents';
+	// Only the standard campaign fields are carried; other utm_* names (such as a stray `utm_`) are not.
+	var utmNames = [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content' ];
 	var utm = [];
 	var eventPrefix = '';
 
 	try {
 		new URLSearchParams( window.location.search ).forEach(
 			function ( value, name ) {
-				if ( 0 === name.indexOf( 'utm_' ) && value ) {
+				if ( -1 !== utmNames.indexOf( name ) && value ) {
 					utm.push( [ name, value ] );
 				}
 			}
@@ -190,9 +190,6 @@ $( 'a[href*="cvent.com"]' ).each(
 		// /archive/<year>/event-slug/. Elsewhere internal links get no UTMs.
 		var root = window.lfeEventRoot;
 		eventPrefix = 'string' === typeof root && '/' === root.charAt( 0 ) ? root.replace( /\/?$/, '/' ) : '';
-		if ( eventPrefix ) {
-			refIdValue = 'lfevents-hero';
-		}
 	} catch ( e ) {
 		return;
 	}
