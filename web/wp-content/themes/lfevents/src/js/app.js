@@ -163,6 +163,119 @@ $( 'a[href*="cvent.com"]' ).each(
 	}
 );
 
+// Registration attribution, with nothing stored in the browser (no consent needed). When this page's
+// address carries the visitor's standard UTM parameters, copy them onto this page's links to the same
+// event's pages and onto registration links (register.linuxfoundation.org), so they still reach Cvent
+// after a detour such as the FAQ. Registration links and links within this event always lose UTMs
+// written on them, so a visitor who arrived without UTMs sends none: fixed UTMs would overwrite their
+// real source. `RefId=lfevents` (Cvent's reporting field) marks registrations that started on this
+// site. A link that already has a RefId keeps it, so editors can mark a placement on a given link.
+( function () {
+	var registerHost = 'register.linuxfoundation.org';
+	var refIdValue = 'lfevents';
+	// The campaign fields Google Analytics documents (support.google.com/analytics/answer/10917952) are
+	// carried; other utm_* names, such as a bare `utm_`, are not.
+	var utmNames = [
+		'utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_source_platform', 'utm_term',
+		'utm_content', 'utm_creative_format', 'utm_marketing_tactic'
+	];
+	var utm = [];
+	var eventPrefix = '';
+
+	try {
+		new URLSearchParams( window.location.search ).forEach(
+			function ( value, name ) {
+				if ( -1 !== utmNames.indexOf( name ) && value ) {
+					utm.push( [ name, value ] );
+				}
+			}
+		);
+		// The current event's root path, given by the theme on event pages only: /event-slug/ or
+		// /archive/<year>/event-slug/. Elsewhere internal links get no UTMs.
+		var root = window.lfeEventRoot;
+		eventPrefix = 'string' === typeof root && '/' === root.charAt( 0 ) ? root.replace( /\/?$/, '/' ) : '';
+	} catch ( e ) {
+		return;
+	}
+
+	function stripUtm( url ) {
+		Array.from( url.searchParams.keys() ).forEach(
+			function ( name ) {
+				if ( 0 === name.indexOf( 'utm_' ) ) {
+					url.searchParams.delete( name );
+				}
+			}
+		);
+	}
+
+	function useVisitorUtm( url ) {
+		stripUtm( url );
+		utm.forEach(
+			function ( pair ) {
+				url.searchParams.append( pair[0], pair[1] );
+			}
+		);
+	}
+
+	// A link to this same page (such as #faq) must stay an in-page jump, not a reload.
+	function isThisPage( url ) {
+		return url.pathname === window.location.pathname && url.search === window.location.search;
+	}
+
+	function isThisEvent( url ) {
+		return '' !== eventPrefix && 0 === url.pathname.replace( /\/?$/, '/' ).indexOf( eventPrefix );
+	}
+
+	function decorate( link ) {
+		try {
+			var url = new URL( link.href );
+			if ( 'https:' !== url.protocol && 'http:' !== url.protocol ) {
+				return;
+			}
+			if ( url.hostname === registerHost ) {
+				useVisitorUtm( url );
+				var hasRefId = Array.from( url.searchParams.keys() ).some(
+					function ( name ) {
+						return 'refid' === name.toLowerCase();
+					}
+				);
+				if ( ! hasRefId ) {
+					url.searchParams.set( 'RefId', refIdValue );
+				}
+			} else if ( url.origin === window.location.origin && ! isThisPage( url ) && isThisEvent( url ) ) {
+				// Links within this event never keep UTMs written on them (the next page would take them
+				// for the visitor's own); they carry the visitor's UTMs, if any. Other links are left alone.
+				useVisitorUtm( url );
+			} else {
+				return;
+			}
+			if ( url.href !== link.href ) {
+				link.href = url.href;
+			}
+		} catch ( e ) {
+			// A link this can't parse is left as it is; nothing else on the page is affected.
+		}
+	}
+
+	document.querySelectorAll( 'a[href]' ).forEach( decorate );
+	// Links rendered after load are decorated when they are opened: a click, a middle-click
+	// (`auxclick`) or the context menu ("Open in new tab", "Copy link").
+	[ 'click', 'auxclick', 'contextmenu' ].forEach(
+		function ( type ) {
+			document.addEventListener(
+				type,
+				function ( e ) {
+					var link = e.target.closest && e.target.closest( 'a[href]' );
+					if ( link ) {
+						decorate( link );
+					}
+				},
+				true
+			);
+		}
+	);
+}() );
+
 function readCookie(name) {
 	var nameEQ = name + "=";
 	var ca = document.cookie.split( ';' );
