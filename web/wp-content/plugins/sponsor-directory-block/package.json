@@ -19,7 +19,7 @@
 		"@wordpress/components": "^28",
 		"@wordpress/element": "^6",
 		"@wordpress/i18n": "^5",
-		"@wordpress/scripts": "27.8.0",
+		"@wordpress/scripts": "37.1.0",
 		"typescript": "5.4.5"
 	},
 	"repository": {
