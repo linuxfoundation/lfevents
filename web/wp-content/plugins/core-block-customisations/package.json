@@ -29,7 +29,7 @@
 		"@wordpress/block-editor": "^13.2.0",
 		"@wordpress/blocks": "^13.2.0",
 		"@wordpress/i18n": "^5.2.0",
-		"@wordpress/scripts": "27.8.0",
+		"@wordpress/scripts": "37.1.0",
 		"classnames": "^2.5.1"
 	},
 	"dependencies": {
