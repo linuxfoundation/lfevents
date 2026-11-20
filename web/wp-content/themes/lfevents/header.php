@@ -11,11 +11,13 @@
 $event_menu = ( show_non_event_menu() ) ? '' : 'add-overflow';
 
 $cncf_font = get_post_meta( lfe_get_event_parent_id( $post ), 'lfes_cncf_font', true ) ? 'use-cncf-font' : '';
+$aaif_font = get_post_meta( lfe_get_event_parent_id( $post ), 'lfes_aaif_font', true ) ? 'use-aaif-font' : '';
 
 $all_classes = array(
 	'site-container',
 	$event_menu,
 	$cncf_font,
+	$aaif_font,
 );
 $classes     = implode( ' ', $all_classes );
 ?>

@@ -240,6 +240,17 @@ $sidebar = array(
 							'use_toggle'    => false,
 							'input_label'   => __( 'Use CNCF font' ),
 						),
+						array(
+							'type'          => 'checkbox',
+							'id'            => 'aaif_font',
+							'data_type'     => 'meta',
+							'data_key'      => 'aaif_font',
+							'register_meta' => true,
+							'ui_border_top' => true,
+							'default_value' => false,
+							'use_toggle'    => false,
+							'input_label'   => __( 'Use AAIF font' ),
+						),
 					),
 				),
 				array(

@@ -1,0 +1,49 @@
+$instrument-sans:
+  'Instrument Sans',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Helvetica,
+  Arial,
+  sans-serif,
+  Roboto,
+  Ubuntu,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol';
+
+@font-face {
+  font-display: fallback;
+  font-family: 'Instrument Sans';
+  font-weight: 400 700;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  src: url('/wp-content/themes/lfevents/src/fonts/instrument-sans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: 'Instrument Sans';
+  font-weight: 400 700;
+  font-stretch: 75% 100%;
+  font-style: italic;
+  src: url('/wp-content/themes/lfevents/src/fonts/instrument-sans/InstrumentSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+.site-container.use-aaif-font {
+  font-family: $instrument-sans;
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    font-family: $instrument-sans;
+  }
+}

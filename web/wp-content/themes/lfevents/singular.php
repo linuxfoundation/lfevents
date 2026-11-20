@@ -18,6 +18,7 @@ $splash_page      = get_post_meta( get_the_ID(), 'lfes_splash_page', true );
 $hide_header      = get_post_meta( get_the_ID(), 'lfes_hide_header', true );
 $hide_sponsors    = get_post_meta( get_the_ID(), 'lfes_hide_sponsors', true );
 $use_cncf_font    = get_post_meta( $parent_id, 'lfes_cncf_font', true );
+$use_aaif_font    = get_post_meta( $parent_id, 'lfes_aaif_font', true );
 $event_has_passed = get_post_meta( $parent_id, 'lfes_event_has_passed', true );
 $menu_color       = get_post_meta( $parent_id, 'lfes_menu_color', true );
 $menu_color_2     = get_post_meta( $parent_id, 'lfes_menu_color_2', true );
@@ -52,6 +53,14 @@ if ( $use_cncf_font ) {
 		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/css/cncf-font.css', array(), filemtime( get_template_directory() . '/dist/css/cncf-font.css' ), 'all' );
 	} else {
 		wp_enqueue_style( 'cncf', get_stylesheet_directory_uri() . '/dist/css/cncf-font.min.css', array(), filemtime( get_template_directory() . '/dist/css/cncf-font.min.css' ), 'all' );
+	}
+}
+
+if ( $use_aaif_font ) {
+	if ( WP_DEBUG === true ) {
+		wp_enqueue_style( 'aaif-font', get_stylesheet_directory_uri() . '/dist/css/aaif-font.css', array(), filemtime( get_template_directory() . '/dist/css/aaif-font.css' ), 'all' );
+	} else {
+		wp_enqueue_style( 'aaif-font', get_stylesheet_directory_uri() . '/dist/css/aaif-font.min.css', array(), filemtime( get_template_directory() . '/dist/css/aaif-font.min.css' ), 'all' );
 	}
 }
 
